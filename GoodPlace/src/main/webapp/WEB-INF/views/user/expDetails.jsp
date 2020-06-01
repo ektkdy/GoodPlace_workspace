@@ -161,12 +161,9 @@
                 <div style="width:80%; height:120px; margin:0 10%;">
                     <div style="width:80%;">
                         <br><h1>투명한 아름다움 레진 아트</h1>
-                    </div><br>  
-                    <div class="category">
-                        <h3>공예</h3>
-                    </div>
-                    <div class="fullWidth">
-                        <h4>서울, 강남구</h4>
+                    </div><br>
+                    <div style="float:left;">
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                     </div>
                 </div>
                 <div style="width:80%; margin:0 10%;">
@@ -207,7 +204,7 @@
                     </div>
                     <div class="fullWidth"> 
                         <div style="width:20%; margin-right:5%;">
-                            <h1 style="text-align: left;">호스트</h1>
+                            <h1 style="text-align: left;">파트너</h1>
                         </div>
                         <div style="width:75%; padding:10px;"  class="marginBottom_60px replyStyle1">
                             <div class="fullWidth">
@@ -343,7 +340,7 @@
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
             <a style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
-        <br style="clear:both;">
+        
 
     </div>
 

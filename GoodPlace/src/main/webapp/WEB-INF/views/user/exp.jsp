@@ -161,7 +161,7 @@
                         <h3 class="exp1">쿠킹</h3>
                         <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
                         <h3 class="exp1">홍길동</h3>
-                        <br>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
@@ -180,7 +180,7 @@
                         <h3 class="exp1">쿠킹</h3>
                         <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
                         <h3 class="exp1">홍길동</h3>
-                        <br>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
@@ -199,7 +199,7 @@
                         <h3 class="exp1">쿠킹</h3>
                         <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
                         <h3 class="exp1">홍길동</h3>
-                        <br>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
@@ -218,7 +218,7 @@
                         <h3 class="exp1">쿠킹</h3>
                         <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
                         <h3 class="exp1">홍길동</h3>
-                        <br>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
@@ -237,7 +237,7 @@
                         <h3 class="exp1">쿠킹</h3>
                         <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
                         <h3 class="exp1">홍길동</h3>
-                        <br>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
