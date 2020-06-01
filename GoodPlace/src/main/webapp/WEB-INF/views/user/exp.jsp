@@ -155,7 +155,7 @@
             <div id="expArea1" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
-                        <img src="../img/exp.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:37%; height:180px;">
                         <h3 class="exp1">쿠킹</h3>
@@ -165,7 +165,7 @@
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="../img/emptyHeart.jpg" class="heartMargin" />
+                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
                         <br><br><br>
                         <h3 class="exp3">1인당 6,0000원</h3>
                     </div>
@@ -174,7 +174,7 @@
             <div id="expArea2" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
-                        <img src="../img/exp.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:37%; height:180px;">
                         <h3 class="exp1">쿠킹</h3>
@@ -184,7 +184,7 @@
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="../img/emptyHeart.jpg" class="heartMargin" />
+                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
                         <br><br><br>
                         <h3 class="exp3">1인당 6,0000원</h3>
                     </div>
@@ -193,7 +193,7 @@
             <div id="expArea3" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
-                        <img src="../img/exp.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:37%; height:180px;">
                         <h3 class="exp1">쿠킹</h3>
@@ -203,7 +203,7 @@
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="../img/emptyHeart.jpg" class="heartMargin" />
+                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
                         <br><br><br>
                         <h3 class="exp3">1인당 6,0000원</h3>
                     </div>
@@ -212,7 +212,7 @@
             <div id="expArea4" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
-                        <img src="../img/exp.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:37%; height:180px;">
                         <h3 class="exp1">쿠킹</h3>
@@ -222,7 +222,7 @@
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="../img/emptyHeart.jpg" class="heartMargin" />
+                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
                         <br><br><br>
                         <h3 class="exp3">1인당 6,0000원</h3>
                     </div>
@@ -231,7 +231,7 @@
             <div id="expArea5" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
-                        <img src="../img/exp.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:37%; height:180px;">
                         <h3 class="exp1">쿠킹</h3>
@@ -241,7 +241,7 @@
                         <h3 class="exp1">2시간 소요 * 장비포함</h3>
                     </div>
                     <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="../img/emptyHeart.jpg" class="heartMargin" />
+                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
                         <br><br><br>
                         <h3 class="exp3">1인당 6,0000원</h3>
                     </div>
@@ -271,12 +271,12 @@
         $('#content').find('.likeIt').each(function( i , e ){
             $(this).toggleClass('heartMargin');
             $(this).click(function(){
-                if($(this).attr('src') == '../img/emptyHeart.jpg'){
-                    $(this).attr('src', '../img/redHeartIcon.png');
+                if($(this).attr('src') == '${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg'){
+                    $(this).attr('src', '${pageContext.request.contextPath}/resources/images/user/redHeartIcon.png');
                     $(this).toggleClass('heartMargin');
                     alert('해당 체험을 찜하기 했습니다.');
                 }else{
-                    $(this).attr('src', '../img/emptyHeart.jpg');
+                    $(this).attr('src', '${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg');
                     $(this).toggleClass('heartMargin');
                     alert('찜하기를 취소하였습니다.');
                 }
