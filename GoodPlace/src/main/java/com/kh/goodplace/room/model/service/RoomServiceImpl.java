@@ -21,8 +21,8 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return rDao.selectListCount(sqlSession);
 	}
 
 	@Override

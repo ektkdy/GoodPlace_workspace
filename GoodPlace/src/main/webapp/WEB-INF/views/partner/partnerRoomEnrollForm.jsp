@@ -27,7 +27,7 @@
             <br clear="both">
             <div class="con" style="width:980px; color:#000">
                 <span id="page_title">
-                    <img src="../image/집로고.jpg" style="vertical-align: middle;">
+                    <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;">
                     <p class="title_tt">숙소등록</p>
                 </span>
                 <br clear="both">
@@ -44,18 +44,18 @@
                         <tbody>
                             <tr>
                                 <th rowspan="2">* 숙소명</th>
-                                <td colspan="2"><input type="text" name=""></td>
+                                <td colspan="2" class="instyle"><input type="text" name="" style=""></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>*숙소위치</th>
-                                <td colspan="2"><input type="text" name=""></td>
+                                <td colspan="2" class="instyle"><input type="text" name=""></td>
                             </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
-                                <td rowspan="2"><div style="width: 100px; height: 100px;"></div></td>
+                                <td rowspan="2"><div style="width: 200px; height: 150px; border:1px solid #bebebe"></div></td>
                                 <td><button>사진등록</button></td>
                             </tr>
                             <tr class="pdBtom">
@@ -71,21 +71,21 @@
                             <tr class="pdBtom"><td colspan="2">썸네일.png</td></tr>
                             <tr>
                                 <th rowspan="2">* 예약 설정</th>
-                                <td colspan="2"><input type="number" min="1" max="72">시간 전 부터 예약을 받지 않겠습니다.</td>
+                                <td colspan="2" ><input type="number" min="36" max="72">시간 전 부터 예약을 받지 않겠습니다.</td>
                             </tr>
                             <tr class="pdBtom"><td colspan="2" class="enrollInfo">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
                             <tr>
-                                <th rowspan="4">* 객실정보</th>
-                                <td>침대수 : <input type="number" min="1"></td>
-                                <td>샤워실수 : <input type="number" min="1"></td>
+                                <th rowspan="4" >* 객실정보</th>
+                                <td >침대수 : <input type="number" min="1"></td>
+                                <td >샤워실수 : <input type="number" min="1"></td>
                             </tr>
                             <tr>
-                                <td>화장실수 : <input type="number" min="1"></td>
-                                <td>1박금액 : <input type="number" min="1"></td>
+                                <td >화장실수 : <input type="number" min="1"></td>
+                                <td >1박금액 : <input type="number" min="1"></td>
                             </tr>
                             <tr>
-                                <td>최소인원 : <input type="number" min="1"></td>
-                                <td>최대인원 : <input type="number" min="1"></td>
+                                <td >최소인원 : <input type="number" min="1"></td>
+                                <td >최대인원 : <input type="number" min="1"></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. 최소인원 이상일 경우 1인당 일정금액이 추가되며 <br>최대인원수 이상 받을수 없습니다.</td>
@@ -95,7 +95,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">침구
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">아기침대
                                 </td>
                             </tr>
@@ -103,7 +103,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">여분의침구
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">다리미
                                 </td>
                             </tr>
@@ -111,15 +111,15 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">주방
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">식기류
                                 </td>
                             </tr>
                             <tr>
-                                <td >
+                                <td>
                                     <input type="checkbox" name="rooms" value="">냉장고
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">전자레인지
                                 </td>
                             </tr>
@@ -127,7 +127,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">인덕션
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">조리도구(냄비 등)
                                 </td>
                             </tr>
@@ -135,7 +135,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">커피포트
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">세탁기
                                 </td>
                             </tr>
@@ -143,7 +143,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">에어컨
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">공용PC
                                 </td>
                             </tr>
@@ -151,7 +151,7 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">케이블TV
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">드라이기
                                 </td>
                             </tr>
@@ -159,40 +159,40 @@
                                 <td >
                                     <input type="checkbox" name="rooms" value="">아기욕조
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">온수 및 난방
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">옷걸이
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="rooms" value="">주차가능
                                 </td>
                             </tr>
                             <tr>
                                 <th rowspan="3">* 제공서비스</th>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">샴푸
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">화장지
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">바디워시
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">비누
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">수건
                                 </td>
-                                <td>
+                                <td >
                                     <input type="checkbox" name="service" value="">Free wifi
                                 </td>
                             </tr>
@@ -206,8 +206,11 @@
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <td colspan="2">
+                                <td>
                                     <input type="checkbox" name="includeService" value="">석식
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="includeService" value="">없음
                                 </td>
                             </tr>
                             <tr>
