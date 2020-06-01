@@ -7,7 +7,9 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.goodplace.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.goodplace.room.model.vo.Room" alias="Room"/>
 	</typeAliases>
+	
 	
 	
 	<mappers>
