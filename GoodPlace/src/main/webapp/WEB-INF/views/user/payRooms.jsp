@@ -75,7 +75,7 @@
 
                     <h2 style="font-weight:500;">숙소 정보</h2><hr style="border:2px solid lightgray; margin:15px 0 18px 0;"> 
                     <div style="width:34%; height:180px;">
-                        <img src="../img/street.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/street.jpg" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:20%; height:180px; padding:10px 0 0 16px;">
                         <h3 style="margin-bottom:10px;">숙소명</h3>
@@ -209,7 +209,6 @@
 
             <br style="clear:both;">
         </div>
-    </div>
 
     <!-- '포인트 사용' 클릭 시 -->
     <script>
