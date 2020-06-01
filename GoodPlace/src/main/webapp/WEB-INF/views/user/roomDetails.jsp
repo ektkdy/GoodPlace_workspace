@@ -9,11 +9,11 @@
     <title>숙소검색 > 숙소상세</title>
 
     <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../userCss/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}//swiper.css">
 
     <!-- Swiper JS -->
     <script src="../js/swiper.min.js"></script>
@@ -147,10 +147,10 @@
                 <!-- Swiper -->
                 <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="../img/room1.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/room2.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/room3.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/room4.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room1.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room2.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room3.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room4.jpg" width="100%" height="100%"></div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
@@ -279,7 +279,7 @@
                         <div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle1">
                             <div class="fullWidth">
                                 <div class="c_profileArea">
-                                    <img src="../img/partnerImg.jpg" class="c_profile"/>
+                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
                                 </div>
                                 <div style="width:85%; margin-top:5px;">
                                     <div style="width:20%;">
@@ -311,7 +311,7 @@
                         <div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
                             <div class="fullWidth">
                                 <div class="c_profileArea">
-                                    <img src="../img/partnerImg.jpg" class="c_profile"/>
+                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
                                 </div>
                                 <div style="width:85%; margin-top:5px;">
                                     <div style="width:20%;">
@@ -341,7 +341,7 @@
                         <div style="width:75%; margin-left:25%;"  class="marginBottom_10px padding_10px replyStyle2">
                             <div class="fullWidth">
                                 <div class="c_profileArea">
-                                    <img src="../img/partnerImg.jpg" class="c_profile"/>
+                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
                                 </div>
                                 <div style="width:85%; margin-top:5px;">
                                     <div style="width:20%;">
@@ -398,12 +398,12 @@
             <hr style="margin:unset;">
             <div class="fullWidth" style=" height:100px;">
                 <div class="c_profileArea" style="width:70px; margin:24px;">
-                    <img src="../img/partnerImg.jpg" class="c_profile"/>
+                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
                 </div>
                 <h3 style="margin:40px 10px 0 0; float: left;">김가가</h3>
                 <div style="width:160px;">
                     <a style="float: left; padding:10px; text-align:center; margin:30px 20px;" class="buttonStyle1">
-                        <img src="../img/letterIcon.jpg" style="vertical-align:middle;">문의하기
+                        <img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기
                     </a>
                 </div>
             </div>

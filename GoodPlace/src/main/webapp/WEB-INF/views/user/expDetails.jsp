@@ -9,15 +9,14 @@
     <title>체험검색 > 체험상세</title>
 
     <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../userCss/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiper.css">
 
     <!-- Swiper JS -->
-    <script src="../js/swiper.min.js"></script>
-    
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 
     <style>
         /* content 시작*/
@@ -172,8 +171,8 @@
                 </div>
                 <div style="width:80%; margin:0 10%;">
                     <div style="width:20%; margin-right:5%;">
-                        <img src="../img/clock.jpg" style="float:left; margin-right:5px;"/><h3 style="text-align:left; margin-bottom:10px;">진행시간</h3>
-                        <img src="../img/personIcon.jpg" style="float:left; margin-right:5px;"/><h3 style="text-align:left; margin-bottom:10px;">그룹당 인원</h3>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/clock.jpg" style="float:left; margin-right:5px;"/><h3 style="text-align:left; margin-bottom:10px;">진행시간</h3>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/personIcon.jpg" style="float:left; margin-right:5px;"/><h3 style="text-align:left; margin-bottom:10px;">그룹당 인원</h3>
                     </div>
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">   
@@ -214,7 +213,7 @@
                             <div class="fullWidth">
                                 <div class="p_profileArea">
                                     <div style="width:50%; text-align: center;">
-                                        <img src="../img/partnerImg2.jpg" class="p_profile"/>
+                                        <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg2.jpg" class="p_profile"/>
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
                                         <h1>망손 탈출</h1><br>
@@ -247,13 +246,13 @@
                 <h1 style="float:left; margin:15px 0 15px 46px;">30,000원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div id="getPeriod" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
-                        <img src="../img/calendarLetter.jpg" alt="날짜선택"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/calendarLetter.jpg" alt="날짜선택"/>
                     </div>
                     <div id="calenderArea" style="height:260px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         calender API
                     </div>
                     <div id="getTime" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
-                        <img src="../img/chooseTime.jpg" alt="시간선택"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/chooseTime.jpg" alt="시간선택"/>
                     </div>
                     <div id="timeArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         <div style="width:100%; height:38px; padding:5px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136); font-weight: 900;">
@@ -276,7 +275,7 @@
                         </div>
                     </div>
                     <div id="getPeople" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 8px 0 0 34px;" class="buttonStyle1">
-                        <img src="../img/adjustPeople.jpg"  alt="인원선택"/>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
                     </div>
                     <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
@@ -305,12 +304,12 @@
             <hr style="margin:unset;">
             <div class="fullWidth" style=" height:100px;">
                 <div class="c_profileArea" style="width:70px; margin:24px;">
-                    <img src="../img/partnerImg2.jpg" class="c_profile"/>
+                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg2.jpg" class="c_profile"/>
                 </div>
                 <h3 style="margin:40px 10px 0 0; float: left;">김가가</h3>
                 <div style="width:160px;">
                     <a style="float: left; padding:10px; text-align:center; margin:30px 20px;" class="buttonStyle1">
-                        <img src="../img/letterIcon.jpg" style="vertical-align:middle;">문의하기
+                        <img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기
                     </a>
                 </div>
             </div>

@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숙소검색</title>
-    <link rel="stylesheet" href="../main_css/jquery.bxslider.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/mainPage/jquery.bxslider.css">
     <!-- 슬라이더 버튼들 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
     <style>
         /* content 시작*/
         #content{
@@ -359,7 +359,7 @@
             <div class="rooms power">
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -367,7 +367,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -375,7 +375,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -383,7 +383,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -401,7 +401,7 @@
             <div class="rooms power bottomArea">
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -409,7 +409,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -417,7 +417,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -425,7 +425,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -435,7 +435,7 @@
             <div class="rooms power bottomArea">
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -443,7 +443,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -451,7 +451,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -459,7 +459,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="../images/main/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
