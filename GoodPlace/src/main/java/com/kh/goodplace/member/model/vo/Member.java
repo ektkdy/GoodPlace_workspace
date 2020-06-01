@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 public class Member {
 	
-	private int urNo;			//유저번호
+	private int usNo;			//유저번호
 	private int paNo;			//파트너번호	
 	private String email;		//이메일
 	private String userPwd;		//유저비밀번호

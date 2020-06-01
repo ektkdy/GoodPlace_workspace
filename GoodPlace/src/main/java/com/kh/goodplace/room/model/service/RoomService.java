@@ -29,7 +29,11 @@ public interface RoomService {
 	//6.숙소 휴면용 서비스
 	int restRoom(int rno);
 	
+	//7. 운영중인 숙소 조회용 서비스 (파워등록용)
+	int selectRoomList(int roNo);
 	
+	//8. 파워 신청 및 결제용 서비스 (파워등록용)
+	int payPower(int roNo);
 	
 
 }
