@@ -2,8 +2,19 @@ package com.kh.goodplace.room.model.vo;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Room {
-	
 	
 	/* Rooms 테이블 컬럼 */
 	private int roNo;			// 숙소번호
