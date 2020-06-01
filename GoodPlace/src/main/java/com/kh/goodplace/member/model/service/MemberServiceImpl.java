@@ -47,23 +47,28 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
+	//-------------------------------------------------------------------
+	
+	
+	// 1. 파트너 수입 목록 조회용 서비스
 	@Override
 	public ArrayList<Member> selectIncomeList() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 2. 파트너 계정정보 등록용 서비스
 	@Override
 	public Member selectAccount(int usNo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 3. 파트너 계정정보 수정용 서비스
 	@Override
 	public Member insertAccount(int usNo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	//-------------------------------------------------------------------
 
 	
 
