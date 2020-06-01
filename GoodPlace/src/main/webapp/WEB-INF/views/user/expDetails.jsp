@@ -9,15 +9,14 @@
     <title>체험검색 > 체험상세</title>
 
     <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../userCss/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiper.css">
 
     <!-- Swiper JS -->
-    <script src="../js/swiper.min.js"></script>
-    
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 
     <style>
         /* content 시작*/

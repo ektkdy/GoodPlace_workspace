@@ -9,11 +9,11 @@
     <title>숙소검색 > 숙소상세</title>
 
     <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="../userCss/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}//swiper.css">
 
     <!-- Swiper JS -->
     <script src="../js/swiper.min.js"></script>
