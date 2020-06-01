@@ -61,4 +61,16 @@ public class RoomServiceImpl implements RoomService{
 		return 0;
 	}
 
+	@Override
+	public int selectRoomList(int roNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int payPower(int roNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
