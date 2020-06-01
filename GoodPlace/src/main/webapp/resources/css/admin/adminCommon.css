@@ -1,0 +1,78 @@
+
+    /* header */
+    #header {width: 100%; height: 70px; background: #34538a;}
+    #header #gotomain{float:left; height:100%; width: 50%;}
+    #header #gotomain #logo{float:left; width:240px; height:41px; float: left; margin: 15px 0px 0px 35px;}
+    #header #p_info{position:relative; float:left; width:50%;height: 100%;}
+    #header #p_info .userphoto{float:left; margin-top: 15px; width: 35px; height: 35px; margin-left: 440px;}
+    #header #p_info .arrow{float:left; width: 20px;height: 20px; margin-top: 20px; margin-left: 5px;}
+    #header #p_info p{float:left; margin-top: 18px; color:#fff; margin-left: 5px}
+    #header #slide_menu{position: absolute; top:70px; left:1160px; background: #fff; width:200px; line-height: 50px; color:#333; display:none;}
+    #header #slide_menu ul li{list-style: none; border:1px solid #f1f1f1; border-top:none; }
+    #header #slide_menu ul li:hover{background: #c1d9f0}
+
+
+    .title_name{float: left; margin-top:32px; color:#fff}
+
+
+    /* navi css */
+    #sidenav {float: left; width: 200px; height: 100%;  background: #fff; color:#34538a}
+    #sidenav ul{margin-left: 35px;margin-top: 35px;}
+    #sidenav ul li{list-style: none; text-align: left;} 
+    #sidenav ul li a{color:#34538a;}
+    #sidenav ul li a:hover{font-weight: 600;}
+    #sidenav ul li a.on{font-weight: 600;}
+    #sidenav ul li a span{ float:left; margin-right:5px; width: 25px; height: 25px; background: url(../../images/admin/listadmin.jpg) no-repeat; }
+    #sidenav ul li a p{margin-bottom:30px; }
+
+
+    /* navi icon css */
+    #sidenav ul li .icon1{background-position: 0 0;}
+    #sidenav ul li a .icon2{background-position: 0 -25px;}
+    #sidenav ul li a .icon3{background-position: 0 -50px;}
+    #sidenav ul li a .icon4{background-position: 0 -75px;}
+    #sidenav ul li a .icon5{background-position: 0 -100px;}
+    #sidenav ul li a .icon6{background-position: 0px -125PX;}
+    #sidenav ul li a .icon7{background-position: -25px 0;}
+    #sidenav ul li a .icon8{background-position: -25px -25px;}
+    #sidenav ul li a .icon9{background-position: -25px -50px;}
+    #sidenav ul li a .icon10{background-position: -25px -75px;}
+    #sidenav ul li a .icon11{background-position: -25px -100px;}
+    #sidenav ul li a .icon12{background-position: -25px -125px;}
+   
+
+
+    /* content - sitemap */
+    #contents {float: left; width: 1000px; height: 100%;  background: #fff; /*border: 1px solid #000;*/} 
+    .sitemap{width:50%; height:70px; float: left; text-align: right; font-size: 15px;padding-top:30px;}
+
+
+    /* content - content */
+    .con{width:100%; height:100%; text-align: left;}
+    #page_title{float:left; width: 50%; vertical-align: middle; padding:0;}
+    #page_title img{float:left; width: 35px; height: 35px; }
+    #page_title p{float:left; font-size: 30px; line-height: 35px;}
+    .up_btn_space{float:left; width: 50%; text-align: right;}
+
+    /* table */
+    .common_tb{width: 100%; padding-top:15px}
+    .common_tb thead tr td{background-color:#c1d9f0; font-size: 18px; color:#333; padding: 10px 0; text-align: center;
+                           border-top: 1px solid #bebebe; border-bottom:1px solid #bebebe;}
+    .common_tb tbody tr td{padding: 10px 0; text-align: center; border-bottom:1px solid rgb(241, 241, 241); color:#505050; font-size: 15px;} 
+
+
+
+    /* tab */
+    #tab{width:50%; float: left; padding-top:30px; }
+    #tab button{float:left; width: 150px; height: 50px; font-size: 18px;}
+    #tab .lt_tab{border-bottom-left-radius: 13px; border-top-left-radius: 13px;}
+    #tab .on{background: #184c88;  border:1px solid #184c88; color:#fff;}
+    #tab .off{background: #f1f1f1; color:#333; border: 1px solid #bebebe;}
+    #tab .gt_tab{border-bottom-right-radius: 13px; border-top-right-radius: 13px;}
+
+    /* button */
+    .blue_btn{background-color: #184c88; color:#fff; width: 140px; height: 35px; border-radius: 6px; border:1px solid #184c88}
+    
+    /* footer */
+    #footer {float: left; width: 1200px; height: 100px; background: rgb(241, 241, 241);
+            color:rgb(51, 51, 51)}

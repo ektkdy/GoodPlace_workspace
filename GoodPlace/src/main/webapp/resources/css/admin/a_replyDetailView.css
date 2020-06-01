@@ -1,0 +1,7 @@
+.replyDetail{width:100%; border:1px solid #bebebe; border-bottom:none; border-right:none; border-left:none}
+.replyDetail thead tr td{font-size: 15px; vertical-align: middle; background: #c1d9f0; }
+.replyDetail thead tr.pdTop td{padding-top:15px}
+.replyDetail thead tr.pdBot td{padding-bottom:15px; padding-top:5px}
+.replyDetail tbody tr td .reply_con{width:100%; height:250px; border:1px solid #bebebe; overflow-y:scroll}
+.replyDetail tfoot tr td .replyAnswer{width:100%; height: 100%; border:1px solid #bebebe; resize: none; }
+.replyBtnArea .blue_btn{margin-bottom:30px; float:right}

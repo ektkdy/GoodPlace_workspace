@@ -1,0 +1,10 @@
+/* reply table */
+.reply_tb{width: 100%; border:1px solid #bebebe; border-bottom:none}
+.reply_tb tr td{border-bottom:1px solid #bebebe; height:50px; padding:10px; vertical-align: middle; font-size: 16px; color:#5e5e5e;}
+.reply_tb tr img{background-color: gray; border:1px solid gray; width:60px; height:60px; border-radius: 50%;}
+.text_center{text-align: center;}
+
+ /*페이징바*/
+ #pagingArea{width: 980px; text-align: right;}
+ #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer;}
+ #pagingArea a:hover{color: white; background-color: #34538a;}

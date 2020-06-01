@@ -1,0 +1,12 @@
+
+.common_tb tbody tr td .ing{width:100px; height:30px;  border:1px solid #0d80fb; background: #0d80fb; 
+                            border-radius: 15px; color:#fff; line-height: 28px;}
+.common_tb tbody tr td .confirm_ing{width:100px; height: 30px; border:1px solid #91919b; background: #91919b; 
+                                    border-radius: 15px; color:#fff; line-height: 28px;}
+.common_tb tbody tr td .cancel{width:100px; height: 30px; border:1px solid #d22d32; background: #d22d32; 
+                                    border-radius: 15px; color:#fff; line-height: 28px;}
+.common_tb tbody tr td .rest{width:100px; height: 30px; border:1px solid #272b36; background: #fff; 
+                                        border-radius: 15px; color:#333; line-height: 28px;}                                          
+.modify_btn{width: 70px;height: 30px;background: #e1ebf5; border-radius: 15px; color:#184c88; line-height: 28px; border:1px solid #e1ebf5;}
+.detail_btn{width: 70px;height: 30px;background: #f1f1f1; border-radius: 15px; color:#333; line-height: 28px; border:1px solid #f1f1f1;}
+.schedule_btn{width: 70px;height: 30px;background: #2777f6; border-radius: 15px; color:#fff; line-height: 28px; border:1px solid #2777f6;}
