@@ -22,9 +22,10 @@ public class ExperienceController {
 	@RequestMapping("expEnrollForm2.exp")
 	public ModelAndView expForm2(Experience e, ModelAndView mv) {
 		
+		System.out.println(e);
+		
 		mv.addObject("e", e);
 
-		System.out.println(e);
 		mv.setViewName("partner/partnerExpEnrollForm2");
 		
 		return mv;

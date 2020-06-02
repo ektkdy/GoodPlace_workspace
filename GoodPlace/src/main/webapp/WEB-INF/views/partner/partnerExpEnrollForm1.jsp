@@ -70,11 +70,11 @@
                             <h5>• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                 상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
                                 관리자 심사 후 수정될수 있습니다.</h5>
-                            <input type="radio" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                            <input type="radio" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                            <input type="radio" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                            <input type="radio" name="expCategory" value="art"><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                            <input type="radio" name="expCategory" value="outdoor"><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+                            <input type="radio" name="expCategory" value=1><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+                            <input type="radio" name="expCategory" value=2><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
+                            <input type="radio" name="expCategory" value=3><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+                            <input type="radio" name="expCategory" value=4><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+                            <input type="radio" name="expCategory" value=5><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
                         </td>
                     </tr>
                     <tr>
@@ -138,6 +138,7 @@
 							<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;"> 
                         </td>
                     </tr>
+                    
                 </table>
             <br>
             </div>
