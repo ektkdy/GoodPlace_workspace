@@ -80,7 +80,7 @@
 	                    <tr>
 	                        <th>* 소개</th>
 	                        <td>
-	                            <textarea id="" name="" value=""></textarea>
+	                            <textarea id="" name=""></textarea>
 	                            <h5>• 예약 확정 후 서로의 연락처가 공개됩니다.<br>
 	                                • 안전 거래를 위해 파트너님의 개인 연락처 및 SNS 페이지를 기재할 경우 수정되거나 삭제될 수 있습니다.</h5>   
 	                        </td>

@@ -64,27 +64,37 @@
             <div id="stepOne">
             
             <form action="" method="post">
+            	<input type="hidden" name="expCategory" value="${ e.expCategory }">
+            	<input type="hidden" name="language" value="${ e.language }">
+            	<input type="hidden" name="expTag" value="${ e.expTag }">
+            	<input type="hidden" name="expTitle" value="${ e.expTitle }">
+            	<input type="hidden" name="expContent" value="${ e.expContent }">
+            	<input type="hidden" name="addBasic" value="${ e.addBasic }">
+            	<input type="hidden" name="addDetail" value="${ e.addDetail }">
+            	<input type="hidden" name="addRef" value="${ e.addRef }">
+            	<input type="hidden" name="zipCode" value="${ e.zipCode }">
+            	
                 <table>
                     <tr>
                         <th>* 활동강도</th>
                         <td>
-                            <input type="radio" name="activityIntensity" value="light"><label for="lifeStyle">가벼움</label><br>
-                            <input type="radio" name="activityIntensity" value="normal"><label for="normal">보통</label><br>
-                            <input type="radio" name="activityIntensity" value="hard"><label for="hard">격렬한</label><br>
-                            <input type="radio" name="activityIntensity" value="extreme"><label for="extreme">익스트림</label><br>
+                            <input type="radio" class="activity" name="activity" value="1"><label for="1">가벼움</label><br>
+                            <input type="radio" class="activity" name="activity" value="2"><label for="2">보통</label><br>
+                            <input type="radio" class="activity" name="activity" value="3"><label for="3">격렬한</label><br>
+                            <input type="radio" class="activity" name="activity" value="4"><label for="4">익스트림</label><br>
                         </td>
                     </tr>
                     <tr>
                         <th>* 최대 인원수</th>
                         <td>
-                            <input type="number" class="maxPeople">
+                            <input type="number" class="maxPeople" name="maxPeople">
                             <h5>• 최소 인원수는 1명입니다. 한 회차당 운영 가능한 최대인원수를 입력하세요.</h5>
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 시간</th>
                         <td>
-                            <select name="expStartTime" id="expStartTime" style="margin-bottom: 5px; margin-right: 5px;">
+                            <select name="startTime" id="startTime" style="margin-bottom: 5px; margin-right: 5px;">
                                 <option>운영 시작시간 선택</option>
                                 <option value="10">오전 10시</option>
                                 <option value="11">오전 11시</option>
@@ -99,7 +109,7 @@
                                 <option value="20">오후 20시</option>
                                 <option value="21">오후 21시</option>
                             </select>
-                            <select name="expEndTime" id="expEndTime">
+                            <select name="endTime" id="endTime">
                                 <option>운영 끝 시간 선택</option>
                                 <option value="10">오전 10시</option>
                                 <option value="11">오전 11시</option>
@@ -114,7 +124,7 @@
                                 <option value="20">오후 20시</option>
                                 <option value="21">오후 21시</option>
                             </select>
-                            <select name="expTime" id="expTime" style="margin-bottom: 5px; margin-right: 5px;">
+                            <select name="useTime" id="useTime" style="margin-bottom: 5px; margin-right: 5px;">
                                 <option>소요시간 선택</option>
                                 <option value="1">1시간 소요</option>
                                 <option value="2">2시간 소요</option>
@@ -123,7 +133,7 @@
                                 <option value="5">5시간 소요</option>
                                 <option value="6">6시간 소요</option>
                             </select>
-                            <select name="expTime" id="expTime">
+                            <select name="intervalTime" id="intervalTime">
                                 <option>체험 간격 선택</option>
                                 <option value="30">30분마다 운영</option>
                                 <option value="60">1시간마다 운영</option>
@@ -138,7 +148,7 @@
                         <th>* 게스트 준비물</th>
                         <td>
                             <input type="text" id="supplies" name="supplies" value="">
-                            <input type="checkbox" id="noSupplies" name="noSupplies" class="">
+                            <input type="checkbox" id="noSupplies" name="supplies" value="">
                             	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
                         </td>
                     </tr>

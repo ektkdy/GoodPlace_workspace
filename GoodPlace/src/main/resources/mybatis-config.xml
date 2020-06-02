@@ -8,11 +8,14 @@
 	<typeAliases>
 		<typeAlias type="com.kh.goodplace.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.goodplace.room.model.vo.Room" alias="Room"/>
+		<typeAlias type="com.kh.goodplace.experience.model.vo.Experience" alias="Experience"/>
+		<typeAlias type="com.kh.goodplace.experience.model.vo.ExpPay" alias="ExpPay"/>
 	</typeAliases>
 	
 	
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/exp-mapper.xml"/>
 	</mappers>
 </configuration>

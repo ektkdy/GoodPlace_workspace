@@ -18,7 +18,7 @@ public class ExpPay {
 	/* 체험결제 컬럼들 */
 	private int epNo; 			// 체험결제번호
 	private int exNo;			// 체험번호
-	private int userNo;			// 회원번호
+	private int usNo;			// 회원번호
 	private int amount;			// 체험결제금액
 	private Timestamp payDate;	// 체험결제일
 	private Timestamp expDate;	// 체험신청일
