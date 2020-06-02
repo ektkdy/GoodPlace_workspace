@@ -142,7 +142,7 @@
             </div>
 
             <!-- 숙소검색 -->
-            <form action="faq.bo" post="get">
+            <form action="faq.bo" method="get" >
                 <div class="search input" style="display: block;">
                     <li class="liBox">
                         <b>위치</b>

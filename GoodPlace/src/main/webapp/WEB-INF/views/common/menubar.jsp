@@ -288,14 +288,14 @@
 		                        <div id="personalImg" style="margin-left: 10px;">
 		                            
 		                            <li class="drop-down">
-		                                <a><img src="#" width="50px" height="50px" style="border-radius: 50px; background-color: darkblue;"></a>
+		                                <a><img src="" width="50px" height="50px" style="border-radius: 50px; background-color: darkblue;"></a>
 		                                <ul>
 		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
-		                                    <li><a href="#">my굿플레이스</a></li>
-		                                    <li><a href="#">숙소예약내역</a></li>
-		                                    <li><a href="#">위시리스트</a></li>
-		                                    <li><a href="#">파트너대시보드</a></li>
-		                                    <li><a href="#">관리자페이지</a></li>
+		                                    <li><a href="">my굿플레이스</a></li>
+		                                    <li><a href="">숙소예약내역</a></li>
+		                                    <li><a href="">위시리스트</a></li>
+		                                    <li><a href="">파트너대시보드</a></li>
+		                                    <li><a href="">관리자페이지</a></li>
 		                                    <li><a href="logout.me">로그아웃</a></li>
 		                                </ul>
 		                            </li>
@@ -331,7 +331,7 @@
             <div>
                 <!--아이디-->
                 <div class="chat_common"> 
-                    <img src="#" width="28px" height="28px"> <!-- 프로필사진 -->
+                    <img src="" width="28px" height="28px"> <!-- 프로필사진 -->
                     <span>GoodPlace</span>
                 </div>
                 <!-- 채팅 내용 -->
@@ -345,7 +345,7 @@
             <div>
                 <!--아이디-->
                 <div class="chat_common chat_userId">
-                    <img src="#" width="28px" height="28px"> <!-- 프로필사진 -->
+                    <img src="" width="28px" height="28px"> <!-- 프로필사진 -->
                     <span>GoodPlace</span>
                 </div>
                 <!-- 채팅 내용 -->
@@ -359,7 +359,7 @@
             <div>
                 <!--아이디-->
                 <div class="chat_common"> 
-                    <img src="#" width="28px" height="28px">
+                    <img src="" width="28px" height="28px">
                     <span>GoodPlace</span>
                 </div>
                 <!-- 채팅 내용 -->
@@ -373,7 +373,7 @@
             <div>
                 <!--아이디-->
                 <div class="chat_common chat_userId">
-                    <img src="#" width="28px" height="28px">
+                    <img src="" width="28px" height="28px">
                     <span>GoodPlace</span>
                 </div>
                 <!-- 채팅 내용 -->
