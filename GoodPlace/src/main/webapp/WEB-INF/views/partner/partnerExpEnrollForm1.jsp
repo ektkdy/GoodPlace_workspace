@@ -70,11 +70,11 @@
                             <h5>• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                 상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
                                 관리자 심사 후 수정될수 있습니다.</h5>
-                            <input type="radio" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                            <input type="radio" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                            <input type="radio" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                            <input type="radio" name="expCategory" value="art"><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                            <input type="radio" name="expCategory" value="outdoor"><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+                            <input type="radio" name="expCategory" value=1><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+                            <input type="radio" name="expCategory" value=2><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
+                            <input type="radio" name="expCategory" value=3><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+                            <input type="radio" name="expCategory" value=4><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+                            <input type="radio" name="expCategory" value=5><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
                         </td>
                     </tr>
                     <tr>
@@ -114,7 +114,7 @@
                     <tr>
                         <th>* 체험 제목</th>
                         <td>
-                            <input type="text" id="expTitle" name="expTitle">
+                            <input type="text" id="expTitle" name="expTitle" required>
                             <h5>• 정확하고 간결하게 표현해주세요. <br>
                                 • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
                                 (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>

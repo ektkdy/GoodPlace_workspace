@@ -78,16 +78,16 @@
                     <tr>
                         <th>* 활동강도</th>
                         <td>
-                            <input type="radio" class="activity" name="activity" value="1"><label for="1">가벼움</label><br>
-                            <input type="radio" class="activity" name="activity" value="2"><label for="2">보통</label><br>
-                            <input type="radio" class="activity" name="activity" value="3"><label for="3">격렬한</label><br>
-                            <input type="radio" class="activity" name="activity" value="4"><label for="4">익스트림</label><br>
+                            <input type="radio" class="activity" name="activity" value=1><label for=1>가벼움</label><br>
+                            <input type="radio" class="activity" name="activity" value=2><label for=2>보통</label><br>
+                            <input type="radio" class="activity" name="activity" value=3><label for=3>격렬한</label><br>
+                            <input type="radio" class="activity" name="activity" value=4><label for=4>익스트림</label><br>
                         </td>
                     </tr>
                     <tr>
                         <th>* 최대 인원수</th>
                         <td>
-                            <input type="number" class="maxPeople" name="maxPeople">
+                            <input type="number" class="maxPeople" name="maxPeople" required>
                             <h5>• 최소 인원수는 1명입니다. 한 회차당 운영 가능한 최대인원수를 입력하세요.</h5>
                         </td>
                     </tr>
@@ -126,12 +126,12 @@
                             </select>
                             <select name="useTime" id="useTime" style="margin-bottom: 5px; margin-right: 5px;">
                                 <option>소요시간 선택</option>
-                                <option value="1">1시간 소요</option>
-                                <option value="2">2시간 소요</option>
-                                <option value="3">3시간 소요</option>
-                                <option value="4">4시간 소요</option>
-                                <option value="5">5시간 소요</option>
-                                <option value="6">6시간 소요</option>
+                                <option value=1>1시간 소요</option>
+                                <option value=2>2시간 소요</option>
+                                <option value=3>3시간 소요</option>
+                                <option value=4>4시간 소요</option>
+                                <option value=5>5시간 소요</option>
+                                <option value=6>6시간 소요</option>
                             </select>
                             <select name="intervalTime" id="intervalTime">
                                 <option>체험 간격 선택</option>
@@ -147,7 +147,7 @@
                     <tr>
                         <th>* 게스트 준비물</th>
                         <td>
-                            <input type="text" id="supplies" name="supplies" value="">
+                            <input type="text" id="supplies" name="supplies">
                             <input type="checkbox" id="noSupplies" name="supplies" value="">
                             	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
                         </td>
@@ -155,7 +155,7 @@
                     <tr>
                         <th>* 대표 사진</th>
                         <td>
-                            <input type="file" id="" name="" value="">
+                            <input type="file" id="" name="" value="" required>
                             <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
                         </td>
                     </tr>
