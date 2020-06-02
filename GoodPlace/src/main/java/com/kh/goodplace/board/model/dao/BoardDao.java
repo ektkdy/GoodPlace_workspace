@@ -45,4 +45,10 @@ public class BoardDao {
 		
 	}
 	
+	public int faqDelete(SqlSessionTemplate sqlSession, int fno) {
+		
+		return sqlSession.delete("boardMapper.faqDelete", fno);
+		
+	}
+	
 }

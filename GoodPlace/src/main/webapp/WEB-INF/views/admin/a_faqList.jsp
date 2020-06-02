@@ -119,7 +119,7 @@
                              -->
                              <c:forEach items="${ list }" var="b">
 	                            <tr>
-	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"  id="faqDelete" name="checkRow" value="${ b.faqNo }"></td>
 	                                <td>${ b.faqNo }</td>
 	                                <td>${ b.faqTitle }</td>
 	                                <td>${ b.faqCategory }</td>
@@ -139,6 +139,25 @@
  	            		    
 		            	});
 		            </script>
+		            
+            
+<!-- 		           	<script>
+		            	$(function(){
+		            		
+ 	            		    $("#delete_btn").click(function(){
+ 	            		    	confirm("삭제하시겠습니까?");
+ 	            	            $("input[name=checkRow]:checked").each(function(){
+ 	            	                var fno =$(this).val();
+									console.log(fno);
+									location.href="faqDelete.bo?=" + fno;
+ 	            	            });
+ 	            		    	
+		            		});  
+ 	            		    
+		            	});
+		            </script> -->
+		            
+
                     
                     <table>
                         <th>

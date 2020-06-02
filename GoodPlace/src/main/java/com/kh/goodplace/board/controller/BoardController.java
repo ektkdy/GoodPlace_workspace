@@ -116,7 +116,25 @@ public class BoardController {
     }
     
 
-    
+    @RequestMapping("faqDelete.bo")
+    public String faqDelete(int fno, Model model) {
+    	
+    	int result = bService.faqDelete(fno);
+    	
+        if(result > 0)
+        {   // 게시글 삭제 성공
+            
+            return "redirect:aFaqList.bo?currentPage=1";
+            
+        }
+        else
+        {   // 게시글 삭제 실패
+            
+            model.addAttribute("msg", "게시글 삭제 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
     
     
     

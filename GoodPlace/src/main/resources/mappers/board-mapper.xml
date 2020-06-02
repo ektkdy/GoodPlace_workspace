@@ -73,7 +73,13 @@
 	
 	</update>
 	
+	<delete id="faqDelete" parameterType="_int">
 	
+		delete 
+		  from faq
+		 where where faqno=#{fno}
+	
+	</delete>
 	
 	
 	

@@ -51,8 +51,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int faqDelete(int fno) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return bDao.faqDelete(sqlSession, fno);
+		
 	}
 
 
