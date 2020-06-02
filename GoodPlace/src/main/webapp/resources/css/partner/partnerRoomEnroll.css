@@ -11,7 +11,7 @@
 .pdTopBtom{padding-top:15px; padding-bottom: 15px;}
 .roomEnroll_tb tbody tr.pdBtom td{padding-bottom:30px}
 .roomEnroll_tb tbody tr td p{margin-left:12px;margin-top:10px; font-size:15px}
-.roomEnroll_tb button{width:80px; height: 30px; border:1px solid #bebebe; background: #f1f1f1; color:#333; border-radius: 5px;}
+.roomEnroll_tb .photoButton{width:80px; height: 30px; border:1px solid #bebebe; background: #f1f1f1; color:#333; border-radius: 5px;}
 .roomEnroll_tb .photo_btn{vertical-align: top;}
 .roomEnroll_tb input{ border-radius:3px; border:1px solid #bebebe; }
 .input_st input{height:30px}
