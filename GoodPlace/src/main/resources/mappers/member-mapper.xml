@@ -2,17 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 	<resultMap id="memberResultSet" type="Member">
-		<id column="USER_ID" property="userId"/>
+		<id column="USNO" property="usNo"/>
+		<result column="PANO" property="paNo"/>
+		<result column="EMAIL" property="email"/>
 		<result column="USER_PWD" property="userPwd"/>
 		<result column="USER_NAME" property="userName"/>
-		<result column="EMAIL" property="email"/>
-		<result column="GENDER" property="gender"/>
-		<result column="AGE" property="age"/>
 		<result column="PHONE" property="phone"/>
-		<result column="ADDRESS" property="address"/>
+		<result column="POINT" property="point"/>
+		<result column="USER_KIND" property="userKind"/>
 		<result column="ENROLL_DATE" property="enrollDate"/>
-		<result column="MODIFY_DATE" property="modifyDate"/>
 		<result column="STATUS" property="status"/>
+		<result column="YELLOW_CARD" property="yellowCard"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	
+		<result column="PARTNER_INTRO" property="partnerIntro"/>
+		<result column="PA_ENROLL_DATE" property="paEnrollDate"/>
+		<result column="ACCOUNT_NAME" property="accountName"/>
+		<result column="ACCOUNT_NUM" property="accountNum"/>
+		<result column="PRE_MSG" property="preMsg"/>
+		<result column="PA_YELLOW_CARD" property="paYellowCard"/>
+		<result column="PARTNER_STATUS" property="partnerStatus"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="Member">
@@ -23,7 +34,20 @@
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		select *
 		  from Member
+	 left join partner using(pano)
 		 where email = #{email}
 		   and status = 'Y'
 	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="_int">
+		select count(*)
+		  from member
+		 where email=#{email}
+	</select>
+	
+	<update id="updatePwd" parameterType="Member">
+		update member
+		   set user_pwd = #{userPwd}
+		 where email = #{email}
+	</update>
 </mapper>

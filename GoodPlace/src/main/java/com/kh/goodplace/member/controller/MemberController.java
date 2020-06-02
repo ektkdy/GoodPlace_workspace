@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.member.model.service.MemberService;
@@ -20,6 +20,8 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	
 	// 로그인 메인
 	@RequestMapping("loginForm.me")
 	public String loginForm() {
@@ -31,6 +33,46 @@ public class MemberController {
 		return "user/member/loginEmail";
 	}
 	
+	//비밀번호 찾기 페이지1
+	@RequestMapping("pwdFindForm1.me")
+	public String pwdFindForm1() {
+		return "user/member/pwdFind1";
+	}
+	
+	//비밀번호 찾기 페이지2 이메일 체크
+	@RequestMapping("emailCheck.me")
+	public String emailCheck(String email, HttpSession session, Model model) {
+		
+		int result = mService.emailCheck(email);
+		
+		if( result > 0 ) {
+			model.addAttribute("email", email);
+			return "user/member/pwdFind2";
+		} else {
+			session.setAttribute("msg", "가입된 이메일이 없습니다.");
+			return "redirect:pwdFindForm1.me";
+		}
+	}
+	//비밀번호 찾기 페이지3 비밀번호 재설정 페이지
+	@RequestMapping("pwdResetForm.me")
+	public String pwdResetForm(String email, Model model) {
+		model.addAttribute("email", email);
+		return "user/member/pwdReset";
+	}
+	//비밀번호 재설정
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(Member m, HttpSession session) {
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		
+		m.setUserPwd(encPwd);
+		
+		int result = mService.updatePwd(m);
+		
+		session.setAttribute("msg", "비밀번호를 성공적으로 변경 하였습니다.");
+		return "redirect:/";
+	}
+
+	
 	// 로그인
 	@RequestMapping(value="login.me")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
@@ -41,6 +83,7 @@ public class MemberController {
 		// 		   m에 userPwd : 로그인 시 입력한 비밀번호(평문)
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
+			//System.out.println(loginUser);
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		} else {
@@ -51,6 +94,12 @@ public class MemberController {
 			//mv.setViewName("user/member/loginEmail");	
 		}
 		return mv;
+	}
+	
+	@RequestMapping("logout.me")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	// 회원가입 메인

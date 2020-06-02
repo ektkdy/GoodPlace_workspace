@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,26 +132,19 @@
 </style>
 </head>
 <body>
-
 	<!-- header -->
 	<jsp:include page="../../common/menubar.jsp"/>
 	
     <!-- content -->
-    <div id="content" style="margin-bottom: 150px;">
-        <h3 style="text-align: center; margin-top: 98px ;">회원가입 마지막 단계입니다.</h3>
+    <div id="content" style="margin: 150px 0px;">
         <div class="enrollBox">
             <div>
                 이메일 인증
             </div>
-            <form action="insertMember.me" method="post" onsubmit="">
-	            <input type="hidden" name="userName" value="${ m.userName }">
-	            <input type="hidden" name="email" value="${ m.email }">
-	            <input type="hidden" name="userPwd" value="${ m.userPwd }">
-	            <input type="hidden" name="phone" value="${ m.phone }">
-	            
+            <form action="pwdResetForm.me" method="post" onsubmit="">
                 <div class="form-group">
                     <div>
-                        <input type="text" class="form-control"  value="gmldud695@gmail.com" readonly><br>
+                        <input type="text" class="form-control" name="email" value=${ email } readonly><br>
                     </div>
                 </div>
                 <div class="certify">
@@ -177,7 +170,6 @@
     </div>
     <!-- footer -->
 	<jsp:include page="../../common/footer.jsp"/>
-	
 	<script>
         // 인증번호 체크 스크립트
         function certify_check(){

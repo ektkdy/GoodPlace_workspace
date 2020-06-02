@@ -201,7 +201,7 @@
     .drop-down ul{
         display:none;
         padding-left: 0px;
-        width: 210px;
+        width: 190px;
         border-right-width: 50px;
         right: 1px;
         position: absolute;
@@ -272,7 +272,7 @@
 	                	<c:when test="${ empty loginUser }">
 	                		<!-- 로그인 전 -->
 	                		<li style="margin-top: 10px;">
-		                        <a class="list qBtn" href="" style="font-size: 15px; margin-left: 50px;">1:1채팅상담</a>
+		                        <a class="list qBtn" href="enrollForm.me" style="font-size: 15px; margin-left: 50px;">회원가입</a>
 		                    </li>
 		                    <li style="margin-top: 10px;">
 		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 30px;">로그인</a>
@@ -296,6 +296,7 @@
 		                                    <li><a href="#">위시리스트</a></li>
 		                                    <li><a href="#">파트너대시보드</a></li>
 		                                    <li><a href="#">관리자페이지</a></li>
+		                                    <li><a href="logout.me">로그아웃</a></li>
 		                                </ul>
 		                            </li>
 		                        </div>
