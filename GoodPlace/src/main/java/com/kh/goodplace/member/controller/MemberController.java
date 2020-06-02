@@ -156,4 +156,26 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+//	// "경우1" 글씨 몇 번 읽는지 테스트  -> 경우1: return 으로 "텍스트"(뷰명) 반환하는 경우
+//    @RequestMapping("faq.bo")
+//    public String faq() {
+//    	
+//    	System.out.println("경우1");
+//    	
+//    	return "main";
+//    	
+//    }
+    
+	 // "경우2" 글씨 몇 번 읽는지 테스트  -> 경우2: return 으로 "redirect:/" 반환하는 경우
+    @RequestMapping("faq.bo")
+    public String faq() {
+    	
+    	System.out.println("경우2");
+    	
+    	return "redirect:/";
+    	
+    }
+    
+    
 }
