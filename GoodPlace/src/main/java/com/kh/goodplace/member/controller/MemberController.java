@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.member.model.service.MemberService;
@@ -53,6 +54,20 @@ public class MemberController {
 			return "redirect:pwdFindForm1.me";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="emailCheck2.me")
+	public String emailCheck2(String email) {
+		int count = mService.emailCheck(email);
+		
+		if(count > 0) {	// 중복 아이디 있음 --> 사용 불가
+			return "fail";
+		} else { // 중복된 아이디가 없음 --> 사용가능
+			return "success";
+		}
+		
+	}
+	
 	//비밀번호 찾기 페이지3 비밀번호 재설정 페이지
 	@RequestMapping("pwdResetForm.me")
 	public String pwdResetForm(String email, Model model) {

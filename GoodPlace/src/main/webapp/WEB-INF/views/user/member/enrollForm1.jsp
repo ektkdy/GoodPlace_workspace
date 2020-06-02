@@ -18,7 +18,7 @@
 
         #content .enrollBox{
             width: 400px;
-            height: 620px;
+            height: 650px;
             background-color: #ffffff;
             margin: 0 auto;
             padding: 40px 40px;
@@ -107,9 +107,10 @@
                     <p for="email"> * 이메일 </p>
                     <div>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Email" required><br>
+                        <div id="checkResult" style="visibility:hidden; font-size:0.8em">ㅇ</div>
                     </div>
 
-                    <p for="userPwd">* 비밀번호 </p>
+                    <p for="userPwd" style="margin-top: 0px;">* 비밀번호 </p>
                     <div>
                         <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Please Enter Password" required><br>
                     </div>
@@ -153,8 +154,8 @@
                 </div>
 
                 <div class="btns" align="center">
-                    <button class="cancle" type="reset" class="btn btn-danger" style="margin-right: 30px;"> 초기화</button>
-                    <button class="next" type="submit" onclick="return allCheck();" class="btn btn-primary">회원가입</button>
+                    <button class="cancle" type="reset"  class="btn btn-danger" style="margin-right: 30px;"> 초기화</button>
+                    <button class="next" type="submit" id="enrollBtn" onclick="return allCheck();" class="btn btn-primary" disabled>회원가입</button>
                 </div>
             </form>
         </div>
@@ -165,7 +166,7 @@
 	
 	<script>
         $(function(){
-
+			// 약관동의
             $('.allCheck').change(function(){
                 if($('.allCheck').is(":checked")){
                     $('.subCheck').attr("checked", true);
@@ -173,7 +174,57 @@
                     $('.subCheck').attr("checked", false);
                 }
             });
+            
+         	// 이벤트 걸고자 하는 input 요소 변수에 기록해놓기
+            var $emailInput = $("input[name=email]");
+            
+            $emailInput.keyup(function(){
+          	 //console.log($idInput.val());
+          	 if($emailInput.val().length >= 10){ // 적어도 아이디가 5글자 이상 되었을 때 본격적으로 중복체크
+          		 $.ajax({
+          			url:"emailCheck2.me",
+          			data:{email:$emailInput.val()},
+          			success:function(status){
+          				
+          				if(status == "fail"){ // 중복 아이디 존재 == 사용불가
+          					idCheckValidate(2);
+          				
+          				} else { // 중복된 아이디 없음 == 사용가능
+          					idCheckValidate(3);
+          				}
+          			}, error:function(){
+          				console.log("아이디 중복체크용 ajax 통신 실패");
+          			}
+          		 });
+          	 
+          	 } else { // 중복체크 X
+          		 idCheckValidate(1);
+          	 }
+          	 
+            });
         });
+        
+        function idCheckValidate(num){
+            
+            if(num == 1) { // 아이디 중복체크를 아직 안하는 경우 : 메세지 보여지지 않음 버튼 비활성화
+               
+               $("#checkResult").css("visibility", "hidden");
+               $("enrollBtn").attr("diasbled", true);
+               
+            }else if(num == 2){ // 아이디 중복체크 후 사용불가능한 아이디일 경우 : "중복아이디 존재 사용불가능" 메세지 보여짐, 버튼 비활성화
+               
+               $("#checkResult").css("color", "red").text("이미 가입된 이메일입니다.");
+               $("#checkResult").css("visibility", "visible");
+               $("#enrollBtn").attr("disabled", true);
+                            
+            }else{ // 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능한 아이디임" 메세지 보여짐, 버튼 활성화
+               
+               $("#checkResult").css("color", "green").text("사용 가능한 이메일입니다.");
+               $("#checkResult").css("visibility", "visible");
+               $("#enrollBtn").removeAttr("disabled");
+               
+            }
+         }
 
         function allCheck() {
             if($('.subCheck').is(":checked")){
@@ -184,7 +235,6 @@
                 return false;
             }
         }
-
 
     </script>
 </body>
