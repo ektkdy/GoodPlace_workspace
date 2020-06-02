@@ -44,7 +44,6 @@
 		          from faq
 		         where faq_category = #{faqCategory}
 		        )
-		where rownum < 4
 	</select>
 	
 	<select id="selectFaqContent" parameterType="Board" resultType="Board">
