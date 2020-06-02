@@ -25,6 +25,7 @@
 		 order by FAQNO desc
 	</select>
 
+	<!-- 진아  -->
 	<select id="selectFaqCategory" resultType="string">
 		select distinct faq_category
 		  from faq
@@ -37,6 +38,7 @@
 		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
 	</insert>
 
+	<!-- 진아  -->
 	<select id="selectFaqTitle" parameterType="Board" resultType="string">
 		select faq_title
 		from    (
@@ -46,6 +48,7 @@
 		        )
 	</select>
 	
+	<!-- 진아  -->
 	<select id="selectFaqContent" parameterType="Board" resultType="Board">
 		select *
 		  from faq
