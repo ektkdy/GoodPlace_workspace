@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+
+	<resultMap type="Board" id="boardFaqResultSet">
+		<id column="FAQNO" property="faqNo"/>
+		<result column="FAQ_CATEGORY" property="faqCategory"/>
+		<result column="FAQ_TITLE" property="faqTitle"/>
+		<result column="FAQ_CONTENT" property="faqContent"/>
+		<result column="FAQ_CREATE_DATE" property="faqCreateDate"/>
+	</resultMap>
+
+
+
+	<select id="aSelectFaqListCount" resultType="_int">
+		select count(*)
+		  from faq
+	</select>
+	
+	<select id="aSelectFaqList" resultMap="boardFaqResultSet">
+		select *
+		  from faq
+		 order by FAQNO desc
+	</select>
+
+
+</mapper>
