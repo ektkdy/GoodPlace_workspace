@@ -103,11 +103,11 @@
                                 <td width="100">번호</td>
                                 <td width="300">제목</td>
                                 <td width="200">분류</td>
-                                <td width="100">조회수</td>
                                 <td width="200">수정</td>
                             </tr>
                         </thead>
                         <tbody>
+                        	<!-- 
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>1</td>
@@ -116,6 +116,16 @@
                                 <td>134</td>
                                 <td><button class="modifiyBtn">수정</button></td>
                             </tr>
+                             -->
+                             <c:forEach items="${ list }" var="b">
+	                            <tr>
+	                                <td><input type="checkbox"></td>
+	                                <td>${ b.faqNo }</td>
+	                                <td>${ b.faqTitle }</td>
+	                                <td>${ b.faqContent }</td>
+	                                <td><button class="modifiyBtn">수정</button></td>
+	                            </tr>
+	                         </c:forEach>
 
                         </tbody>
                     </table>
@@ -127,13 +137,45 @@
                         </th>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
+                            	
+						   <!-- <a>&lt;</a>
                                 <a>1</a>
                                 <a>2</a>
                                 <a>3</a>
                                 <a>4</a>
                                 <a>5</a>
-                                <a>&gt;</a>
+                                <a>&gt;</a> -->
+                                
+			                    <c:choose>
+				                	<c:when test="${ pi.currentPage eq 1 }">
+					                    <a href="#">&lt;</a>
+					                </c:when>
+					                <c:otherwise>
+				                    	<a href="aFaqList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+				                    </c:otherwise>
+			                    </c:choose>
+			                    
+						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			                    	<c:choose>
+			                    		<c:when test="${ p eq pi.currentPage }">
+				                    		<a href="#">${p}</a>
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<a class="page-link" href="aFaqList.bo?currentPage=${ p }">${p}</a>
+				                    	</c:otherwise>
+				                    </c:choose>
+			                    </c:forEach>
+			                    
+						        <c:choose>
+			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					                    <a>&gt;</a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="aFaqList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+					                </c:otherwise>
+			                    </c:choose>
+			                    
+
                             </div>
                         </th>
     
