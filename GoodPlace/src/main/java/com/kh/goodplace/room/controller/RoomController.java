@@ -23,7 +23,7 @@ public class RoomController {
 		
 		int listCount = rService.selectListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Room> list = rService.selectRoomsList(pi);
 		model.addAttribute("pi", pi);

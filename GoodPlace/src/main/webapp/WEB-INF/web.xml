@@ -43,6 +43,7 @@
 		<url-pattern>*.bo</url-pattern>
 		<url-pattern>*.ro</url-pattern>
 		<url-pattern>*.exp</url-pattern>
+		<url-pattern>*.re</url-pattern>
 	</servlet-mapping>
 
 	<!-- 한글 깨짐 방지용 인고딩 필터 등록 -->

@@ -26,7 +26,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public ArrayList<Experience> selectList(PageInfo pi) {
+	public ArrayList<Experience> selectExpList(PageInfo pi) {
 		return null;
 	}
 
