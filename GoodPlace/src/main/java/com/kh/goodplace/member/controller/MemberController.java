@@ -74,6 +74,7 @@ public class MemberController {
 		model.addAttribute("email", email);
 		return "user/member/pwdReset";
 	}
+	
 	//비밀번호 재설정
 	@RequestMapping("updatePwd.me")
 	public String updatePwd(Member m, HttpSession session) {
@@ -132,9 +133,7 @@ public class MemberController {
 	public ModelAndView enrollEmailForm2(Member m, ModelAndView mv) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		//System.out.println("암호화후: " + encPwd);
-		
 		m.setUserPwd(encPwd);
-		
 		
 		mv.addObject("m", m);
         mv.setViewName("user/member/enrollForm2");

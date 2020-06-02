@@ -39,7 +39,7 @@
 		   and status = 'Y'
 	</select>
 	
-	<select id="emailCheck" parameterType="String" resultType="_int">
+	<select id="emailCheck" parameterType="string" resultType="_int">
 		select count(*)
 		  from member
 		 where email=#{email}
