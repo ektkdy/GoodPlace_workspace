@@ -114,7 +114,7 @@
                     <tr>
                         <th>* 체험 제목</th>
                         <td>
-                            <input type="text" id="expTitle" name="expTitle">
+                            <input type="text" id="expTitle" name="expTitle" required>
                             <h5>• 정확하고 간결하게 표현해주세요. <br>
                                 • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
                                 (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>
