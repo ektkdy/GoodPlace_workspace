@@ -20,7 +20,6 @@ public class ExperienceController {
 		return "partner/partnerExpEnrollForm1";
 	}
 	
-	@InitBinder
 	@RequestMapping("expEnrollForm2.exp")
 	public ModelAndView expForm2(Experience e, ModelAndView mv) {
 		
