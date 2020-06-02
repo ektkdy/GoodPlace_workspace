@@ -25,5 +25,10 @@
 		 order by FAQNO desc
 	</select>
 
+	<select id="selectFaqCategory" resultMap="boardFaqResultSet">
+		select distinct faq_category
+		  from faq
+		  order by faq_category
+	</select>
 
 </mapper>
