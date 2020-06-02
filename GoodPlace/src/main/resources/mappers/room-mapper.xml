@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="roomMapper">
+	<resultMap type="Room" id="roomResultSet">
+		<id column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="MIN_PEOPLE" property="minPeople"/>
+		<result column="MAX_PEOPLE" property="maxPeople"/>
+		<result column="PRICE" property="price"/>
+		<result column="ADD_PRICE" property="addPrice"/>
+		<result column="ROOMS_NOTICE" property="roomsNotice"/>
+		<result column="ROOMS_TAG" property="roomsTag"/>
+		<result column="ROOM_COUNT" property="roomCount"/>
+		<result column="BED_COUNT" property="bedCount"/>
+		<result column="BATH_COUNT" property="bathCount"/>
+		<result column="RESTROOM_COUNT" property="restroomCount"/>
+		<result column="PACILITY" property="facility"/>
+		<result column="SERVICE" property="service"/>
+		<result column="MEAL" property="meal"/>
+		<result column="DENY" property="deny"/>
+		<result column="DENY_CONTENT" property="denyContent"/>
+		<result column="ADD_BASIC" property="addBasic"/>
+		<result column="ADD_DETAIL" property="addDetail"/>
+		<result column="ADD_REF" property="addRef"/>
+		<result column="ZIP_CODE" property="zipCode"/>
+		<result column="APPLY_DATE" property="applyDate"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="OPERATE_DAY" property="operateDay"/>
+		<result column="PONO" property="opNo"/>
+		<result column="POWER_START" property="powerStart"/>
+		<result column="POWER_END" property="powerEnd"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHECK_IN" property="checkIn"/>
+		<result column="CHECK_OUT" property="checkOut"/>
+		<result column="DEADLINE" property="deadline"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="RPNO" property="rpNo"/>
+		<result column="POWER_KIND" property="powerKind"/>
+	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
@@ -8,6 +48,12 @@
 		 where status='Y'
 	</select>
 	
-	
+	<select id="selectRoomsList" resultMap="roomResultSet">
+		select *
+	      from rooms r
+			join power p using(pono)
+			join powerpay pp using(rono)
+			where r.status = 1
+	</select>
 
 </mapper>

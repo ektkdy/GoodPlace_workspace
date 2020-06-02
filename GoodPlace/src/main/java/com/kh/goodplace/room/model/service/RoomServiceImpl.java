@@ -27,8 +27,7 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public ArrayList<Room> selectRoomsList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return rDao.selectRoomsList(sqlSession, pi);
 	}
 
 	@Override
