@@ -37,6 +37,13 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.insertFaq(sqlSession, b);
 	}
 
+	@Override
+	public Board selectFaq(int fno) {
+		
+		return bDao.selectFaq(sqlSession, fno);
+		
+	}
+
 
 
 }

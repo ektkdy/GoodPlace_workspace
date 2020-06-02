@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -58,6 +59,32 @@ public class BoardController {
             return "common/errorPage";
         }
     	
+    }
+    
+    
+    @RequestMapping("aFaqDetail.bo")
+    public ModelAndView selectFaq(int fno, ModelAndView mv)
+    {
+        
+		/* int result = bService.selectFaq(fno, b); */
+    	
+    	Board b = bService.selectFaq(fno);
+    	
+    	
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_faqDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
     }
     
     

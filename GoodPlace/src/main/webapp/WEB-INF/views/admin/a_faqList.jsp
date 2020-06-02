@@ -96,7 +96,7 @@
                     <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
+                    <table id="faqList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <td width="100">선택</td>
@@ -123,12 +123,21 @@
 	                                <td>${ b.faqNo }</td>
 	                                <td>${ b.faqTitle }</td>
 	                                <td>${ b.faqCategory }</td>
-	                                <td><button class="modifiyBtn">수정</button></td>
+	                                <td><button id="#faqUpdate" class="modifiyBtn" onclick="location.href='aFaqDetail.bo?fno=${ b.faqNo }'">수정</button></td>
 	                            </tr>
 	                         </c:forEach>
 
                         </tbody>
                     </table>
+                    
+		            <script>
+		            	$(function(){
+		            		$("#faqList tbody tr").click(function(){
+		            			location.href="aFaqDetail.bo?fno=" + $(this).children().eq(1).text();
+		            		})
+		            	});
+		            </script>
+                    
                     <table>
                         <th>
                             <br>

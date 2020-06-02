@@ -69,10 +69,10 @@
                         <thead>
                             <tr>
                                 <td width="150px">제목</td>
-                                <td colspan="3" style="background: white; width: 300px; text-align: left; padding-left: 5%;">숙소예약관련</td>
+                                <td colspan="3" style="background: white; width: 300px; text-align: left; padding-left: 5%;">${ b.faqTitle }</td>
                                 <td width="100px">분류</td>
                                 <td colspan="2" width="100px" style="background: white; text-align: left; padding-left: 5%;">
-                                    숙소관련
+                                    ${ b.faqCategory }
                                 </td>
                             </tr>
 
@@ -81,14 +81,14 @@
                             <tr>
                                 <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
                                 <td colspan="5" style="padding-left: 5%;">
-                                    <textarea name="" id="" style="border: none;" readonly>안녕하세요</textarea>
+                                    <textarea name="" id="" style="border: none;" readonly>${ b.faqContent }</textarea>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
                     <div style="text-align: right;">
-                        <button class="blue_btn" >목록으로</button>
+                        <button class="blue_btn" onclick="location.href='aFaqList.bo?currentPage=1'">목록으로</button>
                     </div>
 
                 </div>

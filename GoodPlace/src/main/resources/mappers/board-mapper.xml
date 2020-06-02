@@ -13,12 +13,12 @@
 	</resultMap>
 
 
-
+	<!-- 현영  -->
 	<select id="aSelectFaqListCount" resultType="_int">
 		select count(*)
 		  from faq
 	</select>
-	
+	<!-- 현영  -->
 	<select id="aSelectFaqList" resultMap="boardFaqResultSet">
 		select *
 		  from faq
@@ -31,6 +31,7 @@
 		  order by faq_category
 	</select>
 	
+	<!-- 현영  -->
 	<insert id="insertFaq" parameterType="Board">
 		insert into faq
 		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
@@ -50,6 +51,13 @@
 		select *
 		  from faq
 		 where faq_category=#{faqCategory}; 
+	</select>
+	
+	<!-- 현영  -->
+	<select id="selectFaq" parameterType="_int" resultMap="boardFaqResultSet">
+		select *
+		  from faq
+		 where faqno= #{fno}
 	</select>
 
 </mapper>
