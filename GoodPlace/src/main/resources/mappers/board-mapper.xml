@@ -37,7 +37,14 @@
 		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
 	</insert>
 
-	
+	<select id="selectFaqTitle" parameterType="Board" resultType="string">
+		select faq_title
+		from    (
+		        select *
+		          from faq
+		         where faq_category = #{faqCategory}
+		        )
+	</select>
 	
 	<select id="selectFaqContent" parameterType="Board" resultType="Board">
 		select *
