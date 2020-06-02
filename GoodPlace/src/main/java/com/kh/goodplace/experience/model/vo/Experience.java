@@ -18,7 +18,7 @@ public class Experience {
 	
 	/* 체험 관련 컬럼들  */
 	private int exNo;		// 체험번호
-	private int userNo;		// 회원번호
+	private int usNo;		// 회원번호
 	private String language;	// 언어
 	private int expCategory;	// 체험카테고리(총5개)
 	private String expTag;	// 체험태그(체험당2개)

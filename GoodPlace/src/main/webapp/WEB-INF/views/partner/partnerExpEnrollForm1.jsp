@@ -61,9 +61,8 @@
                 <span><h2>체험 정보 입력</h2></span>
                 <h5 style="margin-bottom: 50px;">안내에 따라 체험 내용을 정확하게 설명하여 주세요. /  상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다. </h5>
             </div>
+            <form id="expEnrollForm2" action="expEnrollForm2.exp" method="post">
             <div id="stepOne">
-            
-            <form action="" method="post">
                 <table>
                     <tr>
                         <th>* 카테고리</th>
@@ -71,51 +70,51 @@
                             <h5>• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                 상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
                                 관리자 심사 후 수정될수 있습니다.</h5>
-                            <input type="radio" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                            <input type="radio" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                            <input type="radio" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                            <input type="radio" name="expCategory" value="art"><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                            <input type="radio" name="expCategory" value="outdoor"><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+                            <input type="radio" name="expCategory" value=1><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+                            <input type="radio" name="expCategory" value=2><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
+                            <input type="radio" name="expCategory" value=3><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+                            <input type="radio" name="expCategory" value=4><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+                            <input type="radio" name="expCategory" value=5><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
                         </td>
                     </tr>
                     <tr>
                         <th>* 언어</th>
                         <td>
                             <h5>• 체험 진행 시 주로 사용되는 언어를 선택해주세요</h5>
-                            <input type="checkbox" name="ko" value="ko">한국어
-                            <input type="checkbox" name="es" value="es" style="margin-left:20px;">스페인어
-                            <input type="checkbox" name="jp" value="jp" style="margin-left:20px;">일본어
+                            <input type="checkbox" name="language" value="ko">한국어
+                            <input type="checkbox" name="language" value="es" style="margin-left:20px;">스페인어
+                            <input type="checkbox" name="language" value="jp" style="margin-left:20px;">일본어
                             <br>
-                            <input type="checkbox" name="en" value="en">영어
-                            <input type="checkbox" name="ch" value="ch" style="margin-left:30px;">중국어
-                            <input type="checkbox" name="etc" value="etc" style="margin-left:33px;">그 외
+                            <input type="checkbox" name="language" value="en">영어
+                            <input type="checkbox" name="language" value="ch" style="margin-left:30px;">중국어
+                            <input type="checkbox" name="language" value="etc" style="margin-left:33px;">그 외
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 태그</th>
                         <td>
                             <h5>• 상품에 가장 잘 어울리는 태그를 선택해주세요. 최대 2개까지 가능합니다.</h5>
-                            <input type="checkbox" class="expTag" name="museum" value="museum">박물관/미술관
-                            <input type="checkbox" class="expTag" name="shopping" value="shopping" style="margin-left:20px;">쇼핑
-                            <input type="checkbox" class="expTag" name="beauty" value="beauty" style="margin-left:50px;">뷰티/패션
+                            <input type="checkbox" class="expTag" name="expTag" value="museum">박물관/미술관
+                            <input type="checkbox" class="expTag" name="expTag" value="shopping" style="margin-left:20px;">쇼핑
+                            <input type="checkbox" class="expTag" name="expTag" value="beauty" style="margin-left:50px;">뷰티/패션
                             <br>
-                            <input type="checkbox" class="expTag" name="themapark" value="themapark">테마파크
-                            <input type="checkbox" class="expTag" name="citytour" value="citytour" style="margin-left:50px;">시티투어
-                            <input type="checkbox" class="expTag" name="camping" value="camping" style="margin-left:25px;">캠핑
+                            <input type="checkbox" class="expTag" name="expTag" value="themapark">테마파크
+                            <input type="checkbox" class="expTag" name="expTag" value="citytour" style="margin-left:50px;">시티투어
+                            <input type="checkbox" class="expTag" name="expTag" value="camping" style="margin-left:25px;">캠핑
                             <br>
-                            <input type="checkbox" class="expTag" name="special" value="special">이색체험
-                            <input type="checkbox" class="expTag" name="food" value="food" style="margin-left:50px;">맛집/카페
-                            <input type="checkbox" class="expTag" name="sports" value="sports" style="margin-left:20px;">스포츠
+                            <input type="checkbox" class="expTag" name="expTag" value="special">이색체험
+                            <input type="checkbox" class="expTag" name="expTag" value="food" style="margin-left:50px;">맛집/카페
+                            <input type="checkbox" class="expTag" name="expTag" value="sports" style="margin-left:20px;">스포츠
                             <br>
-                            <input type="checkbox" class="expTag" name="nightscape" value="nightscape">야경
-                            <input type="checkbox" class="expTag" name="bicycle" value="bicycle" style="margin-left:72px;">자전거
-                            <input type="checkbox" class="expTag" name="class" value="class" style="margin-left:39px;">클래스(강좌)
+                            <input type="checkbox" class="expTag" name="expTag" value="nightscape">야경
+                            <input type="checkbox" class="expTag" name="expTag" value="bicycle" style="margin-left:72px;">자전거
+                            <input type="checkbox" class="expTag" name="expTag" value="class" style="margin-left:39px;">클래스(강좌)
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 제목</th>
                         <td>
-                            <input type="text" id="" name="" value="">
+                            <input type="text" id="expTitle" name="expTitle" required>
                             <h5>• 정확하고 간결하게 표현해주세요. <br>
                                 • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
                                 (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>
@@ -124,28 +123,30 @@
                     <tr>
                         <th>* 체험 소개</th>
                         <td>
-                            <textarea id="" name="" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기"></textarea>
+                            <textarea id="expContent" name="expContent" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 장소</th>
                         <td>
-	                        <input type="text" id="del_postcode" name="address1" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
+                        	<!-- 주소API -->
+	                        <input type="text" id="del_postcode" name="zipCode" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
 							<input type="button" id="searchAdressBtn" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="width: 100px; height:25px; background-color: #34538a; color:#fff; border:1px solid #34538a; border-radius:4px;" readonly><br>
-	                        <input type="text" id="del_address" name="address2" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>											
-							<input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
+	                        <input type="text" id="del_address" name="addBasic" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>											
+							<input type="text" id="del_extraAddress" name="addRef" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
 							<!-- 사용자가 직접 입력하는 칸  -->
-							<input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;"> 
+							<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;"> 
                         </td>
                     </tr>
+                    
                 </table>
-            </form>
             <br>
             </div>
             <div id="btns">
-                <button type="submit" id="cancle" id="" name="">취소하기</button>
-                <button type="button" id="next" id="" name="" >저장 후 다음으로</button>
+                <button type="button" id="cancle" name="">취소하기</button>
+                <button type="submit" id="next">저장 후 다음으로</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

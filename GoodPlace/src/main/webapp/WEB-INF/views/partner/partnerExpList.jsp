@@ -52,7 +52,7 @@
                 <p class="title_tt">체험관리</p>
             </span>
             <span class="up_btn_space">
-                <button class="blue_btn" style="margin-right: 20px;">체험등록</button>
+                <button class="blue_btn" style="margin-right: 20px;" id="expForm">체험등록</button>
             </span>
             
             <div class="con2">
@@ -94,5 +94,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$("#expForm").click(function(){
+			location.href="expEnrollForm1.exp";
+		});
+	});
+
+</script>
 </body>
 </html>
