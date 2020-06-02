@@ -63,44 +63,61 @@
             </div>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">FAQ수정</p></span>
-                                <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <td width="150px">제목</td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqInsert" value="파트너 등록이 어려울 때" style="width:300px; height:25px; padding-left: 5px;"></td>
-                                <td width="100px">분류</td>
-                                <td colspan="2" width="100px" style="background: white; padding-left: 5%;">
-                                    <span class="up_btn_space">
-                                        <select name="" id="searchSelect" style="width:100px; height:35px;">
-                                            <option value="" selected>숙소관련</option>
-                                            <option value="">예약관련</option>
-                                            <option value="">홈페이지 이용</option>
-                                        </select>
-                                    </span>
-                                </td>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
-                                <td colspan="5" style="padding-left: 5%;">
-                                    <textarea name="" id="" style="padding-left: 10px; border:1px solid black;">되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가 있다</textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
-                        <button class="blue_btn" >수정하기</button>
-                    </div>
-
+            	<div class="con2">
+            		<form id="faqUpdateForm" method="post" action="faqUpdate.bo">
+            			<input type="hidden" name="faqNo" value="${ b.faqNo }">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+	                        <thead>
+	                            <tr>
+	                                <td width="150px">제목</td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqTitle" value="${ b.faqTitle }"style="width:300px; height:25px; padding-left: 5px;" required></td>
+	                                <td width="100px">분류</td>
+	                                <td colspan="2" width="100px" style="background: white; padding-left: 5%;">
+	                                    <span class="up_btn_space">
+	                                        <select name="faqCategory" id="searchSelect" style="width:100px; height:35px;">
+		                                            <option value="일반">일반문의</option>
+		                                            <option value="숙소">숙소관련</option>
+		                                            <option value="예약">예약방법</option>
+		                                            <option value="파트너">파트너</option>
+	                                        </select>
+	                                    </span>
+	                                </td>
+	                            </tr>
+	
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+	                                <td colspan="5" style="padding-left: 5%;">
+	                                    <textarea name="faqContent" id="faqContent" style="padding-left: 10px; border:1px solid black;" required>${ b.faqContent }</textarea>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                    <br>
+	                    <div style="text-align: right;">
+	                        <button id="gotoList" onclick="location.href='aFaqList.bo?currentPage=1'">목록으로</button>
+	                        <button type="submit" class="blue_btn" >수정하기</button>
+	                    </div>
+					</form>
                 </div>
             </div>
         </div>
     </div>
+    
+   	<script>
+		$(function(){
+			switch('${b.faqCategory}'){
+			case "일반" : $("#searchSelect option").eq(0).attr("selected", true); break;
+			case "숙소" : $("#searchSelect option").eq(1).attr("selected", true); break;
+			case "예약" : $("#searchSelect option").eq(2).attr("selected", true); break;
+			case "파트너" : $("#searchSelect option").eq(3).attr("selected", true); break;
+			}
+		});
+	</script>
+    
+    
+    
 
     <script>
         $(function(){

@@ -61,5 +61,31 @@
 		  from faq
 		 where faqno= #{fno}
 	</select>
+	
+	<!-- 현영  -->
+	<update id="faqUpdate" parameterType="Board">
+	
+		update faq
+		   set faq_category=#{faqCategory},
+		       faq_title=#{faqTitle},
+		       faq_content=#{faqContent}
+		 where faqno=#{faqNo}
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

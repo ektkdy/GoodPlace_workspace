@@ -87,7 +87,33 @@ public class BoardController {
         return mv;
     }
     
+
     
+    
+    @RequestMapping("faqUpdate.bo")
+    public String faqUpdate(Board b, Model model, HttpServletRequest request) {
+    	
+        int result = bService.faqUpdate(b);
+        
+        if(result > 0)
+        {
+            return "redirect:aFaqDetail.bo?fno=" + b.getFaqNo();
+        }
+        else
+        {
+            model.addAttribute("msg", "게시글 수정 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("faqUpdateForm.bo")
+    public String faqUpdateForm(int fno, Model model)
+    {
+        model.addAttribute("b", bService.selectFaq(fno));
+        return "admin/a_faqUpdate";
+    }
     
 
     

@@ -119,11 +119,11 @@
                              -->
                              <c:forEach items="${ list }" var="b">
 	                            <tr>
-	                                <td><input type="checkbox"></td>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
 	                                <td>${ b.faqNo }</td>
 	                                <td>${ b.faqTitle }</td>
 	                                <td>${ b.faqCategory }</td>
-	                                <td><button id="#faqUpdate" class="modifiyBtn" onclick="location.href='aFaqDetail.bo?fno=${ b.faqNo }'">수정</button></td>
+	                                <td onclick="event.cancelBubble=true"><button id="faqUpdate" class="modifiyBtn" onclick="location.href='faqUpdateForm.bo?fno=${ b.faqNo }'">수정</button></td>
 	                            </tr>
 	                         </c:forEach>
 
@@ -132,9 +132,11 @@
                     
 		            <script>
 		            	$(function(){
-		            		$("#faqList tbody tr").click(function(){
+		            		
+ 	            		    $("#faqList tbody tr").click(function(){
 		            			location.href="aFaqDetail.bo?fno=" + $(this).children().eq(1).text();
-		            		})
+		            		});  
+ 	            		    
 		            	});
 		            </script>
                     

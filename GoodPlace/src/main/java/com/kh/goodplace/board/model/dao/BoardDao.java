@@ -39,4 +39,10 @@ public class BoardDao {
 		
 	}
 	
+	public int faqUpdate(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.faqUpdate", b);
+		
+	}
+	
 }

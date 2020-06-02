@@ -20,7 +20,11 @@ public interface BoardService {
 	// 3. FAQ게시판 상세조회용 서비스-현영
 	Board selectFaq(int fno);
 	
+	// 4.게시글 수정용 서비스
+	int faqUpdate(Board b);
 	
+	// 5. 게시글 삭제용 서비스
+	int faqDelete(int fno);
 	
 
 }

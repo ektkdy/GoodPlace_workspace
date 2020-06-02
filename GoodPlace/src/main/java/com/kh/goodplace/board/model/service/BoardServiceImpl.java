@@ -44,6 +44,17 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public int faqUpdate(Board b) {
+		return bDao.faqUpdate(sqlSession, b);
+	}
+
+	@Override
+	public int faqDelete(int fno) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 }
