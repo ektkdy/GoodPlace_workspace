@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.goodplace.room.model.vo.Room" alias="Room"/>
 		<typeAlias type="com.kh.goodplace.experience.model.vo.Experience" alias="Experience"/>
 		<typeAlias type="com.kh.goodplace.experience.model.vo.ExpPay" alias="ExpPay"/>
+		<typeAlias type="com.kh.goodplace.board.model.vo.Board" alias="Board"/>
 	</typeAliases>
 	
 	
@@ -17,5 +18,7 @@
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/exp-mapper.xml"/>
+		<mapper resource="mappers/room-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>

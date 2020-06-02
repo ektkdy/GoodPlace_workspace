@@ -59,7 +59,7 @@
             <li><a href="#"><span class="icon4"></span><p>후기관리</p></a></li>
             <li><a href="#"><span class="icon5"></span><p>파트너관리</p></a></li>
             <li><a href="#"><span class="icon6"></span><p>파워등록</p></a></li>
-            <li><a href="#"><span class="icon7"></span><p>게시글관리</p></a></li>
+            <li><a href="aFaqList.bo?currentPage=1"><span class="icon7"></span><p>게시글관리</p></a></li>
             <li><a href="#"><span class="icon8"></span><p>정산관리</p></a></li>
             <li><a href="#"><span class="icon9"></span><p>메세지</p></a></li>
             <li><a href="#"><span class="icon10"></span><p>1:1문의관리</p></a></li>
