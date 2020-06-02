@@ -78,10 +78,10 @@
                     <tr>
                         <th>* 활동강도</th>
                         <td>
-                            <input type="radio" class="activity" name="activity" value=1><label for=1>가벼움</label><br>
-                            <input type="radio" class="activity" name="activity" value=2><label for=2>보통</label><br>
-                            <input type="radio" class="activity" name="activity" value=3><label for=3>격렬한</label><br>
-                            <input type="radio" class="activity" name="activity" value=4><label for=4>익스트림</label><br>
+                            <label><input type="radio" class="activity" name="activity" value=1>가벼움</label><br>
+                            <label><input type="radio" class="activity" name="activity" value=2>보통</label><br>
+                            <label><input type="radio" class="activity" name="activity" value=3>격렬한</label><br>
+                            <label><input type="radio" class="activity" name="activity" value=4>익스트림</label><br>
                         </td>
                     </tr>
                     <tr>
@@ -148,24 +148,23 @@
                         <th>* 게스트 준비물</th>
                         <td>
                             <input type="text" id="supplies" name="supplies">
-                            <input type="checkbox" id="noSupplies" name="supplies" value="">
+                            <input type="checkbox" id="noSupplies" name="supplies">
                             	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
                         </td>
                     </tr>
                     <tr>
                         <th>* 대표 사진</th>
                         <td>
+                            <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
                         	<div style="width: 200px; height: 150px; border:1px solid #bebebe"></div>
                             <input type="file" id="" name="" value="" required>
-                            <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
                         </td>
                     </tr>
                     <tr>
                         <th>* 상세 사진</th>
                         <td>
-                        	
-                            <input type="file" id="" name="" value="">
                             <h5>• 1장 이상의 상세 사진을 등록해주세요. 최대 10장까지 가능합니다.</h5>
+                            <input type="file" id="" name="" value="">
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +177,7 @@
                                 <option value="1day">1일 전</option>
                                 <option value="2day">2일 전</option>
                                 <option value="3day">3일 전</option>
-                            </select>
+                            </select> 부터 예약을 받지 않겠습니다.
                             <h5>• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
                                 	나중에 언제든지 변경하실수 있습니다.</h5>
                         </td>
@@ -187,41 +186,50 @@
                         <th>* 요금 책정</th>
                         <td>
                             <span>1인 예약시 요금</span>
-                            <span><input type="number" id="" name="" value="">원</span>
+                            <span><input type="number" class="price" name="price" style="text-align:right; padding-right:5px;">원</span>
                             <br><br>
 
                             <span>파트너 예상수익</span>
-                            <span><input type="number" id="" name="" value="" readonly>원</span><br>
+                            <span><input type="number" class="priceCal" name="priceCal" style="text-align:right; padding-right:5px;" readonly disabled>원</span><br>
                             <span></span>
                         </td>
                     </tr>
                     <tr>
                         <th>* 검토 후 제출</th>
                         <td>
-                            <input type="checkbox" id="" name="checkRow" value="">
-                            	<label>서비스 수수료에 동의합니다.</label>
-                            <p style="font-size: 15px;">
-			                                굿플레이스는 각 예약당 요금의 20%에 해당하는 수수료를 받습니다. 
-			                                모든 결제는 굿플레이스를 통해 진행되며 고객센터를 통한 24시간 지원과 함께 
-			                                대부분의 체험에 대해 책임 보험도 제공하고 있습니다. 
-			                                서비스 수수료에 대해 자세히 알아보세요.
-                            </p>
-                            <input type="checkbox" id="" name="checkRow" value="">
-                            	<label>굿플레이스 회원만을 위한 체험을 진행합니다.</label>
-                            <p style="font-size: 15px;">
-			                                굿플레이스를 통해 체험예약을 받는 날에는 
-			                                굿플레이스 게스트만 체험예약을 진행해야만 합니다. 
-			                                다른 플랫폼을 통해 예약하고 결제한 게스트는 별도로 체험 진행해야 합니다.
-                            </p>
-                            <input type="checkbox" id="" name="checkRow" value="">
-                            	<label>굿플레이스의 안전관리 지침을 읽고 이해했으며 진행하는 체험이 지침을 준수함을 확인합니다.</label><br>
-                            <input type="checkbox" id="" name="checkRow" value="">
-                            	<label>현지가이드라인 및 현지 안전 법규를 준수하며 이를 어길 시 굿플레이스 플랫폼에서 삭제될 수 있음을 이해합니다.</label><br>
-                            <input type="checkbox"id="" name="checkRow" value="">
-                            	<label>굿플레이스 체험 서비스와 게스트 환불 정책에 동의합니다.</label>
+                        	<label>
+                            	<input type="checkbox" class="checkRow" name="checkRow">서비스 수수료에 동의합니다.<br>
+				                                굿플레이스는 각 예약당 요금의 20%에 해당하는 수수료를 받습니다. 
+				                                모든 결제는 굿플레이스를 통해 진행되며 고객센터를 통한 24시간 지원과 함께 
+				                                대부분의 체험에 대해 책임 보험도 제공하고 있습니다. 
+				                                서비스 수수료에 대해 자세히 알아보세요.
+                            </label>
                             <br><br>
-                            <input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();">
-                            	<label style="font-weight: bold; font-size: 18px;" for="th_checkAll">전체 동의 후 체험 제출</label>
+                            <label>
+	                            <input type="checkbox" class="checkRow" name="checkRow">굿플레이스 회원만을 위한 체험을 진행합니다.<br>
+				                                굿플레이스를 통해 체험예약을 받는 날에는 
+				                                굿플레이스 게스트만 체험예약을 진행해야만 합니다. 
+				                                다른 플랫폼을 통해 예약하고 결제한 게스트는 별도로 체험 진행해야 합니다.
+                            </label>
+                            <br><br>
+                            <label>
+                            	<input type="checkbox" class="checkRow" name="checkRow">
+                            	굿플레이스의 안전관리 지침을 읽고 이해했으며 진행하는 체험이 지침을 준수함을 확인합니다.
+                            </label>
+                            <br><br>
+                            <label>
+                            	<input type="checkbox" class="checkRow" name="checkRow">
+                            	현지가이드라인 및 현지 안전 법규를 준수하며 이를 어길 시 굿플레이스 플랫폼에서 삭제될 수 있음을 이해합니다.
+                            </label>
+                            <br><br>
+                            <label>
+                            	<input type="checkbox" class="checkRow" name="checkRow">
+                            	굿플레이스 체험 서비스와 게스트 환불 정책에 동의합니다.
+                            </label>
+                            <br><br>
+                            <label>
+                            	<input type="checkbox" id="checkAll">전체 동의 후 체험 제출
+                           	</label>
                         </td>
                     </tr>
                 </table>
@@ -233,16 +241,61 @@
                 <button type="submit" id="next">체험등록신청</button>
             </div>
             
+            
+            <!-- 준비물 쪽 체크박스 -->
+            <script type="text/javascript">
+            	$(function(){
+            		$("#noSupplies").click(function(){
+            			if($("#noSupplies").is(":checked")){
+            				var a = $("#noSupplies").val("장비포함");
+            				$("#supplies").attr("disabled", true);
+			            	//console.log(a.val()); // "장비포함"
+            			} else{
+            				$("#supplies").attr("disabled", false);
+            			}
+            		});
+            	});
+            </script>
+            
+            <!-- 검토 후 제출 쪽 체크박스  -->
             <script>
-				/* 전체 선택 */
-				function checkAll(){
-					if($("#th_checkAll").is(':checked') ){
-						$("input[name=checkRow]").prop("checked", true);
-					}else{
-						$("input[name=checkRow]").prop("checked", false);
-					}
-				}
+				$(function(){
+					$("#checkAll").click(function(){
+						if($("#checkAll").is(":checked")){
+							$(".checkRow").prop("checked", true);
+						}else{
+							$(".checkRow").prop("checked", false);
+						}
+					});
+					$(".checkRow").click(function(){
+						if($("input[name=checkRow]:checked").length==5){
+							$("#checkAll").prop("checked", true);
+						} else{
+							$("#checkAll").prop("checked", false);
+						}
+					});
+				});
 			</script>
+			
+			<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
+			<script>
+				$(function(){
+					// 이벤트 걸고자하는 input요소
+					var price = $(".price");
+					
+					price.keyup(function(){
+						// 금액이 4자리 이상 되었을 때 예상가격 출력
+						if(price.val().length>=4){
+							//console.log(price.val());
+							var priceCal = Math.floor(price.val()*0.8);
+							$(".priceCal").val(priceCal);
+						}else{
+							$('.priceCal').val('');
+						}					
+					});
+				});
+			</script>
+			
         </div>
     </div>
 </div>

@@ -69,45 +69,45 @@
                             <p class="hh">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                 상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
                                 관리자 심사 후 수정될수 있습니다.</p>
-                            <input type="radio" name="expCategory" value=1><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                            <input type="radio" name="expCategory" value=2><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                            <input type="radio" name="expCategory" value=3><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                            <input type="radio" name="expCategory" value=4><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                            <input type="radio" name="expCategory" value=5><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+                            <label><input type="radio" name="expCategory" value=1>라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+                            <label><input type="radio" name="expCategory" value=2>문화와 역사(과학/경제/역사/봉사활동)</label><br>
+                            <label><input type="radio" name="expCategory" value=3>스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+                            <label><input type="radio" name="expCategory" value=4>미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+                            <label><input type="radio" name="expCategory" value=5>야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
                         </td>
                     </tr>
                     <tr>
                         <th>* 언어</th>
                         <td>
                             <p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
-                            <input type="checkbox" name="language" value="ko">한국어
-                            <input type="checkbox" name="language" value="es" style="margin-left:20px;">스페인어
-                            <input type="checkbox" name="language" value="jp" style="margin-left:20px;">일본어
+                            <label><input type="checkbox" name="language" value="한국어">한국어</label>
+                            <label><input type="checkbox" name="language" value="스페인어" style="margin-left:20px;">스페인어</label>
+                            <label><input type="checkbox" name="language" value="일본어" style="margin-left:20px;">일본어</label>
                             <br>
-                            <input type="checkbox" name="language" value="en">영어
-                            <input type="checkbox" name="language" value="ch" style="margin-left:30px;">중국어
-                            <input type="checkbox" name="language" value="etc" style="margin-left:33px;">그 외
+                            <label><input type="checkbox" name="language" value="영어">영어</label>
+                            <label><input type="checkbox" name="language" value="중국어" style="margin-left:30px;">중국어</label>
+                            <label><input type="checkbox" name="language" value="그 외" style="margin-left:33px;">그 외</label>
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 태그</th>
                         <td>
                             <p class="hh">• 상품에 가장 잘 어울리는 태그를 선택해주세요. 최대 2개까지 가능합니다.</p>
-                            <input type="checkbox" class="expTag" name="expTag" value="museum">박물관/미술관
-                            <input type="checkbox" class="expTag" name="expTag" value="shopping" style="margin-left:20px;">쇼핑
-                            <input type="checkbox" class="expTag" name="expTag" value="beauty" style="margin-left:50px;">뷰티/패션
+                            <label><input type="checkbox" class="expTag" name="expTag" value="박물관/미술관">박물관/미술관</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="쇼핑" style="margin-left:20px;">쇼핑</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="뷰티/패션" style="margin-left:50px;">뷰티/패션</label>
                             <br>
-                            <input type="checkbox" class="expTag" name="expTag" value="themapark">테마파크
-                            <input type="checkbox" class="expTag" name="expTag" value="citytour" style="margin-left:50px;">시티투어
-                            <input type="checkbox" class="expTag" name="expTag" value="camping" style="margin-left:25px;">캠핑
+                            <label><input type="checkbox" class="expTag" name="expTag" value="테마파크">테마파크</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="시티투어" style="margin-left:50px;">시티투어</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="캠핑" style="margin-left:25px;">캠핑</label>
                             <br>
-                            <input type="checkbox" class="expTag" name="expTag" value="special">이색체험
-                            <input type="checkbox" class="expTag" name="expTag" value="food" style="margin-left:50px;">맛집/카페
-                            <input type="checkbox" class="expTag" name="expTag" value="sports" style="margin-left:20px;">스포츠
+                            <label><input type="checkbox" class="expTag" name="expTag" value="이색체험">이색체험</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="맛집/카페" style="margin-left:50px;">맛집/카페</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="스포츠" style="margin-left:20px;">스포츠</label>
                             <br>
-                            <input type="checkbox" class="expTag" name="expTag" value="nightscape">야경
-                            <input type="checkbox" class="expTag" name="expTag" value="bicycle" style="margin-left:72px;">자전거
-                            <input type="checkbox" class="expTag" name="expTag" value="class" style="margin-left:39px;">클래스(강좌)
+                            <label><input type="checkbox" class="expTag" name="expTag" value="야경">야경</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="자전거" style="margin-left:72px;">자전거</label>
+                            <label><input type="checkbox" class="expTag" name="expTag" value="클래스(강좌)" style="margin-left:39px;">클래스(강좌)</label>
                         </td>
                     </tr>
                     <tr>
@@ -150,6 +150,24 @@
         </div>
     </div>
 </div>
+
+     
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- summernote -->
+<script type="text/javascript">
+	$(function(){
+		if($(".expTag :checked").size()>2){
+			alert("2개까지 선택가능합니다.");
+		}else if($(".expTag :checked").size()<1){
+			alert("최소1개는 선택");	
+		}
+	});
+</script>
 
 <script>
    function del_execDaumPostcode() {
@@ -200,6 +218,7 @@
        }).open();
    }
 </script>
+
 <script>
 	$(function(){
 		
@@ -233,14 +252,6 @@
 	
 	});
 </script>
-     
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!-- summernote -->
 
 </body>
 </html>

@@ -30,12 +30,14 @@ public class ExperienceController {
 	@RequestMapping("insert.exp")
 	public ModelAndView insertExp(Experience e, ModelAndView mv) {
 		
-		
-		
 		mv.addObject("e", e);
 		mv.setViewName("partner/partnerExpList");
 		return mv;
 	}
 	
+	@RequestMapping("priceCal.exp")
+	public void priceCal(String price) {
+		
+	}
 
 }
