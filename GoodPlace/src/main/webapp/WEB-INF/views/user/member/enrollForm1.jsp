@@ -165,6 +165,28 @@
 	<jsp:include page="../../common/footer.jsp"/>
 	
 	<script>
+	    function idCheckValidate(num){
+	        
+	        if(num == 1) { // 아이디 중복체크를 아직 안하는 경우 : 메세지 보여지지 않음 버튼 비활성화
+	           
+	           $("#checkResult").css("visibility", "hidden");
+	           $("enrollBtn").attr("diasbled", true);
+	           
+	        }else if(num == 2){ // 아이디 중복체크 후 사용불가능한 아이디일 경우 : "중복아이디 존재 사용불가능" 메세지 보여짐, 버튼 비활성화
+	           
+	           $("#checkResult").css("color", "red").text("이미 가입된 이메일입니다.");
+	           $("#checkResult").css("visibility", "visible");
+	           $("#enrollBtn").attr("disabled", true);
+	                        
+	        }else{ // 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능한 아이디임" 메세지 보여짐, 버튼 활성화
+	           
+	           $("#checkResult").css("color", "green").text("사용 가능한 이메일입니다.");
+	           $("#checkResult").css("visibility", "visible");
+	           $("#enrollBtn").removeAttr("disabled");
+	           
+	        }
+	     }
+		
         $(function(){
 			// 약관동의
             $('.allCheck').change(function(){
@@ -204,27 +226,7 @@
             });
         });
         
-        function idCheckValidate(num){
-            
-            if(num == 1) { // 아이디 중복체크를 아직 안하는 경우 : 메세지 보여지지 않음 버튼 비활성화
-               
-               $("#checkResult").css("visibility", "hidden");
-               $("enrollBtn").attr("diasbled", true);
-               
-            }else if(num == 2){ // 아이디 중복체크 후 사용불가능한 아이디일 경우 : "중복아이디 존재 사용불가능" 메세지 보여짐, 버튼 비활성화
-               
-               $("#checkResult").css("color", "red").text("이미 가입된 이메일입니다.");
-               $("#checkResult").css("visibility", "visible");
-               $("#enrollBtn").attr("disabled", true);
-                            
-            }else{ // 아이디 중복체크 후 사용가능한 아이디일 경우 : "사용 가능한 아이디임" 메세지 보여짐, 버튼 활성화
-               
-               $("#checkResult").css("color", "green").text("사용 가능한 이메일입니다.");
-               $("#checkResult").css("visibility", "visible");
-               $("#enrollBtn").removeAttr("disabled");
-               
-            }
-         }
+
 
         function allCheck() {
             if($('.subCheck').is(":checked")){

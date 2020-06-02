@@ -399,12 +399,11 @@
     </div>
     
     <script>
-    /*채팅창*/
-    var currentPosition = parseInt($("#sidebox").css("top"));
-    $(window).scroll(function() {
-        var position = $(window).scrollTop();
-        $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000);
-    });
+	    var currentPosition = parseInt($("#sidebox").css("top"));
+	    $(window).scroll(function() {
+	        var position = $(window).scrollTop();
+	        $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000);
+	    });
     </script>
 </body>
 </html>

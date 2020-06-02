@@ -39,7 +39,7 @@
         <h1 style="margin-top: 100px ;">굿플레이스의 회원이 되신것을 축하드립니다.</h1>
         <p>로그인 후 서비스 이용이 가능합니다.</p>
 
-        <input onclick="location.href='${pageContext.servletContext.contextPath}'"type="button" value="로그인">
+        <input onclick="location.href='loginForm.me'"type="button" value="로그인">
     </div>
     <!-- footer -->
 	<jsp:include page="../../common/footer.jsp"/>
