@@ -197,10 +197,58 @@
         background-color: rgb(10, 0, 150);
         color: white;
     }
+        /*로그인 드롭박스*/
+    .drop-down ul{
+        display:none;
+        padding-left: 0px;
+        width: 210px;
+        border-right-width: 50px;
+        right: 1px;
+        position: absolute;
+        list-style-type: none;
+        z-index: 1111111111;
+        background-color: white;
+        font-size: 16px;
+    }
+    .drop-down ul>li{
+        padding: 8px 0px;
+        border: rgb(0, 0, 0) 1px solid;
+    }
+    .drop-down ul>li>a{
+        text-decoration: none;
+        color: black
+    }
+    li:hover > ul{
+        display:block; 
+    }
+    .drop-down ul a:hover{
+        background: rgb(71,71,71);
+        border:0px;
+        color:#ffffff;
+        text-decoration:none;
+    }
+    .drop-down .drop-down ul {
+        top: 0;
+        left: calc(100% - 300px);
+        
+    }
+    .drop-down .drop-down:hover > ul {
+            left: -100%;
+    }
+    .drop-down .drop-down > a:after {
+            content: "\ea9d";
+    }
 
 </style>
 </head>
 <body>
+	<!-- 반응 메세지 출력 -->
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");	// alert(회원가입성공!!)
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
   <!-- header -->
     <div id="header">
         <div id="header_wrap">
@@ -219,27 +267,42 @@
             </div>    
             <div id="header_3">
                 <ul id="navi" style="padding-left: 0px; margin-top: 5px;">
-                    <!-- 로그인 전 -->
-
-                    <li style="margin-top: 10px;">
-                        <a class="list qBtn" href="" style="font-size: 15px; margin-left: 50px;">1:1채팅상담</a>
-                    </li>
-                    <li style="margin-top: 10px;">
-                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 30px;">로그인</a>
-                    </li>
-
-                    <!-- 로그인 후 -->
-<!--
-                    <li style=" margin-top: 10px;">
-                        <a class="list qBtn" href="" style="font-size: 15px;">파트너등록하기</a>
-                        <a class="list qBtn" href="" style="font-size: 15px;">1:1채팅상담</a>
-                    </li>
-                    <li>
-                        <div id="personalImg" style="margin-left: 10px;">
-                            <img src="#" width="50px" height="50px" style="border-radius: 50px; background-color: darkblue;">
-                        </div>
-                    </li>
--->
+                
+                	<c:choose>
+	                	<c:when test="${ empty loginUser }">
+	                		<!-- 로그인 전 -->
+	                		<li style="margin-top: 10px;">
+		                        <a class="list qBtn" href="" style="font-size: 15px; margin-left: 50px;">1:1채팅상담</a>
+		                    </li>
+		                    <li style="margin-top: 10px;">
+		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 30px;">로그인</a>
+		                    </li>
+	                	</c:when>
+						<c:otherwise>
+							<!-- 로그인 후 -->
+		                    <li style=" margin-top: 10px;">
+		                        <a class="list qBtn" href="" style="font-size: 15px;">파트너등록하기</a>
+		                        <a class="list qBtn" href="" style="font-size: 15px;">1:1채팅상담</a>
+		                    </li>
+		                    <li>
+		                        <div id="personalImg" style="margin-left: 10px;">
+		                            
+		                            <li class="drop-down">
+		                                <a><img src="#" width="50px" height="50px" style="border-radius: 50px; background-color: darkblue;"></a>
+		                                <ul>
+		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
+		                                    <li><a href="#">my굿플레이스</a></li>
+		                                    <li><a href="#">숙소예약내역</a></li>
+		                                    <li><a href="#">위시리스트</a></li>
+		                                    <li><a href="#">파트너대시보드</a></li>
+		                                    <li><a href="#">관리자페이지</a></li>
+		                                </ul>
+		                            </li>
+		                        </div>
+		                    </li>
+						</c:otherwise>
+                 	</c:choose>
+                    
                 </ul>
             </div>
         </div>

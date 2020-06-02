@@ -18,12 +18,17 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDao mDao;
 	
+	/**
+	 * 1. 로그인 서비스
+	 */
 	@Override
 	public Member loginMember(Member m) {
-		// TODO Auto-generated method stub
-		return null;
+		return mDao.loginMember(sqlSession,m);
 	}
 
+	/**
+	 * 2. 회원가입 정보 입력 서비스
+	 */
 	@Override
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);

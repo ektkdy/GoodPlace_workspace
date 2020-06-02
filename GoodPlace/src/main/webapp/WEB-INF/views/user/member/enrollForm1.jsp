@@ -165,6 +165,7 @@
 	
 	<script>
         $(function(){
+
             $('.allCheck').change(function(){
                 if($('.allCheck').is(":checked")){
                     $('.subCheck').attr("checked", true);

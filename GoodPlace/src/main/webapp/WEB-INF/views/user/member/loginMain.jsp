@@ -57,7 +57,7 @@
             <div>
                 <a href="">카카오로 로그인</a> <br>
                 <b>
-                    <a href="">네이버</a> | <a href="">이메일</a><br><br>
+                    <a href="">네이버</a> | <a href="loginEmailForm.me">이메일</a><br><br>
                     아직 회원이 아니신가요?
                 </b>
                 <a href="enrollForm.me" style="color: gray;"><b>회원가입</b></a>

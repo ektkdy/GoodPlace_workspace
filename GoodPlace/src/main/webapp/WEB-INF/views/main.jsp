@@ -7,13 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- 슬라이더 버튼들 -->
-<link rel="stylesheet" href="resources/css/user/mainPage/jquery.bxslider.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <!-- 슬라이더를 생성하는 부분 -->
 <script src="resources/js/jquery-3.4.1.min.js"></script>
 <script src="resources/js/jquery.bxslider.js"></script>
+<!-- 슬라이더 버튼들 -->
+<link rel="stylesheet" href="resources/css/user/mainPage/jquery.bxslider.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <style>
     /*content*/
 
@@ -125,6 +124,8 @@
         display: inline-block;
         text-align: left;
     }
+    
+    
 </style>
 </head>
 <body>

@@ -32,7 +32,7 @@
 </head>
 <body>
     <!-- footer -->
-	<jsp:include page="../../common/footer.jsp"/>
+	<jsp:include page="../../common/menubar.jsp"/>
 	
 	<!-- content -->
     <div id="content" style="margin-bottom: 150px;">
