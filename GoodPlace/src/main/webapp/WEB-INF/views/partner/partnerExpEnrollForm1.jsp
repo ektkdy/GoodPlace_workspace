@@ -138,6 +138,7 @@
 							<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;"> 
                         </td>
                     </tr>
+                    
                 </table>
             <br>
             </div>
