@@ -63,40 +63,42 @@
             </div>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">FAQ작성</p></span>
-                                <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <td width="150px">제목</td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqInsert" style="width:300px; height:25px; padding-left: 5px;"></td>
-                                <td width="100px">분류</td>
-                                <td colspan="2" width="100px" style="background: white; padding-left: 5%;">
-                                    <span class="up_btn_space">
-                                        <select name="" id="searchSelect" style="width:100px; height:35px;">
-                                            <option value="">숙소관련</option>
-                                            <option value="">예약관련</option>
-                                            <option value="">홈페이지 이용</option>
-                                        </select>
-                                    </span>
-                                </td>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
-                                <td colspan="5" style="padding-left: 5%;">
-                                    <textarea name="" id="" style="padding-left: 10px; border:1px solid black;"></textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
-                        <button class="blue_btn" >등록하기</button>
-                    </div>
-
+                <div class="con2">
+                    <form id="faqEnrollForm" method="post" action="faqInsert.bo">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+	                        <thead>
+	                            <tr>
+	                                <td width="150px">제목</td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqTitle" style="width:300px; height:25px; padding-left: 5px;" required></td>
+	                                <td width="100px">분류</td>
+	                                <td colspan="2" width="100px" style="background: white; padding-left: 5%;">
+	                                    <span class="up_btn_space">
+	                                        <select name="faqCategory" id="faqCategory" style="width:100px; height:35px;">
+	                                            <option value="일반">일반문의</option>
+	                                            <option value="숙소">숙소관련</option>
+	                                            <option value="예약">예약방법</option>
+	                                            <option value="파트너">파트너</option>
+	                                        </select>
+	                                    </span>
+	                                </td>
+	                            </tr>
+	
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+	                                <td colspan="5" style="padding-left: 5%;">
+	                                    <textarea name="faqContent" id="faqContent" style="padding-left: 10px; border:1px solid black;" required></textarea>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                    <br>
+	                    <div style="text-align: right;">
+	                        <button id="gotoList" onclick="location.href='aFaqList.bo?currentPage=1'">목록으로</button>
+	                        <button type="submit" class="blue_btn">등록하기</button>
+	                    </div>
+					</form>
                 </div>
             </div>
         </div>

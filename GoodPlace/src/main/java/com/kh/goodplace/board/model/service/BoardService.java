@@ -14,6 +14,9 @@ public interface BoardService {
 	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스-현영
 	ArrayList<Board> aSelectFaqList(PageInfo pi);
 	
+	// 2. 게시판 작성용 서비스-현영
+	int insertFaq(Board b);
+	
 	
 
 }

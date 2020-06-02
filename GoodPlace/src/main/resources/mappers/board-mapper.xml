@@ -30,5 +30,10 @@
 		  from faq
 		  order by faq_category
 	</select>
+	
+	<insert id="insertFaq" parameterType="Board">
+		insert into faq
+		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
+	</insert>
 
 </mapper>

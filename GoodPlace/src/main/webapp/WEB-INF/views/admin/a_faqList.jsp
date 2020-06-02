@@ -122,7 +122,7 @@
 	                                <td><input type="checkbox"></td>
 	                                <td>${ b.faqNo }</td>
 	                                <td>${ b.faqTitle }</td>
-	                                <td>${ b.faqContent }</td>
+	                                <td>${ b.faqCategory }</td>
 	                                <td><button class="modifiyBtn">수정</button></td>
 	                            </tr>
 	                         </c:forEach>
@@ -132,7 +132,7 @@
                     <table>
                         <th>
                             <br>
-                            <button class="blue_btn" >등록하기</button>
+                            <button class="blue_btn" onclick="location.href='faqEnrollForm.bo'">등록하기</button>
                             <button class="blue_btn" id="delete_btn">삭제</button>
                         </th>
                         <th>

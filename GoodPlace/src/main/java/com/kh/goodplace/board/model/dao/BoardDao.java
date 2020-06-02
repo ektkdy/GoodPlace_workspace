@@ -27,4 +27,10 @@ public class BoardDao {
 		
 	}
 	
+	public int insertFaq(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.insert("boardMapper.insertFaq", b);
+		
+	}
+	
 }

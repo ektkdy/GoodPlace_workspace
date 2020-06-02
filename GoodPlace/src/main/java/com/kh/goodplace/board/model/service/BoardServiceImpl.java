@@ -32,4 +32,11 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.aSelectFaqList(sqlSession, pi);
 	}
 
+	@Override
+	public int insertFaq(Board b) {
+		return bDao.insertFaq(sqlSession, b);
+	}
+
+
+
 }

@@ -2,6 +2,8 @@ package com.kh.goodplace.board.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,33 @@ public class BoardController {
         
     	
     }
+    
+    @RequestMapping("faqEnrollForm.bo")
+    public String faqEnrollForm() {
+    	
+    	return "admin/a_faqInsert";
+    	
+    }
+    
+    @RequestMapping("faqInsert.bo")
+    public String insertFaq(Board b, Model model, HttpServletRequest request) {
+    	
+    	int result = bService.insertFaq(b);
+    	
+        if(result > 0)
+        { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지
+            return "redirect:aFaqList.bo?currentPage=1";
+        }
+        else
+        { // 게시글 작성 실패
+            model.addAttribute("msg", "게시글 등록 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
+    
+    
 
     
     
