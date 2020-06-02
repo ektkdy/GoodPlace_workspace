@@ -25,7 +25,7 @@
 		 order by FAQNO desc
 	</select>
 
-	<!-- 진아  -->
+	<!-- 진아 : 모든 faqCategory 조회 -->
 	<select id="selectFaqCategory" resultType="string">
 		select distinct faq_category
 		  from faq
@@ -38,21 +38,21 @@
 		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
 	</insert>
 
-	<!-- 진아  -->
+	<!-- 진아  : faqCategory별 모든 제목 조회 -->
 	<select id="selectFaqTitle" parameterType="Board" resultType="string">
 		select faq_title
 		from    (
 		        select *
 		          from faq
 		         where faq_category = #{faqCategory}
-		        )
+		        )	
 	</select>
 	
-	<!-- 진아  -->
+	<!-- 진아  : faqCategory별 제목과 내용 조회 -->
 	<select id="selectFaqContent" parameterType="Board" resultType="Board">
 		select *
 		  from faq
-		 where faq_category=#{faqCategory}; 
+		 where faq_category=#{faqCategory}; 	
 	</select>
 	
 	<!-- 현영  -->
