@@ -63,7 +63,7 @@
             </div>
             <div id="stepOne">
             
-            <form action="" method="post">
+            <form action="insert.exp" method="post">
             	<input type="hidden" name="expCategory" value="${ e.expCategory }">
             	<input type="hidden" name="language" value="${ e.language }">
             	<input type="hidden" name="expTag" value="${ e.expTag }">
@@ -87,7 +87,7 @@
                     <tr>
                         <th>* 최대 인원수</th>
                         <td>
-                            <input type="number" class="maxPeople" name="maxPeople" required>
+                            <input type="number" class="maxPeople" name="maxPeople" min="1" required>
                             <h5>• 최소 인원수는 1명입니다. 한 회차당 운영 가능한 최대인원수를 입력하세요.</h5>
                         </td>
                     </tr>
@@ -155,6 +155,7 @@
                     <tr>
                         <th>* 대표 사진</th>
                         <td>
+                        	<div style="width: 200px; height: 150px; border:1px solid #bebebe"></div>
                             <input type="file" id="" name="" value="" required>
                             <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
                         </td>
@@ -245,7 +246,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

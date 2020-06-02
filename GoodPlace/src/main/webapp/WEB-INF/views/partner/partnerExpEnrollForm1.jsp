@@ -27,7 +27,7 @@
     #stepOne{width:950px; border: 1px solid #dbdbdb;}
     table th{width: 200px; padding-top: 30px; padding-left: 70px; vertical-align: top;}
     table td{width:500px; padding-top: 30px; padding-left: 50px; font-size:13px;}
-    h5{color: cornflowerblue; padding-bottom: 5px;} /*중앙박스 외 상단에도 하나 있음*/
+    .hh{color: cornflowerblue; padding-bottom: 5px; font-weight:bold; font-size:14px;} /*중앙박스 외 상단에도 하나 있음*/
     table td textarea{width: 500px; height: 170px; border-radius: 4px; resize: none; border: 1px solid #dbdbdb;}
     table input[type=radio]{margin-right:5px;}
     table input[type=checkbox]{margin-right:5px;}
@@ -37,10 +37,9 @@
 
     /*하단 버튼 css*/
     #btns{width:950px; text-align: right; margin-top: 20px; margin-bottom: 20px; margin-right: 20px;}
-    button{cursor: pointer;  width: 140px; height: 35px; }
-    #cancle{border: 1px solid #dbdbdb; border-radius: 4px; font-size: 15px;}
+    #cancle{cursor: pointer;  width: 140px; height: 35px; border: 1px solid #dbdbdb; border-radius: 4px; font-size: 15px;}
     #cancle:hover{background-color: white; border: solid 1px #dbdbdb;}
-    #next{border: 1px solid #34538a; border-radius: 4px; font-size: 15px;}
+    #next{cursor: pointer;  width: 140px; height: 35px; border: 1px solid #34538a; border-radius: 4px; font-size: 15px;}
     #next:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
     #next{color: white; background-color: #34538a;}
 </style>  
@@ -59,7 +58,7 @@
         <div class="con" style="color:#000">
             <div style="text-align: center;">
                 <span><h2>체험 정보 입력</h2></span>
-                <h5 style="margin-bottom: 50px;">안내에 따라 체험 내용을 정확하게 설명하여 주세요. /  상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다. </h5>
+                <p class="hh" style="margin-bottom: 50px;">안내에 따라 체험 내용을 정확하게 설명하여 주세요. /  상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다. </p>
             </div>
             <form id="expEnrollForm2" action="expEnrollForm2.exp" method="post">
             <div id="stepOne">
@@ -67,9 +66,9 @@
                     <tr>
                         <th>* 카테고리</th>
                         <td>
-                            <h5>• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
+                            <p class="hh">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                 상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
-                                관리자 심사 후 수정될수 있습니다.</h5>
+                                관리자 심사 후 수정될수 있습니다.</p>
                             <input type="radio" name="expCategory" value=1><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
                             <input type="radio" name="expCategory" value=2><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
                             <input type="radio" name="expCategory" value=3><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
@@ -80,7 +79,7 @@
                     <tr>
                         <th>* 언어</th>
                         <td>
-                            <h5>• 체험 진행 시 주로 사용되는 언어를 선택해주세요</h5>
+                            <p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
                             <input type="checkbox" name="language" value="ko">한국어
                             <input type="checkbox" name="language" value="es" style="margin-left:20px;">스페인어
                             <input type="checkbox" name="language" value="jp" style="margin-left:20px;">일본어
@@ -93,7 +92,7 @@
                     <tr>
                         <th>* 체험 태그</th>
                         <td>
-                            <h5>• 상품에 가장 잘 어울리는 태그를 선택해주세요. 최대 2개까지 가능합니다.</h5>
+                            <p class="hh">• 상품에 가장 잘 어울리는 태그를 선택해주세요. 최대 2개까지 가능합니다.</p>
                             <input type="checkbox" class="expTag" name="expTag" value="museum">박물관/미술관
                             <input type="checkbox" class="expTag" name="expTag" value="shopping" style="margin-left:20px;">쇼핑
                             <input type="checkbox" class="expTag" name="expTag" value="beauty" style="margin-left:50px;">뷰티/패션
@@ -115,15 +114,16 @@
                         <th>* 체험 제목</th>
                         <td>
                             <input type="text" id="expTitle" name="expTitle" required>
-                            <h5>• 정확하고 간결하게 표현해주세요. <br>
+                            <p class="hh">• 정확하고 간결하게 표현해주세요. <br>
                                 • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
-                                (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>
+                                (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</p>
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 소개</th>
                         <td>
-                            <textarea id="expContent" name="expContent" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기"></textarea>
+                        	<div id="summernote" style="height:100px; border:1px solid red" name="expContent"></div>
+                        	
                         </td>
                     </tr>
                     <tr>
@@ -200,7 +200,47 @@
        }).open();
    }
 </script>
+<script>
+	$(function(){
+		
+         // 1. 단순히 에디터 폼만 보이게 하는거
+         //$("#summernote").summernote();
 
+         // 2. 추가적인 속성들 부여 가능
+         // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
+         $('#summernote').summernote({
+         	//placeholder:"체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다. &#13;&#10;
+                //	게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요.&#13;&#10; &#13;&#10;
+                //	* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요. &#13;&#10;
+                //	- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기 &#13;&#10;
+                //	- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기",
+         tabsize: 2,
+             height: 200,
+             width:600/*
+             toolbar: [
+                 [groupName, [list of button]]
+                 ['Font Style', ['fontname']],
+                 ['style', ['bold', 'italic', 'underline']],
+                 ['font', ['strikethrough']],
+                 ['fontsize', ['fontsize']],
+                 ['color', ['color']],
+                 ['para', ['paragraph']],
+                 ['height', ['height']],
+                 ['Insert', ['picture']]
+             ] 
+             */
+     	});
+	
+	});
+</script>
+     
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- summernote -->
 
 </body>
 </html>

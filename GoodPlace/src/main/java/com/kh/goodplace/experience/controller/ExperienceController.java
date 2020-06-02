@@ -2,7 +2,6 @@ package com.kh.goodplace.experience.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,13 +21,19 @@ public class ExperienceController {
 	
 	@RequestMapping("expEnrollForm2.exp")
 	public ModelAndView expForm2(Experience e, ModelAndView mv) {
+		//System.out.println(e);
+		mv.addObject("e", e);
+		mv.setViewName("partner/partnerExpEnrollForm2");
+		return mv;
+	}
+	
+	@RequestMapping("insert.exp")
+	public ModelAndView insertExp(Experience e, ModelAndView mv) {
 		
-		System.out.println(e);
+		
 		
 		mv.addObject("e", e);
-
-		mv.setViewName("partner/partnerExpEnrollForm2");
-		
+		mv.setViewName("partner/partnerExpList");
 		return mv;
 	}
 	
