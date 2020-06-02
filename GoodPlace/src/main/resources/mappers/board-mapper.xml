@@ -42,7 +42,6 @@
 		        select *
 		          from faq
 		         where faq_category = #{faqCategory}
-		         order by faq_no
 		        )
 		where rownum < 4
 	</select>
