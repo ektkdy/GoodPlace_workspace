@@ -25,6 +25,8 @@
     #pagingArea{width: 980px; text-align: right;}
     #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer; border-radius: 4px;}
     #pagingArea a:hover{color: white; background-color: #34538a;}
+    
+    #noticeList tr:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -43,7 +45,7 @@
                     <p class="title_tt">공지사항</p>
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+                    <table id="noticeList" class="common_tb" cellpadding="0" cellspacing="0" >
                         <thead>
                             <tr>
                                 <td width="100px">번호</td>
@@ -71,6 +73,15 @@
                         </tbody>
                     </table>
                     
+                    <!-- 공지사항 상세조회용 서비스 -->
+                    <script type="text/javascript">
+			             $(function(){
+			            	 $("#noticeList tbody tr").click(function(){
+								 location.href="pNoticeListDetail.bo?noNo="+$(this).children().eq(0).text();           		 
+			            	 });
+			             });
+		            </script>
+                    
                     <c:if test="${ !empty list }">
 	                    <div id="pagingArea" style="margin-top: 22px;">
 	                       <c:choose>
@@ -78,7 +89,7 @@
 				                    <a href="#">&lt;</a>
 				                </c:when>
 				                <c:otherwise>
-			                    	<a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    	<a href="pNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
 			                    </c:otherwise>
 		                    </c:choose>
 		                    
@@ -88,7 +99,7 @@
 			                    		<a href="#">${p}</a>
 			                    	</c:when>
 			                    	<c:otherwise>
-			                    		<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
+			                    		<a class="page-link" href="pNoticeList.bo?currentPage=${ p }">${p}</a>
 			                    	</c:otherwise>
 			                    </c:choose>
 		                    </c:forEach>
@@ -98,7 +109,7 @@
 				                    <a>&gt;</a>
 				                </c:when>
 				                <c:otherwise>
-				                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                    <a href="pNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
 				                </c:otherwise>
 		                    </c:choose>
 	                    </div>

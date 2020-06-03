@@ -255,37 +255,78 @@ public class BoardController {
     
     
     
-    // 파트너 공지사항 시작
+    // 파트너 공지사항 시작 -------------------------------------------
     // 공지사항 전체 목록 조회용 서비스
     @RequestMapping("pNoticeList.bo")
     public String pSelectNoticeList(int currentPage, Model model) {
     	
         int listCount = bService.pSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
-        
+        //System.out.println(list);
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
         
         return "partner/partnerNotice";
     }
     
-    // 공지사항 상세 조회용 서비스
+    // 공지사항 상세 조회용 서비스 
     @RequestMapping("pNoticeListDetail.bo")
-    public String pSelectNoticeListDetail(int noNo) {
+    public ModelAndView pSelectNoticeListDetail(int noNo, ModelAndView mv){
     	
-    	
-    	
-    	
+        int result = bService.pNoticeIncreaseCount(noNo);
         
-        return "partner/partnerNoticeDetail";
+        if(result > 0){ // 게시글 상세조회 성공
+            
+            Board b = bService.pSelectNoticeDetail(noNo);
+            mv.addObject("b", b);
+            mv.setViewName("partner/partnerNoticeDetail");
+            
+        }else{ // 게시글 상세조회 실패
+        	
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
     }
     
-    // 파트너 공지사항 끝
+    //------------------------------------------- 파트너 공지사항 끝
     
     
+    // 사용자 FAQ 시작
+    // 전체 Category별 제목 조회
+//    @RequestMapping("faq.bo")
+//    public String showFaq(Model model) {
+//    	
+//    		ArrayList<String> faqCategoryList = selectFaqCategory();
+////        ArrayList<String> faqCategoryList = bService.selectFaqCategory();
+////        ArrayList<String> faqTitleList = bService.selectFaqList(String faqCategory);
+//        
+//        model.addAttribute("faqCategoryList", faqCategoryList);
+//        model.addAttribute("faqTitleList", faqTitleList);
+//        	
+//        return "user/faq";
+//    }
     
+    // FAQ 모든 카테고리 조회
+    @RequestMapping("faq.bo")
+    public ArrayList<String> selectFaqCategory(){
+    	
+    	ArrayList<String> faqCategoryList = bService.selectFaqCategory();
+    	System.out.println(faqCategoryList);
+    	return faqCategoryList;
+    	
+    }
+    
+//    // FAQ 카테고리별 faqTitle 조회
+//    public ArrayList<String> selectFaqList(String faqCategory){
+//    	ArrayList<String> faqTitleList = bService.selectFaqCategory();
+//    	return faqCategoryList;
+//    }
+    
+    
+    // 사용자 FAQ 끝
     
     
     

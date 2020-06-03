@@ -29,11 +29,8 @@ public interface MemberService {
 	// 1. 파트너 수입 목록 조회용 서비스
 	ArrayList<Member> selectIncomeList();
 	
-	// 2. 파트너 계정정보 등록용 서비스
-	Member selectAccount(int usNo);
-	
-	// 3. 파트너 계정정보 수정용 서비스
-	Member insertAccount(int usNo);
+	//2. 파트너 계정정보 수정용 서비스
+	int updateAccount(Member m);
 	
 	//-------------------------------------------------------------------
 	

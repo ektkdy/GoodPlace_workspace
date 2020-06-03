@@ -124,11 +124,21 @@ public class BoardDao {
 	}
 
 	public Board pSelectNoticeDetail(SqlSessionTemplate sqlSession, int noNo) {
-		return null;
+		return sqlSession.selectOne("boardMapper.pSelectNoticeDetail", noNo);
+	}
+
+	public int pNoticeIncreaseCount(SqlSessionTemplate sqlSession, int noNo) {
+		return sqlSession.update("boardMapper.pNoticeIncreaseCount", noNo);
 	}
 	
 	
+	// ---------------------------------- 사용자 FAQ --------------------------------------------------------------------------
 	
+	public ArrayList<String> selectFaqList(SqlSessionTemplate sqlSession, String faqCategory){
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectFaqCategory");
+		
+	}
 	
 	
 	

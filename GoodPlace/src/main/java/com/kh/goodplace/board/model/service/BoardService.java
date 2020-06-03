@@ -60,14 +60,20 @@ public interface BoardService {
 	ArrayList<Board> pSelectNoticeList(PageInfo pi);
 	
 	// 2. 파트너 공지사항 상세 조회용 서비스 - 하정
-	Board selectNoticeDetail(int noNo);
+	Board pSelectNoticeDetail(int noNo);
+
+	// 3. 공지사항 조회수 1증가용 서비스 - 하정
+	int pNoticeIncreaseCount(int noNo);
 	
 	
 	// ------------------------------------------------------
 
+	// 1. FAQ 모든 카테고리 조회용 서비스 - 진아
+	ArrayList<String> selectFaqCategory();
 	
+	// 2. FAQ 카테고리별 제목 조회용 서비스 - 진아
+	ArrayList<String> selectFaqList(String faqCategory);
 	
-	
-	
-	
+	// 3. FAQ 카테고리별 : 제목, 내용표시용 서비스 - 진아
+	ArrayList<Board> selectFaqContent(String faqCategory);
 }

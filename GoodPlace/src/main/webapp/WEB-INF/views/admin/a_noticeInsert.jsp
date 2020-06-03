@@ -104,7 +104,7 @@
 	                        <thead>
 	                            <tr>
 	                                <td width="150px">제목</td>
-	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="noticeTitle" style="width:720px; height:25px; padding-left: 10px;"></td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="noticeTitle" style="width:720px; height:25px; padding-left: 10px;" required></td>
 	                            </tr>
 	
 	                        </thead>
@@ -112,7 +112,7 @@
 	                            <tr>
 	                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
 	                                <td colspan="5" style="padding-left: 5%;">
-	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;"></textarea>
+	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;" required></textarea>
 	                                </td>
 	                            </tr>
 	                            <tr class="file_input">

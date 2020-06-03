@@ -34,10 +34,8 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="file_path" property="filePath"/>
-	</resultMap>
 	
-	<resultMap id="expPayResultSet" type="ExpPay">
-		<id column="epno" property="epNo"/>
+		<result column="epno" property="epNo"/>
 		<result column="exno" property="exNo"/>
 		<result column="usno" property="usNo"/>
 		<result column="amount" property="amount"/>

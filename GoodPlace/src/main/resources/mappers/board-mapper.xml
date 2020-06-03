@@ -35,7 +35,7 @@
 	</select>
 
 	<!-- 진아 : 모든 faqCategory 조회 -->
-	<select id="selectFaqCategory" resultType="string">
+	<select id="selectFaqCategory" resultType="arraylist">
 		select distinct faq_category
 		  from faq
 		  order by faq_category
@@ -154,8 +154,25 @@
 		select *
 		  from notice
 		 where status='Y'
-		 order by NONO desc
+		 order by nono desc
 	</select>
+	
+	<select id="pSelectNoticeDetail" parameterType="_int" resultMap="boardNoticeResultSet">
+		select *
+		  from (select nono, notice_title, notice_content, notice_date,
+       			lag(nono, 1, 0) over(order by nono) as prevNoNo, 
+       			lag(notice_title, 1, '이전글이 없습니다') over(order by nono) as prevTitle, 
+       			lead(nono, 1, 0) over(order by nono) as nextNoNo, 
+       			lead(notice_title, 1, '다음글이 없습니다') over(order by nono) as nextTitle
+				from notice order by nono)
+		 where nono= #{noNo}
+	</select>
+	
+	<update id="pNoticeIncreaseCount" parameterType="_int">
+		update notice
+		   set count = count + 1
+		 where nono = #{noNo} and status = 'Y'
+	</update>
 	
 	<!-- /하정 -->
 	
