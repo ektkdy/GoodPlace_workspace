@@ -40,15 +40,15 @@ public interface BoardService {
 	
 	// 3. 공지사항게시판 상세조회용 서비스-현영
 	// 3_1. 해당 게시글 조회수 증가용 서비스
-	int NoticeincreaseCount(int nno);
+	int noticeIncreaseCount(int nno);
 	// 3_2. 해당 게시글 조회용 서비스
 	Board selectNotice(int nno);
 	
 	// 4.게시글 수정용 서비스-현영
-	int NoticeUpdate(Board b);
+	int noticeUpdate(Board b);
 	
 	// 5. 게시글 삭제용 서비스-현영
-	int NoticeDelete(int nno);
+	int noticeDelete(int nno);
 	
 	//------------------------------------------------------
 

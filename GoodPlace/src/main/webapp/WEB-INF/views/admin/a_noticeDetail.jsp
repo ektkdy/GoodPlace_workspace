@@ -50,9 +50,9 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="off lt_tab">FAQ관리</button>
+                <button class="off lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
-                <button class="on gt_tab">공지사항관리</button>
+                <button class="on gt_tab" onclick="location.href='aNoticeList.bo?currentPage=1'">공지사항관리</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">공지사항 상세</span></a>
@@ -64,7 +64,7 @@
                         <thead>
                             <tr>
                                 <td width="150px">제목</td>
-                                <td colspan="3" width="150px" style="background: white; text-align: left; padding-left: 10px;">[공지]서비스 점검 안내</td>
+                                <td colspan="3" width="150px" style="background: white; text-align: left; padding-left: 10px;">${ b.noticeTitle }</td>
                             </tr>
 
                         </thead>
@@ -72,7 +72,7 @@
                             <tr>
                                 <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
                                 <td colspan="5">
-                                    <textarea name="" id="" style="padding-left: 10px;" readonly>되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가 있다
+                                    <textarea name="" id="" style="padding-left: 10px;" readonly>${ b.noticeContent }
                                     </textarea>
                                 </td>
                             </tr>
@@ -85,7 +85,7 @@
                             <tr>
                                 <td><button>첨부파일</button></td>
                                 <td><input type="text" value="점검시간.hwp" style="width: 300px; height: 35px; padding-left: 10px;" readonly></td>
-                                <td style="padding-left: 350px;"><button id="gotoList">목록으로 가기</button></td>
+                                <td style="padding-left: 350px;"><button id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로 가기</button></td>
                             </tr>
                         </table>
 

@@ -89,9 +89,9 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="off lt_tab">FAQ관리</button>
+                <button class="off lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
-                <button class="on gt_tab">공지사항관리</button>
+                <button class="on gt_tab" onclick="location.href='aNoticeList.bo?currentPage=1'">공지사항관리</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">공지사항등록</span></a>
@@ -132,7 +132,7 @@
 	                    <br>
 	                    <div style="text-align: right;">
 	                        <button id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로</button>
-	                        <button class="blue_btn" >등록하기</button>
+	                        <button type="submit" class="blue_btn" >등록하기</button>
 	                    </div>
 					</form>
                 </div>

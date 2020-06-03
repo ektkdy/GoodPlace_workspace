@@ -74,22 +74,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int NoticeincreaseCount(int nno) {
-		return 0;
+	public int noticeIncreaseCount(int nno) {
+		return bDao.noticeIncreaseCount(sqlSession, nno);
 	}
 
 	@Override
 	public Board selectNotice(int nno) {
-		return null;
+		return bDao.selectNotice(sqlSession, nno);
 	}
 
 	@Override
-	public int NoticeUpdate(Board b) {
-		return 0;
+	public int noticeUpdate(Board b) {
+		return bDao.noticeUpdate(sqlSession, b);
 	}
 
 	@Override
-	public int NoticeDelete(int nno) {
+	public int noticeDelete(int nno) {
 		return 0;
 	}
 	

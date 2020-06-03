@@ -183,6 +183,55 @@ public class BoardController {
         }
     }
     
+    @RequestMapping("aNoticeDetail.bo")
+    public ModelAndView selectNotice(int nno, ModelAndView mv)
+    {
+    	
+        int result = bService.noticeIncreaseCount(nno);
+        
+        if(result > 0)
+        { // 게시글 상세조회 성공
+            
+            Board b = bService.selectNotice(nno);
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_noticeDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    
+    
+    @RequestMapping("noticeUpdateForm.bo")
+    public String noticeUpdateForm(int nno, Model model)
+    {
+        model.addAttribute("b", bService.selectNotice(nno));
+        return "admin/a_noticeUpdate";
+    }
+    
+    
+    @RequestMapping("noticeUpdate.bo")
+    public String noticeUpdate(Board b, Model model, HttpServletRequest request) {
+    	
+        int result = bService.noticeUpdate(b);
+        
+        if(result > 0)
+        {
+            return "redirect:aNoticeDetail.bo?nno=" + b.getNoNo();
+        }
+        else
+        {
+            model.addAttribute("msg", "게시글 수정 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
     // 관리자 공지사항 끝
     
 

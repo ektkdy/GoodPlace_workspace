@@ -76,6 +76,25 @@ public class BoardDao {
 		
 	}
 	
+	public int noticeIncreaseCount(SqlSessionTemplate sqlSession, int nno) {
+		
+		return sqlSession.update("boardMapper.noticeIncreaseCount", nno);
+		
+	}
+	
+	
+	public Board selectNotice(SqlSessionTemplate sqlSession, int nno) {
+		
+		return sqlSession.selectOne("boardMapper.selectNotice", nno);
+		
+	}
+	
+	public int noticeUpdate(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.noticeUpdate", b);
+		
+	}
+	
 	
 	
 	

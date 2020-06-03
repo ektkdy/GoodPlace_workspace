@@ -96,7 +96,7 @@
                     <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
+                    <table id="noticeList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <td width="100">선택</td>
@@ -113,11 +113,21 @@
 	                                <td>${ b.noNo }</td>
 	                                <td>${ b.noticeTitle }</td>
 	                                <td>${ b.count }</td>
-	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn">수정</button></td>
+	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn" onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정</button></td>
 	                            </tr>
 							</c:forEach>
                         </tbody>
                     </table>
+                    
+                    
+		            <script>
+		            	$(function(){
+		            		$("#noticeList tbody tr").click(function(){
+		            			location.href="aNoticeDetail.bo?nno=" + $(this).children().eq(1).text();
+		            		})
+		            	});
+		            </script>
+                    
                     <table>
                         <th>
                             <br>
