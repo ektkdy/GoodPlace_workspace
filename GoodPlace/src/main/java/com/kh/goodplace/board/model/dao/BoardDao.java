@@ -12,6 +12,8 @@ import com.kh.goodplace.common.model.vo.PageInfo;
 @Repository("bDao")
 public class BoardDao {
 
+	
+	//------------ 관리자 FAQ -----------------------------------------
 	public int aSelectFaqListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("boardMapper.aSelectFaqListCount");
@@ -50,5 +52,50 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.faqDelete", fno);
 		
 	}
+	
+	//------------ 관리자 공지사항 -----------------------------------------
+	
+	public int aSelectNoticeListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.aSelectNoticeListCount");
+		
+	}
+	
+	public ArrayList<Board> aSelectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.aSelectNoticeList", null, rowBounds);
+		
+	}
+	
+	public int insertNotice(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.insert("boardMapper.insertNotice", b);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

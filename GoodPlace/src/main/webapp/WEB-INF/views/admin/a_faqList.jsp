@@ -78,9 +78,9 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">FAQ관리</button>
+                <button class="on lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
-                <button class="off gt_tab">공지사항관리</button>
+                <button class="off gt_tab" onclick="location.href='aNoticeList.bo?currentPage=1'">공지사항관리</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px; margin-right: 30px;">FAQ관리</span></a>

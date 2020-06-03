@@ -54,7 +54,7 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">FAQ관리</button>
+                <button class="on lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
                 <button class="off gt_tab">공지사항관리</button>
             </div>
@@ -75,8 +75,9 @@
 	                                    <span class="up_btn_space">
 	                                        <select name="faqCategory" id="faqCategory" style="width:100px; height:35px;">
 	                                            <option value="일반">일반문의</option>
-	                                            <option value="숙소">숙소관련</option>
-	                                            <option value="예약">예약방법</option>
+	                                            <option value="숙소">숙소문의</option>
+	                                            <option value="체험">체험문의</option>
+	                                            <option value="예약">예약문의</option>
 	                                            <option value="파트너">파트너</option>
 	                                        </select>
 	                                    </span>

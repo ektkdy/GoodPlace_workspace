@@ -1,6 +1,10 @@
 package com.kh.goodplace.board.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.board.model.service.BoardService;
@@ -21,6 +27,7 @@ public class BoardController {
     @Autowired
     private BoardService bService;
     
+    // 관리자 FAQ 시작
     @RequestMapping("aFaqList.bo")
     public String aSelectFaqList(int currentPage, Model model) {
     	
@@ -135,16 +142,49 @@ public class BoardController {
         }
     	
     }
+    // 관리자 FAQ 끝
+
+    // 관리자 공지사항 시작
     
+    @RequestMapping("aNoticeList.bo")
+    public String aSelectNoticeList(int currentPage, Model model) {
+    	
+        int listCount = bService.aSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aSelectNoticeList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_noticeList";
+        
+    }
     
+    @RequestMapping("noticeEnrollForm.bo")
+    public String enrollForm() {
+        return "admin/a_noticeInsert";
+    }
     
+    @RequestMapping("noticeInsert.bo")
+    public String insertBoard(Board b, HttpServletRequest request, Model model)
+    {
+        
+        int result = bService.insertNotice(b);
+        
+        if(result > 0)
+        { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지
+            return "redirect:aNoticeList.bo?currentPage=1";
+        }
+        else
+        { // 게시글 작성 실패
+            model.addAttribute("msg", "게시글 등록 실패!!");
+            return "common/errorPage";
+        }
+    }
     
+    // 관리자 공지사항 끝
     
-    
-    
-    
-    
-    
-    
+
     
 }

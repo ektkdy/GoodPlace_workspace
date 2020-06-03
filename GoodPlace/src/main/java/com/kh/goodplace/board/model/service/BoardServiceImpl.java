@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDao bDao;
 	
-	
+	// ------------------- 관리자 FAQ ----------------------
 	@Override
 	public int aSelectFaqListCount() {
 		
@@ -55,6 +55,45 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.faqDelete(sqlSession, fno);
 		
 	}
+	
+	// ------------------- 관리자 공지사항 ----------------------
+
+	@Override
+	public int aSelectNoticeListCount() {
+		return bDao.aSelectNoticeListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> aSelectNoticeList(PageInfo pi) {
+		return bDao.aSelectNoticeList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertNotice(Board b) {
+		return bDao.insertNotice(sqlSession, b);
+	}
+
+	@Override
+	public int NoticeincreaseCount(int nno) {
+		return 0;
+	}
+
+	@Override
+	public Board selectNotice(int nno) {
+		return null;
+	}
+
+	@Override
+	public int NoticeUpdate(Board b) {
+		return 0;
+	}
+
+	@Override
+	public int NoticeDelete(int nno) {
+		return 0;
+	}
+	
+
 
 
 

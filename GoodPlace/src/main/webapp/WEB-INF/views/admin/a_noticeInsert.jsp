@@ -98,42 +98,43 @@
             </div>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">공지사항등록</p></span>
-                                <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <td width="150px">제목</td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqInsert" style="width:720px; height:25px; padding-left: 10px;"></td>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
-                                <td colspan="5" style="padding-left: 5%;">
-                                    <textarea name="" id="" style="padding-left: 10px; border:1px solid #bebebe;"></textarea>
-                                </td>
-                            </tr>
-                            <tr class="file_input">
-                                <td width="150px">
-                                    <div>
-                                        <label>
-                                            파일첨부
-                                            <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
-                                        </label>
-                                        
-                                    </div>
-                                </td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
-                        <button class="blue_btn" >등록하기</button>
-                    </div>
-
+                <div class="con2">
+	                <form id="noticeEnrollForm" method="post" action="noticeInsert.bo">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+	                        <thead>
+	                            <tr>
+	                                <td width="150px">제목</td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="noticeTitle" style="width:720px; height:25px; padding-left: 10px;"></td>
+	                            </tr>
+	
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+	                                <td colspan="5" style="padding-left: 5%;">
+	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;"></textarea>
+	                                </td>
+	                            </tr>
+	                            <tr class="file_input">
+	                                <td width="150px">
+	                                    <div>
+	                                        <label>
+	                                            	파일첨부
+	                                            <input type="file" id="upfile" onchange="javascript:document.getElementById('file_route').value=this.value" name="uploadFile">
+	                                        </label>
+	                                        
+	                                    </div>
+	                                </td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route"></td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                    <br>
+	                    <div style="text-align: right;">
+	                        <button id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로</button>
+	                        <button class="blue_btn" >등록하기</button>
+	                    </div>
+					</form>
                 </div>
             </div>
         </div>

@@ -11,6 +11,15 @@
 		<result column="FAQ_CONTENT" property="faqContent"/>
 		<result column="FAQ_CREATE_DATE" property="faqCreateDate"/>
 	</resultMap>
+	
+	<resultMap type="Board" id="boardNoticeResultSet">
+		<id column="NONO" property="noNo"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_DATE" property="noticeDate"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
 
 
 	<!-- 현영  -->
@@ -72,7 +81,7 @@
 		 where faqno=#{faqNo}
 	
 	</update>
-	
+	<!-- 현영  -->
 	<delete id="faqDelete" parameterType="_int">
 	
 		delete 
@@ -82,11 +91,27 @@
 	</delete>
 	
 	
+	<!-- 공지사항 -->
+	<!-- 현영 -->
+	<select id="aSelectNoticeListCount" resultType="_int">
+		select count(*)
+		  from notice
+		 where status='Y'
+	</select>
 	
+	<!-- 현영  -->
+	<select id="aSelectNoticeList" resultMap="boardNoticeResultSet">
+		select *
+		  from notice
+		 where status='Y'
+		 order by NONO desc
+	</select>
 	
-	
-	
-	
+	<!-- 현영  -->
+	<insert id="insertNotice" parameterType="Board">
+		insert into notice
+		values(nono.nextval, #{noticeTitle}, #{noticeContent}, sysdate, default, default)
+	</insert>
 	
 	
 	

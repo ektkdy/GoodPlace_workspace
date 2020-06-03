@@ -78,9 +78,9 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="off lt_tab">FAQ관리</button>
+                <button class="off lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
-                <button class="on gt_tab">공지사항관리</button>
+                <button class="on gt_tab" onclick="location.href='aNoticeList.bo?currentPage=1'">공지사항관리</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">공지사항관리</span></a>
@@ -107,31 +107,62 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>[공지]서비스 점검 안내</td>
-                                <td>134</td>
-                                <td><button class="modifiyBtn">수정</button></td>
-                            </tr>
-
+	                        <c:forEach items="${ list }" var="b">
+	                            <tr>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
+	                                <td>${ b.noNo }</td>
+	                                <td>${ b.noticeTitle }</td>
+	                                <td>${ b.count }</td>
+	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn">수정</button></td>
+	                            </tr>
+							</c:forEach>
                         </tbody>
                     </table>
                     <table>
                         <th>
                             <br>
-                            <button class="blue_btn" >등록하기</button>
+                            <button class="blue_btn" onclick="location.href='noticeEnrollForm.bo'">등록하기</button>
                             <button class="blue_btn" id="delete_btn">삭제</button>
                         </th>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
+<!--                                 <a>&lt;</a>
                                 <a>1</a>
                                 <a>2</a>
                                 <a>3</a>
                                 <a>4</a>
                                 <a>5</a>
-                                <a>&gt;</a>
+                                <a>&gt;</a> -->
+                                
+                                <c:choose>
+				                	<c:when test="${ pi.currentPage eq 1 }">
+					                    <a href="#">&lt;</a>
+					                </c:when>
+					                <c:otherwise>
+				                    	<a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+				                    </c:otherwise>
+			                    </c:choose>
+			                    
+						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			                    	<c:choose>
+			                    		<c:when test="${ p eq pi.currentPage }">
+				                    		<a href="#">${p}</a>
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
+				                    	</c:otherwise>
+				                    </c:choose>
+			                    </c:forEach>
+			                    
+						        <c:choose>
+			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					                    <a>&gt;</a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+					                </c:otherwise>
+			                    </c:choose>
+                                
                             </div>
                         </th>
     

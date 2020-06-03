@@ -21,7 +21,7 @@ public class Board {
 	private String noticeContent; 	// 공지사항 내용
 	private Date noticeDate; 		// 공지사항 작성일
 	private int count;				// 조회수
-	
+	private String status;
 	
 	/* FAQ 컬럼들 */
 	private int faqNo;				// faq번호
