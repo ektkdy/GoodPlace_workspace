@@ -89,51 +89,53 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="off lt_tab">FAQ관리</button>
+                <button class="off lt_tab" onclick="location.href='aFaqList.bo?currentPage=1'">FAQ관리</button>
                 <button class="off mid_tab">이벤트관리</button>
-                <button class="on gt_tab">공지사항관리</button>
+                <button class="on gt_tab" onclick="location.href='aNoticeList.bo?currentPage=1'">공지사항관리</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">공지사항수정</span></a>
             </div>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">공지사항수정</p></span>
-                                <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <td width="150px">제목</td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="faqInsert" style="width:720px; height:25px; padding-left: 10px;" value="[공지]점검일정"></td>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
-                                <td colspan="5" style="padding-left: 5%;">
-                                    <textarea name="" id="" style="padding-left: 10px; border:1px solid #bebebe;">오늘하루도 화이팅입니다.</textarea>
-                                </td>
-                            </tr>
-                            <tr class="file_input">
-                                <td width="150px">
-                                    <div>
-                                        <label>
-                                            파일첨부
-                                            <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
-                                        </label>
-                                        
-                                    </div>
-                                </td>
-                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route" value="점검일정.hwp"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
-                        <button class="blue_btn" >수정하기</button>
-                    </div>
-
+                <div class="con2">
+	                <form id="noticeUpdateForm" method="post" action="noticeUpdate.bo">
+	                	<input type="hidden" name="noNo" value="${ b.noNo }">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+	                        <thead>
+	                            <tr>
+	                                <td width="150px">제목</td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" name="noticeTitle" style="width:720px; height:25px; padding-left: 10px;" value="${ b.noticeTitle }"></td>
+	                            </tr>
+	
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+	                                <td colspan="5" style="padding-left: 5%;">
+	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;">${ b.noticeContent }</textarea>
+	                                </td>
+	                            </tr>
+	                            <tr class="file_input">
+	                                <td width="150px">
+	                                    <div>
+	                                        <label>
+	                                            	파일첨부
+	                                            <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
+	                                        </label>
+	                                        
+	                                    </div>
+	                                </td>
+	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route" value="점검일정.hwp"></td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                    <br>
+	                    <div style="text-align: right;">
+	                        <button type="button" id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로</button>
+	                        <button type="submit" class="blue_btn" >수정하기</button>
+	                    </div>
+					</form>
                 </div>
             </div>
         </div>

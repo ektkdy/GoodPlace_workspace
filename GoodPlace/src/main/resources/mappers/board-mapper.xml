@@ -113,8 +113,29 @@
 		values(nono.nextval, #{noticeTitle}, #{noticeContent}, sysdate, default, default)
 	</insert>
 	
+	<!-- 현영  -->
+	<update id="noticeIncreaseCount" parameterType="_int">
+		update notice
+		   set count = count + 1
+		 where nono = #{nno} and status = 'Y'
+	</update>
 	
+	<!-- 현영  -->
+	<select id="selectNotice" parameterType="_int" resultMap="boardNoticeResultSet">
+		select *
+		  from notice
+		 where nono= #{nno} and status='Y'
+	</select>
 	
+	<!-- 현영  -->
+	<update id="noticeUpdate" parameterType="Board">
+	
+		update notice
+		   set NOTICE_TITLE=#{noticeTitle},
+		       NOTICE_CONTENT=#{noticeContent}
+		 where nono=#{noNo}
+	
+	</update>
 	
 	
 	

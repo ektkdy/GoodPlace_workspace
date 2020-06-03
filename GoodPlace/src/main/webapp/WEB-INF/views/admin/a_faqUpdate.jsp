@@ -97,7 +97,7 @@
 	                    </table>
 	                    <br>
 	                    <div style="text-align: right;">
-	                        <button id="gotoList" onclick="location.href='aFaqList.bo?currentPage=1'">목록으로</button>
+	                        <button type="button" id="gotoList" onclick="location.href='aFaqList.bo?currentPage=1'">목록으로</button>
 	                        <button type="submit" class="blue_btn" >수정하기</button>
 	                    </div>
 					</form>
