@@ -108,8 +108,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board selectNoticeDetail(int noNo) {
+	public Board pSelectNoticeDetail(int noNo) {
 		return bDao.pSelectNoticeDetail(sqlSession, noNo);
+	}
+
+	@Override
+	public int pNoticeIncreaseCount(int noNo) {
+		return bDao.pNoticeIncreaseCount(sqlSession, noNo);
 	}
 	
 

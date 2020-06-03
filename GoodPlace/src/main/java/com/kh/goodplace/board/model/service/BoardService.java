@@ -60,7 +60,10 @@ public interface BoardService {
 	ArrayList<Board> pSelectNoticeList(PageInfo pi);
 	
 	// 2. 파트너 공지사항 상세 조회용 서비스 - 하정
-	Board selectNoticeDetail(int noNo);
+	Board pSelectNoticeDetail(int noNo);
+
+	// 3. 공지사항 조회수 1증가용 서비스 - 하정
+	int pNoticeIncreaseCount(int noNo);
 	
 	
 	// ------------------------------------------------------

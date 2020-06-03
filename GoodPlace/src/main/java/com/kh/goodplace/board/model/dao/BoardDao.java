@@ -124,7 +124,11 @@ public class BoardDao {
 	}
 
 	public Board pSelectNoticeDetail(SqlSessionTemplate sqlSession, int noNo) {
-		return null;
+		return sqlSession.selectOne("boardMapper.pSelectNoticeDetail", noNo);
+	}
+
+	public int pNoticeIncreaseCount(SqlSessionTemplate sqlSession, int noNo) {
+		return sqlSession.update("boardMapper.pNoticeIncreaseCount", noNo);
 	}
 	
 	

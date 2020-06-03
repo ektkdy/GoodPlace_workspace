@@ -23,6 +23,11 @@ public class Board {
 	private int count;				// 조회수
 	private String status;
 	
+	private int prevNoNo;			// 공지사항 번호 -이전글
+	private String prevTitle;		// 공지제목 -이전글
+	private int nextNoNo;			// 공지사항 번호 -다음글
+	private String nextTitle;		// 공지제목 -다음글
+	
 	/* FAQ 컬럼들 */
 	private int faqNo;				// faq번호
 	private String faqCategory;		// faq카테고리
