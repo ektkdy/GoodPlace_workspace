@@ -25,6 +25,11 @@ public class RoomDao {
 		
 	}
 	
+	public int insertRoom(SqlSessionTemplate sqlSession, Room r) {
+		
+		return sqlSession.insert("roomMapper.insertRoom", r);
+	}
+	
 	
 	
 	

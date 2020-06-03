@@ -34,7 +34,7 @@ public class Member {
 	private String partnerIntro;	//파트너소개
 	private Date paEnrollDate;		//파트너가입일
 	private String accountName; 	//은행명
-	private int accountNum;			//계좌번호
+	private String accountNum;		//계좌번호
 	private String preMsg;			//기본응답메세지
 	private int paYellowCard;		//경고누적
 	private String partnerStatus;	//파트너신고상태

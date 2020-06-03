@@ -25,6 +25,8 @@
     #pagingArea{width: 980px; text-align: right;}
     #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer; border-radius: 4px;}
     #pagingArea a:hover{color: white; background-color: #34538a;}
+    
+    #noticeList tr:hover{cursor:pointer;}
 </style>
 </head>
 <body>

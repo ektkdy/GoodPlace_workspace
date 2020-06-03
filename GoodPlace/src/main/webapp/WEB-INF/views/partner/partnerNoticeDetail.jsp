@@ -77,13 +77,27 @@
                                 <tr>
                                     <td width="150px">이전글</td>
                                     <td width="800px">
-                                    	<a href="pNoticeListDetail.bo?noNo=${ b.prevNoNo }">${ b.prevTitle }</a>
+                                    	<c:choose>
+                                    		<c:when test="${ b.prevNoNo == 0 }">
+                                    			<p value="${ b.prevNoNo }" readonly>${ b.prevTitle }</p>
+                                    		</c:when>
+                                    		<c:otherwise>
+												<a href="pNoticeListDetail.bo?noNo=${ b.prevNoNo }">${ b.prevTitle }</a>
+                                    		</c:otherwise>
+                                    	</c:choose>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="border-bottom:1px solid #dbdbdb">다음글</td>
                                     <td style="border-bottom:1px solid #dbdbdb">
-                                    	<a href="pNoticeListDetail.bo?noNo=${ b.nextNoNo }">${ b.nextTitle }</a>
+                                    	<c:choose>
+                                    		<c:when test="${ b.nextNoNo == 0 }">
+                                    			<p value="${ b.nextNoNo }" readonly>${ b.nextTitle }</p>
+                                    		</c:when>
+                                    		<c:otherwise>
+	                                    		<a href="pNoticeListDetail.bo?noNo=${ b.nextNoNo }">${ b.nextTitle }</a>
+                                    		</c:otherwise>
+                                    	</c:choose>
                                     </td>
                                 </tr>
                             </thead>
@@ -95,9 +109,8 @@
     </div>
     <script>
         $(function(){
-            $(".bottum_tb>tbody>tr").click(function(){
-                var bno  = $(this).children().eq(0).text();
-                location.href="${pageContext.request.contextPath}/detail.no?nno="+nno;
+            $("#gotoList").click(function(){
+            	location.href="pNoticeList.bo?currentPage=1";
             });
         });
     </script>

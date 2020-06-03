@@ -28,7 +28,7 @@
                 <a href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/nobackgroundlogo.png" id="logo" alt="logo" ><p class="title_name">파트너</p></a>
             </span>
             <span id="p_info">
-                <a href="" style="float:left; "><img src="#" class="userphoto"><p>홍길동</p></a><img src="${pageContext.request.contextPath}/resources/images/partner/arrow.png" class="arrow">
+                <a href="" style="float:left; "><img src="#" class="userphoto"><p></p></a><img src="${pageContext.request.contextPath}/resources/images/partner/arrow.png" class="arrow">
             </span>
             <div id="slide_menu">
                 <ul>
@@ -47,7 +47,7 @@
                 <li><a href=""><span class="icon6"></span><p>체험관리</p></a></li>
                 <li><a href=""><span class="icon7"></span><p>정산관리</p></a></li>
                 <li><a href=""><span class="icon8"></span><p>메세지</p></a></li>
-                <li><a href=""><span class="icon9"></span><p>계정관리</p></a></li>
+                <li><a href="pAccount.me"><span class="icon9"></span><p>계정관리</p></a></li>
                 <li><a href="pNoticeList.bo?currentPage=1"><span class="icon10"></span><p>공지사항</p></a></li>
             </ul>
         </div>
