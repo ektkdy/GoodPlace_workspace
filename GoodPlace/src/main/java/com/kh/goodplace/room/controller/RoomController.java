@@ -34,11 +34,21 @@ public class RoomController {
 	
 	@RequestMapping("insert.ro")
 	public String insertRoom(Room r) {
+			
 		
+		
+		return "";
 	}
 	
 	
-	// ------------- Power 관리 시작 --------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+// ------------- Power 관리 시작 --------------------------------------------------
 	
     @RequestMapping("aPowerList.po")
     public String selectList(Model model)
@@ -52,5 +62,7 @@ public class RoomController {
     }
 	
 	// ------------- Power 관리 끝 --------------------------------------------------
+	
+	
 
 }
