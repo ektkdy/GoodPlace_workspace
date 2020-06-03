@@ -32,8 +32,7 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public int insertRoom(Room r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rDao.insertRoom(sqlSession, r);
 	}
 
 	@Override
