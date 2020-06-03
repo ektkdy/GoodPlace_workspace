@@ -132,7 +132,13 @@ public class BoardDao {
 	}
 	
 	
+	// ---------------------------------- 사용자 FAQ --------------------------------------------------------------------------
 	
+	public ArrayList<String> selectFaqList(SqlSessionTemplate sqlSession, String faqCategory){
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectFaqCategory");
+		
+	}
 	
 	
 	

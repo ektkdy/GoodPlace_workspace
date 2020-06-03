@@ -116,7 +116,25 @@ public class BoardServiceImpl implements BoardService {
 	public int pNoticeIncreaseCount(int noNo) {
 		return bDao.pNoticeIncreaseCount(sqlSession, noNo);
 	}
-	
+
+	// ------------------- 사용자 FAQ ----------------------
+
+	@Override
+	public ArrayList<String> selectFaqList(String faqCategory) {
+		return bDao.selectFaqList(sqlSession, faqCategory);
+	}
+
+	@Override
+	public ArrayList<Board> selectFaqContent(String faqCategory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> selectFaqCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 
