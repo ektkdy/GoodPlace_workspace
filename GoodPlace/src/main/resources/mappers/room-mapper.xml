@@ -63,8 +63,8 @@
 			where r.status = 1
 	</select>
 	
-	<!-- 숙소등록 -->
-	<insert id="insertRoom"  parameterType="Room">
+	<!-- 숙소등록 
+	<insert id="insertRoom" parameterType="Room">
 		insert into rooms
 		values(roNo.nextval, #{userNo}, #{roomsTitle}, #{minPeople}, #{maxPeople), #{price}, 
 			   null, #{roomsNotice}, #{roomsTag}, #{roomCount}, #{bedCount}, #{bathCount},
@@ -72,7 +72,7 @@
 			   #{addRef}, #{zipCode}, sysdate, null, null, null, #{checkIn}, #{checkOut}, #{deadline},
 			   #{originName}, #{changeName}, #{filePath}, 2)
 	</insert>
-	
+	-->
 	
 	
 	<!-- 파워관리 -->
