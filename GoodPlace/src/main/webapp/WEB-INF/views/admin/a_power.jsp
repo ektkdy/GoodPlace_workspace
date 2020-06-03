@@ -74,7 +74,7 @@
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">파워등록관리</p></span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
+                    <table id="powerList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <td width="150">번호</td>
@@ -124,19 +124,30 @@
 	                                <td>${ r.powerKind }</td>
 	                                <td>${ r.powerPrice }원</td>
 	                                <td>${ r.period }일</td>
-	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn">수정</button></td>
+	                                <td><button class="modifiyBtn">수정</button></td>
 	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
 	                            </tr>
 	                        </c:forEach>   
                         </tbody>
                     </table>
+                    
                     <table>
                         <th>
                             <br>
                             <button id="delete_btn"  style="margin-left:700px;">삭제</button>
-                            <button class="insert_btn">등록</button>
+                            <button class="insert_btn" onclick="location.href='powerEnrollForm.po'">등록</button>
                         </th>
                     </table>
+                    
+                 	<script>
+		            	$(function(){
+		            		
+ 	            		    $("#powerList tbody tr").click(function(){
+		            			location.href="powerUpdateForm.po?pno=" + $(this).children().eq(0).text();
+		            		});  
+ 	            		    
+		            	});
+		            </script>
 
                 </div>
             </div>

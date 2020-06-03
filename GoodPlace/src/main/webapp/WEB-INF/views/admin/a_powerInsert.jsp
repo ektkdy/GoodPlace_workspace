@@ -88,7 +88,7 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">파워등록 관리</button>
+                <button class="on lt_tab" onclick="location.href='aPowerList.po'">파워등록 관리</button>
                 <button class="off gt_tab">파워등록 목록</button>
             </div>
             <div class="sitemap">
@@ -100,32 +100,34 @@
                 <div class="con2">
                     <br><br>
                     <div class="con3">
-                        <table>
-                            <tr>
-                                <th colspan="3" style="line-height:70px;"><h2>파워등록 정보입력</h2></th>
-                            </tr>
-                            <tr>
-                                <td width="100px">파워등록명</td>
-                                <td colspan="1"><input type="text" placeholder="파워등록명을 입력하세요." style = "text-align: center;"></td>
-                            </tr>
-                            
-                            <tr>
-                                <td width="100px">금 액</td>
-                                <td><input type="text" placeholder="금액을 입력하세요." style = "text-align: center;"></td>
-                                <td>원</td>
-                            </tr>
-                            <tr>
-                                <td width="100px">기 간</td>
-                                <td><input type="text" placeholder="기간을 입력하세요." style = "text-align:center;"></td>
-                                <td>일</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <button id="delete_btn">목록으로</button>
-                                    <button class="insert_btn">등록하기</button>
-                                </td>
-                            </tr>
-                        </table>
+	                    <form id="powerEnrollForm" method="post" action="powerInsert.po">
+	                        <table>
+	                            <tr>
+	                                <th colspan="3" style="line-height:70px;"><h2>파워등록 정보입력</h2></th>
+	                            </tr>
+	                            <tr>
+	                                <td width="100px">파워등록명</td>
+	                                <td colspan="1"><input type="text" name="powerKind" placeholder="파워등록명을 입력하세요." style = "text-align: center;" required></td>
+	                            </tr>
+	                            
+	                            <tr>
+	                                <td width="100px">금 액</td>
+	                                <td><input type="text" name="powerPrice" placeholder="금액을 입력하세요." style = "text-align: center;" required></td>
+	                                <td>원</td>
+	                            </tr>
+	                            <tr>
+	                                <td width="100px">기 간</td>
+	                                <td><input type="text" name="period" placeholder="기간을 입력하세요." style = "text-align:center;" required></td>
+	                                <td>일</td>
+	                            </tr>
+	                            <tr>
+	                                <td colspan="3">
+	                                    <button type="button" id="delete_btn" onclick="location.href='aPowerList.po'">목록으로</button>
+	                                    <button type="submit" class="insert_btn">등록하기</button>
+	                                </td>
+	                            </tr>
+	                        </table>
+	                    </form>
                     </div>
             	</div>
         	</div>
