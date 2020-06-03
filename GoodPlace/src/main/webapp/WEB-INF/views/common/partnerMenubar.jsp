@@ -48,7 +48,7 @@
                 <li><a href=""><span class="icon7"></span><p>정산관리</p></a></li>
                 <li><a href=""><span class="icon8"></span><p>메세지</p></a></li>
                 <li><a href=""><span class="icon9"></span><p>계정관리</p></a></li>
-                <li><a href=""><span class="icon10"></span><p>공지사항</p></a></li>
+                <li><a href="pNoticeList.bo?currentPage=1"><span class="icon10"></span><p>공지사항</p></a></li>
             </ul>
         </div>
 </body>

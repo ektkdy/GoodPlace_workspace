@@ -187,4 +187,65 @@ public class BoardController {
     
 
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // 파트너 공지사항 시작
+    // 공지사항 전체 목록 조회용 서비스
+    @RequestMapping("pNoticeList.bo")
+    public String pSelectNoticeList(int currentPage, Model model) {
+    	
+        int listCount = bService.pSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "partner/partnerNotice";
+    }
+    
+    // 공지사항 상세 조회용 서비스
+    @RequestMapping("pNoticeListDetail.bo")
+    public String pSelectNoticeListDetail(int noNo) {
+    	
+    	
+    	
+    	
+        
+        return "partner/partnerNoticeDetail";
+    }
+    
+    // 파트너 공지사항 끝
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

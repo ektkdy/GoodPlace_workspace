@@ -52,22 +52,57 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>31</td>
-                                <td>공지사항제목입니다</td>
-                                <td>20.04.27</td>
-                            </tr>
+                        	<c:choose>
+	                        	<c:when test="${ !empty list }">
+	                        		<c:forEach items="${ list }" var="b">
+		                        		<tr>
+			                                <td>${ b.noNo }</td>
+			                                <td>${ b.noticeTitle }</td>
+			                                <td>${ b.noticeDate }</td>
+		                            	</tr>
+	                        		</c:forEach>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<tr>
+	                        			<td colspan="3"> 공지사항이 없습니다 </td>
+	                        		</tr>
+	                        	</c:otherwise>
+                            </c:choose>
                         </tbody>
                     </table>
-                    <div id="pagingArea" style="margin-top: 22px;">
-                        <a>&lt;</a>
-                        <a>1</a>
-                        <a>2</a>
-                        <a>3</a>
-                        <a>4</a>
-                        <a>5</a>
-                        <a>&gt;</a>
-                    </div>
+                    
+                    <c:if test="${ !empty list }">
+	                    <div id="pagingArea" style="margin-top: 22px;">
+	                       <c:choose>
+			                	<c:when test="${ pi.currentPage eq 1 }">
+				                    <a href="#">&lt;</a>
+				                </c:when>
+				                <c:otherwise>
+			                    	<a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    </c:otherwise>
+		                    </c:choose>
+		                    
+					        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    	<c:choose>
+		                    		<c:when test="${ p eq pi.currentPage }">
+			                    		<a href="#">${p}</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    		<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
+			                    	</c:otherwise>
+			                    </c:choose>
+		                    </c:forEach>
+		                    
+					        <c:choose>
+		                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+				                    <a>&gt;</a>
+				                </c:when>
+				                <c:otherwise>
+				                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                </c:otherwise>
+		                    </c:choose>
+	                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>

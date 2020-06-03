@@ -49,7 +49,25 @@ public interface BoardService {
 	
 	// 5. 게시글 삭제용 서비스-현영
 	int NoticeDelete(int nno);
-	
+
 	//------------------------------------------------------
 
+	
+	// 1_1.파트너 공지사항 전체 리스트 조회용 서비스 - 하정
+	int pSelectNoticeListCount();
+	
+	// 1_2. 요청한 페이지에 보여질 공지사항 리스트 조회용 서비스 - 하정
+	ArrayList<Board> pSelectNoticeList(PageInfo pi);
+	
+	// 2. 파트너 공지사항 상세 조회용 서비스 - 하정
+	Board selectNoticeDetail(int noNo);
+	
+	
+	// ------------------------------------------------------
+
+	
+	
+	
+	
+	
 }

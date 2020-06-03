@@ -75,7 +75,38 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertNotice", b);
 		
 	}
+
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------ 파트너 공지사항 -----------------------------------------
+	
+	public int pSelectNoticeListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.pSelectNoticeListCount");
+	}
+
+	public ArrayList<Board> pSelectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.pSelectNoticeList", null, rowBounds);
+	}
+
+	public Board pSelectNoticeDetail(SqlSessionTemplate sqlSession, int noNo) {
+		return null;
+	}
 	
 	
 	

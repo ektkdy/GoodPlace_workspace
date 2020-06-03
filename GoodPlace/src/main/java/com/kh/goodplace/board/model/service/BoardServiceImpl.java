@@ -92,6 +92,25 @@ public class BoardServiceImpl implements BoardService {
 	public int NoticeDelete(int nno) {
 		return 0;
 	}
+
+	
+	
+	// ------------------- 파트너 공지사항 ----------------------
+	
+	@Override
+	public int pSelectNoticeListCount() {
+		return bDao.pSelectNoticeListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> pSelectNoticeList(PageInfo pi) {
+		return bDao.pSelectNoticeList(sqlSession, pi);
+	}
+
+	@Override
+	public Board selectNoticeDetail(int noNo) {
+		return bDao.pSelectNoticeDetail(sqlSession, noNo);
+	}
 	
 
 
