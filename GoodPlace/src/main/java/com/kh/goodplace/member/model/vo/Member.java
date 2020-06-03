@@ -37,7 +37,8 @@ public class Member {
 	private int accountNum;			//계좌번호
 	private String preMsg;			//기본응답메세지
 	private int paYellowCard;		//경고누적
-	private String partnerStatus;	//파트너신고상태 
+	private String partnerStatus;	//파트너신고상태
+	private String kakaoId;			//카카오 아이디
 	
 	private int rpNo;				//결제번호
 	private Timestamp payDate; 		//결제일자 selectIncomeList()

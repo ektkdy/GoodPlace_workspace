@@ -28,7 +28,7 @@
 	
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER
-		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,NULL,NULL)
+		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
 	</insert>
 	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
@@ -50,4 +50,18 @@
 		   set user_pwd = #{userPwd}
 		 where email = #{email}
 	</update>
+
+	<update id="updatePartnerNo" parameterType="Member">
+		update member
+		   set paNo = pano.currval,
+		   	   user_kind = 2,
+		   	   origin_name = #{originName},
+		   	   change_name = #{changeName}
+		 where usNo = #{usNo}
+	</update>	
+	<insert id="insertPartner" parameterType="Member">
+		insert into partner
+		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'N')
+	</insert>
+
 </mapper>

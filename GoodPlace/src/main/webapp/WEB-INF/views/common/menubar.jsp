@@ -281,14 +281,22 @@
 						<c:otherwise>
 							<!-- 로그인 후 -->
 		                    <li style=" margin-top: 10px;">
-		                        <a class="list qBtn" href="" style="font-size: 15px;">파트너등록하기</a>
+		                    	<c:choose>
+		                    		<c:when test="${ loginUser.userKind eq 1 }">
+		                    			<a class="list qBtn" href="enrollPartnerForm.me" style="font-size: 15px;">파트너등록하기</a>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<a class="list qBtn" href="" style="font-size: 15px;">파트너대시보드</a>
+		                    		</c:otherwise>
+		                    	</c:choose>
+
 		                        <a class="list qBtn" href="" style="font-size: 15px;">1:1채팅상담</a>
 		                    </li>
 		                    <li>
 		                        <div id="personalImg" style="margin-left: 10px;">
 		                            
-		                            <li class="drop-down">
-		                                <a><img src="" width="50px" height="50px" style="border-radius: 50px; background-color: darkblue;"></a>
+		                            <li class="drop-down" style="top: 5px;">
+		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px; background-color: darkblue;"></a>
 		                                <ul>
 		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
 		                                    <li><a href="">my굿플레이스</a></li>

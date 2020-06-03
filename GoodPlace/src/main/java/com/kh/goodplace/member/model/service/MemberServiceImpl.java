@@ -55,6 +55,14 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePwd(Member m) {
 		return mDao.updatePwd(sqlSession, m);
 	}
+	
+	/**
+	 * 7.파트너 정보 등록 서비스
+	 */
+	@Override
+	public int insertPartner(Member m) {
+		return mDao.insertPartner(sqlSession, m);
+	}
 
 	//-------------------------------------------------------------------
 	
@@ -76,6 +84,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member insertAccount(int usNo) {
 		return null;
 	}
+
 
 	
 	//-------------------------------------------------------------------
