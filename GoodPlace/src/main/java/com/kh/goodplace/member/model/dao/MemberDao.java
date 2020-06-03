@@ -31,7 +31,7 @@ public class MemberDao {
 		int result1 = sqlSession.insert("memberMapper.insertPartner", m);
 		int result2 = sqlSession.update("memberMapper.updatePartnerNo", m);	// 회원테이블의 파트너번호, 프로필 변경
 		return result1 * result2;
-
+	}
 	public int updateAccount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateAccount", m);
 	}
