@@ -38,6 +38,19 @@ public class RoomController {
 	}
 	
 	
+	// ------------- Power 관리 시작 --------------------------------------------------
 	
+    @RequestMapping("aPowerList.po")
+    public String selectList(Model model)
+    {
+        
+        ArrayList<Room> list = rService.selectPowerList();
+        
+        model.addAttribute("list", list);
+        
+        return "admin/a_power";
+    }
+	
+	// ------------- Power 관리 끝 --------------------------------------------------
 
 }

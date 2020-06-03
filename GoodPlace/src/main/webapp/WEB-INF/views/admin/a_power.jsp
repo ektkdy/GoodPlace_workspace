@@ -86,7 +86,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+<!--                             <tr>
                                 <td>1</td>
                                 <td>STANDARD</td>
                                 <td>300,000원</td>
@@ -117,7 +117,17 @@
                                 <td>120일</td>
                                 <td><button class="modifiyBtn">수정</button></td>
                                 <td><input type="checkbox"></td>
-                            </tr>
+                            </tr> -->
+	                        <c:forEach items="${ list }" var="r">
+	                            <tr>
+	                                <td>${ r.poNo }</td>
+	                                <td>${ r.powerKind }</td>
+	                                <td>${ r.powerPrice }원</td>
+	                                <td>${ r.period }일</td>
+	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn">수정</button></td>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
+	                            </tr>
+	                        </c:forEach>   
                         </tbody>
                     </table>
                     <table>

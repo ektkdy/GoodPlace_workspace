@@ -56,7 +56,13 @@ public class Room {
 	private Date powerStart;	// 파워시작일
 	private Date powerEnd;		// 파워종료일
 	private int rpNo;			// 숙소결제번호
+
+	
+	/* 파워 테이블 컬럼 */
+	private int poNo;			// 파워번호
 	private String powerKind; 	// 파워종류
+	private int period;			// 파워기간
+	private int powerPrice;		// 파워가격
 	
 	
 

@@ -39,10 +39,10 @@
 <body>
     <div id="header">
         <span id="gotomain">
-            <a href="#"><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/배경없는_굿플로고.png" id="logo" alt="logo" ><p class="title_name">관리자</p></a>
+            <a href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/배경없는_굿플로고.png" id="logo" alt="logo" ><p class="title_name">관리자</p></a>
         </span>
         <span id="p_info">
-            <a href="#" style="float:left; "><img src="#" class="userphoto"><p>나관리</p></a><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/arrow.png" class="arrow">
+            <a href="" style="float:left; "><img src="#" class="userphoto"><p>나관리</p></a><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/arrow.png" class="arrow">
         </span>
         <div id="slide_menu">
             <ul>
@@ -53,18 +53,18 @@
     </div>
     <div id="sidenav">
         <ul>
-            <li><a href="#"><span class="icon1"></span><p>대시보드</p></a></li>
-            <li><a href="#"><span class="icon2"></span><p>회원관리</p></a></li>
-            <li><a href="#"><span class="icon3"></span><p>신고관리</p></a></li>
-            <li><a href="#"><span class="icon4"></span><p>후기관리</p></a></li>
-            <li><a href="#"><span class="icon5"></span><p>파트너관리</p></a></li>
-            <li><a href="#"><span class="icon6"></span><p>파워등록</p></a></li>
+            <li><a href=""><span class="icon1"></span><p>대시보드</p></a></li>
+            <li><a href=""><span class="icon2"></span><p>회원관리</p></a></li>
+            <li><a href=""><span class="icon3"></span><p>신고관리</p></a></li>
+            <li><a href=""><span class="icon4"></span><p>후기관리</p></a></li>
+            <li><a href=""><span class="icon5"></span><p>파트너관리</p></a></li>
+            <li><a href="aPowerList.po"><span class="icon6"></span><p>파워등록</p></a></li>
             <li><a href="aFaqList.bo?currentPage=1"><span class="icon7"></span><p>게시글관리</p></a></li>
-            <li><a href="#"><span class="icon8"></span><p>정산관리</p></a></li>
-            <li><a href="#"><span class="icon9"></span><p>메세지</p></a></li>
-            <li><a href="#"><span class="icon10"></span><p>1:1문의관리</p></a></li>
-            <li><a href="#"><span class="icon11"></span><p>숙소관리</p></a></li>
-            <li><a href="#"><span class="icon12"></span><p>체험관리</p></a></li>
+            <li><a href=""><span class="icon8"></span><p>정산관리</p></a></li>
+            <li><a href=""><span class="icon9"></span><p>메세지</p></a></li>
+            <li><a href=""><span class="icon10"></span><p>1:1문의관리</p></a></li>
+            <li><a href=""><span class="icon11"></span><p>숙소관리</p></a></li>
+            <li><a href=""><span class="icon12"></span><p>체험관리</p></a></li>
         </ul>
     </div>
     <script>

@@ -42,6 +42,13 @@
 		<result column="POWER_KIND" property="powerKind"/>
 	</resultMap>
 	
+	<resultMap type="Room" id="powerResultSet">
+		<id column="PONO" property="poNo"/>
+		<result column="POWER_KIND" property="powerKind"/>
+		<result column="PERIOD" property="period"/>
+		<result column="PRICE" property="powerPrice"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
 		  from rooms
@@ -55,5 +62,14 @@
 			join powerpay pp using(rono)
 			where r.status = 1
 	</select>
+	
+	
+	
+	<!-- 파워관리 -->
+	<select id="selectPowerList" resultMap="powerResultSet">
+		select *
+	      from power
+	</select>
+	
 
 </mapper>
