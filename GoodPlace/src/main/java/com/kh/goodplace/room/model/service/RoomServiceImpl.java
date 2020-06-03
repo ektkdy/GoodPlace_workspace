@@ -72,4 +72,40 @@ public class RoomServiceImpl implements RoomService{
 		return 0;
 	}
 
+	
+	// --------- 파워관리 시작 --------------------------
+	@Override
+	public ArrayList<Room> selectPowerList() {
+		
+		return rDao.selectPowerList(sqlSession);
+	}
+
+	@Override
+	public int insertPower(Room r) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePower(Room r) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deletePower(int pno) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Room> selectPowerRoomList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	// --------- 파워관리 끝 --------------------------
+	
+	
+	
+	
 }

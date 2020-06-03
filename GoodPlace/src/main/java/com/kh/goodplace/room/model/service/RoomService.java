@@ -2,6 +2,7 @@ package com.kh.goodplace.room.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -77,6 +78,76 @@ public interface RoomService {
 	//14_2. 요청한 페이지에 보여질 답글후 후기 목록 조회용 서비스
 	
 	//14_3. 답글 후 후기 상세조회용 서비스
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------[파워관리]------------
+	// 1. 파워등록 리스트 조회용 서비스
+	ArrayList<Room> selectPowerList();
+	
+	// 2. 파워등록 작성용 서비스
+	int insertPower(Room r);
+	
+	// 3.게시글 수정용 서비스-현영
+	int updatePower(Room r);
+	
+	// 4. 게시글 삭제용 서비스-현영
+	int deletePower(int pno);
+	
+	// 5. 파워등록 된 리스트 조회용 서비스
+	ArrayList<Room> selectPowerRoomList();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

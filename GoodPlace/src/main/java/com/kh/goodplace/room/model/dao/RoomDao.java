@@ -24,5 +24,50 @@ public class RoomDao {
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsList", null, rowBounds);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// --------- 파워관리 시작 ----------------
+	
+	public ArrayList<Room> selectPowerList(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("roomMapper.selectPowerList");
+		
+	}
+	
+	// --------- 파워관리 끝 -----------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
