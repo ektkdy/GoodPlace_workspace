@@ -294,7 +294,39 @@ public class BoardController {
     //------------------------------------------- 파트너 공지사항 끝
     
     
+    // 사용자 FAQ 시작
+    // 전체 Category별 제목 조회
+//    @RequestMapping("faq.bo")
+//    public String showFaq(Model model) {
+//    	
+//    		ArrayList<String> faqCategoryList = selectFaqCategory();
+////        ArrayList<String> faqCategoryList = bService.selectFaqCategory();
+////        ArrayList<String> faqTitleList = bService.selectFaqList(String faqCategory);
+//        
+//        model.addAttribute("faqCategoryList", faqCategoryList);
+//        model.addAttribute("faqTitleList", faqTitleList);
+//        	
+//        return "user/faq";
+//    }
     
+    // FAQ 모든 카테고리 조회
+    @RequestMapping("faq.bo")
+    public ArrayList<String> selectFaqCategory(){
+    	
+    	ArrayList<String> faqCategoryList = bService.selectFaqCategory();
+    	System.out.println(faqCategoryList);
+    	return faqCategoryList;
+    	
+    }
+    
+//    // FAQ 카테고리별 faqTitle 조회
+//    public ArrayList<String> selectFaqList(String faqCategory){
+//    	ArrayList<String> faqTitleList = bService.selectFaqCategory();
+//    	return faqCategoryList;
+//    }
+    
+    
+    // 사용자 FAQ 끝
     
     
     

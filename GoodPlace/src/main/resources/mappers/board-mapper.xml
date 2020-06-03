@@ -35,7 +35,7 @@
 	</select>
 
 	<!-- 진아 : 모든 faqCategory 조회 -->
-	<select id="selectFaqCategory" resultType="string">
+	<select id="selectFaqCategory" resultType="arraylist">
 		select distinct faq_category
 		  from faq
 		  order by faq_category
