@@ -116,9 +116,7 @@ public class BoardServiceImpl implements BoardService {
 	public int pNoticeIncreaseCount(int noNo) {
 		return bDao.pNoticeIncreaseCount(sqlSession, noNo);
 	}
+
 	
-
-
-
 
 }

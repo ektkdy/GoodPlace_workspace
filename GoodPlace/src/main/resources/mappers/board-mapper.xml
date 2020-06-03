@@ -159,7 +159,7 @@
 	
 	<select id="pSelectNoticeDetail" parameterType="_int" resultMap="boardNoticeResultSet">
 		select *
-		  from (select nono, notice_title, notice_content, 
+		  from (select nono, notice_title, notice_content, notice_date,
        			lag(nono, 1, 0) over(order by nono) as prevNoNo, 
        			lag(notice_title, 1, '이전글이 없습니다') over(order by nono) as prevTitle, 
        			lead(nono, 1, 0) over(order by nono) as nextNoNo, 

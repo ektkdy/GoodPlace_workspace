@@ -180,4 +180,68 @@ public class MemberController {
 	 */
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // ------------------ 파트너 계정관리 컨트롤러 --------------------
+    
+    @RequestMapping("partnerMain.me")
+    public String partnerMain() {
+    	return "common/partnerMenubar";
+    }
+    
+    @RequestMapping("pAccount.me")
+    public String pAccount() {
+    	return "partner/partnerAccount";
+    }
+    
+    @RequestMapping("updateAccount.me")
+    public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
+    	int result  = mService.updateAccount(m);
+	
+		if(result>0) {
+			session.setAttribute("msg", "계정정보 업데이트 성공");
+			mv.setViewName("redirect:partnerMain.me");
+		} else {
+			session.setAttribute("msg", "계정정보 업데이트에 실패했습니다");
+			mv.setViewName("redirect:pAccount.me");
+		}
+		return mv;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

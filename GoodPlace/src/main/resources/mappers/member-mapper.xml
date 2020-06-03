@@ -50,4 +50,43 @@
 		   set user_pwd = #{userPwd}
 		 where email = #{email}
 	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<update id="updateAccount" parameterType="Member">
+		update (select partner_intro, phone, account_name, account_num, pre_msg
+				from member
+				join partner using (usno))
+		   set partner_intro=#{partnerIntro}, phone=#{phone}, 
+		   	   account_name=#{accountName}, account_num=#{accountNum},
+			   pre_msg=#{preMsg}
+		 where usno=#{usNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

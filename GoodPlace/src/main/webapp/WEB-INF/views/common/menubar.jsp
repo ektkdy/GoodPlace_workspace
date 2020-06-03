@@ -294,7 +294,7 @@
 		                                    <li><a href="">my굿플레이스</a></li>
 		                                    <li><a href="">숙소예약내역</a></li>
 		                                    <li><a href="">위시리스트</a></li>
-		                                    <li><a href="">파트너대시보드</a></li>
+		                                    <li><a href="partnerMain.me">파트너대시보드</a></li>
 		                                    <li><a href="">관리자페이지</a></li>
 		                                    <li><a href="logout.me">로그아웃</a></li>
 		                                </ul>
