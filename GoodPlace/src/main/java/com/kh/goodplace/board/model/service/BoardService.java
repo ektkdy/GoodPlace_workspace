@@ -65,9 +65,13 @@ public interface BoardService {
 	
 	// ------------------------------------------------------
 
+	// 1. FAQ 모든 카테고리 조회용 서비스 - 진아
+	String selectFaqCategory();
 	
+	// 2. FAQ 카테고리별 제목 조회용 서비스 - 진아
+	ArrayList<String> selectFaqList(String faqCategory);
 	
-	
-	
+	// 3. FAQ 카테고리별 : 제목, 내용표시용 서비스 - 진아
+	ArrayList<Board> selectFaqContent(String faqCategory);
 	
 }
