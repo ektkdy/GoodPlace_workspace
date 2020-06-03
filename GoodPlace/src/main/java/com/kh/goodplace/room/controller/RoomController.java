@@ -32,6 +32,11 @@ public class RoomController {
 		return "";
 	}
 	
+	@RequestMapping("insert.ro")
+	public String insertRoom(Room r) {
+		
+	}
+	
 	
 	
 

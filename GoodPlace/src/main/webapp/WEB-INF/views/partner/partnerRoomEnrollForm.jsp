@@ -9,42 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerRoomEnroll.css" />
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-.filebox label {
-  display: inline-block;
-  padding: .3em .20em;
-  color: #fff;
-  font-size: 15px;
-  font-weight:400;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #2777f6;
-  cursor: pointer;
-  border: 1px solid #2777f6;
-  border-radius: .25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
-}
-
-.filebox label:hover {
-  background-color: #184c88;
-}
-
-.filebox label:active {
-  background-color: #184c88;
-}
-
-.filebox input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-
+button{cursor: pointer}
 </style>
 </head>
 <body>
@@ -84,7 +49,7 @@
                         <tbody>
                             <tr>
                                 <th rowspan="2">* 숙소명</th>
-                                <td colspan="2" class="instyle"><input type="text" name="" style=""></td>
+                                <td colspan="2" class="instyle"><input type="text" name="roomsTitle" required></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
@@ -92,50 +57,51 @@
                             <tr class="pdBtom">
                                 <th>*숙소위치</th>
                                 <td colspan="2" class="instyle">
-			                        <input type="text" id="del_postcode" name="address1" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly>
-									<input type="button" id="searchAdressBtn" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="width: 100px; font-size:15px;height:28px; background-color: #34538a; color:#fff; border:1px solid #34538a; border-radius:4px;" readonly><br>
-			                        <input type="text" id="del_address" name="address2" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly>											
-									<input type="text" id="del_extraAddress" name="address3" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly>
+			                        <input type="text" id="del_postcode" name="zipCode" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly required>
+									<input type="button" id="searchAdressBtn" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="width: 100px; font-size:15px;height:28px; background-color: #34538a; color:#fff; border:1px solid #34538a; border-radius:4px;" readonly required><br>
+			                        <input type="text" id="del_address" name="addBasic" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly required>											
+									<input type="text" id="del_extraAddress" name="addRef" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px; font-size:15px" readonly>
 									<!-- 사용자가 직접 입력하는 칸  -->
-									<input type="text" id="del_detailAddress"  name="address4" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px; font-size:15px"> 
+									<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px; font-size:15px" required> 
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th  width=" ">* 대표사진</th>
                                 <td colspan="2">
-                                <div style="width: 200px; height: 150px; margin-bottom:10px; border:1px solid #bebebe" id="titleImg" ></div>
+                                	<img id="titleImg" style="border:0.5px solid #bebebe; width: 200px; height:150px" >
                                	<div id="fileArea">
-									<input type="file" name="file1" id="file1" onchange="loadImg(this,1);">
+									<input type="file" name="file1" id="file1" onchange="loadImg(this,1);"required>
 								</div>
-                               		<div class="filebox" style="float:left;">
+                               	<!--  	<div class="filebox" style="float:left;">
 										<label for="ex_file">업로드</label>
 										<input type="file" id="ex_file" >
-									</div>
-                                <span class="enrollInfo" style="line-height:33px; padding-left:10px; float:left;">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</span>
+									</div>-->
+                                <p class="enrollInfo" style="text-align:left; margin-left:0;margin-top:0">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</p>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 상세사진</th>
                                 <td class="photo_btn" colspan="2">
-                                	<input class="upload-name" value="파일선택" disabled="disabled"> 
-                                	<label for="ex_filename">업로드</label> 
-                                	<input type="file" id="ex_filename" class="upload-hidden">
-
+									<div id="parah"></div>
+                               		<input type="button" value="추가" onclick="addInput();" style="width:50px; height:35px; background:#184c88; color:#fff; border:none" />
+									<input type="button" value="삭제" onclick="deleteInput();" style="width:50px; height:35px; border:1px solid #bebebe"/>
 								</td>
+							</tr>
+							
                             <tr>
                                 <th rowspan="2">* 예약 설정</th>
                                 <td colspan="2" ><input type="number" min="36" max="72" value="36" style="padding-left:5px">시간 전 부터 예약을 받지 않겠습니다.</td>
                             </tr>
-                            <tr class="pdBtom"><td colspan="2" class="enrollInfo">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
+                            <tr class="pdBtom"><td colspan="2" class="enrollInfo" name="deadline">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
                             <tr>
                                 <th rowspan="2">* 객실정보</th>
                                 <td colspan="2">
-                                	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" value="1" class="putNum mgRight">
-                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum"><br>
-                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight">
-                                	1박 금액   &nbsp;: <input type="number" min="1" value="1" class="putNum"><br>
-                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight">
-                                	최대 인원 : <input type="number" min="1" value="1" class="putNum">
+                                	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" value="1"class="putNum mgRight"  name="bedCount">
+                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum" name="bathCount"><br>
+                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight" name="restroomCount">
+                                	1박 금액   &nbsp;: <input type="number" min="1" value="1" class="putNum" name="price"><br>
+                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight" name="minPeople">
+                                	최대 인원 : <input type="number" min="1" value="1" class="putNum" name="maxPeople">
                                 </td>
                             </tr>
                             <tr class="pdBtom">
@@ -144,59 +110,59 @@
                             <tr class="pdBtom">
                                 <th >* 숙소시설</th>
                                 <td colspan="2">
-                                    <input type="checkbox" name="facility" value="침구">침구
-                                    <input type="checkbox" name="facility" value="아기침대" style="margin-left:132px">아기침대<br>
-                                    <input type="checkbox" name="facility" value="여분의침구">여분의침구
-                                    <input type="checkbox" name="facility" value="다리미" style="margin-left:82.5px">다리미<br>
-                                    <input type="checkbox" name="facility" value="주방">주방
-                                    <input type="checkbox" name="facility" value="식기류" style="margin-left:132px">식기류<br>
-                                    <input type="checkbox" name="facility" value="냉장고">냉장고
-                                    <input type="checkbox" name="facility" value="전자레인지" style="margin-left:115.5px">전자레인지<br>
-                                    <input type="checkbox" name="facility" value="인덕션">인덕션
-                                    <input type="checkbox" name="facility" value="조리도구(냄비 등)" style="margin-left:115.5px">조리도구(냄비 등)<br>
-                                    <input type="checkbox" name="facility" value="커피포트">커피포트
-                                    <input type="checkbox" name="facility" value="세탁기" style="margin-left:99px">세탁기<br>
-                                    <input type="checkbox" name="facility" value="에어컨">에어컨
-                                    <input type="checkbox" name="facility" value="공용PC" style="margin-left:115.5px">공용PC<br>
-                                    <input type="checkbox" name="facility" value="케이블TV">케이블TV
-                                    <input type="checkbox" name="facility" value="드라이기" style="margin-left:94.5px">드라이기<br>
-                                    <input type="checkbox" name="facility" value="아기욕조">아기욕조
-                                    <input type="checkbox" name="facility" value="온수및난방" style="margin-left:99px">온수 및 난방<br>
-                                    <input type="checkbox" name="facility" value="옷걸이">옷걸이
-                                    <input type="checkbox" name="facility" value="주차가능" class="mLeft835">주차가능
+                                	<label><input type="checkbox" name="facility" value="침구">침구</label>
+	                                <label><input type="checkbox" name="facility" value="아기침대" style="margin-left:132px">아기침대</label><br>
+	                                <label><input type="checkbox" name="facility" value="여분의침구">여분의침구</label>
+                                    <label><input type="checkbox" name="facility" value="다리미" style="margin-left:91px">다리미</label><br>
+                                    <label><input type="checkbox" name="facility" value="주방">주방</label>
+                                    <label><input type="checkbox" name="facility" value="식기류" style="margin-left:132px">식기류</label><br>
+                                    <label><input type="checkbox" name="facility" value="냉장고">냉장고</label>
+                                    <label><input type="checkbox" name="facility" value="전자레인지" style="margin-left:118px">전자레인지</label><br>
+                                    <label><input type="checkbox" name="facility" value="인덕션">인덕션</label>
+                                    <label><input type="checkbox" name="facility" value="조리도구(냄비 등)" style="margin-left:118px">조리도구(냄비 등)</label><br>
+                                    <label><input type="checkbox" name="facility" value="커피포트">커피포트</label>
+                                    <label><input type="checkbox" name="facility" value="세탁기" style="margin-left:104px">세탁기</label><br>
+                                    <label><input type="checkbox" name="facility" value="에어컨">에어컨</label>
+                                    <label><input type="checkbox" name="facility" value="공용PC" style="margin-left:118px">공용PC</label><br>
+                                    <label><input type="checkbox" name="facility" value="케이블TV">케이블TV</label>
+                                    <label><input type="checkbox" name="facility" value="드라이기" style="margin-left:99px">드라이기</label><br>
+                                    <label><input type="checkbox" name="facility" value="아기욕조">아기욕조</label>
+                                    <label><input type="checkbox" name="facility" value="온수및난방" style="margin-left:104px">온수 및 난방</label><br>
+                                    <label><input type="checkbox" name="facility" value="옷걸이">옷걸이</label>
+                                    <label><input type="checkbox" name="facility" value="주차가능" style="margin-left:118px">주차가능</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 제공서비스</th>
                                 <td colspan="2">
-                                    <input type="checkbox" name="service" value="샴푸">샴푸
-                                    <input type="checkbox" name="service" value="화장지" style="margin-left:132px">화장지 <br>
-                                    <input type="checkbox" name="service" value="바디워시">바디워시
-                                    <input type="checkbox" name="service" value="비누" style="margin-left:99px">비누 <br>
-                                    <input type="checkbox" name="service" value="수건">수건
-                                    <input type="checkbox" name="service" value="FreeWifi" style="margin-left:132px">Free wifi
+                                    <label><input type="checkbox" name="service" value="샴푸">샴푸</label>
+                                    <label><input type="checkbox" name="service" value="화장지" style="margin-left:132px">화장지 </label><br>
+                                    <label><input type="checkbox" name="service" value="바디워시">바디워시</label>
+                                    <label><input type="checkbox" name="service" value="비누" style="margin-left:104px">비누</label> <br>
+                                    <label><input type="checkbox" name="service" value="수건">수건</label>
+                                    <label><input type="checkbox" name="service" value="FreeWifi" style="margin-left:132px">Free wifi</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>포함사항</th>
                                 <td colspan="2">
-                                    <input type="checkbox" name="meal" value="조식">조식
-                                    <input type="checkbox" name="meal" value="중식" style="margin-left:132px">중식 <br>
-                                    <input type="checkbox" name="meal" value="석식">석식
-                                    <input type="checkbox" name="meal" value="없음" style="margin-left:132px">없음
+                                    <label><input type="checkbox" name="meal" value="조식">조식</label>
+                                    <label><input type="checkbox" name="meal" value="중식" style="margin-left:132px">중식 </label><br>
+                                    <label><input type="checkbox" name="meal" value="석식">석식</label>
+                                    <label><input type="checkbox" name="meal" value="없음" style="margin-left:132px">없음</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 숙소검색태그</th>
                                 <td colspan="2">
-                                    <input type="checkbox" name="roomsTag" value="신축건물">신축건물
-                                    <input type="checkbox" name="roomsTag" value="교통이 편리한" style="margin-left:100px">교통이 편리한 <br>
-                                    <input type="checkbox" name="roomsTag" value="관광명소가 가까운">관광명소가 가까운
-                                    <input type="checkbox" name="roomsTag" value="무인으로 운영되는" style="margin-left:28.5px">무인으로 운영되는<br>
-                                    <input type="checkbox" name="roomsTag" value="커플숙소">커플숙소
-                                    <input type="checkbox" name="roomsTag" value="비주얼이예쁜" style="margin-left:100px">비주얼이 예쁜<br>
-                                    <input type="checkbox" name="roomsTag" value="이색숙소">이색숙소
-                                    <input type="checkbox" name="roomsTag" value="조식이포함된" style="margin-left:100px">조식이 포함된<br>
+                                    <label><input type="checkbox" name="roomsTag" value="신축건물">신축건물</label>
+                                    <label><input type="checkbox" name="roomsTag" value="교통이 편리한" style="margin-left:104px">교통이 편리한</label> <br>
+                                    <label><input type="checkbox" name="roomsTag" value="관광명소가 가까운">관광명소가 가까운</label>
+                                    <label><input type="checkbox" name="roomsTag" value="무인으로 운영되는" style="margin-left:44.5px">무인으로 운영되는</label><br>
+                                    <label><input type="checkbox" name="roomsTag" value="커플숙소">커플숙소</label>
+                                    <label><input type="checkbox" name="roomsTag" value="비주얼이예쁜" style="margin-left:104px">비주얼이 예쁜</label><br>
+                                    <label><input type="checkbox" name="roomsTag" value="이색숙소">이색숙소</label>
+                                    <label><input type="checkbox" name="roomsTag" value="조식이포함된" style="margin-left:104px">조식이 포함된</label><br>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
@@ -214,7 +180,7 @@
                                 <th rowspan="6">*검토 후 제출</th>
                                 <td colspan="2">
                                 	<label style="font-size:15px; font-weight:400">
-	                                    <input type="checkbox" name="agree" value="" class="check">서비스 수수료에 동의합니다.
+	                                    <input type="checkbox" value="" class="check">서비스 수수료에 동의합니다.
 	                                    <p>
 	                                    	굿플레이스는 각 예약당 요금의 20%에 해당하는 수수료를 받습니다.<br>
 							                                    모든 결제는 굿플레이스를 통해 진행되며 고객센터를 통한 24시간 지원과 함께<br>
@@ -227,7 +193,7 @@
                             <tr class="pdBtom">
                                 <td colspan="2">
                                 <label style="font-size:15px; font-weight:400">
-                                    <input type="checkbox" name="agree" value="" class="check">굿플레이스 회원만을 위한 체험을 진행합니다.
+                                    <input type="checkbox"value="" class="check">굿플레이스 회원만을 위한 체험을 진행합니다.
                                     <p>
                                     	굿플레이스를 통해 체험예약을 받는 날에는 굿플레이스 게스트만 체험예약을 <br>
                                     	진행해야만 합니다. 다른 플랫폼을 통해 예약하고 결제한 게스트는 <br>
@@ -239,7 +205,7 @@
                             <tr class="pdBtom">
                                 <td colspan="2">
                                 	<label style="font-size:15px; font-weight:400">
-	                                    <input type="checkbox" name="agree" value="" class="check">
+	                                    <input type="checkbox"value="" class="check">
 							                                    굿플레이스의 안전관리 지침을 읽고 이해했으며 진행하는 체험이 지침을<br>&nbsp;&nbsp;&nbsp; 
 							                                    준수함을 확인합니다.
                                     </label>
@@ -248,7 +214,7 @@
                             <tr class="pdBtom">
                                 <td colspan="2">
                                 	<label style="font-size:15px; font-weight:400">
-                                    	<input type="checkbox" name="agree" value="" class="check">
+                                    	<input type="checkbox" value="" class="check">
 							                                    현지가이드라인 및 현지 안전 법규를 준수하며 이를 어길 시<br>&nbsp;&nbsp;&nbsp;  
 							                                    굿플레이스 플랫폼에서 삭제될 수 있음을 이해합니다.
 							        </label>
@@ -257,7 +223,7 @@
                             <tr class="pdBtom">
                                 <td colspan="2">
                                 	<label style="font-size:15px; font-weight:400">
-                                    	<input type="checkbox" name="agree" value="" class="check">굿플레이스 서비스와 게스트 환불 정책에 동의합니다.
+                                    	<input type="checkbox" value="" class="check">굿플레이스 서비스와 게스트 환불 정책에 동의합니다.
                                     </label>
                                 </td>
                             </tr>
@@ -270,34 +236,61 @@
                             </tr>
                     </table>
                     <div class="btnArea">
-                        <button class="cancel">취소하기</button>
-                        <button class="enroll">등록하기</button>
+                        <button class="cancel" type="reset">취소하기</button>
+                        <button class="enroll" type="submit" disabled>등록하기</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <!-- 유효성검사 -->
+    <script type="text/javascript">
+    	
+    </script>
+    <!-- input 추가 -->
+    <script>
+		var maxAppend = 0; 
+    	function addInput(){
+    		if (maxAppend >= 5) return; 
+    		$("#parah").append('<input type="file" name="file'+ maxAppend+'">');
+    		maxAppend++;
+    	}
+    	
+    	function deleteInput(){
+    		$("#parah input:last-child").remove();
+    		maxAppend--;
+    	}
+    	
+    </script>
     <!-- 동의 checkbox -->
     <script>
     	$(function(){
     		$("#allcheck").click(function(){
     			if($("#allcheck").is(":checked")){
     				$(".check").prop("checked", true);
+					$(".enroll").attr("disabled", false);
+					$(".enroll").attr("cursor", pointer);
     			}else{
     				$(".check").prop("checked", false);
+					$(".enroll").prop("disabled", true);
     			}
     		});
     
     		$(".check").click(function(){
-    			if($("input[name='agree']:checked").length == 5){
+    			if($("input[class='check']:checked").length == 5){
     				$("#allcheck").prop("checked", true);
+					$(".enroll").attr("disabled", false);
+					$(".enroll").attr("cursor", pointer);
     			}else{
     				$("#allcheck").prop("checked", false);
+					$(".enroll").prop("disabled", true);
     			}
     		});
     	});
     </script>
+    
+    
     
     <!-- toggle -->
 	<script>
@@ -397,8 +390,10 @@
 			$("#titleImg").click(function(){
 				$("#file1").click();
 			});
-		});
+		
 			
+		});
+		
 		function loadImg(inputFile, num) {
 			// inputFile : 현재 변화가 생긴 input type="file" 요소
 			// num : 몇번째 input 요소인지 확인 후 해당 영역에 미리보기 하려고 받는 숫자값
@@ -416,16 +411,14 @@
 				//파일 읽기가 완료 되었을때 실행할 메소드
 				// e : 현재 이벤트가 발생한 이벤트객체
 				reader.onload = function(e) {
-					switch (num) {
-					case 1: $("#titleImg").attr("src", e.target.result); break;
-					}
+					
+					$("#titleImg").attr("src", e.target.result); 
+					
 				};
-	
 			}
 	
 		}
 	</script>
-     </script>
      
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
