@@ -3,7 +3,9 @@ package com.kh.goodplace.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 public interface MemberService {
 	
@@ -68,6 +70,11 @@ public interface MemberService {
 	
 	//3. 파트너 정지해지
 	int updateBlockPartnerOff(int mno);
+	
+	// 4. 파트너 상세조회용 서비스-현영
+	Member aSelectPartnerMember(int ptno);
+	ArrayList<Room> aSelectPartnerRoom(int ptno);
+	ArrayList<Experience> aSelectPartnerExp(int ptno);
 	
 	
 	//-------------------------------------------------------------------
