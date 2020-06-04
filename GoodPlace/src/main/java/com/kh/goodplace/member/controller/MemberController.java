@@ -114,7 +114,7 @@ public class MemberController {
 			//mv.addObject("msg","로그인 실패!!");
 			//mv.setViewName("common/errorPage");
 			session.setAttribute("msg", "아이디 혹은 비밀번호가 틀립니다.");
-			mv.setViewName("redsirect:loginEmailForm.me");
+			mv.setViewName("redirect:loginEmailForm.me");
 			//mv.setViewName("user/member/loginEmail");
 		}
 		return mv;
