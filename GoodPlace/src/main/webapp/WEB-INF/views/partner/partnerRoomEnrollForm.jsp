@@ -36,7 +36,7 @@ button{cursor: pointer}
                 </span>
                 <br clear="both">
                 <div class="con2">
-                <form action="" id="enrollRoom" method="" enctype="">
+                <form action="insert.ro" id="enrollRoom" method="post" enctype="multipart/form-data">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
@@ -70,12 +70,8 @@ button{cursor: pointer}
                                 <td colspan="2">
                                 	<img id="titleImg" style="border:0.5px solid #bebebe; width: 200px; height:150px" >
                                	<div id="fileArea">
-									<input type="file" name="file1" id="file1" onchange="loadImg(this,1);"required>
+									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
 								</div>
-                               	<!--  	<div class="filebox" style="float:left;">
-										<label for="ex_file">업로드</label>
-										<input type="file" id="ex_file" >
-									</div>-->
                                 <p class="enrollInfo" style="text-align:left; margin-left:0;margin-top:0">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</p>
                                 </td>
                             </tr>
@@ -253,7 +249,7 @@ button{cursor: pointer}
 		var maxAppend = 0; 
     	function addInput(){
     		if (maxAppend >= 5) return; 
-    		$("#parah").append('<input type="file" name="file'+ maxAppend+'">');
+    		$("#parah").append('<input type="file" name="file">');
     		maxAppend++;
     	}
     	
@@ -388,7 +384,7 @@ button{cursor: pointer}
 			$("#fileArea").hide();
 			
 			$("#titleImg").click(function(){
-				$("#file1").click();
+				$("#thumb").click();
 			});
 		
 			

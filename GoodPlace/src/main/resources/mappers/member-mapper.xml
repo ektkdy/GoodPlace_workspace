@@ -16,7 +16,7 @@
 		<result column="ORIGIN_NAME" property="originName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
-	
+
 		<result column="PARTNER_INTRO" property="partnerIntro"/>
 		<result column="PA_ENROLL_DATE" property="paEnrollDate"/>
 		<result column="ACCOUNT_NAME" property="accountName"/>
@@ -25,12 +25,12 @@
 		<result column="PA_YELLOW_CARD" property="paYellowCard"/>
 		<result column="PARTNER_STATUS" property="partnerStatus"/>
 	</resultMap>
-	
+
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER
-		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,NULL,NULL)
+		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
 	</insert>
-	
+
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		select *
 		  from Member
@@ -38,55 +38,69 @@
 		 where email = #{email}
 		   and status = 'Y'
 	</select>
-	
+
 	<select id="emailCheck" parameterType="string" resultType="_int">
 		select count(*)
 		  from member
 		 where email=#{email}
 	</select>
-	
+
 	<update id="updatePwd" parameterType="Member">
 		update member
 		   set user_pwd = #{userPwd}
 		 where email = #{email}
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	<update id="updatePartnerNo" parameterType="Member">
+		update member
+		   set paNo = pano.currval,
+		   	   user_kind = 2,
+		   	   origin_name = #{originName},
+		   	   change_name = #{changeName}
+		 where usNo = #{usNo}
+	</update>
+	<insert id="insertPartner" parameterType="Member">
+		insert into partner
+		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'N')
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<update id="updateAccount" parameterType="Member">
 		update (select partner_intro, phone, account_name, account_num, pre_msg
 				from member
 				join partner using (usno))
-		   set partner_intro=#{partnerIntro}, phone=#{phone}, 
+		   set partner_intro=#{partnerIntro}, phone=#{phone},
 		   	   account_name=#{accountName}, account_num=#{accountNum},
 			   pre_msg=#{preMsg}
 		 where usno=#{usNo}
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

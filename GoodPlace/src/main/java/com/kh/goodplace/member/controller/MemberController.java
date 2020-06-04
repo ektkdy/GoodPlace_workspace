@@ -1,5 +1,11 @@
 package com.kh.goodplace.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.member.model.service.MemberService;
@@ -18,11 +26,11 @@ public class MemberController {
 
 	@Autowired // DI
 	private MemberService mService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	
-	
+
+
 	// 로그인 메인
 	@RequestMapping("loginForm.me")
 	public String loginForm() {
@@ -33,19 +41,19 @@ public class MemberController {
 	public String loginEmailForm() {
 		return "user/member/loginEmail";
 	}
-	
+
 	//비밀번호 찾기 페이지1
 	@RequestMapping("pwdFindForm1.me")
 	public String pwdFindForm1() {
 		return "user/member/pwdFind1";
 	}
-	
+
 	//비밀번호 찾기 페이지2 이메일 체크
 	@RequestMapping("emailCheck.me")
 	public String emailCheck(String email, HttpSession session, Model model) {
-		
+
 		int result = mService.emailCheck(email);
-		
+
 		if( result > 0 ) {
 			model.addAttribute("email", email);
 			return "user/member/pwdFind2";
@@ -54,50 +62,50 @@ public class MemberController {
 			return "redirect:pwdFindForm1.me";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="emailCheck2.me")
 	public String emailCheck2(String email) {
 		int count = mService.emailCheck(email);
-		
+
 		if(count > 0) {	// 중복 아이디 있음 --> 사용 불가
 			return "fail";
 		} else { // 중복된 아이디가 없음 --> 사용가능
 			return "success";
 		}
-		
+
 	}
-	
+
 	//비밀번호 찾기 페이지3 비밀번호 재설정 페이지
 	@RequestMapping("pwdResetForm.me")
 	public String pwdResetForm(String email, Model model) {
 		model.addAttribute("email", email);
 		return "user/member/pwdReset";
 	}
-	
+
 	//비밀번호 재설정
 	@RequestMapping("updatePwd.me")
 	public String updatePwd(Member m, HttpSession session) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
-		
+
 		m.setUserPwd(encPwd);
-		
+
 		int result = mService.updatePwd(m);
-		
+
 		session.setAttribute("msg", "비밀번호를 성공적으로 변경 하였습니다.");
 		return "redirect:/";
 	}
 
-	
+
 	// 로그인
 	@RequestMapping(value="login.me")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-		
+
 		Member loginUser = mService.loginMember(m);
-		
+
 		// loginUser의 userPwd : 암호문
 		// 		   m에 userPwd : 로그인 시 입력한 비밀번호(평문)
-		
+
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
 			//System.out.println(loginUser);
 			session.setAttribute("loginUser", loginUser);
@@ -107,17 +115,17 @@ public class MemberController {
 			//mv.setViewName("common/errorPage");
 			session.setAttribute("msg", "아이디 혹은 비밀번호가 틀립니다.");
 			mv.setViewName("redsirect:loginEmailForm.me");
-			//mv.setViewName("user/member/loginEmail");	
+			//mv.setViewName("user/member/loginEmail");
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
 	// 회원가입 메인
 	@RequestMapping("enrollForm.me")
 	public String enrollForm() {
@@ -134,17 +142,17 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		//System.out.println("암호화후: " + encPwd);
 		m.setUserPwd(encPwd);
-		
+
 		mv.addObject("m", m);
         mv.setViewName("user/member/enrollForm2");
-		
+
 		return mv;
 	}
-	
+
 	// 회원가입 성공
 	@RequestMapping("insertMember.me")
 	public ModelAndView insertMember(Member m, ModelAndView mv, HttpSession session) {
-		
+
 		int result = mService.insertMember(m);
 		if(result > 0) {	// 회원가입 성공
 			session.setAttribute("msg", "GoodPlace의 회원이 되신것을 축하합니다.");
@@ -153,73 +161,84 @@ public class MemberController {
 			mv.addObject("msg","회원가입 실패!!");
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
-	
-//	// "경우1" 글씨 몇 번 읽는지 테스트  -> 경우1: return 으로 "텍스트"(뷰명) 반환하는 경우
-    @RequestMapping("faq.bo")
-    public String faq() {
-    	
-    	System.out.println("경우1");
-    	
-    	return "main";
-    	
-    }
-    
-	/*
-	 * // "경우2" 글씨 몇 번 읽는지 테스트 -> 경우2: return 으로 "redirect:/" 반환하는 경우
-	 * 
-	 * @RequestMapping("faq.bo") public String faq() {
-	 * 
-	 * System.out.println("경우2");
-	 * 
-	 * return "redirect:/";
-	 * 
-	 * }
-	 */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+	// 파트너 등록 페이지 이동
+	@RequestMapping("enrollPartnerForm.me")
+	public String enrollPartnerForm() {
+		return "user/member/p_enrollFrom";
+	}
+
+	// 파트너 정보 insert
+	@RequestMapping("insertPartner.me")
+	public String insertPartner(Member m, HttpSession session, HttpServletRequest request,
+			 						@RequestParam(name="uploadFile", required=false) MultipartFile file) {
+		if(!file.getOriginalFilename().equals("")) {
+			// 서버에 파일 업로드  --> saveFile 메소드로 따로 빼서 정의할 것
+			String changeName = saveFile(file, request);
+
+			m.setOriginName(file.getOriginalFilename());
+			m.setChangeName(changeName);
+		}
+
+		int result = mService.insertPartner(m);
+
+		session.setAttribute("loginUser", mService.loginMember(m));
+		session.setAttribute("msg", "GoodPlace의 파트너 회원이 되신것을 축하합니다!");
+		return "redirect:/";
+	}
+
+	// 전달받은 파일을 서버에 업로드 시키는 메소드
+	   public String saveFile(MultipartFile file, HttpServletRequest request) {
+
+	      // 파일을 업로드 시킬 폴더 경로 (String savePath)
+	      String resources = request.getSession().getServletContext().getRealPath("resources");
+	      String savePath = resources + "\\uploadFiles\\userProfile\\";
+
+	      // 원본명 (aaa.jpg)
+	      String originName = file.getOriginalFilename();
+
+	      // 수정명 (20200522202011.jpg)
+	      // 년월일시분초 (String currentTime)
+	      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 20200522202011
+
+	      // 확장자(String ext)
+	      String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+
+	      String changeName = currentTime + ext;
+
+
+	      try {
+	         file.transferTo(new File(savePath + changeName));
+	      } catch (IllegalStateException | IOException e) {
+	         e.printStackTrace();
+	      }
+
+	      return changeName;
+
+	   }
+
+
+
+
+
+
+
+
     // ------------------ 파트너 계정관리 컨트롤러 --------------------
-    
+
     @RequestMapping("partnerMain.me")
     public String partnerMain() {
     	return "common/partnerMenubar";
     }
-    
+
     @RequestMapping("pAccount.me")
     public String pAccount() {
     	return "partner/partnerAccount";
     }
-    
+
     @RequestMapping("updateAccount.me")
     public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
     	int result1  = mService.updateMemberAccount(m);
@@ -236,15 +255,15 @@ public class MemberController {
 		}
 		return mv;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 }

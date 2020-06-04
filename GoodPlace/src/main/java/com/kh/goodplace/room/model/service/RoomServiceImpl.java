@@ -32,8 +32,7 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public int insertRoom(Room r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rDao.insertRoom(sqlSession, r);
 	}
 
 	@Override
@@ -82,14 +81,21 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public int insertPower(Room r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rDao.insertPower(sqlSession, r);
 	}
 
 	@Override
 	public int updatePower(Room r) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return rDao.updatePower(sqlSession, r);
+		
+	}
+	
+	@Override
+	public Room selectPower(int pno) {
+		
+		return rDao.selectPower(sqlSession, pno);
+		
 	}
 
 	@Override

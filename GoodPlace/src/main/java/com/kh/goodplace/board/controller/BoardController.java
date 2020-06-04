@@ -40,8 +40,12 @@ public class BoardController {
         model.addAttribute("pi", pi);
         
         return "admin/a_faqList";
-        
-    	
+    }
+    
+    // 사용자 페이지 이벤트리스트 이동
+    @RequestMapping("eventForm.bo")
+    public String eventForm() {
+    	return "user/board/eventList";
     }
     
     @RequestMapping("faqEnrollForm.bo")

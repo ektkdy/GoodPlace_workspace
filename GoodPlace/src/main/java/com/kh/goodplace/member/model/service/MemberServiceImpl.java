@@ -14,10 +14,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Autowired
 	private MemberDao mDao;
-	
+
 	/**
 	 * 1. 로그인 서비스
 	 */
@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);
 	}
-	
+
 
 	@Override
 	public int updateMember(Member m) {
@@ -56,9 +56,17 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updatePwd(sqlSession, m);
 	}
 
+	/**
+	 * 7.파트너 정보 등록 서비스
+	 */
+	@Override
+	public int insertPartner(Member m) {
+		return mDao.insertPartner(sqlSession, m);
+	}
+
 	//-------------------------------------------------------------------
-	
-	
+
+
 	// 1. 파트너 수입 목록 조회용 서비스
 	@Override
 	public ArrayList<Member> selectIncomeList() {
@@ -71,8 +79,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updateAccount(sqlSession, m);
 	}
 
+
+
 	//-------------------------------------------------------------------
 
-	
+
 
 }
