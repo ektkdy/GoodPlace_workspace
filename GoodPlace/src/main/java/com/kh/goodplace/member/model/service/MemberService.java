@@ -30,7 +30,9 @@ public interface MemberService {
 	ArrayList<Member> selectIncomeList();
 	
 	//2. 파트너 계정정보 수정용 서비스
-	int updateAccount(Member m);
+	int updateMemberAccount(Member m);
+	int updatePartnerAccount(Member m);
+
 	
 	//-------------------------------------------------------------------
 	

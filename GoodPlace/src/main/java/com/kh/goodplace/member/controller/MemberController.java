@@ -222,7 +222,10 @@ public class MemberController {
     
     @RequestMapping("updateAccount.me")
     public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
-    	int result  = mService.updateAccount(m);
+    	int result1  = mService.updateMemberAccount(m);
+    	int result2 = mService.updatePartnerAccount(m);
+    	
+    	int result = result1*result2;
 	
 		if(result>0) {
 			session.setAttribute("msg", "계정정보 업데이트 성공");
