@@ -64,8 +64,8 @@
 
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">파워등록 관리</button>
-                <button class="off gt_tab">파워등록 목록</button>
+                <button class="on lt_tab" onclick="location.href='aPowerList.po'">파워등록 관리</button>
+                <button class="off gt_tab" onclick="location.href='powerOkayList.po?currentPage=1'">파워등록 목록</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">파워등록관리</span></a>

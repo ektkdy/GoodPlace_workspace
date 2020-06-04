@@ -78,6 +78,21 @@ public class RoomDao {
 	}
 	
 	
+	public int aSelectPowerListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("roomMapper.aSelectPowerListCount");
+	}
+	
+	
+	public ArrayList<Room> selectPowerRoomList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset =(pi.getCurrentPage()-1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("roomMapper.selectPowerRoomList", null, rowBounds);
+		
+	}
+	
 	// --------- 파워관리 끝 -----------------
 	
 	

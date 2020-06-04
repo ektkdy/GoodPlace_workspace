@@ -189,6 +189,21 @@ public class RoomController {
     	
     }
     
+    @RequestMapping("powerOkayList.po")
+    public String selectPowerRoomList(int currentPage, Model model)
+    {
+     
+        int listCount = rService.aSelectPowerListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+    	
+        ArrayList<Room> list = rService.selectPowerRoomList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_powerList";
+    }
+    
     
 	// ------------- Power 관리 끝 --------------------------------------------------
 	

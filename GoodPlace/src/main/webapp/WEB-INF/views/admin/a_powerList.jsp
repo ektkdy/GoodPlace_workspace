@@ -64,8 +64,8 @@
 
         <div id="contents" style="width:980px">
             <div id="tab">
-                <button class="off lt_tab">파워등록 관리</button>
-                <button class="on gt_tab">파워등록 목록</button>
+                <button class="off lt_tab" onclick="location.href='aPowerList.po'">파워등록 관리</button>
+                <button class="on gt_tab" onclick="location.href='powerOkayList.po?currentPage=1'">파워등록 목록</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">파워등록목록</span></a>
@@ -93,11 +93,10 @@
                                 <td width="150">사용일수</td>
                                 <td width="200">사용기간</td>
                                 <td width="150">진열상태</td>
-                                <td width="150">총조회수</td>
-
                             </tr>
                         </thead>
                         <tbody>
+                        <!-- 
                             <tr>
                                 <td>1</td>
                                 <td>PLATINUM</td>
@@ -107,20 +106,59 @@
                                 <td>20.05.18~20.09.18</td>
                                 <td>Y</td>
                                 <td>0</td>
-                            </tr>
-
+                            </tr>  -->
+                            
+                            <c:forEach items="${ list }" var="r">
+	                            <tr>
+	                                <td>${ r.poNo }</td>
+	                                <td>${ r.powerKind }</td>
+	                                <td>${ r.roomsTitle }</td>
+	                                <td>${ r.email } </td>
+	                                <td>${ r.period }</td>
+	                                <td>${ r.powerStart }~${ r.powerEnd }</td>
+		                             <c:choose> 
+			                             <c:when test="${ r.opNo eq 0 }">
+			                                <td>N</td>
+			                             </c:when>
+			                             <c:otherwise>
+			                                <td>Y</td>
+			                             </c:otherwise>
+	                             	</c:choose>
+	                            </tr>
+							</c:forEach>
                         </tbody>
                     </table>
                     <table>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a>
+      			                <c:choose>
+				                	<c:when test="${ pi.currentPage eq 1 }">
+					                    <a href="#">&lt;</a>
+					                </c:when>
+					                <c:otherwise>
+				                    	<a href="powerOkayList.po?currentPage=${ pi.currentPage -1 }">&lt;</a>
+				                    </c:otherwise>
+			                    </c:choose>
+			                    
+						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			                    	<c:choose>
+			                    		<c:when test="${ p eq pi.currentPage }">
+				                    		<a href="#">${p}</a>
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<a class="page-link" href="powerOkayList.po?currentPage=${ p }">${p}</a>
+				                    	</c:otherwise>
+				                    </c:choose>
+			                    </c:forEach>
+			                    
+						        <c:choose>
+			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					                    <a>&gt;</a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="powerOkayList.po?currentPage=${ pi.currentPage +1 }">&gt;</a>
+					                </c:otherwise>
+			                    </c:choose>
                             </div>
                         </th>
 

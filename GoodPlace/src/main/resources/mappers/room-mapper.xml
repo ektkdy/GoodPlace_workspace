@@ -47,6 +47,12 @@
 		<result column="POWER_KIND" property="powerKind"/>
 		<result column="PERIOD" property="period"/>
 		<result column="PRICE" property="powerPrice"/>
+		
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="EMAIL" property="email"/>
+		<result column="POWER_START" property="powerStart"/>
+		<result column="POWER_END" property="powerEnd"/>
+		<result column="PONO" property="opNo"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -103,6 +109,25 @@
 		  from power
 		 where pono= #{pno}
 	      
+	</select>
+	
+	<select id="aSelectPowerListCount" resultType="_int">
+		select count(*)
+		  from POWER P
+		  JOIN ROOMS R ON r.pono = p.pono
+		  JOIN MEMBER M ON r.usno = m.usno
+		 WHERE R.PONO > 0
+	</select>
+	
+	<select id="selectPowerRoomList" resultMap="powerResultSet">
+	
+		select P.PONO, P.POWER_KIND, R.ROOMS_TITLE, M.EMAIL, P.PERIOD, R.POWER_START, R.POWER_END, R.PONO
+		  FROM POWER P
+		  JOIN ROOMS R ON r.pono = p.pono
+		  JOIN MEMBER M ON r.usno = m.usno
+		 WHERE R.PONO > 0
+		
+	
 	</select>
 
 </mapper>

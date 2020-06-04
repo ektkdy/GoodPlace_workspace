@@ -105,11 +105,16 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public ArrayList<Room> selectPowerRoomList() {
-		// TODO Auto-generated method stub
-		return null;
+	public int aSelectPowerListCount() {
+		return rDao.aSelectPowerListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Room> selectPowerRoomList(PageInfo pi) {
+		return rDao.selectPowerRoomList(sqlSession, pi);
 	}
 	// --------- 파워관리 끝 --------------------------
+
 	
 	
 	

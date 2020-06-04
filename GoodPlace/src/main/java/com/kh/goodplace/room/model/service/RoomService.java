@@ -135,8 +135,10 @@ public interface RoomService {
 	// 4. 게시글 삭제용 서비스-현영
 	int deletePower(int pno);
 	
-	// 5. 파워등록 된 리스트 조회용 서비스
-	ArrayList<Room> selectPowerRoomList();
+	//5_1. 숙소 총 갯수 조회용 서비스
+	int aSelectPowerListCount();
+	//5_2. 파워등록 된 리스트 조회용 서비스
+	ArrayList<Room> selectPowerRoomList(PageInfo pi);
 	
 	
 	
