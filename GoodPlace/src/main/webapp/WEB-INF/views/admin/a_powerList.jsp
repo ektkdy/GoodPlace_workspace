@@ -117,7 +117,7 @@
 	                                <td>${ r.period }</td>
 	                                <td>${ r.powerStart }~${ r.powerEnd }</td>
 		                             <c:choose> 
-			                             <c:when test="${ r.opNo eq 0 }">
+			                             <c:when test="${ r.poNo1 eq 0 }">
 			                                <td>N</td>
 			                             </c:when>
 			                             <c:otherwise>
