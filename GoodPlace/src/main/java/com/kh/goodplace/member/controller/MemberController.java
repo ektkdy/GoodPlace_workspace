@@ -3,6 +3,7 @@ package com.kh.goodplace.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
 
@@ -273,6 +276,114 @@ public class MemberController {
 
 
 
+    
+    
+    
+    
+    // ------------------ 관리자 컨트롤러 시작 --------------------
+    
+    /*회원용*/
+    @RequestMapping("aMemberList.me")
+    public String aSelectMemberList(int currentPage, Model model)
+    {
+        int listCount = mService.aSelectMemberListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Member> list = mService.aSelectMemberList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_member";
+    }
+    
+    @RequestMapping("blockOn.me")
+    public ModelAndView updateBlockMemberOn(int mno, HttpSession session, ModelAndView mv) {
+    	
+    	int result  = mService.updateBlockMemberOn(mno);
+    	
+		if(result>0) {
+			session.setAttribute("msg", "해당 회원을 정지했습니다");
+			mv.setViewName("redirect:aMemberList.me?currentPage=1");
+		} else {
+			session.setAttribute("msg", "정지 실패!!");
+			mv.setViewName("redirect:aMemberList.me?currentPage=1");
+		}
+		return mv;
+    }
+    
+    @RequestMapping("blockOff.me")
+    public ModelAndView updateBlockMemberOff(int mno, HttpSession session, ModelAndView mv) {
+    	
+    	int result  = mService.updateBlockMemberOff(mno);
+    	
+		if(result>0) {
+			session.setAttribute("msg", "해당 회원을 정지해지했습니다");
+			mv.setViewName("redirect:aMemberList.me?currentPage=1");
+		} else {
+			session.setAttribute("msg", "정지 실패!!");
+			mv.setViewName("redirect:aMemberList.me?currentPage=1");
+		}
+		return mv;
+    }
+    
+    /*파트너용*/
+    @RequestMapping("aPartnerList.me")
+    public String selectPartnerList(int currentPage, Model model)
+    {
+        int listCount = mService.aSelectPartnerListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Member> list = mService.aSelectPartnerList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_partner";
+    }
+    
+    
+    @RequestMapping("partnerblockOn.me")
+    public ModelAndView updateBlockPartnerOn(int ptno, HttpSession session, ModelAndView mv) {
+    	
+    	int result  = mService.updateBlockPartnerOn(ptno);
+    	
+		if(result>0) {
+			session.setAttribute("msg", "해당 파트너를 정지했습니다");
+			mv.setViewName("redirect:aPartnerList.me?currentPage=1");
+		} else {
+			session.setAttribute("msg", "정지 실패!!");
+			mv.setViewName("redirect:aPartnerList.me?currentPage=1");
+		}
+		return mv;
+    }
+    
+    @RequestMapping("partnerblockOff.me")
+    public ModelAndView updateBlockPartnerOff(int ptno, HttpSession session, ModelAndView mv) {
+    	//System.out.println(ptno);
+    	int result  = mService.updateBlockPartnerOff(ptno);
+    	
+		if(result>0) {
+			session.setAttribute("msg", "해당 파트너를 정지해지했습니다");
+			mv.setViewName("redirect:aPartnerList.me?currentPage=1");
+		} else {
+			session.setAttribute("msg", "정지 실패!!");
+			mv.setViewName("redirect:aPartnerList.me?currentPage=1");
+		}
+		return mv;
+    }
+    
+    
+    
+    
+    
+    
+    // ------------------ 관리자 컨트롤러 끝 --------------------
+    
+    
+    
+    
+    
 
 
 

@@ -103,10 +103,57 @@
 
 
 
+	<!-- 관리자 -->
+	<select id="aSelectMemberListCount" resultType="_int">
+		select count(*)
+		  from member
+		 where user_kind=1
+	</select>
+	
+	<select id="aSelectMemberList" resultMap="memberResultSet">
+		select *
+		  from member
+		 where user_kind=1
+		 order by usno asc
+	</select>
+	
+	<update id="updateBlockMemberOn" parameterType="_int">
+		update member
+		   set status = 'N'
+		 where usNo = #{mno}
+	</update>
+	
+	<update id="updateBlockMemberOff" parameterType="_int">
+		update member
+		   set status = 'Y'
+		 where usNo = #{mno}
+	</update>
 
 
+	<select id="aSelectPartnerListCount" resultType="_int">
+         select count(*)
+         from member
+         where user_kind=2
+	</select>
 
+	<select id="aSelectPartnerList" resultMap="memberResultSet">
+         select DISTINCT USNO, PANO, EMAIL, USER_NAME, PHONE, PA_ENROLL_DATE, PARTNER_STATUS
+         from member
+         join partner using(pano)
+         where user_kind=2
+	</select>
 
+	<update id="updateBlockPartnerOn" parameterType="_int">
+		update partner
+		   set PARTNER_STATUS = 'N'
+		 where paNo = #{ptno}
+	</update>
+	
+	<update id="updateBlockPartnerOff" parameterType="_int">
+		update partner
+		   set PARTNER_STATUS = 'Y'
+		 where paNo = #{ptno}
+	</update>
 
 
 </mapper>
