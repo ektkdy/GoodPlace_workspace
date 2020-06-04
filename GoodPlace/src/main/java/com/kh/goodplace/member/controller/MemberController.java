@@ -373,7 +373,32 @@ public class MemberController {
 		return mv;
     }
     
-    
+    @RequestMapping("aPartnerDetail.me")
+    public ModelAndView aSelectPartner(int ptno, ModelAndView mv)
+    {
+        
+    	Member m = mService.aSelectPartnerMember(ptno);
+    	ArrayList listR = mService.aSelectPartnerRoom(ptno);
+    	ArrayList listE = mService.aSelectPartnerExp(ptno);
+    	
+    	
+    	
+        if(m != null)
+        { // 파트너 상세조회 성공
+            
+            mv.addObject("m", m);
+            mv.addObject("listR", listR);
+            mv.addObject("listE", listE);
+            mv.setViewName("admin/a_partnerDetail");
+        }
+        else
+        { // 파트너 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    } 
     
     
     
