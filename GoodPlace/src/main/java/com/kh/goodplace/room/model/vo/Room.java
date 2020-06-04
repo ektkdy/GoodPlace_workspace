@@ -52,7 +52,7 @@ public class Room {
 	private int status;			// 운영중(1),승인대기(2),승인거절(3),휴면(4),노출안됨(5)
 	
 	/* 파워 등록 쪽 */
-	private int opNo;			// 파워등록유무 (기본0)
+	private int poNo1;			// 파워등록유무 (기본0)
 	private Date powerStart;	// 파워시작일
 	private Date powerEnd;		// 파워종료일
 	private int rpNo;			// 숙소결제번호

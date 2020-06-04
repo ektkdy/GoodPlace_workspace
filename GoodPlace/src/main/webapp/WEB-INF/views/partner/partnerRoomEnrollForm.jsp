@@ -37,6 +37,7 @@ button{cursor: pointer}
                 <br clear="both">
                 <div class="con2">
                 <form action="insert.ro" id="enrollRoom" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="userNo" value="1">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
@@ -92,12 +93,13 @@ button{cursor: pointer}
                             <tr>
                                 <th rowspan="2">* 객실정보</th>
                                 <td colspan="2">
-                                	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" value="1"class="putNum mgRight"  name="bedCount">
-                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum" name="bathCount"><br>
-                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight" name="restroomCount">
-                                	1박 금액   &nbsp;: <input type="number" min="1" value="1" class="putNum" name="price"><br>
-                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight" name="minPeople">
-                                	최대 인원 : <input type="number" min="1" value="1" class="putNum" name="maxPeople">
+                                	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" value="1"class="putNum mgRight" style="margin-bottom:10px" name="bedCount">
+                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum" name="bathCount" style="margin-bottom:10px" ><br>
+                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight" name="restroomCount" style="margin-bottom:10px" >
+                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight" name="minPeople" style="margin-bottom:10px" ><br>
+                                	최대 인원 : <input type="number" min="1" value="1" class="putNum" name="maxPeople" style="margin-bottom:10px" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	방  &nbsp;개  &nbsp;수&nbsp;: <input type="number" min="1" value="1" class="putNum" name="roomCount" style="margin-bottom:10px" ><br>
+                                	1박 금액   &nbsp;: <input type="number" min="10000" value="10000" step="1000" class="putNum" name="price" style="width:100px"><br>
                                 </td>
                             </tr>
                             <tr class="pdBtom">

@@ -44,7 +44,7 @@ public class RoomController {
 	public String insertRoom(Room r, @RequestParam(name="thumb", required=false) MultipartFile file,
 							 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 							 HttpServletRequest request) {
-		System.out.println(r);
+		
 			//현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 r 주섬주섬 담기
 			if(!file.getOriginalFilename().equals("")) {//넘어온 파일명이  빈 문자열이 아닐경우
 			
@@ -53,11 +53,16 @@ public class RoomController {
 				
 				r.setOriginName(file.getOriginalFilename());
 				r.setChangeName(changeName);
+				r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 			
 			}
-			return "";
+			System.out.println(r);
 					
-//			int result = rService.insertRoom(r);
+			int result = rService.insertRoom(r);
+			
+			System.out.println(result);
+			
+			return "";
 //			
 //			if(result > 0) { //숙소 등록 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지 보여지도록 해야함
 //				

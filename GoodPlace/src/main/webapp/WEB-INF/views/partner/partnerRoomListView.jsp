@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerRoomList.css" />
+<style>
+button:hover{cursor:pointer}
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -24,7 +27,7 @@
             <br clear="both">
             <div class="con" style="color:#000">
                 <span id="page_title">
-                    <img src="../image/집로고.jpg" style="vertical-align: middle;">
+                    <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;">
                     <p class="title_tt">숙소관리</p>
                 </span>
                 <span class="up_btn_space" style="margin-top:8px">
