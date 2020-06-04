@@ -1,8 +1,12 @@
 package com.kh.goodplace.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.vo.Member;
 
 @Repository("mDao")
@@ -35,4 +39,59 @@ public class MemberDao {
 	public int updateAccount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateAccount", m);
 	}
+	
+	
+	
+	
+	//-------------------------------관리자------------------------------------
+	// 1. 회원 전체 목록 조회용 서비스 - 관리자
+	/*회원용*/
+	public int aSelectMemberListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.aSelectMemberListCount");
+		
+	}
+	
+	public ArrayList<Member> aSelectMemberList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.aSelectMemberList", null, rowBounds);
+		
+	}
+	
+	public int updateBlockMemberOn(SqlSessionTemplate sqlSession, int mno) {
+		return sqlSession.update("memberMapper.updateBlockMemberOn", mno);
+	}
+	
+	public int updateBlockMemberOff(SqlSessionTemplate sqlSession, int mno) {
+		return sqlSession.update("memberMapper.updateBlockMemberOff", mno);
+	}
+	/*파트너용*/
+	public int aSelectPartnerListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.aSelectPartnerListCount");
+		
+	}
+	
+	public ArrayList<Member> aSelectPartnerList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.aSelectPartnerList", null, rowBounds);
+		
+	}
+	
+	public int updateBlockPartnerOn(SqlSessionTemplate sqlSession, int ptno) {
+		return sqlSession.update("memberMapper.updateBlockPartnerOn", ptno);
+	}
+	
+	public int updateBlockPartnerOff(SqlSessionTemplate sqlSession, int ptno) {
+		return sqlSession.update("memberMapper.updateBlockPartnerOff", ptno);
+	}
+	
+	
+	//-------------------------------------------------------------------
 }

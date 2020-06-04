@@ -2,6 +2,7 @@ package com.kh.goodplace.member.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.vo.Member;
 
 public interface MemberService {
@@ -39,7 +40,36 @@ public interface MemberService {
 	
 	
 	
+	/*관리자*/
+	//-------------------------------------------------------------------
+	/*회원용*/
+	//1_1. 게시판 총갯수 조회용 서비스
+	int aSelectMemberListCount();
 	
+	//1_2. 전체 회원 조회용 서비스
+	ArrayList<Member> aSelectMemberList(PageInfo pi);
+	
+	//2. 회원 정지
+	int updateBlockMemberOn(int mno);
+	
+	//3. 회원 정지해지
+	int updateBlockMemberOff(int mno);
+	
+	/*파트너용*/
+	//1_1. 게시판 총갯수 조회용 서비스
+	int aSelectPartnerListCount();
+	
+	//1_2. 전체 파트너 조회용 서비스
+	ArrayList<Member> aSelectPartnerList(PageInfo pi);
+	
+	//2. 파트너 정지
+	int updateBlockPartnerOn(int mno);
+	
+	//3. 파트너 정지해지
+	int updateBlockPartnerOff(int mno);
+	
+	
+	//-------------------------------------------------------------------
 	
 	
 	

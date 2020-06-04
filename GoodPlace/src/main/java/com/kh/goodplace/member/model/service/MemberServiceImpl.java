@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.dao.MemberDao;
 import com.kh.goodplace.member.model.vo.Member;
 
@@ -81,8 +82,65 @@ public class MemberServiceImpl implements MemberService {
 
 
 
+
+
 	//-------------------------------------------------------------------
 
 
+	//-------------------------------------------------------------------
+	// 1. 회원 전체 목록 조회용 서비스 - 관리자
+	/*회원용*/
+	@Override
+	public int aSelectMemberListCount() {
+		
+		return mDao.aSelectMemberListCount(sqlSession);
+		
+	}
+	
+	@Override
+	public ArrayList<Member> aSelectMemberList(PageInfo pi) {
+		
+		return mDao.aSelectMemberList(sqlSession, pi);
+		
+	}
+
+	@Override
+	public int updateBlockMemberOn(int mno) {
+		
+		return mDao.updateBlockMemberOn(sqlSession, mno);
+		
+	}
+
+	@Override
+	public int updateBlockMemberOff(int mno) {
+		
+		return mDao.updateBlockMemberOff(sqlSession, mno);
+		
+	}
+
+	/*파트너용*/
+	@Override
+	public int aSelectPartnerListCount() {
+		return mDao.aSelectPartnerListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Member> aSelectPartnerList(PageInfo pi) {
+		
+		return mDao.aSelectPartnerList(sqlSession, pi);
+		
+	}
+	
+	@Override
+	public int updateBlockPartnerOn(int ptno) {
+		return mDao.updateBlockPartnerOn(sqlSession, ptno);
+	}
+	
+	@Override
+	public int updateBlockPartnerOff(int ptno) {
+		return mDao.updateBlockPartnerOff(sqlSession, ptno);
+	}
+	
+	//-------------------------------------------------------------------
 
 }

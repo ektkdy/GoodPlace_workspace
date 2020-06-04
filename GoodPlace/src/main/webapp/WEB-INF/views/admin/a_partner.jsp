@@ -70,79 +70,139 @@
                 </span>
                 
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <td width="100"><input type="checkbox"></td>
-                                <td width="150">파트너번호</td>
-                                <td width="200">이름</td>
-                                <td width="200">아이디</td>
-                                <td width="200">등록일</td>
-                                <td width="300">휴대전화</td>
-                                <td width="150">파트너타입</td>
-                                <td width="150">숙소</td>
-                                <td width="150">체험</td>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>2</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>3</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table>
-                        <th>
-                            <br>
-                            <button class="blue_btn">정지</button>
-                            <button class="blue_btn">정지해지</button>
-                        </th>
-                        <th>
-                            <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a>
-                            </div>
-                        </th>
-
-                    </table>
-
+	                <form id="postForm" method="post" action="">
+	                    <table id="partnerList" class="common_tb" cellpadding="0" cellspacing="0">
+	                        <thead>
+	                            <tr>
+	                                <td width="100"><input type="checkbox"></td>
+	                                <td width="150">파트너번호</td>
+	                                <td width="200">이름</td>
+	                                <td width="200">아이디</td>
+	                                <td width="200">등록일</td>
+	                                <td width="300">휴대전화</td>
+	                                <td width="150">파트너타입</td>
+	                                <td width="150">숙소</td>
+	                                <td width="150">체험</td>
+	
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        <!-- 
+	                            <tr>
+	                                <td><input type="checkbox"></td>
+	                                <td>1</td>
+	                                <td>홍길동</td>
+	                                <td>test0000</td>
+	                                <td>20.05.18</td>
+	                                <td>010-9999-9999</td>
+	                                <td>Y</td>
+	                                <td>0</td>
+	                                <td>0</td>
+	                            </tr>
+	                            <tr>
+	                                <td><input type="checkbox"></td>
+	                                <td>2</td>
+	                                <td>홍길동</td>
+	                                <td>test0000</td>
+	                                <td>20.05.18</td>
+	                                <td>010-9999-9999</td>
+	                                <td>Y</td>
+	                                <td>0</td>
+	                                <td>0</td>
+	
+	                            </tr> -->
+	                            <c:forEach items="${ list }" var="m">
+		                            <tr>
+		                                <td onclick="event.cancelBubble=true"><input type="checkbox" name="ptno" value="${ m.paNo }"></td>
+		                                <td>${ m.paNo }</td>
+		                                <td>${ m.userName }</td>
+		                                <td>${ m.email }</td>
+		                                <td>${ m.paEnrollDate }</td>
+		                                <td>${ m.phone }</td>
+		                                <td>${ m.partnerStatus }</td>
+		                                <td>0</td>
+		                                <td>0</td>
+		                            </tr>
+	                            </c:forEach>
+	                        </tbody>
+	                    </table>
+	                    
+		                <script>
+			            	$(function(){
+			            		
+	 	            		    $("#partnerList tbody tr").click(function(){
+			            			location.href="aPartnerDetail.me?ptno=" + $(this).children().eq(1).text();
+			            		});  
+	 	            		    
+			            	});
+			            </script>
+	                    
+	                    <table>
+	                        <th>
+	                            <br>
+	                            <button class="blue_btn" onclick="postFormSubmit(1)">정지</button>
+	                            <button class="blue_btn" onclick="postFormSubmit(2)">정지해지</button>
+	                        </th>
+	                        <th>
+	                            <div id="pagingArea" style="margin-top: 22px;">
+				                    <c:choose>
+					                	<c:when test="${ pi.currentPage eq 1 }">
+						                    <a href="#">&lt;</a>
+						                </c:when>
+						                <c:otherwise>
+					                    	<a href="aPartnerList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    </c:otherwise>
+				                    </c:choose>
+				                    
+							        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				                    	<c:choose>
+				                    		<c:when test="${ p eq pi.currentPage }">
+					                    		<a href="#">${p}</a>
+					                    	</c:when>
+					                    	<c:otherwise>
+					                    		<a class="page-link" href="aPartnerList.me?currentPage=${ p }">${p}</a>
+					                    	</c:otherwise>
+					                    </c:choose>
+				                    </c:forEach>
+				                    
+							        <c:choose>
+				                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+						                    <a>&gt;</a>
+						                </c:when>
+						                <c:otherwise>
+						                    <a href="aPartnerList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
+						                </c:otherwise>
+				                    </c:choose>
+	                            </div>
+	                        </th>
+	
+	                    </table>
+					</form>
+					
+					
+					
+						    			
+		    		<script>
+	                  function postFormSubmit(num)
+	                  {
+	                     if(num == 1)
+	                     {
+	                    	confirm("정지하시겠습니까?");
+	                        $("#postForm").attr("action", "partnerblockOn.me");
+	                     }
+	                     else
+	                     {
+	                    	confirm("정지해제하시겠습니까?");
+	                        $("#postForm").attr("action", "partnerblockOff.me");
+	                     }
+	                     
+	                     $("#postForm").submit();
+	                  }
+	               </script>
+					
+					
+					
+					
                 </div>
             </div>
         </div>
