@@ -75,72 +75,126 @@
                     <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <td width="100"><input type="checkbox"></td>
-                                <td width="150">회원번호</td>
-                                <td width="200">이름</td>
-                                <td width="200">아이디</td>
-                                <td width="200">등록일</td>
-                                <td width="300">휴대전화</td>
-                                <td width="150">회원타입</td>
-                                <td width="150">경고횟수</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>2</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>3</td>
-                                <td>홍길동</td>
-                                <td>test0000</td>
-                                <td>20.05.18</td>
-                                <td>010-9999-9999</td>
-                                <td>Y</td>
-                                <td>0</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table>
-                        <th>
-                            <br>
-                            <button class="blue_btn">정지</button>
-                            <button class="blue_btn">정지해지</button>
-                        </th>
-                        <th>
-                            <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a>
-                            </div>
-                        </th>
-    
-                    </table>
-    
+	                <form id="postForm" method="post" action="">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0">
+	                        <thead>
+	                            <tr>
+	                                <td width="100"><input type="checkbox"></td>
+	                                <td width="150">회원번호</td>
+	                                <td width="200">이름</td>
+	                                <td width="200">아이디</td>
+	                                <td width="200">등록일</td>
+	                                <td width="300">휴대전화</td>
+	                                <td width="150">회원타입</td>
+	                                <td width="150">경고횟수</td>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        <!-- 
+	                            <tr>
+	                                <td><input type="checkbox"></td>
+	                                <td>1</td>
+	                                <td>홍길동</td>
+	                                <td>test0000</td>
+	                                <td>20.05.18</td>
+	                                <td>010-9999-9999</td>
+	                                <td>Y</td>
+	                                <td>0</td>
+	                            </tr>
+	                            <tr>
+	                                <td><input type="checkbox"></td>
+	                                <td>2</td>
+	                                <td>홍길동</td>
+	                                <td>test0000</td>
+	                                <td>20.05.18</td>
+	                                <td>010-9999-9999</td>
+	                                <td>Y</td>
+	                                <td>0</td>
+	                            </tr> -->
+	                            <c:forEach items="${ list }" var="m">
+		                            <tr>
+		                                <td><input type="checkbox" name="mno" value="${ m.usNo }"></td>
+		                                <td>${ m.usNo }</td>
+		                                <td>${ m.userName }</td>
+		                                <td>${ m.email }</td>
+		                                <td>${ m.enrollDate }</td>
+		                                <td>${ m.phone }</td>
+		                                <td>${ m.status }</td>
+		                                <c:choose>
+			                                <c:when test="${ m.yellowCard >= 3}">
+			                                	<input type="hidden" id="blockOnsubmit" name="mno" value="${ m.usNo }">
+				                                <td>${ m.yellowCard }</td>
+			                                </c:when>
+			                                <c:otherwise>
+				                                <td>${ m.yellowCard }</td>
+			                                </c:otherwise>
+		                                </c:choose>
+		                            </tr>
+	                            </c:forEach>
+	                            
+	                        </tbody>
+	                    </table>
+	               
+	                    <table>
+	                        <th>
+	                            <br>
+	                            <button class="blue_btn" onclick="postFormSubmit(1)">정지</button>
+	                            <button class="blue_btn" onclick="postFormSubmit(2)">정지해지</button>
+	                        </th>
+	                        <th>
+	                            <div id="pagingArea" style="margin-top: 22px;">
+				                    <c:choose>
+					                	<c:when test="${ pi.currentPage eq 1 }">
+						                    <a href="#">&lt;</a>
+						                </c:when>
+						                <c:otherwise>
+					                    	<a href="aMemberList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    </c:otherwise>
+				                    </c:choose>
+				                    
+							        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				                    	<c:choose>
+				                    		<c:when test="${ p eq pi.currentPage }">
+					                    		<a href="#">${p}</a>
+					                    	</c:when>
+					                    	<c:otherwise>
+					                    		<a class="page-link" href="aMemberList.me?currentPage=${ p }">${p}</a>
+					                    	</c:otherwise>
+					                    </c:choose>
+				                    </c:forEach>
+				                    
+							        <c:choose>
+				                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+						                    <a>&gt;</a>
+						                </c:when>
+						                <c:otherwise>
+						                    <a href="aMemberList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
+						                </c:otherwise>
+				                    </c:choose>
+	                            </div>
+	                        </th>
+	    
+	                    </table>
+	    			</form>
+	    			
+		    		<script>
+	                  function postFormSubmit(num)
+	                  {
+	                     if(num == 1)
+	                     {
+	                    	confirm("정지하시겠습니까?");
+	                        $("#postForm").attr("action", "blockOn.me");
+	                     }
+	                     else
+	                     {
+	                    	confirm("정지해제하시겠습니까?");
+	                        $("#postForm").attr("action", "blockOff.me");
+	                     }
+	                     
+	                     $("#postForm").submit();
+	                  }
+	               </script>
+	               
                 </div>
             </div>
 
