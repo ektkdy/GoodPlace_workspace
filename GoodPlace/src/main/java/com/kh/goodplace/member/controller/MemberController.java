@@ -114,7 +114,7 @@ public class MemberController {
 			//mv.addObject("msg","로그인 실패!!");
 			//mv.setViewName("common/errorPage");
 			session.setAttribute("msg", "아이디 혹은 비밀번호가 틀립니다.");
-			mv.setViewName("redsirect:loginEmailForm.me");
+			mv.setViewName("redirect:loginEmailForm.me");
 			//mv.setViewName("user/member/loginEmail");
 		}
 		return mv;
@@ -241,8 +241,11 @@ public class MemberController {
 
     @RequestMapping("updateAccount.me")
     public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
-    	int result  = mService.updateAccount(m);
-
+    	int result1  = mService.updateMember(m);
+    	int result2 = mService.updatePartnerAccount(m);
+    	
+    	int result = result1*result2;
+	
 		if(result>0) {
 			session.setAttribute("msg", "계정정보 업데이트 성공");
 			mv.setViewName("redirect:partnerMain.me");

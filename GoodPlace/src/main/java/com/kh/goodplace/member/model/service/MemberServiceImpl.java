@@ -75,8 +75,8 @@ public class MemberServiceImpl implements MemberService {
 
 	//2. 파트너 계정정보 수정용 서비스
 	@Override
-	public int updateAccount(Member m) {
-		return mDao.updateAccount(sqlSession, m);
+	public int updatePartnerAccount(Member m) {
+		return 0;
 	}
 
 

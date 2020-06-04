@@ -32,8 +32,8 @@ public interface MemberService {
 	// 1. 파트너 수입 목록 조회용 서비스
 	ArrayList<Member> selectIncomeList();
 	
-	//2. 파트너 계정정보 수정용 서비스
-	int updateAccount(Member m);
+	//2. 파트너 계정정보 수정용 서비스 --> updateMember와 updatePartnerAccount를 사용함
+	int updatePartnerAccount(Member m);
 	
 	//-------------------------------------------------------------------
 	

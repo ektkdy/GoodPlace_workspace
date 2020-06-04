@@ -64,6 +64,6 @@ public class Room {
 	private int period;			// 파워기간
 	private int powerPrice;		// 파워가격
 	
-	
+	private String email;		// 회원아이디
 
 }

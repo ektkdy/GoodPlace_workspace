@@ -63,14 +63,19 @@
             </span><br>
             <div style="margin-bottom: 50px;"></div>
             
-                <form action="updateAccount.me" method="post">
+                <form action="updateAccount.me" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
 	                <div id="backgroundImg">
 	                    <img src="" width="100%" height="160px">
 	                </div>
 	                <div id="personalImg">
-	                    <img src="" width="100px" height="100px" style="border-radius: 50px; background-color: darkblue;">
-	                    <input type="file">
+	                    <img id="profileImg" src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ loginUser.changeName }" width="100px" height="100px" style="border-radius: 50px;" required>
+	                	
+	                	<div id="profileImgArea">
+                	        <input type="file" id="uploadFile" name="reUploadFile" >
+                           	<input type="hidden" name="changeName" value="${ loginUser.changeName }">
+	                	</div>
+	                               
 	                </div>
 	                
 		                <table id="accountTable">
@@ -126,7 +131,18 @@
 	                <button type="submit" id="next">등록하기</button>
 	            </div>
         </form>
-        
+       	
+       	<script type="text/javascript">
+	       	 $(function(){
+	       		$("#profileImgArea").hide(); 
+	       		
+	       		$("#profileImg").click(function(){
+	       			$("#uploadFile").click();
+	       		});
+	       	 });
+	       	 
+       	</script>
+       	                    
         </div>
     </div>
  </div>

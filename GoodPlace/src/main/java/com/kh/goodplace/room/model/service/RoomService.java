@@ -126,14 +126,19 @@ public interface RoomService {
 	// 2. 파워등록 작성용 서비스
 	int insertPower(Room r);
 	
-	// 3.게시글 수정용 서비스-현영
+	// 3_1. 해당 게시글 조회용 서비스
+	Room selectPower(int pno);
+	
+	// 3_2.게시글 수정용 서비스-현영
 	int updatePower(Room r);
 	
 	// 4. 게시글 삭제용 서비스-현영
 	int deletePower(int pno);
 	
-	// 5. 파워등록 된 리스트 조회용 서비스
-	ArrayList<Room> selectPowerRoomList();
+	//5_1. 숙소 총 갯수 조회용 서비스
+	int aSelectPowerListCount();
+	//5_2. 파워등록 된 리스트 조회용 서비스
+	ArrayList<Room> selectPowerRoomList(PageInfo pi);
 	
 	
 	
