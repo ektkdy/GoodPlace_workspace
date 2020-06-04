@@ -55,7 +55,7 @@ public class MemberController {
 	
 	@RequestMapping("partnerDashBoardForm.me")
 	public String partnerDashBoardForm() {
-		return "user/member/partnerDashBoard";
+		return "user/partner/partnerDashBoard";
 	}
 
 	//비밀번호 찾기 페이지2 이메일 체크
