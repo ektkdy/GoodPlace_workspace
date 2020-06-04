@@ -126,7 +126,10 @@ public interface RoomService {
 	// 2. 파워등록 작성용 서비스
 	int insertPower(Room r);
 	
-	// 3.게시글 수정용 서비스-현영
+	// 3_1. 해당 게시글 조회용 서비스
+	Room selectPower(int pno);
+	
+	// 3_2.게시글 수정용 서비스-현영
 	int updatePower(Room r);
 	
 	// 4. 게시글 삭제용 서비스-현영

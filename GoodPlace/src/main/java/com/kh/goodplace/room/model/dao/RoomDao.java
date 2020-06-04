@@ -58,6 +58,26 @@ public class RoomDao {
 		
 	}
 	
+	
+	public int insertPower(SqlSessionTemplate sqlSession, Room r) {
+		
+		return sqlSession.insert("roomMapper.insertPower", r);
+		
+	}
+	
+	public int updatePower(SqlSessionTemplate sqlSession, Room r) {
+		
+		return sqlSession.update("roomMapper.updatePower", r);
+		
+	}
+	
+	public Room selectPower(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("roomMapper.selectPower", pno);
+		
+	}
+	
+	
 	// --------- 파워관리 끝 -----------------
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
@@ -124,6 +125,71 @@ public class RoomController {
         return "admin/a_power";
     }
 	
+    
+    @RequestMapping("powerEnrollForm.po")
+    public String powerEnrollForm()
+    {
+        return "admin/a_powerInsert";
+    }
+	
+    @RequestMapping("powerInsert.po")
+    public String insertFaq(Room r, Model model, HttpServletRequest request) {
+    	
+    	int result = rService.insertPower(r);
+    	
+        if(result > 0)
+        { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지
+            return "redirect:aPowerList.po";
+        }
+        else
+        { // 게시글 작성 실패
+            model.addAttribute("msg", "게시글 등록 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
+    @RequestMapping("powerUpdateForm.po")
+    public ModelAndView faqUpdateForm(int pno, ModelAndView mv)
+    {	
+    	
+    	Room r = rService.selectPower(pno);
+    	
+        if(r != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("r", r);
+            mv.setViewName("admin/a_powerUpdate");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+    
+    @RequestMapping("powerUpdate.po")
+    public String faqUpdate(Room r, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updatePower(r);
+        
+        if(result > 0)
+        {
+            return "redirect:aPowerList.po";
+        }
+        else
+        {
+            model.addAttribute("msg", "게시글 수정 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    
 	// ------------- Power 관리 끝 --------------------------------------------------
 	
 	

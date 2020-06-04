@@ -81,5 +81,28 @@
 	      from power
 	</select>
 	
+		
+	<insert id="insertPower" parameterType="Room">
+		insert into power
+		values(pono.nextval, #{powerKind}, #{period}, #{powerPrice})
+		 order by price asc
+	</insert>
+	
+	<update id="updatePower" parameterType="Room">
+	
+		update power
+		   set POWER_KIND=#{powerKind},
+		       PERIOD=#{period},
+		       PRICE=#{powerPrice}
+		 where pono=#{poNo}
+	
+	</update>
+	
+	<select id="selectPower" parameterType="_int" resultMap="powerResultSet">
+		select *
+		  from power
+		 where pono= #{pno}
+	      
+	</select>
 
 </mapper>
