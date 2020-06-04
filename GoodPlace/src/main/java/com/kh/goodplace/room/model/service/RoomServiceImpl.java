@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
@@ -33,6 +34,16 @@ public class RoomServiceImpl implements RoomService{
 	@Override
 	public int insertRoom(Room r) {
 		return rDao.insertRoom(sqlSession, r);
+	}
+
+	@Override
+	public int selectRono() {
+		return rDao.selectRono(sqlSession);
+	}
+
+	@Override
+	public int insertAttachment(Attachment at) {
+		return rDao.insertAttachment(sqlSession, at);
 	}
 
 	@Override
@@ -114,6 +125,9 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectPowerRoomList(sqlSession, pi);
 	}
 	// --------- 파워관리 끝 --------------------------
+
+	
+	
 
 	
 	

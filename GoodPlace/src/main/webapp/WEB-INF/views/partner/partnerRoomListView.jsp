@@ -9,6 +9,13 @@
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerRoomList.css" />
 <style>
 button:hover{cursor:pointer}
+
+/*페이징바*/
+    #pagingArea{width: 980px; text-align: right;}
+    #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer; border-radius: 4px;}
+    #pagingArea a:hover{color: white; background-color: #34538a;}
+    
+    #noticeList tr:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -31,8 +38,8 @@ button:hover{cursor:pointer}
                     <p class="title_tt">숙소관리</p>
                 </span>
                 <span class="up_btn_space" style="margin-top:8px">
-                    <button class="blue_btn">파워등록신청</button>
-                    <button class="blue_btn">숙소등록</button>
+                    <button class="blue_btn" onclick="location.href=''">파워등록신청</button>
+                    <button class="blue_btn" onclick="location.href='insertRoomForm.ro'">숙소등록</button>
                 </span>
                 
                 <div class="con2">
@@ -48,56 +55,85 @@ button:hover{cursor:pointer}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><div class="ing" style="margin:0 auto">운영중</div></td>
-                                <td>파리</td>
-                                <td>20.04.27</td>
-                                <td>파리한인민박</td>
-                                <td>52</td>
-                                <td>
-                                    <button class="detail_btn">보기</button>
-                                    <button class="modify_btn">수정</button>
-                                    <button class="schedule_btn">일정관리</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>
-                                <td>파리</td>
-                                <td>20.04.27</td>
-                                <td>파리한인민박</td>
-                                <td>52</td>
-                                <td>
-                                    <button class="detail_btn">보기</button>
-                                    <button class="modify_btn">수정</button>
-                                    <button class="schedule_btn">일정관리</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><div class="cancel" style="margin:0 auto">승인거절</div></td>
-                                <td>파리</td>
-                                <td>20.04.27</td>
-                                <td>파리한인민박</td>
-                                <td>52</td>
-                                <td>
-                                    <button class="detail_btn">보기</button>
-                                    <button class="modify_btn">수정</button>
-                                    <button class="schedule_btn">일정관리</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><div class="rest" style="margin:0 auto">휴면중</div></td>
-                                <td>파리</td>
-                                <td>20.04.27</td>
-                                <td>파리한인민박</td>
-                                <td>52</td>
-                                <td>
-                                    <button class="detail_btn">보기</button>
-                                    <button class="modify_btn">수정</button>
-                                    <button class="schedule_btn">일정관리</button>
-                                </td>
-                            </tr>
+                           <c:choose>
+                           	<c:when  test="${!empty list }">
+	                           <c:forEach items="${ list }" var="r">
+				                    <tr>
+				                    <c:choose>
+				                    	<c:when test="${r.status eq 1}">
+				                        	<td><div class="ing" style="margin:0 auto">운영중</div></td>
+				                        </c:when>
+				                        <c:when test="${r.status eq 2 }">
+				                        	<td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>
+				                        </c:when>
+				                       	<c:when test="${r.status eq 3}">
+				                       		<td><div class="cancel" style="margin:0 auto">승인거절</div></td>
+				                       	</c:when>
+				                       	<c:otherwise>
+				                       		<td><div class="rest" style="margin:0 auto">휴면중</div></td>
+				                       	</c:otherwise>
+				                    </c:choose>
+				                        <td>${r.addBasic.substr( 1, 2 )}</td>
+				                        <td>${r.startDate }</td>
+				                        <td>${r.roomsTitle}</td>
+				                        <td>50</td>
+				                        <td>
+			                        	    <button class="detail_btn">보기</button>
+	                                    	<button class="modify_btn">수정</button>
+	                                    	<button class="schedule_btn">일정관리</button>
+				                        </td>
+				                    </tr>
+				                </c:forEach>
+				                </c:when>
+				                <c:otherwise>
+				                	<tr>
+				                		<td colspan="6"> 등록된 숙소가 없습니다.</td>
+				                	</tr>
+				                </c:otherwise>
+				            </c:choose>
                         </tbody>
                     </table>
+                    <!-- 공지사항 상세조회용 서비스 -->
+                    <script type="text/javascript">
+			             $(function(){
+			            	 $("#noticeList tbody tr").click(function(){
+								 location.href="pNoticeListDetail.bo?noNo="+$(this).children().eq(0).text();           		 
+			            	 });
+			             });
+		            </script>
+                    
+                    <c:if test="${ !empty list }">
+	                    <div id="pagingArea" style="margin-top: 22px;">
+	                       <c:choose>
+			                	<c:when test="${ pi.currentPage eq 1 }">
+				                    <a href="#">&lt;</a>
+				                </c:when>
+				                <c:otherwise>
+			                    	<a href="pNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    </c:otherwise>
+		                    </c:choose>
+		                    
+					        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    	<c:choose>
+		                    		<c:when test="${ p eq pi.currentPage }">
+			                    		<a href="#">${p}</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    		<a class="page-link" href="pNoticeList.bo?currentPage=${ p }">${p}</a>
+			                    	</c:otherwise>
+			                    </c:choose>
+		                    </c:forEach>
+		                    
+					        <c:choose>
+		                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+				                    <a>&gt;</a>
+				                </c:when>
+				                <c:otherwise>
+				                    <a href="pNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                </c:otherwise>
+		                    </c:choose>
+	                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>

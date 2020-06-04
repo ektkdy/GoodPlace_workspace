@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -31,6 +32,17 @@ public class RoomDao {
 	}
 	
 	
+	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {
+		
+		return sqlSession.insert("roomMapper.insertAttachment", at);
+	}
+	
+	public int selectRono(SqlSessionTemplate sqlSession) {
+		
+		
+		return sqlSession.selectOne("roomMapper.selectRono");
+	
+	}
 	
 	
 	
