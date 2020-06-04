@@ -9,7 +9,7 @@ public interface ExperienceService {
 	
 	// 1. 전체 체험목록 조회용 서비스
 	// 1_1. 전체 체험 갯수 조회용 서비스 
-	int selectListExpCount();
+	int selectExpListCount();
 	
 	// 1_2. 요청한 페이지에 보여질 체험리스트 조회용 서비스
 	ArrayList<Experience> selectExpList(PageInfo pi);

@@ -21,13 +21,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao expDao;
 
 	@Override
-	public int selectListExpCount() {
-		return 0;
+	public int selectExpListCount() {
+		return expDao.selectExpListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Experience> selectExpList(PageInfo pi) {
-		return null;
+		return expDao.selectExpList(sqlSession, pi);
 	}
 
 	@Override

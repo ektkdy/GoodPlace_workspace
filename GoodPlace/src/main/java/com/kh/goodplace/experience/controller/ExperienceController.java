@@ -22,8 +22,8 @@ public class ExperienceController {
 	/* 1. 체험관리- 전체 체험목록 조회용 서비스 */
 	@RequestMapping("list.exp")
 	public String selectExpList(int currentPage, Model model) {
-		int listCount = expService.selectListExpCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		int listCount = expService.selectExpListCount();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Experience> list = expService.selectExpList(pi);
 		model.addAttribute("pi", pi);
@@ -62,8 +62,8 @@ public class ExperienceController {
 	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
 	@RequestMapping("pIncome.me")
 	public String selectIncomeList(int currentPage, Model model) {
-		int listCount = expService.selectListExpCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		int listCount = expService.selectExpListCount();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		return "partner/partnerIncome";
 	}

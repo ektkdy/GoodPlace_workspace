@@ -28,7 +28,7 @@
 	<!-- 반응 메세지 출력 -->
 	<c:if test="${ !empty msg }">
 		<script>
-			alert("${msg}");	// alert(회원가입성공!!)
+			alert("${msg}");
 		</script>
 		<c:remove var="msg" scope="session"/>
 	</c:if>
@@ -36,11 +36,14 @@
 	
 	<div id="header">
             <span id="gotomain">
-                <a href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/nobackgroundlogo.png" id="logo" alt="logo" ><p class="title_name">파트너</p></a>
+                <a href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/nobackgroundlogo.png" id="logo" alt="logo"><p class="title_name">파트너</p></a>
             </span>
             <span id="p_info">
-                <a href="" style="float:left; "><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" class="userphoto"><p>${ loginUser.userName }</p></a>
-                <img src="${pageContext.request.contextPath}/resources/images/partner/arrow.png" class="arrow">
+                <a href="" style="float:left; ">
+                	<img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" class="userphoto" style="border-radius: 50px; margin-right:5px;">
+                	<p>${ loginUser.userName }</p>
+                </a>
+                <img src="${pageContext.request.contextPath}/resources/images/partner/arrow.png" class="arrow" style="margin-left:10px;">
             </span>
             <div id="slide_menu">
                 <ul>
@@ -56,7 +59,7 @@
                 <li><a href=""><span class="icon3"></span><p>일정관리</p></a></li>
                 <li><a href=""><span class="icon4"></span><p>숙소관리</p></a></li>
                 <li><a href=""><span class="icon5"></span><p>후기관리</p></a></li>
-                <li><a href=""><span class="icon6"></span><p>체험관리</p></a></li>
+                <li><a href="list.exp?currentPage=1"><span class="icon6"></span><p>체험관리</p></a></li>
                 <li><a href=""><span class="icon7"></span><p>정산관리</p></a></li>
                 <li><a href=""><span class="icon8"></span><p>메세지</p></a></li>
                 <li><a href="pAccount.me"><span class="icon9"></span><p>계정관리</p></a></li>

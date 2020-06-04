@@ -55,52 +55,101 @@
                 <button class="blue_btn" style="margin-right: 20px;" id="expForm">체험등록</button>
             </span>
             
+            <script>
+				$(function(){
+					$("#expForm").click(function(){
+						location.href="expEnrollForm1.exp";
+					});
+				});
+			</script>
+            
             <div class="con2">
                 <table class="common_tb" cellpadding="0" cellspacing="0" >
                     <thead>
                         <tr>
                             <td width="100px">상태</td>
                             <td width="100px">지역</td>
-                            <td width="100px">체험개시일</td>
                             <td width="300px">체험명</td>
+                            <td width="200px">개시일(신청일)</td>
                             <td width="200px">누적판매수</td>
-                            <td width="300px">비고</td>
+                            <td width="200px">비고</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>상태</td>
-                            <td>파리</td>
-                            <td>20.04.27</td>
-                            <td>체험이름</td>
-                            <td>52</td>
-                            <td>
-                                <button class="blue_btn">보기</button>
-                                <button class="blue_btn">수정</button>
-                            </td>
-                        </tr>
+                    	<c:choose>
+                    		<c:when test="${ !empty list }">
+                    			<c:forEach items="${ list }" var="exp">
+	                    			<tr>
+	                    				<input type="hidden" value=${ exp.exNo }>
+			                            <td>${ exp.status }</td>
+			                            <td>${ exp.addBasic }</td>
+			                            <td>${ exp.expTitle }</td>
+			                            <td>${ exp.startDate }(${ exp.applyDate })</td>
+			                            <td>${ exp.expContent }</td>
+			                            <td>
+			                                <button class="blue_btn" class="expDetail">보기</button>
+			                                <button class="blue_btn" class="expUpdate">수정</button>
+			                            </td>
+			                        </tr>
+		                        </c:forEach>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<tr><td colspan="6" style="text-align:center;"><br>등록된 체험이 없습니다 <br> 신규체험을 등록하고 나만의 재능을 공유해 보세요<br><br></td></tr>
+                    		</c:otherwise>
+                    	</c:choose>
                     </tbody>
                 </table>
-                <div id="pagingArea" style="margin-top: 22px;">
-                    <a>&lt;</a>
-                    <a>1</a>
-                    <a>2</a>
-                    <a>3</a>
-                    <a>4</a>
-                    <a>5</a>
-                    <a>&gt;</a>
-                </div>
+                
+                <script>
+	                $(function(){
+						$(".expDetail").click(function(){
+							location.href="";
+						});
+					});
+                	
+	                $(function(){
+						$(".expUpdate").click(function(){
+							location.href="";
+						});
+					});
+                
+                </script>
+                
+                <c:if test="${ !empty list }">
+                   <div id="pagingArea" style="margin-top: 22px;">
+                      <c:choose>
+	                	<c:when test="${ pi.currentPage eq 1 }">
+		                    <a href="#">&lt;</a>
+		                </c:when>
+		                <c:otherwise>
+	                    	<a href="list.exp?currentPage=${ pi.currentPage -1 }">&lt;</a>
+	                    </c:otherwise>
+                    </c:choose>
+                    
+			        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<c:choose>
+                    		<c:when test="${ p eq pi.currentPage }">
+	                    		<a href="#">${p}</a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<a class="page-link" href="list.exp?currentPage=${ p }">${p}</a>
+	                    	</c:otherwise>
+	                    </c:choose>
+                    </c:forEach>
+                    
+			        <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    <a>&gt;</a>
+		                </c:when>
+		                <c:otherwise>
+		                    <a href="list.exp?currentPage=${ pi.currentPage +1 }">&gt;</a>
+		                </c:otherwise>
+                    </c:choose>
+                  </div>
+              </c:if>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-	$(function(){
-		$("#expForm").click(function(){
-			location.href="expEnrollForm1.exp";
-		});
-	});
-
-</script>
 </body>
 </html>
