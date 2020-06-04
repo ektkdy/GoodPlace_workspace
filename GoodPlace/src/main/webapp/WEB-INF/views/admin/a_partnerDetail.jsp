@@ -80,18 +80,18 @@
                     <table style="margin:0 auto; margin-top: 20px;">
                         <tr>
                             <th height="50px;" width="200px;">파트너이메일</th>
-                            <td width="300px;" style="text-align: left; padding-left: 10px;">duck3@google.com</td>
+                            <td width="300px;" style="text-align: left; padding-left: 10px;">${ m.email }</td>
                             <th width="100px;">연락처</th>
-                            <th width="200px;">010-5555-7410</th>
+                            <th width="200px;">${ m.phone }</th>
                         </tr>
                         <tr>
                             <th height="50px;" width="200px;">파트너 이름</th>
-                            <td colspan="3" style="text-align: left; padding-left: 10px;">홍길동</td>
+                            <td colspan="3" style="text-align: left; padding-left: 10px;">${ m.userName }</td>
                         </tr>
                         <tr>
                             <th style="padding-bottom: 50px;">소개</th>
                             <td colspan="3">
-                                <textarea name="" id="">안녕하세요 홍길동입니다.</textarea>
+                                <textarea name="" id="">${ m.partnerIntro }</textarea>
                             </td>
                         </tr>
                     </table>
@@ -116,13 +116,38 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<!-- 
                             <tr>
                                 <td width="200px">심사진행중</td>
                                 <td width="200px">파리</td>
                                 <td width="200px">20.04.27</td>
                                 <td width="200px">파리한인민박</td>
                                 <td width="200px">52</td>
-                            </tr>
+                            </tr> -->
+                            <c:forEach items="${ listR }" var="r">
+	                            <c:if test="${ r.status ne 5 }">
+		                            <tr>
+	                            		<c:choose>
+				                            <c:when test="${ r.status eq 1}">
+				                                <td width="200px">운영중</td>
+				                            </c:when>
+				                            <c:when test="${ r.status eq 2}">
+				                                <td width="200px">승인대기</td>
+				                            </c:when>
+				                            <c:when test="${ r.status eq 3}">
+				                                <td width="200px">승인거절</td>
+				                            </c:when>
+				                            <c:when test="${ r.status eq 4}">
+				                                <td width="200px">휴면</td>
+				                            </c:when>
+			                            </c:choose>
+		                                <td width="200px">${ r.addBasic }</td>
+		                                <td width="200px">${ r.startDate }</td>
+		                                <td width="200px">${ r.roomsTitle }</td>
+		                                <td width="200px">52</td>
+		                            </tr>
+		                        </c:if>
+                            </c:forEach>
                         </tbody>
                     </table>
                     
@@ -142,18 +167,43 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<!-- 
                             <tr>
                                 <td width="200px">운영중</td>
                                 <td width="200px">서울</td>
                                 <td width="200px">20.04.27</td>
                                 <td width="200px">경복궁 역사체험</td>
                                 <td width="200px">40</td>
-                            </tr>
+                            </tr> -->
+                            <c:forEach items="${ listE }" var="e">
+	                            <c:if test="${ e.status ne 5 }">
+		                            <tr>
+			                            <c:choose>
+				                            <c:when test="${ e.status eq 1}">
+				                                <td width="200px">운영중</td>
+				                            </c:when>
+				                            <c:when test="${ e.status eq 2}">
+				                                <td width="200px">승인대기</td>
+				                            </c:when>
+				                            <c:when test="${ e.status eq 3}">
+				                                <td width="200px">승인거절</td>
+				                            </c:when>
+				                            <c:when test="${ e.status eq 4}">
+				                                <td width="200px">휴면</td>
+				                            </c:when>
+			                            </c:choose>
+		                                <td width="200px">${ e.addBasic }</td>
+		                                <td width="200px">${ e.startDate }</td>
+		                                <td width="200px">${ e.expTitle }</td>
+		                                <td width="200px">40</td>
+		                            </tr>
+	                            </c:if>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <br>
                     <div style="text-align: right;">
-                        <button id="gotoList">목록으로 가기</button>
+                        <button id="gotoList" onclick="javascript:history.go(-1);">목록으로 가기</button>
                     </div>
                 </div>
             </div>
