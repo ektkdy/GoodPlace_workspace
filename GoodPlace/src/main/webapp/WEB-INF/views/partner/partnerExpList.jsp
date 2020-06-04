@@ -81,11 +81,27 @@
                     			<c:forEach items="${ list }" var="exp">
 	                    			<tr>
 	                    				<input type="hidden" value=${ exp.exNo }>
-			                            <td>${ exp.status }</td>
-			                            <td>${ exp.addBasic }</td>
+		                            	<c:choose>
+		                            		<c:when test="${ exp.status eq 1}">
+		                            			<td>운영중</td>
+		                            		</c:when>
+		                            		<c:when test="${ exp.status eq 2}">
+		                            			<td>승인대기</td>
+		                            		</c:when>
+		                            		<c:when test="${ exp.status eq 3}">
+		                            			<td>승인거절</td>
+		                            		</c:when>
+		                            		<c:when test="${ exp.status eq 4}">
+		                            			<td>휴면</td>
+		                            		</c:when>
+		                            		<c:otherwise>
+		                            			<td>삭제</td>
+		                            		</c:otherwise>
+		                            	</c:choose>
+			                            <td>${ exp.local }</td>
 			                            <td>${ exp.expTitle }</td>
 			                            <td>${ exp.startDate }(${ exp.applyDate })</td>
-			                            <td>${ exp.expContent }</td>
+			                            <td>${ exp.totalSal }</td>
 			                            <td>
 			                                <button class="blue_btn" class="expDetail">보기</button>
 			                                <button class="blue_btn" class="expUpdate">수정</button>

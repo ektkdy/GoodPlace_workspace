@@ -42,11 +42,14 @@ public class Experience {
 	private Date startDate;			// 체험승인일(개시일)
 	private Date endDate;			// 체험종료일
 	private String operateDay;		// 운영요일
-	private String status;			// 운영중(1),승인대기(2),승인거절(3),휴면(4),노출안됨(5)
+	private String status;			// 운영중(1),승인대기(2),승인거절(3),휴면(4),삭제(5)
 	private String deny;			// 거절사유
 	private String denyContent;		// 거절상세	
 	private String originName;		// 파일원본명(체험썸네일)
 	private String changeName;		// 파일수정명(체험썸네일)
 	private String filePath;		// 파일저장경로(체험썸네일)
+	
+	private String local;			// 지역
+	private String totalSal;		// 누적판매수
 
 }

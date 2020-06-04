@@ -48,9 +48,13 @@
 	</select>
 	
 	<select id="selectExpList" resultMap="ExperienceResultSet">
-		select *
-		  from experience
-		 order by exNo desc
+		select e.status, e.exp_Title, e.start_date, e.apply_date,
+       		   substr(e.add_basic, 1, 3) as local,
+               count(p.exno) as totalSal
+  		  from experience e
+     left join expPay p on(e.exno=p.exno) 
+         group by e.status, e.exp_Title, e.start_date, e.apply_date, substr(e.add_basic, 1, 3)
+ 	     order by status asc, totalSal desc
 	</select>
 	
 
