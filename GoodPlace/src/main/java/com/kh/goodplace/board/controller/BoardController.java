@@ -298,39 +298,53 @@ public class BoardController {
     //------------------------------------------- 파트너 공지사항 끝
     
     
-    // 사용자 FAQ 시작
-    // 전체 Category별 제목 조회
-//    @RequestMapping("faq.bo")
-//    public String showFaq(Model model) {
-//    	
-//    		ArrayList<String> faqCategoryList = selectFaqCategory();
-////        ArrayList<String> faqCategoryList = bService.selectFaqCategory();
-////        ArrayList<String> faqTitleList = bService.selectFaqList(String faqCategory);
-//        
-//        model.addAttribute("faqCategoryList", faqCategoryList);
-//        model.addAttribute("faqTitleList", faqTitleList);
-//        	
-//        return "user/faq";
-//    }
-    
-    // FAQ 모든 카테고리 조회
+    // 사용자 FAQ 시작 -------------------------------------------------------------------------
+    // Page_faq.jsp : get latest 3 faqTitle per faqCategory
     @RequestMapping("faq.bo")
-    public ArrayList<String> selectFaqCategory(){
+    public ModelAndView selectFaqList(ModelAndView mv){
     	
-    	ArrayList<String> faqCategoryList = bService.selectFaqCategory();
-    	System.out.println(faqCategoryList);
-    	return faqCategoryList;
+    	ArrayList<Board> faqList = new ArrayList<>();
+    	ArrayList<Board> faqTempList = null;
+    	
+    	String[] faqCategoryList = {"공지사항", "상품문의", "예약방법", "일반문의", "취소환불", "파트너등록"};
+    	String faqCategory = null;
+    	System.out.println("point 1");
+    	
+    	for(int i=0; i<6; i++) {
+    		
+    		faqCategory = faqCategoryList[i];
+    		faqTempList = bService.selectFaqList(faqCategory);
+        	System.out.println("point 2");
+        	
+    		for(int y=0; y<3; y++) {
+    			
+    			faqList.add(faqTempList.get(y));
+    			
+    		}
+    		
+    		
+    	}
+
+        if(!faqList.isEmpty()){ // 성공
+           
+            mv.addObject("faqList", faqList);
+            mv.setViewName("user/faq");
+            for(int i=0; i<faqList.size(); i++) {
+            	//System.out.println("faqList size() : " + faqList.size());
+                System.out.println(i + " faqList 조회 성공 : " + faqList.get(i));
+            }
+
+        }else{ // 실패
+        	
+            mv.addObject("msg", "FAQ 리스트 조회 실패!");
+            mv.setViewName("common/errorPage");
+            System.out.println("faqList 조회 실패 : " + faqList);
+
+        }
+        
+        return mv;
     	
     }
-    
-//    // FAQ 카테고리별 faqTitle 조회
-//    public ArrayList<String> selectFaqList(String faqCategory){
-//    	ArrayList<String> faqTitleList = bService.selectFaqCategory();
-//    	return faqCategoryList;
-//    }
-    
-    
-    // 사용자 FAQ 끝
     
     
     

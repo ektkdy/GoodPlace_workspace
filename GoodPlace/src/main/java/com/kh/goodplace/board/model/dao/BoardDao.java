@@ -134,11 +134,11 @@ public class BoardDao {
 	
 	// ---------------------------------- 사용자 FAQ --------------------------------------------------------------------------
 	
-	public ArrayList<String> selectFaqList(SqlSessionTemplate sqlSession, String faqCategory){
-		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectFaqCategory");
-		
+	public ArrayList<Board> selectFaqList(SqlSessionTemplate sqlSession, String faqCategory){
+		System.out.println("faqCategory : " + faqCategory);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectFaqList", faqCategory);
 	}
+	
 	
 	
 	
