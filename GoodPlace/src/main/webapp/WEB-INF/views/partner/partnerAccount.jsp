@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,12 +109,12 @@
 		                        <td>
 		                            <select name="accountName" id="accountName" style="margin-bottom:10px;">
 		                                <option>은행명을 선택하세요</option>
-		                                <option value="기업은행">기업은행</option>
-		                                <option value="국민은행">국민은행</option>
-		                                <option value="우리은행">우리은행</option>
-		                                <option value="신한은행">신한은행</option>
-		                                <option value="카카오뱅크">카카오뱅크</option>
-		                                <option value="우체국">우체국</option>
+		                                <option value="기업은행" id="1">기업은행</option>
+		                                <option value="국민은행" id="2">국민은행</option>
+		                                <option value="우리은행" id="3">우리은행</option>
+		                                <option value="신한은행" id="4">신한은행</option>
+		                                <option value="카카오뱅크" id="5">카카오뱅크</option>
+		                                <option value="우체국" id="6">우체국</option>
 		                            </select>
 		                            <input type="text" placeholder="예)1234-56-78900 (-)포함하여 입력하세요" name="accountNum" value="${ loginUser.accountNum }" style="padding-left:10px;">
 		                            <h5>• 예금주가 본인 이름인 계좌만 설정이 가능합니다.</h5>
@@ -162,8 +163,20 @@
 	       			};
 	       		 }
 	       	 }
-	       	 
-     		 
+     		
+     		 // 사용자의 계좌명 가져오기
+     		 $(function(){
+     			 var accountName = "${loginUser.accountName}";
+     			 
+     			 switch(accountName){
+     			 case "기업은행": $("#1").prop("selected", true); break;
+     			 case "국민은행": $("#2").prop("selected", true); break;
+     			 case "우리은행": $("#3").prop("selected", true); break;
+     			 case "신한은행": $("#4").prop("selected", true); break;
+     			 case "카카오뱅크": $("#5").prop("selected", true); break;
+     			 case "우체국": $("#6").prop("selected", true); break;
+     			 }
+     		 });
        	</script>
        	                    
         </div>
