@@ -72,17 +72,21 @@
 	                    <img id="profileImg" src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ loginUser.changeName }" width="100px" height="100px" style="border-radius: 50px;" required>
 	                	
 	                	<div id="profileImgArea">
-                	        <input type="file" id="uploadFile" name="reUploadFile" >
+                	        <input type="file" id="uploadFile" name="reUploadFile" onchange="loadImg(this,1);">
                            	<input type="hidden" name="changeName" value="${ loginUser.changeName }">
 	                	</div>
 	                               
 	                </div>
 	                
 		                <table id="accountTable">
-		                	<input type="hidden" value="${ loginUser.usNo }">
+		                	<input type="hidden" name="paNo" value="${ loginUser.paNo }">
+		                	<input type="hidden" name="email" value="${ loginUser.email }">
 		                    <tr>
 		                        <th>* 파트너 이름 </th>
-		                        <td><input type="text" name="userName" value="${ loginUser.userName }" readonly disabled style="padding-left:10px;"></td>
+		                        <td>
+		                        	<input type="text" name="userName" value="${ loginUser.userName }" readonly disabled style="padding-left:10px;">
+		                        	<h5>• 프로필 사진을 클릭하면 변경이 가능합니다.</h5>
+		                        </td>
 		                    </tr>
 		                    <tr>
 		                        <th>* 소개</th>
@@ -111,14 +115,14 @@
 		                                <option value="카카오뱅크">카카오뱅크</option>
 		                                <option value="우체국">우체국</option>
 		                            </select>
-		                            <input type="text" placeholder="예)1234-56-78900 (-)포함하여 입력하세요" name="accountNum"style="padding-left:10px;">
+		                            <input type="text" placeholder="예)1234-56-78900 (-)포함하여 입력하세요" name="accountNum" value="${ loginUser.accountNum }" style="padding-left:10px;">
 		                            <h5>• 예금주가 본인 이름인 계좌만 설정이 가능합니다.</h5>
 		                        </td>
 		                    </tr>
 		                    <tr>
 		                        <th>* 문의 기본응답 메세지</th>
 		                        <td>
-		                            <textarea id="preMsg" name="preMsg" style="padding:10px;"></textarea>
+		                            <textarea id="preMsg" name="preMsg" style="padding:10px;">${ loginUser.preMsg }</textarea>
 		                            <h5>• 기본메시지는 여행자가 최초 문의를 했을 때 기본으로 제공되는 메시지 입니다.<br>
 		                                • 친절하고 구체적인 인사말로 예약을 유도하세요.</h5>
 		                        </td>
@@ -132,7 +136,8 @@
 	            </div>
         </form>
        	
-       	<script type="text/javascript">
+       	<script>
+     		 // 사용자가 본인의 프로필사진을 클릭하면 변경할수 있게 파일업로드 창이 뜸
 	       	 $(function(){
 	       		$("#profileImgArea").hide(); 
 	       		
@@ -141,6 +146,24 @@
 	       		});
 	       	 });
 	       	 
+     		 // 사용자가 프로필 사진을 변경할 경우 바꾼 파일로 미리보기를 변경해준다 
+	       	 function loadImg(inputFile, num){  
+	       		 if(inputFile.files.length==1){
+	       			// 파일을 읽어들일 FileReader 객체생성
+	       			var reader = new FileReader();
+	       			
+	       			// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
+	       			reader.readAsDataURL(inputFile.files[0]);
+	       			
+	       			//파일 읽기가 완료 되었을때 실행할 메소드
+					// e : 현재 이벤트가 발생한 이벤트객체
+	       			reader.onload = function(e){
+	       				$("#profileImg").attr("src", e.target.result); 
+	       			};
+	       		 }
+	       	 }
+	       	 
+     		 
        	</script>
        	                    
         </div>

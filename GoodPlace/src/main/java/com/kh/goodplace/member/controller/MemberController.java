@@ -191,34 +191,34 @@ public class MemberController {
 	}
 
 	// 전달받은 파일을 서버에 업로드 시키는 메소드
-	   public String saveFile(MultipartFile file, HttpServletRequest request) {
+    public String saveFile(MultipartFile file, HttpServletRequest request) {
 
-	      // 파일을 업로드 시킬 폴더 경로 (String savePath)
-	      String resources = request.getSession().getServletContext().getRealPath("resources");
-	      String savePath = resources + "\\uploadFiles\\userProfile\\";
+      // 파일을 업로드 시킬 폴더 경로 (String savePath)
+      String resources = request.getSession().getServletContext().getRealPath("resources");
+      String savePath = resources + "\\uploadFiles\\userProfile\\";
 
-	      // 원본명 (aaa.jpg)
-	      String originName = file.getOriginalFilename();
+      // 원본명 (aaa.jpg)
+      String originName = file.getOriginalFilename();
 
-	      // 수정명 (20200522202011.jpg)
-	      // 년월일시분초 (String currentTime)
-	      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 20200522202011
+      // 수정명 (20200522202011.jpg)
+      // 년월일시분초 (String currentTime)
+      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 20200522202011
 
-	      // 확장자(String ext)
-	      String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+      // 확장자(String ext)
+      String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
 
-	      String changeName = currentTime + ext;
+      String changeName = currentTime + ext;
 
 
-	      try {
-	         file.transferTo(new File(savePath + changeName));
-	      } catch (IllegalStateException | IOException e) {
-	         e.printStackTrace();
-	      }
+      try {
+         file.transferTo(new File(savePath + changeName));
+      } catch (IllegalStateException | IOException e) {
+         e.printStackTrace();
+      }
 
-	      return changeName;
+      return changeName;
 
-	   }
+   }
 
 
 
@@ -240,13 +240,27 @@ public class MemberController {
     }
 
     @RequestMapping("updateAccount.me")
-    public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
-    	int result1  = mService.updateMember(m);
-    	int result2 = mService.updatePartnerAccount(m);
+    public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request,
+    								  @RequestParam(name="reUploadFile", required=true) MultipartFile file) {
     	
+    	//현재 넘어온 파일이 있을 경우(== 넘어온 파일명이 빈문자열이 아닐경우)
+    	if(!file.getOriginalFilename().equals("")) {
+    		
+    		//서버에 파일 업로드 진행
+    		String changeName = saveFile(file, request);
+    		
+    		m.setOriginName(file.getOriginalFilename());
+    		m.setChangeName(changeName);
+    		m.setFilePath(session.getServletContext().getRealPath("resources")+ "\\uploadFiles\\" + changeName);
+    	}
+
+    	int result1 = mService.updateMemberAccount(m);
+    	int result2 = mService.updatePartnerAccount(m);
+
     	int result = result1*result2;
 	
 		if(result>0) {
+			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("msg", "계정정보 업데이트 성공");
 			mv.setViewName("redirect:partnerMain.me");
 		} else {

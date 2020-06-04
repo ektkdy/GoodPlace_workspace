@@ -59,6 +59,7 @@
 		   	   change_name = #{changeName}
 		 where usNo = #{usNo}
 	</update>
+	
 	<insert id="insertPartner" parameterType="Member">
 		insert into partner
 		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'N')
@@ -81,17 +82,22 @@
 
 
 
-	<update id="updateAccount" parameterType="Member">
-		update (select partner_intro, phone, account_name, account_num, pre_msg
-				from member
-				join partner using (usno))
-		   set partner_intro=#{partnerIntro}, phone=#{phone},
-		   	   account_name=#{accountName}, account_num=#{accountNum},
-			   pre_msg=#{preMsg}
-		 where usno=#{usNo}
+	<update id="updateMemberAccount" parameterType="Member">
+		update member
+		   set phone=#{phone}, 
+		   	   origin_name = #{originName},
+		   	   change_name = #{changeName}
+		 where pano=#{paNo}
 	</update>
 
-
+	<update id="updatePartnerAccount" parameterType="Member">
+		update partner 
+		   set partner_intro=#{partnerIntro},
+		   	   account_name=#{accountName}, 
+		   	   account_num=#{accountNum},
+			   pre_msg=#{preMsg}
+		 where pano=#{paNo}
+	</update>
 
 
 

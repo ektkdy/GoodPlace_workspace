@@ -34,6 +34,7 @@ public interface MemberService {
 	
 	//2. 파트너 계정정보 수정용 서비스 --> updateMember와 updatePartnerAccount를 사용함
 	int updatePartnerAccount(Member m);
+	int updateMemberAccount(Member m);
 	
 	//-------------------------------------------------------------------
 	

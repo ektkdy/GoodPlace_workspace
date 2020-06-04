@@ -73,10 +73,16 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-	//2. 파트너 계정정보 수정용 서비스
+	//2_1. 파트너 계정정보 수정용(파트너 테이블) 서비스
 	@Override
 	public int updatePartnerAccount(Member m) {
-		return 0;
+		return mDao.updatePartnerAccount(sqlSession, m);
+	}
+
+	// 2_2. 파트너 계정정보 수정용(멤버 테이블) 서비스
+	@Override
+	public int updateMemberAccount(Member m) {
+		return mDao.updateMemberAccount(sqlSession, m);
 	}
 
 

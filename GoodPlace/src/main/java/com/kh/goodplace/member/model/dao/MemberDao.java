@@ -32,7 +32,42 @@ public class MemberDao {
 		int result2 = sqlSession.update("memberMapper.updatePartnerNo", m);	// 회원테이블의 파트너번호, 프로필 변경
 		return result1 * result2;
 	}
-	public int updateAccount(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateAccount", m);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 파트너 계정관리 업데이트
+	public int updatePartnerAccount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePartnerAccount", m);
 	}
+
+	public int updateMemberAccount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMemberAccount", m);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
