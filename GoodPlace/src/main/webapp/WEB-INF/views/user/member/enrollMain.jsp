@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
         /*content*/
         #content{
@@ -54,7 +55,9 @@
                 <h2>여행의 모든 것, GoodPlace</h2>
             </div>
             <div>
-                <a href="">카카오로 회원가입</a> <br>
+                <a id="kakao-enroll-btn"></a>
+				<a href="http://developers.kakao.com/logout"></a>
+                <br>
                 <b>
                     <a href="">네이버</a> | <a href="enrollEmailForm1.me">이메일</a><br><br>
                    	이미 아이디가 있으신가요?
@@ -63,9 +66,44 @@
             </div>
         </div>
     </div>
-    
+    <form id="kakaoEnroll" action="kakaoEnroll.me">
+    	<input id="kakaoEmail" type="hidden" name="email" value="">
+    	<input id="kakaoName" type="hidden" name="userName" value="">
+    	<input id="kakaoPwd" type="hidden" name="userPwd" value="">
+    </form>
     <!-- footer -->
 	<jsp:include page="../../common/footer.jsp"/>
 	
+	<script type="text/javascript">
+	
+	  // input your appkey
+	  Kakao.init('62fda0bf46ca2ad372f7f5e69d04a01e')
+	  Kakao.Auth.createLoginButton({
+	    container: '#kakao-enroll-btn',
+	    success: function(authObj) {
+	      Kakao.API.request({
+	        url: '/v2/user/me',
+	        success: function(res) {
+	          console.log(res.kakao_account['email']);
+	          console.log(res.properties['nickname']);
+	          $("#kakaoEmail").val(res.kakao_account['email']);
+	          $("#kakaoName").val(res.properties['nickname']);
+	          $("#kakaoPwd").val(res.id);
+	          $("#kakaoEnroll").submit();
+	        },
+	        fail: function(error) {
+	          alert(
+	            'login success, but failed to request user information: ' +
+	              JSON.stringify(error)
+	          )
+	        },
+	      })
+	    },
+	    fail: function(err) {
+	      alert('failed to login: ' + JSON.stringify(err))
+	    },
+	  });
+
+	</script>
 </body>
 </html>

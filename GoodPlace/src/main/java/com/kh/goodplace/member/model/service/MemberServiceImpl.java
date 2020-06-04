@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return mDao.loginMember(sqlSession,m);
 	}
-
+	
 	/**
 	 * 2. 회원가입 정보 입력 서비스
 	 */
@@ -36,7 +36,6 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);
 	}
-
 
 	@Override
 	public int updateMember(Member m) {
@@ -163,6 +162,8 @@ public class MemberServiceImpl implements MemberService {
 		public ArrayList<Experience> aSelectPartnerExp(int ptno) {
 			return mDao.aSelectPartnerExp(sqlSession, ptno);
 		}
+
+
 		
 		//-------------------------------------------------------------------
 

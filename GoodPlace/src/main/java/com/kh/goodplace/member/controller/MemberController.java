@@ -122,6 +122,15 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="kakaoLogin.me")
+	public ModelAndView kakaoLogin(Member m, HttpSession session, ModelAndView mv) {
+		Member loginUser = mService.loginMember(m);
+		session.setAttribute("loginUser", loginUser);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
 
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -165,6 +174,32 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		}
 
+		return mv;
+	}
+	
+	@RequestMapping("kakaoEnroll.me")
+	public ModelAndView kakaoEnroll(Member m, ModelAndView mv, HttpSession session) {
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd);
+		
+		int result1 = mService.emailCheck(m.getEmail()); // 이메일 체크
+		int result2 = 0;
+		
+		if(result1 == 0) { // 가입된 이메일이 없을 경우
+			result2 = mService.insertMember(m);
+		}
+
+		if(result2 > 0) {	// 회원가입 성공
+			session.setAttribute("msg", "GoodPlace의 회원이 되신것을 축하합니다.");
+			mv.setViewName("user/member/enrollSuccess");
+		} else if(result1 > 0) {			// 회원가입 실패
+			session.setAttribute("msg", "이미 가입된 이메일 입니다.");
+			mv.setViewName("redirect:loginForm.me");
+		} else {
+			mv.addObject("msg","회원가입 실패! 관리자에게 문의하세요.");
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 

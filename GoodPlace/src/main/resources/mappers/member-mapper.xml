@@ -28,9 +28,19 @@
 
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER
-		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
+		values(usno.nextval, null, #{email}, #{userPwd}, #{userName},
+				<choose>
+					<when test="phone != null">
+					#{phone},
+					</when>
+					<otherwise>
+					NULL,
+					</otherwise>
+				</choose>
+				
+				0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
 	</insert>
-
+	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		select *
 		  from Member
