@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.room.model.service.RoomService;
@@ -35,16 +36,22 @@ public class RoomController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Room> list = rService.selectRoomsList(pi);
+		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
 		return "partner/partnerRoomListView";
 	}
 	
+	@RequestMapping("insertRoomForm.ro")
+	public String insertRoomForm(){
+		
+		return "partner/partnerRoomEnrollForm";
+	}
 	@RequestMapping("insert.ro")
 	public String insertRoom(Room r, @RequestParam(name="thumb", required=false) MultipartFile file,
 							 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-							 HttpServletRequest request) {
+							 HttpServletRequest request, Attachment at) {
 		
 			//현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 r 주섬주섬 담기
 			if(!file.getOriginalFilename().equals("")) {//넘어온 파일명이  빈 문자열이 아닐경우
@@ -57,13 +64,31 @@ public class RoomController {
 				r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 			
 			}
-			System.out.println(r);
-					
+			
 			int result = rService.insertRoom(r);
 			
-			System.out.println(result);
+			int rono = rService.selectRono();
+			int result1 = 1;
+			for(int i=0; i<filelist.length; i++) {
+				   if(!filelist[i].getOriginalFilename().equals("")){
+				      String changeName = saveFile(filelist[i], request);
+				      at.setOriginName(filelist[i].getOriginalFilename());
+				      at.setChangeName(changeName);
+				      at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				      at.setRoNo(rono);
+				      int result2 = rService.insertAttachment(at);
+				      result1 = result1 * result2;
+				   }
+				}
 			
-			return "";
+			
+			
+			if(result*result1 > 0) {
+				return "redirect:list.ro?currentPage=1";
+			}else {
+				return "common/errorPage";
+			}
+			
 //			
 //			if(result > 0) { //숙소 등록 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지 보여지도록 해야함
 //				
@@ -75,8 +100,11 @@ public class RoomController {
 //			}	
 		
 	}
+
 	
-	// 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
+
+
+		// 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
 		// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
 			
@@ -96,7 +124,7 @@ public class RoomController {
 			// 확장자(String ext)
 			String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
 					//lastIndexOf : 원본명이름중에 . 이후 ~ 마지막 까지 선택
-			String changeName = currentTime + ext;
+			String changeName = currentTime + (int)(Math.random()*1000)+1 + ext ;
 			
 			try {
 				file.transferTo(new File(savePath + changeName));

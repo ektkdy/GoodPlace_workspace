@@ -42,6 +42,7 @@
 		<result column="POWER_KIND" property="powerKind"/>
 	</resultMap>
 	
+	
 	<resultMap type="Room" id="powerResultSet">
 		<id column="PONO" property="poNo"/>
 		<result column="POWER_KIND" property="powerKind"/>
@@ -58,7 +59,7 @@
 	<select id="selectListCount" resultType="_int">
 		select count(*)
 		  from rooms
-		 where status='Y'
+		 where usno = #{userNo}
 	</select>
 	
 	<select id="selectRoomsList" resultMap="roomResultSet">
@@ -79,6 +80,19 @@
 			   #{originName}, #{changeName}, #{filePath}, #{roomsNotice})
 	</insert>
 	
+	<!-- 숙소rono -->
+	<select id="selectRono" resultType="_int">	
+		select rono
+	      from rooms
+	     where rownum = 1
+	     order by rono desc
+	</select>
+	
+	<!-- 숙소등록 상세이미지  -->
+	<insert id="insertAttachment" parameterType="Attachment">
+		insert into attachment
+		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 1, rono.currval, null)
+	</insert>
 	
 	
 	<!-- 파워관리 -->

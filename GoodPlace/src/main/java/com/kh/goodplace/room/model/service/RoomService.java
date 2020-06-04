@@ -2,7 +2,7 @@ package com.kh.goodplace.room.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.goodplace.board.model.vo.Board;
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -22,6 +22,12 @@ public interface RoomService {
 	
 	//2.숙소등록 서비스
 	int insertRoom(Room r);
+	
+	//+숙소 번호 가져오는 서비스(CURRVAL안되서..)
+	int selectRono();
+	
+	//+ 숙소 상세이미지 등록 서비스
+	int insertAttachment(Attachment at);
 	
 	//3.숙소 조회용 서비스
 	Room selectBoard(int rno);

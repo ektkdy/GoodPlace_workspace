@@ -57,7 +57,7 @@
                 <li><a href=""><span class="icon1"></span><p>대시보드 </p></a></li>
                 <li><a href=""><span class="icon2"></span><p>예약관리</p></a></li>
                 <li><a href=""><span class="icon3"></span><p>일정관리</p></a></li>
-                <li><a href=""><span class="icon4"></span><p>숙소관리</p></a></li>
+                <li><a href="list.ro?currentPage=1"><span class="icon4"></span><p>숙소관리</p></a></li>
                 <li><a href=""><span class="icon5"></span><p>후기관리</p></a></li>
                 <li><a href="list.exp?currentPage=1"><span class="icon6"></span><p>체험관리</p></a></li>
                 <li><a href=""><span class="icon7"></span><p>정산관리</p></a></li>
