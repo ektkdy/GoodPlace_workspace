@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("mDao")
 public class MemberDao {
@@ -36,8 +38,31 @@ public class MemberDao {
 		int result2 = sqlSession.update("memberMapper.updatePartnerNo", m);	// 회원테이블의 파트너번호, 프로필 변경
 		return result1 * result2;
 	}
-	public int updateAccount(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateAccount", m);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 파트너 계정관리 업데이트
+	public int updatePartnerAccount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePartnerAccount", m);
+	}
+
+	public int updateMemberAccount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMemberAccount", m);
 	}
 	
 	
@@ -90,6 +115,24 @@ public class MemberDao {
 	
 	public int updateBlockPartnerOff(SqlSessionTemplate sqlSession, int ptno) {
 		return sqlSession.update("memberMapper.updateBlockPartnerOff", ptno);
+	}
+	
+	public Member aSelectPartnerMember(SqlSessionTemplate sqlSession, int ptno) {
+		
+		return sqlSession.selectOne("memberMapper.aSelectPartnerMember", ptno);
+		
+	}
+	
+	public ArrayList<Room> aSelectPartnerRoom(SqlSessionTemplate sqlSession, int ptno) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.aSelectPartnerRoom", ptno);
+		
+	}
+	
+	public ArrayList<Experience> aSelectPartnerExp(SqlSessionTemplate sqlSession, int ptno) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.aSelectPartnerExp", ptno);
+		
 	}
 	
 	

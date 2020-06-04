@@ -53,7 +53,7 @@
 		<result column="EMAIL" property="email"/>
 		<result column="POWER_START" property="powerStart"/>
 		<result column="POWER_END" property="powerEnd"/>
-		<result column="PONO" property="opNo"/>
+		<result column="PONO" property="poNo1"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">

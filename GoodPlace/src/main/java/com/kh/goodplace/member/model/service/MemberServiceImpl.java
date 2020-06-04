@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.dao.MemberDao;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Service("mService")	// 구체화 된 빈 (즉, 이 객체는 서비스의 역할을 수행하는 빈으로 등록)
 public class MemberServiceImpl implements MemberService {
@@ -26,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return mDao.loginMember(sqlSession,m);
 	}
-
+	
 	/**
 	 * 2. 회원가입 정보 입력 서비스
 	 */
@@ -34,7 +36,6 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);
 	}
-
 
 	@Override
 	public int updateMember(Member m) {
@@ -74,10 +75,16 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-	//2. 파트너 계정정보 수정용 서비스
+	//2_1. 파트너 계정정보 수정용(파트너 테이블) 서비스
 	@Override
 	public int updatePartnerAccount(Member m) {
-		return 0;
+		return mDao.updatePartnerAccount(sqlSession, m);
+	}
+
+	// 2_2. 파트너 계정정보 수정용(멤버 테이블) 서비스
+	@Override
+	public int updateMemberAccount(Member m) {
+		return mDao.updateMemberAccount(sqlSession, m);
 	}
 
 
@@ -88,59 +95,76 @@ public class MemberServiceImpl implements MemberService {
 
 
 	//-------------------------------------------------------------------
-	// 1. 회원 전체 목록 조회용 서비스 - 관리자
-	/*회원용*/
-	@Override
-	public int aSelectMemberListCount() {
+		// 1. 회원 전체 목록 조회용 서비스 - 관리자
+		/*회원용*/
+		@Override
+		public int aSelectMemberListCount() {
+			
+			return mDao.aSelectMemberListCount(sqlSession);
+			
+		}
 		
-		return mDao.aSelectMemberListCount(sqlSession);
-		
-	}
-	
-	@Override
-	public ArrayList<Member> aSelectMemberList(PageInfo pi) {
-		
-		return mDao.aSelectMemberList(sqlSession, pi);
-		
-	}
+		@Override
+		public ArrayList<Member> aSelectMemberList(PageInfo pi) {
+			
+			return mDao.aSelectMemberList(sqlSession, pi);
+			
+		}
 
-	@Override
-	public int updateBlockMemberOn(int mno) {
-		
-		return mDao.updateBlockMemberOn(sqlSession, mno);
-		
-	}
+		@Override
+		public int updateBlockMemberOn(int mno) {
+			
+			return mDao.updateBlockMemberOn(sqlSession, mno);
+			
+		}
 
-	@Override
-	public int updateBlockMemberOff(int mno) {
-		
-		return mDao.updateBlockMemberOff(sqlSession, mno);
-		
-	}
+		@Override
+		public int updateBlockMemberOff(int mno) {
+			
+			return mDao.updateBlockMemberOff(sqlSession, mno);
+			
+		}
 
-	/*파트너용*/
-	@Override
-	public int aSelectPartnerListCount() {
-		return mDao.aSelectPartnerListCount(sqlSession);
-	}
-	
-	@Override
-	public ArrayList<Member> aSelectPartnerList(PageInfo pi) {
+		/*파트너용*/
+		@Override
+		public int aSelectPartnerListCount() {
+			return mDao.aSelectPartnerListCount(sqlSession);
+		}
 		
-		return mDao.aSelectPartnerList(sqlSession, pi);
+		@Override
+		public ArrayList<Member> aSelectPartnerList(PageInfo pi) {
+			
+			return mDao.aSelectPartnerList(sqlSession, pi);
+			
+		}
 		
-	}
-	
-	@Override
-	public int updateBlockPartnerOn(int ptno) {
-		return mDao.updateBlockPartnerOn(sqlSession, ptno);
-	}
-	
-	@Override
-	public int updateBlockPartnerOff(int ptno) {
-		return mDao.updateBlockPartnerOff(sqlSession, ptno);
-	}
-	
-	//-------------------------------------------------------------------
+		@Override
+		public int updateBlockPartnerOn(int ptno) {
+			return mDao.updateBlockPartnerOn(sqlSession, ptno);
+		}
+		
+		@Override
+		public int updateBlockPartnerOff(int ptno) {
+			return mDao.updateBlockPartnerOff(sqlSession, ptno);
+		}
+
+		@Override
+		public Member aSelectPartnerMember(int ptno) {
+			return mDao.aSelectPartnerMember(sqlSession, ptno);
+		}
+
+		@Override
+		public ArrayList<Room> aSelectPartnerRoom(int ptno) {
+			return mDao.aSelectPartnerRoom(sqlSession, ptno);
+		}
+
+		@Override
+		public ArrayList<Experience> aSelectPartnerExp(int ptno) {
+			return mDao.aSelectPartnerExp(sqlSession, ptno);
+		}
+
+
+		
+		//-------------------------------------------------------------------
 
 }

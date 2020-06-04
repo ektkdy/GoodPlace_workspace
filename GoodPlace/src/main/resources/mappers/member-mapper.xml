@@ -28,9 +28,19 @@
 
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER
-		values(usno.nextval, null, #{email}, #{userPwd}, #{userName}, #{phone}, 0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
+		values(usno.nextval, null, #{email}, #{userPwd}, #{userName},
+				<choose>
+					<when test="phone != null">
+					#{phone},
+					</when>
+					<otherwise>
+					NULL,
+					</otherwise>
+				</choose>
+				
+				0, 1, SYSDATE, 'Y', 0,NULL,'default.jpg',NULL)
 	</insert>
-
+	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		select *
 		  from Member
@@ -59,6 +69,7 @@
 		   	   change_name = #{changeName}
 		 where usNo = #{usNo}
 	</update>
+	
 	<insert id="insertPartner" parameterType="Member">
 		insert into partner
 		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'N')
@@ -81,17 +92,22 @@
 
 
 
-	<update id="updateAccount" parameterType="Member">
-		update (select partner_intro, phone, account_name, account_num, pre_msg
-				from member
-				join partner using (usno))
-		   set partner_intro=#{partnerIntro}, phone=#{phone},
-		   	   account_name=#{accountName}, account_num=#{accountNum},
-			   pre_msg=#{preMsg}
-		 where usno=#{usNo}
+	<update id="updateMemberAccount" parameterType="Member">
+		update member
+		   set phone=#{phone}, 
+		   	   origin_name = #{originName},
+		   	   change_name = #{changeName}
+		 where pano=#{paNo}
 	</update>
 
-
+	<update id="updatePartnerAccount" parameterType="Member">
+		update partner 
+		   set partner_intro=#{partnerIntro},
+		   	   account_name=#{accountName}, 
+		   	   account_num=#{accountNum},
+			   pre_msg=#{preMsg}
+		 where pano=#{paNo}
+	</update>
 
 
 
@@ -148,6 +164,42 @@
 		   set PARTNER_STATUS = 'Y'
 		 where paNo = #{ptno}
 	</update>
+	
+	<resultMap id="partnerExpResultSet" type="Experience">
+		<id column="EXNO" property="exNo"/>
+		<result column="EXP_TITLE" property="expTitle"/>
+		<result column="ADD_BASIC" property="addBasic"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+
+
+	<resultMap id="partnerRoomResultSet" type="Room">
+		<id column="RONO" property="roNo"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="ADD_BASIC" property="addBasic"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<select id="aSelectPartnerMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT *
+		  FROM PARTNER
+		  JOIN MEMBER USING(PANO)
+		  WHERE USNO=#{ptno}
+	</select>
+	
+	<select id="aSelectPartnerRoom" parameterType="_int" resultMap="partnerRoomResultSet">
+		SELECT RONO, ROOMS_TITLE, ADD_BASIC, START_DATE, STATUS
+		  FROM ROOMS
+		 WHERE USNO=#{ptno}
+	</select>
+	
+	<select id="aSelectPartnerExp" parameterType="_int" resultMap="partnerExpResultSet">
+		SELECT EXNO, EXP_TITLE, ADD_BASIC, START_DATE, STATUS
+		  FROM EXPERIENCE
+		 WHERE USNO=#{ptno}
+	</select>
 
 
 </mapper>

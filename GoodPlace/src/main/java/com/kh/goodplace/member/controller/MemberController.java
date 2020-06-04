@@ -122,6 +122,15 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="kakaoLogin.me")
+	public ModelAndView kakaoLogin(Member m, HttpSession session, ModelAndView mv) {
+		Member loginUser = mService.loginMember(m);
+		session.setAttribute("loginUser", loginUser);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
 
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -167,6 +176,32 @@ public class MemberController {
 
 		return mv;
 	}
+	
+	@RequestMapping("kakaoEnroll.me")
+	public ModelAndView kakaoEnroll(Member m, ModelAndView mv, HttpSession session) {
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		m.setUserPwd(encPwd);
+		
+		int result1 = mService.emailCheck(m.getEmail()); // 이메일 체크
+		int result2 = 0;
+		
+		if(result1 == 0) { // 가입된 이메일이 없을 경우
+			result2 = mService.insertMember(m);
+		}
+
+		if(result2 > 0) {	// 회원가입 성공
+			session.setAttribute("msg", "GoodPlace의 회원이 되신것을 축하합니다.");
+			mv.setViewName("user/member/enrollSuccess");
+		} else if(result1 > 0) {			// 회원가입 실패
+			session.setAttribute("msg", "이미 가입된 이메일 입니다.");
+			mv.setViewName("redirect:loginForm.me");
+		} else {
+			mv.addObject("msg","회원가입 실패! 관리자에게 문의하세요.");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
 
 	// 파트너 등록 페이지 이동
 	@RequestMapping("enrollPartnerForm.me")
@@ -194,34 +229,34 @@ public class MemberController {
 	}
 
 	// 전달받은 파일을 서버에 업로드 시키는 메소드
-	   public String saveFile(MultipartFile file, HttpServletRequest request) {
+    public String saveFile(MultipartFile file, HttpServletRequest request) {
 
-	      // 파일을 업로드 시킬 폴더 경로 (String savePath)
-	      String resources = request.getSession().getServletContext().getRealPath("resources");
-	      String savePath = resources + "\\uploadFiles\\userProfile\\";
+      // 파일을 업로드 시킬 폴더 경로 (String savePath)
+      String resources = request.getSession().getServletContext().getRealPath("resources");
+      String savePath = resources + "\\uploadFiles\\userProfile\\";
 
-	      // 원본명 (aaa.jpg)
-	      String originName = file.getOriginalFilename();
+      // 원본명 (aaa.jpg)
+      String originName = file.getOriginalFilename();
 
-	      // 수정명 (20200522202011.jpg)
-	      // 년월일시분초 (String currentTime)
-	      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 20200522202011
+      // 수정명 (20200522202011.jpg)
+      // 년월일시분초 (String currentTime)
+      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 20200522202011
 
-	      // 확장자(String ext)
-	      String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+      // 확장자(String ext)
+      String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
 
-	      String changeName = currentTime + ext;
+      String changeName = currentTime + ext;
 
 
-	      try {
-	         file.transferTo(new File(savePath + changeName));
-	      } catch (IllegalStateException | IOException e) {
-	         e.printStackTrace();
-	      }
+      try {
+         file.transferTo(new File(savePath + changeName));
+      } catch (IllegalStateException | IOException e) {
+         e.printStackTrace();
+      }
 
-	      return changeName;
+      return changeName;
 
-	   }
+   }
 
 
 
@@ -243,13 +278,27 @@ public class MemberController {
     }
 
     @RequestMapping("updateAccount.me")
-    public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv) {
-    	int result1  = mService.updateMember(m);
-    	int result2 = mService.updatePartnerAccount(m);
+    public ModelAndView updateAccount(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request,
+    								  @RequestParam(name="reUploadFile", required=true) MultipartFile file) {
     	
+    	//현재 넘어온 파일이 있을 경우(== 넘어온 파일명이 빈문자열이 아닐경우)
+    	if(!file.getOriginalFilename().equals("")) {
+    		
+    		//서버에 파일 업로드 진행
+    		String changeName = saveFile(file, request);
+    		
+    		m.setOriginName(file.getOriginalFilename());
+    		m.setChangeName(changeName);
+    		m.setFilePath(session.getServletContext().getRealPath("resources")+ "\\uploadFiles\\" + changeName);
+    	}
+
+    	int result1 = mService.updateMemberAccount(m);
+    	int result2 = mService.updatePartnerAccount(m);
+
     	int result = result1*result2;
 	
 		if(result>0) {
+			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("msg", "계정정보 업데이트 성공");
 			mv.setViewName("redirect:partnerMain.me");
 		} else {
@@ -359,7 +408,32 @@ public class MemberController {
 		return mv;
     }
     
-    
+    @RequestMapping("aPartnerDetail.me")
+    public ModelAndView aSelectPartner(int ptno, ModelAndView mv)
+    {
+        
+    	Member m = mService.aSelectPartnerMember(ptno);
+    	ArrayList listR = mService.aSelectPartnerRoom(ptno);
+    	ArrayList listE = mService.aSelectPartnerExp(ptno);
+    	
+    	
+    	
+        if(m != null)
+        { // 파트너 상세조회 성공
+            
+            mv.addObject("m", m);
+            mv.addObject("listR", listR);
+            mv.addObject("listE", listE);
+            mv.setViewName("admin/a_partnerDetail");
+        }
+        else
+        { // 파트너 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    } 
     
     
     

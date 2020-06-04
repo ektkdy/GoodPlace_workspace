@@ -76,14 +76,12 @@
 	                            <tr>
 	                                <td width="100"><input type="checkbox"></td>
 	                                <td width="150">파트너번호</td>
+	                                <td width="150">회원번호</td>
 	                                <td width="200">이름</td>
 	                                <td width="200">아이디</td>
 	                                <td width="200">등록일</td>
 	                                <td width="300">휴대전화</td>
 	                                <td width="150">파트너타입</td>
-	                                <td width="150">숙소</td>
-	                                <td width="150">체험</td>
-	
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -115,13 +113,12 @@
 		                            <tr>
 		                                <td onclick="event.cancelBubble=true"><input type="checkbox" name="ptno" value="${ m.paNo }"></td>
 		                                <td>${ m.paNo }</td>
+		                                <td>${ m.usNo }</td>
 		                                <td>${ m.userName }</td>
 		                                <td>${ m.email }</td>
 		                                <td>${ m.paEnrollDate }</td>
 		                                <td>${ m.phone }</td>
 		                                <td>${ m.partnerStatus }</td>
-		                                <td>0</td>
-		                                <td>0</td>
 		                            </tr>
 	                            </c:forEach>
 	                        </tbody>
@@ -131,7 +128,7 @@
 			            	$(function(){
 			            		
 	 	            		    $("#partnerList tbody tr").click(function(){
-			            			location.href="aPartnerDetail.me?ptno=" + $(this).children().eq(1).text();
+			            			location.href="aPartnerDetail.me?ptno=" + $(this).children().eq(2).text();
 			            		});  
 	 	            		    
 			            	});
