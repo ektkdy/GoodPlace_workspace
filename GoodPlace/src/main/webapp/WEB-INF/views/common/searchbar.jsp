@@ -37,6 +37,12 @@
     #mainSearch .input .liBox{
         border: solid 1px lightgray;
         height: 58px;
+        width: 200px; 
+    }
+    
+    #mainSearch .input .liBox1{
+        border: solid 1px lightgray;
+        height: 58px;
         width: 268px; 
     }
 
@@ -95,7 +101,11 @@
                         <input type="text" placeholder="어디로 여행가세요?" >
                     </li>
                     <li class="liBox">
-                        <b>날짜</b>
+                        <b>가는날짜</b>
+                        <input type="date" placeholder="날짜를 입력하세요" >
+                    </li>
+                    <li class="liBox">
+                        <b>오는날짜</b>
                         <input type="date" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox">
@@ -110,15 +120,15 @@
             <!-- 체험검색 -->
             <form action="" post="get">
                 <div class="experience input" style="display: none;">
-                    <li class="liBox">
+                    <li class="liBox1">
                         <b>태그</b>
                         <input type="text" placeholder="체험 목록을 선택하세요" >
                     </li>
-                    <li class="liBox">
+                    <li class="liBox1">
                         <b>날짜</b>
                         <input type="date" placeholder="날짜를 입력하세요" >
                     </li>
-                    <li class="liBox">
+                    <li class="liBox1">
                         <b>키워드</b>
                         <input type="number" placeholder="키워드를 입력하세요">
                     </li>

@@ -286,7 +286,7 @@
 		                    			<a class="list qBtn" href="enrollPartnerForm.me" style="font-size: 15px;">파트너등록하기</a>
 		                    		</c:when>
 		                    		<c:otherwise>
-		                    			<a class="list qBtn" href="" style="font-size: 15px;">파트너대시보드</a>
+		                    			<a class="list qBtn" href="partnerDashBoardForm.me" style="font-size: 15px;">파트너대시보드</a>
 		                    		</c:otherwise>
 		                    	</c:choose>
 
