@@ -51,13 +51,6 @@ public class MemberController {
 		return "user/member/pwdFind1";
 	}
 	
-	// 파트너대시보드 페이지
-	
-	@RequestMapping("partnerDashBoardForm.me")
-	public String partnerDashBoardForm() {
-		return "user/member/partnerDashBoard";
-	}
-
 	//비밀번호 찾기 페이지2 이메일 체크
 	@RequestMapping("emailCheck.me")
 	public String emailCheck(String email, HttpSession session, Model model) {

@@ -1,13 +1,23 @@
 package com.kh.goodplace.experience.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
@@ -18,6 +28,40 @@ public class ExperienceController {
 	
 	@Autowired // DI
 	private ExperienceService expService;
+	
+	/* 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드 */
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		// 파일을 업로드 시킬 폴더 경로(String savePath)
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		//웹컨테이너의 resources의 물리적인 경로 알아내는 것		
+
+		String savePath = resources + "\\uploadFiles\\";
+		
+		// 원본명(aaa.jpg)
+		String originName = file.getOriginalFilename();
+		
+		// 수정명(20200522202011.jpg 년월일시분초.기존의원본의확장자)
+		// 년월일시분초 (String currentTime)
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		
+		// 확장자(String ext)
+		String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+				//lastIndexOf : 원본명이름중에 . 이후 ~ 마지막 까지 선택
+		String changeName = currentTime + (int)(Math.random()*1000)+1 + ext ;
+		
+		try {
+			file.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// transferTo : 어떤 폴더에 어떤 이름으로 저장할지 지정하는 메소드
+		
+		return changeName;
+		
+	}
 	
 	/* 1. 체험관리- 전체 체험목록 조회용 서비스 */
 	@RequestMapping("list.exp")
@@ -49,11 +93,41 @@ public class ExperienceController {
 	
 	/* 2_3. 체험등록용 서비스 */
 	@RequestMapping("insert.exp")
-	public ModelAndView insertExp(Experience e, ModelAndView mv) {
+	public String insertExp(Experience e, @RequestParam(name="titleImg", required=false) MultipartFile file,
+			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
+			 HttpServletRequest request, Attachment[] at) {
 		
-		mv.addObject("e", e);
-		mv.setViewName("partner/partnerExpList");
-		return mv;
+		if(!file.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(file, request);
+			e.setOriginName(file.getOriginalFilename());
+			e.setChangeName(changeName);
+			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
+		
+		int result1 = expService.insertExp(e);
+		
+		
+		for(int i=0; i<filelist.length; i++) {
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	// 3개를 주가했는데 2개만 넣었을 경우 비어있는 객체는 제외됨
+				String changeName = saveFile(filelist[i], request);
+				at[i].setOriginName(filelist[i].getOriginalFilename());
+				at[i].setChangeName(changeName);
+				at[i].setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+			}
+		}
+		
+		int result2 = expService.insertAttachment(at);
+		
+		int result = result1*result2;
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		}else {
+			return "";
+		}
+		
+		
 	}
 	
 	

@@ -30,7 +30,7 @@ public class Experience {
 	private Timestamp startTime;	// 운영시작시간
 	private Timestamp endTime;		// 운영끝시간
 	private int useTime;			// 체험소요시간
-	private Timestamp intervalTime;	// 체험간격
+	private int intervalTime;		// 체험간격
 	private String supplies;		// 준비물
 	private Timestamp deadline;		// 예약가능시간
 	private int price;				// 체험가격
