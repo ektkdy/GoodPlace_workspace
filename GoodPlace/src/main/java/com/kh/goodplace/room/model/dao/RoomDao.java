@@ -17,12 +17,12 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.selectListCount");
 	}
 	
-	public ArrayList<Room> selectRoomsList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Room> selectRoomsList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
 		int offset =(pi.getCurrentPage()-1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsList", userNo, rowBounds);
 		
 	}
 	

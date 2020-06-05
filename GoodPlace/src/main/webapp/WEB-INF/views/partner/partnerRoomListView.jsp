@@ -73,7 +73,7 @@ button:hover{cursor:pointer}
 				                       		<td><div class="rest" style="margin:0 auto">휴면중</div></td>
 				                       	</c:otherwise>
 				                    </c:choose>
-				                        <td>${r.addBasic.substr( 1, 2 )}</td>
+				                        <td>${r.addBasic}</td>
 				                        <td>${r.startDate }</td>
 				                        <td>${r.roomsTitle}</td>
 				                        <td>50</td>
