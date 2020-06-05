@@ -135,7 +135,7 @@
 	                        <input type="text" id="del_address" name="addBasic" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>											
 							<input type="text" id="del_extraAddress" name="addRef" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
 							<!-- 사용자가 직접 입력하는 칸  -->
-							<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;"> 
+							<input type="text" id="del_detailAddress"  name="addDetail" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;" required> 
                         </td>
                     </tr>
                     
@@ -151,7 +151,6 @@
     </div>
 </div>
 
-     
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
@@ -159,13 +158,20 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- summernote -->
+
+
 <script type="text/javascript">
 	$(function(){
-		if($(".expTag :checked").size()>2){
-			alert("2개까지 선택가능합니다.");
-		}else if($(".expTag :checked").size()<1){
-			alert("최소1개는 선택");	
-		}
+		$(".expTag").click(function(){
+			if($("input[name=expTag]:checked").length>2){
+				alert("2개까지 선택가능합니다.");
+				return false;
+			}
+			if($("input[name=expTag]:checked").length<1){
+				alert("최소1개는 선택해야합니다");
+				return false;
+			}
+		});
 	});
 </script>
 
@@ -228,15 +234,13 @@
          // 2. 추가적인 속성들 부여 가능
          // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
          $('#summernote').summernote({
-         	//placeholder:"체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다. &#13;&#10;
-                //	게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요.&#13;&#10; &#13;&#10;
-                //	* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요. &#13;&#10;
-                //	- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기 &#13;&#10;
-                //	- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기",
-         tabsize: 2,
+         	
+         	tabsize: 2,
              height: 200,
-             width:600/*
-             toolbar: [
+              width: 600,
+        placeholder: '체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  '
+        			+'게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요.'
+             /*toolbar: [
                  [groupName, [list of button]]
                  ['Font Style', ['fontname']],
                  ['style', ['bold', 'italic', 'underline']],
@@ -252,6 +256,9 @@
 	
 	});
 </script>
+
+
+
 
 </body>
 </html>

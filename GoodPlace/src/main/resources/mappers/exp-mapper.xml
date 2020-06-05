@@ -57,5 +57,37 @@
  	     order by status asc, totalSal desc
 	</select>
 	
+	<insert id="insertExp" parameterType="Experience">
+		insert into experience
+		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle}, #{expContent},
+			  #{activity}, #{maxPeople}, null, #{startTime}, #{endTime}, #{useTime}, #{intervalTime}, 
+			  #{supplies}, #{deadline}, #{price}, #{addBasic}, #{addDetail}, #{addRef}, #{zipCode}, 
+			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath})
+	</insert>
+	
+
+	<insert id="insertAttachment" parameterType="Attachment">
+		insert into attachment
+		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval )
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

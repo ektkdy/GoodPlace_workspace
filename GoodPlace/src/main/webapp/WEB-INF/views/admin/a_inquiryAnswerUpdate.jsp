@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/adminCommon.css" />
+<link rel="stylesheet" type="text/css" href="../admin_css/a_common.css" />
 <style>
     /*공통*/
     /* font */
@@ -41,20 +41,20 @@
 
     #answer{width:90%; height: 300px; padding-left: 20px; padding-top: 20px;}
 
-</style>        
+</style>   
 </head>
 <body>
+
     <div id="wrap">
-
 		<jsp:include page="../common/adminMenubar.jsp"/>
-
+		
         <div id="contents" style="width:980px">
             <div id="tab"></div>
-            <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">답변하기</span></a></div>
+            <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">문의상세</span></a></div>
             <div class="con" style="color:#000">
-                <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">1:1문의 답변</p></span>
+                <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">1:1문의 상세</p></span>
                 <div class="con2">
-                	<form id="inquiryUpdateForm" method="post" action="inquiryUpdate.bo">
+                	<form id="inquiryAnswerUpdateForm" method="post" action="inquiryAnswerupdate.bo">
                 		<input type="hidden" name="inNo" value="${ b.inNo }">
 	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
 	                        <thead>
@@ -100,7 +100,7 @@
 	                            </tr>
 	                            <tr>
 	                                <td colspan="8" style="padding-left: 5%;">
-	                                    <textarea  id="answer" name="inqReContent" placeholder="답변내용이 없습니다." style="border:1px solid #dbdbdb;" required></textarea>
+	                                    <textarea  id="answer" name="inqReContent" style="border:1px solid #dbdbdb;" required>${b.inqReContent}</textarea>
 	                                </td>
 	                            </tr>
 	                        </tbody>
@@ -108,9 +108,10 @@
 	                    <br>
 	                    <div style="text-align: right;">
 	                        <button type="button" id="gotoList" onclick="location.href='aInquiryList.bo?currentPage=1'">목록으로</button>
-	                        <button type="submit" class="blue_btn" >등록하기</button>
+	                        <button type="submit" class="blue_btn" >수정하기</button>
 	                    </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -124,6 +125,7 @@
             });
         });
     </script>
+
 
 </body>
 </html>

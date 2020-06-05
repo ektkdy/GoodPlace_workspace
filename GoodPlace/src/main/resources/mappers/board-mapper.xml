@@ -157,6 +157,23 @@
 		 WHERE INNO = #{ino}
 	</select>
 	
+	<update id="inquiryUpdate" parameterType="Board">
+	
+		update INQUERY
+		   set RE_CONTENT=#{inqReContent}
+		 where INNO=#{inNo}
+	
+	</update>
+	
+	<update id="insertInquiry" parameterType="Board">
+	
+		update INQUERY
+		   set RE_CONTENT=#{inqReContent},
+		       RE_STATUS=2
+		 where INNO=#{inNo}
+	
+	</update>
+	
 	<!-- 현영  -->	
 	
 	

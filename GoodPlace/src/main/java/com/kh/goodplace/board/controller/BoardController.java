@@ -255,10 +255,11 @@ public class BoardController {
     }
     
     
-    /*
+    
     @RequestMapping("inquiryAnswerForm.bo")
-    public String inquiryEnrollForm() {
+    public String inquiryEnrollForm(int ino, Model model) {
     	
+        model.addAttribute("b", bService.selectInquiry(ino));
     	return "admin/a_inquiryAnswer";
     	
     }
@@ -280,7 +281,7 @@ public class BoardController {
         }
     	
     }
-    */
+    
     
     
     @RequestMapping("aInquiryDetail.bo")
@@ -306,8 +307,8 @@ public class BoardController {
     
 
     
-    /*
-    @RequestMapping("inquiryAnswerupdate.bo.bo")
+    
+    @RequestMapping("inquiryAnswerupdate.bo")
     public String inquiryUpdate(Board b, Model model, HttpServletRequest request) {
     	
         int result = bService.inquiryUpdate(b);
@@ -325,12 +326,12 @@ public class BoardController {
     	
     }
     
-    @RequestMapping("inquiryUpdateForm.bo")
+    @RequestMapping("inquiryAnswerUpdateForm.bo")
     public String inquiryUpdateForm(int ino, Model model)
     {
         model.addAttribute("b", bService.selectInquiry(ino));
-        return "admin/a_inquiryUpdate";
-    }*/
+        return "admin/a_inquiryAnswerUpdate";
+    }
     
     // 관리자 1:1문의 끝
     

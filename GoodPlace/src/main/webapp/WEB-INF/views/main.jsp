@@ -7,9 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 슬라이더를 생성하는 부분 -->
-<script src="resources/js/jquery-3.4.1.min.js"></script>
-<script src="resources/js/jquery.bxslider.js"></script>
+
 <!-- 슬라이더 버튼들 -->
 <link rel="stylesheet" href="resources/css/user/mainPage/jquery.bxslider.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -193,6 +191,8 @@
 	<!-- footer -->
 	<jsp:include page="common/footer.jsp"/>
 	
+	<!-- 슬라이더를 생성 스크립트 -->
+	<script src="resources/js/jquery.bxslider.js"></script>
 	<script>
     /* 슬라이더 js */
     $(document).ready(function(){
