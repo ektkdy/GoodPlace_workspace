@@ -29,13 +29,13 @@ public class RoomController {
 	private RoomService rService;
 	
 	@RequestMapping("list.ro")
-	public String selectRoomsList(int currentPage, Model model) {
+	public String selectRoomsList(int currentPage,int userNo, Model model) {
 		
 		int listCount = rService.selectListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Room> list = rService.selectRoomsList(pi);
+		ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -240,6 +240,23 @@ public class RoomController {
     
 	// ------------- Power 관리 끝 --------------------------------------------------
 	
-	
+ // ------------- 사용자 시작 --------------------------------------------------
+    
+    @RequestMapping("searchRo.ro")
+    public String searchRoom(String tripArea, String tripPeriod, String tripPeople, ModelAndView mv) {
+    	
+    	System.out.println("넘겨받은것들 : " + tripArea + " " + tripPeriod + " " + tripPeople);
+    	
+    	return "user/searchRooms";
+    }
+    
+    
+    
+    
+    
+    
+	// ------------- 사용자 끝 --------------------------------------------------
+    
+    
 
 }

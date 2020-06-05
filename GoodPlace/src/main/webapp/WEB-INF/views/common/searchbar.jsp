@@ -94,29 +94,43 @@
             </div>
 
             <!-- 숙소검색 -->
-            <form action="" method="get" >
+            <form action="" id="roomSearchArea" method="get" >
                 <div class="search input" style="display: block;">
                     <li class="liBox">
                         <b>위치</b>
-                        <input type="text" placeholder="어디로 여행가세요?" >
+                        <input type="text" id="tripArea" placeholder="어디로 여행가세요?" >
                     </li>
                     <li class="liBox">
                         <b>가는날짜</b>
-                        <input type="date" placeholder="날짜를 입력하세요" >
+                        <input type="date" id="tripStartDate" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox">
                         <b>오는날짜</b>
-                        <input type="date" placeholder="날짜를 입력하세요" >
+                        <input type="date" id="tripEndDate" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox">
                         <b>인원수</b>
-                        <input type="number" placeholder="인원수를 선택해주세요">
+                        <input type="number" id="tripPeople" placeholder="인원수를 선택해주세요">
                     </li>
                     <li style="margin: auto; text-align: center;">
-                        <input id="sub"type="submit" value="숙소검색">
+                        <input id="subRoomInfo"type="submit" value="숙소검색">
                     </li>
                 </div>
             </form>
+         	<script>
+            	$(function(){
+            		$("#roomSearchArea #subRoomInfo").click(function(){
+            			
+            			var tripArea = $("#tripArea").val();
+            			var tripPeriod = $("#tripPeriod").val();
+            			var tripPeople = $("#tripPeople").val();
+
+            			console.log(tripArea, tripPeriod, tripPeople);
+            			
+            			location.href = "searchRo.ro";
+            		});
+            	});
+            </script>
             <!-- 체험검색 -->
             <form action="" post="get">
                 <div class="experience input" style="display: none;">

@@ -27,7 +27,7 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public ArrayList<Room> selectRoomsList(PageInfo pi) {
+	public ArrayList<Room> selectRoomsList(PageInfo pi, int userNo) {
 		return rDao.selectRoomsList(sqlSession, pi);
 	}
 

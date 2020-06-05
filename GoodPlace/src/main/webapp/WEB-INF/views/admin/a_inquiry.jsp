@@ -67,6 +67,10 @@
     }
     #delete_btn:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
     #page_title{width:280px;}
+    
+    .offBtn{
+    	pointer-events: none;
+    }
 </style>    
 </head>
 <body>
@@ -94,7 +98,7 @@
                     <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
+                    <table id="inquiryList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <td width="100">선택</td>
@@ -106,6 +110,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<!-- 
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>10261</td>
@@ -113,17 +118,38 @@
                                 <td>상품문의</td>
                                 <td>20-05-13</td>
                                 <td><button class="modifiyBtn">답변하기</button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>10261</td>
-                                <td>예약을 하려고 하는데...</td>
-                                <td>상품문의</td>
-                                <td>20-05-13</td>
-                                <td><button class="modifiyBtn">답변완료</button></td>
-                            </tr>
+                            </tr> -->
+                            <c:forEach items="${ list }" var="b">
+	                            <tr>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
+	                                <td>${ b.inNo }</td>
+	                                <td>${ b.inqTitle }</td>
+	                                <td>${ b.inqCategory }</td>
+	                                <td>${ b.inqDate }</td>
+									<c:choose>	
+										<c:when test="${ b.inqReStatus eq 1 }">                                
+		                                	<td onclick="event.cancelBubble=true"><button class="modifiyBtn" onclick="location.href='inquiryAnswerForm.bo?ino=${ b.inNo }'">답변하기</button></td>
+										</c:when>
+										<c:otherwise>
+		                                	<td onclick="event.cancelBubble=true"><button class="modifiyBtn offBtn" disabled>답변완료</button></td>
+		                                </c:otherwise>
+	                                </c:choose>
+	                            </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
+                    
+                    <script>
+		            	$(function(){
+		            		
+ 	            		    $("#inquiryList tbody tr").click(function(){
+		            			location.href="aInquiryDetail.bo?ino=" + $(this).children().eq(1).text();
+		            		});  
+ 	            		    
+		            	});
+		            </script>
+                    
+                       
                     <table>
                         <th>
                             <br>
@@ -131,13 +157,34 @@
                         </th>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a>
+			                    <c:choose>
+				                	<c:when test="${ pi.currentPage eq 1 }">
+					                    <a href="#">&lt;</a>
+					                </c:when>
+					                <c:otherwise>
+				                    	<a href="aInquiryList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+				                    </c:otherwise>
+			                    </c:choose>
+			                    
+						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			                    	<c:choose>
+			                    		<c:when test="${ p eq pi.currentPage }">
+				                    		<a href="#">${p}</a>
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<a class="page-link" href="aInquiryList.bo?currentPage=${ p }">${p}</a>
+				                    	</c:otherwise>
+				                    </c:choose>
+			                    </c:forEach>
+			                    
+						        <c:choose>
+			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					                    <a>&gt;</a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="aInquiryList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+					                </c:otherwise>
+			                    </c:choose>
                             </div>
                         </th>
     

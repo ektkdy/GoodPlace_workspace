@@ -62,12 +62,12 @@
 		 where usno = #{userNo}
 	</select>
 	
-	<select id="selectRoomsList" resultMap="roomResultSet">
+	<select id="selectRoomsList" resultMap="roomResultSet" parameterType="_int">
 		select *
 	      from rooms r
 			join power p using(pono)
 			join powerpay pp using(rono)
-			where r.status = 1
+			where rono = #{userNo}
 	</select>
 	
 	<!-- 숙소등록 -->

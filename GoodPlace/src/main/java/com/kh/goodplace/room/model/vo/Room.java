@@ -65,5 +65,7 @@ public class Room {
 	private int powerPrice;		// 파워가격
 	
 	private String email;		// 회원아이디
-
+	
+	/* DB에는 없지만 새로 생성한 변수 */
+	private String addArea; // ~시  // ex) 서울특별시, 화성시
 }

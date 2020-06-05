@@ -62,7 +62,7 @@
             <li><a href="aFaqList.bo?currentPage=1"><span class="icon7"></span><p>게시글관리</p></a></li>
             <li><a href=""><span class="icon8"></span><p>정산관리</p></a></li>
             <li><a href=""><span class="icon9"></span><p>메세지</p></a></li>
-            <li><a href=""><span class="icon10"></span><p>1:1문의관리</p></a></li>
+            <li><a href="aInquiryList.bo?currentPage=1"><span class="icon10"></span><p>1:1문의관리</p></a></li>
             <li><a href=""><span class="icon11"></span><p>숙소관리</p></a></li>
             <li><a href=""><span class="icon12"></span><p>체험관리</p></a></li>
         </ul>

@@ -20,19 +20,27 @@
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
 	</resultMap>
+	
+	<resultMap type="Board" id="boardInquiryResultSet">
+		<id column="INNO" property="inNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="RENO" property="reNo"/>
+		<result column="RPNO" property="rpNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="CATEGORY" property="inqCategory"/>
+		<result column="INQUERY_TITLE" property="inqTitle"/>
+		<result column="INQUERY_CONTENT" property="inqContent"/>
+		<result column="INQUERY_DATE" property="inqDate"/>
+		<result column="RE_TITLE" property="inqReTitle"/>
+		<result column="RE_CONTENT" property="inqReContent"/>
+		<result column="RE_STATUS" property="inqReStatus"/>
+		<result column="STATUS" property="inqStatus"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="EMAIL" property="email"/>
+	</resultMap>
 
 
-	<!-- 현영  -->
-	<select id="aSelectFaqListCount" resultType="_int">
-		select count(*)
-		  from faq
-	</select>
-	<!-- 현영  -->
-	<select id="aSelectFaqList" resultMap="boardFaqResultSet">
-		select *
-		  from faq
-		 order by FAQNO desc
-	</select>
+
 
 	<!-- 진아  : faqCategory별 모든 제목 조회 -->
 	<select id="selectFaqList" parameterType="string" resultMap="boardFaqResultSet">
@@ -41,7 +49,20 @@
 		  where faq_category = #{faqCategory}	
 	</select>
 	
+	
 	<!-- 현영  -->
+	<!-- FAQ -->
+	<select id="aSelectFaqListCount" resultType="_int">
+		select count(*)
+		  from faq
+	</select>
+	
+	<select id="aSelectFaqList" resultMap="boardFaqResultSet">
+		select *
+		  from faq
+		 order by FAQNO desc
+	</select>
+	
 	<insert id="insertFaq" parameterType="Board">
 		insert into faq
 		values(faqno.nextval, #{faqCategory}, #{faqTitle}, #{faqContent}, sysdate)
@@ -49,14 +70,12 @@
 
 	
 	
-	<!-- 현영  -->
 	<select id="selectFaq" parameterType="_int" resultMap="boardFaqResultSet">
 		select *
 		  from faq
 		 where faqno= #{fno}
 	</select>
 	
-	<!-- 현영  -->
 	<update id="faqUpdate" parameterType="Board">
 	
 		update faq
@@ -66,7 +85,6 @@
 		 where faqno=#{faqNo}
 	
 	</update>
-	<!-- 현영  -->
 	<delete id="faqDelete" parameterType="_int">
 	
 		delete 
@@ -77,14 +95,12 @@
 	
 	
 	<!-- 공지사항 -->
-	<!-- 현영 -->
 	<select id="aSelectNoticeListCount" resultType="_int">
 		select count(*)
 		  from notice
 		 where status='Y'
 	</select>
 	
-	<!-- 현영  -->
 	<select id="aSelectNoticeList" resultMap="boardNoticeResultSet">
 		select *
 		  from notice
@@ -92,27 +108,23 @@
 		 order by NONO desc
 	</select>
 	
-	<!-- 현영  -->
 	<insert id="insertNotice" parameterType="Board">
 		insert into notice
 		values(nono.nextval, #{noticeTitle}, #{noticeContent}, sysdate, default, default)
 	</insert>
 	
-	<!-- 현영  -->
 	<update id="noticeIncreaseCount" parameterType="_int">
 		update notice
 		   set count = count + 1
 		 where nono = #{nno} and status = 'Y'
 	</update>
 	
-	<!-- 현영  -->
 	<select id="selectNotice" parameterType="_int" resultMap="boardNoticeResultSet">
 		select *
 		  from notice
 		 where nono= #{nno} and status='Y'
 	</select>
 	
-	<!-- 현영  -->
 	<update id="noticeUpdate" parameterType="Board">
 	
 		update notice
@@ -122,6 +134,30 @@
 	
 	</update>
 	
+	<!-- 1:1문의 -->
+	
+	<select id="aSelectInquiryListCount" resultType="_int">
+		select count(*)
+		  from INQUERY
+         where category != 5
+	</select>
+	
+	<select id="aSelectInquiryList" resultMap="boardInquiryResultSet">
+        select *
+		  from INQUERY
+         where category != 5
+		 order by inNO desc
+	</select>
+	
+	<select id="selectInquiry" parameterType="_int" resultMap="boardInquiryResultSet">
+		SELECT I.INNO, I.INQUERY_TITLE, I.CATEGORY, R.ROOMS_TITLE, M.EMAIL, I.INQUERY_CONTENT, I.RE_CONTENT
+		  FROM INQUERY I
+		  JOIN ROOMS R ON R.RONO = I.RONO
+		  JOIN MEMBER M ON M.USNO = I.USNO
+		 WHERE INNO = #{ino}
+	</select>
+	
+	<!-- 현영  -->	
 	
 	
 	
