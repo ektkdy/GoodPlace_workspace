@@ -238,7 +238,101 @@ public class BoardController {
     
     // 관리자 공지사항 끝
     
+    // 관리자 1:1문의 시작
+    
+    @RequestMapping("aInquiryList.bo")
+    public String aSelectInquiryList(int currentPage, Model model) {
+    	
+        int listCount = bService.aSelectInquiryListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aSelectInquiryList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_inquiry";
+    }
+    
+    
+    /*
+    @RequestMapping("inquiryAnswerForm.bo")
+    public String inquiryEnrollForm() {
+    	
+    	return "admin/a_inquiryAnswer";
+    	
+    }
+    
+    
+    @RequestMapping("inquiryUpdate.bo")
+    public String insertInquiry(Board b, Model model, HttpServletRequest request) {
+    	
+    	int result = bService.insertInquiry(b);
+    	
+        if(result > 0)
+        { // 게시글 작성 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지
+            return "redirect:aInquiryList.bo?currentPage=1";
+        }
+        else
+        { // 게시글 작성 실패
+            model.addAttribute("msg", "게시글 등록 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    */
+    
+    
+    @RequestMapping("aInquiryDetail.bo")
+    public ModelAndView selectInquiry(int ino, ModelAndView mv)
+    {
+    	
+    	Board b = bService.selectInquiry(ino);
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_inquiryDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    
 
+    
+    /*
+    @RequestMapping("inquiryAnswerupdate.bo.bo")
+    public String inquiryUpdate(Board b, Model model, HttpServletRequest request) {
+    	
+        int result = bService.inquiryUpdate(b);
+        
+        if(result > 0)
+        {
+            return "redirect:aInquiryDetail.bo?ino=" + b.getInNo();
+        }
+        else
+        {
+            model.addAttribute("msg", "게시글 수정 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("inquiryUpdateForm.bo")
+    public String inquiryUpdateForm(int ino, Model model)
+    {
+        model.addAttribute("b", bService.selectInquiry(ino));
+        return "admin/a_inquiryUpdate";
+    }*/
+    
+    // 관리자 1:1문의 끝
     
     
     

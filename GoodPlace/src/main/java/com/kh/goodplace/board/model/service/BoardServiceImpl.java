@@ -92,7 +92,35 @@ public class BoardServiceImpl implements BoardService {
 	public int noticeDelete(int nno) {
 		return 0;
 	}
+	
+	// ------------------- 관리자 1:1문의 ----------------------
 
+	@Override
+	public int aSelectInquiryListCount() {
+		return bDao.aSelectInquiryListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> aSelectInquiryList(PageInfo pi) {
+		return bDao.aSelectInquiryList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertInquiry(Board b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Board selectInquiry(int ino) {
+		return bDao.selectInquiry(sqlSession, ino);
+	}
+
+	@Override
+	public int inquiryUpdate(Board b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	// ------------------- 파트너 공지사항 ----------------------
@@ -123,6 +151,8 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectFaqList(String faqCategory) {
 		return bDao.selectFaqList(sqlSession, faqCategory);
 	}
+
+
 
 
 
