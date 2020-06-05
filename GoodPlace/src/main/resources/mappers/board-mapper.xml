@@ -37,7 +37,17 @@
 		<result column="STATUS" property="inqStatus"/>
 		<result column="ROOMS_TITLE" property="roomsTitle"/>
 		<result column="EXP_TITLE" property="expTitle"/>
+		<result column="REVIEW_TITLE" property="reTitle"/>
 		<result column="EMAIL" property="email"/>
+		<result column="rUSNO" property="userNoR"/>
+		<result column="vUSNO" property="userNoV"/>
+		<result column="eUSNO" property="userNoE"/>
+		<result column="rEMAIL" property="emailR"/>
+		<result column="vEMAIL" property="emailV"/>
+		<result column="eEMAIL" property="emailE"/>
+		<result column="rYC" property="yellowCardR"/>
+		<result column="vYC" property="yellowCardV"/>
+		<result column="eYC" property="yellowCardE"/>
 	</resultMap>
 
 
@@ -175,6 +185,29 @@
 		 where INNO=#{inNo}
 	
 	</update>
+	
+	<select id="aSelectReportListCount" resultType="_int">
+		select count(*)
+		  from INQUERY
+         where category = 5 and status = 'Y'
+	</select>
+	
+	<select id="aSelectReportList" resultMap="boardInquiryResultSet">
+		SELECT I.INNO, I.USNO, M.EMAIL, I.INQUERY_TITLE, I.INQUERY_DATE, REVIEW_TITLE, ROOMS_TITLE, EXP_TITLE, 
+		R.USNO AS "rUSNO", V.USNO AS "vUSNO", E.USNO AS "eUSNO", 
+		RM.EMAIL AS "rEMAIL", RM.YELLOW_CARD AS "rYC", VM.EMAIL AS "vEMAIL", VM.YELLOW_CARD AS "vYC", EM.EMAIL AS "eEMAIL", EM.YELLOW_CARD AS "eYC"
+		FROM INQUERY I
+		LEFT JOIN MEMBER M ON(I.USNO = M.USNO)
+		LEFT JOIN ROOMS R ON(I.RONO=R.RONO)
+		LEFT JOIN REVIEW V ON(I.RENO=V.RENO)
+		LEFT JOIN EXPERIENCE E ON(I.EXNO=E.EXNO)
+		LEFT JOIN MEMBER RM ON(R.USNO = RM.USNO)
+		LEFT JOIN MEMBER VM ON(V.USNO = VM.USNO)
+		LEFT JOIN MEMBER EM ON(E.USNO = EM.USNO)
+		WHERE CATEGORY = 5 AND I.STATUS='Y'
+		ORDER BY I.INNO DESC
+	</select>
+	
 	
 	<!-- 현영  -->	
 	

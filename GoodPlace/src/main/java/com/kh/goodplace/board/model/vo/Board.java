@@ -66,7 +66,19 @@ public class Board {
 	/*1:1문의 detail select 용*/
 	private String email;
 	private String expTitle;
-	/*---------------------*/
+
+	
+	/*신고관리 select 용*/
+	private int userNoR;			//룸 관련 신고당한사람 번호
+	private int userNoV;			//후기 관련 신고당한사람 번호
+	private int userNoE;			//체험 관련 신고당한사람 번호
+	private String emailR;			//룸 관련 신고당한사람 이메일
+	private String emailV;			//후기 관련 신고당한사람 이메일
+	private String emailE;			//체험 관련 신고당한사람 이메일
+	private int yellowCardR;		//룸 관련 신고당한사람 경고횟수
+	private int yellowCardV;		//후기 관련 신고당한사람 경고횟수
+	private int yellowCardE;		//체험 관련 신고당한사람 경고횟수
+
 	
 	
 	/* 리뷰 관련 컬럼들 */

@@ -335,7 +335,22 @@ public class BoardController {
     
     // 관리자 1:1문의 끝
     
+    // 관리자 신고관리 시작
+    @RequestMapping("aReportList.bo")
+    public String aSelectReportList(int currentPage, Model model) {
+    	
+        int listCount = bService.aSelectReportListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aSelectReportList(pi);
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_report";
+    }
     
+    
+    // 관리자 신고관리 끝
     
     
     

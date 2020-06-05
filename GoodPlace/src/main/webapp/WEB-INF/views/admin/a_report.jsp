@@ -76,52 +76,90 @@
                             <tr>
                                 <td width="100"><input type="checkbox"></td>
                                 <td width="150">신고번호</td>
-                                <td width="200">신고자명</td>
-                                <td width="200">신고당한사람</td>
                                 <td width="300">제목</td>
+                                <td width="200">신고자명</td>
                                 <td width="200">등록일</td>
+                                <td width="200">신고당한사람</td>
                                 <td width="150">경고횟수</td>
 
                             </tr>
                         </thead>
                         <tbody>
+                        <!-- 
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>1</td>
-                                <td>홍길동</td>
-                                <td>임꺽정</td>
                                 <td>방이 너무 더러워요</td>
+                                <td>홍길동</td>
                                 <td>20.05.18</td>
+                                <td>임꺽정</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>1</td>
-                                <td>홍길동</td>
-                                <td>임꺽정</td>
                                 <td>방이 너무 더러워요</td>
+                                <td>홍길동</td>
                                 <td>20.05.18</td>
+                                <td>임꺽정</td>
                                 <td>0</td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>홍길동</td>
-                                <td>임꺽정</td>
-                                <td>방이 너무 더러워요</td>
-                                <td>20.05.18</td>
-                                <td>0</td>
-                            </tr>
+                             -->
+                             
+	                        <c:forEach items="${ list }" var="b">
+	                            <tr>
+	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
+	                                <td>${ b.inNo }</td>
+	                                <td>${ b.inqTitle }</td>
+	                                <td>${ b.email }</td>
+	                                <td>${ b.inqDate }</td>
+	                                <c:choose>
+		                                <c:when test="${ b.emailR ne null }">
+		                                	<td>${ b.emailR }</td>
+		                                	<td>${ b.yellowCardR }</td>
+		                                </c:when>
+		                                <c:when test="${ b.emailE ne null }">
+		                                	<td>${ b.emailE }</td>
+		                                	<td>${ b.yellowCardE }</td>
+		                                </c:when>
+		                                <c:when test="${ b.emailV ne null }">
+		                                	<td>${ b.emailV }</td>
+		                                	<td>${ b.yellowCardV }</td>
+		                                </c:when>
+	                                </c:choose>
+	                            </tr>
+	                         </c:forEach>
                         </tbody>
                     </table>
                     <div id="pagingArea" style="margin-top: 22px;">
-                        <a>&lt;</a>
-                        <a>1</a>
-                        <a>2</a>
-                        <a>3</a>
-                        <a>4</a>
-                        <a>5</a>
-                        <a>&gt;</a>
+	                    <c:choose>
+		                	<c:when test="${ pi.currentPage eq 1 }">
+			                    <a href="#">&lt;</a>
+			                </c:when>
+			                <c:otherwise>
+		                    	<a href="aReportList.bo??currentPage=${ pi.currentPage -1 }">&lt;</a>
+		                    </c:otherwise>
+	                    </c:choose>
+	                    
+				        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	                    	<c:choose>
+	                    		<c:when test="${ p eq pi.currentPage }">
+		                    		<a href="#">${p}</a>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<a class="page-link" href="aReportList.bo??currentPage=${ p }">${p}</a>
+		                    	</c:otherwise>
+		                    </c:choose>
+	                    </c:forEach>
+	                    
+				        <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+			                    <a>&gt;</a>
+			                </c:when>
+			                <c:otherwise>
+			                    <a href="aReportList.bo??currentPage=${ pi.currentPage +1 }">&gt;</a>
+			                </c:otherwise>
+	                    </c:choose>
                     </div>
                     <br>
                 </div>
