@@ -240,6 +240,23 @@ public class RoomController {
     
 	// ------------- Power 관리 끝 --------------------------------------------------
 	
-	
+ // ------------- 사용자 시작 --------------------------------------------------
+    
+    @RequestMapping("searchRo.ro")
+    public String searchRoom(String tripArea, String tripPeriod, String tripPeople, ModelAndView mv) {
+    	
+    	System.out.println("넘겨받은것들 : " + tripArea + " " + tripPeriod + " " + tripPeople);
+    	
+    	return "user/searchRooms";
+    }
+    
+    
+    
+    
+    
+    
+	// ------------- 사용자 끝 --------------------------------------------------
+    
+    
 
 }
