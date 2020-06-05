@@ -149,7 +149,11 @@ public class BoardDao {
 		
 	}
 	
-	
+	public Board selectReport(SqlSessionTemplate sqlSession, int rno) {
+		
+		return sqlSession.selectOne("boardMapper.selectReport", rno);
+		
+	}
 	
 	
 	//------------ 파트너 공지사항 -----------------------------------------

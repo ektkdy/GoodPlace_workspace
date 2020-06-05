@@ -71,7 +71,7 @@
                 </span>
                 
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0">
+                    <table id="reportList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
                                 <td width="100"><input type="checkbox"></td>
@@ -131,6 +131,21 @@
 	                         </c:forEach>
                         </tbody>
                     </table>
+                    
+                   	<script>
+		            	$(function(){
+		            		
+ 	            		    $("#reportList tbody tr").click(function(){
+		            			location.href="aReportDetail.bo?rno=" + $(this).children().eq(1).text();
+		            		});  
+ 	            		    
+		            	});
+		            </script>
+                    
+                    
+                    
+                    
+                    
                     <div id="pagingArea" style="margin-top: 22px;">
 	                    <c:choose>
 		                	<c:when test="${ pi.currentPage eq 1 }">

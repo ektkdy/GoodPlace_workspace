@@ -133,8 +133,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board selectReport(int rno) {
-		// TODO Auto-generated method stub
-		return null;
+		return bDao.selectReport(sqlSession, rno);
 	}
 	
 	

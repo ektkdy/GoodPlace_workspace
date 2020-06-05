@@ -349,6 +349,27 @@ public class BoardController {
         return "admin/a_report";
     }
     
+    @RequestMapping("aReportDetail.bo")
+    public ModelAndView selectReport(int rno, ModelAndView mv)
+    {
+    	
+    	Board b = bService.selectReport(rno);
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_reportDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    
     
     // 관리자 신고관리 끝
     

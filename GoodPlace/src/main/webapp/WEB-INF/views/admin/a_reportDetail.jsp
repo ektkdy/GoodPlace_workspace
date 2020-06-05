@@ -55,24 +55,44 @@
                         <thead>
                             <tr>
                                 <td width="250px">제목</td>
-                                <td colspan="4" width="100px" style="background: white;">방이 너무 더러워요~</td>
+                                <td colspan="4" width="100px" style="background: white;">${ b.inqTitle }</td>
                                 <td width="100px">문의분류</td>
                                 <td width="100px" style="background: white;">신고</td>
                             </tr>
                             <tr>
                                 <td width="200px" style="border-top: 0px;">숙소/체험명</td>
-                                <td colspan="2" width="300px" style="background: white; border-top: 0px;">강남 cozy room</ㅅwidth=>
-                                <td width="200px" style="border-top: 0px;">신고자명</td>
-                                <td width="200px" style="background: white; border-top: 0px;">김나나</td>
+                                <c:choose>
+	                                <c:when test="${ b.roomsTitle ne null }">
+	                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+	                                </c:when>
+	                                <c:when test="${ b.expTitle ne null }">
+	                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.expTitle }</td>
+	                                </c:when>
+	                                <c:when test="${ b.reTitle ne null }">
+	                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.reTitle }</td>
+	                                </c:when>
+                                </c:choose>
+                                <td width="200px" style="border-top: 0px;">신고자</td>
+                                <td width="200px" style="background: white; border-top: 0px;">${ b.email }</td>
                                 <td width="200px" style="border-top: 0px;">신고당한사람</td>
-                                <td width="200px" style="background: white; border-top: 0px;">박추추</td>
+                                <c:choose>
+	                                <c:when test="${ b.emailR ne null }">
+	                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailR }</td>
+	                                </c:when>
+	                                <c:when test="${ b.emailE ne null }">
+	                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailE }</td>
+	                                </c:when>
+	                                <c:when test="${ b.emailV ne null }">
+	                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailV }</td>
+	                                </c:when>
+                                </c:choose>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td rowspan="2" width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
                                 <td colspan="6" style="border-bottom: 0px;">
-                                    <textarea name="" id="">박추추를 신고합니다.</textarea>
+                                    <textarea name="" id="">${ b.inqContent }</textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -82,7 +102,7 @@
                     </table>
                     <br>
                     <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
+                        <button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
                     </div>
 
                 </div>
