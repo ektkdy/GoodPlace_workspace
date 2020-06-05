@@ -40,6 +40,8 @@
     button:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
 
     #answer{width:90%; height: 300px; padding-left: 20px; padding-top: 20px;}
+    
+    .offBtn{pointer-events: none;}
 
 </style>    
 </head>
@@ -102,7 +104,15 @@
                     <br>
                     <div style="text-align: right;">
                         <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
-                        <button class="blue_btn" >수정하기</button>
+               	        <c:choose>
+	                     	<c:when test="${ b.inqReContent eq null}">
+	               				<button class="blue_btn offBtn" disabled>수정하기</button>
+	                     	</c:when>
+	                     	<c:otherwise>
+	               				<button class="blue_btn" onclick="location.href='inquiryAnswerUpdateForm.bo?ino=${ b.inNo }'">수정하기</button>
+	                     	</c:otherwise>
+                     	</c:choose>
+                        
                     </div>
 
                 </div>

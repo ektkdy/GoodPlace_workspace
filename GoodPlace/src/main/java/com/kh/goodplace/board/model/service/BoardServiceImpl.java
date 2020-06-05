@@ -107,8 +107,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertInquiry(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bDao.insertInquiry(sqlSession, b);
 	}
 
 	@Override
@@ -118,8 +117,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int inquiryUpdate(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bDao.inquiryUpdate(sqlSession, b);
 	}
 	
 	

@@ -116,7 +116,7 @@ public class BoardDao {
 	
 	public int insertInquiry(SqlSessionTemplate sqlSession, Board b) {
 		
-		return sqlSession.insert("boardMapper.insertInquiry", b);
+		return sqlSession.update("boardMapper.insertInquiry", b);
 		
 	}
 	
