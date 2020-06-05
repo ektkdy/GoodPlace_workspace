@@ -51,6 +51,23 @@ public interface BoardService {
 	int noticeDelete(int nno);
 	
 	//------------------------------------------------------
+	// 1. 관리자 1:1문의 게시판 리스트 조회용 서비스-현영
+	// 1_1. 관리자 공지사항 게시판 총갯수 조회용 서비스
+	int aSelectInquiryListCount();
+	
+	// 1_2. 요청한 페이지에 보여질 게시글 리스트 조회용 서비스-현영
+	ArrayList<Board> aSelectInquiryList(PageInfo pi);
+	
+	// 2. 1:1문의 단볍 작성용 서비스-현영
+	int insertInquiry(Board b);
+	
+	// 3. 1:1문의 상세조회용 서비스-현영
+	Board selectInquiry(int ino);
+	
+	// 4.게시글 수정용 서비스-현영
+	int inquiryUpdate(Board b);
+	
+	//------------------------------------------------------
 
 	
 	// 1_1.파트너 공지사항 전체 리스트 조회용 서비스 - 하정

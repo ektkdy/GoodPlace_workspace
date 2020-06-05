@@ -77,17 +77,6 @@ public class BoardDao {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int noticeIncreaseCount(SqlSessionTemplate sqlSession, int nno) {
 		
 		return sqlSession.update("boardMapper.noticeIncreaseCount", nno);
@@ -107,8 +96,41 @@ public class BoardDao {
 		
 	}
 	
+	//------------ 관리자 1:1문의 -----------------------------------------
 	
 	
+	public int aSelectInquiryListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.aSelectInquiryListCount");
+		
+	}
+	
+	public ArrayList<Board> aSelectInquiryList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.aSelectInquiryList", null, rowBounds);
+		
+	}
+	
+	public int insertInquiry(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.insert("boardMapper.insertInquiry", b);
+		
+	}
+	
+	public Board selectInquiry(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.selectOne("boardMapper.selectInquiry", ino);
+		
+	}
+	
+	public int inquiryUpdate(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.inquiryUpdate", b);
+		
+	}
 	
 	//------------ 파트너 공지사항 -----------------------------------------
 	

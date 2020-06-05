@@ -64,7 +64,7 @@
                             </tr>
                             <tr>
                                 <td width="200px" style="border-top: 0px;">숙소/체험명</td>
-                                <td colspan="2" width="300px" style="background: white; border-top: 0px;">강남 cozy room</ㅅwidth=>
+                                <td colspan="2" width="300px" style="background: white; border-top: 0px;">강남 cozy room</td>
                                 <td width="200px" style="border-top: 0px;">신고자명</td>
                                 <td width="200px" style="background: white; border-top: 0px;">김나나</td>
                                 <td width="200px" style="border-top: 0px;">신고당한사람</td>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td rowspan="2" width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
                                 <td colspan="6" style="border-bottom: 0px;">
-                                    <textarea name="" id="">박추추를 신고합니다.</textarea>
+                                    <textarea name="" id="" readonly>박추추를 신고합니다.</textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -86,15 +86,15 @@
                             </tr>
                             <tr>
                                 <td colspan="8" style="padding-left: 5%;">
-                                    <textarea  id="answer" name="" style="border:1px solid #dbdbdb;"></textarea>
+                                    <textarea  id="answer" name="inqReContent" style="border:1px solid #dbdbdb;" required></textarea>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
                     <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
-                        <button class="blue_btn" >등록하기</button>
+                        <button type="button" id="gotoList" onclick="javascript:history.go(-1);">이전으로</button>
+                        <button type="submit" class="blue_btn" >등록하기</button>
                     </div>
 
                 </div>

@@ -59,6 +59,13 @@ public class Board {
 	private String inqContent;		// 문의내용
 	private String inqTitle;		// 문의제목
 	private Date inqDate;			// 문의날짜
+	private String inqReTitle;		// 답글제목
+	private String inqReContent;	// 문의답글
+	private String inqReStatus;		// 답변대기(1), 답변완료(2)
+	private String inqStatus;		// 문의상태값
+	/*1:1문의 detail select 용*/
+	private String email;
+	/*---------------------*/
 	
 	
 	/* 리뷰 관련 컬럼들 */

@@ -57,31 +57,43 @@
                     <table class="common_tb" cellpadding="0" cellspacing="0" >
                         <thead>
                             <tr>
-                                <td width="250px">제목</td>
-                                <td colspan="4" width="100px" style="background: white;">방이 너무 더러워요~</td>
-                                <td width="100px">문의분류</td>
-                                <td width="100px" style="background: white;">신고</td>
+                                <td width="150px">제목</td>
+                                <td colspan="4" width="100px" style="background: white;">${ b.inqTitle }</td>
+                                <td width="150px">문의분류</td>
+	                            <c:choose>
+		                            <c:when test="${ b.inqCategory eq 1}">
+                                		<td width="250px" style="background: white;">일반</td>
+		                            </c:when>
+		                            <c:when test="${ b.inqCategory eq 2}">
+                                		<td width="250px" style="background: white;">숙소/체험</td>
+		                            </c:when>
+		                            <c:when test="${ b.inqCategory eq 3}">
+                                		<td width="250px" style="background: white;">취소환불</td>
+		                            </c:when>
+		                            <c:when test="${ b.inqCategory eq 4}">
+                                		<td width="250px" style="background: white;">포인트</td>
+		                            </c:when>
+	                            </c:choose>
+
                             </tr>
                             <tr>
-                                <td width="200px" style="border-top: 0px;">숙소/체험명</td>
-                                <td colspan="2" width="300px" style="background: white; border-top: 0px;">강남 cozy room</ㅅwidth=>
-                                <td width="200px" style="border-top: 0px;">신고자명</td>
-                                <td width="200px" style="background: white; border-top: 0px;">김나나</td>
-                                <td width="200px" style="border-top: 0px;">신고당한사람</td>
-                                <td width="200px" style="background: white; border-top: 0px;">박추추</td>
+                                <td width="150px" style="border-top: 0px;">숙소/체험명</td>
+                                <td colspan="4" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+                                <td width="150px" style="border-top: 0px;">작성자</td>
+                                <td width="250px" style="background: white; border-top: 0px;">${ b.email }</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+                                <td width="150px" style="background: #c1d9f0; font-size: 18px;">내용</td>
                                 <td colspan="6">
-                                    <textarea name="" id="">박추추를 신고합니다.</textarea>
+                                    <textarea name="" id="" readonly>${ b.inqContent }</textarea>
                                 </td>
                             </tr>
                             <tr>
-                                <td width="200px" style="background: #dbdbdb; font-size: 18px; border-bottom:1px solid #dbdbdb;">답변</td>
+                                <td width="150px" style="background: #dbdbdb; font-size: 18px; border-bottom:1px solid #dbdbdb;">답변</td>
                                 <td colspan="6">
-                                    <textarea name="" id="">안녕하세요 반갑습니다. 문의하신 내용은 .....</textarea>
+                                    <textarea name="" id="" placeholder="답변내용이 없습니다." readonly>${ b.inqReContent }</textarea>
                                 </td>
                             </tr>
 
@@ -89,7 +101,7 @@
                     </table>
                     <br>
                     <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
+                        <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
                         <button class="blue_btn" >수정하기</button>
                     </div>
 
