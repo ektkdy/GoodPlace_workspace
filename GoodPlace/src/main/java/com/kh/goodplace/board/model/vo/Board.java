@@ -65,6 +65,7 @@ public class Board {
 	private String inqStatus;		// 문의상태값
 	/*1:1문의 detail select 용*/
 	private String email;
+	private String expTitle;
 	/*---------------------*/
 	
 	

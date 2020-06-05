@@ -80,7 +80,17 @@
 	                            </tr>
 	                            <tr>
 	                                <td width="150px" style="border-top: 0px;">숙소/체험명</td>
-	                                <td colspan="4" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+		                            <c:choose>
+		                                <c:when test="${ b.roomsTitle ne null }">
+		                                	<td colspan="4" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+		                                </c:when>
+		                                <c:when test="${ b.expTitle ne null }">
+		                                	<td colspan="4" width="300px" style="background: white; border-top: 0px;">${ b.expTitle }</td>
+		                                </c:when>
+		                                <c:otherwise>
+		                                	<td colspan="4" width="300px" style="background: white; border-top: 0px;">""</td>
+		                                </c:otherwise>
+	                                </c:choose>
 	                                <td width="150px" style="border-top: 0px;">작성자</td>
 	                                <td width="250px" style="background: white; border-top: 0px;">${ b.email }</td>
 	                            </tr>

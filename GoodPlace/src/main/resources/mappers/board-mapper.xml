@@ -36,6 +36,7 @@
 		<result column="RE_STATUS" property="inqReStatus"/>
 		<result column="STATUS" property="inqStatus"/>
 		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="EXP_TITLE" property="expTitle"/>
 		<result column="EMAIL" property="email"/>
 	</resultMap>
 
@@ -150,10 +151,11 @@
 	</select>
 	
 	<select id="selectInquiry" parameterType="_int" resultMap="boardInquiryResultSet">
-		SELECT I.INNO, I.INQUERY_TITLE, I.CATEGORY, R.ROOMS_TITLE, M.EMAIL, I.INQUERY_CONTENT, I.RE_CONTENT
+        SELECT I.INNO, I.INQUERY_TITLE, I.CATEGORY, R.ROOMS_TITLE, E.EXP_TITLE, M.EMAIL, I.INQUERY_CONTENT, I.RE_CONTENT
 		  FROM INQUERY I
-		  JOIN ROOMS R ON R.RONO = I.RONO
-		  JOIN MEMBER M ON M.USNO = I.USNO
+		  LEFT JOIN ROOMS R ON(I.RONO = R.RONO)
+          LEFT JOIN EXPERIENCE E ON(I.EXNO = E.EXNO)
+		  LEFT JOIN MEMBER M ON(I.USNO = M.USNO)
 		 WHERE INNO = #{ino}
 	</select>
 	
