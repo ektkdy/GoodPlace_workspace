@@ -2,6 +2,7 @@ package com.kh.goodplace.experience.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
 
@@ -14,8 +15,11 @@ public interface ExperienceService {
 	// 1_2. 요청한 페이지에 보여질 체험리스트 조회용 서비스
 	ArrayList<Experience> selectExpList(PageInfo pi);
 	
-	// 2. 체험 등록용 서비스
-	int insertExp();
+	// 2_1. 체험 등록용 서비스(체험정보+썸네일)
+	int insertExp(Experience e);
+	
+	// 2_3. 체험 등록용 서비스(상세사진용)
+	int insertAttachment(Attachment[] at);
 	
 	// 3. 체험 상세조회용 서비스 
 	Experience selectExp(int exNo);
@@ -31,5 +35,7 @@ public interface ExperienceService {
 	
 	// 7. 체험 반려건 재등록 요청 서비스
 	int updateReExp(int exNo);
+
+	
 	
 }

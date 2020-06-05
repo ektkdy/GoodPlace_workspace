@@ -30,10 +30,11 @@
     table td textarea{width: 500px; height: 170px; border-radius: 4px; resize: none; border: 1px solid #dbdbdb;}
     table input[type=radio]{margin-right:5px;}
     table input[type=checkbox]{margin-right:5px;}
-    table input[type=text]{width: 500px; height: 30px; border-radius: 4px; border: 1px solid #dbdbdb;}
-    table td span input[type=number]{width:200px; height: 30px;border-radius: 4px; margin-left: 20px;border: 1px solid #dbdbdb;}
+    table input[type=text]{height: 30px; border-radius: 4px; border: 1px solid #dbdbdb;}
+    table td input[type=number]{width:100px; height:30px; border-radius: 4px; border: 1px solid #dbdbdb;}
     table select{width: 200px; height: 30px; border-radius: 4px;}
     .maxPeople {width: 200px; height: 30px; border-radius: 4px; border: 1px solid #dbdbdb; padding-left: 5px;}
+    #oprateTimes input{width:100px; height:30px;border-radius:4px; border: 1px solid #dbdbdb; padding-left:5px;}
 
     /*하단 버튼 css*/
     #btns{width:950px; text-align: right; margin-top: 20px; margin-bottom: 20px; margin-right: 20px;}
@@ -63,7 +64,8 @@
             </div>
             <div id="stepOne">
             
-            <form action="insert.exp" method="post">
+            <form id="insertExp" action="insert.exp" method="post">
+            	<input type="hidden" name="usNo" value=${ loginUser.usNo }">
             	<input type="hidden" name="expCategory" value="${ e.expCategory }">
             	<input type="hidden" name="language" value="${ e.language }">
             	<input type="hidden" name="expTag" value="${ e.expTag }">
@@ -87,97 +89,52 @@
                     <tr>
                         <th>* 최대 인원수</th>
                         <td>
-                            <input type="number" class="maxPeople" name="maxPeople" min="1" required>
+                            <input type="number" class="maxPeople" name="maxPeople" min="1" required style="width:100px;margin-right:5px;">명
                             <h5>• 최소 인원수는 1명입니다. 한 회차당 운영 가능한 최대인원수를 입력하세요.</h5>
                         </td>
                     </tr>
                     <tr>
                         <th>* 체험 시간</th>
-                        <td>
-                            <select name="startTime" id="startTime" style="margin-bottom: 5px; margin-right: 5px;">
-                                <option>운영 시작시간 선택</option>
-                                <option value="10">오전 10시</option>
-                                <option value="11">오전 11시</option>
-                                <option value="12">오후 12시</option>
-                                <option value="13">오후 13시</option>
-                                <option value="14">오후 14시</option>
-                                <option value="15">오후 15시</option>
-                                <option value="16">오후 16시</option>
-                                <option value="17">오후 17시</option>
-                                <option value="18">오후 18시</option>
-                                <option value="19">오후 19시</option>
-                                <option value="20">오후 20시</option>
-                                <option value="21">오후 21시</option>
-                            </select>
-                            <select name="endTime" id="endTime">
-                                <option>운영 끝 시간 선택</option>
-                                <option value="10">오전 10시</option>
-                                <option value="11">오전 11시</option>
-                                <option value="12">오후 12시</option>
-                                <option value="13">오후 13시</option>
-                                <option value="14">오후 14시</option>
-                                <option value="15">오후 15시</option>
-                                <option value="16">오후 16시</option>
-                                <option value="17">오후 17시</option>
-                                <option value="18">오후 18시</option>
-                                <option value="19">오후 19시</option>
-                                <option value="20">오후 20시</option>
-                                <option value="21">오후 21시</option>
-                            </select>
-                            <select name="useTime" id="useTime" style="margin-bottom: 5px; margin-right: 5px;">
-                                <option>소요시간 선택</option>
-                                <option value=1>1시간 소요</option>
-                                <option value=2>2시간 소요</option>
-                                <option value=3>3시간 소요</option>
-                                <option value=4>4시간 소요</option>
-                                <option value=5>5시간 소요</option>
-                                <option value=6>6시간 소요</option>
-                            </select>
-                            <select name="intervalTime" id="intervalTime">
-                                <option>체험 간격 선택</option>
-                                <option value="30">30분마다 운영</option>
-                                <option value="60">1시간마다 운영</option>
-                                <option value="90">1시간 30분마다 운영</option>
-                                <option value="120">2시간마다 운영</option>
-                                <option value="150">2시간 30분마다 운영</option>
-                            </select>
-                            
-                        </td>
-                    </tr>
+						<td id="oprateTimes">
+							운영 시작 시간은 <input type="time" name="startTime" id="startTime"> 입니다.<br><br>
+							운영 마감 시간은 <input type="time" name="endTime" id="endTime"> 입니다.<br><br>
+							체험 소요 시간은  <input type="number" name="useTime" min=1 placeholder="1">시간 입니다. 
+							<h5>• 최소 소요시간은 1시간입니다.</h5><br>
+							체험 운영 간격은	<input type="number" name="intervalTime" id="intervalTime" min=30 placeholder="30">분 입니다.
+							<h5>• 최소 운영간격은 30분입니다.</h5>
+						</td>
+					</tr>
                     <tr>
                         <th>* 게스트 준비물</th>
                         <td>
-                            <input type="text" id="supplies" name="supplies">
-                            <input type="checkbox" id="noSupplies" name="supplies">
+                            <input type="text" id="supplies" name="supplies" style="width:500px;">
+                            <input type="checkbox" id="noSupplies" name="supplies" value="별도의 준비물이 필요없는 체험입니다.">
                             	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
                         </td>
                     </tr>
                     <tr>
                         <th>* 대표 사진</th>
-                        <td>
-                            <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
-                        	<div style="width: 200px; height: 150px; border:1px solid #bebebe"></div>
-                            <input type="file" id="" name="" value="" required>
-                        </td>
+                        <td colspan="2">
+                          	<img id="titleImg" style="border:0.5px solid #bebebe; width: 200px; height:150px" >
+                         	<div id="fileArea">
+								<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
+							</div>
+                          <h5>• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
+                       </td>
                     </tr>
                     <tr>
                         <th>* 상세 사진</th>
-                        <td>
-                            <h5>• 1장 이상의 상세 사진을 등록해주세요. 최대 10장까지 가능합니다.</h5>
-                            <input type="file" id="" name="" value="">
-                        </td>
+                        <td class="photo_btn" colspan="2">
+							<div id="parah"></div>
+                        	<input type="button" value="추가" onclick="addInput();" style="width:50px; height:35px; background:#184c88; color:#fff; border:none; border-radius:4px;" />
+							<input type="button" value="삭제" onclick="deleteInput();" style="width:50px; height:35px; border:none; border-radius:4px;"/>
+							<h5>• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</h5>
+						</td>
                     </tr>
                     <tr>
                         <th>* 예약 설정</th>
                         <td>
-                            <select name="deadline" id="deadline">
-                                <option value="1hour">1시간 전</option>
-                                <option value="3hour">3시간 전</option>
-                                <option value="5hour">5시간 전</option>
-                                <option value="1day">1일 전</option>
-                                <option value="2day">2일 전</option>
-                                <option value="3day">3일 전</option>
-                            </select> 부터 예약을 받지 않겠습니다.
+                        	<input type="number" name="deadline" id="deadline" min=1 placeholder="1" style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
                             <h5>• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
                                 	나중에 언제든지 변경하실수 있습니다.</h5>
                         </td>
@@ -257,7 +214,69 @@
             	});
             </script>
             
-            <!-- 검토 후 제출 쪽 체크박스  -->
+            <!-- 대표사진 fileArea -->
+			<script>
+				$(function(){
+					$("#fileArea").hide();
+					
+					$("#titleImg").click(function(){
+						$("#thumb").click();
+					});
+				
+				});
+				
+				function loadImg(inputFile, num) {
+					if(inputFile.files.length==1){
+		       			// 파일을 읽어들일 FileReader 객체생성
+		       			var reader = new FileReader();
+			
+		       			// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
+		       			reader.readAsDataURL(inputFile.files[0]);
+		       			
+		       			//파일 읽기가 완료 되었을때 실행할 메소드
+						// e : 현재 이벤트가 발생한 이벤트객체
+		       			reader.onload = function(e){
+							$("#titleImg").attr("src", e.target.result); 
+						};
+					}
+				}
+			</script>
+			
+			<!-- 상세사진용 input 추가 -->
+		    <script>
+				var maxAppend = 0; 
+		    	function addInput(){
+		    		if (maxAppend >= 5) return; 
+		    		$("#parah").append('<input type="file" name="file">');
+		    		maxAppend++;
+		    	}
+		    	
+		    	function deleteInput(){
+		    		$("#parah input:last-child").remove();
+		    		maxAppend--;
+		    	}
+		    </script>
+			
+			<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
+			<script>
+				$(function(){
+					// 이벤트 걸고자하는 input요소
+					var price = $(".price");
+					
+					price.keyup(function(){
+						// 금액이 4자리 이상 되었을 때 예상가격 출력 -- 소수점이하 버림
+						if(price.val().length>=4){
+							//console.log(price.val());
+							var priceCal = Math.floor(price.val()*0.8);
+							$(".priceCal").val(priceCal);
+						}else{
+							$('.priceCal').val('');
+						}					
+					});
+				});
+			</script>
+			
+			<!-- 검토 후 제출 쪽 체크박스  -->
             <script>
 				$(function(){
 					$("#checkAll").click(function(){
@@ -274,28 +293,15 @@
 							$("#checkAll").prop("checked", false);
 						}
 					});
-				});
-			</script>
-			
-			<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
-			<script>
-				$(function(){
-					// 이벤트 걸고자하는 input요소
-					var price = $(".price");
-					
-					price.keyup(function(){
-						// 금액이 4자리 이상 되었을 때 예상가격 출력
-						if(price.val().length>=4){
-							//console.log(price.val());
-							var priceCal = Math.floor(price.val()*0.8);
-							$(".priceCal").val(priceCal);
+					/* $("#next").click(function(){
+						if($("#checkAll").is(":checked")){
+							$("#insertExp").submit();
 						}else{
-							$('.priceCal').val('');
-						}					
-					});
+							alert("모두 동의 후 체험 신청이 가능합니다.");
+						}
+					} */
 				});
 			</script>
-			
         </div>
     </div>
 </div>

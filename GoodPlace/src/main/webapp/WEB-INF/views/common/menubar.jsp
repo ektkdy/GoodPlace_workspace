@@ -286,7 +286,7 @@
 		                    			<a class="list qBtn" href="enrollPartnerForm.me" style="font-size: 15px;">파트너등록하기</a>
 		                    		</c:when>
 		                    		<c:otherwise>
-		                    			<a class="list qBtn" href="partnerDashBoardForm.me" style="font-size: 15px;">파트너대시보드</a>
+		                    			<a class="list qBtn" href="partnerMain.me" style="font-size: 15px;">파트너 페이지 가기</a>
 		                    		</c:otherwise>
 		                    	</c:choose>
 
@@ -302,7 +302,7 @@
 		                                    <li><a href="">my굿플레이스</a></li>
 		                                    <li><a href="">숙소예약내역</a></li>
 		                                    <li><a href="">위시리스트</a></li>
-		                                    <li><a href="partnerMain.me">파트너대시보드</a></li>
+		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
 		                                    <li><a href="">관리자페이지</a></li>
 		                                    <li><a href="logout.me">로그아웃</a></li>
 		                                </ul>

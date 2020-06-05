@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.dao.ExperienceDao;
 import com.kh.goodplace.experience.model.vo.Experience;
@@ -30,10 +31,28 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.selectExpList(sqlSession, pi);
 	}
 
+	
+	//---------------------------------------------------------
+	
 	@Override
-	public int insertExp() {
-		return 0;
+	public int insertExp(Experience e) {
+		return expDao.insertExp(sqlSession, e);
 	}
+	
+	@Override
+	public int insertAttachment(Attachment[] at) {
+		
+		int result = 1;
+		
+		for(int i=0; i<at.length; i++) {
+			int result1 = expDao.insertAttachment(sqlSession, at[i]); 
+			result = result*result1;
+		}
+		
+		return result;
+	}
+
+	//---------------------------------------------------------
 
 	@Override
 	public Experience selectExp(int exNo) {
@@ -60,4 +79,5 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return 0;
 	}
 
+	
 }
