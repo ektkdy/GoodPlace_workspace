@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.room.model.vo.Room;
@@ -106,6 +107,40 @@ public class RoomDao {
 	}
 	
 	// --------- 파워관리 끝 -----------------
+	// --------- 숙소관리 시작 -----------------
+	
+	public int selectListRoomsWaitCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("roomMapper.selectListRoomsWaitCount");
+		
+	}
+	
+	public ArrayList<Room> selectRoomsWaitList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsWaitList", null, rowBounds);
+		
+	}
+	
+	public int selectListRoomsOkayCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("roomMapper.selectListRoomsOkayCount");
+		
+	}
+	
+	public ArrayList<Room> selectRoomsOkayList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsOkayList", null, rowBounds);
+		
+	}
+	
+	
+	// --------- 숙소관리 시작 -----------------
 	
 	
 	

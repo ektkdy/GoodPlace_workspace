@@ -95,7 +95,7 @@
 	</insert>
 	
 	
-	<!-- 파워관리 -->
+	<!-- 파워관리 시작-->
 	<select id="selectPowerList" resultMap="powerResultSet">
 		select *
 	      from power
@@ -143,5 +143,66 @@
 		
 	
 	</select>
+	<!-- 파워관리 시작-->
+	
+	
+	<!-- 숙소관리 시작-->
+	
+	<select id="selectListRoomsWaitCount" resultType="_int">
+		select count(*)
+		  from rooms
+		 where status = 2
+	</select>
+	
+	<select id="selectRoomsWaitList" resultMap="roomResultSet">
+		select *
+		  from rooms
+		 where status = 2
+	</select>
+	
+	<select id="selectListRoomsOkayCount" resultType="_int">
+		select count(*)
+		  from rooms
+		 where status = 1
+	</select>
+	
+	<select id="selectRoomsOkayList" resultMap="roomResultSet">
+		select *
+		  from rooms
+		 where status = 1
+	</select>
+	
+	
+	
+	<!-- 숙소관리 끝-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

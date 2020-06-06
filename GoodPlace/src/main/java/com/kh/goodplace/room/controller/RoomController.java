@@ -239,6 +239,40 @@ public class RoomController {
     
     
 	// ------------- Power 관리 끝 --------------------------------------------------
+    // ------------- 숙소 관리 시작 --------------------------------------------------
+	@RequestMapping("aRoomsWaitList.ro")
+	public String selectRoomsWaitList(int currentPage, Model model) {
+		
+		int listCount = rService.selectListRoomsWaitCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Room> list = rService.selectRoomsWaitList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminRoomsWaitList";
+	}
+	
+	@RequestMapping("aRoomsOkeyList.ro")
+	public String selectRoomsOkayList(int currentPage, Model model) {
+		
+		int listCount = rService.selectListRoomsOkayCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Room> list = rService.selectRoomsOkayList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminRoomsOkeyList";
+	}
+	
+	
+	
+    // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
    	public void searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv, Date date) {
