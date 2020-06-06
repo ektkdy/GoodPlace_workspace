@@ -241,7 +241,7 @@ public class RoomController {
 	// ------------- Power 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
-   	public String searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv, Date date) {
+   	public void searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv, Date date) {
 
     	java.sql.Date startDate = java.sql.Date.valueOf(tripStartDate);
     	java.sql.Date endDate = java.sql.Date.valueOf(tripEndDate);
@@ -250,12 +250,12 @@ public class RoomController {
     	//System.out.println("Date 타입 연산결과 : " + (endDate - startDate) );
     	
     	//System.out.println("넘겨받은것들 : " + tripArea + ", " + tripStartDate + ", " + tripEndDate + ", " + tripPeople);
-    	System.out.println("지점1" + tripArea);
+    	//System.out.println("지점1" + tripArea);
     	//ArrayList<Room> roomList = rService.selectRoomList(tripArea);
-    	System.out.println("지점2 에서 roomList : " + roomList);
+    	//System.out.println("지점2 에서 roomList : " + roomList);
     
     
-    
+   	}
     
     
     

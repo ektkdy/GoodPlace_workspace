@@ -62,7 +62,7 @@
                 <span><h2>체험 정보 입력</h2></span>
                 <h5 style="margin-bottom: 50px;">안내에 따라 체험 내용을 정확하게 설명하여 주세요. /  상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다. </h5>
             </div>
-            <form id="insertExp" action="insert.exp" method="post">
+            <form id="insertExp" action="insert.exp" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
 	            
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">

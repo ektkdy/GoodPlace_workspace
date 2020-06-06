@@ -114,19 +114,26 @@ public class ExperienceController {
 		int result1 = expService.insertExp(e);
 		
 		int result = 1;
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤
 		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
 		for(int i=0; i<filelist.length; i++) {
-			if(!filelist[i].getOriginalFilename().isEmpty()) { 	// 3개를 주가했는데 2개만 넣었을 경우 비어있는 객체는 제외됨
-				
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
 				
 				String changeName = saveFile(filelist[i], request);
 				
-				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
 				Attachment at = new Attachment();
+				
 				at.setOriginName(filelist[i].getOriginalFilename());
 				at.setChangeName(changeName);
 				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 				
+				// 잘 추가되었다면 1이 리턴
 				int result2 = expService.insertAttachment(at);
 				result = result1*result2;
 			}
@@ -137,15 +144,13 @@ public class ExperienceController {
 		}else {
 			return "common/errorPage";
 		}
-		
-		
 	}
 	
 	
 	
 	
 	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
-	@RequestMapping("pIncome.me")
+	@RequestMapping("partnerIncome.me")
 	public String selectIncomeList(int currentPage, Model model, int usNo) {
 		int listCount = expService.selectExpListCount(usNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
