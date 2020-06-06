@@ -107,7 +107,7 @@
 	                    <tr>
 	                        <th>* 게스트 준비물</th>
 	                        <td>
-	                            <input type="text" id="supplies" name="supplies" style="width:500px;">
+	                            <input type="text" id="supplies" name="supplies" style="width:500px;padding-left:5px;">
 	                            <input type="checkbox" id="noSupplies" name="supplies" value="별도의 준비물이 필요없는 체험입니다.">
 	                            	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
 	                        </td>

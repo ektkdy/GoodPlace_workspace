@@ -24,7 +24,7 @@ public class ExperienceDao {
 	}
 
 	public int insertExp(SqlSessionTemplate sqlSession, Experience e) {
-		return 0;
+		return sqlSession.insert("expMapper.insertExp", e);
 	}
 
 	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {

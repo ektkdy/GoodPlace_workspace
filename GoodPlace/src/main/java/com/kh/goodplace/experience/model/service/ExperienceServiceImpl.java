@@ -41,15 +41,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 	
 	@Override
 	public int insertAttachment(Attachment at) {
-		
-		//int result = 1;
-		
-		//for(int i=0; i<at.length; i++) {
-			int result1 = expDao.insertAttachment(sqlSession, at); 
-			//result = result*result1;
-		//}
-		
-		return result1;
+		return expDao.insertAttachment(sqlSession, at);
 	}
 
 	//---------------------------------------------------------

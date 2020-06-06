@@ -100,7 +100,7 @@ public class ExperienceController {
 	@RequestMapping("insert.exp")
 	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request/* , Attachment[] at */) {
+			HttpServletRequest request/* , Attachment at */) {
 		
 		
 		if(!file.getOriginalFilename().equals("")) {
