@@ -266,24 +266,61 @@ public class RoomController {
     
     
 	// ------------- Power 관리 끝 --------------------------------------------------
+    // ------------- 숙소 관리 시작 --------------------------------------------------
+	@RequestMapping("aRoomsWaitList.ro")
+	public String selectRoomsWaitList(int currentPage, Model model) {
+		
+		int listCount = rService.selectListRoomsWaitCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Room> list = rService.selectRoomsWaitList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminRoomsWaitList";
+	}
 	
- // ------------- 사용자 시작 --------------------------------------------------
-    
-    @RequestMapping("searchRo.ro")
-    public String searchRoom(String tripArea, String tripPeriod, String tripPeople, ModelAndView mv) {
+	@RequestMapping("aRoomsOkeyList.ro")
+	public String selectRoomsOkayList(int currentPage, Model model) {
+		
+		int listCount = rService.selectListRoomsOkayCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Room> list = rService.selectRoomsOkayList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminRoomsOkeyList";
+	}
+	
+	
+	
+    // ------------- 숙소 관리 끝 --------------------------------------------------
+	
+	// ------------- 사용자 시작 --------------------------------------------------
+   	public void searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv, Date date) {
+
+    	java.sql.Date startDate = java.sql.Date.valueOf(tripStartDate);
+    	java.sql.Date endDate = java.sql.Date.valueOf(tripEndDate);
+    	//Date today = new Date ();
+
+    	//System.out.println("Date 타입 연산결과 : " + (endDate - startDate) );
     	
-    	System.out.println("넘겨받은것들 : " + tripArea + " " + tripPeriod + " " + tripPeople);
-    	
-    	return "user/searchRooms";
-    }
+    	//System.out.println("넘겨받은것들 : " + tripArea + ", " + tripStartDate + ", " + tripEndDate + ", " + tripPeople);
+    	//System.out.println("지점1" + tripArea);
+    	//ArrayList<Room> roomList = rService.selectRoomList(tripArea);
+    	//System.out.println("지점2 에서 roomList : " + roomList);
     
     
-    
+   	}
     
     
     
 	// ------------- 사용자 끝 --------------------------------------------------
-    
     
 
 }

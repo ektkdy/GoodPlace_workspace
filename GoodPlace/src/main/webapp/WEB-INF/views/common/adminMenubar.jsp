@@ -55,7 +55,7 @@
         <ul>
             <li><a href=""><span class="icon1"></span><p>대시보드</p></a></li>
             <li><a href="aMemberList.me?currentPage=1"><span class="icon2"></span><p>회원관리</p></a></li>
-            <li><a href=""><span class="icon3"></span><p>신고관리</p></a></li>
+            <li><a href="aReportList.bo?currentPage=1"><span class="icon3"></span><p>신고관리</p></a></li>
             <li><a href=""><span class="icon4"></span><p>후기관리</p></a></li>
             <li><a href="aPartnerList.me?currentPage=1"><span class="icon5"></span><p>파트너관리</p></a></li>
             <li><a href="aPowerList.po"><span class="icon6"></span><p>파워등록</p></a></li>
@@ -63,8 +63,8 @@
             <li><a href=""><span class="icon8"></span><p>정산관리</p></a></li>
             <li><a href=""><span class="icon9"></span><p>메세지</p></a></li>
             <li><a href="aInquiryList.bo?currentPage=1"><span class="icon10"></span><p>1:1문의관리</p></a></li>
-            <li><a href=""><span class="icon11"></span><p>숙소관리</p></a></li>
-            <li><a href=""><span class="icon12"></span><p>체험관리</p></a></li>
+            <li><a href="aRoomsWaitList.ro?currentPage=1"><span class="icon11"></span><p>숙소관리</p></a></li>
+            <li><a href="aExpWaitList.ex?currentPage=1"><span class="icon12"></span><p>체험관리</p></a></li>
         </ul>
     </div>
     <script>

@@ -125,8 +125,30 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectPowerRoomList(sqlSession, pi);
 	}
 	// --------- 파워관리 끝 --------------------------
+	// --------- 숙소관리 시작 --------------------------
+
+	@Override
+	public int selectListRoomsWaitCount() {
+		return rDao.selectListRoomsWaitCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Room> selectRoomsWaitList(PageInfo pi) {
+		return rDao.selectRoomsWaitList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListRoomsOkayCount() {
+		return rDao.selectListRoomsOkayCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Room> selectRoomsOkayList(PageInfo pi) {
+		return rDao.selectRoomsOkayList(sqlSession, pi);
+	}
 
 	
+	// --------- 숙소관리 끝 --------------------------
 	
 
 	

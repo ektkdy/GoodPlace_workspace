@@ -45,35 +45,66 @@
 	<select id="selectExpListCount" resultType="_int">
 		select count(*)
 		  from experience
+		 where usno=#{usNo}
 	</select>
 	
-	<select id="selectExpList" resultMap="ExperienceResultSet">
-		select e.status, e.exp_Title, e.start_date, e.apply_date,
-       		   substr(e.add_basic, 1, 3) as local,
-               count(p.exno) as totalSal
-  		  from experience e
-     left join expPay p on(e.exno=p.exno) 
-         group by e.status, e.exp_Title, e.start_date, e.apply_date, substr(e.add_basic, 1, 3)
- 	     order by status asc, totalSal desc
+	<select id="selectExpList" resultMap="ExperienceResultSet" parameterType="_int">
+		select e.status, e.exp_Title, 
+		       e.start_date, e.apply_date, e.usno, 
+		       substr(e.add_basic, 1, 3) as local, 
+       		   count(p.exno) as totalSal
+          from experience e
+          left join expPay p on(e.exno=p.exno) 
+  		 group by e.status, e.exp_Title, e.start_date, e.apply_date, 
+  		 	   substr(e.add_basic, 1, 3), e.usno
+		having e.usno= #{usNo}
+		 order by status asc, totalSal desc
 	</select>
 	
 	<insert id="insertExp" parameterType="Experience">
 		insert into experience
-		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle}, #{expContent},
+		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle},
 			  #{activity}, #{maxPeople}, null, #{startTime}, #{endTime}, #{useTime}, #{intervalTime}, 
 			  #{supplies}, #{deadline}, #{price}, #{addBasic}, #{addDetail}, #{addRef}, #{zipCode}, 
-			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath})
+			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent})
 	</insert>
 	
 
 	<insert id="insertAttachment" parameterType="Attachment">
 		insert into attachment
-		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval )
+		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval)
 	</insert>
 
 
 
-
+	<!-- 체험관리 시작 -->
+	
+	<select id="selectListExpWaitCount" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 2
+	</select>
+	
+	<select id="selectExpWaitList" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 2
+	</select>
+	
+	<select id="selectListExpOkayCount" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 1
+	</select>
+	
+	<select id="selectExpOkayList" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 1
+	</select>
+	
+	
+	<!-- 체험관리 끝 -->
 
 
 

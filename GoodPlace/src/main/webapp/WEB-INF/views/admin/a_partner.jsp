@@ -76,12 +76,13 @@
 	                            <tr>
 	                                <td width="100"><input type="checkbox"></td>
 	                                <td width="150">파트너번호</td>
-	                                <td width="150">회원번호</td>
-	                                <td width="200">이름</td>
-	                                <td width="200">아이디</td>
-	                                <td width="200">등록일</td>
-	                                <td width="300">휴대전화</td>
+	                                <td width="100">회원번호</td>
+	                                <td width="150">이름</td>
+	                                <td width="250">아이디</td>
+	                                <td width="100">등록일</td>
+	                                <td width="150">휴대전화</td>
 	                                <td width="150">파트너타입</td>
+	                                <td width="100">경고누적</td>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -119,6 +120,7 @@
 		                                <td>${ m.paEnrollDate }</td>
 		                                <td>${ m.phone }</td>
 		                                <td>${ m.partnerStatus }</td>
+		                                <td>${ m.paYellowCard }</td>
 		                            </tr>
 	                            </c:forEach>
 	                        </tbody>

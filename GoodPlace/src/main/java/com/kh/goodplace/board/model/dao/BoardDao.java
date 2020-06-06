@@ -132,6 +132,44 @@ public class BoardDao {
 		
 	}
 	
+	// ------------------- 관리자 신고관리 ----------------------
+	
+	public int aSelectReportListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.aSelectReportListCount");
+		
+	}
+	
+	public ArrayList<Board> aSelectReportList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.aSelectReportList", null, rowBounds);
+		
+	}
+	
+	public Board selectReport(SqlSessionTemplate sqlSession, int rno) {
+		
+		return sqlSession.selectOne("boardMapper.selectReport", rno);
+		
+	}
+	
+	
+	public int reportDelete(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("boardMapper.reportDelete", ino);
+		
+	}
+	
+	public int yellowCardPlus(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.yellowCardPlus", b);
+		
+	}
+	
+	
+	
 	//------------ 파트너 공지사항 -----------------------------------------
 	
 	public int pSelectNoticeListCount(SqlSessionTemplate sqlSession) {

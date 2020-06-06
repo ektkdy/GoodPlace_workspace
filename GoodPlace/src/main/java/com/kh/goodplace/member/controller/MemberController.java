@@ -276,7 +276,7 @@ public class MemberController {
 
     @RequestMapping("partnerMain.me")
     public String partnerMain() {
-    	return "common/partnerMenubar";
+    	return "partner/partnerDashBoard";
     }
 
     @RequestMapping("pAccount.me")

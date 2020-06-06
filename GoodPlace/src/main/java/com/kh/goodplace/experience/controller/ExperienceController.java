@@ -1,6 +1,5 @@
 package com.kh.goodplace.experience.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -8,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,8 @@ import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -65,11 +67,15 @@ public class ExperienceController {
 	
 	/* 1. 체험관리- 전체 체험목록 조회용 서비스 */
 	@RequestMapping("list.exp")
-	public String selectExpList(int currentPage, Model model) {
-		int listCount = expService.selectExpListCount();
+	public String selectExpList(int currentPage, Model model, Member m, HttpSession session) {
+		
+		Member loginUser  = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
+		
+		int listCount = expService.selectExpListCount(usNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
-		ArrayList<Experience> list = expService.selectExpList(pi);
+		ArrayList<Experience> list = expService.selectExpList(pi, usNo);
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
@@ -93,9 +99,10 @@ public class ExperienceController {
 	
 	/* 2_3. 체험등록용 서비스 */
 	@RequestMapping("insert.exp")
-	public String insertExp(Experience e, @RequestParam(name="titleImg", required=false) MultipartFile file,
+	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			 HttpServletRequest request, Attachment[] at) {
+			HttpServletRequest request/* , Attachment at */) {
+		
 		
 		if(!file.getOriginalFilename().equals("")) {
 			
@@ -107,39 +114,128 @@ public class ExperienceController {
 		
 		int result1 = expService.insertExp(e);
 		
+		System.out.println(e);
+		System.out.println(result1);
 		
+		int result = 1;
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
 		for(int i=0; i<filelist.length; i++) {
-			if(!filelist[i].getOriginalFilename().isEmpty()) { 	// 3개를 주가했는데 2개만 넣었을 경우 비어있는 객체는 제외됨
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
 				String changeName = saveFile(filelist[i], request);
-				at[i].setOriginName(filelist[i].getOriginalFilename());
-				at[i].setChangeName(changeName);
-				at[i].setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result2 = expService.insertAttachment(at);
+				result = result1*result2;
+				
+				System.out.println(result2);
+				System.out.println(at);
 			}
 		}
+		System.out.println(list);
+		System.out.println(result);
 		
-		int result2 = expService.insertAttachment(at);
-		
-		int result = result1*result2;
 		
 		if(result>0) {
 			return "redirect:list.exp?currentPage=1";
 		}else {
-			return "";
+			return "common/errorPage";
 		}
-		
-		
 	}
 	
 	
 	
 	
 	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
-	@RequestMapping("pIncome.me")
-	public String selectIncomeList(int currentPage, Model model) {
-		int listCount = expService.selectExpListCount();
+	@RequestMapping("partnerIncome.me")
+	public String selectIncomeList(int currentPage, Model model, int usNo) {
+		int listCount = expService.selectExpListCount(usNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		return "partner/partnerIncome";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------[체험관리]------------
+	@RequestMapping("aExpWaitList.ex")
+	public String selectExpWaitList(int currentPage, Model model) {
+		
+		int listCount = expService.selectListExpWaitCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Experience> list = expService.selectExpWaitList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminExpWaitList";
+	}
+	
+	@RequestMapping("aExpOkayList.ex")
+	public String selectExpOkayList(int currentPage, Model model) {
+		
+		int listCount = expService.selectListExpOkayCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Experience> list = expService.selectExpOkayList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminExpOkeyList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -335,7 +335,85 @@ public class BoardController {
     
     // 관리자 1:1문의 끝
     
+    // 관리자 신고관리 시작
+    @RequestMapping("aReportList.bo")
+    public String aSelectReportList(int currentPage, Model model) {
+    	
+        int listCount = bService.aSelectReportListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aSelectReportList(pi);
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_report";
+    }
     
+    @RequestMapping("aReportDetail.bo")
+    public ModelAndView selectReport(int rno, ModelAndView mv)
+    {
+    	
+    	Board b = bService.selectReport(rno);
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_reportDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    
+    @RequestMapping("reportDelete.bo")
+    public String reportDelete(int ino, Model model) {
+    	
+    	int result = bService.reportDelete(ino);
+    	
+        if(result > 0)
+        {   // 게시글 삭제 성공
+            
+            return "redirect:aReportList.bo?currentPage=1";
+            
+        }
+        else
+        {   // 게시글 삭제 실패
+            
+            model.addAttribute("msg", "게시글 삭제 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
+    @RequestMapping("yellowCardPlus.bo")
+    public String yellowCardPlus(Board b, int ino, Model model) {
+    	
+    	//System.out.println(b);
+    	int result1 = bService.yellowCardPlus(b);
+    	
+    	
+        if(result1 > 0)
+        {   // 게시글 삭제 성공
+        	bService.reportDelete(ino);
+            return "redirect:aReportList.bo?currentPage=1";
+            
+        }
+        else
+        {   // 게시글 삭제 실패
+            
+            model.addAttribute("msg", "게시글 삭제 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
+    
+    // 관리자 신고관리 끝
     
     
     

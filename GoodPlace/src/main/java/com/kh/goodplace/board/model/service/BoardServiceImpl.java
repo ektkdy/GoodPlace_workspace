@@ -119,6 +119,32 @@ public class BoardServiceImpl implements BoardService {
 	public int inquiryUpdate(Board b) {
 		return bDao.inquiryUpdate(sqlSession, b);
 	}
+	// ------------------- 관리자 신고관리 ----------------------
+	
+	@Override
+	public int aSelectReportListCount() {
+		return bDao.aSelectReportListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> aSelectReportList(PageInfo pi) {
+		return bDao.aSelectReportList(sqlSession, pi);
+	}
+
+	@Override
+	public Board selectReport(int rno) {
+		return bDao.selectReport(sqlSession, rno);
+	}
+	
+	@Override
+	public int reportDelete(int ino) {
+		return bDao.reportDelete(sqlSession, ino);
+	}
+
+	@Override
+	public int yellowCardPlus(Board b) {
+		return bDao.yellowCardPlus(sqlSession, b);
+	}
 	
 	
 	// ------------------- 파트너 공지사항 ----------------------
@@ -149,6 +175,10 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectFaqList(String faqCategory) {
 		return bDao.selectFaqList(sqlSession, faqCategory);
 	}
+
+
+
+
 
 
 

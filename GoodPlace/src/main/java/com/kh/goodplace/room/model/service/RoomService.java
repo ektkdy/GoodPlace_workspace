@@ -146,11 +146,21 @@ public interface RoomService {
 	//5_2. 파워등록 된 리스트 조회용 서비스
 	ArrayList<Room> selectPowerRoomList(PageInfo pi);
 	
+	//------------[숙소관리]------------
+	//1.숙소 승인대기 조회용 서비스
+	//1_1. 숙소 총 갯수 조회용 서비스
+	int selectListRoomsWaitCount();
+	
+	//1_2.요청한 페이지에 보여질 숙소 승인대기 리스트 조회용 서비스
+	ArrayList<Room> selectRoomsWaitList(PageInfo pi);
 	
 	
+	//2.숙소 승인완료 조회용 서비스
+	//2_1. 숙소 총 갯수 조회용 서비스
+	int selectListRoomsOkayCount();
 	
-	
-	
+	//2_2.요청한 페이지에 보여질 숙소 승인완료 리스트 조회용 서비스
+	ArrayList<Room> selectRoomsOkayList(PageInfo pi);
 	
 	
 	

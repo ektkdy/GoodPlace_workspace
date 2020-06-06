@@ -32,7 +32,7 @@
     .bottum_tb{margin-top: 30px;}
     .bottum_tb thead tr td{font-size: 16px; color:#333; padding: 10px 0; padding-left: 20px;
                            border-top: 1px solid #dbdbdb}
-    #contentBtn{width: 100px; margin-right: 0px;}
+    .contentBtn{width: 100px; margin-right: 0px;}
     #gotoList{background-color: white; color: black;}
     #gotoList:hover{color: white; background-color: #34538a; font-weight: bold; border: 1px solid #34538a;}
     /*모든 버튼*/
@@ -51,44 +51,106 @@
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">신고상세</p></span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
-                        <thead>
-                            <tr>
-                                <td width="250px">제목</td>
-                                <td colspan="4" width="100px" style="background: white;">방이 너무 더러워요~</td>
-                                <td width="100px">문의분류</td>
-                                <td width="100px" style="background: white;">신고</td>
-                            </tr>
-                            <tr>
-                                <td width="200px" style="border-top: 0px;">숙소/체험명</td>
-                                <td colspan="2" width="300px" style="background: white; border-top: 0px;">강남 cozy room</ㅅwidth=>
-                                <td width="200px" style="border-top: 0px;">신고자명</td>
-                                <td width="200px" style="background: white; border-top: 0px;">김나나</td>
-                                <td width="200px" style="border-top: 0px;">신고당한사람</td>
-                                <td width="200px" style="background: white; border-top: 0px;">박추추</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="2" width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
-                                <td colspan="6" style="border-bottom: 0px;">
-                                    <textarea name="" id="">박추추를 신고합니다.</textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="8" style="text-align:right;"><button id="contentBtn">제제하기</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+					<form id="postForm" method="post" action="">
+						<input type="hidden" name="ino" value="${ b.inNo }">
+						<input type="hidden" name="yellowCardR" value="${ b.yellowCardR }">
+						<input type="hidden" name="yellowCardV" value="${ b.yellowCardV }">
+						<input type="hidden" name="yellowCardE" value="${ b.yellowCardE }">
+						<input type="hidden" name="yellowCardRp" value="${ b.yellowCardRp }">
+						<input type="hidden" name="yellowCardEp" value="${ b.yellowCardEp }">
+	                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+	                        <thead>
+	                            <tr>
+	                                <td width="250px">제목</td>
+	                                <td colspan="4" width="100px" style="background: white;">${ b.inqTitle }</td>
+	                                <td width="100px">문의분류</td>
+	                                <td width="100px" style="background: white;">신고</td>
+	                            </tr>
+	                            <tr>
+	                                <td width="200px" style="border-top: 0px;">숙소/체험명</td>
+	                                <c:choose>
+		                                <c:when test="${ b.roomsTitle ne null }">
+		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+		                                </c:when>
+		                                <c:when test="${ b.expTitle ne null }">
+		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.expTitle }</td>
+		                                </c:when>
+		                                <c:when test="${ b.reTitle ne null }">
+		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.reTitle }</td>
+		                                </c:when>
+	                                </c:choose>
+	                                <td width="200px" style="border-top: 0px;">신고자</td>
+	                                <td width="200px" style="background: white; border-top: 0px;">${ b.email }</td>
+	                                <td width="200px" style="border-top: 0px;">신고당한사람</td>
+	                                <c:choose>
+		                                <c:when test="${ b.emailR ne null }">
+		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailR }</td>
+		                                </c:when>
+		                                <c:when test="${ b.emailE ne null }">
+		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailE }</td>
+		                                </c:when>
+		                                <c:when test="${ b.emailV ne null }">
+		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailV }</td>
+		                                </c:when>
+	                                </c:choose>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td rowspan="2" width="200px" style="background: #c1d9f0; font-size: 18px;">내용</td>
+	                                <td colspan="6" style="border-bottom: 0px;">
+	                                    <textarea name="" id="">${ b.inqContent }</textarea>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                            
+	                                <td colspan="5" style="text-align:right;"><button id="contentBtn" name="ino" value="${ b.inNo }" onclick="postFormSubmit(1)">삭제하기</button></td>
+	                                <c:choose>
+		                                <c:when test="${ b.emailR ne null }">
+	                                		<td colspan="3" style="text-align:right;"><button id="contentBtn" name="partnerNoR" value="${ b.partnerNoR }" onclick="postFormSubmit(2)">제제하기</button></td>
+		                                </c:when>
+		                                <c:when test="${ b.emailE ne null }">
+	                                		<td colspan="3" style="text-align:right;"><button id="contentBtn" name="partnerNoE" value="${ b.partnerNoE }" onclick="postFormSubmit(2)">제제하기</button></td>
+		                                </c:when>
+		                                <c:when test="${ b.emailV ne null }">
+	                                		<td colspan="3" style="text-align:right;"><button id="contentBtn" name="userNoV" value="${ b.userNoV }" onclick="postFormSubmit(2)">제제하기</button></td>
+		                                </c:when>
+	                                </c:choose>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+					</form>
                     <br>
                     <div style="text-align: right;">
-                        <button id="gotoList">목록으로</button>
+                        <button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+    
+	<script>
+	    function postFormSubmit(num)
+	    {
+	       if(num == 1)
+	       {
+	      	confirm("삭제하시겠습니까?");
+	          $("#postForm").attr("action", "reportDelete.bo");
+	       }
+	       else
+	       {
+	      	confirm("제제하시겠습니까?");
+	          $("#postForm").attr("action", "yellowCardPlus.bo");
+	       }
+	       
+	       $("#postForm").submit();
+	    }
+	 </script>
+    
+    
+    
+    
 
     <script>
         $(function(){

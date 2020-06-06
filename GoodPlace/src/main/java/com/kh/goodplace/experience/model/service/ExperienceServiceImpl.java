@@ -10,6 +10,7 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.dao.ExperienceDao;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.room.model.vo.Room;
 
 
 @Service("expService")
@@ -22,13 +23,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao expDao;
 
 	@Override
-	public int selectExpListCount() {
-		return expDao.selectExpListCount(sqlSession);
+	public int selectExpListCount(int usNo) {
+		return expDao.selectExpListCount(sqlSession, usNo);
 	}
 
 	@Override
-	public ArrayList<Experience> selectExpList(PageInfo pi) {
-		return expDao.selectExpList(sqlSession, pi);
+	public ArrayList<Experience> selectExpList(PageInfo pi, int usNo) {
+		return expDao.selectExpList(sqlSession, pi, usNo);
 	}
 
 	
@@ -40,16 +41,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 	
 	@Override
-	public int insertAttachment(Attachment[] at) {
-		
-		int result = 1;
-		
-		for(int i=0; i<at.length; i++) {
-			int result1 = expDao.insertAttachment(sqlSession, at[i]); 
-			result = result*result1;
-		}
-		
-		return result;
+	public int insertAttachment(Attachment at) {
+		return expDao.insertAttachment(sqlSession, at);
 	}
 
 	//---------------------------------------------------------
@@ -78,6 +71,67 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public int updateReExp(int exNo) {
 		return 0;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------[체험관리]------------
 
+	@Override
+	public int selectListExpWaitCount() {
+		return expDao.selectListExpWaitCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Experience> selectExpWaitList(PageInfo pi) {
+		return expDao.selectExpWaitList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListExpOkayCount() {
+		return expDao.selectListExpOkayCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Experience> selectExpOkayList(PageInfo pi) {
+		return expDao.selectExpOkayList(sqlSession, pi);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -1,7 +1,6 @@
 package com.kh.goodplace.experience.model.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,16 +22,15 @@ public class Experience {
 	private int expCategory;		// 체험카테고리(총5개)
 	private String expTag;			// 체험태그(체험당2개)
 	private String expTitle;		// 체험명
-	private String expContent;		// 체험내용
 	private int activity;			// 활동강도
 	private int maxPeople;			// 최대인원수
 	private Date expDate;			// 체험날짜
-	private Timestamp startTime;	// 운영시작시간
-	private Timestamp endTime;		// 운영끝시간
-	private int useTime;			// 체험소요시간
-	private int intervalTime;		// 체험간격
+	private String startTime;		// 운영시작시간
+	private String endTime;			// 운영끝시간
+	private String useTime;			// 체험소요시간
+	private String intervalTime;	// 체험간격
 	private String supplies;		// 준비물
-	private Timestamp deadline;		// 예약가능시간
+	private String deadline;		// 예약가능시간
 	private int price;				// 체험가격
 	private String addBasic;		// 기본주소
 	private String addDetail;		// 상세주소
@@ -48,6 +46,7 @@ public class Experience {
 	private String originName;		// 파일원본명(체험썸네일)
 	private String changeName;		// 파일수정명(체험썸네일)
 	private String filePath;		// 파일저장경로(체험썸네일)
+	private String expContent;		// 체험내용
 	
 	private String local;			// 지역
 	private String totalSal;		// 누적판매수
