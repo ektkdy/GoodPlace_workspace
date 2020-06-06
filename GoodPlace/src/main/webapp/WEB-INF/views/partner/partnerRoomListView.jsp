@@ -47,6 +47,7 @@ button:hover{cursor:pointer}
                         <thead>
                             <tr>
                                 <td width="120">상태</td>
+                                <td>숙소번호</td>
                                 <td width="100">지역</td>
                                 <td width="100">숙소개시일</td>
                                 <td width="400">숙소명</td>
@@ -73,14 +74,22 @@ button:hover{cursor:pointer}
 				                       		<td><div class="rest" style="margin:0 auto">휴면중</div></td>
 				                       	</c:otherwise>
 				                    </c:choose>
-				                        <td>${r.addBasic}</td>
-				                        <td>${r.startDate }</td>
-				                        <td>${r.roomsTitle}</td>
-				                        <td>50</td>
-				                        <td>
-			                        	    <button class="detail_btn">보기</button>
-	                                    	<button class="modify_btn">수정</button>
-	                                    	<button class="schedule_btn">일정관리</button>
+				                    	<td>${r.roNo }</td>
+				                        <td width="10%">${r.addBasic}</td>
+				                        <c:choose>
+				                        	<c:when test="${!empty r.startDate }">
+				                        		<td width="15%">${r.startDate }</td>
+				                        	</c:when>
+				                        	<c:when test="${empty r.startDate }">
+				                        		<td width="15%">심사중</td>
+				                        	</c:when>
+				                       	</c:choose>
+				                        <td width="35%">${r.roomsTitle}</td>
+				                        <td width="10%">50</td>
+				                        <td width="18%">
+			                        	    <button class="detail_btn" onclick="location.href='roomDetailView.ro?rno='+${r.roNo}">보기</button>
+	                                    	<button class="schedule_btn">수정</button>
+	                                    	<!-- <button class="schedule_btn">일정관리</button> -->
 				                        </td>
 				                    </tr>
 				                </c:forEach>
@@ -138,7 +147,8 @@ button:hover{cursor:pointer}
             </div>
         </div>
     </div>
-
+    
+<!-- 토글  -->
     <script>
         $(function(){
             

@@ -13,8 +13,8 @@ import com.kh.goodplace.room.model.vo.Room;
 @Repository("rDao")
 public class RoomDao {
 	
-	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("roomMapper.selectListCount");
+	public int selectListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectListCount", userNo);
 	}
 	
 	public ArrayList<Room> selectRoomsList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
@@ -42,6 +42,12 @@ public class RoomDao {
 		
 		return sqlSession.selectOne("roomMapper.selectRono");
 	
+	}
+	
+	public Room selectRoom(SqlSessionTemplate sqlSession, int rno) {
+		
+		
+		return sqlSession.selectOne("roomMapper.selectRoom", rno);
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -28,20 +30,25 @@ public class RoomController {
 	@Autowired // DI
 	private RoomService rService;
 	
-	@RequestMapping("list.ro")
-	public String selectRoomsList(int currentPage,int userNo, Model model) {
-		
-		int listCount = rService.selectListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		
-		return "partner/partnerRoomListView";
-	}
+	 @RequestMapping("list.ro")
+	 public String selectRoomsList(int currentPage, Model model, 
+	       HttpSession session) {
+	   
+	    Member m = (Member)session.getAttribute("loginUser");
+	    
+	    int userNo = m.getUsNo();
+	    
+	    int listCount = rService.selectListCount(userNo);
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+	    
+	    ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
+	    
+	    model.addAttribute("pi", pi);
+	    model.addAttribute("list", list);
+	    
+	    return "partner/partnerRoomListView";
+	 }
 	
 	@RequestMapping("insertRoomForm.ro")
 	public String insertRoomForm(){
@@ -100,8 +107,28 @@ public class RoomController {
 //			}	
 		
 	}
-
 	
+	@RequestMapping("roomDetailView.ro")
+	public String roomDetailView(int rno, Model model ) {
+		System.out.println(rno);
+		 Room r = rService.selectRoom(rno);
+		
+		model.addAttribute("r", r);
+		
+		return "partner/partnerRoomDetailView";
+	}
+
+	@RequestMapping("updateRoomForm.ro")
+	public String updateRoomForm() {
+		
+		return "partner/partnerRoomUpdateForm";
+	}
+	
+	@RequestMapping("updateRoom.ro")
+	public String updateRoom() {
+		
+		return "";
+	}
 
 
 		// 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 

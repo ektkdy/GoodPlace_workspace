@@ -15,7 +15,7 @@ public interface RoomService {
 	
 	//1.숙소리스트 조회용 서비스
 	//1_1. 숙소 총 갯수 조회용 서비스
-	int selectListCount();
+	int selectListCount(int userNo);
 	
 	//1_2.요청한 페이지에 보여질 숙소 리스트 조회용 서비스
 	ArrayList<Room> selectRoomsList(PageInfo pi, int userNo);
@@ -30,7 +30,7 @@ public interface RoomService {
 	int insertAttachment(Attachment at);
 	
 	//3.숙소 조회용 서비스
-	Room selectBoard(int rno);
+	Room selectRoom(int rno);
 	
 	//4.숙소 삭제용 서비스
 	int deleteRoom(int rno);

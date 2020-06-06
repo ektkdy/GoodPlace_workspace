@@ -21,14 +21,15 @@ public class RoomServiceImpl implements RoomService{
 	private RoomDao rDao;
 
 	@Override
-	public int selectListCount() {
+	public int selectListCount(int userNo) {
 		
-		return rDao.selectListCount(sqlSession);
+		return rDao.selectListCount(sqlSession, userNo);
 	}
 
 	@Override
 	public ArrayList<Room> selectRoomsList(PageInfo pi, int userNo) {
-		return rDao.selectRoomsList(sqlSession, pi);
+		
+		return rDao.selectRoomsList(sqlSession, pi, userNo);
 	}
 
 	@Override
@@ -47,9 +48,8 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public Room selectBoard(int rno) {
-		// TODO Auto-generated method stub
-		return null;
+	public Room selectRoom(int rno) {
+		return rDao.selectRoom(sqlSession, rno);
 	}
 
 	@Override

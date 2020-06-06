@@ -37,7 +37,7 @@ button{cursor: pointer}
                 <br clear="both">
                 <div class="con2">
                 <form action="insert.ro" id="enrollRoom" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="userNo" value="1">
+                <input type="hidden" name="userNo" value="${ loginUser.usNo }">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
