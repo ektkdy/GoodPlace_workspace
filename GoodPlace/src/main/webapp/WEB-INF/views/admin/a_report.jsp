@@ -76,9 +76,9 @@
                             <tr>
                                 <td width="100"><input type="checkbox"></td>
                                 <td width="150">신고번호</td>
-                                <td width="300">제목</td>
+                                <td width="350">제목</td>
                                 <td width="200">신고자명</td>
-                                <td width="200">등록일</td>
+                                <td width="150">등록일</td>
                                 <td width="200">신고당한사람</td>
                                 <td width="150">경고횟수</td>
 
@@ -116,11 +116,11 @@
 	                                <c:choose>
 		                                <c:when test="${ b.emailR ne null }">
 		                                	<td>${ b.emailR }</td>
-		                                	<td>${ b.yellowCardR }</td>
+		                                	<td>${ b.yellowCardRp }</td>
 		                                </c:when>
 		                                <c:when test="${ b.emailE ne null }">
 		                                	<td>${ b.emailE }</td>
-		                                	<td>${ b.yellowCardE }</td>
+		                                	<td>${ b.yellowCardEp }</td>
 		                                </c:when>
 		                                <c:when test="${ b.emailV ne null }">
 		                                	<td>${ b.emailV }</td>

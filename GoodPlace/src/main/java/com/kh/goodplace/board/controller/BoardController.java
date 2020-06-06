@@ -370,6 +370,48 @@ public class BoardController {
         return mv;
     }
     
+    @RequestMapping("reportDelete.bo")
+    public String reportDelete(int ino, Model model) {
+    	
+    	int result = bService.reportDelete(ino);
+    	
+        if(result > 0)
+        {   // 게시글 삭제 성공
+            
+            return "redirect:aReportList.bo?currentPage=1";
+            
+        }
+        else
+        {   // 게시글 삭제 실패
+            
+            model.addAttribute("msg", "게시글 삭제 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
+    @RequestMapping("yellowCardPlus.bo")
+    public String yellowCardPlus(Board b, int ino, Model model) {
+    	
+    	//System.out.println(b);
+    	int result1 = bService.yellowCardPlus(b);
+    	
+    	
+        if(result1 > 0)
+        {   // 게시글 삭제 성공
+        	bService.reportDelete(ino);
+            return "redirect:aReportList.bo?currentPage=1";
+            
+        }
+        else
+        {   // 게시글 삭제 실패
+            
+            model.addAttribute("msg", "게시글 삭제 실패!!");
+            return "common/errorPage";
+        }
+    	
+    }
+    
     
     // 관리자 신고관리 끝
     

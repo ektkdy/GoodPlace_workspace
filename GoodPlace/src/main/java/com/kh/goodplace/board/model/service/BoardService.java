@@ -78,6 +78,12 @@ public interface BoardService {
 	// 2. 1:1문의 상세조회용 서비스-현영
 	Board selectReport(int rno);
 	
+	// 3. 게시글 삭제용 서비스-현영
+	int reportDelete(int ino);
+	
+	// 4. 신고당한사람 제제용 서비스-현영
+	int yellowCardPlus(Board b);
+	
 	//------------------------------------------------------
 
 	

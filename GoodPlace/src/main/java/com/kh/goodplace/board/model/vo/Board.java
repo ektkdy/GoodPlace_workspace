@@ -78,6 +78,11 @@ public class Board {
 	private int yellowCardR;		//룸 관련 신고당한사람 경고횟수
 	private int yellowCardV;		//후기 관련 신고당한사람 경고횟수
 	private int yellowCardE;		//체험 관련 신고당한사람 경고횟수
+	private int partnerNoR;
+	private int partnerNoE;
+	private int yellowCardRp;
+	private int yellowCardEp;
+	
 
 	
 	

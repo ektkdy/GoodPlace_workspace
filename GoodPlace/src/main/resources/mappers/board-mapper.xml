@@ -48,6 +48,10 @@
 		<result column="rYC" property="yellowCardR"/>
 		<result column="vYC" property="yellowCardV"/>
 		<result column="eYC" property="yellowCardE"/>
+		<result column="RPANO" property="partnerNoR"/>
+		<result column="EPANO" property="partnerNoE"/>
+		<result column="RPYC" property="yellowCardRp"/>
+		<result column="EPYC" property="yellowCardEp"/>
 	</resultMap>
 
 
@@ -195,7 +199,9 @@
 	<select id="aSelectReportList" resultMap="boardInquiryResultSet">
 		SELECT I.INNO, I.USNO, M.EMAIL, I.INQUERY_TITLE, I.INQUERY_DATE, REVIEW_TITLE, ROOMS_TITLE, EXP_TITLE, 
 		R.USNO AS "rUSNO", V.USNO AS "vUSNO", E.USNO AS "eUSNO", 
-		RM.EMAIL AS "rEMAIL", RM.YELLOW_CARD AS "rYC", VM.EMAIL AS "vEMAIL", VM.YELLOW_CARD AS "vYC", EM.EMAIL AS "eEMAIL", EM.YELLOW_CARD AS "eYC"
+		RM.EMAIL AS "rEMAIL", RM.YELLOW_CARD AS "rYC", VM.EMAIL AS "vEMAIL", VM.YELLOW_CARD AS "vYC", EM.EMAIL AS "eEMAIL", 
+		EM.YELLOW_CARD AS "eYC", PRM.PANO AS "RPANO", PEM.PANO AS "EPANO", 
+		PRM.PA_YELLOW_CARD AS "RPYC", PEM.PA_YELLOW_CARD AS "EPYC"
 		FROM INQUERY I
 		LEFT JOIN MEMBER M ON(I.USNO = M.USNO)
 		LEFT JOIN ROOMS R ON(I.RONO=R.RONO)
@@ -204,13 +210,19 @@
 		LEFT JOIN MEMBER RM ON(R.USNO = RM.USNO)
 		LEFT JOIN MEMBER VM ON(V.USNO = VM.USNO)
 		LEFT JOIN MEMBER EM ON(E.USNO = EM.USNO)
+		LEFT JOIN PARTNER PRM ON(RM.PANO = PRM.PANO)
+        LEFT JOIN PARTNER PEM ON(EM.PANO = PEM.PANO)
 		WHERE CATEGORY = 5 AND I.STATUS='Y'
 		ORDER BY I.INNO DESC
 	</select>
 	
 	<select id="selectReport" parameterType="_int" resultMap="boardInquiryResultSet">
 	
-		SELECT I.INNO, I.USNO, M.EMAIL, I.INQUERY_TITLE, I.INQUERY_CONTENT, I.INQUERY_DATE, REVIEW_TITLE, ROOMS_TITLE, EXP_TITLE, R.USNO AS "rUSNO", V.USNO AS "vUSNO", E.USNO AS "eUSNO", RM.EMAIL AS "rEMAIL", RM.YELLOW_CARD AS "rYC", VM.EMAIL AS "vEMAIL", VM.YELLOW_CARD AS "vYC", EM.EMAIL AS "eEMAIL", EM.YELLOW_CARD AS "eYC"
+		SELECT I.INNO, I.USNO, M.EMAIL, I.INQUERY_TITLE, I.INQUERY_CONTENT, I.INQUERY_DATE, 
+		REVIEW_TITLE, ROOMS_TITLE, EXP_TITLE, R.USNO AS "rUSNO", V.USNO AS "vUSNO", E.USNO AS "eUSNO", 
+		RM.EMAIL AS "rEMAIL", RM.YELLOW_CARD AS "rYC", VM.EMAIL AS "vEMAIL", VM.YELLOW_CARD AS "vYC", 
+		EM.EMAIL AS "eEMAIL", EM.YELLOW_CARD AS "eYC", PRM.PANO AS "RPANO", PEM.PANO AS "EPANO", 
+		PRM.PA_YELLOW_CARD AS "RPYC", PEM.PA_YELLOW_CARD AS "EPYC"
 		FROM INQUERY I
 		LEFT JOIN MEMBER M ON(I.USNO = M.USNO)
 		LEFT JOIN ROOMS R ON(I.RONO=R.RONO)
@@ -219,9 +231,62 @@
 		LEFT JOIN MEMBER RM ON(R.USNO = RM.USNO)
 		LEFT JOIN MEMBER VM ON(V.USNO = VM.USNO)
 		LEFT JOIN MEMBER EM ON(E.USNO = EM.USNO)
+		LEFT JOIN PARTNER PRM ON(RM.PANO = PRM.PANO)
+        LEFT JOIN PARTNER PEM ON(EM.PANO = PEM.PANO)
 		WHERE CATEGORY = 5 AND I.STATUS='Y' AND INNO = #{rno}
 	
 	</select>
+	
+	<update id="reportDelete" parameterType="_int">
+	
+		update INQUERY
+		   set STATUS='N'
+		 where INNO=#{ino}
+	
+	</update>
+	
+	<update id="yellowCardPlus" parameterType="Board">
+	
+		<choose>
+		    <when test="partnerNoR != 0">
+					update PARTNER
+				<choose>
+				    <when test="yellowCardRp lt 2">
+						   set PA_YELLOW_CARD = PA_YELLOW_CARD + 1
+					</when>
+					<otherwise>
+						   set PARTNER_STATUS = 'N', PA_YELLOW_CARD = PA_YELLOW_CARD + 1
+					</otherwise>
+				</choose>
+					 where PANO= #{partnerNoR}
+		    </when>
+		    <when test="partnerNoE != 0">
+					update PARTNER
+				<choose>
+				    <when test="yellowCardEp lt 2">
+						   set PA_YELLOW_CARD = PA_YELLOW_CARD + 1
+					</when>
+					<otherwise>
+						   set PARTNER_STATUS = 'N', PA_YELLOW_CARD = PA_YELLOW_CARD + 1
+					</otherwise>
+				</choose>
+					 where PANO= #{partnerNoE}
+		    </when>
+		    <when test="userNoV != 0">
+					update MEMBER
+				<choose>
+				    <when test="yellowCardV lt 2">
+						   set YELLOW_CARD = YELLOW_CARD + 1
+					</when>
+					<otherwise>
+						   set STATUS = 'N', YELLOW_CARD = YELLOW_CARD + 1
+					</otherwise>
+				</choose>
+					 where USNO = #{userNoV}
+		    </when>
+		</choose>
+	
+	</update>
 	
 	
 	<!-- 현영  -->	

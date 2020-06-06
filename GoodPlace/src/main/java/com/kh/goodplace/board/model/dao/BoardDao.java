@@ -156,6 +156,20 @@ public class BoardDao {
 	}
 	
 	
+	public int reportDelete(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("boardMapper.reportDelete", ino);
+		
+	}
+	
+	public int yellowCardPlus(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.yellowCardPlus", b);
+		
+	}
+	
+	
+	
 	//------------ 파트너 공지사항 -----------------------------------------
 	
 	public int pSelectNoticeListCount(SqlSessionTemplate sqlSession) {

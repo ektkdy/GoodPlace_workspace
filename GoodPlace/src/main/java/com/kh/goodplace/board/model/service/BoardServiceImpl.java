@@ -136,6 +136,15 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.selectReport(sqlSession, rno);
 	}
 	
+	@Override
+	public int reportDelete(int ino) {
+		return bDao.reportDelete(sqlSession, ino);
+	}
+
+	@Override
+	public int yellowCardPlus(Board b) {
+		return bDao.yellowCardPlus(sqlSession, b);
+	}
 	
 	
 	// ------------------- 파트너 공지사항 ----------------------
@@ -166,6 +175,8 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectFaqList(String faqCategory) {
 		return bDao.selectFaqList(sqlSession, faqCategory);
 	}
+
+
 
 
 

@@ -147,22 +147,23 @@
 	</select>
 
 	<select id="aSelectPartnerList" resultMap="memberResultSet">
-         select DISTINCT USNO, PANO, EMAIL, USER_NAME, PHONE, PA_ENROLL_DATE, PARTNER_STATUS
-         from member
-         join partner using(pano)
+       select DISTINCT m.USNO, m.PANO, m.EMAIL, m.USER_NAME, PHONE, p.PA_ENROLL_DATE, p.PARTNER_STATUS, P.PA_YELLOW_CARD
+         from member m
+         left join partner p on(m.pano = p.pano)
          where user_kind=2
+         ORDER BY M.PANO ASC
 	</select>
 
 	<update id="updateBlockPartnerOn" parameterType="_int">
 		update partner
 		   set PARTNER_STATUS = 'N'
-		 where paNo = #{ptno}
+		 where PANO = #{ptno}
 	</update>
 	
 	<update id="updateBlockPartnerOff" parameterType="_int">
 		update partner
-		   set PARTNER_STATUS = 'Y'
-		 where paNo = #{ptno}
+		   set PARTNER_STATUS = 'Y', PA_YELLOW_CARD = 0
+		 where PANO = #{ptno}
 	</update>
 	
 	<resultMap id="partnerExpResultSet" type="Experience">
