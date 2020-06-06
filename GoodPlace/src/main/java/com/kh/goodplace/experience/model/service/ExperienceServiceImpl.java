@@ -22,13 +22,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 	private ExperienceDao expDao;
 
 	@Override
-	public int selectExpListCount() {
-		return expDao.selectExpListCount(sqlSession);
+	public int selectExpListCount(int usNo) {
+		return expDao.selectExpListCount(sqlSession, usNo);
 	}
 
 	@Override
-	public ArrayList<Experience> selectExpList(PageInfo pi) {
-		return expDao.selectExpList(sqlSession, pi);
+	public ArrayList<Experience> selectExpList(PageInfo pi, int usNo) {
+		return expDao.selectExpList(sqlSession, pi, usNo);
 	}
 
 	
@@ -40,16 +40,16 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 	
 	@Override
-	public int insertAttachment(Attachment[] at) {
+	public int insertAttachment(Attachment at) {
 		
-		int result = 1;
+		//int result = 1;
 		
-		for(int i=0; i<at.length; i++) {
-			int result1 = expDao.insertAttachment(sqlSession, at[i]); 
-			result = result*result1;
-		}
+		//for(int i=0; i<at.length; i++) {
+			int result1 = expDao.insertAttachment(sqlSession, at); 
+			//result = result*result1;
+		//}
 		
-		return result;
+		return result1;
 	}
 
 	//---------------------------------------------------------

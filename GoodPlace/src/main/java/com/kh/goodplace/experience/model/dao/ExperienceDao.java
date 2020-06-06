@@ -13,14 +13,14 @@ import com.kh.goodplace.experience.model.vo.Experience;
 @Repository("expDao")
 public class ExperienceDao {
 
-	public int selectExpListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("expMapper.selectExpListCount");
+	public int selectExpListCount(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("expMapper.selectExpListCount", usNo);
 	}
 
-	public ArrayList<Experience> selectExpList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Experience> selectExpList(SqlSessionTemplate sqlSession, PageInfo pi, int usNo) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("expMapper.selectExpList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpList", usNo, rowBounds);
 	}
 
 	public int insertExp(SqlSessionTemplate sqlSession, Experience e) {
