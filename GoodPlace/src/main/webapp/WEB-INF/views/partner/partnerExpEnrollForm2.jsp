@@ -115,7 +115,7 @@
 	                    <tr>
 	                        <th>* 대표 사진</th>
 	                        <td colspan="2">
-	                          	<img id="titleImg" name="titleImg" style="border:0.5px solid #bebebe; width: 200px; height:150px" >
+	                          	<img id="titleImg" style="border:0.5px solid #bebebe; width: 200px; height:150px" >
 	                         	<div id="fileArea">
 									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
 								</div>

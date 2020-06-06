@@ -98,7 +98,7 @@ public class ExperienceController {
 	
 	/* 2_3. 체험등록용 서비스 */
 	@RequestMapping("insert.exp")
-	public String insertExp(Experience e, @RequestParam(name="titleImg", required=true) MultipartFile file,
+	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request/* , Attachment[] at */) {
 		
@@ -112,6 +112,9 @@ public class ExperienceController {
 		}
 		
 		int result1 = expService.insertExp(e);
+		
+		System.out.println(e);
+		System.out.println(result1);
 		
 		int result = 1;
 		
@@ -136,8 +139,14 @@ public class ExperienceController {
 				// 잘 추가되었다면 1이 리턴
 				int result2 = expService.insertAttachment(at);
 				result = result1*result2;
+				
+				System.out.println(result2);
+				System.out.println(at);
 			}
 		}
+		System.out.println(list);
+		System.out.println(result);
+		
 		
 		if(result>0) {
 			return "redirect:list.exp?currentPage=1";
