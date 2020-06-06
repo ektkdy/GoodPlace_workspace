@@ -77,7 +77,34 @@
 
 
 
-
+	<!-- 체험관리 시작 -->
+	
+	<select id="selectListExpWaitCount" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 2
+	</select>
+	
+	<select id="selectExpWaitList" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 2
+	</select>
+	
+	<select id="selectListExpOkayCount" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 1
+	</select>
+	
+	<select id="selectExpOkayList" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 1
+	</select>
+	
+	
+	<!-- 체험관리 끝 -->
 
 
 

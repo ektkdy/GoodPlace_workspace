@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.room.model.vo.Room;
 
 public interface ExperienceService {
 	
@@ -37,6 +38,27 @@ public interface ExperienceService {
 	int updateReExp(int exNo);
 
 	
+	
+	
+	
+	
+	
+	
+	//------------[체험관리]------------
+	//1.체험 승인대기 조회용 서비스
+	//1_1. 체험 총 갯수 조회용 서비스
+	int selectListExpWaitCount();
+	
+	//1_2.요청한 페이지에 보여질 체험 승인대기 리스트 조회용 서비스
+	ArrayList<Experience> selectExpWaitList(PageInfo pi);
+	
+	
+	//2.체험 승인완료 조회용 서비스
+	//2_1. 체험 총 갯수 조회용 서비스
+	int selectListExpOkayCount();
+	
+	//2_2.요청한 페이지에 보여질 체험 승인완료 리스트 조회용 서비스
+	ArrayList<Experience> selectExpOkayList(PageInfo pi);
 
 
 	

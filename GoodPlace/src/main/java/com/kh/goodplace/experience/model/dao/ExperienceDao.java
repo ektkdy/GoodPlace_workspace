@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("expDao")
 public class ExperienceDao {
@@ -30,5 +31,47 @@ public class ExperienceDao {
 	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {
 		return sqlSession.insert("expMapper.insertAttachment", at);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// --------- 체험관리 시작 -----------------
+	
+	public int selectListExpWaitCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("expMapper.selectListExpWaitCount");
+		
+	}
+	
+	public ArrayList<Experience> selectExpWaitList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpWaitList", null, rowBounds);
+		
+	}
+	
+	public int selectListExpOkayCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("expMapper.selectListExpOkayCount");
+		
+	}
+	
+	public ArrayList<Experience> selectExpOkayList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpOkayList", null, rowBounds);
+		
+	}
+	
+	
+	// --------- 체험관리 시작 -----------------
 
 }

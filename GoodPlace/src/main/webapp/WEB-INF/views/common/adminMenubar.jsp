@@ -64,7 +64,7 @@
             <li><a href=""><span class="icon9"></span><p>메세지</p></a></li>
             <li><a href="aInquiryList.bo?currentPage=1"><span class="icon10"></span><p>1:1문의관리</p></a></li>
             <li><a href="aRoomsWaitList.ro?currentPage=1"><span class="icon11"></span><p>숙소관리</p></a></li>
-            <li><a href=""><span class="icon12"></span><p>체험관리</p></a></li>
+            <li><a href="aExpWaitList.ex?currentPage=1"><span class="icon12"></span><p>체험관리</p></a></li>
         </ul>
     </div>
     <script>

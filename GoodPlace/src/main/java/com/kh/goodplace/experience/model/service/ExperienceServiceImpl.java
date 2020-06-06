@@ -10,6 +10,7 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.dao.ExperienceDao;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.room.model.vo.Room;
 
 
 @Service("expService")
@@ -70,6 +71,67 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public int updateReExp(int exNo) {
 		return 0;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------[체험관리]------------
 
+	@Override
+	public int selectListExpWaitCount() {
+		return expDao.selectListExpWaitCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Experience> selectExpWaitList(PageInfo pi) {
+		return expDao.selectExpWaitList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListExpOkayCount() {
+		return expDao.selectListExpOkayCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Experience> selectExpOkayList(PageInfo pi) {
+		return expDao.selectExpOkayList(sqlSession, pi);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

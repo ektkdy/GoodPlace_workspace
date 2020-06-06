@@ -50,9 +50,8 @@
         <jsp:include page="../common/adminMenubar.jsp"/>
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">승인대기목록</button>
-                <!-- <button class="off mid_tab">확정된 예약</button> -->
-                <button class="off gt_tab">체험승인목록</button>
+                <button class="on lt_tab" onclick="location.href='aExpWaitList.ex?currentPage=1'">승인대기목록</button>
+                <button class="off gt_tab" onclick="location.href='aExpOkayList.ex?currentPage=1'">체험승인목록</button>
             </div>
             <div class="sitemap">
                 <a href="#"><span>HOME</span></a>
@@ -86,6 +85,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<!-- 
                             <tr>
                                 <td>상태</td>
                                 <td>파리</td>
@@ -95,17 +95,50 @@
                                 <td>
                                     <button class="blue_btn">승인대기</button>
                                 </td>
-                            </tr>
+                            </tr> -->
+							<c:forEach items="${ list }" var="e">
+	                            <tr>
+	                                <td>${ e.exNo }</td>
+	                                <td>${ e.addBasic }</td>
+	                                <td>${ e.applyDate }</td>
+	                                <td>${ e.expTitle }</td>
+	                                <td>${ e.price }원</td>
+	                                <td onclick="event.cancelBubble=true">
+	                                    <button class="blue_btn">승인대기</button>
+	                                </td>
+	                            </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <div id="pagingArea" style="margin-top: 22px;">
-                        <a>&lt;</a>
-                        <a>1</a>
-                        <a>2</a>
-                        <a>3</a>
-                        <a>4</a>
-                        <a>5</a>
-                        <a>&gt;</a>
+	                    <c:choose>
+		                	<c:when test="${ pi.currentPage eq 1 }">
+			                    <a href="#">&lt;</a>
+			                </c:when>
+			                <c:otherwise>
+		                    	<a href="aExpWaitList.ex?currentPage=${ pi.currentPage -1 }">&lt;</a>
+		                    </c:otherwise>
+	                    </c:choose>
+	                    
+				        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	                    	<c:choose>
+	                    		<c:when test="${ p eq pi.currentPage }">
+		                    		<a href="#">${p}</a>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<a class="page-link" href="aExpWaitList.ex?currentPage=${ p }">${p}</a>
+		                    	</c:otherwise>
+		                    </c:choose>
+	                    </c:forEach>
+	                    
+				        <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+			                    <a>&gt;</a>
+			                </c:when>
+			                <c:otherwise>
+			                    <a href="aExpWaitList.ex?currentPage=${ pi.currentPage +1 }">&gt;</a>
+			                </c:otherwise>
+	                    </c:choose>
                     </div>
                 </div>
             </div>

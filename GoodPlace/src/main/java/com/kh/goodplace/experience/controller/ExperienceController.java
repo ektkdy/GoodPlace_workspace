@@ -23,6 +23,7 @@ import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -166,5 +167,75 @@ public class ExperienceController {
 		
 		return "partner/partnerIncome";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------[체험관리]------------
+	@RequestMapping("aExpWaitList.ex")
+	public String selectExpWaitList(int currentPage, Model model) {
+		
+		int listCount = expService.selectListExpWaitCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Experience> list = expService.selectExpWaitList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminExpWaitList";
+	}
+	
+	@RequestMapping("aExpOkayList.ex")
+	public String selectExpOkayList(int currentPage, Model model) {
+		
+		int listCount = expService.selectListExpOkayCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Experience> list = expService.selectExpOkayList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		return "admin/adminExpOkeyList";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
