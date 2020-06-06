@@ -94,23 +94,23 @@
             </div>
 
             <!-- 숙소검색 -->
-            <form action="" id="roomSearchArea" method="get" >
+            <form action="searchRo.ro" id="roomSearchArea" method="get" >
                 <div class="search input" style="display: block;">
                     <li class="liBox">
                         <b>위치</b>
-                        <input type="text" id="tripArea" placeholder="어디로 여행가세요?" >
+                        <input type="text" name="tripArea" id="tripArea" placeholder="어디로 여행가세요?" >
                     </li>
                     <li class="liBox">
                         <b>가는날짜</b>
-                        <input type="date" id="tripStartDate" placeholder="날짜를 입력하세요" >
+                        <input type="date" name="tripStartDate" id="tripStartDate" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox">
                         <b>오는날짜</b>
-                        <input type="date" id="tripEndDate" placeholder="날짜를 입력하세요" >
+                        <input type="date" name="tripEndDate" id="tripEndDate" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox">
                         <b>인원수</b>
-                        <input type="number" id="tripPeople" placeholder="인원수를 선택해주세요">
+                        <input type="number" name="tripPeople" id="tripPeople" placeholder="인원수를 선택해주세요">
                     </li>
                     <li style="margin: auto; text-align: center;">
                         <input id="subRoomInfo"type="submit" value="숙소검색">
@@ -120,14 +120,9 @@
          	<script>
             	$(function(){
             		$("#roomSearchArea #subRoomInfo").click(function(){
-            			
-            			var tripArea = $("#tripArea").val();
-            			var tripPeriod = $("#tripPeriod").val();
-            			var tripPeople = $("#tripPeople").val();
 
-            			console.log(tripArea, tripPeriod, tripPeople);
+            			$("#roomSearchArea").submit();
             			
-            			location.href = "searchRo.ro";
             		});
             	});
             </script>
