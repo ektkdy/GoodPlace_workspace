@@ -86,10 +86,10 @@ public interface RoomService {
 	//14_3. 답글 후 후기 상세조회용 서비스
 	
 	
+	//------------[숙소검색]------------
 	
-	
-	
-	
+	//15. 메뉴바에서 검색한 조건에 해당하는 숙소리스트 조회용 서비스
+	ArrayList<Room> searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople);
 	
 	
 	

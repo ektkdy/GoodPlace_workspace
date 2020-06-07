@@ -68,4 +68,9 @@ public class Room {
 	
 	/* DB에는 없지만 새로 생성한 변수 */
 	private String addArea; // ~시  // ex) 서울특별시, 화성시
+	
+	/* Roomspay 테이블 컬럼 */
+	private int amount;			// 결제번호
+	private String birthday;	// 생년월일 -- 여기다가 더 추가해야된다~~!!
+
 }
