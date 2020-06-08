@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,7 @@
                     		<c:when test="${ !empty list }">
                     			<c:forEach items="${ list }" var="exp">
 	                    			<tr>
-	                    				<input type="hidden" value=${ exp.exNo }>
+	                    				<input type="hidden" name="exNo" value=${ exp.exNo }>
 		                            	<c:choose>
 		                            		<c:when test="${ exp.status eq 1}">
 		                            			<td>운영중</td>
@@ -98,13 +99,18 @@
 		                            			<td>삭제</td>
 		                            		</c:otherwise>
 		                            	</c:choose>
-			                            <td>${ exp.local }</td>
+			                            <td>${fn:substring(exp.addBasic,0,2)}</td>
 			                            <td>${ exp.expTitle }</td>
-			                            <td>${ exp.startDate }(${ exp.applyDate })</td>
+			                            <c:if test="${ empty exp.startDate }">
+			                            	<td> 심사진행중 (${ exp.applyDate })</td>
+			                            </c:if>
+			                            <c:if test="${ !empty exp.startDate }">
+			                            	<td>${ exp.startDate }(${ exp.applyDate })</td>
+			                            </c:if>
 			                            <td>${ exp.totalSal }</td>
 			                            <td>
-			                                <button class="blue_btn" class="expDetail">보기</button>
-			                                <button class="blue_btn" class="expUpdate">수정</button>
+			                                <button class="blue_btn expDetail">보기</button>
+			                                <button class="blue_btn expUpdate">수정</button>
 			                            </td>
 			                        </tr>
 		                        </c:forEach>
@@ -116,19 +122,25 @@
                     </tbody>
                 </table>
                 
+                
+                <!-- 상세보기 / 수정폼 / 거절사유있는 수정폼으로의 이동 -->
                 <script>
 	                $(function(){
 						$(".expDetail").click(function(){
-							location.href="";
+							location.href="expDetail.exp?exNo="+$(this).parent().siblings().eq(0).val();
+							//console.log($(this).parent().siblings().eq(0).val());
 						});
 					});
-                	
+	                
 	                $(function(){
 						$(".expUpdate").click(function(){
-							location.href="";
+		                	if($(this).parent().siblings().eq(1).text()=="승인거절"){	// 체험번호의 상태가 승인거절(3)일 경우 거절사유가 적힌 폼으로 이동
+		                		location.href="updateReExpForm.exp?exNo="+$(this).parent().siblings().eq(0).val();
+		                	}else{	// 그 외에는 수정폼으로 이동
+		                		location.href="updateExpForm.exp?exNo="+$(this).parent().siblings().eq(0).val();
+		                	}
 						});
-					});
-                
+	                });
                 </script>
                 
                 <c:if test="${ !empty list }">

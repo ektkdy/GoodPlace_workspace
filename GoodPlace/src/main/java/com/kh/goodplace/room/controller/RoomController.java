@@ -291,26 +291,90 @@ public class RoomController {
 		
 		return "admin/adminRoomsOkeyList";
 	}
-	
-	
+		
+    @RequestMapping("aRoomDetail.ro")
+    public ModelAndView selectRoomWaitDetail(int rno, ModelAndView mv)
+    {	
+    	
+    	Room r = rService.selectRoomWaitDetail(rno);
+    	
+        if(r != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("r", r);
+            mv.setViewName("admin/adminRoomsListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+    
+    
+    @RequestMapping("aRoomOkay.ro")
+    public String updateOkay(int rno, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateOkay(rno);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsOkeyList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "승인 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("aRoomReject.ro")
+    public String updateReject(Room r, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateReject(r);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsWaitList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "거절 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
-   	public void searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv, Date date) {
-
-    	java.sql.Date startDate = java.sql.Date.valueOf(tripStartDate);
-    	java.sql.Date endDate = java.sql.Date.valueOf(tripEndDate);
-    	//Date today = new Date ();
-
-    	//System.out.println("Date 타입 연산결과 : " + (endDate - startDate) );
+	@RequestMapping("searchRo.ro")
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
+		
+		// 넘겨받은 여행조건들 room객체에 set
+		room.setAddBasic(tripArea);
+		room.setStartDays(tripStartDate);
+		room.setEndDays(tripEndDate);
+		room.setPeople(Integer.parseInt((tripPeople)));
+		
+    	ArrayList<Room> roomList = rService.searchRoom(room);
+   		//System.out.println(" roomList 조회 : " + roomList);
     	
-    	//System.out.println("넘겨받은것들 : " + tripArea + ", " + tripStartDate + ", " + tripEndDate + ", " + tripPeople);
-    	//System.out.println("지점1" + tripArea);
-    	//ArrayList<Room> roomList = rService.selectRoomList(tripArea);
-    	//System.out.println("지점2 에서 roomList : " + roomList);
-    
-    
+        if(!roomList.isEmpty()){
+        	mv.addObject("roomList", roomList);
+        	mv.setViewName("user/searchRooms");
+        }
+        else{
+            mv.addObject("msg", "거절 실패!!");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
    	}
     
     

@@ -147,10 +147,29 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectRoomsOkayList(sqlSession, pi);
 	}
 
+	@Override
+	public Room selectRoomWaitDetail(int rno) {
+		return rDao.selectRoomWaitDetail(sqlSession, rno);
+	}
+	
+	@Override
+	public int updateOkay(int rno) {
+		return rDao.updateOkay(sqlSession, rno);
+	}
+
+	@Override
+	public int updateReject(Room r) {
+		return rDao.updateReject(sqlSession, r);
+	}
 	
 	// --------- 숙소관리 끝 --------------------------
 	
-
+	// --------- 숙소검색 시작 -------------------------
+	
+	@Override
+	public ArrayList<Room> searchRoom(Room room) {
+		return rDao.searchRoom(sqlSession, room);
+	}
 	
 	
 	

@@ -9,6 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/adminCommon.css" />
+<!-- 부트스트랩에서 제공하고 있는 모달 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 모달 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
     /*공통*/
     /* font */
@@ -43,7 +47,7 @@
 
     .cancel:hover{background-color: #fff; border: 1px solid #bebebe; cursor: pointer;}
     .enroll:hover{background-color: #fff; border: 1px solid #184c88; cursor: pointer; color: #184c88;}
-</style>
+</style>      
 </head>
 <body>
 	<div id="wrap">
@@ -81,225 +85,158 @@
                         <tbody>
                             <tr>
                                 <th rowspan="2">* 숙소명</th>
-                                <td colspan="2"><input type="text" name=""></td>
+                                <td colspan="2"><strong>${ r.roomsTitle }</strong></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>*숙소위치</th>
-                                <td colspan="2"><input type="text" name=""></td>
+                                <td colspan="2"><strong>${ r.addBasic }</strong></td>
                             </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
-                                <td rowspan="2"><div style="width: 100px; height: 100px;"></div></td>
-                                <td><button>사진등록</button></td>
+                                <td rowspan="2"><div style="width: 150px; height: 150px; border:1px solid black;">
+                                    <img src="../image/집로고.jpg" style="vertical-align: middle; width:100%; height: 100%;">
+                                </div></td>
+
                             </tr>
                             <tr class="pdBtom">
-                                <td class="enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</td>
+                                <td class="enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 승인 거절 할 수 있습니다.</td>
                             </tr>
                             <tr>
-                                <th rowspan="4">* 상세사진</th>
-                                <td rowspan="4" class="photo_btn"><button>사진등록</button></td>
-                                <td colspan="2">썸네일.png</td>
+                                <th rowspan="5">* 상세사진</th>
                             </tr>
                             <tr><td colspan="2">썸네일.png</td></tr>
                             <tr><td colspan="2">썸네일.png</td></tr>
-                            <tr class="pdBtom"><td colspan="2">썸네일.png</td></tr>
+                            <tr><td colspan="2">썸네일.png</td></tr>
+                            <tr><td colspan="2">썸네일.png</td></tr>
+
+                            
                             <tr>
-                                <th rowspan="2">* 예약 설정</th>
-                                <td colspan="2"><input type="number" min="1" max="72">시간 전 부터 예약을 받지 않겠습니다.</td>
+                                <th rowspan="2"  style="padding-top: 30px;">* 예약 설정</th>
+                                <td colspan="2"  style="padding-top: 30px;"> <strong>${ r.deadline }</strong> 시간 전 부터 예약을 받지 않겠습니다.</td>
                             </tr>
                             <tr class="pdBtom"><td colspan="2" class="enrollInfo">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
                             <tr>
                                 <th rowspan="4">* 객실정보</th>
-                                <td>침대수 : <input type="number" min="1"></td>
-                                <td>샤워실수 : <input type="number" min="1"></td>
+                                <td>침대수 : <strong>${ r.bedCount }</strong></td>
+                                <td>샤워실수 : <strong>${ r.bathCount }</strong></td>
                             </tr>
                             <tr>
-                                <td>화장실수 : <input type="number" min="1"></td>
-                                <td>1박금액 : <input type="number" min="1"></td>
+                                <td>화장실수 : <strong>${ r.restroomCount }</strong></td>
+                                <td>1박금액 : <strong>${ r.price }</strong>원</td>
                             </tr>
                             <tr>
-                                <td>최소인원 : <input type="number" min="1"></td>
-                                <td>최대인원 : <input type="number" min="1"></td>
+                                <td>최소인원 : <strong>${ r.minPeople }</strong></td>
+                                <td>최대인원 : <strong>${ r.maxPeople }</strong></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. 최소인원 이상일 경우 1인당 일정금액이 추가되며 <br>최대인원수 이상 받을수 없습니다.</td>
                             </tr>
                             <tr>
-                                <th rowspan="10">* 숙소시설</th>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">침구
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">아기침대
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">여분의침구
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">다리미
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">주방
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">식기류
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">냉장고
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">전자레인지
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">인덕션
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">조리도구(냄비 등)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">커피포트
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">세탁기
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">에어컨
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">공용PC
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">케이블TV
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">드라이기
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >
-                                    <input type="checkbox" name="rooms" value="">아기욕조
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">온수 및 난방
-                                </td>
-                            </tr>
+                                <tr class="pdBtom">
+                                    <th>* 숙소시설</th>
+                                    <td colspan="2">
+                                        <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:200px;" readonly>${ r.facility }</textarea>
+                                    </td>
+                                </tr>
                             <tr class="pdBtom">
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">옷걸이
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="rooms" value="">주차가능
-                                </td>
-                            </tr>
-                            <tr>
-                                <th rowspan="3">* 제공서비스</th>
-                                <td>
-                                    <input type="checkbox" name="service" value="">샴푸
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="service" value="">화장지
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="service" value="">바디워시
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="service" value="">비누
-                                </td>
-                            </tr>
-                            <tr class="pdBtom">
-                                <td>
-                                    <input type="checkbox" name="service" value="">수건
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="service" value="">Free wifi
+                                <th>* 제공서비스</th>
+                                <td colspan="2">
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.service }</textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th rowspan="2">포함사항</th>
                                 <td>
-                                    <input type="checkbox" name="includeService" value="">조식
+                                    <input type="checkbox" id="includeService1" name="includeService" value="${r.meal}">조식
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="includeService" value="">중식
+                                    <input type="checkbox" id="includeService2" name="includeService" value="${r.meal}">중식
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2">
-                                    <input type="checkbox" name="includeService" value="">석식
-                                </td>
-                            </tr>
-                            <tr>
-                                <th rowspan="4">* 숙소검색태그</th>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">신축건물
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">교통이 편리한
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">관광명소가 가까운
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">무인으로 운영되는
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">커플숙소
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">비주얼이 예쁜
+                                    <input type="checkbox" id="includeService3" name="includeService" value="${r.meal}">석식
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <td>
-                                    <input type="checkbox" name="tag" value="">이색숙소
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="tag" value="">조식이 포함된
+                                <th>* 숙소검색태그</th>
+                                <td colspan="2">
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.roomsTag }</textarea>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80"></textarea>
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%;" readonly>${ r.roomsNotice }</textarea>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 이용안내</th>
-                                <td>체크인 시간 : <input type="time"></td>
-                                <td>체크아웃 시간 : <input type="time"></td>
+                                <td>체크인 시간 : <strong>${ r.checkIn }</strong></td>
+                                <td>체크아웃 시간 : <strong>${ r.checkOut }</strong></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="btnArea">
-                        <button class="cancel">취소하기</button>
-                        <button class="enroll">등록하기</button>
+                    <div class="btnArea" style="padding-bottom: 10%;">
+                        <button class="cancel" data-toggle="modal" data-target="#rejection">거절하기</button>
+                        <button class="enroll" onclick="location.href='aRoomOkay.ro?rno=${ r.roNo }'">승인하기</button>
+                        <div id="test" style="display:none;  padding-bottom: 20%;" >
+                            <textarea style="width:300px; height: 200px; border:1px solid black; resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="guideBox">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+	<script>
+		$(function(){
+			switch('${r.meal}'){
+			case "조식" : $("#includeService1").prop("checked", true); break;
+			case "중식" : $("#includeService2").prop("checked", true); break;
+			case "석식" : $("#includeService3").prop("checked", true); break;
+			}
+		});
+	</script>
+
+    <!-- 거절하기 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 button 클릭시 보임) -->
+    <div class="modal fade" id="rejection">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="width:500px;">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">해당 숙소를 정말로 거절하겠습니까?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+            </div>
+
+            <form action="aRoomReject.ro" method="post">
+            <input type="hidden" name="roNo" value="${ r.roNo }">
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <label for="userId" class="mr-sm-2">거절사유 :</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="거절사유" id="deny" name="deny"> <br>
+                    <label for="userPwd" class="mr-sm-2">상세사유:</label><br>
+                    <textarea class="form-control mb-2 mr-sm-2" style="height:200px;" id="denyContent" name="denyContent" placeholder="내용을 입력해주세요."></textarea>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="border:1px solid #bebebe; background: #f1f1f1; color:#333;" data-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-primary" style="border: 1px solid #184c88; background: #184c88; color:#fff">확인</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    
 </body>
 </html>

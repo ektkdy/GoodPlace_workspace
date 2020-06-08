@@ -114,8 +114,8 @@ public class ExperienceController {
 		
 		int result1 = expService.insertExp(e);
 		
-		System.out.println(e);
-		System.out.println(result1);
+		//System.out.println(e);
+		//System.out.println(result1);
 		
 		int result = 1;
 		
@@ -141,12 +141,12 @@ public class ExperienceController {
 				int result2 = expService.insertAttachment(at);
 				result = result1*result2;
 				
-				System.out.println(result2);
-				System.out.println(at);
+				//System.out.println(result2);
+				//System.out.println(at);
 			}
 		}
-		System.out.println(list);
-		System.out.println(result);
+		//System.out.println(list);
+		//System.out.println(result);
 		
 		
 		if(result>0) {
@@ -155,6 +155,60 @@ public class ExperienceController {
 			return "common/errorPage";
 		}
 	}
+	
+	/* 3. 체험 상세보기용 서비스 */
+	@RequestMapping("expDetail.exp")
+	public ModelAndView selectExp(int exNo, ModelAndView mv) {
+		//System.out.println(exNo);
+		//Experience exp = expService.selectExp(exNo);
+		
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		//System.out.println(list);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.setViewName("partner/partnerExpDetail");
+		}else {
+			mv.addObject("msg", "상세보기 실패");
+			mv.setViewName("partner/partnerExpList");
+		}
+		
+		return mv;
+	}
+	
+	/* 4_1. 체험수정폼 요청용 서비스 */
+	@RequestMapping("updateExpForm.exp")
+	public String updateExpForm(int exNo,  Model model) {
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		model.addAttribute("list", list);
+		return "partner/partnerExpUpdateForm";
+	}
+	
+	/* 4_2. 승인 거절 시 체험수정폼 요청용 서비스 */
+	@RequestMapping("updateReExpForm.exp")
+	public String updateReExpForm(int exNo,  Model model) {
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		model.addAttribute("list", list);
+		return "partner/partnerExpReUpdateForm";
+	}
+	
+	/* 4_3. 체험수정 요청용 서비스 */
+	@RequestMapping("updateExp.exp")
+	public ModelAndView updateExp(int exNo, ModelAndView mv) {
+		int result = expService.updateExp(exNo);
+		
+		if(result>0) {
+			mv.setViewName("partner/partnerExpList");
+		}else {
+			mv.addObject("msg", "수정 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	
+	
+	
 	
 	
 	

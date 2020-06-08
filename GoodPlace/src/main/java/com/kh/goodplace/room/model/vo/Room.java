@@ -68,4 +68,19 @@ public class Room {
 	
 	/* DB에는 없지만 새로 생성한 변수 */
 	private String addArea; // ~시  // ex) 서울특별시, 화성시
+	
+	/* Roomspay 테이블 컬럼 */
+	private int payUserNo;		// 결제자의 회원번호
+	private int amount;			// 결제금액
+	private String birthday;	// 생년월일
+	private String payDate;		// 결제날짜
+	private int addPoint;		// 추가포인트
+	private String CheckInTime;	// 예약자가 직접 입력한 체크인시간
+	private int reserveStatus;	// 확정대기(1),확정(2),여행완료(3)
+	private int usePoint;		// 사용포인트
+	private int people;			// 인원수
+	private String concept;		// 여행컨셉
+	private String request;		// 요청사항
+	private String startDays;	// 예약시작일자
+	private String endDays;		// 예약끝일자
 }

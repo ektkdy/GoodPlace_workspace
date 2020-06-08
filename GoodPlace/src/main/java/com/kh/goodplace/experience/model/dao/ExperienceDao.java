@@ -32,7 +32,20 @@ public class ExperienceDao {
 		return sqlSession.insert("expMapper.insertAttachment", at);
 	}
 	
+
+	public ArrayList<Experience> selectExp(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
+	}
+
 	
+	public ArrayList<Experience> updateExpForm(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
+	}
+	
+	public ArrayList<Experience> updateReExpForm(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
+	}
+
 	
 	
 	
@@ -70,6 +83,7 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpOkayList", null, rowBounds);
 		
 	}
+
 	
 	
 	// --------- 체험관리 시작 -----------------

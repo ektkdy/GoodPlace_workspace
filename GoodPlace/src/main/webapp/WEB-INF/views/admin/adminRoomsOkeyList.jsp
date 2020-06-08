@@ -101,7 +101,7 @@
 	                                <td>${ r.roomsTitle }</td>
 	                                <td>${ r.price }원</td>
 	                                <td onclick="event.cancelBubble=true">
-	                                    <button class="blue_btn">승인대기</button>
+	                                    <button class="blue_btn">승인완료</button>
 	                                </td>
 	                            </tr>
                             </c:forEach>

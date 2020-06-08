@@ -56,6 +56,62 @@
 		<result column="PONO" property="poNo1"/>
 	</resultMap>
 	
+	<!-- Rooms테이블 + Roomspay테이블 -->
+	<resultMap type="Room" id="roomAndRoomspayResultSet">
+		<id column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="MIN_PEOPLE" property="minPeople"/>
+		<result column="MAX_PEOPLE" property="maxPeople"/>
+		<result column="PRICE" property="price"/>
+		<result column="ADD_PRICE" property="addPrice"/>
+		<result column="ROOMS_NOTICE" property="roomsNotice"/>
+		<result column="ROOMS_TAG" property="roomsTag"/>
+		<result column="ROOM_COUNT" property="roomCount"/>
+		<result column="BED_COUNT" property="bedCount"/>
+		<result column="BATH_COUNT" property="bathCount"/>
+		<result column="RESTROOM_COUNT" property="restroomCount"/>
+		<result column="FACILITY" property="facility"/>
+		<result column="SERVICE" property="service"/>
+		<result column="MEAL" property="meal"/>
+		<result column="DENY" property="deny"/>
+		<result column="DENY_CONTENT" property="denyContent"/>
+		<result column="ADD_BASIC" property="addBasic"/>
+		<result column="ADD_DETAIL" property="addDetail"/>
+		<result column="ADD_REF" property="addRef"/>
+		<result column="ZIP_CODE" property="zipCode"/>
+		<result column="APPLY_DATE" property="applyDate"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="OPERATE_DAY" property="operateDay"/>
+		<result column="PONO" property="poNo"/>
+		<result column="POWER_START" property="powerStart"/>
+		<result column="POWER_END" property="powerEnd"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHECK_IN" property="checkIn"/>
+		<result column="CHECK_OUT" property="checkOut"/>
+		<result column="DEADLINE" property="deadline"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="ROOMS_NOTICE" property="roomsNotice"/>
+		
+		
+		
+		<result column="AMOUNT" property="amount"/>
+		<result column="BIRTHDATE" property="birthday"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="ADD_POINT" property="addPoint"/>
+		
+		<result column="RESERVE_STATUS" property="reserveStatus"/>
+		<result column="USE_POINT" property="usePoint"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="CONCEPT" property="concept"/>
+		<result column="REQUEST" property="request"/>
+		<result column="START_DAYS" property="startDays"/>
+		<result column="END_DAYS" property="endDays"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
 		select count(*)
 		  from rooms
@@ -176,14 +232,49 @@
 		 where status = 1
 	</select>
 	
+		<select id="selectRoomWaitDetail" resultMap="roomResultSet" parameterType="_int">
+		select *
+		  from rooms
+		 where rono = #{rno}
+	</select>
 	
+	<update id="updateOkay" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 1
+		 where RONO=#{rno}
+	
+	</update>
+	
+	<update id="updateReject" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 3,
+		       DENY=#{deny},
+		       DENY_CONTENT=#{denyContent}
+		 where RONO=#{roNo}
+	
+	</update>
 	
 	<!-- 숙소관리 끝-->
 
+	<!-- 숙소검색 시작 // 미완성 -->
+	<select id="selectRoomSearch" parameterType="Room" resultMap="roomAndRoomspayResultSet">
+		SELECT *
+		FROM ROOMS
+		WHERE RONO NOT IN (
+		                    SELECT R.RONO
+		                    FROM ROOMS R
+		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
+		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND (P.END_DAYS-1))
+		                        or (#{endDays} BETWEEN (P.START_DAYS+1) AND P.END_DAYS))
+				)
+        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
+        AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
+        ORDER BY RONO
+	</select>
 
-
-
-
+	<!-- 숙소검색 끝 -->
 
 
 
