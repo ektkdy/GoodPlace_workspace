@@ -166,7 +166,7 @@ button{cursor: pointer}
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
                                 <td colspan="2">
-                                    <div id="summernote" name="roomsNotice" style="height:100px; border:1px solid red"></div>
+                                    <textarea id="summernote" name="roomsNotice" style="height:100px; border:1px solid red"></textarea>
                                 </td>
                             </tr>
                             <tr class="pdBtom">

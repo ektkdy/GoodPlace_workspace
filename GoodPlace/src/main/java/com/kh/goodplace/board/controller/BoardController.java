@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class BoardController {
@@ -520,9 +523,25 @@ public class BoardController {
     }
     
     
+    @RequestMapping("reviewList.re")
+    public String reviewList(int currentPage, Model model, HttpSession session) {
+ 	   
+		 Member m = (Member)session.getAttribute("loginUser");
+		 
+		 int userNo = m.getUsNo();
+		 
+		 int listCount = bService.selectReviewCount(userNo);
+		 
+		 PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		 
+		 ArrayList<Board> list = bService.reviewList(pi, userNo);
+		 System.out.println(list);
+		 model.addAttribute("pi", pi);
+		 model.addAttribute("list", list);
+		 
+		 return "partner/partnerReplyListView";
     
-    
-    
+    }
     
     
     

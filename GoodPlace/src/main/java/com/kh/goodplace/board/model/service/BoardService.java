@@ -106,4 +106,13 @@ public interface BoardService {
 	ArrayList<Board> selectFaqList(String faqCategory);
 	
 	
+	// ------------------------------------------------------ 
+	
+	//1-1.파트너  리뷰 전체 리스트 조회용 서비스 - 기하
+	int selectReviewCount(int userNo);
+	
+	//1-2.리뷰 조회용서비스 - 기하
+	ArrayList<Board> reviewList(PageInfo pi, int userNo);
+	
+	
 }

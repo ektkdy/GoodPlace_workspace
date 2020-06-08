@@ -200,6 +200,17 @@ public class BoardDao {
 	}
 	
 	
+	// ---------------------------------- 사용자 리뷰 ----------------------------------
+	
+	public int selectReviewCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("boardMapper.selectReviewCount", userNo);
+	}
+
+	public ArrayList<Board> reviewList(SqlSessionTemplate sqlSession, int userNo,  PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("boardMapper.reviewList", userNo, rowBounds);
+	}
 	
 	
 	

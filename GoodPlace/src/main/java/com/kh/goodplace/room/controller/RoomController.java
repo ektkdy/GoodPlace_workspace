@@ -108,29 +108,29 @@ public class RoomController {
 		
 	}
 	
-	@RequestMapping("roomDetailView.ro")
-	public String roomDetailView(int rno, Model model ) {
-		System.out.println(rno);
-		 Room r = rService.selectRoom(rno);
+		@RequestMapping("roomDetailView.ro")
+		public String roomDetailView(int rno, Model model ) {
+			System.out.println(rno);
+			 Room r = rService.selectRoom(rno);
+			
+			model.addAttribute("r", r);
+			
+			return "partner/partnerRoomDetailView";
+		}
 		
-		model.addAttribute("r", r);
+		@RequestMapping("updateRoomForm.ro")
+		public String updateRoomForm() {
+			
+			return "partner/partnerRoomUpdateForm";
+		}
 		
-		return "partner/partnerRoomDetailView";
-	}
+		@RequestMapping("updateRoom.ro")
+		public String updateRoom() {
+			
+			return "";
+		}
 
-	@RequestMapping("updateRoomForm.ro")
-	public String updateRoomForm() {
 		
-		return "partner/partnerRoomUpdateForm";
-	}
-	
-	@RequestMapping("updateRoom.ro")
-	public String updateRoom() {
-		
-		return "";
-	}
-
-
 		// 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
 		// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -138,7 +138,7 @@ public class RoomController {
 			// 파일을 업로드 시킬 폴더 경로(String savePath)
 			String resources = request.getSession().getServletContext().getRealPath("resources");
 			//웹컨테이너의 resources의 물리적인 경로 알아내는 것		
-
+		
 			String savePath = resources + "\\uploadFiles\\";
 			
 			// 원본명(aaa.jpg)
@@ -165,12 +165,7 @@ public class RoomController {
 			return changeName;
 			
 		}
-	
-	
-	
-	
-	
-	
+		
 	
 // ------------- Power 관리 시작 --------------------------------------------------
 	

@@ -53,6 +53,21 @@
 		<result column="RPYC" property="yellowCardRp"/>
 		<result column="EPYC" property="yellowCardEp"/>
 	</resultMap>
+	
+	<resultMap type="Board" id="reviewResultSet">
+		<id column="RENO" property="reNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="REVIEW_TITLE" property="reTitle"/>
+		<result column="REVIEW_CONTENT" property="reContent"/>
+		<result column="CREATE_DATE" property="reviewDate"/>
+		<result column="SCORE" property="score"/>
+		<result column="REPLY" property="reply"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+	</resultMap>
 
 
 
@@ -330,6 +345,28 @@
 	<!-- /하정 -->
 	
 	
+	
+	<!-- 기하 partner review -->
+	<select id="selectReviewCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from review
+		 where rono in(select rono
+		 				 from rooms
+		 				where usno= #{userNo})
+	</select>
+	
+	<select id="reviewList" parameterType="_int" resultMap="reviewResultSet" >
+		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+	   	  FROM REVIEW RE
+		  JOIN MEMBER M ON(M.USNO = RE.USNO)
+		  JOIN ROOMS R ON(R.RONO = RE.RONO)
+		 WHERE RE.RONO IN(SELECT R.RONO
+                            FROM ROOMS 
+                           WHERE R.USNO = #{userNo})
+	</select>
+	
+	
+	<!-- /기하 partner review -->
 	
 
 </mapper>

@@ -91,7 +91,7 @@
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" readonly style="resize: none; overflow-y: scroll;"> ${r.roomsNotice }</textarea>
+                                    <c:out value="${r.roomsNotice }" escapeXml="false" />
                                 </td>
                             </tr>
                             <tr class="pdBtom">

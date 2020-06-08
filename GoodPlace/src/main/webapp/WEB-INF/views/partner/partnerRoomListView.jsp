@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,13 +47,13 @@ button:hover{cursor:pointer}
                     <table class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
-                                <td width="120">상태</td>
+                                <td>상태</td>
                                 <td>숙소번호</td>
-                                <td width="100">지역</td>
-                                <td width="100">숙소개시일</td>
-                                <td width="400">숙소명</td>
-                                <td width="100">총판매수</td>
-                                <td width="300">비고</td>
+                                <td>지역</td>
+                                <td>숙소개시일</td>
+                                <td>숙소명</td>
+                                <td>총판매수</td>
+                                <td>비고</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +63,7 @@ button:hover{cursor:pointer}
 				                    <tr>
 				                    <c:choose>
 				                    	<c:when test="${r.status eq 1}">
-				                        	<td><div class="ing" style="margin:0 auto">운영중</div></td>
+				                        	<td w><div class="ing" style="margin:0 auto">운영중</div></td>
 				                        </c:when>
 				                        <c:when test="${r.status eq 2 }">
 				                        	<td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>
@@ -74,19 +75,19 @@ button:hover{cursor:pointer}
 				                       		<td><div class="rest" style="margin:0 auto">휴면중</div></td>
 				                       	</c:otherwise>
 				                    </c:choose>
-				                    	<td>${r.roNo }</td>
-				                        <td width="10%">${r.addBasic}</td>
+										<td>${r.roNo }</td>
+				                        <td width="8%">${fn:substring(r.addBasic,0,2)}</td>
 				                        <c:choose>
 				                        	<c:when test="${!empty r.startDate }">
 				                        		<td width="15%">${r.startDate }</td>
 				                        	</c:when>
 				                        	<c:when test="${empty r.startDate }">
-				                        		<td width="15%">심사중</td>
+				                        		<td width="10%">심사중</td>
 				                        	</c:when>
 				                       	</c:choose>
-				                        <td width="35%">${r.roomsTitle}</td>
+				                        <td width="32%">${r.roomsTitle}</td>
 				                        <td width="10%">50</td>
-				                        <td width="18%">
+				                        <td width="0%">
 			                        	    <button class="detail_btn" onclick="location.href='roomDetailView.ro?rno='+${r.roNo}">보기</button>
 	                                    	<button class="schedule_btn">수정</button>
 	                                    	<!-- <button class="schedule_btn">일정관리</button> -->

@@ -176,12 +176,18 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.selectFaqList(sqlSession, faqCategory);
 	}
 
+	// ------------------- 파트너 리뷰 ----------------------
+	
+	@Override
+	public int selectReviewCount(int userNo) {
+		return bDao.selectReviewCount(sqlSession, userNo);
+	}
 
-
-
-
-
-
+	@Override
+	public ArrayList<Board> reviewList(PageInfo pi, int userNo) {
+		
+		return bDao.reviewList(sqlSession, userNo, pi);
+	}
 
 
 	
