@@ -85,14 +85,14 @@
                         <tbody>
                             <tr>
                                 <th rowspan="2">* 숙소명</th>
-                                <td colspan="2"><strong>편안한방</strong></td>
+                                <td colspan="2"><strong>${ r.roomsTitle }</strong></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>*숙소위치</th>
-                                <td colspan="2"><strong>서울시 강남구</strong></td>
+                                <td colspan="2"><strong>${ r.addBasic }</strong></td>
                             </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
@@ -115,21 +115,21 @@
                             
                             <tr>
                                 <th rowspan="2"  style="padding-top: 30px;">* 예약 설정</th>
-                                <td colspan="2"  style="padding-top: 30px;"> <strong>33</strong> 시간 전 부터 예약을 받지 않겠습니다.</td>
+                                <td colspan="2"  style="padding-top: 30px;"> <strong>${ r.deadline }</strong> 시간 전 부터 예약을 받지 않겠습니다.</td>
                             </tr>
                             <tr class="pdBtom"><td colspan="2" class="enrollInfo">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
                             <tr>
                                 <th rowspan="4">* 객실정보</th>
-                                <td>침대수 : <strong>2</strong></td>
-                                <td>샤워실수 : <strong>2</strong></td>
+                                <td>침대수 : <strong>${ r.bedCount }</strong></td>
+                                <td>샤워실수 : <strong>${ r.bathCount }</strong></td>
                             </tr>
                             <tr>
-                                <td>화장실수 : <strong>2</strong></td>
-                                <td>1박금액 : <strong>85000</strong>원</td>
+                                <td>화장실수 : <strong>${ r.restroomCount }</strong></td>
+                                <td>1박금액 : <strong>${ r.price }</strong>원</td>
                             </tr>
                             <tr>
-                                <td>최소인원 : <strong>1</strong></td>
-                                <td>최대인원 : <strong>4</strong></td>
+                                <td>최소인원 : <strong>${ r.minPeople }</strong></td>
+                                <td>최대인원 : <strong>${ r.maxPeople }</strong></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. 최소인원 이상일 경우 1인당 일정금액이 추가되며 <br>최대인원수 이상 받을수 없습니다.</td>
@@ -138,51 +138,51 @@
                                 <tr class="pdBtom">
                                     <th>* 숙소시설</th>
                                     <td colspan="2">
-                                        <textarea rows="10" cols="80" style="padding-top: 1%; padding-left: 1%; height:200px;" readonly>신축건물, 교통이 편리한, 관광명소가 가까운</textarea>
+                                        <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:200px;" readonly>${ r.facility }</textarea>
                                     </td>
                                 </tr>
                             <tr class="pdBtom">
                                 <th>* 제공서비스</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" style="padding-top: 1%; padding-left: 1%; height:100px;" readonly>신축건물, 교통이 편리한, 관광명소가 가까운</textarea>
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.service }</textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th rowspan="2">포함사항</th>
                                 <td>
-                                    <input type="checkbox" name="includeService" value="">조식
+                                    <input type="checkbox" id="includeService1" name="includeService" value="${r.meal}">조식
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="includeService" value="">중식
+                                    <input type="checkbox" id="includeService2" name="includeService" value="${r.meal}">중식
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2">
-                                    <input type="checkbox" name="includeService" value="">석식
+                                    <input type="checkbox" id="includeService3" name="includeService" value="${r.meal}">석식
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 숙소검색태그</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" style="padding-top: 1%; padding-left: 1%; height:100px;" readonly>신축건물, 교통이 편리한, 관광명소가 가까운</textarea>
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.roomsTag }</textarea>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" style="padding-top: 1%; padding-left: 1%;" readonly>편안하고 안락한 침대가 최고에요</textarea>
+                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%;" readonly>${ r.roomsNotice }</textarea>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 이용안내</th>
-                                <td>체크인 시간 : <strong>15:00~22:00</strong></td>
-                                <td>체크아웃 시간 : <strong>11:00</strong></td>
+                                <td>체크인 시간 : <strong>${ r.checkIn }</strong></td>
+                                <td>체크아웃 시간 : <strong>${ r.checkOut }</strong></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="btnArea" style="padding-bottom: 10%;">
                         <button class="cancel" data-toggle="modal" data-target="#rejection">거절하기</button>
-                        <button class="enroll">승인하기</button>
+                        <button class="enroll" onclick="location.href='aRoomOkay.ro?rno=${ r.roNo }'">승인하기</button>
                         <div id="test" style="display:none;  padding-bottom: 20%;" >
                             <textarea style="width:300px; height: 200px; border:1px solid black; resize: none;"></textarea>
                         </div>
@@ -195,7 +195,15 @@
         </div>
     </div>
 
-
+	<script>
+		$(function(){
+			switch('${r.meal}'){
+			case "조식" : $("#includeService1").prop("checked", true); break;
+			case "중식" : $("#includeService2").prop("checked", true); break;
+			case "석식" : $("#includeService3").prop("checked", true); break;
+			}
+		});
+	</script>
 
     <!-- 거절하기 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 button 클릭시 보임) -->
     <div class="modal fade" id="rejection">
@@ -207,13 +215,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button> 
             </div>
 
-            <form action="로그인요청받아주는서버" method="post">
+            <form action="aRoomReject.ro" method="post">
+            <input type="hidden" name="roNo" value="${ r.roNo }">
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <label for="userId" class="mr-sm-2">거절사유 :</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="거절사유" id="userId"> <br>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="거절사유" id="deny" name="deny"> <br>
                     <label for="userPwd" class="mr-sm-2">상세사유:</label><br>
-                    <textarea class="form-control mb-2 mr-sm-2" style="height:200px;" placeholder="내용을 입력해주세요."></textarea>
+                    <textarea class="form-control mb-2 mr-sm-2" style="height:200px;" id="denyContent" name="denyContent" placeholder="내용을 입력해주세요."></textarea>
                 </div>
                 
                 <!-- Modal footer -->

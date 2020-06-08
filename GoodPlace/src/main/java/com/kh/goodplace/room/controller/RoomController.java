@@ -297,13 +297,70 @@ public class RoomController {
 		return "admin/adminRoomsOkeyList";
 	}
 		
-	
+    @RequestMapping("aRoomDetail.ro")
+    public ModelAndView selectRoomWaitDetail(int rno, ModelAndView mv)
+    {	
+    	
+    	Room r = rService.selectRoomWaitDetail(rno);
+    	
+        if(r != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("r", r);
+            mv.setViewName("admin/adminRoomsListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+    
+    
+    @RequestMapping("aRoomOkay.ro")
+    public String updateOkay(int rno, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateOkay(rno);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsOkeyList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "승인 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("aRoomReject.ro")
+    public String updateReject(Room r, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateReject(r);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsWaitList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "거절 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
 	@RequestMapping("searchRo.ro")
-   	public String searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
 		
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
@@ -312,8 +369,17 @@ public class RoomController {
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		
-   		return "user/searchRooms";
+   		//System.out.println(" roomList 조회 : " + roomList);
+    	
+        if(!roomList.isEmpty()){
+        	mv.addObject("roomList", roomList);
+        	mv.setViewName("user/searchRooms");
+        }
+        else{
+            mv.addObject("msg", "거절 실패!!");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
    	}
     
     

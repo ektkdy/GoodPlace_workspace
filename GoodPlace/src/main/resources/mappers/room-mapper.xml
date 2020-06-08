@@ -56,7 +56,7 @@
 		<result column="PONO" property="poNo1"/>
 	</resultMap>
 	
-	<!-- Rooms테이블 + Roomspay테이블 아직 미완성 : Roomspay 필드 추가할 것 -->
+	<!-- Rooms테이블 + Roomspay테이블 -->
 	<resultMap type="Room" id="roomAndRoomspayResultSet">
 		<id column="RONO" property="roNo"/>
 		<result column="USNO" property="userNo"/>
@@ -232,7 +232,29 @@
 		 where status = 1
 	</select>
 	
+		<select id="selectRoomWaitDetail" resultMap="roomResultSet" parameterType="_int">
+		select *
+		  from rooms
+		 where rono = #{rno}
+	</select>
 	
+	<update id="updateOkay" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 1
+		 where RONO=#{rno}
+	
+	</update>
+	
+	<update id="updateReject" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 3,
+		       DENY=#{deny},
+		       DENY_CONTENT=#{denyContent}
+		 where RONO=#{roNo}
+	
+	</update>
 	
 	<!-- 숙소관리 끝-->
 
@@ -244,11 +266,12 @@
 		                    SELECT R.RONO
 		                    FROM ROOMS R
 		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
-		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND P.END_DAYS)
-		                        or (#{endDays} BETWEEN P.START_DAYS AND P.END_DAYS))
+		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND (P.END_DAYS-1))
+		                        or (#{endDays} BETWEEN (P.START_DAYS+1) AND P.END_DAYS))
 				)
-		        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
-		        AND (ADD_BASIC LIKE '%' || #{addBasic} || '%' OR ADD_REF LIKE '%' || #{addBasic} || '%')
+        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
+        AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
+        ORDER BY RONO
 	</select>
 
 	<!-- 숙소검색 끝 -->
