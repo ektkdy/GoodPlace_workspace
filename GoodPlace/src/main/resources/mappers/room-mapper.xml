@@ -244,8 +244,8 @@
 		                    SELECT R.RONO
 		                    FROM ROOMS R
 		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
-		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND P.END_DAYS)
-		                        or (#{endDays} BETWEEN P.START_DAYS AND P.END_DAYS))
+		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND (P.END_DAYS-1))
+		                        or (#{endDays} BETWEEN (P.START_DAYS+1) AND P.END_DAYS))
 				)
 		        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
 		        AND (ADD_BASIC LIKE '%' || #{addBasic} || '%' OR ADD_REF LIKE '%' || #{addBasic} || '%')

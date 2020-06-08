@@ -312,7 +312,7 @@ public class RoomController {
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		
+   		System.out.println(" roomList 조회 : " + roomList); 
    		return "user/searchRooms";
    	}
     
