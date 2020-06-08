@@ -360,7 +360,7 @@ public class RoomController {
 	
 	// ------------- 사용자 시작 --------------------------------------------------
 	@RequestMapping("searchRo.ro")
-   	public String searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
 		
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
@@ -369,8 +369,17 @@ public class RoomController {
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		System.out.println(" roomList 조회 : " + roomList); 
-   		return "user/searchRooms";
+   		//System.out.println(" roomList 조회 : " + roomList);
+    	
+        if(!roomList.isEmpty()){
+        	mv.addObject("roomList", roomList);
+        	mv.setViewName("user/searchRooms");
+        }
+        else{
+            mv.addObject("msg", "거절 실패!!");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
    	}
     
     
