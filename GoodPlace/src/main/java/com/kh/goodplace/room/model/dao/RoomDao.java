@@ -145,6 +145,23 @@ public class RoomDao {
 		
 	}
 	
+	public Room selectRoomWaitDetail(SqlSessionTemplate sqlSession, int rno) {
+		
+		return sqlSession.selectOne("roomMapper.selectRoomWaitDetail", rno);
+		
+	}
+	
+	public int updateOkay(SqlSessionTemplate sqlSession, int rno) {
+		
+		return sqlSession.update("roomMapper.updateOkay", rno);
+		
+	}
+	
+	public int updateReject(SqlSessionTemplate sqlSession, Room r) {
+		
+		return sqlSession.update("roomMapper.updateReject", r);
+		
+	}
 	
 	// --------- 숙소관리 시작 -----------------
 	

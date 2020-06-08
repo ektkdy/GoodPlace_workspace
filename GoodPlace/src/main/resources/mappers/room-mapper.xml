@@ -232,7 +232,29 @@
 		 where status = 1
 	</select>
 	
+		<select id="selectRoomWaitDetail" resultMap="roomResultSet" parameterType="_int">
+		select *
+		  from rooms
+		 where rono = #{rno}
+	</select>
 	
+	<update id="updateOkay" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 1
+		 where RONO=#{rno}
+	
+	</update>
+	
+	<update id="updateReject" parameterType="Room">
+	
+		update rooms
+		   set STATUS = 3,
+		       DENY=#{deny},
+		       DENY_CONTENT=#{denyContent}
+		 where RONO=#{roNo}
+	
+	</update>
 	
 	<!-- 숙소관리 끝-->
 

@@ -297,7 +297,64 @@ public class RoomController {
 		return "admin/adminRoomsOkeyList";
 	}
 		
-	
+    @RequestMapping("aRoomDetail.ro")
+    public ModelAndView selectRoomWaitDetail(int rno, ModelAndView mv)
+    {	
+    	
+    	Room r = rService.selectRoomWaitDetail(rno);
+    	
+        if(r != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("r", r);
+            mv.setViewName("admin/adminRoomsListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+    
+    
+    @RequestMapping("aRoomOkay.ro")
+    public String updateOkay(int rno, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateOkay(rno);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsOkeyList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "승인 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("aRoomReject.ro")
+    public String updateReject(Room r, Model model, HttpServletRequest request) {
+    	
+        int result = rService.updateReject(r);
+        
+        if(result > 0)
+        {
+            return "redirect:aRoomsWaitList.ro?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "거절 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
