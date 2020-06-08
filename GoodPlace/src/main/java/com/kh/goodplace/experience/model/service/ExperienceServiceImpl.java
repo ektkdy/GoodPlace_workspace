@@ -32,7 +32,6 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.selectExpList(sqlSession, pi, usNo);
 	}
 
-	
 	@Override
 	public int insertExp(Experience e) {
 		return expDao.insertExp(sqlSession, e);
@@ -49,35 +48,40 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public ArrayList<Experience> updateExpForm(int exNo) {
-		return expDao.updateExpForm(sqlSession, exNo);
-	}
-	
-	@Override
-	public ArrayList<Experience> updateReExpForm(int exNo) {
-		return expDao.updateReExpForm(sqlSession, exNo);
+	public Experience selectExpOne(int exNo) {
+		return expDao.selectExpOne(sqlSession, exNo);
 	}
 
 	@Override
-	public int updateExp(int exNo) {
-		return 0;
+	public ArrayList<Attachment> selectAt(int exNo) {
+		return expDao.selectAt(sqlSession, exNo);
+	}
+
+	@Override
+	public int updateExp(Experience e) {
+		return expDao.updateExp(sqlSession, e);
+	}
+
+	@Override
+	public int updateAt(Attachment at) {
+		return expDao.updateAt(sqlSession, at);
+	}
+	
+	@Override
+	public int updateReExp(Experience e) {
+		return expDao.updateReExp(sqlSession, e);
 	}
 
 	@Override
 	public int restExp(int exNo) {
-		return 0;
+		return expDao.restExp(sqlSession, exNo);
 	}
 
 	@Override
 	public int deleteExp(int exNo) {
-		return 0;
+		return expDao.deleteExp(sqlSession, exNo);
 	}
 
-	@Override
-	public int updateReExp(int exNo) {
-		return 0;
-	}
-	
 	
 	
 	
@@ -128,6 +132,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public int updateReject(Experience e) {
 		return expDao.updateReject(sqlSession, e);
 	}
+
+	
 	
 	
 	

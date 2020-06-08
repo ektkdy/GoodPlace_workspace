@@ -31,23 +31,39 @@ public class ExperienceDao {
 	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {
 		return sqlSession.insert("expMapper.insertAttachment", at);
 	}
-	
 
 	public ArrayList<Experience> selectExp(SqlSessionTemplate sqlSession, int exNo) {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
 	}
 
-	
-	public ArrayList<Experience> updateExpForm(SqlSessionTemplate sqlSession, int exNo) {
-		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
-	}
-	
-	public ArrayList<Experience> updateReExpForm(SqlSessionTemplate sqlSession, int exNo) {
-		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
+	public Experience selectExpOne(SqlSessionTemplate sqlSession, int exNo) {
+		return sqlSession.selectOne("expMapper.selectExpOne", exNo);
 	}
 
+	public ArrayList<Attachment> selectAt(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectAt", exNo);
+	}
+
+	public int updateExp(SqlSessionTemplate sqlSession, Experience e) {
+		return sqlSession.update("expMapper.updateExp", e);
+	}
+
+	public int updateAt(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.update("expMapper.updateAt", at);
+	}
 	
-	
+	public int updateReExp(SqlSessionTemplate sqlSession, Experience e) {
+		return sqlSession.update("expMapper.updateReExp", e);
+	}
+
+	public int restExp(SqlSessionTemplate sqlSession, int exNo) {
+		return sqlSession.update("expMapper.restExp", exNo);
+	}
+
+	public int deleteExp(SqlSessionTemplate sqlSession, int exNo) {
+		return sqlSession.update("expMapper.deleteExp", exNo);
+	}
+
 	
 	
 	
@@ -102,6 +118,14 @@ public class ExperienceDao {
 		return sqlSession.update("expMapper.updateReject", e);
 		
 	}
+
+	
+	
+	
+	
+	
+	
+	
 
 	
 	

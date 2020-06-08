@@ -44,6 +44,18 @@
 		<result column="change_name_1" property="atChangeName"/>
 	</resultMap>
 	
+	<resultMap type="Attachment" id="AttachmentResultSet">
+		<id column="fino" property="fiNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+		<result column="upload_date" property="uploadDate"/>
+		<result column="status" property="status"/>
+		<result column="category" property="category"/>
+		<result column="rono" property="roNo"/>
+		<result column="exno" property="exNo"/>
+	</resultMap>
+	
 	<!-- 사용자의 체험 전체 목록 조회  -->
 	<select id="selectExpListCount" resultType="_int">
 		select count(*)
@@ -79,40 +91,69 @@
 		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval)
 	</insert>
 	
-	<!-- 체험 상세조회 / 수정폼 요청 / 거절사유가 있는 수정폼 요청 -->
+	<!-- 체험 상세조회 -->
 	<select id="selectExp" resultMap="ExperienceResultSet" parameterType="_int">
 		select * 
-		  from experience 
-		  join attachment using (exno)
+		  from experience
+		  left join attachment using (exno)
 		 where exno=#{exNo}
 	</select>
 	
-	<!-- 체험 휴면 -->
+	<!-- 체험객체조회 -->
+	<select id="selectExpOne" resultMap="ExperienceResultSet" parameterType="_int">
+		select * 
+		  from experience
+		 where exno=#{exNo}
+	</select>
 	
+	<!-- 체험번호에 해당하는 체험 상세사진 조회 -->
+	<select id="selectAt" resultMap="AttachmentResultSet" parameterType="_int">
+		select * 
+		  from attachment
+		 where exno=#{exNo}
+	</select>
 	
-	
-	
-	
-	
-	<!-- 체험 삭제 -->
+	<!-- 체험객체 업데이트 -->
+	<update id="updateExp" parameterType="Experience">
+		update experience 
+   		   set language=#{language}, exp_category=#{expCategory}, exp_tag=#{expTag}, exp_title=#{expTitle}, 
+      		   activity=#{activity}, max_people=#{maxPeople},start_time=#{startTime}, end_time=#{endTime}, 
+      		   use_time=#{useTime}, interval_time=#{intervalTime}, supplies=#{supplies}, deadline=#{deadline}, 
+      		   price=#{price}, add_basic=#{addBasic}, add_detail=#{addDetail}, add_ref=#{addRef}, zip_code=#{zipCode}, 
+      		   origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath}, exp_content=#{expContent}
+		 where exno=#{exNo}
+	</update>
 
+	<!-- 체험 상세사진 업데이트 (승인거절된 체험 상세사진 업데이트 동일) -->
+	<update id="updateAt" parameterType="Attachment">
+		update attachment
+		   set origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath}, upload_date=sysdate, category=2
+ 		 where exno=#{exNo}
+	</update>
 
+	<!-- 승인거절된 체험객체 업데이트 -->
+	<update id="updateReExp" parameterType="Experience">
+		update experience 
+   		   set language=#{language}, exp_category=#{expCategory}, exp_tag=#{expTag}, exp_title=#{expTitle}, 
+      		   activity=#{activity}, max_people=#{maxPeople}, start_time=#{startTime}, end_time=#{endTime}, 
+      		   use_time=#{useTime}, interval_time=#{intervalTime}, supplies=#{supplies}, deadline=#{deadline}, 
+      		   price=#{price}, add_basic=#{addBasic}, add_detail=#{addDetail}, add_ref=#{addRef}, zip_code=#{zipCode}, 
+      		   origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath}, exp_content=#{expContent},
+      		   status=2, deny=null, deny_content=null
+		 where exno=#{exNo}
+	</update>
 
-
-
-
-
+	<update id="restExp" parameterType="Experience">
+		update experience
+		   set status=4
+	     where exno=#{exNo}
+	</update>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<update id="deleteExp" parameterType="Experience">
+		update experience
+		   set status=5
+	     where exno=#{exNo}
+	</update>
 	
 
 	<!-- 체험관리 시작 -->
