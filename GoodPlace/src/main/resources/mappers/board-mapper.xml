@@ -82,6 +82,20 @@
 		  where faq_category = #{faqCategory}	
 	</select>
 	
+	<!-- 진아 : 숙소별 리뷰 조회 : 미완성 -->
+	<select id="reviewListPerRoom" parameterType="_int" resultMap="reviewResultSet">
+		SELECT *
+		FROM REVIEW
+		WHERE RONO = #{roNo}
+		ORDER BY RENO
+	</select>
+	
+	<!-- 진아 : 숙소별 리뷰 개수 조회 : 미완성 -->
+	<select id="reviewListCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE RONO = #{roNo}
+	</select>
 	
 	<!-- 현영  -->
 	<!-- FAQ -->

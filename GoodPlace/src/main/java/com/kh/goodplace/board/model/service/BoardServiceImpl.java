@@ -175,7 +175,20 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectFaqList(String faqCategory) {
 		return bDao.selectFaqList(sqlSession, faqCategory);
 	}
-
+	
+	
+	// ------------------- 사용자 리뷰 ----------------------
+	/*
+	@Override
+	public ArrayList<Board> selectReviewList(int roNo) {
+		return bDao.selectReviewList(sqlSession, roNo);
+	}
+	*/
+	@Override
+	public int reviewListCount(int roNo) {
+		return bDao.reviewListCount(sqlSession, roNo);
+	}
+	
 	// ------------------- 파트너 리뷰 ----------------------
 	
 	@Override
@@ -198,6 +211,10 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
 	}
+
+
+
+
 
 
 	

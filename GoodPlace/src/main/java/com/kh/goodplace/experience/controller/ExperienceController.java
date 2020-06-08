@@ -23,7 +23,6 @@ import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -65,6 +64,18 @@ public class ExperienceController {
 		
 	}
 	
+	// 전달받은 파일명을 가지고 서버로부터 삭제하는 메소드 
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources +"\\uploadFiles\\";
+		
+		File deleteFile = new File(savePath + fileName);
+		deleteFile.delete();
+	};
+		
+
+	//-----------------------------------------------------------------------------------------------------
+	
 	/* 1. 체험관리- 전체 체험목록 조회용 서비스 */
 	@RequestMapping("list.exp")
 	public String selectExpList(int currentPage, Model model, Member m, HttpSession session) {
@@ -103,19 +114,13 @@ public class ExperienceController {
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request/* , Attachment at */) {
 		
-		
 		if(!file.getOriginalFilename().equals("")) {
-			
 			String changeName = saveFile(file, request);
 			e.setOriginName(file.getOriginalFilename());
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
-		
 		int result1 = expService.insertExp(e);
-		
-		//System.out.println(e);
-		//System.out.println(result1);
 		
 		int result = 1;
 		
@@ -140,14 +145,8 @@ public class ExperienceController {
 				// 잘 추가되었다면 1이 리턴
 				int result2 = expService.insertAttachment(at);
 				result = result1*result2;
-				
-				//System.out.println(result2);
-				//System.out.println(at);
 			}
 		}
-		//System.out.println(list);
-		//System.out.println(result);
-		
 		
 		if(result>0) {
 			return "redirect:list.exp?currentPage=1";
@@ -159,11 +158,8 @@ public class ExperienceController {
 	/* 3. 체험 상세보기용 서비스 */
 	@RequestMapping("expDetail.exp")
 	public ModelAndView selectExp(int exNo, ModelAndView mv) {
-		//System.out.println(exNo);
-		//Experience exp = expService.selectExp(exNo);
-		
+		// Experience테이블과 Attachment테이블 join하여 데이터 가져옴
 		ArrayList<Experience> list = expService.selectExp(exNo);
-		//System.out.println(list);
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -172,66 +168,104 @@ public class ExperienceController {
 			mv.addObject("msg", "상세보기 실패");
 			mv.setViewName("partner/partnerExpList");
 		}
-		
 		return mv;
 	}
 	
 	/* 4_1. 체험수정폼 요청용 서비스 */
 	@RequestMapping("updateExpForm.exp")
 	public String updateExpForm(int exNo,  Model model) {
-		ArrayList<Experience> list = expService.selectExp(exNo);
+		// exNo보내서 해당하는 e객체와 list불러와서 폼 내부에 뿌려주기
+		Experience e = expService.selectExpOne(exNo);
+		ArrayList<Attachment> list = expService.selectAt(exNo);
+		
+		model.addAttribute("e", e);
 		model.addAttribute("list", list);
+		
 		return "partner/partnerExpUpdateForm";
 	}
 	
-	/* 4_2. 승인 거절 시 체험수정폼 요청용 서비스 */
+	/* 4_2. 체험 업데이트 */
+	@RequestMapping("updateExp.exp")
+	public String updateExp(Experience e,  Model model) {
+		// exNo보내서 해당하는 e객체와 list불러와서 폼 내부에 뿌려주기
+		int result1 = expService.updateExp(e);
+		//int result2 = expService.updateAt(at);
+		
+
+
+		
+		return "partner/partnerExpUpdateForm";
+	}
+	
+	
+	/* 5_1. 거절사유가 담긴 체험수정폼 요청용 서비스 */
 	@RequestMapping("updateReExpForm.exp")
 	public String updateReExpForm(int exNo,  Model model) {
-		ArrayList<Experience> list = expService.selectExp(exNo);
+		// exNo보내서 해당하는 e객체와 l${ ist불러와서 폼 내부에 뿌려주기
+		Experience e = expService.selectExpOne(exNo);
+		ArrayList<Attachment> list = expService.selectAt(exNo);
+		
+		model.addAttribute("e", e);
 		model.addAttribute("list", list);
-		return "partner/partnerExpReUpdateForm";
+		
+		return "partner/partnerExpEnrollReturn";
 	}
 	
-	/* 4_3. 체험수정 요청용 서비스 */
-	@RequestMapping("updateExp.exp")
-	public ModelAndView updateExp(int exNo, ModelAndView mv) {
-		int result = expService.updateExp(exNo);
+	
+	/* 5_2. 거절사유 확인후 수정하고 재심사요청 */
+	@RequestMapping("updateReExp.exp")
+	public String updateReExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
+			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
+			HttpServletRequest request) {
+		
+		if(!file.getOriginalFilename().equals("")) {
+			if(e.getChangeName() != null) {
+				deleteFile(e.getChangeName(), request);
+			}
+			String changeName = saveFile(file, request);
+			e.setOriginName(file.getOriginalFilename());
+			e.setChangeName(changeName);
+			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
+		int result1 = expService.updateReExp(e);
+		
+		int result = 1;
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
+		for(int i=0; i<filelist.length; i++) {
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
+				if(filelist[i].getName() != null) {
+					deleteFile(e.getChangeName(), request);
+				}
+				
+				String changeName = saveFile(filelist[i], request);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result2 = expService.insertAttachment(at);
+				result = result1*result2;
+			}
+		}
 		
 		if(result>0) {
-			mv.setViewName("partner/partnerExpList");
+			return "redirect:list.exp?currentPage=1";
 		}else {
-			mv.addObject("msg", "수정 실패");
-			mv.setViewName("common/errorPage");
+			return "common/errorPage";
 		}
-		return mv;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
-	@RequestMapping("partnerIncome.me")
-	public String selectIncomeList(int currentPage, Model model, int usNo) {
-		int listCount = expService.selectExpListCount(usNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
-		return "partner/partnerIncome";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

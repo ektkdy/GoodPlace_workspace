@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
-import com.kh.goodplace.room.model.vo.Room;
 
 public interface ExperienceService {
 	
@@ -23,22 +22,22 @@ public interface ExperienceService {
 	int insertAttachment(Attachment at);
 	
 	// 3. 체험 상세조회용 서비스 
-	//Experience selectExp(int exNo);
-	
-	// 3. 체험 상세조회용 서비스 
 	ArrayList<Experience> selectExp(int exNo);
 	
-	// 4_1. 체험 수정폼 요청용 서비스
-	ArrayList<Experience> updateExpForm(int exNo);
+	// [공통] 체험객체(썸네일포함 모든 컬럼) 조회용 서비스
+	Experience selectExpOne(int exNo);
 	
-	// 4_2. 승인 거절시 체험 수정폼 요청용 서비스
-	ArrayList<Experience> updateReExpForm(int exNo);
+	// [공통] 체험번호에 해당하는 상세사진 조회용 서비스
+	ArrayList<Attachment> selectAt(int exNo);
 	
-	// 4_3. 체험수정용 서비스
-	int updateExp(int exNo);
+	// [공통] 변경된 내용으로 체험객체 업데이트
+	int updateExp(Experience e);
 	
-	// 4_4. 체험 반려건 재등록 요청 서비스
-	int updateReExp(int exNo);
+	// [공통] 변경된 내용으로 상세사진 업데이트
+	int updateAt(Attachment at);
+	
+	// 승인거절된 체험객체 업데이트
+	int updateReExp(Experience e);
 	
 	// 5. 체험 휴면용 서비스
 	int restExp(int exNo);
@@ -46,8 +45,6 @@ public interface ExperienceService {
 	// 6. 체험 삭제용 서비스
 	int deleteExp(int exNo);
 	
-	
-
 	
 	
 	
@@ -71,6 +68,14 @@ public interface ExperienceService {
 	//2_2.요청한 페이지에 보여질 체험 승인완료 리스트 조회용 서비스
 	ArrayList<Experience> selectExpOkayList(PageInfo pi);
 
+	// 3_1. 해당 게시글 조회용 서비스
+	Experience selectExpmWaitDetail(int eno);
+	
+	// 3_2.게시글 승인용 서비스-현영
+	int updateOkay(int eno);
+	
+	// 3_3.게시글 거절용 서비스-현영
+	int updateReject(Experience e);
 
 
 	

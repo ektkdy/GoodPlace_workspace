@@ -1,6 +1,9 @@
 package com.kh.goodplace.room.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import com.kh.goodplace.board.model.vo.Board;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -83,4 +86,8 @@ public class Room {
 	private String request;		// 요청사항
 	private String startDays;	// 예약시작일자
 	private String endDays;		// 예약끝일자
+	
+	/* DB에는 없지만 새로 생성한 변수 */
+	private int reviewCount;	// 숙소별 Review 개수
+	private ArrayList<Board> review; // 숙소별 Review 리스트
 }

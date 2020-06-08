@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.goodplace.board.model.service.BoardService;
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
@@ -29,6 +31,9 @@ public class RoomController {
 	
 	@Autowired // DI
 	private RoomService rService;
+	
+    @Autowired // DI
+    private BoardService bService;
 	
 	 @RequestMapping("list.ro")
 	 public String selectRoomsList(int currentPage, Model model, 
@@ -354,8 +359,9 @@ public class RoomController {
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
+    // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, Board board, ModelAndView mv ) {
 		
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
@@ -363,15 +369,30 @@ public class RoomController {
 		room.setEndDays(tripEndDate);
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
+		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		//System.out.println(" roomList 조회 : " + roomList);
+   		System.out.println(" roomList 조회 : " + roomList);
+    	System.out.println("roomList 의 크기 : " + roomList.size());
     	
+    	// roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 set
+    	ArrayList<Board> reivew = null;
+    	
+    	for(int i=0; i<roomList.size(); i++) {
+    		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
+        	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
+    	}
+
         if(!roomList.isEmpty()){
+        	mv.addObject("tripArea", tripArea);
+        	mv.addObject("tripStartDate", tripStartDate);
+        	mv.addObject("tripEndDate", tripEndDate);
+        	mv.addObject("tripPeople", tripPeople);
+        	
         	mv.addObject("roomList", roomList);
         	mv.setViewName("user/searchRooms");
         }
         else{
-            mv.addObject("msg", "거절 실패!!");
+            mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
         return mv;
