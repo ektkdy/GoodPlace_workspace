@@ -54,6 +54,11 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 	
 	@Override
+	public ArrayList<Experience> updateReExpForm(int exNo) {
+		return expDao.updateReExpForm(sqlSession, exNo);
+	}
+
+	@Override
 	public int updateExp(int exNo) {
 		return 0;
 	}

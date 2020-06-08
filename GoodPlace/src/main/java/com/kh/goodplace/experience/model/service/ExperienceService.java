@@ -19,7 +19,7 @@ public interface ExperienceService {
 	// 2_1. 체험 등록용 서비스(체험정보+썸네일)
 	int insertExp(Experience e);
 	
-	// 2_3. 체험 등록용 서비스(상세사진용)
+	// 2_2. 체험 등록용 서비스(상세사진용)
 	int insertAttachment(Attachment at);
 	
 	// 3. 체험 상세조회용 서비스 
@@ -31,8 +31,14 @@ public interface ExperienceService {
 	// 4_1. 체험 수정폼 요청용 서비스
 	ArrayList<Experience> updateExpForm(int exNo);
 	
-	// 4_2. 체험수정용 서비스
+	// 4_2. 승인 거절시 체험 수정폼 요청용 서비스
+	ArrayList<Experience> updateReExpForm(int exNo);
+	
+	// 4_3. 체험수정용 서비스
 	int updateExp(int exNo);
+	
+	// 4_4. 체험 반려건 재등록 요청 서비스
+	int updateReExp(int exNo);
 	
 	// 5. 체험 휴면용 서비스
 	int restExp(int exNo);
@@ -40,8 +46,7 @@ public interface ExperienceService {
 	// 6. 체험 삭제용 서비스
 	int deleteExp(int exNo);
 	
-	// 7. 체험 반려건 재등록 요청 서비스
-	int updateReExp(int exNo);
+	
 
 	
 	

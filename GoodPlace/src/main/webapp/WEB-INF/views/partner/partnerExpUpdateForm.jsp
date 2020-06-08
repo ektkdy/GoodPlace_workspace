@@ -68,8 +68,7 @@
             </span><br>
             <div style="text-align: center; margin-bottom: 150px;"></div>
             <br clear="both">
-            
-            <form action="updateExp.exp" id="updateExp" method="post">    
+            <form action="" id="updateExp" method="post">
 	            <div id="stepOne">
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	
@@ -135,7 +134,7 @@
 		                    <tr>
 		                    	<th>* 체험 소개</th>
 		                        <td>
-		                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent"></textarea>
+		                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent">${ list[0].expContent }</textarea>
 		                        </td>
 		                    </tr>
 		                    <tr>
@@ -238,12 +237,12 @@
                     <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
 		                </span>
 		                <div style="text-align:right; margin-top: -40px;">
-		                    <button id="delete">삭제하기</button>
-		                    <button id="rest">휴면하기</button>
-		                    <button type="submit" id="modify">수정하기</button>
+		                    <button id="delete" onclick="expSubmit(1);">삭제하기</button>
+		                    <button id="rest" onclick="expSubmit(2);">휴면하기</button>
+		                    <button id="modify" onclick="expSubmit(3);">수정하기</button>
 		                </div>
 		            </div>
-            </form>
+		        </form>
             <br><br><br>
         </div>
     </div>
@@ -259,15 +258,15 @@
 
 
 <script>
-	$(function(){
-		$("#rest").click(function(){
-			
-		});
-		
-		$("#delete").click(function(){
-			
-		});
-	});
+	function expSubmit(num){	// num에는 1,2,3중 하나가 넘어옴
+		if(num==1){		// 삭제하기 클릭시
+			$("#updateExp").attr("action", "delete.exp");
+		}else if(num==2){	// 휴면하기 클릭시
+			$("#updateExp").attr("action", "rest.exp");
+		}else{	// 수정하기 클릭시
+			$("#updateExp").attr("action", "updateExp.exp");
+		}
+	}
 </script>
 
 <!-- 준비물 쪽 체크박스 -->

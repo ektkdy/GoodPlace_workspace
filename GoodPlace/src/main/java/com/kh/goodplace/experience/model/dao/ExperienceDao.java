@@ -42,6 +42,10 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
 	}
 	
+	public ArrayList<Experience> updateReExpForm(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
+	}
+
 	
 	
 	

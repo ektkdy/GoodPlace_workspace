@@ -184,13 +184,34 @@ public class ExperienceController {
 		return "partner/partnerExpUpdateForm";
 	}
 	
-	/* 4_2. 체험수정 요청용 서비스 */
-	@RequestMapping("updateExp.exp")
-	public String updateExp(int exNo, ModelAndView mv) {
-	
-		
-		return "";
+	/* 4_2. 승인 거절 시 체험수정폼 요청용 서비스 */
+	@RequestMapping("updateReExpForm.exp")
+	public String updateReExpForm(int exNo,  Model model) {
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		model.addAttribute("list", list);
+		return "partner/partnerExpReUpdateForm";
 	}
+	
+	/* 4_3. 체험수정 요청용 서비스 */
+	@RequestMapping("updateExp.exp")
+	public ModelAndView updateExp(int exNo, ModelAndView mv) {
+		int result = expService.updateExp(exNo);
+		
+		if(result>0) {
+			mv.setViewName("partner/partnerExpList");
+		}else {
+			mv.addObject("msg", "수정 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
 	@RequestMapping("partnerIncome.me")

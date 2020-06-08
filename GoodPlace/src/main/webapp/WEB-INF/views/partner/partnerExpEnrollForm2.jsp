@@ -64,7 +64,7 @@
             </div>
             <form id="insertExp" action="insert.exp" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
-	            
+	             ${ e.expContent }
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="expCategory" value="${ e.expCategory }">
 	            	<input type="hidden" name="language" value="${ e.language }">
@@ -98,9 +98,9 @@
 							<td id="oprateTimes">
 								운영 시작 시간은 <input type="time" name="startTime" id="startTime"> 입니다.<br><br>
 								운영 마감 시간은 <input type="time" name="endTime" id="endTime"> 입니다.<br><br>
-								체험 소요 시간은  <input type="number" name="useTime" min=1 placeholder="1">시간 입니다. 
+								체험 소요 시간은  <input type="number" name="useTime" min=1>시간 입니다. 
 								<h5>• 최소 소요시간은 1시간입니다.</h5><br>
-								체험 운영 간격은	<input type="number" name="intervalTime" id="intervalTime" min=30 placeholder="30">분 입니다.
+								체험 운영 간격은	<input type="number" name="intervalTime" id="intervalTime" min=30>분 입니다.
 								<h5>• 최소 운영간격은 30분입니다.</h5>
 							</td>
 						</tr>
@@ -134,7 +134,7 @@
 	                    <tr>
 	                        <th>* 예약 설정</th>
 	                        <td>
-	                        	<input type="number" name="deadline" id="deadline" min=1 placeholder="1" style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
+	                        	<input type="number" name="deadline" id="deadline" min=1 style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
 	                            <h5>• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
 	                                	나중에 언제든지 변경하실수 있습니다.</h5>
 	                        </td>
@@ -198,112 +198,112 @@
             </div>
             
             </form>
-            
-            <!-- 준비물 쪽 체크박스 -->
-            <script type="text/javascript">
-            	$(function(){
-            		$("#noSupplies").click(function(){
-            			if($("#noSupplies").is(":checked")){
-            				var a = $("#noSupplies").val("장비포함");
-            				$("#supplies").attr("disabled", true);
-			            	//console.log(a.val()); // "장비포함"
-            			} else{
-            				$("#supplies").attr("disabled", false);
-            			}
-            		});
-            	});
-            </script>
-            
-            <!-- 대표사진 fileArea -->
-			<script>
-				$(function(){
-					$("#fileArea").hide();
-					
-					$("#titleImg").click(function(){
-						$("#thumb").click();
-					});
-				
-				});
-				
-				function loadImg(inputFile, num) {
-					if(inputFile.files.length==1){
-		       			// 파일을 읽어들일 FileReader 객체생성
-		       			var reader = new FileReader();
-			
-		       			// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
-		       			reader.readAsDataURL(inputFile.files[0]);
-		       			
-		       			//파일 읽기가 완료 되었을때 실행할 메소드
-						// e : 현재 이벤트가 발생한 이벤트객체
-		       			reader.onload = function(e){
-							$("#titleImg").attr("src", e.target.result); 
-						};
-					}
-				}
-			</script>
-			
-			<!-- 상세사진용 input 추가 -->
-		    <script>
-				var maxAppend = 0; 
-		    	function addInput(){
-		    		if (maxAppend >= 5) return; 
-		    		$("#parah").append('<input type="file" name="file">');
-		    		maxAppend++;
-		    	}
-		    	
-		    	function deleteInput(){
-		    		$("#parah input:last-child").remove();
-		    		maxAppend--;
-		    	}
-		    </script>
-			
-			<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
-			<script>
-				$(function(){
-					// 이벤트 걸고자하는 input요소
-					var price = $(".price");
-					
-					price.keyup(function(){
-						// 금액이 4자리 이상 되었을 때 예상가격 출력 -- 소수점이하 버림
-						if(price.val().length>=4){
-							//console.log(price.val());
-							var priceCal = Math.floor(price.val()*0.8);
-							$(".priceCal").val(priceCal);
-						}else{
-							$('.priceCal').val('');
-						}					
-					});
-				});
-			</script>
-			
-			<!-- 검토 후 제출 쪽 체크박스  -->
-            <script>
-				$(function(){
-					$("#checkAll").click(function(){
-						if($("#checkAll").is(":checked")){
-							$(".checkRow").prop("checked", true);
-						}else{
-							$(".checkRow").prop("checked", false);
-						}
-					});
-					$(".checkRow").click(function(){
-						if($("input[name=checkRow]:checked").length==5){
-							$("#checkAll").prop("checked", true);
-						} else{
-							$("#checkAll").prop("checked", false);
-						}
-					});
-					/* $("#next").click(function(){
-						if($("#checkAll").is(":checked")){
-							$("#insertExp").submit();
-						}else{
-							alert("모두 동의 후 체험 신청이 가능합니다.");
-						}
-					} */
-				});
-			</script>
         </div>
     </div>
 </div>
+
+<!-- 준비물 쪽 체크박스 -->
+<script type="text/javascript">
+	$(function(){
+		$("#noSupplies").click(function(){
+			if($("#noSupplies").is(":checked")){
+				var a = $("#noSupplies").val("장비포함");
+				$("#supplies").attr("disabled", true);
+   	//console.log(a.val()); // "장비포함"
+			} else{
+				$("#supplies").attr("disabled", false);
+			}
+		});
+	});
+</script>
+
+<!-- 대표사진 fileArea -->
+<script>
+$(function(){
+	$("#fileArea").hide();
+	
+	$("#titleImg").click(function(){
+		$("#thumb").click();
+	});
+
+});
+
+function loadImg(inputFile, num) {
+	if(inputFile.files.length==1){
+     			// 파일을 읽어들일 FileReader 객체생성
+     			var reader = new FileReader();
+
+     			// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
+     			reader.readAsDataURL(inputFile.files[0]);
+     			
+     			//파일 읽기가 완료 되었을때 실행할 메소드
+		// e : 현재 이벤트가 발생한 이벤트객체
+     			reader.onload = function(e){
+			$("#titleImg").attr("src", e.target.result); 
+		};
+	}
+}
+</script>
+
+<!-- 상세사진용 input 추가 -->
+<script>
+var maxAppend = 0; 
+  	function addInput(){
+  		if (maxAppend >= 5) return; 
+  		$("#parah").append('<input type="file" name="file">');
+  		maxAppend++;
+  	}
+  	
+  	function deleteInput(){
+  		$("#parah input:last-child").remove();
+  		maxAppend--;
+  	}
+  </script>
+
+<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
+<script>
+$(function(){
+	// 이벤트 걸고자하는 input요소
+	var price = $(".price");
+	
+	price.keyup(function(){
+		// 금액이 4자리 이상 되었을 때 예상가격 출력 -- 소수점이하 버림
+		if(price.val().length>=4){
+			//console.log(price.val());
+			var priceCal = Math.floor(price.val()*0.8);
+			$(".priceCal").val(priceCal);
+		}else{
+			$('.priceCal').val('');
+		}					
+	});
+});
+</script>
+
+<!-- 검토 후 제출 쪽 체크박스  -->
+<script>
+$(function(){
+	$("#checkAll").click(function(){
+		if($("#checkAll").is(":checked")){
+			$(".checkRow").prop("checked", true);
+		}else{
+			$(".checkRow").prop("checked", false);
+		}
+	});
+	$(".checkRow").click(function(){
+		if($("input[name=checkRow]:checked").length==5){
+			$("#checkAll").prop("checked", true);
+		} else{
+			$("#checkAll").prop("checked", false);
+		}
+	});
+	/* $("#next").click(function(){
+		if($("#checkAll").is(":checked")){
+			$("#insertExp").submit();
+		}else{
+			alert("모두 동의 후 체험 신청이 가능합니다.");
+		}
+	} */
+});
+</script>
 </body>
 </html>

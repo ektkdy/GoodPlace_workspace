@@ -123,7 +123,6 @@
                         <th>* 체험 소개</th>
                         <td>
                         	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent"></textarea>
-                        	
                         </td>
                     </tr>
                     <tr>
@@ -143,7 +142,7 @@
             <br>
             </div>
             <div id="btns">
-                <button type="button" id="cancle" onclick="javascript:history.go(-1);">취소하기</button>
+                <button type="button" id="cancle" onclick="location.href='list.exp?currentPage=1'">취소하기</button>
                 <button type="submit" id="next">저장 후 다음으로</button>
             </div>
             </form>
@@ -159,7 +158,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- summernote -->
 
-
+<!-- expTag용 스크립트 -->
 <script type="text/javascript">
 	$(function(){
 		$(".expTag").click(function(){

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,10 +99,10 @@
 		                            			<td>삭제</td>
 		                            		</c:otherwise>
 		                            	</c:choose>
-			                            <td>${ exp.local }</td>
+			                            <td>${fn:substring(exp.addBasic,0,2)}</td>
 			                            <td>${ exp.expTitle }</td>
 			                            <c:if test="${ empty exp.startDate }">
-			                            	<td> - (${ exp.applyDate })</td>
+			                            	<td> 심사진행중 (${ exp.applyDate })</td>
 			                            </c:if>
 			                            <c:if test="${ !empty exp.startDate }">
 			                            	<td>${ exp.startDate }(${ exp.applyDate })</td>
