@@ -111,7 +111,7 @@
 
         /*파워등록숙소,인기숙소*/
         #roomList{
-            width:80%;
+            width:100%;
             float:left;
         }
         #roomList .menu>a{
@@ -127,6 +127,7 @@
         #roomList .power>li{
             display: inline-block;
             text-align: left;
+            float:left;
         }
         .halfWidth{
             width:50%;
@@ -251,11 +252,11 @@
         
         <!-- 인기등록 숙소-->
         <div id="roomList">
-            <div style="padding-top:120px;"><h2>HOT 인기숙소</h2></div>
+            <div style="padding-top:60px;"><h2>HOT 인기숙소</h2></div>
             <div class="rooms power">
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -263,7 +264,15 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
+                        숙소 타이틀<br>
+                        숙소 간단한 설명<br>
+                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
+                    </a>
+                </li>
+               <li>
+                    <a href="">
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -271,15 +280,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
@@ -289,7 +290,7 @@
         </div>
 
         <!-- 검색된 숙소 : 미완성 -->
-        <div id="roomList" style="margin-left:20%;">
+        <div id="roomList">
             <div style="margin:50px 0 20px 0; height:30px; width:100%;">
                 <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
                 <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
@@ -299,83 +300,82 @@
            	<div class="rooms power bottomArea">
            		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
            			<c:forTokens  var="roomTag" items="${ roomList.roomsTag }" delims=",">
-		           		<li>
+		               	<li>
 		                    <a href="">
-		                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+		                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
 		                        	${ roomList.roomsTitle }<br>
-									
-		                        	#<c:out value="${roomTag}"/>&nbsp;#<c:out value="${roomTag}"/><br>
+			                       	#<c:out value="${roomTag}"/>&nbsp;#<c:out value="${roomTag}"/><br>
 		                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
 		                    </a>
-		               	</li>
+                		</li>
 	               	</c:forTokens>
                	 </c:forEach>
            	</div>
            
             <div class="rooms power bottomArea">
-                <li>
+            	<li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
+                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
+                    </a>
+                </li>
+               <li>
+                    <a href="">
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
             </div>
             <div class="rooms power bottomArea">
-                <li>
+               <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
-                <li>
+               <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
-                <li>
+               <li>
                     <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+				                        숙소 타이틀<br>
+				                        숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>

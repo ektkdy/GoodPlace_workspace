@@ -133,10 +133,10 @@
             $(window).scroll(function(){
                 var position = $(document).scrollTop();
                 $("#filterAreaInner").css({ width:'220px', 
-                                            margin:'200px auto'
+                                            margin:'60px auto'
                                             });
                 if($(document).scrollTop() != 0){
-                    $("#filterAreaInner").stop().animate({top:position-100+"px"}, 1); //해당 오브젝트 위치값 재설정
+                    $("#filterAreaInner").stop().animate({top:position-40 + "px"}, 1); //해당 오브젝트 위치값 재설정
                 }else{
                     $("#filterAreaInner").stop().animate({top:position+"px"}, 1); //해당 오브젝트 위치값 재설정
                 }
