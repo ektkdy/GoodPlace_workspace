@@ -70,8 +70,9 @@ public class Room {
 	private String addArea; // ~시  // ex) 서울특별시, 화성시
 	
 	/* Roomspay 테이블 컬럼 */
+	private int payUserNo;		// 결제자의 회원번호
 	private int amount;			// 결제번호
-	private String birthday;	// 생년월일 -- 여기다가 더 추가해야된다~~!!
+	private String birthday;	// 생년월일
 	private String payDate;		// 결제날짜
 	private int addPoint;		// 추가포인트
 	private String CheckInTime;	// 예약자가 직접 입력한 체크인시간

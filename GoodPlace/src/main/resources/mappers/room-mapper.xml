@@ -95,6 +95,7 @@
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
 		<result column="ROOMS_NOTICE" property="roomsNotice"/>
+		
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
@@ -222,7 +223,7 @@
 	<!-- 숙소관리 끝-->
 
 	<!-- 숙소검색 시작 -->
-	<select id="selectRoomSearch" parameterType="string" resultMap="roomResultSet">
+	<select id="selectRoomSearch" parameterType="string" resultMap="roomAndRoomspayResultSet">
 		SELECT *
 		FROM ROOMS
 		WHERE RONO NOT IN (
