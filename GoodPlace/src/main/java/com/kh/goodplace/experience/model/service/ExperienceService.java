@@ -35,7 +35,7 @@ public interface ExperienceService {
 	ArrayList<Experience> updateReExpForm(int exNo);
 	
 	// 4_3. 체험수정용 서비스
-	int updateExp(int exNo);
+	int updateExp(Experience);
 	
 	// 4_4. 체험 반려건 재등록 요청 서비스
 	int updateReExp(int exNo);

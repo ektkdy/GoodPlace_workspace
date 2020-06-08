@@ -79,24 +79,13 @@
 		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval)
 	</insert>
 	
-	<!-- 체험 상세조회 -->
+	<!-- 체험 상세조회 / 수정폼 요청 / 거절사유가 있는 수정폼 요청 -->
 	<select id="selectExp" resultMap="ExperienceResultSet" parameterType="_int">
 		select * 
 		  from experience 
 		  join attachment using (exno)
 		 where exno=#{exNo}
 	</select>
-
-	<!-- 체험 수정폼 요청 -->
-	
-	
-	
-	
-	
-	<!-- 거절사유가 있는 체험 수정폼 요청 -->
-	
-	
-	
 	
 	<!-- 체험 휴면 -->
 	

@@ -266,6 +266,7 @@
 		}else{	// 수정하기 클릭시
 			$("#updateExp").attr("action", "updateExp.exp");
 		}
+		$("#updateExp").submit();
 	}
 </script>
 
