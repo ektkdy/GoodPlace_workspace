@@ -435,6 +435,9 @@
                 <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
                 <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
             </div>
+            <c:forEach items="${ roomList }" var="roomList" varStatus="status">
+            
+            </c:forEach>
             <div class="rooms power bottomArea">
                 <li>
                     <a href="">
