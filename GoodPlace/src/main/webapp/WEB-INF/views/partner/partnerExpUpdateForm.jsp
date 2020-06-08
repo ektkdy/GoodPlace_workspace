@@ -75,24 +75,24 @@
 	            	
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
 	                    1. 기본 정보</div>
-	                    
 		                <table>
 		                    <tr>
 		                        <th>* 카테고리</th>
 		                        <td>
 		                            <p class="hh">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
-                                상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
-                                관리자 심사 후 수정될수 있습니다.</p>
-                            <label><input type="radio" id="life" name="expCategory" value=1>라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                            <label><input type="radio" id="culture" name="expCategory" value=2>문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                            <label><input type="radio" id="fitness" name="expCategory" value=3>스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                            <label><input type="radio" id="art" name="expCategory" value=4>미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                            <label><input type="radio" id="outdoor" name="expCategory" value=5>야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
-                        </td>
+					                                상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
+					                                관리자 심사 후 수정될수 있습니다.</p>
+		                            <label><input type="radio" id="life" name="expCategory" value=1>라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+		                            <label><input type="radio" id="culture" name="expCategory" value=2>문화와 역사(과학/경제/역사/봉사활동)</label><br>
+		                            <label><input type="radio" id="fitness" name="expCategory" value=3>스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+		                            <label><input type="radio" id="art" name="expCategory" value=4>미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+		                            <label><input type="radio" id="outdoor" name="expCategory" value=5>야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+		                        </td>
 		                    </tr>
 		                    <tr>
 		                        <th>* 언어</th>
-		                        <td><p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
+		                        <td>
+		                        	<p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
 		                            <label><input type="checkbox" id="ko" name="language" value="한국어">한국어</label>
 		                            <label><input type="checkbox" id="es" name="language" value="스페인어" style="margin-left:20px;">스페인어</label>
 		                            <label><input type="checkbox" id="jp" name="language" value="일본어" style="margin-left:20px;">일본어</label>
@@ -126,7 +126,7 @@
 		                    <tr>
 		                        <th>* 체험 제목</th>
 		                        <td>
-		                            <input type="text" id="expTitle" name="expTitle" value="${ list[0].expTitle }" style="padding-left:5px;width:500px" required>
+		                            <input type="text" id="expTitle" name="expTitle" value="${ e.expTitle }" style="padding-left:5px;width:500px" required>
 		                            <p class="hh">• 정확하고 간결하게 표현해주세요. <br>
 		                                • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
 		                                (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</p>
@@ -135,19 +135,19 @@
 		                    <tr>
 		                    	<th>* 체험 소개</th>
 		                        <td>
-		                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent">${ list[0].expContent }</textarea>
+		                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent">${ e.expContent }</textarea>
 		                        </td>
 		                    </tr>
 		                    <tr>
 		                        <th>* 체험 장소</th>
 		                        <td>
 		                        	<!-- 주소API -->
-			                        <input type="text" id="del_postcode" name="zipCode" value="${ list[0].zipCode }" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
+			                        <input type="text" id="del_postcode" name="zipCode" value="${ e.zipCode }" placeholder="우편번호" style="width:100px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
 									<input type="button" id="searchAdressBtn" onclick="del_execDaumPostcode()" value="우편번호 찾기" style="width: 100px; height:25px; background-color: #34538a; color:#fff; border:1px solid #34538a; border-radius:4px;" readonly><br>
-			                        <input type="text" id="del_address" name="addBasic" value="${ list[0].addBasic }" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>											
-									<input type="text" id="del_extraAddress" name="addRef" value="${ list[0].addRef }" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
+			                        <input type="text" id="del_address" name="addBasic" value="${ e.addBasic }" placeholder="주소" style="width:320px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>											
+									<input type="text" id="del_extraAddress" name="addRef" value="${ e.addRef }" placeholder="참고항목" style="width:150px; height:25px; padding-left:5px; margin-bottom:5px;" readonly>
 									<!-- 사용자가 직접 입력하는 칸  -->
-									<input type="text" id="del_detailAddress"  name="addDetail" value="${ list[0].addDetail }" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;" required> 
+									<input type="text" id="del_detailAddress"  name="addDetail" value="${ e.addDetail }" placeholder="상세주소" style="width:480px; height:25px; padding-left:5px;" required> 
 		                        </td>
 		                    </tr>
 		                </table>
@@ -167,25 +167,25 @@
 	                    <tr>
 	                        <th>* 최대 인원수</th>
 	                        <td>
-	                            <input type="number" class="maxPeople" name="maxPeople" value="${ list[0].maxPeople }" min="1" required style="width:100px;margin-right:5px;">명
+	                            <input type="number" class="maxPeople" name="maxPeople" value="${ e.maxPeople }" min="1" required style="width:100px;margin-right:5px;">명
 	                            <p class="hh">• 최소 인원수는 1명입니다. 한 회차당 운영 가능한 최대인원수를 입력하세요.</p>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <th>* 체험 시간</th>
 	                        <td id="oprateTimes">
-								운영 시작 시간은 <input type="time" name="startTime" value="${ list[0].startTime }" id="startTime"> 입니다.<br><br>
-								운영 마감 시간은 <input type="time" name="endTime" value="${ list[0].endTime }" id="endTime"> 입니다.<br><br>
-								체험 소요 시간은  <input type="number" name="useTime" value="${ list[0].useTime }" min=1>시간 입니다. 
+								운영 시작 시간은 <input type="time" name="startTime" value="${ e.startTime }" id="startTime"> 입니다.<br><br>
+								운영 마감 시간은 <input type="time" name="endTime" value="${ e.endTime }" id="endTime"> 입니다.<br><br>
+								체험 소요 시간은  <input type="number" name="useTime" value="${ e.useTime }" min=1>시간 입니다. 
 								<p class="hh">• 최소 소요시간은 1시간입니다.</p><br>
-								체험 운영 간격은	<input type="number" name="intervalTime" value="${ list[0].intervalTime }" id="intervalTime" min=30>분 입니다.
+								체험 운영 간격은	<input type="number" name="intervalTime" value="${ e.intervalTime }" id="intervalTime" min=30>분 입니다.
 								<p class="hh">• 최소 운영간격은 30분입니다.</p>
 							</td>
 	                    </tr>
 	                    <tr>
 	                        <th>* 게스트 준비물</th>
 	                        <td>
-	                            <input type="text" id="supplies" name="supplies" value="${ list[0].supplies }" style="width:500px;padding-left:5px;">
+	                            <input type="text" id="supplies" name="supplies" value="${ e.supplies }" style="width:500px;padding-left:5px;">
 	                            <input type="checkbox" id="noSupplies" name="supplies" value="별도의 준비물이 필요없는 체험입니다.">
 	                            	<label for="noSupplies">게스트가 준비할 사항이 전혀 없습니다.</label>
 	                        </td>
@@ -193,7 +193,7 @@
 	                    <tr>
 	                        <th>* 대표 사진</th>
 	                        <td colspan="2">
-	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ list[0].changeName }"
+	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
 	                         	<div id="fileArea">
 									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
@@ -213,7 +213,7 @@
 	                    <tr>
 	                        <th>* 예약 설정</th>
 	                        <td>
-	                        	<input type="number" name="deadline" value="${ list[0].deadline }" id="deadline" min=1 style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
+	                        	<input type="number" name="deadline" value="${ e.deadline }" id="deadline" min=1 style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
 	                            <p class="hh">• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
 	                                	나중에 언제든지 변경하실수 있습니다.</p>
 	                        </td>
@@ -222,7 +222,7 @@
 	                        <th>* 요금 책정</th>
 	                        <td>
 	                            <span>1인 예약시 요금</span>
-	                            <span><input type="number" class="price" name="price" value="${ list[0].price }" style="text-align:right; padding-right:5px;">원</span>
+	                            <span><input type="number" class="price" name="price" value="${ e.price }" style="text-align:right; padding-right:5px;">원</span>
 	                            <br><br>
 	
 	                            <span>파트너 예상수익</span>
@@ -288,7 +288,7 @@
 
 <script>
 	$(function(){
-		if('${list[0].supplies}'=="장비포함"){
+		if('${e.supplies}'=="장비포함"){
 			$("#supplies").text(" ");
 			$("#supplies").attr("disabled", true);
 			$("#noSupplies").prop("checked",true);
@@ -296,7 +296,8 @@
 	});
 
 	$(function(){
-		switch('${list[0].expCategory}'){
+		
+		switch('${e.expCategory}'){
 		case "1" : $("#life").prop("checked", true); break;
 		case "2" : $("#culture").prop("checked", true); break;
 		case "3" : $("#fitness").prop("checked", true); break;
@@ -306,7 +307,7 @@
 	});
 	
 	$(function(){
-		switch('${list[0].language}'){
+		switch('${e.language}'){
 		case "한국어" : $("#ko").prop("checked", true); break;
 		case "스페인어" : $("#es").prop("checked", true); break;
 		case "일본어" : $("#jp").prop("checked", true); break;
@@ -317,7 +318,7 @@
 	});
 	
 	$(function(){
-		switch('${list[0].expTag}'){
+		switch('${e.expTag}'){
 		case "박물관/미술관" : $("#musium").prop("checked", true); break;
 		case "쇼핑" : $("#shop").prop("checked", true); break;
 		case "뷰티/패션" : $("#beauty").prop("checked", true); break;
@@ -334,7 +335,7 @@
 	});
 	
 	$(function(){
-		switch('${list[0].activity}'){
+		switch('${e.activity}'){
 		case "1" : $("#level1").prop("checked", true); break;
 		case "2" : $("#level2").prop("checked", true); break;
 		case "3" : $("#level3").prop("checked", true); break;

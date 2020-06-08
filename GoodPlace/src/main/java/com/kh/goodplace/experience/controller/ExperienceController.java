@@ -199,39 +199,72 @@ public class ExperienceController {
 	
 	
 	/* 5_1. 거절사유가 담긴 체험수정폼 요청용 서비스 */
-	@RequestMapping("updateReExpForm1.exp")
+	@RequestMapping("updateReExpForm.exp")
 	public String updateReExpForm(int exNo,  Model model) {
-		// exNo보내서 해당하는 e객체와 list불러와서 폼 내부에 뿌려주기
+		// exNo보내서 해당하는 e객체와 l${ ist불러와서 폼 내부에 뿌려주기
 		Experience e = expService.selectExpOne(exNo);
 		ArrayList<Attachment> list = expService.selectAt(exNo);
 		
 		model.addAttribute("e", e);
 		model.addAttribute("list", list);
 		
-		return "partner/partnerExpEnrollReturn1";
+		return "partner/partnerExpEnrollReturn";
 	}
 	
-
-	/* 5_2. 거절사유가 담긴 체험수정폼2 요청용 서비스 */
-	@RequestMapping("updateReExpForm2.exp")
-	public ModelAndView expForm2(Experience e, ArrayList<Attachment> list, ModelAndView mv) {
-		mv.addObject("e", e);
-		mv.addObject("list", list);
-		mv.setViewName("partner/partnerExpEnrollReturn2");
-		return mv;
-	}
 	
-	/* 5_3. 거절사유 확인후 수정하고 재심사요청 */
+	/* 5_2. 거절사유 확인후 수정하고 재심사요청 */
 	@RequestMapping("updateReExp.exp")
 	public String updateReExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request) {
 		
+		if(!file.getOriginalFilename().equals("")) {
+			if(e.getChangeName() != null) {
+				deleteFile(e.getChangeName(), request);
+			}
+			String changeName = saveFile(file, request);
+			e.setOriginName(file.getOriginalFilename());
+			e.setChangeName(changeName);
+			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
 		int result1 = expService.updateReExp(e);
 		
+		int result = 1;
 		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		ArrayList<Attachment> list = new ArrayList<>();
 		
-		return "";
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
+		for(int i=0; i<filelist.length; i++) {
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
+				if(filelist[i].getName() != null) {
+					deleteFile(e.getChangeName(), request);
+				}
+				
+				String changeName = saveFile(filelist[i], request);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result2 = expService.insertAttachment(at);
+				result = result1*result2;
+			}
+		}
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		}else {
+			return "common/errorPage";
+		}
+		
 	}
 	
 	

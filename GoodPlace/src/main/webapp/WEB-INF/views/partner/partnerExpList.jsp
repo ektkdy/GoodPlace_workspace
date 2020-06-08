@@ -22,19 +22,28 @@
     body {background: #fff;}
     #wrap {width: 1200px; height: 900px; margin: 0 auto; font-size: 18px; color: #fff; text-align: center; text-transform: uppercase; }
     
-    
     /*모든 버튼*/
     button{cursor: pointer;}
-    button:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
 
-    /*비고 안 버튼 3종 css*/
-    table .blue_btn{width: 80px;}
-     
     /*페이징바*/
     h5{color: royalblue;}
     #pagingArea{width: 980px; text-align: right;}
     #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer; border-radius: 4px;}
     #pagingArea a:hover{color: white; background-color: #34538a;}
+    
+    /*상태모양*/
+	.common_tb tbody tr td .ing{width:100px; height:30px;  border:1px solid #0d80fb; background: #0d80fb; 
+	                            border-radius: 15px; color:#fff; line-height: 28px;}
+	.common_tb tbody tr td .confirm_ing{width:100px; height: 30px; border:1px solid #91919b; background: #91919b; 
+	                                    border-radius: 15px; color:#fff; line-height: 28px;}
+	.common_tb tbody tr td .cancel{width:100px; height: 30px; border:1px solid #d22d32; background: #d22d32; 
+	                                    border-radius: 15px; color:#fff; line-height: 28px;}
+	.common_tb tbody tr td .rest{width:100px; height: 30px; border:1px solid #272b36; background: #fff; 
+	                                        border-radius: 15px; color:#333; line-height: 28px;}
+	.expUpdate{width: 70px;height: 30px;background: #2777f6; border-radius: 15px; color:#fff; line-height: 28px; border:1px solid #2777f6;}
+	.expUpdate:hover{background-color:white; color:#2777f6; font-weight:400;}
+	.expDetail{width: 70px;height: 30px;background: #f1f1f1; border-radius: 15px; color:#333; line-height: 28px; border:1px solid #f1f1f1;}
+	.expDetail:hover{background-color:white;}
 </style>   
 </head>
 <body>
@@ -52,7 +61,7 @@
                 <img src="${pageContext.request.contextPath}/resources/images/partner/집로고.jpg" style="vertical-align: middle;">
                 <p class="title_tt">체험관리</p>
             </span>
-            <span class="up_btn_space">
+            <span class="up_btn_space" style="margin-top:8px">
                 <button class="blue_btn" style="margin-right: 20px;" id="expForm">체험등록</button>
             </span>
             
@@ -84,16 +93,16 @@
 	                    				<input type="hidden" name="exNo" value=${ exp.exNo }>
 		                            	<c:choose>
 		                            		<c:when test="${ exp.status eq 1}">
-		                            			<td>운영중</td>
+		                            			<td><div class="ing">운영중</div></td>
 		                            		</c:when>
 		                            		<c:when test="${ exp.status eq 2}">
-		                            			<td>승인대기</td>
+		                            			<td><div class="confirm_ing">승인대기</div></td>
 		                            		</c:when>
 		                            		<c:when test="${ exp.status eq 3}">
-		                            			<td>승인거절</td>
+		                            			<td><div class="cancel">승인거절</div></td>
 		                            		</c:when>
 		                            		<c:when test="${ exp.status eq 4}">
-		                            			<td>휴면</td>
+		                            			<td><div class="rest">휴면</div></td>
 		                            		</c:when>
 		                            		<c:otherwise>
 		                            			<td>삭제</td>
@@ -109,8 +118,8 @@
 			                            </c:if>
 			                            <td>${ exp.totalSal }</td>
 			                            <td>
-			                                <button class="blue_btn expDetail">보기</button>
-			                                <button class="blue_btn expUpdate">수정</button>
+			                                <button class="expDetail">보기</button>
+			                                <button class="expUpdate">수정</button>
 			                            </td>
 			                        </tr>
 		                        </c:forEach>
