@@ -238,7 +238,7 @@
 		 where rono = #{rno}
 	</select>
 	
-	<update id="updateOkay" parameterType="Room">
+	<update id="updateOkay" parameterType="_int">
 	
 		update rooms
 		   set STATUS = 1
