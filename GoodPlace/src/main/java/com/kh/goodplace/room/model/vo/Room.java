@@ -71,7 +71,7 @@ public class Room {
 	
 	/* Roomspay 테이블 컬럼 */
 	private int payUserNo;		// 결제자의 회원번호
-	private int amount;			// 결제번호
+	private int amount;			// 결제금액
 	private String birthday;	// 생년월일
 	private String payDate;		// 결제날짜
 	private int addPoint;		// 추가포인트

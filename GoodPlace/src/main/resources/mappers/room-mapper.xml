@@ -96,6 +96,20 @@
 		<result column="FILE_PATH" property="filePath"/>
 		<result column="ROOMS_NOTICE" property="roomsNotice"/>
 		
+		
+		
+		<result column="AMOUNT" property="amount"/>
+		<result column="BIRTHDATE" property="birthday"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="ADD_POINT" property="addPoint"/>
+		
+		<result column="RESERVE_STATUS" property="reserveStatus"/>
+		<result column="USE_POINT" property="usePoint"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="CONCEPT" property="concept"/>
+		<result column="REQUEST" property="request"/>
+		<result column="START_DAYS" property="startDays"/>
+		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
@@ -222,19 +236,19 @@
 	
 	<!-- 숙소관리 끝-->
 
-	<!-- 숙소검색 시작 -->
-	<select id="selectRoomSearch" parameterType="string" resultMap="roomAndRoomspayResultSet">
+	<!-- 숙소검색 시작 // 미완성 -->
+	<select id="selectRoomSearch" parameterType="Room" resultMap="roomAndRoomspayResultSet">
 		SELECT *
 		FROM ROOMS
 		WHERE RONO NOT IN (
 		                    SELECT R.RONO
 		                    FROM ROOMS R
 		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
-		                    WHERE ((#{tripStartDate} BETWEEN P.START_DAYS AND P.END_DAYS)
-		                        or (#{tripEndDate} BETWEEN P.START_DAYS AND P.END_DAYS))
+		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND P.END_DAYS)
+		                        or (#{endDays} BETWEEN P.START_DAYS AND P.END_DAYS))
 				)
-		        AND (#{tripPeople} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
-		        AND (ADD_BASIC LIKE '%서초%' OR ADD_REF LIKE '%서초%')
+		        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
+		        AND (ADD_BASIC LIKE '%' || #{addBasic} || '%' OR ADD_REF LIKE '%' || #{addBasic} || '%')
 	</select>
 
 	<!-- 숙소검색 끝 -->

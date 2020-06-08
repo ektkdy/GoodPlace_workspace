@@ -149,8 +149,8 @@ public class RoomDao {
 	// --------- 숙소관리 시작 -----------------
 	
 	// --------- 숙소검색 시작 -----------------
-	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, String tripArea, String tripStartDate, String tripEndDate, String tripPeople){
-		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", tripArea); // 미완성
+	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
 	}
 	
 	

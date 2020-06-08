@@ -153,8 +153,8 @@ public class RoomServiceImpl implements RoomService{
 	// --------- 숙소검색 시작 -------------------------
 	
 	@Override
-	public ArrayList<Room> searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople) {
-		return rDao.searchRoom(sqlSession, tripArea, tripStartDate, tripEndDate, tripPeople);
+	public ArrayList<Room> searchRoom(Room room) {
+		return rDao.searchRoom(sqlSession, room);
 	}
 	
 	

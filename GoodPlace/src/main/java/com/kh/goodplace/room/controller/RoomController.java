@@ -296,16 +296,22 @@ public class RoomController {
 		
 		return "admin/adminRoomsOkeyList";
 	}
-	
+		
 	
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
 	@RequestMapping("searchRo.ro")
-   	public String searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, ModelAndView mv ) {
-
-    	ArrayList<Room> roomList = rService.searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople);
+   	public String searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, ModelAndView mv ) {
+		
+		// 넘겨받은 여행조건들 room객체에 set
+		room.setAddBasic(tripArea);
+		room.setStartDays(tripStartDate);
+		room.setEndDays(tripEndDate);
+		room.setPeople(Integer.parseInt((tripPeople)));
+		
+    	ArrayList<Room> roomList = rService.searchRoom(room);
    		
    		return "user/searchRooms";
    	}
