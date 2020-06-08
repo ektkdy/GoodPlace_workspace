@@ -367,11 +367,16 @@ public class RoomController {
    		//System.out.println(" roomList 조회 : " + roomList);
     	
         if(!roomList.isEmpty()){
+        	mv.addObject("tripArea", tripArea);
+        	mv.addObject("tripStartDate", tripStartDate);
+        	mv.addObject("tripEndDate", tripEndDate);
+        	mv.addObject("tripPeople", tripPeople);
+        	
         	mv.addObject("roomList", roomList);
         	mv.setViewName("user/searchRooms");
         }
         else{
-            mv.addObject("msg", "거절 실패!!");
+            mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
         return mv;
