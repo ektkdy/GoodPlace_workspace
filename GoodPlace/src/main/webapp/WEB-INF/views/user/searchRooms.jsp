@@ -429,15 +429,32 @@
             </div>
         </div>
 
-        <!-- 검색된 숙소-->
+        <!-- 검색된 숙소 : 미완성 -->
         <div id="roomList" style="margin-left:20%;">
             <div style="margin:50px 0 20px 0; height:30px; width:100%;">
                 <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
                 <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
             </div>
-            <c:forEach items="${ roomList }" var="roomList" varStatus="status">
             
-            </c:forEach>
+            
+           	<div class="rooms power bottomArea">
+           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
+           			<c:forTokens  var="tagList" items="${ roomList.roomsTag }" delims=",">
+				   		
+					
+		           		<li>
+		                    <a href="">
+		                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
+		                        	${ roomList.roomsTitle }<br>
+									
+		                        	#<c:out value="${name}"/>&nbsp;#<c:out value="${name}"/><br>
+		                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
+		                    </a>
+		               	</li>
+	               	</c:forTokens>
+               	 </c:forEach>
+           	</div>
+           
             <div class="rooms power bottomArea">
                 <li>
                     <a href="">

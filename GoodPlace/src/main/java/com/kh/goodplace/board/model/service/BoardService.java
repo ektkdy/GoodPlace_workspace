@@ -105,7 +105,12 @@ public interface BoardService {
 	// 1. FAQ 카테고리별 제목 조회용 서비스 - 진아
 	ArrayList<Board> selectFaqList(String faqCategory);
 	
+	// 2. 숙소별 REVIEW 리스트 조회 - 진아
+	//ArrayList<Board> selectReviewList(int roNo);
 	
+	// 3. 숙소별  REVIEW 갯수 조회 - 진아
+	int reviewListCount(int roNo);
+
 	// ------------------------------------------------------ 
 	
 	//1-1.파트너  리뷰 전체 리스트 조회용 서비스 - 기하

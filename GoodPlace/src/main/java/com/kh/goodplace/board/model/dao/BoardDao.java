@@ -211,9 +211,16 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("boardMapper.reviewList", userNo, rowBounds);
 	}
-	
-	
-	
+	/*
+	// 숙소별 ReviewList 조회
+	public ArrayList<Board> selectReviewList(SqlSessionTemplate sqlSession, int roNo){
+		return (ArrayList)sqlSession.selectList("boardMapper.reviewListPerRoom", roNo);
+	}
+	*/
+	// 숙소별 Review 개수 조회
+	public int reviewListCount(SqlSessionTemplate sqlSession, int roNo){
+		return (sqlSession.selectOne("boardMapper.reviewListCount", roNo));
+	}
 	
 	
 	
