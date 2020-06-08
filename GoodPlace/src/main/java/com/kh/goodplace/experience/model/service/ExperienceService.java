@@ -71,7 +71,14 @@ public interface ExperienceService {
 	//2_2.요청한 페이지에 보여질 체험 승인완료 리스트 조회용 서비스
 	ArrayList<Experience> selectExpOkayList(PageInfo pi);
 
-
+	// 3_1. 해당 게시글 조회용 서비스
+	Experience selectExpmWaitDetail(int eno);
+	
+	// 3_2.게시글 승인용 서비스-현영
+	int updateOkay(int eno);
+	
+	// 3_3.게시글 거절용 서비스-현영
+	int updateReject(Experience e);
 
 	
 	

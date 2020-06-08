@@ -85,35 +85,35 @@
                                 <h5 class="h5Cl enrollInfo">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                     상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
                                     관리자 심사 후 수정될수 있습니다.</h5>
-                                <input type="radio" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
-                                <input type="radio" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
-                                <input type="radio" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
-                                <input type="radio" name="expCategory" value="art"><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
-                                <input type="radio" name="expCategory" value="outdoor"><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
+                                <input type="radio" id="expCategory1" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
+                                <input type="radio" id="expCategory2" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
+                                <input type="radio" id="expCategory3" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
+                                <input type="radio" id="expCategory4" name="expCategory" value="art"><label for="art">미술과 디자인(그림/전시/목공/사진/일러스트)</label><br>
+                                <input type="radio" id="expCategory5" name="expCategory" value="outdoor"><label for="outdoor">야외활동(별관찰/농촌투어/캠핑/하이킹)</label>
                             </td>
                         </tr>
                         <tr>
                             <th>* 언어</th>
                             <td>
                                 <h5 class="h5Cl enrollInfo">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</h5>
-                                <input type="checkbox" name="ko" value="ko"><label class="language" for="ko" style="padding-right: 20px;">한국어</label>
-                                <input type="checkbox" name="es" value="es"><label class="language" for="es" style="padding-right: 20px;">스페인어</label>
-                                <input type="checkbox" name="jp" value="jp"><label class="language" for="jp">일본어</label><br>
-                                <input type="checkbox" name="en" value="en"><label class="language" for="en" style="padding-right: 35px;">영어</label>
-                                <input type="checkbox" name="ch" value="ch"><label class="language" for="ch" style="padding-right: 34px;">중국어</label>
-                                <input type="checkbox" name="etc" value="etc"><label class="language" for="etc">그 외</label>
+                                <input type="checkbox" id="language1" name="ko" value="ko"><label class="language" for="ko" style="padding-right: 20px;">한국어</label>
+                                <input type="checkbox" id="language2" name="es" value="es"><label class="language" for="es" style="padding-right: 20px;">스페인어</label>
+                                <input type="checkbox" id="language3" name="jp" value="jp"><label class="language" for="jp">일본어</label><br>
+                                <input type="checkbox" id="language4" name="en" value="en"><label class="language" for="en" style="padding-right: 35px;">영어</label>
+                                <input type="checkbox" id="language5" name="ch" value="ch"><label class="language" for="ch" style="padding-right: 34px;">중국어</label>
+                                <input type="checkbox" id="language6" name="etc" value="etc"><label class="language" for="etc">그 외</label>
                             </td>
                         </tr>
                         <tr>
                             <th>* 체험 태그</th>
                             <td>
-                                <strong>테마파크, 맛집/카페</strong>
+                                <strong>${ e.expTag }</strong>
                             </td>
                         </tr>
                         <tr>
                             <th>* 체험 제목</th>
                             <td>
-                                <strong>인생사진</strong>
+                                <strong>${ e.expTitle }</strong>
                                 <h5 class="expEnroll_tb enrollInfo">• 정확하고 간결하게 표현해주세요. <br>
                                     • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
                                     (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>
@@ -122,13 +122,13 @@
                         <tr>
                             <th>* 체험 소개</th>
                             <td>
-                                <textarea class="enrollInfo" style="color:black;" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기"></textarea>
+                                <textarea class="enrollInfo" style="color:black;" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기">${ e.expContent }</textarea>
                             </td>
                         </tr>
                         <tr>
                             <th>* 체험 장소</th>
                             <td>
-                                    다음주소 api사용
+                                 ${ e.addBasic }
                             </td>
                         </tr>
                     </table>
@@ -139,27 +139,27 @@
                         <tr>
                             <th>* 활동강도</th>
                             <td>
-                                <strong>가벼움</strong>
+                                <strong>${ e.activity }</strong>
                             </td>
                         </tr>
                         <tr>
                             <th>* 최대 인원수</th>
                             <td>
-                                <strong>5명</strong>
+                                <strong>${ e.maxPeople }명</strong>
                                 <h5 class="h5Cl enrollInfo">• 최소 인원수는 1명입니다.</h5>
                             </td>
                         </tr>
                         <tr>
                             <th>* 체험 시간</th>
                             <td>
-                                <strong>체험 시작시간 오전 10시</strong>
-                                (소요시간<strong>3시간</strong>)
+                                <strong>체험 시작시간 ${ e.startTime }</strong>
+                                (소요시간<strong>${ e.useTime }시간</strong>)
                             </td>
                         </tr>
                         <tr>
                             <th>* 게스트 준비물</th>
                             <td>
-                                <input type="text" placeholder="게스트가 준비할 사항이 전혀 없습니다." name="" value="">
+                                <input type="text" placeholder="게스트가 준비할 사항이 전혀 없습니다." name="" value="${ e.supplies }">
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +179,7 @@
                         <tr>
                             <th>* 예약 설정</th>
                             <td>
-                                <strong>1시간 전</strong>
+                                <strong>${ e.deadline }</strong>시간 전
                                 <h5 class="h5Cl enrollInfo">• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
                                     나중에 언제든지 변경하실수 있습니다.</h5>
                             </td>
@@ -189,7 +189,7 @@
                 </div>
                 <div class="btnArea" style="padding-bottom: 10%;">
                     <button class="cancel" data-toggle="modal" data-target="#rejection">거절하기</button>
-                    <button class="enroll">승인하기</button>
+                    <button class="enroll" onclick="location.href='aExpOkay.ex?eno=${ e.exNo }'">승인하기</button>
                     <div id="test" style="display:none;  padding-bottom: 20%;" >
                         <textarea style="width:300px; height: 200px; border:1px solid black; resize: none;"></textarea>
                     </div>
@@ -197,15 +197,30 @@
             </div>
         </div>
     </div>
-
+    
+    
     <script>
-        $(function(){
-            
-            $(".arrow").click(function(){
-                $("#slide_menu").slideToggle(500);
-            });
-        });
-    </script>
+		$(function(){
+			switch('${e.expCategory}'){
+			case "1" : $("#expCategory1").prop("checked", true); break;
+			case "2" : $("#expCategory2").prop("checked", true); break;
+			case "3" : $("#expCategory3").prop("checked", true); break;
+			case "4" : $("#expCategory4").prop("checked", true); break;
+			case "5" : $("#expCategory5").prop("checked", true); break;
+			}
+		});
+		
+		$(function(){
+			switch('${e.language}'){
+			case "ko" : $("#language1").prop("checked", true); break;
+			case "es" : $("#language2").prop("checked", true); break;
+			case "jp" : $("#language3").prop("checked", true); break;
+			case "en" : $("#language4").prop("checked", true); break;
+			case "ch" : $("#language5").prop("checked", true); break;
+			case "etc" : $("#language6").prop("checked", true); break;
+			}
+		});
+	</script>
 
 
 
@@ -219,13 +234,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button> 
             </div>
 
-            <form action="로그인요청받아주는서버" method="post">
+            <form action="aExpReject.ex" method="post">
+                <input type="hidden" name="exNo" value="${ e.exNo }">
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <label for="userId" class="mr-sm-2">거절사유 :</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="거절사유" id="userId"> <br>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="거절사유" id="deny" name="deny"> <br>
                     <label for="userPwd" class="mr-sm-2">상세사유:</label><br>
-                    <textarea class="form-control mb-2 mr-sm-2" style="height:200px;" placeholder="내용을 입력해주세요."></textarea>
+                    <textarea class="form-control mb-2 mr-sm-2" style="height:200px;" id="denyContent" name="denyContent" placeholder="내용을 입력해주세요."></textarea>
                 </div>
                 
                 <!-- Modal footer -->
@@ -237,5 +253,36 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    
+	<script>
+        $(function(){
+            
+            $(".arrow").click(function(){
+                $("#slide_menu").slideToggle(500);
+            });
+        });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>

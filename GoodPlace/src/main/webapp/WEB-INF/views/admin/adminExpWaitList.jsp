@@ -73,7 +73,7 @@
                     <input type="button" id="searchBtn" value="검색">
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+                    <table id="ExpList" class="common_tb" cellpadding="0" cellspacing="0" >
                         <thead>
                             <tr>
                                 <td width="100px">번호</td>
@@ -103,13 +103,24 @@
 	                                <td>${ e.applyDate }</td>
 	                                <td>${ e.expTitle }</td>
 	                                <td>${ e.price }원</td>
-	                                <td onclick="event.cancelBubble=true">
+	                                <td>
 	                                    <button class="blue_btn">승인대기</button>
 	                                </td>
 	                            </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                    
+					<script>
+		            	$(function(){
+		            		
+ 	            		    $("#ExpList tbody tr").click(function(){
+		            			location.href="aExpDetail.ex?eno=" + $(this).children().eq(0).text();
+		            		});  
+ 	            		    
+		            	});
+		            </script>
+                    
                     <div id="pagingArea" style="margin-top: 22px;">
 	                    <c:choose>
 		                	<c:when test="${ pi.currentPage eq 1 }">
