@@ -327,7 +327,64 @@ public class ExperienceController {
 		return "admin/adminExpOkeyList";
 	}
 	
-	
+    @RequestMapping("aExpDetail.ex")
+    public ModelAndView selectExpmWaitDetail(int eno, ModelAndView mv)
+    {	
+    	
+    	Experience e = expService.selectExpmWaitDetail(eno);
+    	
+        if(e != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("e", e);
+            mv.setViewName("admin/adminExpListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+    
+    
+    @RequestMapping("aExpOkay.ex")
+    public String updateOkay(int eno, Model model, HttpServletRequest request) {
+    	
+        int result = expService.updateOkay(eno);
+        
+        if(result > 0)
+        {
+            return "redirect:aExpOkayList.ex?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "승인 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("aExpReject.ex")
+    public String updateReject(Experience e, Model model, HttpServletRequest request) {
+    	
+        int result = expService.updateReject(e);
+        
+        if(result > 0)
+        {
+            return "redirect:aExpWaitList.ex?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "거절 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
 	
 	
 	

@@ -83,6 +83,25 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpOkayList", null, rowBounds);
 		
 	}
+	
+
+	public Experience selectExpmWaitDetail(SqlSessionTemplate sqlSession, int eno) {
+		
+		return sqlSession.selectOne("expMapper.selectExpmWaitDetail", eno);
+		
+	}
+	
+	public int updateOkay(SqlSessionTemplate sqlSession, int eno) {
+		
+		return sqlSession.update("expMapper.updateOkay", eno);
+		
+	}
+	
+	public int updateReject(SqlSessionTemplate sqlSession, Experience e) {
+		
+		return sqlSession.update("expMapper.updateReject", e);
+		
+	}
 
 	
 	

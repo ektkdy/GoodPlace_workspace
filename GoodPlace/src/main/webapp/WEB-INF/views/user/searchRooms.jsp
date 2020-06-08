@@ -187,8 +187,88 @@
     <br>
     <div id="content">
         
-        <!-- searchbar -->
-        <jsp:include page="../common/searchbar.jsp"/>
+		<!-- searchbar -->
+	    <div id="searchbar">
+	        <div id="mainSearch">
+	            <div class="search chgBtn">
+	                <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();">숙소</a> | 
+	                <a onclick="searchView2();">체험</a>
+	            </div>
+	
+	            <!-- 숙소검색 -->
+	            <form action="searchRo.ro" id="roomSearchArea" method="get" >
+	                <div class="search input" style="display: block;">
+	                    <li class="liBox">
+	                        <b>위치</b>
+	                        <input type="text" name="tripArea" id="tripArea" placeholder="${ tripArea }">
+	                    </li>
+	                    <li class="liBox">
+	                        <b>가는날짜</b>
+	                        <input type="date" name="tripStartDate" id="tripStartDate" placeholder="${ tripStartDate }">
+	                    </li>
+	                    <li class="liBox">
+	                        <b>오는날짜</b>
+	                        <input type="date" name="tripEndDate" id="tripEndDate" placeholder="${ tripEndDate }">
+	                    </li>
+	                    <li class="liBox">
+	                        <b>인원수</b>
+	                        <input type="number" name="tripPeople" id="tripPeople" placeholder="${ tripPeople }">
+	                    </li>
+	                    <li style="margin: auto; text-align: center;">
+	                        <input id="subRoomInfo"type="submit" value="숙소검색">
+	                    </li>
+	                </div>
+	            </form>
+	         	<script>
+	            	$(function(){
+	            		$("#roomSearchArea #subRoomInfo").click(function(){
+	
+	            			$("#roomSearchArea").submit();
+	            			
+	            		});
+	            	});
+	            </script>
+            <!-- 체험검색 -->
+	            <form action="" post="get">
+	                <div class="experience input" style="display: none;">
+	                    <li class="liBox1">
+	                        <b>태그</b>
+	                        <input type="text" placeholder="체험 목록을 선택하세요" >
+	                    </li>
+	                    <li class="liBox1">
+	                        <b>날짜</b>
+	                        <input type="date" placeholder="날짜를 입력하세요" >
+	                    </li>
+	                    <li class="liBox1">
+	                        <b>키워드</b>
+	                        <input type="number" placeholder="키워드를 입력하세요">
+	                    </li>
+	                    <li style="margin: auto; text-align: center;">
+	                        <input id="sub"type="submit" value="체험검색">
+	                    </li>
+	                </div>
+	            </form>
+        	</div>
+    	</div><!-- /searchbar -->
+		
+		<script>
+	    function searchView1(){
+	        $('#mainSearch form .search').css("display","block");
+	        $('#mainSearch .chgBtn').children().eq(0).css("color","#63b8ee");
+	        $('#mainSearch .chgBtn').children().eq(0).css("cursor","inherit");
+	        $('#mainSearch form .experience').css("display","none");
+	        $('#mainSearch .chgBtn').children().eq(1).css("color","gray");
+	        $('#mainSearch .chgBtn').children().eq(1).css("cursor","pointer");
+	    }
+	    function searchView2(){
+	        $('#mainSearch form .experience').css("display","block");
+	        $('#mainSearch .chgBtn').children().eq(0).css("color","gray");
+	        $('#mainSearch .chgBtn').children().eq(0).css("cursor","pointer");
+	        $('#mainSearch form .search').css("display","none");
+	        $('#mainSearch .chgBtn').children().eq(1).css("color","#63b8ee");
+	        $('#mainSearch .chgBtn').children().eq(1).css("cursor","inherit");
+	    }
+		</script>
         
         <div style="width:20%; height:auto; float:left;">
             <div id="filterArea">

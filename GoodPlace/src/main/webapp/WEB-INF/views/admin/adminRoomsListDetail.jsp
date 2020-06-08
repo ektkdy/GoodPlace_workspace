@@ -216,7 +216,7 @@
             </div>
 
             <form action="aRoomReject.ro" method="post">
-            <input type="hidden" name="roNo" value="${ r.roNo }">
+            	<input type="hidden" name="roNo" value="${ r.roNo }">
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <label for="userId" class="mr-sm-2">거절사유 :</label>

@@ -114,7 +114,20 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.selectExpOkayList(sqlSession, pi);
 	}
 
-	
+	@Override
+	public Experience selectExpmWaitDetail(int eno) {
+		return expDao.selectExpmWaitDetail(sqlSession, eno);
+	}
+
+	@Override
+	public int updateOkay(int eno) {
+		return expDao.updateOkay(sqlSession, eno);
+	}
+
+	@Override
+	public int updateReject(Experience e) {
+		return expDao.updateReject(sqlSession, e);
+	}
 	
 	
 	

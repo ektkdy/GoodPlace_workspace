@@ -142,6 +142,29 @@
 	</select>
 	
 	
+	<select id="selectExpmWaitDetail" resultMap="ExperienceResultSet" parameterType="_int">
+		select *
+		  from EXPERIENCE
+		 where exno = #{eno}
+	</select>
+	
+	<update id="updateOkay" parameterType="_int">
+	
+		update EXPERIENCE
+		   set STATUS = 1
+		 where exno=#{eno}
+	
+	</update>
+	
+	<update id="updateReject" parameterType="Experience">
+	
+		update EXPERIENCE
+		   set STATUS = 3,
+		       DENY=#{deny},
+		       DENY_CONTENT=#{denyContent}
+		 where exno=#{exNo}
+	
+	</update>
 	<!-- 체험관리 끝 -->
 
 
