@@ -80,7 +80,7 @@
                     		<c:when test="${ !empty list }">
                     			<c:forEach items="${ list }" var="exp">
 	                    			<tr>
-	                    				<input type="hidden" value=${ exp.exNo }>
+	                    				<input type="hidden" name="exNo" value=${ exp.exNo }>
 		                            	<c:choose>
 		                            		<c:when test="${ exp.status eq 1}">
 		                            			<td>운영중</td>
@@ -98,12 +98,14 @@
 		                            			<td>삭제</td>
 		                            		</c:otherwise>
 		                            	</c:choose>
-			                            <td>${ exp.local } / ${ exp.exNo }</td>
+			                            <td>${ exp.local }</td>
 			                            <td>${ exp.expTitle }</td>
-			                            
-			                            
-			                            <td>${ exp.startDate }(${ exp.applyDate })</td>
-			                            	
+			                            <c:if test="${ empty exp.startDate }">
+			                            	<td> - (${ exp.applyDate })</td>
+			                            </c:if>
+			                            <c:if test="${ !empty exp.startDate }">
+			                            	<td>${ exp.startDate }(${ exp.applyDate })</td>
+			                            </c:if>
 			                            <td>${ exp.totalSal }</td>
 			                            <td>
 			                                <button class="blue_btn expDetail">보기</button>
@@ -124,7 +126,7 @@
                 <script>
 	                $(function(){
 						$(".expDetail").click(function(){
-							location.href="expDetail.exp?exno="+$(this).parent().siblings().eq(0).val();
+							location.href="expDetail.exp?exNo="+$(this).parent().siblings().eq(0).val();
 							//console.log($(this).parent().siblings().eq(0).val());
 						});
 					});
@@ -132,9 +134,9 @@
 	                $(function(){
 						$(".expUpdate").click(function(){
 		                	if($(this).parent().siblings().eq(1).text()=="승인거절"){	// 체험번호의 상태가 승인거절(3)일 경우 거절사유가 적힌 폼으로 이동
-		                		location.href="updateReExpForm.exp?exno="+$(this).parent().siblings().eq(0).val();
+		                		location.href="updateReExpForm.exp?exNo="+$(this).parent().siblings().eq(0).val();
 		                	}else{	// 그 외에는 수정폼으로 이동
-		                		location.href="updateExpForm.exp?exno="+$(this).parent().siblings().eq(0).val();
+		                		location.href="updateExpForm.exp?exNo="+$(this).parent().siblings().eq(0).val();
 		                	}
 						});
 	                });

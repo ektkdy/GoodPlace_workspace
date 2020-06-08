@@ -23,10 +23,13 @@ public interface ExperienceService {
 	int insertAttachment(Attachment at);
 	
 	// 3. 체험 상세조회용 서비스 
-	Experience selectExp(int exNo);
+	//Experience selectExp(int exNo);
+	
+	// 3. 체험 상세조회용 서비스 
+	ArrayList<Experience> selectExp(int exNo);
 	
 	// 4_1. 체험 수정폼 요청용 서비스
-	int updateExpForm(int exNo);
+	ArrayList<Experience> updateExpForm(int exNo);
 	
 	// 4_2. 체험수정용 서비스
 	int updateExp(int exNo);

@@ -40,6 +40,8 @@
 		<result column="pay_date" property="payDate"/>
 		<result column="exp_date" property="expDate"/>
 		<result column="people" property="people"/>
+		
+		<result column="change_name_1" property="atChangeName"/>
 	</resultMap>
 	
 	<!-- 사용자의 체험 전체 목록 조회  -->

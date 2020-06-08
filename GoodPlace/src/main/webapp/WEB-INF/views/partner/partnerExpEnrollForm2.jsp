@@ -256,13 +256,6 @@
 		    		maxAppend--;
 		    	}
 		    </script>
-		    
-		    <script>
-		    	$(function(){
-		    		var startTime = $("#startTime").val();
-							    		
-		    	});
-		    </script>
 			
 			<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
 			<script>

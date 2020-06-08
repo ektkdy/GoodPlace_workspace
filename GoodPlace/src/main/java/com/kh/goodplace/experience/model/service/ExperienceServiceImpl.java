@@ -44,12 +44,12 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public Experience selectExp(int exNo) {
+	public ArrayList<Experience> selectExp(int exNo) {
 		return expDao.selectExp(sqlSession, exNo);
 	}
 
 	@Override
-	public int updateExpForm(int exNo) {
+	public ArrayList<Experience> updateExpForm(int exNo) {
 		return expDao.updateExpForm(sqlSession, exNo);
 	}
 	

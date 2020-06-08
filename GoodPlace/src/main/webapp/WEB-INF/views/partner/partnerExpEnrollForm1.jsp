@@ -122,7 +122,7 @@
                     <tr>
                         <th>* 체험 소개</th>
                         <td>
-                        	<div id="summernote" style="height:100px; border:1px solid red" name="expContent"></div>
+                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent"></textarea>
                         	
                         </td>
                     </tr>

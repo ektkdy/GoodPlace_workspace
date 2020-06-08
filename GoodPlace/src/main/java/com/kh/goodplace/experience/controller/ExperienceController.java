@@ -159,14 +159,18 @@ public class ExperienceController {
 	/* 3. 체험 상세보기용 서비스 */
 	@RequestMapping("expDetail.exp")
 	public ModelAndView selectExp(int exNo, ModelAndView mv) {
-		Experience exp = expService.selectExp(exNo);
+		//System.out.println(exNo);
+		//Experience exp = expService.selectExp(exNo);
 		
-		if(exp !=null) {
-			mv.addObject("exp", exp);
-			mv.setViewName("partner/partnerExpUpdateForm");
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		//System.out.println(list);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.setViewName("partner/partnerExpDetail");
 		}else {
 			mv.addObject("msg", "상세보기 실패");
-			mv.setViewName("partner/list.exp");
+			mv.setViewName("partner/partnerExpList");
 		}
 		
 		return mv;
@@ -175,7 +179,8 @@ public class ExperienceController {
 	/* 4_1. 체험수정폼 요청용 서비스 */
 	@RequestMapping("updateExpForm.exp")
 	public String updateExpForm(int exNo,  Model model) {
-		model.addAttribute("exp", expService.selectExp(exNo));
+		ArrayList<Experience> list = expService.selectExp(exNo);
+		model.addAttribute("list", list);
 		return "partner/partnerExpUpdateForm";
 	}
 	

@@ -33,13 +33,13 @@ public class ExperienceDao {
 	}
 	
 
-	public Experience selectExp(SqlSessionTemplate sqlSession, int exNo) {
-		return sqlSession.selectOne("expMapper.selectExp", exNo);
+	public ArrayList<Experience> selectExp(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
 	}
 
 	
-	public int updateExpForm(SqlSessionTemplate sqlSession, int exNo) {
-		return 0;
+	public ArrayList<Experience> updateExpForm(SqlSessionTemplate sqlSession, int exNo) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExp", exNo);
 	}
 	
 	
