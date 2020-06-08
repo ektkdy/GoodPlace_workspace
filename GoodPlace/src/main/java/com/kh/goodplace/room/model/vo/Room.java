@@ -72,5 +72,14 @@ public class Room {
 	/* Roomspay 테이블 컬럼 */
 	private int amount;			// 결제번호
 	private String birthday;	// 생년월일 -- 여기다가 더 추가해야된다~~!!
-
+	private String payDate;		// 결제날짜
+	private int addPoint;		// 추가포인트
+	private String CheckInTime;	// 예약자가 직접 입력한 체크인시간
+	private int reserveStatus;	// 확정대기(1),확정(2),여행완료(3)
+	private int usePoint;		// 사용포인트
+	private int people;			// 인원수
+	private String concept;		// 여행컨셉
+	private String request;		// 요청사항
+	private String startDays;	// 예약시작일자
+	private String endDays;		// 예약끝일자
 }
