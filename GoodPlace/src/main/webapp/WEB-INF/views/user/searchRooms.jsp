@@ -186,53 +186,10 @@
     <!-- content -->
     <br>
     <div id="content">
-        <div id="mainSearch">
-            <div class="search chgBtn">
-                <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();">숙소</a> | 
-                <a onclick="searchView2();">체험</a>
-            </div>
-
-            <!-- 숙소검색 -->
-            <form action="" post="get">
-                <div class="search input" style="display: block;">
-                    <li class="liBox">
-                        <b>위치</b>
-                        <input type="text" placeholder="어디로 여행가세요?" >
-                    </li>
-                    <li class="liBox">
-                        <b>날짜</b>
-                        <input type="date" placeholder="날짜를 입력하세요" >
-                    </li>
-                    <li class="liBox">
-                        <b>인원수</b>
-                        <input type="number" placeholder="인원수를 선택해주세요">
-                    </li>
-                    <li style="margin: auto; text-align: center;">
-                        <input id="sub"type="submit" value="숙소검색">
-                    </li>
-                </div>
-            </form>
-            <!-- 체험검색 -->
-            <form action="" post="get">
-                <div class="experience input" style="display: none;">
-                    <li class="liBox">
-                        <b>태그</b>
-                        <input type="text" placeholder="체험 목록을 선택하세요" >
-                    </li>
-                    <li class="liBox">
-                        <b>날짜</b>
-                        <input type="date" placeholder="날짜를 입력하세요" >
-                    </li>
-                    <li class="liBox">
-                        <b>키워드</b>
-                        <input type="number" placeholder="키워드를 입력하세요">
-                    </li>
-                    <li style="margin: auto; text-align: center;">
-                        <input id="sub"type="submit" value="체험검색">
-                    </li>
-                </div>
-            </form>
-        </div>
+        
+        <!-- searchbar -->
+        <jsp:include page="../common/searchbar.jsp"/>
+        
         <div style="width:20%; height:auto; float:left;">
             <div id="filterArea">
                 <div id="filterAreaInner" style="position:absolute; top:300px; width:220px; float:left;">   
@@ -470,7 +427,7 @@
 
         <!-- 페이징 바 -->
         <div class="pagingBar">
-            <button>&lt;</button>
+            <button>&lt;</button>&nbsp;
             <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
             <button>n</button>&nbsp;
             <button>n</button>&nbsp;
