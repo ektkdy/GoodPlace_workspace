@@ -25,7 +25,10 @@ public interface ExperienceService {
 	// 3. 체험 상세조회용 서비스 
 	Experience selectExp(int exNo);
 	
-	// 4. 체험 수정용 서비스
+	// 4_1. 체험 수정폼 요청용 서비스
+	int updateExpForm(int exNo);
+	
+	// 4_2. 체험수정용 서비스
 	int updateExp(int exNo);
 	
 	// 5. 체험 휴면용 서비스
@@ -59,6 +62,7 @@ public interface ExperienceService {
 	
 	//2_2.요청한 페이지에 보여질 체험 승인완료 리스트 조회용 서비스
 	ArrayList<Experience> selectExpOkayList(PageInfo pi);
+
 
 
 	

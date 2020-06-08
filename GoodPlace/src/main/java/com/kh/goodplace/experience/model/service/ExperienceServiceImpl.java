@@ -33,8 +33,6 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	
-	//---------------------------------------------------------
-	
 	@Override
 	public int insertExp(Experience e) {
 		return expDao.insertExp(sqlSession, e);
@@ -45,13 +43,16 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.insertAttachment(sqlSession, at);
 	}
 
-	//---------------------------------------------------------
-
 	@Override
 	public Experience selectExp(int exNo) {
-		return null;
+		return expDao.selectExp(sqlSession, exNo);
 	}
 
+	@Override
+	public int updateExpForm(int exNo) {
+		return expDao.updateExpForm(sqlSession, exNo);
+	}
+	
 	@Override
 	public int updateExp(int exNo) {
 		return 0;
@@ -108,6 +109,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.selectExpOkayList(sqlSession, pi);
 	}
 
+	
 	
 	
 	

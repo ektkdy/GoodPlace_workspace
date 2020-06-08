@@ -42,25 +42,28 @@
 		<result column="people" property="people"/>
 	</resultMap>
 	
+	<!-- 사용자의 체험 전체 목록 조회  -->
 	<select id="selectExpListCount" resultType="_int">
 		select count(*)
 		  from experience
 		 where usno=#{usNo}
 	</select>
 	
+	<!-- 패당 페이지에 보여줄 사용자의  체험 목록 조회 -->
 	<select id="selectExpList" resultMap="ExperienceResultSet" parameterType="_int">
 		select e.status, e.exp_Title, 
-		       e.start_date, e.apply_date, e.usno, 
+		       e.start_date, e.apply_date, e.usno, e.exno,
 		       substr(e.add_basic, 1, 3) as local, 
        		   count(p.exno) as totalSal
           from experience e
           left join expPay p on(e.exno=p.exno) 
   		 group by e.status, e.exp_Title, e.start_date, e.apply_date, 
-  		 	   substr(e.add_basic, 1, 3), e.usno
+  		 	   substr(e.add_basic, 1, 3), e.usno, e.exno
 		having e.usno= #{usNo}
 		 order by status asc, totalSal desc
 	</select>
 	
+	<!-- 체험 등록 -->
 	<insert id="insertExp" parameterType="Experience">
 		insert into experience
 		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle},
@@ -69,13 +72,58 @@
 			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent})
 	</insert>
 	
-
+	<!-- 체험 상세사진 등록 -->
 	<insert id="insertAttachment" parameterType="Attachment">
 		insert into attachment
 		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, exno.currval)
 	</insert>
+	
+	<!-- 체험 상세조회 -->
+	<select id="selectExp" resultMap="ExperienceResultSet" parameterType="_int">
+		select * 
+		  from experience 
+		  join attachment using (exno)
+		 where exno=#{exNo}
+	</select>
+
+	<!-- 체험 수정폼 요청 -->
+	
+	
+	
+	
+	
+	<!-- 거절사유가 있는 체험 수정폼 요청 -->
+	
+	
+	
+	
+	<!-- 체험 휴면 -->
+	
+	
+	
+	
+	
+	
+	<!-- 체험 삭제 -->
 
 
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	<!-- 체험관리 시작 -->
 	
@@ -105,19 +153,6 @@
 	
 	
 	<!-- 체험관리 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

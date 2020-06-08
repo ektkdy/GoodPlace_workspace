@@ -143,7 +143,7 @@
             <br>
             </div>
             <div id="btns">
-                <button type="button" id="cancle" name="">취소하기</button>
+                <button type="button" id="cancle" onclick="javascript:history.go(-1);">취소하기</button>
                 <button type="submit" id="next">저장 후 다음으로</button>
             </div>
             </form>

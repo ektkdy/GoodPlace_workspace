@@ -98,13 +98,16 @@
 		                            			<td>삭제</td>
 		                            		</c:otherwise>
 		                            	</c:choose>
-			                            <td>${ exp.local }</td>
+			                            <td>${ exp.local } / ${ exp.exNo }</td>
 			                            <td>${ exp.expTitle }</td>
+			                            
+			                            
 			                            <td>${ exp.startDate }(${ exp.applyDate })</td>
+			                            	
 			                            <td>${ exp.totalSal }</td>
 			                            <td>
-			                                <button class="blue_btn" class="expDetail">보기</button>
-			                                <button class="blue_btn" class="expUpdate">수정</button>
+			                                <button class="blue_btn expDetail">보기</button>
+			                                <button class="blue_btn expUpdate">수정</button>
 			                            </td>
 			                        </tr>
 		                        </c:forEach>
@@ -116,19 +119,25 @@
                     </tbody>
                 </table>
                 
+                
+                <!-- 상세보기 / 수정폼 / 거절사유있는 수정폼으로의 이동 -->
                 <script>
 	                $(function(){
 						$(".expDetail").click(function(){
-							location.href="";
+							location.href="expDetail.exp?exno="+$(this).parent().siblings().eq(0).val();
+							//console.log($(this).parent().siblings().eq(0).val());
 						});
 					});
-                	
+	                
 	                $(function(){
 						$(".expUpdate").click(function(){
-							location.href="";
+		                	if($(this).parent().siblings().eq(1).text()=="승인거절"){	// 체험번호의 상태가 승인거절(3)일 경우 거절사유가 적힌 폼으로 이동
+		                		location.href="updateReExpForm.exp?exno="+$(this).parent().siblings().eq(0).val();
+		                	}else{	// 그 외에는 수정폼으로 이동
+		                		location.href="updateExpForm.exp?exno="+$(this).parent().siblings().eq(0).val();
+		                	}
 						});
-					});
-                
+	                });
                 </script>
                 
                 <c:if test="${ !empty list }">

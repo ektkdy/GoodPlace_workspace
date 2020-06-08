@@ -114,8 +114,8 @@ public class ExperienceController {
 		
 		int result1 = expService.insertExp(e);
 		
-		System.out.println(e);
-		System.out.println(result1);
+		//System.out.println(e);
+		//System.out.println(result1);
 		
 		int result = 1;
 		
@@ -141,12 +141,12 @@ public class ExperienceController {
 				int result2 = expService.insertAttachment(at);
 				result = result1*result2;
 				
-				System.out.println(result2);
-				System.out.println(at);
+				//System.out.println(result2);
+				//System.out.println(at);
 			}
 		}
-		System.out.println(list);
-		System.out.println(result);
+		//System.out.println(list);
+		//System.out.println(result);
 		
 		
 		if(result>0) {
@@ -156,8 +156,36 @@ public class ExperienceController {
 		}
 	}
 	
+	/* 3. 체험 상세보기용 서비스 */
+	@RequestMapping("expDetail.exp")
+	public ModelAndView selectExp(int exNo, ModelAndView mv) {
+		Experience exp = expService.selectExp(exNo);
+		
+		if(exp !=null) {
+			mv.addObject("exp", exp);
+			mv.setViewName("partner/partnerExpUpdateForm");
+		}else {
+			mv.addObject("msg", "상세보기 실패");
+			mv.setViewName("partner/list.exp");
+		}
+		
+		return mv;
+	}
 	
+	/* 4_1. 체험수정폼 요청용 서비스 */
+	@RequestMapping("updateExpForm.exp")
+	public String updateExpForm(int exNo,  Model model) {
+		model.addAttribute("exp", expService.selectExp(exNo));
+		return "partner/partnerExpUpdateForm";
+	}
 	
+	/* 4_2. 체험수정 요청용 서비스 */
+	@RequestMapping("updateExp.exp")
+	public String updateExp(int exNo, ModelAndView mv) {
+	
+		
+		return "";
+	}
 	
 	/* 8. 정산관리- expPay union roomsPay 리스트 조회용 */
 	@RequestMapping("partnerIncome.me")

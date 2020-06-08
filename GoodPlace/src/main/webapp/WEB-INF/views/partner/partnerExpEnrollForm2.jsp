@@ -193,7 +193,7 @@
 	                <br>
 	            </div>
 	            <div id="btns">
-                <button id="cancle">취소하기</button>
+                <button id="cancle" onclick="javascript:history.go(-2);">취소하기</button>
                 <button type="submit" id="next">체험등록신청</button>
             </div>
             
