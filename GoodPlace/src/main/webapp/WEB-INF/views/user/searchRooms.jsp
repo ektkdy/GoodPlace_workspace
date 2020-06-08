@@ -439,16 +439,14 @@
             
            	<div class="rooms power bottomArea">
            		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
-           			<c:forTokens  var="tagList" items="${ roomList.roomsTag }" delims=",">
-				   		
-					
+           			<c:forTokens  var="roomTag" items="${ roomList.roomsTag }" delims=",">
 		           		<li>
 		                    <a href="">
 		                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="200px" height="150px"><br>
 		                        	${ roomList.roomsTitle }<br>
 									
-		                        	#<c:out value="${name}"/>&nbsp;#<c:out value="${name}"/><br>
-		                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
+		                        	#<c:out value="${roomTag}"/>&nbsp;#<c:out value="${roomTag}"/><br>
+		                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
 		                    </a>
 		               	</li>
 	               	</c:forTokens>
