@@ -212,8 +212,13 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.reviewList", userNo, rowBounds);
 	}
 	
+	public Board selectReview(SqlSessionTemplate sqlSession, int reNo) {
+		return sqlSession.selectOne("boardMapper.selectReview", reNo);
+	}
 	
-	
+	public int insertReply(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.insertReply", b);
+	}
 	
 	
 	

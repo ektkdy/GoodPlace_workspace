@@ -114,5 +114,10 @@ public interface BoardService {
 	//1-2.리뷰 조회용서비스 - 기하
 	ArrayList<Board> reviewList(PageInfo pi, int userNo);
 	
+	//1-3.리뷰 상세조회용(리뷰작성전) - 기하
+	Board selectReview(int reNo);
+	
+	//2.리뷰 댓글 작성용서비스 - 기하
+	int insertReply(Board b);
 	
 }

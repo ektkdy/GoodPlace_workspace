@@ -67,6 +67,9 @@
 		<result column="REPLY" property="reply"/>
 		<result column="REPLY_DATE" property="replyDate"/>
 		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="CONCEPT" property="concept"/>
+		<result column="AGE" property="age"/>
+		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
 
 
@@ -356,7 +359,8 @@
 	</select>
 	
 	<select id="reviewList" parameterType="_int" resultMap="reviewResultSet" >
-		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
 	   	  FROM REVIEW RE
 		  JOIN MEMBER M ON(M.USNO = RE.USNO)
 		  JOIN ROOMS R ON(R.RONO = RE.RONO)
@@ -365,6 +369,22 @@
                            WHERE R.USNO = #{userNo})
 	</select>
 	
+	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
+		 SELECT RENO, USER_NAME, SCORE, END_DAYS, CREATE_DATE, CONCEPT, REVIEW_TITLE, REVIEW_CONTENT, REPLY,
+        M.CHANGE_NAME, TRUNC(TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(BIRTHDATE, 1, 4), 'YYYY')))/12, -1) AGE
+		 FROM REVIEW RE
+		 JOIN MEMBER M ON(M.USNO = RE.USNO)
+		 LEFT JOIN ROOMSPAY R ON(RE.USNO = M.USNO)
+		 WHERE RE.RENO= ${reNo}
+	</select>
+	
+	<update id="insertReply" parameterType="Board">
+		UPDATE REVIEW 
+		   SET REPLY_DATE = SYSDATE,
+		   	   REPLY_STATUS = 'Y',
+		   	   REPLY = #{reply}
+	 	 WHERE RENO = #{reNo}
+	</update>
 	
 	<!-- /기하 partner review -->
 	

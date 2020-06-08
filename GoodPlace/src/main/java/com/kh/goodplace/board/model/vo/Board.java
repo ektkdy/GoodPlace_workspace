@@ -97,5 +97,9 @@ public class Board {
 	private String reply;			// 답글내용
 	private Date replyDate;			// 답글작성일
 	private String replyStatus;	    // 답글 상태
+	
+	private String concept;			// 여행컨셉
+	private String age;				// 연령대
+	private Date endDays;			// 여행날짜
 
 }

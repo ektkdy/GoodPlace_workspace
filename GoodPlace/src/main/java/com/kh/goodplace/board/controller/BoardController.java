@@ -542,9 +542,49 @@ public class BoardController {
     
     }
     
+    @RequestMapping("reviewForm.re")
+    public String reviewForm(int reNo, Model model) {
+
+    	Board r = bService.selectReview(reNo);
+    	
+    	model.addAttribute("r", r);
+    	
+    	return "partner/partnerReplyEnrollForm";
+    }
     
+    @RequestMapping("insert.re")
+    public ModelAndView insertReply(int reNo, String reply, ModelAndView mv) {
+    	
+    	Board b = new Board();
+    	
+    	b.setReNo(reNo);
+    	b.setReply(reply);
+    	
+    	int result = bService.insertReply(b);
+    	if(result > 0){ // 게시글 상세조회 성공
+            
+            Board r = bService.selectReview(reNo);
+            mv.addObject("r", r);
+            mv.setViewName("partner/partnerReplyListView");
+            
+        }else{ // 게시글 상세조회 실패
+        	
+            mv.addObject("msg", "리뷰 등록 실패!!");
+            mv.setViewName("common/errorPage");
+        }
+        return mv;
+    	
+    }
     
-    
-    
+    @RequestMapping("reviewDetailView.re")
+    public String reviewDetailView(int reNo,  Model model) {
+    	
+    	 Board r = bService.selectReview(reNo);
+    	 
+    	 model.addAttribute("r", r);
+		 
+		 return "partner/partnerReplyDetailView";
+    	
+    }
     
 }

@@ -189,6 +189,16 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.reviewList(sqlSession, userNo, pi);
 	}
 
+	@Override
+	public Board selectReview(int reNo) {
+		return bDao.selectReview(sqlSession, reNo);
+	}
+
+	@Override
+	public int insertReply(Board b) {
+		return bDao.insertReply(sqlSession, b);
+	}
+
 
 	
 
