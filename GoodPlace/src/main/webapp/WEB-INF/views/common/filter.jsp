@@ -113,12 +113,6 @@
                                 <tr class="hide">
                                     <td><input type="checkbox" class="filterCheckBox"/><label>Free wifi</label></td>
                                 </tr>
-                                <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>침대 수</label><input type="number" class="filterCheckBox" style="margin-left:10px; width:30px;"/><label>이상</label></td>
-                                </tr>
-                                <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>화장실 개수</label><input type="number" max="6" class="filterCheckBox" style="margin-left:10px; width:30px;"/><label>이상</label></td>
-                                </tr>
                             </table>
                             <div style="width:100%" id="openFilter">   
                                 <h4 style="color:darkslategray; margin-left:2%;" onclick="openFilter()" >필터펼치기</h4>
@@ -154,9 +148,16 @@
                     $('#openFilter h4').text("필터펼치기")
                 }
             }
+            // 필터초기화
             function filterReset(){
                 $(".filterCheckBox[type=checkbox]").prop("checked", false);
             }
+            var text ="";
+            // 필터의 체크된 값 담기
+            $(".filterCheckBox[type=checkbox]").change(function(){
+            	text += $(this).next().text() + ",";
+            	$("#filterValue").val(text);
+            });
         </script>
 </body>
 </html>
