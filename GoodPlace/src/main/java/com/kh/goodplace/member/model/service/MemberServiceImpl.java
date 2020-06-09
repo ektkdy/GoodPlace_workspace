@@ -71,9 +71,17 @@ public class MemberServiceImpl implements MemberService {
 
 	// 1. 파트너 수입 목록 조회용 서비스
 	@Override
-	public ArrayList<Member> selectIncomeList() {
+	public int selectIncomeListCount(int usNo) {
+		return 0;
+	}
+	
+	@Override
+	public ArrayList<Experience> selectIncomeList(PageInfo pi, int usNo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 	//2_1. 파트너 계정정보 수정용(파트너 테이블) 서비스
 	@Override
@@ -163,7 +171,7 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.aSelectPartnerExp(sqlSession, ptno);
 		}
 
-
+		
 		
 		//-------------------------------------------------------------------
 

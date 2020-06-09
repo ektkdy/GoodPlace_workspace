@@ -33,7 +33,11 @@ public interface MemberService {
 	//-------------------------------------------------------------------
 	
 	// 1. 파트너 수입 목록 조회용 서비스
-	ArrayList<Member> selectIncomeList();
+	// 1_1. 해당 파트너의 전체 수입(숙소+체험) 갯수 조회용서비스
+	int selectIncomeListCount(int usNo);
+	
+	// 1_2. 해당 페이지에 보여질 수입목록 조회용 서비스
+	ArrayList<Experience> selectIncomeList(PageInfo pi, int usNo);
 	
 	//2. 파트너 계정정보 수정용 서비스 --> updateMember와 updatePartnerAccount를 사용함
 	int updatePartnerAccount(Member m);

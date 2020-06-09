@@ -52,10 +52,8 @@ public class MemberDao {
 	
 	
 	
-	
-	
-	
-	
+	//-------------------------------파트너------------------------------------
+
 	// 파트너 계정관리 업데이트
 	public int updatePartnerAccount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updatePartnerAccount", m);
@@ -64,6 +62,9 @@ public class MemberDao {
 	public int updateMemberAccount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMemberAccount", m);
 	}
+	
+	
+	
 	
 	
 	

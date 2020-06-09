@@ -25,11 +25,12 @@ public class RoomPay {
 	private Timestamp payDate;	// 결제날짜
 	private int addPoint;	// 적립포인트
 	private Timestamp checkIn;	// 체크인시간
+	private int reserveStatus; 	// 예약상태
 	private int usePoint;	// 사용포인트
 	private int people;		// 예약인원수
 	private String concept;	// 여행컨셉
 	private String request;	// 요청사항
-	private Date startDate;	// 예약시작일자
-	private Date endDate;	// 예약끝일자
+	private Date startDays;	// 예약시작일자
+	private Date endDays;	// 예약끝일자
 
 }

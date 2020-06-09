@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
 
@@ -315,9 +316,23 @@ public class MemberController {
 		return mv;
     }
 
-
-
-
+    
+    /* 파트너페이지 정산관리- expPay union roomsPay 리스트 조회용 */
+	@RequestMapping("partnerIncome.me")
+	public String selectIncomeList(int currentPage, Model model, HttpSession session) {
+		
+		Member loginUser  = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
+		
+		/*int listCount = mService.selectIncomeList(usNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Experience> list = mService.selectExpList(pi, usNo);
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);*/
+		
+		return "partner/partnerIncome";
+	}
     
     
     
