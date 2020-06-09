@@ -177,25 +177,7 @@ public class RoomController {
 		
 // ------------------------------ 파트너 예약관리 시작 ----------------------------------
 		
-		@RequestMapping("reservationList.rv")
-		public String reservationList(int currentPage, Model model, 
-	       HttpSession session) {
-	   
-	    Member m = (Member)session.getAttribute("loginUser");
-	    
-	    int userNo = m.getUsNo();
-	    
-	    int listCount = rService.selectReservationListCount(userNo);
-	    
-	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-	    
-	    ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
-	    
-	    model.addAttribute("pi", pi);
-	    model.addAttribute("list", list);
-	    
-	    return "partner/partnerReservationListView";
-		}
+		
 		
 	
 // ------------- Power 관리 시작 --------------------------------------------------
