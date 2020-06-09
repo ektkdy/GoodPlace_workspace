@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -289,114 +290,44 @@
             </div>
         </div>
 
-        <!-- 검색된 숙소 : 미완성 -->
-        <div id="roomList">
-            <div style="margin:50px 0 20px 0; height:30px; width:100%;">
-                <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
-                <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
-            </div>
-            
-            
-           	<div class="rooms power bottomArea">
-           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
-           			<c:forTokens  var="roomTag" items="${ roomList.roomsTag }" delims=",">
-		               	<li>
-		                    <a href="">
-		                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
-		                        	${ roomList.roomsTitle }<br>
-			                       	#<c:out value="${roomTag}"/>&nbsp;#<c:out value="${roomTag}"/><br>
-		                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
-		                    </a>
-                		</li>
-	               	</c:forTokens>
-               	 </c:forEach>
-           	</div>
-           
-            <div class="rooms power bottomArea">
-            	<li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-               <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-            </div>
-            <div class="rooms power bottomArea">
-               <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-               <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-               <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-				                        숙소 타이틀<br>
-				                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-            </div>
-        </div>
-
-        <!-- 페이징 바 -->
-        <div class="pagingBar">
-            <button>&lt;</button>&nbsp;
-            <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>&gt;</button>
-        </div>
-    </div>
+	        <!-- 검색된 숙소 : 미완성 -->
+	        <div id="roomList">
+	            <div style="margin:50px 0 20px 0; height:30px; width:100%;">
+	                <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
+	                <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
+	            </div>
+	            
+	            
+	           	<div class="rooms power bottomArea">
+	           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
+			               	<li>
+			                    <a href="">
+			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
+			                        	${ roomList.roomsTitle }<br>
+				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
+			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
+			                    </a>
+	                		</li>
+	               	 </c:forEach>
+	           	</div>
+	
+	        <!-- 페이징 바 -->
+	        <div class="pagingBar">
+	            <button>&lt;</button>&nbsp;
+	            <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
+	            <button>n</button>&nbsp;
+	            <button>n</button>&nbsp;
+	            <button>n</button>&nbsp;
+	            <button>n</button>&nbsp;
+	            <button>&gt;</button>
+	        </div>
+	    </div>
+	    	
+   	</div>
     <!-- /content -->
-
-    <!-- footer -->
-	<jsp:include page="../common/footer.jsp"/>
     
+   	<!-- footer -->
+	<jsp:include page="../common/footer.jsp"/>
+	
 </body>
 </html>
