@@ -64,8 +64,8 @@
                                 <td width="200">예약번호</td>
                                 <td width="200">수익일</td>
                                 <td width="200">여행자</td>
-                                <td width="200" id="income">수익금</td>
-                                <td width="200" id="section">수익구분</td>
+                                <td width="200">수익금</td>
+                                <td width="200">수익구분</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +77,7 @@
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
-			                                <td>${ ac.amount }</td>
+			                                <td class="amount">${ ac.amount }</td>
 			                                <td>${ ac.section }</td>
 				                        </tr>
 			                        </c:forEach>
@@ -90,7 +90,7 @@
                     </table>
                 </div>
                 <div class="sum">
-                    <p>선택 내역의 총금액 합계 : 123456원</p>
+                    <p>선택 내역의 총금액 합계 : <span id="sum">0</span>원</p>
                 </div>
                 <h5>*수입금은 굿플레이스의 수수료 20%가 공제된 내역입니다.</h5>
                 
@@ -131,43 +131,42 @@
     </div>
 
 
-	<!-- 체크박스 조건검사 -->
+	<!-- 체크박스 조건검사 및 선택 내역 총금액 출력 -->
     <script>
+    var sum = 0;
 	$(function(){
 		$("#choice").click(function(){
 			if($("#choice").is(":checked")){
 				$(".choice").prop("checked", true);
+				sum=0;
+				for(var i=0; i<'${list.size()}'; i++){
+	    			var a = parseInt($(".amount").eq(i).text());
+					sum += a;
+    			}
 			}else{
 				$(".choice").prop("checked", false);
+				sum = 0;
 			}
+			$("#sum").text(sum);
 		});
+		
 		$(".choice").click(function(){
-			if($("input[name=choice]:checked").length==10){
+			if($("input[name=choice]:checked").length=='${list.size()}'){
 				$("#choice").prop("checked", true);
 			} else{
 				$("#choice").prop("checked", false);
 			}
+			var amount = $(this).parent().siblings().eq(3).text();	
+		    var intAmount = parseInt(amount);						
+    		
+		    if($(this).is(":checked")){	
+		    	sum += intAmount;
+		    }else{
+		    	sum -= intAmount;
+		    }
+		    $("#sum").text(sum);
 		});
 	});
-    </script>
-    
-    <!-- 선택한 체크박스 수익합계 보여주기 -->
-    <script>
-	    var sum = 0;
-    	$(function(){
-    		$(".choice").click(function(){
-			    var amount = $(this).parent().siblings().eq(3).text();
-	    			
-    			if($(".choice").is(":checked")){
-	    			sum += amount;
-    			}else{
-    				sum -= amount;
-    			}
-    			console.log(sum);
-    		});
-    	});
-    
-    
     </script>
 </body>
 </html>
