@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chatMapper">
+
+	<resultMap id="roomResultMap" type="ChatRoom">
+		<id column="CHNO" property="chNo"/>
+		<result column="USER_EMAIL" property="userEmail"/>
+		<result column="TUTOR_EMAIL" property="tutorEmail"/>
+		<result column="CLASS_ID" property="CLASS_class_id"/>
+	</resultMap>
+	
+	<insert id = "createRoom" parameterType="ChatRoom">
+		insert into CHATROOM
+		values(chno.nextval,#{userEmail}, #{tutorEmail} , 1 )
+	</insert>
+
+
+	<select id ="selectChatRoom" resultMap = "roomResultMap" parameterType="ChatRoom">
+	select * from CHATROOM WHERE USER_EMAIL = #{userEmail} and TUTOR_EMAIL = #{tutorEmail} 
+	</select>
+<!--and CLASS_class_id = #{CLASS_class_id}   -->
+
+	<insert id = "insertMessage" parameterType="Message">
+		insert into MESSAGE
+		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, #{messageReadTime})
+	</insert>
+
+</mapper>

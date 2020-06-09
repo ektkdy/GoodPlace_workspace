@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accountsMapper">
+
+	<resultMap type="Accounts" id="accountsResultSet">
+		<id column="RPNO" property="rpNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="RPAMOUNT" property="amountRoom"/>
+		<result column="RP_DATE" property="payDateRoom"/>
+		<result column="EPNO" property="epNo"/>
+		<result column="EXNO" property="exNo"/>
+		<result column="EPAMOUNT" property="amountExp"/>
+		<result column="EP_DATE" property="payDateExp"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="AUSNO" property="userNo"/>
+	</resultMap>
+
+	<select id="aSelectAccountListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER M
+		LEFT JOIN ROOMSPAY RP ON(RP.USNO = M.USNO)
+		LEFT JOIN EXPPAY EP ON(EP.USNO = M.USNO)
+		WHERE RP.RPNO != 0 OR EP.EPNO != 0
+	</select>
+	
+	<select id="aSelectAccountList" resultMap="accountsResultSet">
+		SELECT M.USNO AS "AUSNO", RP.RPNO, EP.EPNO, M.USER_NAME, 
+				RP.PAY_DATE AS "RP_DATE", EP.PAY_DATE AS "EP_DATE", RP.AMOUNT AS "RPAMOUNT", EP.AMOUNT AS "EPAMOUNT"
+		FROM MEMBER M
+		LEFT JOIN ROOMSPAY RP ON(RP.USNO = M.USNO)
+		LEFT JOIN EXPPAY EP ON(EP.USNO = M.USNO)
+		WHERE RP.RPNO != 0 OR EP.EPNO != 0
+		ORDER BY EP_DATE DESC, RP_DATE DESC
+	</select>
+
+</mapper>

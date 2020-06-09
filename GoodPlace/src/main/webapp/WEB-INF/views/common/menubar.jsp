@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="resources/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <style>
 	body{
 		margin:0px;
@@ -290,7 +292,7 @@
 		                    		</c:otherwise>
 		                    	</c:choose>
 
-		                        <a class="list qBtn" href="" style="font-size: 15px;">1:1채팅상담</a>
+		                        <a class="list qBtn" onclick="boxSlide();" style="font-size: 15px; cursor:pointer ">1:1채팅문의</a>
 		                    </li>
 		                    <li>
 		                        <div id="personalImg" style="margin-left: 10px;">
@@ -316,13 +318,13 @@
             </div>
         </div>
     </div>
-    <div id="sidebox" style="box-shadow: 5px 5px 10px black; z-index: 99999;"> 
+    <div id="sidebox" style="box-shadow: 5px 5px 10px black; z-index: 99999; display:none;"> 
         <!-- 채팅헤더 -->
         <div class="chat_header" style="width:240px; padding: 10px 20px; height: 80px; border-top-left-radius: 20px; border-top-right-radius: 20px; background-color:#184c88;">
             <div style="color: white;">
                 <b style=" font-weight: 800; font-size: 24px;">GoodPlace</b>
                 <span style="float: right; margin-top:10px">
-                    <a href="#">
+                    <a onclick="boxClose();" style="cursor: pointer;">
                         <img src="resources/images/user/clear-button.png" width="18px">
                     </a>
                 </span>
@@ -333,7 +335,7 @@
             </div>
         </div>
         <!-- 채팅박스 -->
-        <div class="chat_content" style="box-shadow: lightgray;">
+        <div class="chat_content" id="messageArea" style="box-shadow: lightgray;">
 
             <!-- 유저1 -->
             <div>
@@ -362,56 +364,94 @@
                 </div>
                 <div class="chat_date chat_userDate">20:21</div> <!-- 시간 -->
             </div>
-
-            <!-- 유저1 -->
-            <div>
-                <!--아이디-->
-                <div class="chat_common"> 
-                    <img src="" width="28px" height="28px">
-                    <span>GoodPlace</span>
-                </div>
-                <!-- 채팅 내용 -->
-                <div class="chat chat_admin">
-                    안녕하세요! 여행 플랫폼 서비스! GoodPlace입니다!
-                </div>
-                <div class="chat_date chat_adminDate" style="clear: both; margin: 0px 10px; color:grey; font-size: 12px;">20:20</div> <!-- 시간 -->
-            </div>
-            <!-- 유저1 끝 -->
-            <!-- 유저2 -->
-            <div>
-                <!--아이디-->
-                <div class="chat_common chat_userId">
-                    <img src="" width="28px" height="28px">
-                    <span>GoodPlace</span>
-                </div>
-                <!-- 채팅 내용 -->
-                <div class="chat chat_user">
-                    숙소 환불하려고 하는데요
-                </div>
-                <div class="chat_date chat_userDate">20:21</div> <!-- 시간 -->
-            </div>
-
-            
+  
         </div>
         
         <div class="chat_bottom" style="height: 90px; width: 280px; border-bottom-left-radius: 20px; border-radius: 20px; border: 1px solid lightgray; box-sizing: border-box;">
-            <div style="float: left; height: 100%; width: 214px; padding: 5px;">
+            <div style="float: left; height: 100%; width: 75%; padding: 5px;">
                 <!-- 채팅 문자열 입력(chat_str) -->
-                <textarea name="chat_str" id="" style="overflow-y: auto; width: 100%; height: 87%; box-sizing: border-box; border:none; resize:none"></textarea>
+                <textarea type="text" name="chat_str" id="message" style="overflow-y: auto; width: 100%; height: 87%; box-sizing: border-box; border:none; resize:none"></textarea>
             </div>
             
-            <div style="float: left; height: 100%; width:54px; background-color: #184c88; border-bottom-right-radius: 20px; border-top-right-radius: 20px; box-sizing: border-box; text-align: center; padding: 34px 0px;">
-                <a herf="" style="text-align: center;">전송</a>
+            <div style="float: right;height: 100%;width: 21%;background-color: #184c88;border-bottom-right-radius: 20px;border-top-right-radius: 20px;box-sizing: border-box;text-align: center;padding: 34px 0px;">
+                <a id="sendBtn" style="text-align: center; cursor: pointer;">전송</a>
             </div>
         </div>
     </div>
     
+    <input type="hidden" id="loginEmail" value="${ loginUser.email }">
+    <input type="hidden" id="myName" value="${ loginUser.userName }">
     <script>
 	    var currentPosition = parseInt($("#sidebox").css("top"));
 	    $(window).scroll(function() {
 	        var position = $(window).scrollTop();
 	        $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000);
 	    });
+	    
+	    $(function(){
+	    	$("#sidebox").slideUp("fast");	
+	    })
+	    
+	    let sock = null;
+	    // 메세지
+	    function boxSlide(){
+	    	$("#sidebox").slideDown("fast");
+	    	$("#sidebox").css("display","block");
+			$.ajax({
+				// ajax1.do?name=홍길동&age=20
+				url:"selectTutor",
+				data:{email:"ektkdy@naver.com"},
+				type:"post",
+				success:function(tutor){
+					sock = new SockJS("http://localhost:8888/goodplace/echo/");
+					sock.onmessage = onMessage;
+					sock.onclose = onClose;
+					
+					console.log(tutor); // 상대방(관리자) 정보 -- 프로필 사진용
+				},error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});		
+	    }
+	    
+		$("#sendBtn").click(function() {
+			sendMessage();
+			$('#message').text("");
+		});
+
+
+		// 메시지 전송
+		function sendMessage() {
+			var msg = $("#message").val();
+			if(msg != ""){
+				message = {};
+			  	message.messageContent = $("#message").val();
+		  	  	message.messageReceiver = "ektkdy@naver.com" // 관리자 이메일
+		  	  	message.messageSender = '${loginUser.email}'
+		  	  	message.CLASS_class_id = 1//'${room.CLASS_class_id}'
+			}
+			console.log(message);
+			sock.send(JSON.stringify(message));
+			$("#message").val("");
+		}
+		// 서버로부터 메시지를 받았을 때
+		function onMessage(msg) {
+			var data = msg.data;
+			var name = $("#myName").val();
+			$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src="+"''"+" width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_admin'>"+ data + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 12px;'>20:20</div></div>");
+		}
+		// 서버와 연결을 끊었을 때
+		function onClose(evt) {
+			$("#messageArea").append("연결 끊김");
+
+		}
+		
+		
+	    function boxClose(){
+	    	$("#sidebox").slideDown("fast");
+	    }
+	    
+	    
     </script>
 </body>
 </html>
