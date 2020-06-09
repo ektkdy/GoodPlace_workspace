@@ -53,7 +53,7 @@
                     <p class="title_tt">수입내역</p>
                 </span>
                 <span class="up_btn_space">
-                    <button class="blue_btn" style="margin-right: 20px;">엑셀 다운로드</button>
+                    <button class="blue_btn" style="margin-right: 20px;" onclick="location.href='incomeExcel.do'">엑셀 다운로드</button>
                 </span>
                 
                 <div class="con2">
@@ -73,7 +73,7 @@
 	                    		<c:when test="${ !empty list }">
 	                    			<c:forEach items="${ list }" var="ac">
 		                    			<tr>
-		                    				<td><input type="checkbox" name="choice" class="choice" style="display:block;margin-left:40px;"></td>
+		                    				<td><input type="checkbox" name="choice" class="choice" style="display:block; margin-left:40px;"></td>
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
@@ -129,7 +129,6 @@
             </div>
         </div>
     </div>
-
 
 	<!-- 체크박스 조건검사 및 선택 내역 총금액 출력 -->
     <script>

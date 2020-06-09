@@ -39,5 +39,8 @@ public interface AccountsService {
 	
 	// 1_2. 해당 페이지에 보여질 수입목록 조회용 서비스
 	ArrayList<Accounts> selectIncomeList(PageInfo pi, int usNo);
+	
+	// 1_3. 엑셀출력용 수입목록들
+	ArrayList<Accounts> selectIncomeList(int usNo);
 
 }
