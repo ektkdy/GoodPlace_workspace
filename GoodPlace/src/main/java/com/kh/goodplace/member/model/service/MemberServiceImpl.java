@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.dao.MemberDao;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.vo.Room;
 
 @Service("mService")	// 구체화 된 빈 (즉, 이 객체는 서비스의 역할을 수행하는 빈으로 등록)
@@ -65,15 +69,11 @@ public class MemberServiceImpl implements MemberService {
 	public int insertPartner(Member m) {
 		return mDao.insertPartner(sqlSession, m);
 	}
+	
+
 
 	//-------------------------------------------------------------------
 
-
-	// 1. 파트너 수입 목록 조회용 서비스
-	@Override
-	public ArrayList<Member> selectIncomeList() {
-		return null;
-	}
 
 	//2_1. 파트너 계정정보 수정용(파트너 테이블) 서비스
 	@Override
@@ -163,7 +163,7 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.aSelectPartnerExp(sqlSession, ptno);
 		}
 
-
+		
 		
 		//-------------------------------------------------------------------
 

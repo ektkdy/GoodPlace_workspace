@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -296,7 +297,6 @@
 	});
 
 	$(function(){
-		
 		switch('${e.expCategory}'){
 		case "1" : $("#life").prop("checked", true); break;
 		case "2" : $("#culture").prop("checked", true); break;
@@ -307,30 +307,42 @@
 	});
 	
 	$(function(){
-		switch('${e.language}'){
-		case "한국어" : $("#ko").prop("checked", true); break;
-		case "스페인어" : $("#es").prop("checked", true); break;
-		case "일본어" : $("#jp").prop("checked", true); break;
-		case "영어" : $("#en").prop("checked", true); break;
-		case "중국어" : $("#ch").prop("checked", true); break;
-		case "그 외" : $("#etc").prop("checked", true); break;
+		var language = ('${e.language}').split(",");
+		
+		for(var i=0; i<language.length; i++){
+			switch(language[i]){
+			case "한국어" : $("#ko").prop("checked", true); break;
+			case "스페인어" : $("#es").prop("checked", true); break;
+			case "일본어" : $("#jp").prop("checked", true); break;
+			case "영어" : $("#en").prop("checked", true); break;
+			case "중국어" : $("#ch").prop("checked", true); break;
+			case "그 외" : $("#etc").prop("checked", true); break;
+			}
 		}
 	});
 	
+</script>	
+
+<script>
+	
 	$(function(){
-		switch('${e.expTag}'){
-		case "박물관/미술관" : $("#musium").prop("checked", true); break;
-		case "쇼핑" : $("#shop").prop("checked", true); break;
-		case "뷰티/패션" : $("#beauty").prop("checked", true); break;
-		case "테마파크" : $("#park").prop("checked", true); break;
-		case "시티투어" : $("#city").prop("checked", true); break;
-		case "캠핑" : $("#camp").prop("checked", true); break;
-		case "이색체험" : $("#special").prop("checked", true); break;
-		case "맛집/카페" : $("#food").prop("checked", true); break;
-		case "스포츠" : $("#sports").prop("checked", true); break;
-		case "야경" : $("#landscape").prop("checked", true); break;
-		case "자전거" : $("#bicycle").prop("checked", true); break;
-		case "클래스" : $("#class").prop("checked", true); break;
+		var tag = ('${e.expTag}').split(",");
+
+		for(var i=0; i<tag.length; i++){
+			switch(tag[i]){
+			case "박물관/미술관" : $("#musium").prop("checked", true); break;
+			case "쇼핑" : $("#shop").prop("checked", true); break;
+			case "뷰티/패션" : $("#beauty").prop("checked", true); break;
+			case "테마파크" : $("#park").prop("checked", true); break;
+			case "시티투어" : $("#city").prop("checked", true); break;
+			case "캠핑" : $("#camp").prop("checked", true); break;
+			case "이색체험" : $("#special").prop("checked", true); break;
+			case "맛집/카페" : $("#food").prop("checked", true); break;
+			case "스포츠" : $("#sports").prop("checked", true); break;
+			case "야경" : $("#landscape").prop("checked", true); break;
+			case "자전거" : $("#bicycle").prop("checked", true); break;
+			case "클래스" : $("#class").prop("checked", true); break;
+			}
 		}
 	});
 	

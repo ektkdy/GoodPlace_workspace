@@ -24,6 +24,24 @@
 		<result column="PRE_MSG" property="preMsg"/>
 		<result column="PA_YELLOW_CARD" property="paYellowCard"/>
 		<result column="PARTNER_STATUS" property="partnerStatus"/>
+		
+		<result column="rpno" property="rpNo"/>
+		<result column="rono" property="roNo"/>
+		<result column="amount" property="amount"/>
+		<result column="birthdate" property="birthDate"/>
+		<result column="pay_date" property="payDate"/>
+		<result column="add_point" property="addPoint"/>
+		<result column="check_in" property="checkIn"/>
+		<result column="reserv_status" property="reserveStatus"/>
+		<result column="use_point" property="usePoint"/>
+		<result column="people" property="people"/>
+		<result column="concept" property="concept"/>
+		<result column="request" property="request"/>
+		<result column="start_days" property="startDays"/>
+		<result column="end_days" property="endDays"/>
+		<result column="epno" property="rpNo"/>
+		<result column="exno" property="rpNo"/>
+		<result column="exp_date" property="rpNo"/>
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
@@ -108,8 +126,6 @@
 			   pre_msg=#{preMsg}
 		 where pano=#{paNo}
 	</update>
-
-
 
 
 

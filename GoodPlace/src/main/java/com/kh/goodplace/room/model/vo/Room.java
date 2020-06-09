@@ -89,5 +89,5 @@ public class Room {
 	
 	/* DB에는 없지만 새로 생성한 변수 */
 	private int reviewCount;	// 숙소별 Review 개수
-	private ArrayList<Board> review; // 숙소별 Review 리스트
+	private String filterStatus;// 필터 조건에 만족하는지 숙소의 상태값 설정
 }
