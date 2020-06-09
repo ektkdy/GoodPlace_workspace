@@ -33,6 +33,8 @@
                 </span>
                 <br clear="both">
                 <div class="con2">
+                <form action="updateRoomForm.ro" id="updateRoom" method="post"  >
+                	<input type="hidden" name="roNo" value="${r.reNo }">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr class="pdTop">
@@ -102,8 +104,9 @@
                     </table>
                     <div class="btnArea">
                         <button class="cancel" onclick="location.href='list.ro?currentPage=1'">목록으로</button>
-                        <button class="enroll">수정하기</button>
+                        <button class="enroll" type="submit">수정하기</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

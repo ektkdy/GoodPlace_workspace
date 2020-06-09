@@ -115,7 +115,7 @@ public class RoomController {
 	
 		@RequestMapping("roomDetailView.ro")
 		public String roomDetailView(int rno, Model model ) {
-			System.out.println(rno);
+			
 			 Room r = rService.selectRoom(rno);
 			
 			model.addAttribute("r", r);
@@ -124,7 +124,11 @@ public class RoomController {
 		}
 		
 		@RequestMapping("updateRoomForm.ro")
-		public String updateRoomForm() {
+		public String updateRoomForm(int roNo, Model model) {
+			
+			Room r = rService.selectRoom(roNo);
+			
+			model.addAttribute("r", r);
 			
 			return "partner/partnerRoomUpdateForm";
 		}
@@ -240,6 +244,7 @@ public class RoomController {
 		
 		
 		
+// ------------------------------ 파트너 예약관리 시작 ----------------------------------
 		
 		
 		

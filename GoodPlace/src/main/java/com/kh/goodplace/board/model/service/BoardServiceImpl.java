@@ -190,18 +190,28 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// ------------------- 파트너 리뷰 ----------------------
-	
+	//답글 전 리뷰 전체 리스트 조회용
 	@Override
-	public int selectReviewCount(int userNo) {
-		return bDao.selectReviewCount(sqlSession, userNo);
+	public int selectReviewCount1(int userNo) {
+		return bDao.selectReviewCount1(sqlSession, userNo);
 	}
-
+	//답글 후 리뷰 전체 리스트 조회용
 	@Override
-	public ArrayList<Board> reviewList(PageInfo pi, int userNo) {
+	public int selectReviewCount2(int userNo) {
+		return bDao.selectReviewCount2(sqlSession, userNo);
+	}
+	//답글 전 리뷰 조회용
+	@Override
+	public ArrayList<Board> reviewList1(PageInfo noReplyPi, int userNo) {
 		
-		return bDao.reviewList(sqlSession, userNo, pi);
+		return bDao.reviewList1(sqlSession, userNo, noReplyPi);
 	}
-
+	//답글 후 리뷰 조회용
+	@Override
+	public ArrayList<Board> reviewList2(PageInfo responsePi, int userNo) {
+		
+		return bDao.reviewList2(sqlSession, userNo, responsePi);
+	}
 	@Override
 	public Board selectReview(int reNo) {
 		return bDao.selectReview(sqlSession, reNo);
