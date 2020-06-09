@@ -26,6 +26,12 @@ public class AccountsDao {
 		return (ArrayList)sqlSession.selectList("accountsMapper.aSelectAccountList", null, rowBounds);
 		
 	}
+	
+	public ArrayList<Accounts> selectAccountList(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.aSelectAccountList");
+		
+	}
 
 	
 	
@@ -64,6 +70,10 @@ public class AccountsDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 
 		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo, rowBounds);
+	}
+
+	public ArrayList<Accounts> selectIncomeList(SqlSessionTemplate sqlSession, int usNo) {
+		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo);
 	}
 
 }

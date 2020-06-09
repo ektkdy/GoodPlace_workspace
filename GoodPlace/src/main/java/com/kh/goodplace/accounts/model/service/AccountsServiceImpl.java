@@ -28,6 +28,10 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> aSelectAccountList(PageInfo pi) {
 		return aDao.aSelectAccountList(sqlSession, pi);
 	}
+	@Override
+	public ArrayList<Accounts> selectAccountList() {
+		return aDao.selectAccountList(sqlSession);
+	}
 	
 	
 	
@@ -56,6 +60,10 @@ public class AccountsServiceImpl implements AccountsService{
 	@Override
 	public ArrayList<Accounts> selectIncomeList(PageInfo pi, int usNo) {
 		return aDao.selectIncomeList(sqlSession, pi, usNo);
+	}
+	@Override
+	public ArrayList<Accounts> selectIncomeList(int usNo) {
+		return aDao.selectIncomeList(sqlSession, usNo);
 	}
 
 
