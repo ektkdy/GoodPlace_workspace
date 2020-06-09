@@ -303,7 +303,7 @@
 		                                <ul>
 		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
 		                                    <li><a href="">my굿플레이스</a></li>
-		                                    <li><a href="">숙소예약내역</a></li>
+		                                    <li><a href="ReserveForm.ro">숙소예약내역</a></li>
 		                                    <li><a href="">위시리스트</a></li>
 		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
 		                                    <li><a href="">관리자페이지</a></li>
