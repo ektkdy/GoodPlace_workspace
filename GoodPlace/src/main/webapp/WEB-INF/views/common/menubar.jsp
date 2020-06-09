@@ -428,7 +428,7 @@
 			  	message.messageContent = $("#message").val();
 		  	  	message.messageReceiver = "ektkdy@naver.com" // 관리자 이메일
 		  	  	message.messageSender = '${loginUser.email}'
-		  	  	message.CLASS_class_id = 1//'${room.CLASS_class_id}'
+		  	  	message.class_class_id = 1//'${room.CLASS_class_id}'
 			}
 			console.log(message);
 			sock.send(JSON.stringify(message));
@@ -440,18 +440,16 @@
 			var name = $("#myName").val();
 			$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src="+"''"+" width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_admin'>"+ data + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 12px;'>20:20</div></div>");
 		}
-		// 서버와 연결을 끊었을 때
-		function onClose(evt) {
-			$("#messageArea").append("연결 끊김");
-
-		}
-		
 		
 	    function boxClose(){
 	    	$("#sidebox").slideDown("fast");
 	    }
-	    
-	    
+		
+		// 서버와 연결을 끊었을 때
+		function onClose(evt) {
+			$("#messageArea").append("연결 끊김");
+
+		}	    
     </script>
 </body>
 </html>
