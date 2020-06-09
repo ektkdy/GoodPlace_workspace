@@ -364,7 +364,6 @@
                 </div>
                 <div class="chat_date chat_userDate">20:21</div> <!-- 시간 -->
             </div>
-  
         </div>
         
         <div class="chat_bottom" style="height: 90px; width: 280px; border-bottom-left-radius: 20px; border-radius: 20px; border: 1px solid lightgray; box-sizing: border-box;">
@@ -426,9 +425,9 @@
 			if(msg != ""){
 				message = {};
 			  	message.messageContent = $("#message").val();
-		  	  	message.messageReceiver = "ektkdy@naver.com" // 관리자 이메일
-		  	  	message.messageSender = '${loginUser.email}'
-		  	  	message.CLASS_class_id = 1//'${room.CLASS_class_id}'
+		  	  	message.messageReceiver = "ektkdy@naver.com"; // 관리자 이메일
+		  	  	message.messageSender = '${loginUser.email}';
+		  	  	message.CLASS_class_id = 1;
 			}
 			console.log(message);
 			sock.send(JSON.stringify(message));
