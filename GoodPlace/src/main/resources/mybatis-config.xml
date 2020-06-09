@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.goodplace.messages.model.vo.ChatRoom" alias="ChatRoom"/>
 		<typeAlias type="com.kh.goodplace.messages.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.kh.goodplace.messages.model.vo.UserVO" alias="UserVO"/>
+		<typeAlias type="com.kh.goodplace.accounts.model.vo.Accounts" alias="Accounts"/>
 	</typeAliases>
 	
 	
@@ -24,5 +25,6 @@
 		<mapper resource="mappers/room-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/chat-mapper.xml"/>
+		<mapper resource="mappers/accounts-mapper.xml"/>
 	</mappers>
 </configuration>

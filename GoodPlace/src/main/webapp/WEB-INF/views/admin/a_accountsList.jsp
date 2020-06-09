@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,13 +87,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>D1-200427</td>
-                                <td>20.04.27 </td>
-                                <td>홍길동</td>
-                                <td>￦212,016</td>
-                                <td>체험</td>
-                            </tr>
+						<c:forEach items="${ list }" var="a">
+							<c:choose>
+								<c:when test="${ a.epNo eq 0 }">
+		                            <tr>
+		                                <td>D1-${ a.rpNo }</td>
+		                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ a.payDateRoom }"/></td>
+		                                
+		                                <td>${ a.userName }</td>
+		                                <td>￦${ a.amountRoom }</td>
+		                                <td>숙소</td>
+		                            </tr>
+		                        </c:when>
+								<c:when test="${ a.rpNo eq 0 }">
+		                            <tr>
+		                                <td>D1-${ a.epNo }</td>
+		                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ a.payDateExp }"/></td>
+		                                <td>${ a.userName }</td>
+		                                <td>￦${ a.amountExp }</td>
+		                                <td>체험</td>
+		                            </tr>
+		                        </c:when>
+		                    </c:choose>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <table>
@@ -103,13 +120,34 @@
                         </th>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-                                <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a>
+			                    <c:choose>
+				                	<c:when test="${ pi.currentPage eq 1 }">
+					                    <a href="#">&lt;</a>
+					                </c:when>
+					                <c:otherwise>
+				                    	<a href="aAccountsList.ac?currentPage=${ pi.currentPage -1 }">&lt;</a>
+				                    </c:otherwise>
+			                    </c:choose>
+			                    
+						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+			                    	<c:choose>
+			                    		<c:when test="${ p eq pi.currentPage }">
+				                    		<a href="#">${p}</a>
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<a class="page-link" href="aAccountsList.ac?currentPage=${ p }">${p}</a>
+				                    	</c:otherwise>
+				                    </c:choose>
+			                    </c:forEach>
+			                    
+						        <c:choose>
+			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					                    <a>&gt;</a>
+					                </c:when>
+					                <c:otherwise>
+					                    <a href="aAccountsList.ac?currentPage=${ pi.currentPage +1 }">&gt;</a>
+					                </c:otherwise>
+			                    </c:choose>
                             </div>
                         </th>
     
