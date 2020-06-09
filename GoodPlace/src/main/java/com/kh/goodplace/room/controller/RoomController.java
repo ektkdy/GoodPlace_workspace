@@ -115,7 +115,7 @@ public class RoomController {
 	
 		@RequestMapping("roomDetailView.ro")
 		public String roomDetailView(int rno, Model model ) {
-			System.out.println(rno);
+			
 			 Room r = rService.selectRoom(rno);
 			
 			model.addAttribute("r", r);
@@ -124,7 +124,11 @@ public class RoomController {
 		}
 		
 		@RequestMapping("updateRoomForm.ro")
-		public String updateRoomForm() {
+		public String updateRoomForm(int roNo, Model model) {
+			
+			Room r = rService.selectRoom(roNo);
+			
+			model.addAttribute("r", r);
 			
 			return "partner/partnerRoomUpdateForm";
 		}
@@ -169,6 +173,28 @@ public class RoomController {
 			
 			return changeName;
 			
+		}
+		
+// ------------------------------ 파트너 예약관리 시작 ----------------------------------
+		
+		@RequestMapping("reservationList.rv")
+		public String reservationList(int currentPage, Model model, 
+	       HttpSession session) {
+	   
+	    Member m = (Member)session.getAttribute("loginUser");
+	    
+	    int userNo = m.getUsNo();
+	    
+	    int listCount = rService.selectReservationListCount(userNo);
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+	    
+	    ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
+	    
+	    model.addAttribute("pi", pi);
+	    model.addAttribute("list", list);
+	    
+	    return "partner/partnerReservationListView";
 		}
 		
 	

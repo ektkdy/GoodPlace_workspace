@@ -38,6 +38,8 @@ public interface RoomService {
 	//5.숙소 수정용 서비스
 	int updateRoom(Room r);
 	
+	int updateRoomForm(int roNo);
+	
 	//6.숙소 휴면용 서비스
 	int restRoom(int rno);
 	

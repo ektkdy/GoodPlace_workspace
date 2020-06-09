@@ -53,10 +53,10 @@
 #tab .off{background: #f1f1f1; color:#333; border: 1px solid #bebebe;}
 .gt_tab{border-bottom-right-radius: 13px; border-top-right-radius: 13px;}
 /* tab --> radio 변경*/
-#contents label{display:inline-block;float:left; width: 150px; height: 50px; line-height:48px; font-size: 18px; background: #f1f1f1; color:#333; border: 1px solid #bebebe; }
-#contents  input:checked + label{background: #184c88;  border:1px solid #184c88; color:#fff;}
-#contents  input{float:left;display:none}
-#contents  label:hover{ background:#fff; color:#333; font-weight:400; cursor:pointer }
+.label_lb{display:inline-block;float:left; width: 150px; height: 50px; line-height:48px; font-size: 18px; background: #f1f1f1; color:#333; border: 1px solid #bebebe; }
+.input_ck:checked + .label_lb{background: #184c88;  border:1px solid #184c88; color:#fff;}
+.input_ck{float:left;display:none}
+.label_lb:hover{ background:#fff; color:#333; font-weight:400; cursor:pointer }
 
 /* content - content */
 .con{width:100%; height:100%; text-align: left; }
@@ -72,7 +72,10 @@
 .common_tb tbody tr td{padding: 10px 0; text-align: center; border-bottom:1px solid rgb(241, 241, 241); color:#505050; font-size: 15px;}       
 
 /* button */
-.blue_btn{background-color: #184c88; color:#fff; width: 140px; height: 35px; border-radius: 6px; border:1px solid #184c88}
+.blue_btn{background-color: #184c88; color:#fff; width: 140px; height: 35px; border-radius: 6px; border:1px solid #184c88; font-size:14px}
+.blue_btn:hover{ 
+	border:1.5px solid #184c88; color:#333; background:#fff; cursor:pointer;
+}
 .gray_btn{background-color: #f1f1f1; color:#333; width: 140px; height: 35px; border-radius: 6px; border:1px solid #bebebe}
 
 /* footer */
