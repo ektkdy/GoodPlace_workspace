@@ -361,8 +361,12 @@ public class RoomController {
 	// ------------- 사용자 시작 --------------------------------------------------
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, Room room, Board board, ModelAndView mv ) {
-		
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+//		System.out.println("tripArea : " + tripArea);
+//		System.out.println("tripStartDate : " + tripStartDate);
+//		System.out.println("tripEndDate : " + tripEndDate);
+//		System.out.println("tripPeople : " + tripPeople);
+//		System.out.println("filterValue : " + filterValue);
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
 		room.setStartDays(tripStartDate);
@@ -379,6 +383,7 @@ public class RoomController {
     	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
+    		
         	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
     	}
 
@@ -398,7 +403,7 @@ public class RoomController {
         return mv;
    	}
     
-    
+
     
 	// ------------- 사용자 끝 --------------------------------------------------
     

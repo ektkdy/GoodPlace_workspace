@@ -181,24 +181,25 @@
 	                <div class="search input" style="display: block;">
 	                    <li class="liBox">
 	                        <b>위치</b>
-	                        <input type="text" name="tripArea" id="tripArea" placeholder="${ tripArea }">
+	                        <input type="text" name="tripArea" id="tripArea" placeholder="${ tripArea }" value="${ tripArea }">
 	                    </li>
 	                    <li class="liBox">
 	                        <b>가는날짜</b>
-	                        <input type="date" name="tripStartDate" id="tripStartDate" placeholder="${ tripStartDate }">
+	                        <input type="date" name="tripStartDate" id="tripStartDate" placeholder="${ tripStartDate }" value="${ tripStartDate }">
 	                    </li>
 	                    <li class="liBox">
 	                        <b>오는날짜</b>
-	                        <input type="date" name="tripEndDate" id="tripEndDate" placeholder="${ tripEndDate }">
+	                        <input type="date" name="tripEndDate" id="tripEndDate" placeholder="${ tripEndDate }" value="${ tripEndDate }">
 	                    </li>
 	                    <li class="liBox">
 	                        <b>인원수</b>
-	                        <input type="number" name="tripPeople" id="tripPeople" placeholder="${ tripPeople }">
+	                        <input type="number" name="tripPeople" id="tripPeople" placeholder="${ tripPeople }" value="${ tripPeople }">
 	                    </li>
 	                    <li style="margin: auto; text-align: center;">
 	                        <input id="subRoomInfo"type="submit" value="숙소검색">
 	                    </li>
 	                </div>
+	                <input type="hidden" id="filterValue" name="filterValue"/>
 	            </form>
 	         	<script>
 	            	$(function(){
