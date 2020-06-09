@@ -177,7 +177,7 @@
 	            </div>
 	
 	            <!-- 숙소검색 -->
-	            <form action="searchRo.ro" id="roomSearchArea" method="get" >
+	            <form action="searchRoWithFilter.ro" id="roomSearchArea" method="get" >
 	                <div class="search input" style="display: block;">
 	                    <li class="liBox">
 	                        <b>위치</b>
