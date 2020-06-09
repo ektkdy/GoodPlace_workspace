@@ -127,13 +127,7 @@
 		 where pano=#{paNo}
 	</update>
 
-	<select id="selectIncome" resultMap="Member" parameterType="_int">
-		select epno, pay_date, user_name, amount, '숙소' 
-	      from exppay join member using (usno) where usno=#{usNo}
-		 union
-		select rpno, pay_date, user_name, amount, '체험' 
-		  from roomspay join member using (usno) where usno=#{usNo}
-	</select>
+	
 
 
 
