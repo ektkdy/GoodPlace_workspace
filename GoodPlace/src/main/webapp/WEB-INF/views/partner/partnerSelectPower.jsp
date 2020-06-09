@@ -86,7 +86,7 @@
                         	<c:choose>
                     			<c:when test="${ !empty list }">
                     				<c:forEach items="${ list }" var="r">
-                    					<input type="hidden" name="roNo" value=${ r.roNo }>
+                    					<input type="hidden" class="roNo" name="roNo" value=${ r.roNo }>
 			                            <tr>
 			                                <c:choose>
 			                            		<c:when test="${ r.status eq 1}">
@@ -105,25 +105,22 @@
 			                            			<td>삭제</td>
 			                            		</c:otherwise>
 			                            	</c:choose>
-			                                <td>${ fn:substring(r.addBasic,0,2) }</td>
+			                                <td>${ fn:substring(r.addBasic,0,2) } / ${ r.roNo }</td>
 			                                <td>${ r.roomsTitle }</td>
 			                                <td>${ r.totalSal }</td>
 			                                <td>
 			                                    <select name="powerKind" class="powerKind">
 			                                        <c:forEach items="${ plist }" var="p">
-			                                        	<option value="${ p.powerPrice }" >${ p.powerKind }</option>
+			                                        	<option value="${ p.powerPrice },${ p.period }" >${ p.powerKind }</option>
 			                                        </c:forEach>
 			                                    </select>
 			                                </td>
-			                                <td><input type="text" class="result1 re" id="" name="" value="${ plist[0].powerPrice }">원</td>
-			                                <td><input type="text" class="result2 re" id="" name="" value="${ plist[0].period }">일</td>
-			                                <td><button type="button" class="apply" data-toggle="modal" data-target="#myModal">신청</button></td>
+			                                <td><input type="text" class="result1 re price" name="price" value="${ plist[0].powerPrice }">원</td>
+			                                <td><input type="text" class="result2 re period" name="period" value="${ plist[0].period }">일</td>
+			                                <td><button type="button" class="apply">신청</button></td>
 			                            </tr>
 			                        </c:forEach>
 	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<tr><td colspan="8" style="text-align:center;"><br>등록된 체험이 없습니다 <br> 신규체험을 등록하고 나만의 재능을 공유해 보세요<br><br></td></tr>
-	                    		</c:otherwise>
 	                    	</c:choose>
                         </tbody>
                     </table>
@@ -169,18 +166,19 @@
     <script>
         $(function(){
             $(".powerKind").change(function(){
-                value1=$("option:selected").val();
-                $(".result1").val(value1);
-                if(value1=="300000"){
-                    $(".result2").val("30");
-                } else if(value1=="500000"){
-                    $(".result2").val("60");
-                } else if(value1=="800000"){
-                    $(".result2").val("90");
-                } else{
-                    $(".result2").val("120");
-                }
+                var option = $(this).val().split(",");
+                
+                $(".price").val(option[0]);
+                $(".period").val(option[1]);
+                
             });
+        });
+        
+        $(function(){
+        	$(".apply").click(function(){
+        		var roNo = $(this).parent().parent().siblings().eq(0).val();
+        		console.log(roNo);
+        	});
         });
 
     </script>

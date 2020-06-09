@@ -79,7 +79,7 @@
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
-			                                <input class="amount" type="hidden" value="${ ac.amount }">
+			                                <input class="amount" name="amount" type="hidden" value="${ ac.amount }">
 			                                <td><fmt:formatNumber value="${ ac.amount }"/></td>
 			                                <td>${ ac.section }</td>
 				                        </tr>
@@ -134,7 +134,42 @@
     </div>
 
 	<!-- 체크박스 조건검사 및 선택 내역 총금액 출력 -->
-    <script>
+	<script>
+	$(function(){
+		$("#choice").click(function(){
+			if($("#choice").is(":checked")){
+				$(".choice").prop("checked", true);
+			}else{
+				$(".choice").prop("checked", false);
+			}
+		});
+		$(".choice").click(function(){
+			if($("input[name=choice]:checked").length=='${list.size()}'){
+				$("#choice").prop("checked", true);
+			} else{
+				$("#choice").prop("checked", false);
+			}
+		});
+		
+		$("#choice").click(function(){
+			var sum = 0;
+			$("input[name=choice]:checked").each(function(index, item){
+				sum += parseInt($(this).parent().siblings().eq(3).val());
+			});
+			$("#sum").text(sum*0.8);
+		});
+		
+		$(".choice").click(function(){
+			var sum = 0;
+			$("input[name=choice]:checked").each(function(index, item){
+				sum += parseInt($(this).parent().siblings().eq(3).val());
+			});
+			$("#sum").text(sum*0.8);
+		});
+	});
+	</script>
+	
+    <!-- <script>
     var sum = 0;
 	$(function(){
 		$("#choice").click(function(){
@@ -169,6 +204,6 @@
 		    $("#sum").text(sum*0.8);
 		});
 	});
-    </script>
+    </script>-->
 </body>
 </html>
