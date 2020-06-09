@@ -8,7 +8,7 @@
 		<id column="CHNO" property="chNo"/>
 		<result column="USER_EMAIL" property="userEmail"/>
 		<result column="TUTOR_EMAIL" property="tutorEmail"/>
-		<result column="CLASS_ID" property="CLASS_class_id"/>
+		<result column="CLASS_ID" property="class_class_id"/>
 	</resultMap>
 	
 	<insert id = "createRoom" parameterType="ChatRoom">
@@ -20,11 +20,10 @@
 	<select id ="selectChatRoom" resultMap = "roomResultMap" parameterType="ChatRoom">
 	select * from CHATROOM WHERE USER_EMAIL = #{userEmail} and TUTOR_EMAIL = #{tutorEmail} 
 	</select>
-<!--and CLASS_class_id = #{CLASS_class_id}   -->
 
 	<insert id = "insertMessage" parameterType="Message">
 		insert into MESSAGE
-		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, #{messageReadTime})
+		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, SYSDATE)
 	</insert>
 
 </mapper>

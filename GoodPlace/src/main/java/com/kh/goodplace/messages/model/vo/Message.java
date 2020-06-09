@@ -21,8 +21,8 @@ public class Message {
 	private String messageSender;
 	private String messageReceiver;
 	private String messageContent;
-	private Timestamp messageSendTime;
-	private Timestamp messageReadTime;
+	private String messageSendTime;
+	private String messageReadTime;
 
 	
 	public static Message convertMessage(String source) {

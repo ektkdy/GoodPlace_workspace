@@ -401,6 +401,7 @@ public class RoomController {
             mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
+        System.out.println("ㅇㅇㅇㅇ");
         return mv;
    	}
 	

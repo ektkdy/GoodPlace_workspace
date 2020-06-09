@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +27,8 @@
     button:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
 
     /*총금액div*/
-    .sum{ width: 980px; height: 60px; background-color: #dbdbdb;}
-    .sum p{text-align: right; padding-top: 15px; padding-right: 15px;}
+    .sum{ width: 980px; height: 50px; background-color: #dbdbdb;}
+    .sum p{text-align: right; padding-top: 10px; padding-right: 15px;}
 
     /*페이징바*/
     h5{color: cornflowerblue;}
@@ -52,14 +53,14 @@
                     <p class="title_tt">수입내역</p>
                 </span>
                 <span class="up_btn_space">
-                    <button class="blue_btn" style="margin-right: 20px;">엑셀 다운로드</button>
+                    <button class="blue_btn" style="margin-right: 20px;" onclick="location.href='incomeExcel.do'">엑셀 다운로드</button>
                 </span>
                 
                 <div class="con2">
                     <table class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
-                                <td width="100">선택</td>
+                                <td width="100"><input type="checkbox" id="choice" style="display:block; margin-left:40px;"></td> 
                                 <td width="200">예약번호</td>
                                 <td width="200">수익일</td>
                                 <td width="200">여행자</td>
@@ -72,11 +73,11 @@
 	                    		<c:when test="${ !empty list }">
 	                    			<c:forEach items="${ list }" var="ac">
 		                    			<tr>
-		                    				<td><input type="checkbox"></td>
+		                    				<td><input type="checkbox" name="choice" class="choice" style="display:block; margin-left:40px;"></td>
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
-			                                <td>${ ac.amount }</td>
+			                                <td class="amount">${ ac.amount }</td>
 			                                <td>${ ac.section }</td>
 				                        </tr>
 			                        </c:forEach>
@@ -89,7 +90,7 @@
                     </table>
                 </div>
                 <div class="sum">
-                    <p>선택 내역의 총금액 합계 : 123456원</p>
+                    <p>선택 내역의 총금액 합계 : <span id="sum">0</span>원</p>
                 </div>
                 <h5>*수입금은 굿플레이스의 수수료 20%가 공제된 내역입니다.</h5>
                 
@@ -129,10 +130,42 @@
         </div>
     </div>
 
+	<!-- 체크박스 조건검사 및 선택 내역 총금액 출력 -->
     <script>
-
-
-
+    var sum = 0;
+	$(function(){
+		$("#choice").click(function(){
+			if($("#choice").is(":checked")){
+				$(".choice").prop("checked", true);
+				sum=0;
+				for(var i=0; i<'${list.size()}'; i++){
+	    			var a = parseInt($(".amount").eq(i).text());
+					sum += a;
+    			}
+			}else{
+				$(".choice").prop("checked", false);
+				sum = 0;
+			}
+			$("#sum").text(sum);
+		});
+		
+		$(".choice").click(function(){
+			if($("input[name=choice]:checked").length=='${list.size()}'){
+				$("#choice").prop("checked", true);
+			} else{
+				$("#choice").prop("checked", false);
+			}
+			var amount = $(this).parent().siblings().eq(3).text();	
+		    var intAmount = parseInt(amount);						
+    		
+		    if($(this).is(":checked")){	
+		    	sum += intAmount;
+		    }else{
+		    	sum -= intAmount;
+		    }
+		    $("#sum").text(sum);
+		});
+	});
     </script>
 </body>
 </html>

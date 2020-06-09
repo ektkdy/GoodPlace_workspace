@@ -72,4 +72,8 @@ public class AccountsDao {
 		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo, rowBounds);
 	}
 
+	public ArrayList<Accounts> selectIncomeList(SqlSessionTemplate sqlSession, int usNo) {
+		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo);
+	}
+
 }
