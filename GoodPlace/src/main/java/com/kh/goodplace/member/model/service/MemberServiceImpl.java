@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.dao.MemberDao;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.vo.Room;
 
 @Service("mService")	// 구체화 된 빈 (즉, 이 객체는 서비스의 역할을 수행하는 빈으로 등록)
@@ -65,6 +69,8 @@ public class MemberServiceImpl implements MemberService {
 	public int insertPartner(Member m) {
 		return mDao.insertPartner(sqlSession, m);
 	}
+	
+
 
 	//-------------------------------------------------------------------
 

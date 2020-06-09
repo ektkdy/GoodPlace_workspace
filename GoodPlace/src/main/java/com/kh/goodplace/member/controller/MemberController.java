@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 
 @Controller
 public class MemberController {
@@ -32,7 +34,7 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+	
 
 	// 로그인 메인
 	@RequestMapping("loginForm.me")
@@ -265,8 +267,17 @@ public class MemberController {
 
    }
 
+    
+    // 채팅 상대방 정보 가져오기
+	@ResponseBody
+	@RequestMapping(value="selectTutor", produces="application/json; charset=utf-8")
+	public String selectTutor(Member m) throws Exception {
 
-
+		Member tutor = mService.loginMember(m);
+		
+		System.out.println("상대방 : " + tutor);
+		return new Gson().toJson(tutor);
+	}
 
 
 

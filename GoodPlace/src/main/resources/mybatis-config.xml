@@ -11,6 +11,9 @@
 		<typeAlias type="com.kh.goodplace.experience.model.vo.Experience" alias="Experience"/>
 		<typeAlias type="com.kh.goodplace.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.goodplace.common.model.vo.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.goodplace.messages.model.vo.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="com.kh.goodplace.messages.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.goodplace.messages.model.vo.UserVO" alias="UserVO"/>
 	</typeAliases>
 	
 	
@@ -20,5 +23,6 @@
 		<mapper resource="mappers/exp-mapper.xml"/>
 		<mapper resource="mappers/room-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/chat-mapper.xml"/>
 	</mappers>
 </configuration>

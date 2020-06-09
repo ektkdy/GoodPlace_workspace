@@ -127,7 +127,7 @@
                         <tr>
                             <th>* 연락처</th>
                             <td>
-                                <input type="text" value="${ loginUser.phone }" required>
+                                <input type="text" name="phone" value="${ loginUser.phone }" required>
                                 <h5>• 상시 연락할 수 있는 전화번호를 알려주시면 여행자에게 큰 도움이 됩니다.</h5>
                             </td>
                         </tr>
