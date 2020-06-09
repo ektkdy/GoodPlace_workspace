@@ -27,6 +27,10 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> aSelectAccountList(PageInfo pi) {
 		return aDao.aSelectAccountList(sqlSession, pi);
 	}
+	@Override
+	public ArrayList<Accounts> selectAccountList() {
+		return aDao.selectAccountList(sqlSession);
+	}
 	
 
 }

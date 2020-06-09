@@ -26,5 +26,11 @@ public class AccountsDao {
 		return (ArrayList)sqlSession.selectList("accountsMapper.aSelectAccountList", null, rowBounds);
 		
 	}
+	
+	public ArrayList<Accounts> selectAccountList(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.aSelectAccountList");
+		
+	}
 
 }
