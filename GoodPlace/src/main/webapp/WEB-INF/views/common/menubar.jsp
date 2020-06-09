@@ -16,7 +16,7 @@
 	}
 	/* font */
 	*{font-family: 'Noto Sans KR', sans-serif;}
-	
+
 	    /* header(메뉴바) */
 	#header {
 	    clear: both;
@@ -42,8 +42,8 @@
         border-top: solid 1px lightgray;
         background-color: rgb(231, 231, 231);
         height: 250px;
-	}	
-	
+	}
+
 	#header_wrap {
 	    height: inherit;
 	    position: relative;
@@ -53,7 +53,7 @@
 	    right: 0;
 	    text-align: center;
 	}
-	
+
 	#header>#header_wrap>div {
 	    display: inline-block;
 	    height: 100%;
@@ -61,7 +61,7 @@
 	/*로고*/
 	#header_1 {
 	    width: 30%;
-	
+
 	    position: relative;
 	}
 	/*검색*/
@@ -103,7 +103,7 @@
 	    float: left;
 	    color:#ffffff;
 	}
-	
+
 	/*1:1채팅상담*/
 	#navi .qBtn{
 	    margin: 0 10px;
@@ -134,7 +134,7 @@
 	    position:relative;
 	    top:1px;
 	}
-	
+
 	/*채팅박스*/
     #sidebox {
         background-color: white;
@@ -146,7 +146,7 @@
         border-radius: 20px;
     }
 
-    
+
     .chat_content{
         height: 310px;
         background-color:
@@ -221,7 +221,7 @@
         color: black
     }
     li:hover > ul{
-        display:block; 
+        display:block;
     }
     .drop-down ul a:hover{
         background: rgb(71,71,71);
@@ -232,7 +232,7 @@
     .drop-down .drop-down ul {
         top: 0;
         left: calc(100% - 300px);
-        
+
     }
     .drop-down .drop-down:hover > ul {
             left: -100%;
@@ -266,10 +266,10 @@
                         </div>
                     </li>
                 </ul>
-            </div>    
+            </div>
             <div id="header_3">
                 <ul id="navi" style="padding-left: 0px; margin-top: 5px;">
-                
+
                 	<c:choose>
 	                	<c:when test="${ empty loginUser }">
 	                		<!-- 로그인 전 -->
@@ -296,7 +296,7 @@
 		                    </li>
 		                    <li>
 		                        <div id="personalImg" style="margin-left: 10px;">
-		                            
+
 		                            <li class="drop-down" style="top: 5px;">
 		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px; background-color: darkblue;"></a>
 		                                <ul>
@@ -313,12 +313,12 @@
 		                    </li>
 						</c:otherwise>
                  	</c:choose>
-                    
+
                 </ul>
             </div>
         </div>
     </div>
-    <div id="sidebox" style="box-shadow: 5px 5px 10px black; z-index: 99999; display:none;"> 
+    <div id="sidebox" style="box-shadow: 5px 5px 10px black; z-index: 99999; display:none;">
         <!-- 채팅헤더 -->
         <div class="chat_header" style="width:240px; padding: 10px 20px; height: 80px; border-top-left-radius: 20px; border-top-right-radius: 20px; background-color:#184c88;">
             <div style="color: white;">
@@ -340,7 +340,7 @@
             <!-- 유저1 -->
             <div>
                 <!--아이디-->
-                <div class="chat_common"> 
+                <div class="chat_common">
                     <img src="" width="28px" height="28px"> <!-- 프로필사진 -->
                     <span>GoodPlace</span>
                 </div>
@@ -364,21 +364,20 @@
                 </div>
                 <div class="chat_date chat_userDate">20:21</div> <!-- 시간 -->
             </div>
-  
         </div>
-        
+
         <div class="chat_bottom" style="height: 90px; width: 280px; border-bottom-left-radius: 20px; border-radius: 20px; border: 1px solid lightgray; box-sizing: border-box;">
             <div style="float: left; height: 100%; width: 75%; padding: 5px;">
                 <!-- 채팅 문자열 입력(chat_str) -->
                 <textarea type="text" name="chat_str" id="message" style="overflow-y: auto; width: 100%; height: 87%; box-sizing: border-box; border:none; resize:none"></textarea>
             </div>
-            
+
             <div style="float: right;height: 100%;width: 21%;background-color: #184c88;border-bottom-right-radius: 20px;border-top-right-radius: 20px;box-sizing: border-box;text-align: center;padding: 34px 0px;">
                 <a id="sendBtn" style="text-align: center; cursor: pointer;">전송</a>
             </div>
         </div>
     </div>
-    
+
     <input type="hidden" id="loginEmail" value="${ loginUser.email }">
     <input type="hidden" id="myName" value="${ loginUser.userName }">
     <script>
@@ -387,11 +386,11 @@
 	        var position = $(window).scrollTop();
 	        $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000);
 	    });
-	    
+
 	    $(function(){
-	    	$("#sidebox").slideUp("fast");	
+	    	$("#sidebox").slideUp("fast");
 	    })
-	    
+
 	    let sock = null;
 	    // 메세지
 	    function boxSlide(){
@@ -406,14 +405,14 @@
 					sock = new SockJS("http://localhost:8888/goodplace/echo/");
 					sock.onmessage = onMessage;
 					sock.onclose = onClose;
-					
+
 					console.log(tutor); // 상대방(관리자) 정보 -- 프로필 사진용
 				},error:function(){
 					console.log("ajax 통신 실패");
 				}
-			});		
+			});
 	    }
-	    
+
 		$("#sendBtn").click(function() {
 			sendMessage();
 			$('#message').text("");
@@ -426,9 +425,9 @@
 			if(msg != ""){
 				message = {};
 			  	message.messageContent = $("#message").val();
-		  	  	message.messageReceiver = "ektkdy@naver.com" // 관리자 이메일
-		  	  	message.messageSender = '${loginUser.email}'
-		  	  	message.class_class_id = 1//'${room.CLASS_class_id}'
+		  	  	message.messageReceiver = "ektkdy@naver.com"; // 관리자 이메일
+		  	  	message.messageSender = '${loginUser.email}';
+		  	  	message.CLASS_class_id = 1;
 			}
 			console.log(message);
 			sock.send(JSON.stringify(message));
@@ -440,16 +439,16 @@
 			var name = $("#myName").val();
 			$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src="+"''"+" width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_admin'>"+ data + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 12px;'>20:20</div></div>");
 		}
-		
+
 	    function boxClose(){
 	    	$("#sidebox").slideDown("fast");
 	    }
-		
+
 		// 서버와 연결을 끊었을 때
 		function onClose(evt) {
 			$("#messageArea").append("연결 끊김");
 
-		}	    
+		}
     </script>
 </body>
 </html>

@@ -127,28 +127,36 @@
             	});
             </script>
             <!-- 체험검색 -->
-            <form action="" post="get">
+            <form action="exp.exp" id="expSearchArea" post="get">
                 <div class="experience input" style="display: none;">
                     <li class="liBox1">
                         <b>태그</b>
-                        <input type="text" placeholder="체험 목록을 선택하세요" >
+                        <input type="text" name="expCategory" placeholder="체험 목록을 선택하세요" >
                     </li>
                     <li class="liBox1">
                         <b>날짜</b>
-                        <input type="date" placeholder="날짜를 입력하세요" >
+                        <input type="date" name="expDate" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox1">
                         <b>키워드</b>
-                        <input type="number" placeholder="키워드를 입력하세요">
+                        <input type="number" name="expTitle" placeholder="키워드를 입력하세요">
                     </li>
                     <li style="margin: auto; text-align: center;">
-                        <input id="sub"type="submit" value="체험검색">
+                        <input id="subExpInfo" type="button" value="체험검색">
                     </li>
                 </div>
             </form>
         </div>
     </div><!-- /searchbar -->
+	<script>
+	  	$(function(){
+	  		$("#expSearchArea #subExpInfo").click(function(){
 	
+	  			$("#expSearchArea").submit();
+	  			
+	  		});
+	  	});
+	 </script>
 	<script>
     function searchView1(){
         $('#mainSearch form .search').css("display","block");
