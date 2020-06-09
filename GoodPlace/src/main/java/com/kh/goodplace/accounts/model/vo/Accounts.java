@@ -36,6 +36,10 @@ public class Accounts {
 	/* 공용 */
 	private String userName;
 	private String userNo;
+	private String section;			// 파트너-정산관리에서 사용하는 구분
+	private String no;				// 파트너 정산관리에서 사용
+	private int amount;
+	private Date payDate;
 	
 	
 	/* 체험결제 컬럼들 */

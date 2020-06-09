@@ -33,4 +33,43 @@ public class AccountsDao {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int selectIncomeListCount(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("accountsMapper.selectIncomeListCount", usNo);
+	}
+
+	public ArrayList<Accounts> selectIncomeList(SqlSessionTemplate sqlSession, PageInfo pi, int usNo) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo, rowBounds);
+	}
+
 }

@@ -328,24 +328,6 @@ public class MemberController {
     }
 
     
-    /* 파트너페이지 정산관리- expPay union roomsPay 리스트 조회용 */
-	@RequestMapping("partnerIncome.me")
-	public String selectIncomeList(int currentPage, Model model, HttpSession session) {
-		
-		Member loginUser  = (Member)session.getAttribute("loginUser");
-		int usNo = loginUser.getUsNo();
-		
-		/*int listCount = mService.selectIncomeList(usNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		
-		ArrayList<Experience> list = mService.selectExpList(pi, usNo);
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);*/
-		
-		return "partner/partnerIncome";
-	}
-    
-    
     
     
     // ------------------ 관리자 컨트롤러 시작 --------------------

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.accounts.model.dao.AccountsDao;
 import com.kh.goodplace.accounts.model.vo.Accounts;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.Experience;
 
 @Service("aService")
 public class AccountsServiceImpl implements AccountsService{
@@ -31,6 +32,50 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> selectAccountList() {
 		return aDao.selectAccountList(sqlSession);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	// 파트너 정산관리
+	@Override
+	public int selectIncomeListCount(int usNo) {
+		return aDao.selectIncomeListCount(sqlSession, usNo);
+	}
+	
+	@Override
+	public ArrayList<Accounts> selectIncomeList(PageInfo pi, int usNo) {
+		return aDao.selectIncomeList(sqlSession, pi, usNo);
+	}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

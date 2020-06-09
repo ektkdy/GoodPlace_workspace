@@ -14,6 +14,9 @@
 		<result column="EP_DATE" property="payDateExp"/>
 		<result column="USER_NAME" property="userName"/>
 		<result column="AUSNO" property="userNo"/>
+		
+		<result column="amount" property="amount"/>
+		<result column="pay_date" property="payDate"/>
 	</resultMap>
 
 	<select id="aSelectAccountListCount" resultType="_int">
@@ -33,5 +36,66 @@
 		WHERE RP.RPNO != 0 OR EP.EPNO != 0
 		ORDER BY EP_DATE DESC, RP_DATE DESC
 	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<select id="selectIncomeListCount" resultType="_int">
+		select ep+rp
+		  from (select count(*) as ep
+    	        from exppay join member using (usno) where usno=#{usNo}) ep, 
+  			   (select count(*) as rp
+   			    from roomspay join member using (usno) where usno=#{usNo}) rp
+	</select>
+	
+	<select id="selectIncomeList" resultMap="accountsResultSet" parameterType="_int">
+		select epno as no, pay_date, user_name, amount,'숙소' as section 
+		  from exppay join member using (usno) where usno=#{usNo}
+		 union
+		select rpno as no, pay_date, user_name, amount, '체험' as section
+		  from roomspay join member using (usno) where usno=#{usNo}
+	</select>
+
+
+	
+
+
+
+
+
+
+
+
 
 </mapper>
