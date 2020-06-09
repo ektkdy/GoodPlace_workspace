@@ -23,7 +23,7 @@
 
 	<insert id = "insertMessage" parameterType="Message">
 		insert into MESSAGE
-		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, #{messageReadTime})
+		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, SYSDATE)
 	</insert>
 
 </mapper>

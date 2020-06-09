@@ -8,8 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="resources/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 <style>
 	body{
 		margin:0px;
@@ -324,8 +325,8 @@
             <div style="color: white;">
                 <b style=" font-weight: 800; font-size: 24px;">GoodPlace</b>
                 <span style="float: right; margin-top:10px">
-                    <a onclick="boxClose();" style="cursor: pointer;">
-                        <img src="resources/images/user/clear-button.png" width="18px">
+                    <a>
+                        <img onclick="boxClose();" style="cursor: pointer;" src="resources/images/user/clear-button.png" width="18px">
                     </a>
                 </span>
                 <div style="font-size: 14px; font-weight: 600; padding-top: 10px; padding-left: 10px;">
@@ -337,33 +338,27 @@
         <!-- 채팅박스 -->
         <div class="chat_content" id="messageArea" style="box-shadow: lightgray;">
 
-            <!-- 유저1 -->
+<!-- 
             <div>
-                <!--아이디-->
                 <div class="chat_common">
-                    <img src="" width="28px" height="28px"> <!-- 프로필사진 -->
+                    <img src="" width="28px" height="28px"> 
                     <span>GoodPlace</span>
                 </div>
-                <!-- 채팅 내용 -->
                 <div class="chat chat_admin">
                     안녕하세요! 여행 플랫폼 서비스! GoodPlace입니다!
                 </div>
-                <div class="chat_date chat_adminDate" style="clear: both; margin: 0px 10px; color:grey; font-size: 12px;">20:20</div> <!-- 시간 -->
+                <div class="chat_date chat_adminDate" style="clear: both; margin: 0px 10px; color:grey; font-size: 12px;">20:20</div>
             </div>
-            <!-- 유저1 끝 -->
-            <!-- 유저2 -->
             <div>
-                <!--아이디-->
                 <div class="chat_common chat_userId">
-                    <img src="" width="28px" height="28px"> <!-- 프로필사진 -->
+                    <img src="" width="28px" height="28px">
                     <span>GoodPlace</span>
-                </div>
-                <!-- 채팅 내용 -->
                 <div class="chat chat_user">
                     숙소 환불하려고 하는데요
                 </div>
-                <div class="chat_date chat_userDate">20:21</div> <!-- 시간 -->
+                <div class="chat_date chat_userDate">20:21</div> 
             </div>
+-->
         </div>
 
         <div class="chat_bottom" style="height: 90px; width: 280px; border-bottom-left-radius: 20px; border-radius: 20px; border: 1px solid lightgray; box-sizing: border-box;">
@@ -380,6 +375,8 @@
 
     <input type="hidden" id="loginEmail" value="${ loginUser.email }">
     <input type="hidden" id="myName" value="${ loginUser.userName }">
+    <input type="hidden" id="myChangeName" value="${loginUser.changeName}">
+    <input type="hidden" id="tutorChangeName" value="">
     <script>
 	    var currentPosition = parseInt($("#sidebox").css("top"));
 	    $(window).scroll(function() {
@@ -389,36 +386,41 @@
 
 	    $(function(){
 	    	$("#sidebox").slideUp("fast");
-	    })
-
+	    });
+		
 	    let sock = null;
 	    // 메세지
+	   	// 1:1상담문의 버튼을 클릭했을 때
 	    function boxSlide(){
 	    	$("#sidebox").slideDown("fast");
 	    	$("#sidebox").css("display","block");
-			$.ajax({
-				// ajax1.do?name=홍길동&age=20
-				url:"selectTutor",
-				data:{email:"ektkdy@naver.com"},
-				type:"post",
-				success:function(tutor){
-					sock = new SockJS("http://localhost:8888/goodplace/echo/");
-					sock.onmessage = onMessage;
-					sock.onclose = onClose;
-
-					console.log(tutor); // 상대방(관리자) 정보 -- 프로필 사진용
-				},error:function(){
-					console.log("ajax 통신 실패");
-				}
-			});
-	    }
+	    	if(sock == null){
+				$.ajax({
+					// ajax1.do?name=홍길동&age=20
+					url:"selectTutor",
+					data:{email:"ektkdy@naver.com"},
+					type:"post",
+					success:function(tutor){
+						sock = new SockJS("http://localhost:8888/goodplace/echo/");
+						sock.onmessage = onMessage;
+						sock.onclose = onClose;
+						
+						$("#tutorChangeName").val(tutor.changeName);	// 관리자 이메일로 프로필 사진을 가져옴
+						console.log(tutor); // 상대방(관리자) 정보 -- 프로필 사진용
+					},error:function(){
+						console.log("ajax 통신 실패");
+					}
+				})
+	    	}
+	    };
 
 		$("#sendBtn").click(function() {
 			sendMessage();
 			$('#message').text("");
 		});
-
-
+		
+		// 날짜
+		var Now = new Date();
 		// 메시지 전송
 		function sendMessage() {
 			var msg = $("#message").val();
@@ -428,27 +430,37 @@
 		  	  	message.messageReceiver = "ektkdy@naver.com"; // 관리자 이메일
 		  	  	message.messageSender = '${loginUser.email}';
 		  	  	message.CLASS_class_id = 1;
+		  	  	message.messageSendTime = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간
 			}
 			console.log(message);
 			sock.send(JSON.stringify(message));
 			$("#message").val("");
-		}
+		};
+		
 		// 서버로부터 메시지를 받았을 때
 		function onMessage(msg) {
-			var data = msg.data;
-			var name = $("#myName").val();
-			$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src="+"''"+" width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_admin'>"+ data + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 12px;'>20:20</div></div>");
-		}
+			var data = JSON.parse(msg.data);					// 받은 메시지 정보 (내용,시간)
+			var name = $("#myName").val();						// 내 이름
+			var tutorChangeName = $("#tutorChangeName").val();	// 관리자 프로필
+
+			if(data.messageSender != '${loginUser.email}'){		// 메세지를 보낸 이메일과 현재 로그인한 이메일이 다른경우(관리자가 보낸 메세지일 경우)
+				$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + tutorChangeName +"' width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_admin'>"+ data.messageContent + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'>" + data.messageSendTime + "</div></div>");
+			} else {
+				$("#messageArea").append("<div><div class="+"'chat_common chat_userId'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + $("#myChangeName").val() +"' width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_user'>"+ data.messageContent + "</div><div class='chat_date chat_userDate'>" + data.messageSendTime + "</div></div>");
+			}
+			$("#messageArea").scrollTop($("#messageArea")[0].scrollHeight); // 채팅창 스크롤 맨아래로 내리기
+		};
 
 	    function boxClose(){
-	    	$("#sidebox").slideDown("fast");
-	    }
+	    	console.log("123");
+	    	$("#sidebox").slideUp("fast");
+	    };
 
 		// 서버와 연결을 끊었을 때
 		function onClose(evt) {
 			$("#messageArea").append("연결 끊김");
 
-		}
+		};
     </script>
 </body>
 </html>
