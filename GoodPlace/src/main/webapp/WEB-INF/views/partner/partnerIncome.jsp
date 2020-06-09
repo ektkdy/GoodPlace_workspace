@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +27,8 @@
     button:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
 
     /*총금액div*/
-    .sum{ width: 980px; height: 60px; background-color: #dbdbdb;}
-    .sum p{text-align: right; padding-top: 15px; padding-right: 15px;}
+    .sum{ width: 980px; height: 50px; background-color: #dbdbdb;}
+    .sum p{text-align: right; padding-top: 10px; padding-right: 15px;}
 
     /*페이징바*/
     h5{color: cornflowerblue;}
@@ -59,12 +60,12 @@
                     <table class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
-                                <td width="100">선택</td>
+                                <td width="100"><input type="checkbox" id="choice" style="display:block; margin-left:40px;"></td> 
                                 <td width="200">예약번호</td>
                                 <td width="200">수익일</td>
                                 <td width="200">여행자</td>
-                                <td width="200">수익금</td>
-                                <td width="200">수익구분</td>
+                                <td width="200" id="income">수익금</td>
+                                <td width="200" id="section">수익구분</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,7 +73,7 @@
 	                    		<c:when test="${ !empty list }">
 	                    			<c:forEach items="${ list }" var="ac">
 		                    			<tr>
-		                    				<td><input type="checkbox"></td>
+		                    				<td><input type="checkbox" name="choice" class="choice" style="display:block;margin-left:40px;"></td>
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
@@ -129,10 +130,44 @@
         </div>
     </div>
 
+
+	<!-- 체크박스 조건검사 -->
     <script>
-
-
-
+	$(function(){
+		$("#choice").click(function(){
+			if($("#choice").is(":checked")){
+				$(".choice").prop("checked", true);
+			}else{
+				$(".choice").prop("checked", false);
+			}
+		});
+		$(".choice").click(function(){
+			if($("input[name=choice]:checked").length==10){
+				$("#choice").prop("checked", true);
+			} else{
+				$("#choice").prop("checked", false);
+			}
+		});
+	});
+    </script>
+    
+    <!-- 선택한 체크박스 수익합계 보여주기 -->
+    <script>
+	    var sum = 0;
+    	$(function(){
+    		$(".choice").click(function(){
+			    var amount = $(this).parent().siblings().eq(3).text();
+	    			
+    			if($(".choice").is(":checked")){
+	    			sum += amount;
+    			}else{
+    				sum -= amount;
+    			}
+    			console.log(sum);
+    		});
+    	});
+    
+    
     </script>
 </body>
 </html>

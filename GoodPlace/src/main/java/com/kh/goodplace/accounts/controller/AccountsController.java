@@ -87,6 +87,11 @@ public class AccountsController {
 		
 		return "partner/partnerIncome";
 	}
+	
+	@RequestMapping(value="showSum.ac", produces="application/json; charset=utf-8")
+	public String selectIncomeOne(int no) {
+		return "";
+	}
     
     
     
