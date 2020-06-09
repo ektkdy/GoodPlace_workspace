@@ -127,9 +127,6 @@
 		 where pano=#{paNo}
 	</update>
 
-	
-
-
 
 
 	<!-- 관리자 -->

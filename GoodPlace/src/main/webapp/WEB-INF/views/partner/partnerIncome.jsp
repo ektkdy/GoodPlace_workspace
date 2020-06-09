@@ -68,14 +68,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>123456</td>
-                                <td>20.03.01</td>
-                                <td>여행자이름</td>
-                                <td>￦123,456</td>
-                                <td>숙소</td>
-                            </tr>
+                        	<c:choose>
+	                    		<c:when test="${ !empty list }">
+	                    			<c:forEach items="${ list }" var="ac">
+		                    			<tr>
+		                    				<td><input type="checkbox"></td>
+			                                <td>${ ac.no }</td>
+			                                <td>${ ac.payDate }</td>
+			                                <td>${ ac.userName }</td>
+			                                <td>${ ac.amount }</td>
+			                                <td>${ ac.section }</td>
+				                        </tr>
+			                        </c:forEach>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<tr><td colspan="6" style="text-align:center;"><br>수입 내역이 없습니다<br><br></td></tr>
+	                    		</c:otherwise>
+	                    	</c:choose>
                         </tbody>
                     </table>
                 </div>
@@ -83,15 +92,39 @@
                     <p>선택 내역의 총금액 합계 : 123456원</p>
                 </div>
                 <h5>*수입금은 굿플레이스의 수수료 20%가 공제된 내역입니다.</h5>
-                <div id="pagingArea">
-                    <a>&lt;</a>
-                    <a>1</a>
-                    <a>2</a>
-                    <a>3</a>
-                    <a>4</a>
-                    <a>5</a>
-                    <a>&gt;</a>
-                </div>
+                
+                <c:if test="${ !empty list }">
+                   <div id="pagingArea" style="margin-top: 22px;">
+                      <c:choose>
+	                	<c:when test="${ pi.currentPage eq 1 }">
+		                    <a href="#">&lt;</a>
+		                </c:when>
+		                <c:otherwise>
+	                    	<a href="partnerIncome.ac?currentPage=${ pi.currentPage -1 }">&lt;</a>
+	                    </c:otherwise>
+                    </c:choose>
+                    
+			        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<c:choose>
+                    		<c:when test="${ p eq pi.currentPage }">
+	                    		<a href="#">${p}</a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<a class="page-link" href="partnerIncome.ac?currentPage=${ p }">${p}</a>
+	                    	</c:otherwise>
+	                    </c:choose>
+                    </c:forEach>
+                    
+			        <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    <a>&gt;</a>
+		                </c:when>
+		                <c:otherwise>
+		                    <a href="partnerIncome.ac?currentPage=${ pi.currentPage +1 }">&gt;</a>
+		                </c:otherwise>
+                    </c:choose>
+                  </div>
+              </c:if>
             </div>
         </div>
     </div>
