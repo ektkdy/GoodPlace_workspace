@@ -171,6 +171,78 @@ public class RoomController {
 			
 		}
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		@RequestMapping("selectPower.ro")
+		public String selectPowerList(int currentPage, HttpSession session, Model model) {
+			
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
+			
+			int listCount = rService.selectRoomOkeyListCount(usNo);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
+			ArrayList<Room> plist = rService.selectPowerList();
+			
+			model.addAttribute("pi", pi);
+			model.addAttribute("list", list);
+			model.addAttribute("plist", plist);
+			
+			return "partner/partnerSelectPower";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 // ------------- Power 관리 시작 --------------------------------------------------
 	

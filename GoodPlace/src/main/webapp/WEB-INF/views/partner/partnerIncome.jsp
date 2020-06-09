@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +79,8 @@
 			                                <td>${ ac.no }</td>
 			                                <td>${ ac.payDate }</td>
 			                                <td>${ ac.userName }</td>
-			                                <td class="amount">${ ac.amount }</td>
+			                                <input class="amount" type="hidden" value="${ ac.amount }">
+			                                <td><fmt:formatNumber value="${ ac.amount }"/></td>
 			                                <td>${ ac.section }</td>
 				                        </tr>
 			                        </c:forEach>
@@ -139,14 +142,14 @@
 				$(".choice").prop("checked", true);
 				sum=0;
 				for(var i=0; i<'${list.size()}'; i++){
-	    			var a = parseInt($(".amount").eq(i).text());
+	    			var a = parseInt($(".amount").eq(i).val());
 					sum += a;
     			}
 			}else{
 				$(".choice").prop("checked", false);
 				sum = 0;
 			}
-			$("#sum").text(sum);
+			$("#sum").text(sum*0.8);
 		});
 		
 		$(".choice").click(function(){
@@ -155,7 +158,7 @@
 			} else{
 				$("#choice").prop("checked", false);
 			}
-			var amount = $(this).parent().siblings().eq(3).text();	
+			var amount = $(this).parent().siblings().eq(3).val();	
 		    var intAmount = parseInt(amount);						
     		
 		    if($(this).is(":checked")){	
@@ -163,7 +166,7 @@
 		    }else{
 		    	sum -= intAmount;
 		    }
-		    $("#sum").text(sum);
+		    $("#sum").text(sum*0.8);
 		});
 	});
     </script>

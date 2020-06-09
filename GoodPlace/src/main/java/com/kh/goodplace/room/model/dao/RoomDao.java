@@ -51,6 +51,16 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.selectRoom", rno);
 	}
 	
+	public int selectRoomOkeyListCount(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("roomMapper.selectRoomOkeyListCount", usNo);
+	}
+	
+	public ArrayList<Room> selectRoomsOkayList(SqlSessionTemplate sqlSession, PageInfo pi, int usNo) {
+		int offset =(pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("roomMapper.selectOkeyList", usNo, rowBounds);
+	}
+
 	
 	
 	
@@ -112,6 +122,8 @@ public class RoomDao {
 		
 	}
 	
+	
+	
 	// --------- 파워관리 끝 -----------------
 	// --------- 숙소관리 시작 -----------------
 	
@@ -169,6 +181,11 @@ public class RoomDao {
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
 	}
+
+	
+
+	
+	
 	
 	
 	
