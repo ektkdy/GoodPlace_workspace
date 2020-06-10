@@ -21,6 +21,7 @@ import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
@@ -216,28 +217,45 @@ public class RoomController {
 		
 		
 		
-		@RequestMapping("selectPower.ro")
-		public String selectPowerList(int currentPage, HttpSession session, Model model) {
-			
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			int usNo = loginUser.getUsNo();
-			
-			int listCount = rService.selectRoomOkeyListCount(usNo);
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-			
-			ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
-			ArrayList<Room> plist = rService.selectPowerList();
-			
-			model.addAttribute("pi", pi);
-			model.addAttribute("list", list);
-			model.addAttribute("plist", plist);
-			
-			return "partner/partnerSelectPower";
-		}
+	@RequestMapping("selectPower.ro")
+	public String selectPowerList(int currentPage, HttpSession session, Model model) {
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
 		
+		int listCount = rService.selectRoomOkeyListCount(usNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
+		ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
+		ArrayList<Room> plist = rService.selectPowerList();
 		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		model.addAttribute("plist", plist);
+		
+		return "partner/partnerSelectPower";
+	}
+	
+	@RequestMapping("payPower.ro")
+	public String payPower(int roNo, int poNo, Model model) {
+		Room r = rService.selectRoom(roNo);
+		Room p = rService.selectPower(poNo);
+		
+		model.addAttribute("r", r);
+		model.addAttribute("p", p);
+		return "partner/payPower";
+	}
+	
+	@RequestMapping("paymentPower.ro")
+	public String paymentPower(int roNo) {
+		/*
+		 * Room r = rService.updateRoomPower(roNo);
+		 * 
+		 * model.addAttribute("r", r);
+		 */
+		
+		return "partner/paymentPower";
+	}
 		
 		
 		
@@ -245,10 +263,7 @@ public class RoomController {
 		
 		
 // ------------------------------ 파트너 예약관리 시작 ----------------------------------
-		
-		
-		
-	
+
 // ------------- Power 관리 시작 --------------------------------------------------
 	
     @RequestMapping("aPowerList.po")
@@ -483,7 +498,6 @@ public class RoomController {
    	}
 	
 	
-	@SuppressWarnings("null")
 	@RequestMapping("searchRoWithFilter.ro")
    	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
@@ -548,8 +562,13 @@ public class RoomController {
 				}
 			}
 			
+			// 필터 조건 자국 남겨주기 위해 set
+			System.out.println("filterValue : " + filterValue);
+			mv.addObject("filterValue", filterValue);
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
+			
+			
 		}
 
 		return mv;

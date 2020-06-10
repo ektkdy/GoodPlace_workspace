@@ -189,7 +189,6 @@
 	
 	
 	
-	
 	<!-- 파워관리 시작-->
 	<select id="selectPowerList" resultMap="powerResultSet">
 		select *

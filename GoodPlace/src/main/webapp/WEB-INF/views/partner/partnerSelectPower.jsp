@@ -86,39 +86,26 @@
                         	<c:choose>
                     			<c:when test="${ !empty list }">
                     				<c:forEach items="${ list }" var="r">
-                    					<input type="hidden" class="roNo" name="roNo" value=${ r.roNo }>
-			                            <tr>
-			                                <c:choose>
-			                            		<c:when test="${ r.status eq 1}">
-			                            			<td><div class="ing">운영중</div></td>
-			                            		</c:when>
-			                            		<c:when test="${ r.status eq 2}">
-			                            			<td><div class="confirm_ing">승인대기</div></td>
-			                            		</c:when>
-			                            		<c:when test="${ r.status eq 3}">
-			                            			<td><div class="cancel">승인거절</div></td>
-			                            		</c:when>
-			                            		<c:when test="${ r.status eq 4}">
-			                            			<td><div class="rest">휴면</div></td>
-			                            		</c:when>
-			                            		<c:otherwise>
-			                            			<td>삭제</td>
-			                            		</c:otherwise>
-			                            	</c:choose>
-			                                <td>${ fn:substring(r.addBasic,0,2) } / ${ r.roNo }</td>
-			                                <td>${ r.roomsTitle }</td>
-			                                <td>${ r.totalSal }</td>
-			                                <td>
-			                                    <select name="powerKind" class="powerKind">
-			                                        <c:forEach items="${ plist }" var="p">
-			                                        	<option value="${ p.powerPrice },${ p.period }" >${ p.powerKind }</option>
-			                                        </c:forEach>
-			                                    </select>
-			                                </td>
-			                                <td><input type="text" class="result1 re price" name="price" value="${ plist[0].powerPrice }">원</td>
-			                                <td><input type="text" class="result2 re period" name="period" value="${ plist[0].period }">일</td>
-			                                <td><button type="button" class="apply">신청</button></td>
-			                            </tr>
+		                            	<form action="payPower.ro" method="get">
+	                    					<input type="hidden" class="roNo" name="roNo" value=${ r.roNo }>
+				                            <tr>
+		                            			<td><div class="ing">운영중</div></td>
+				                                <td>${ fn:substring(r.addBasic,0,2) }</td>
+				                                <td>${ r.roomsTitle }</td>
+				                                <td>${ r.totalSal }</td>
+				                                <td>
+				                                    <select name="powerKind" class="powerKind">
+				                                        <c:forEach items="${ plist }" var="p">
+				                                        	<option value="${p.poNo} ${p.powerKind} ${p.powerPrice} ${p.period}" >${ p.powerKind }</option>
+				                                        </c:forEach>
+				                                    </select>
+				                                </td>
+				                                <td><input type="text" class="result1 re price" name="price" value="${ plist[0].powerPrice }">원</td>
+				                                <td><input type="text" class="result2 re period" name="period" value="${ plist[0].period }">일</td>
+				                                <input type="hidden" class="poNo" name="poNo" value=${ plist[0].poNo }>
+				                                <td><button type="submit" class="apply">신청</button></td>
+				                            </tr>
+		                                </form>
 			                        </c:forEach>
 	                    		</c:when>
 	                    	</c:choose>
@@ -166,21 +153,14 @@
     <script>
         $(function(){
             $(".powerKind").change(function(){
-                var option = $(this).val().split(",");
-                
-                $(".price").val(option[0]);
-                $(".period").val(option[1]);
+                var option = $(this).val().split(" ");
+                $(this).parent().siblings().eq(6).val(option[0]);
+                $(this).parent().siblings().eq(3).children().val(option[1]);
+                $(this).parent().siblings().eq(4).children().val(option[2]);
+                $(this).parent().siblings().eq(5).children().val(option[3]);
                 
             });
-        });
-        
-        $(function(){
-        	$(".apply").click(function(){
-        		var roNo = $(this).parent().parent().siblings().eq(0).val();
-        		console.log(roNo);
-        	});
-        });
-
+        }); 
     </script>
 </body>
 </html>

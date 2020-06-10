@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -80,8 +81,6 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectRoomsOkayList(sqlSession, pi, usNo);
 	}
 	
-	
-
 	@Override
 	public int payPower(int roNo) {
 		// TODO Auto-generated method stub
@@ -176,6 +175,14 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Room> searchRoom(Room room) {
 		return rDao.searchRoom(sqlSession, room);
 	}
+
+	@Override
+	public int updateRoomForm(int roNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
 
 	
 	

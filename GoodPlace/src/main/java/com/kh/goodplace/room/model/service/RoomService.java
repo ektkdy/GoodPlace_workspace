@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.room.model.vo.Room;
 
 public interface RoomService {
@@ -44,11 +45,11 @@ public interface RoomService {
 	int restRoom(int rno);
 	
 	//7. 운영중인 숙소 조회용 서비스 (파워등록용)
-	int selectRoomOkeyListCount(int usNo);			// 운영중인 숙소 전체 갯수 조회
+	int selectRoomOkeyListCount(int usNo);						// 운영중인 숙소 전체 갯수 조회
 	ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo);	// 해당 페이지에 보여질 운영중인 숙소 조회
 	
 	//8. 파워 신청 및 결제용 서비스 (파워등록용)
-	int payPower(int roNo);
+	int payPower(int roNo);										// 숙소 update
 	
 	
 	//------------[예약관리]------------    (여긴 페이징바 필요없을까?)
@@ -174,6 +175,8 @@ public interface RoomService {
 	
 	// 3_3.게시글 거절용 서비스-현영
 	int updateReject(Room r);
+
+	
 
 
 	

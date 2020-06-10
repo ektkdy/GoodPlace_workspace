@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("rDao")
@@ -181,6 +182,8 @@ public class RoomDao {
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
 	}
+
+	
 
 	
 

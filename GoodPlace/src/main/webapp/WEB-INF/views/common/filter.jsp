@@ -40,6 +40,7 @@
     <!-- filter -->
 	<div style="width:20%; height:auto; margin-left:40px; float:left;">
             <div id="filterArea">
+            	<input id="filterValue" type="hidden" value="${ filterValue }"/>
                 <div id="filterAreaInner" style="position:absolute; width:220px; float:left;">   
                     <div style="width:220px; height:70%; float:left">
                         <div style="width:50%; height:54px; float:left;"><h3>필터</h3></div>
@@ -147,17 +148,33 @@
                     $('#filterArea tr').toggleClass("display");
                     $('#openFilter h4').text("필터펼치기")
                 }
-            }
+            };
+            
             // 필터초기화
             function filterReset(){
                 $(".filterCheckBox[type=checkbox]").prop("checked", false);
-            }
+            };
+            
+            
+            // 필터의 체크된 값 담기, 체크 해제된 값은 빼기
             var text ="";
-            // 필터의 체크된 값 담기
             $(".filterCheckBox[type=checkbox]").change(function(){
-            	text += $(this).next().text() + ",";
-            	$("#filterValue").val(text);
+            	var $checkbox = $(this);
+            	if($checkbox.prop("checked") == true){
+            		text += $(this).next().text() + ",";
+            	}else{
+            		text = text.replace(($(this).next().text() + ","), "");
+            	}
+            	console.log("text : " + text);
+            	$("input[name=filterValue] ").val(text);
             });
+            
+            // 필터 체크하고 검색시 다시 조회된 페이지에서도 필터체크목록 남아있음
+            //var checkBoxCount = $('.filterCheckBox').length;
+     		//console.log("filterValue 값 : " + "<c:out value='${filterValue}'/>");
+            //console.log(" 체크박스 개수 : " + $('.filterCheckBox').length);
+
+            
         </script>
 </body>
 </html>
