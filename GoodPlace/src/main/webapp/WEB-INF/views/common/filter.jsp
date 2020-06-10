@@ -166,7 +166,7 @@
             		text = text.replace(($(this).next().text() + ","), "");
             	}
             	console.log("text : " + text);
-            	$("#filterValue").val(text);
+            	$("input[name=filterValue] ").val(text);
             });
             
             // 필터 체크하고 검색시 다시 조회된 페이지에서도 필터체크목록 남아있음

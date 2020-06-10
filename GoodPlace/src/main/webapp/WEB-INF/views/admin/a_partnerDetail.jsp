@@ -65,7 +65,7 @@
 
 		<jsp:include page="../common/adminMenubar.jsp"/>
 
-        <div id="contents" style="width:980px">
+        <div id="contents" style="width:980px;">
             <div id="tab"></div>
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">파트너상세</span></a></div>
             <div class="con" style="color:#000">
@@ -144,7 +144,7 @@
 		                                <td width="200px">${ r.addBasic }</td>
 		                                <td width="200px">${ r.startDate }</td>
 		                                <td width="200px">${ r.roomsTitle }</td>
-		                                <td width="200px">52</td>
+		                                <td width="200px">${ r.totalSal }</td>
 		                            </tr>
 		                        </c:if>
                             </c:forEach>
@@ -195,14 +195,14 @@
 		                                <td width="200px">${ e.addBasic }</td>
 		                                <td width="200px">${ e.startDate }</td>
 		                                <td width="200px">${ e.expTitle }</td>
-		                                <td width="200px">40</td>
+		                                <td width="200px">${ e.totalSal }</td>
 		                            </tr>
 	                            </c:if>
                             </c:forEach>
                         </tbody>
                     </table>
                     <br>
-                    <div style="text-align: right;">
+                    <div style="text-align: right; height:100px;">
                         <button id="gotoList" onclick="javascript:history.go(-1);">목록으로 가기</button>
                     </div>
                 </div>
@@ -210,7 +210,6 @@
         </div>
         
     </div>
-
     <script>
         $(function(){
             

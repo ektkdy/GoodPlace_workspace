@@ -99,20 +99,17 @@
                 </div>
                 <div id="btns">
                     <button type="button" id="cancle" onclick="location.href='list.ro?currentPage=1'">취소하기</button>
-                    <button type="button" id="next">신청하기</button>
+                    <button type="button" id="next" onclick="payNext();">신청하기</button>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-     $(function(){
-		$("#next").click(function(){
-			var roNo = $("#roomInfo").children().eq(0).val();
-			//console.log(roNo)
-			location.herf='paymentPower.ro?roNo='+roNo;
-		});  	 
-     });
+	    function payNext(){
+	        var roNo = $("#roomInfo").children().eq(0).val();
+	        location.href='paymentPower.ro?roNo='+roNo;
+	     }
     </script>
     
 </body>

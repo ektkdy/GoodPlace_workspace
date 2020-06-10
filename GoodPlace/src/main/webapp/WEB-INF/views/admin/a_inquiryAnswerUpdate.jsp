@@ -102,9 +102,7 @@
 	                                    <textarea name="" id="" readonly>${ b.inqContent }</textarea>
 	                                </td>
 	                            </tr>
-	                            <tr>
-	                                <td colspan="8" style="text-align:right;"><button id="contentBtn">제제하기</button></td>
-	                            </tr>
+
 	                            <tr>
 	                                <td colspan="8" style="text-align:center;"><p style="font-size: 1.2em;">답변작성</p></td>
 	                            </tr>
@@ -116,7 +114,7 @@
 	                        </tbody>
 	                    </table>
 	                    <br>
-	                    <div style="text-align: right;">
+	                    <div style="text-align: right;  height:100px;">
 	                        <button type="button" id="gotoList" onclick="location.href='aInquiryList.bo?currentPage=1'">목록으로</button>
 	                        <button type="submit" class="blue_btn" >수정하기</button>
 	                    </div>

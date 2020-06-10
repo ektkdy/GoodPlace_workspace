@@ -9,9 +9,11 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 <script>
 	var IMP = window.IMP; // 생략가능
-	IMP.init('imp40758225'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	IMP.init('imp44699415'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	
 	// IMP.request_pay(param, callback) 호출
 	IMP.request_pay({	// param
@@ -25,7 +27,7 @@
 	    buyer_tel : '010-1234-5678',
 	    buyer_addr : '서울특별시 강남구 삼성동',
 	    buyer_postcode : '123-456',
-	    m_redirect_url : 'http://192.168.30.232:8080/goodplace'
+	    m_redirect_url : 'http://192.168.30.232:8888/goodplace'
 	}, function(rsp) {	// callback
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';

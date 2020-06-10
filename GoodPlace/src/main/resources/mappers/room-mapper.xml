@@ -229,11 +229,12 @@
 	
 	<select id="selectPowerRoomList" resultMap="powerResultSet">
 	
+	
 		select P.PONO, P.POWER_KIND, R.ROOMS_TITLE, M.EMAIL, P.PERIOD, R.POWER_START, R.POWER_END, R.PONO
 		  FROM POWER P
 		  JOIN ROOMS R ON r.pono = p.pono
 		  JOIN MEMBER M ON r.usno = m.usno
-		 WHERE R.PONO > 0
+		 WHERE R.PONO > 0 and R.POWER_END >= SYSDATE
 		
 	
 	</select>

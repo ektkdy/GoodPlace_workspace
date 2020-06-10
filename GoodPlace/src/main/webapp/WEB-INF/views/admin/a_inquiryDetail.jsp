@@ -112,7 +112,7 @@
                         </tbody>
                     </table>
                     <br>
-                    <div style="text-align: right;">
+                    <div style="text-align: right; height:100px;">
                         <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
                	        <c:choose>
 	                     	<c:when test="${ b.inqReContent eq null}">
