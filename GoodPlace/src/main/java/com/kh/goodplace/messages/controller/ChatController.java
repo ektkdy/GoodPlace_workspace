@@ -46,4 +46,20 @@ public class ChatController {
 		return new Gson().toJson(room);
 	}
 	
+	
+	
+	
+	// 관리자 메시지 페이지이동
+	@RequestMapping("aMessagesList.me")
+	public String aSelectMessagesList(Model model) {
+		
+		
+		return "admin/a_message";
+		
+	}
+	
+	
+	
+	
+	
 }

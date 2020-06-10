@@ -52,9 +52,10 @@
                     <input type="button" id="searchBtn" value="검색">
                 </span>
                 <div class="con2">
-                    <table class="common_tb" cellpadding="0" cellspacing="0" >
+                    <table id="messageList" class="common_tb" cellpadding="0" cellspacing="0" >
                         <thead>
                             <tr>
+                                <td width="200px">메세지번호</td>
                                 <td width="200px">메세지보낸사람</td>
                                 <td width="200px">시간</td>
                                 <td width="500pc">메세지내용</td>
@@ -62,12 +63,28 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td width="200px">메세지보낸사람</td>
-                                <td width="200px">시간</td>
-                                <td width="500pc">메세지내용</td>
+                                <td width="200px">1</td>
+                                <td width="200px">홍길동</td>
+                                <td width="200px">19:00</td>
+                                <td width="500pc">안녕하세요</td>
                             </tr>
                         </tbody>
                     </table>
+                    
+                    
+                    		            <script>
+		            	$(function(){
+		            		
+ 	            		    $("#messageList tbody tr").click(function(){
+		            			location.href="aMessageDetail.me?mno=" + $(this).children().eq(0).text();
+		            		});  
+ 	            		    
+		            	});
+		            </script>
+                    
+                    
+                    
+                    
                     <div id="pagingArea" style="margin-top: 22px;">
                         <a>&lt;</a>
                         <a>1</a>
