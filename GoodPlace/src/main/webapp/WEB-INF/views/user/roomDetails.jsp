@@ -13,10 +13,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}//swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
     <!-- Swiper JS -->
-    <script src="../js/swiper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
     
 
     <style>
@@ -147,10 +147,11 @@
                 <!-- Swiper -->
                 <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room1.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room2.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room3.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room4.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
@@ -159,11 +160,8 @@
 
                 <div style="width:80%; height:120px; margin:0 10%;">
                     <div style="width:80%;">
-                        <br><h1>강남에서 즐기는 유럽형 민박</h1>
+                        <br><h1>${ room.roomsTitle }</h1>
                     </div><br>  
-                    <div class="category">
-                        <h3>쿠킹</h3>
-                    </div>
                     <div class="fullWidth">
                         <h4>서울, 강남구</h4>
                     </div>
@@ -175,9 +173,10 @@
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">
                             <div style="width:50%;"><h3>객실정보</h3></div><div style="width:30%; margin-left:20%; background-color:tomato; color:white; font-weight:900;" class="category">숙소 신고하기</div><br><br>
-                            <p>침대 1개, 화장실 1개, 샤워실 1개<br>
-                                기본인원 3명, 최대인원 4명<br>
-                                1박 금액 : 100,000원<br>
+                            <p>
+                          		방 ${ room.roomCount }개, 침대 ${ room.bedCount }개, 	화장실 ${ room.restroomCount }개, 샤워실 ${ room.bathCount }개<br>
+                              	기본인원 ${ room.minPeople }명, 최대인원 ${ room.maxPeople }명<br>
+                              	1박 금액 : ${ room.price }원<br>
                             </p>
                         </div>
                         <div class="fullWidth marginBottom_40px">
@@ -197,7 +196,7 @@
                         </div>
                         <div class="fullWidth marginBottom_60px">
                             <h3>포함사항</h3><br>
-                            <p>조식, 석식
+                            <p>${ room.meal }
                             </p>
                         </div>
                     </div>
@@ -206,7 +205,7 @@
                     </div>
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">
-                            <div div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#신축건물 #조식이 포함된 #교통이 편리한</h2></div>
+                            <div div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
                         </div>
                     </div>
                     <div style="width:20%; margin-right:5%;">
@@ -214,21 +213,15 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div style="margin-bottom: 28px;" class="fullWidth marginBottom_40px">
-                            <div div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">13:00</h2></div>
+                            <div div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
                             <br><br>
-                            <div div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">11:00</h2></div>
+                            <div div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
+                        	<div div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
+                        	
                         </div>
                         <div class="fullWidth">
                             <h3>특이사항</h3><br>
-                            <p>
-                                규정된 시간 외 체크인 시 사전에 협의 요망.<br>
-                                23시 이후 귀가 시 이웃 주민들에게 피해를 주지 않도록 조용하게 이동 바랍니다.<br>
-                                짐보관은 사전에 문의부탁드립니다.<br>
-                                모든 고객의 편의를 위하여 예약된 입실 인원 외 방문을 제한합니다.<br>
-                                귀중품의 파손 및 현금분실 등은 숙박업소에서 책임지지 않습니다.<br>
-                                숙소 내 금연/금주입니다.<br>
-                                예약 확정 후 받아보시는 카톡ID로 자세한 약도 등의 안내가 발송됩니다.<br>
-                            </p>
+                            ${ room.roomsNotice }
                         </div><br><br>
                     </div>
                     <div style="width:20%; margin-right:5%;">
@@ -236,7 +229,7 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div class="fullWidth">
-                            <div div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">서울시 강남구 논현로 111 302호 </h2></div>
+                            <div div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
                             <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
                         </div><br><br>
                         
@@ -249,22 +242,15 @@
                             <div class="fullWidth">
                                 <div class="p_profileArea">
                                     <div style="width:50%; text-align: center;">
-                                        <img src="../img/partnerImg.jpg" class="p_profile"/>
+                                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ room.paPofile }" class="p_profile"/>
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
-                                        <h1>홍플</h1><br>
+                                        <h1>${ room.roomsTitle }</h1><br>
                                         <div class="buttonStyle1" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
                                     </div>  
                                 </div><hr><br>
                                 <div class="fullWidth">
-                                    <p>
-                                        홍플에대한 설명 홍플에대한 설명문구1줄<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                    </p>
+                                    <p>${ room.partnerIntro }</p>
                                 </div>
                             </div><br><br>
                         </div>  

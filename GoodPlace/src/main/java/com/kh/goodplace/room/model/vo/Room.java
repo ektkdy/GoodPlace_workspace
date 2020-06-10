@@ -92,4 +92,12 @@ public class Room {
 	/* DB에는 없지만 새로 생성한 변수 */
 	private int reviewCount;	// 숙소별 Review 개수
 	private String filterStatus;// 필터 조건에 만족하는지 숙소의 상태값 설정
+	private String detailImg1;  // Attachment 테이블에 담겨있는 숙소상세이미지1
+	private String detailImg2;  // Attachment 테이블에 담겨있는 숙소상세이미지2
+	private String detailImg3;  // Attachment 테이블에 담겨있는 숙소상세이미지3
+	private String detailImg4;  // Attachment 테이블에 담겨있는 숙소상세이미지4
+	
+	/* Member테이블  + Partner테이블 */
+	private String paPofile;	// 프로필사진 변경이름
+	private String partnerIntro; // 파트너소개
 }

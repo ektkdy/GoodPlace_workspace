@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -169,7 +170,7 @@ public class RoomServiceImpl implements RoomService{
 	
 	// --------- 숙소관리 끝 --------------------------
 	
-	// --------- 숙소검색 시작 -------------------------
+	// --------- 숙소조회 시작 -------------------------
 	
 	@Override
 	public ArrayList<Room> searchRoom(Room room) {
@@ -177,15 +178,29 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
+	public Room roomDetail(int roNo) {
+		return rDao.roomDetail(sqlSession, roNo);
+	}
+
+	@Override
+	public ArrayList<Attachment> getDetailImages(int roNo) {
+		return rDao.getDetailImages(sqlSession, roNo);
+	}
+	
+	@Override
+	public Member getPartner(int roNo) {
+		return  rDao.getPartner(sqlSession, roNo);
+	}
+	
+	// --------- 숙소조회 끝 -------------------------
+
+	
+	@Override
 	public int updateRoomForm(int roNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	
-
-	
-	
 	
 	
 }

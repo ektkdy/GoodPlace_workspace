@@ -10,6 +10,7 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("rDao")
@@ -178,15 +179,25 @@ public class RoomDao {
 	
 	// --------- 숙소관리 시작 -----------------
 	
-	// --------- 숙소검색 시작 -----------------
+	// --------- 숙소조회 시작 -----------------
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
-		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room);
 	}
 
-	
+	public Room roomDetail(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.selectOne("roomMapper.selectRoom", roNo);
+	}
 
+	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectDetailImages", roNo);
+	}
 	
-
+	public Member getPartner(SqlSessionTemplate sqlSession, int roNo){
+		return sqlSession.selectOne("memberMapper.selectPartner", roNo);
+	}
+	
+	
+	// --------- 숙소조회 끝 -----------------
 	
 	
 	
