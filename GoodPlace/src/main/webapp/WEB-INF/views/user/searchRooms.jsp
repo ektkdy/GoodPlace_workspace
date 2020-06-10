@@ -295,7 +295,7 @@
 	        <div id="roomList">
 	            <div style="margin:50px 0 20px 0; height:30px; width:100%;">
 	                <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
-	                <div class="halfWidth" style="height:30px; width:40%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
+	                <div class="halfWidth" style="height:30px; width:50%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
 	            </div>
 	            
 	            
