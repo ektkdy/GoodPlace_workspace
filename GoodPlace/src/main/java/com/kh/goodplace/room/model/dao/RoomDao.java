@@ -180,13 +180,16 @@ public class RoomDao {
 	
 	// --------- 숙소조회 시작 -----------------
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
-		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room);
 	}
 
 	public Room roomDetail(SqlSessionTemplate sqlSession, int roNo) {
 		return sqlSession.selectOne("roomMapper.selectRoom", roNo);
 	}
 
+	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectDetailImages", roNo);
+	}
 	
 	// --------- 숙소조회 끝 -----------------
 	

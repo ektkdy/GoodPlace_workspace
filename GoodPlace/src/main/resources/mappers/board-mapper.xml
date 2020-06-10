@@ -90,7 +90,7 @@
 		ORDER BY RENO
 	</select>
 	
-	<!-- 진아 : 숙소별 리뷰 개수 조회 : 미완성 -->
+	<!-- 진아 : 숙소별 리뷰 개수 조회 -->
 	<select id="reviewListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW

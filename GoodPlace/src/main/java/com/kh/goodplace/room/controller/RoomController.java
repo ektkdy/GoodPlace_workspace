@@ -580,8 +580,18 @@ public class RoomController {
 	// 숙소리스트 중에서 특정 숙소 클릭시 해당 숙소 상세페이지로 이동
     @RequestMapping("roomDe.ro")
     public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
-    	System.out.println("roNo : " + roNo);
+    	//System.out.println("roNo : " + roNo);
     	room  = rService.roomDetail(roNo);
+    	ArrayList<Attachment> at = rService.getDetailImages(roNo);
+    	
+    	if(at != null) {
+    		System.out.println("숙소의 상세이미지들 조회 됨~!");
+    		room.setDetailImg1(at.get(0).getChangeName());
+    		room.setDetailImg2(at.get(1).getChangeName());
+    		room.setDetailImg3(at.get(2).getChangeName());
+    		room.setDetailImg4(at.get(3).getChangeName());
+    	}
+    	
     	System.out.println(room);
     	
     	

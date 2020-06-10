@@ -147,10 +147,11 @@
                 <!-- Swiper -->
                 <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room1.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room2.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room3.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room4.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
@@ -159,7 +160,7 @@
 
                 <div style="width:80%; height:120px; margin:0 10%;">
                     <div style="width:80%;">
-                        <br><h1>강남에서 즐기는 유럽형 민박</h1>
+                        <br><h1>${ room.roomsTitle }</h1>
                     </div><br>  
                     <div class="fullWidth">
                         <h4>서울, 강남구</h4>
@@ -172,9 +173,10 @@
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">
                             <div style="width:50%;"><h3>객실정보</h3></div><div style="width:30%; margin-left:20%; background-color:tomato; color:white; font-weight:900;" class="category">숙소 신고하기</div><br><br>
-                            <p>침대 1개, 화장실 1개, 샤워실 1개<br>
-                                기본인원 3명, 최대인원 4명<br>
-                                1박 금액 : 100,000원<br>
+                            <p>
+                          		방 ${ room.roomCount }개, 침대 ${ room.bedCount }개, 	화장실 ${ room.restroomCount }개, 샤워실 ${ room.bathCount }개<br>
+                              	기본인원 ${ room.minPeople }명, 최대인원 ${ room.maxPeople }명<br>
+                              	1박 금액 : ${ room.price }원<br>
                             </p>
                         </div>
                         <div class="fullWidth marginBottom_40px">
@@ -194,7 +196,7 @@
                         </div>
                         <div class="fullWidth marginBottom_60px">
                             <h3>포함사항</h3><br>
-                            <p>조식, 석식
+                            <p>${ room.meal }
                             </p>
                         </div>
                     </div>
@@ -203,7 +205,7 @@
                     </div>
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">
-                            <div div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#신축건물 #조식이 포함된 #교통이 편리한</h2></div>
+                            <div div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
                         </div>
                     </div>
                     <div style="width:20%; margin-right:5%;">
@@ -211,9 +213,11 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div style="margin-bottom: 28px;" class="fullWidth marginBottom_40px">
-                            <div div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">13:00</h2></div>
+                            <div div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
                             <br><br>
-                            <div div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">11:00</h2></div>
+                            <div div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
+                        	<div div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
+                        	
                         </div>
                         <div class="fullWidth">
                             <h3>특이사항</h3><br>
