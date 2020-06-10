@@ -268,6 +268,74 @@ public class ExperienceController {
 	}
 	
 	
+	@RequestMapping("rest.exp")
+	public String restExp(int exNo) {
+		int result = expService.restExp(exNo);
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		} else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("delete.exp")
+	public String deleteExp(int exNo) {
+		int result = expService.deleteExp(exNo);
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		} else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("endRest.exp")
+	public String endRestExp(int exNo) {
+		int result = expService.endRestExp(exNo);
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		} else {
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//------------[체험관리]------------

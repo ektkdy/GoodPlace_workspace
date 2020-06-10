@@ -63,17 +63,33 @@
         <div id="contents" style="width:980px">
             <div id="tab"></div>
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">회원관리</span></a></div>
-            <div class="con" style="color:#000">
+            <div id="searchArea" class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">회원관리<small style="font-size: 0.5em;">(총 회원수 0명)검색결과 0건</small></p></span>
                 <span class="up_btn_space">
-                    <select name="" id="searchSelect" style="width:100px; height:35px;">
-                        <option value="">선택</option>
-                        <option value="">이름</option>
-                        <option value="">회원번호</option>
-                        <option value="">회원타입</option>
-                  </select>
-                    <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
+	                <form name="" method="" action="memSearch.me">
+	                
+	                    <select name="memSearchSelect" id="searchSelect" style="width:100px; height:35px;">
+	                        <option value="searchName">이름</option>
+	                        <option value="searchNo">회원번호</option>
+	                        <option value="searchType">회원타입</option>
+	                	</select>
+	                	<input type="text" id="searchInput" style="width:200px; height:33px; padding-left:5px;" name="keyword" value="${ keyword }"><button type="submit" class="search_btn">검색</button>
+						<input type="hidden" name="currentPage" value="1">
+	                
+	                </form>
                 </span>
+                
+				<script>
+					$(function(){
+						switch('${m.memSearchSelect}'){
+						case "searchName" : $("#searchArea option").eq(0).attr("selected", true); break;
+						case "searchNo" : $("#searchArea option").eq(1).attr("selected", true); break;
+						case "searchType" : $("#searchArea option").eq(2).attr("selected", true); break;
+						}
+					});
+				</script>
+                
+                
                 <div class="con2">
 	                <form id="postForm" method="post" action="">
 	                    <table class="common_tb" cellpadding="0" cellspacing="0">
@@ -143,26 +159,62 @@
 	                        </th>
 	                        <th>
 	                            <div id="pagingArea" style="margin-top: 22px;">
+	                            <!-- [이전] -->
+	                            <c:if test="${ pi.currentPage ne 1 }">
 				                    <c:choose>
-					                	<c:when test="${ pi.currentPage eq 1 }">
-						                    <a href="#">&lt;</a>
+					                	<c:when test="${ empty m.memSearchSelect }">
+						                    <a href="aMemberList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
 						                </c:when>
 						                <c:otherwise>
-					                    	<a href="aMemberList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    	<a href="aMemberList.me?memSearchSelect=${ m.memSearchSelect }&keyword=${m.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
 					                    </c:otherwise>
 				                    </c:choose>
-				                    
-							        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				                    	<c:choose>
-				                    		<c:when test="${ p eq pi.currentPage }">
-					                    		<a href="#">${p}</a>
-					                    	</c:when>
-					                    	<c:otherwise>
-					                    		<a class="page-link" href="aMemberList.me?currentPage=${ p }">${p}</a>
-					                    	</c:otherwise>
-					                    </c:choose>
-				                    </c:forEach>
-				                    
+				                </c:if>
+				                
+				                <!-- [번호들] -->
+								<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
+									<c:choose>
+										<c:when test="${ p eq pi.currentPage }">
+											<font color="red" size="4">${ p }</font>					
+										</c:when>
+										<c:otherwise>
+											<c:choose>
+												<c:when test = "${ empty m.memSearchSelect }">
+													<a class="page-link" href="aMemberList.me?currentPage=${ p }">${p}</a>
+												</c:when>
+												<c:otherwise>
+													<c:url value="memSearch.me" var="searchUrl">
+														<c:param name="condition" value="${ m.memSearchSelect }"/>
+														<c:param name="keyword" value="${ m.keyword }"/>
+														<c:param name="currentPage" value="${ p }"/>
+													</c:url>
+														
+													<a href="${ searchUrl }">${p}</a>
+												</c:otherwise>
+											</c:choose>
+										</c:otherwise>
+
+				               		</c:choose>    
+				                </c:forEach>   
+				                
+								<!-- [다음] -->
+								<c:if test="${ pi.currentPage ne pi.maxPage }">
+									<c:choose>
+										<c:when test = "${ empty m.memSearchSelect }">
+											 <a href="aMemberList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
+										</c:when>
+										<c:otherwise>
+											<c:url value="memSearch.me" var="searchUrl">
+												<c:param name="condition" value="${ m.memSearchSelect }"/>
+												<c:param name="keyword" value="${ m.keyword }"/>
+												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+											</c:url>										
+											<a href="${ searchUrl }">&gt;</a>
+										</c:otherwise>
+									</c:choose>
+				                </c:if>
+				                
+				                
 							        <c:choose>
 				                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
 						                    <a>&gt;</a>
@@ -171,6 +223,8 @@
 						                    <a href="aMemberList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
 						                </c:otherwise>
 				                    </c:choose>
+				                    
+				                
 	                            </div>
 	                        </th>
 	    

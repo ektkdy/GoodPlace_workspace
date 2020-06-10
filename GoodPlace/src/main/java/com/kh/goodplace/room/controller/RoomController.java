@@ -584,13 +584,22 @@ public class RoomController {
     	room  = rService.roomDetail(roNo);
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
     	
+    	// room객체에 숙소태그, 포함사항의 표시형식 보완
+    	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
+    	room.setMeal(room.getMeal().replace(",", ", "));
+    	
+    	// room 객체에 상세이미지 set 
     	if(at != null) {
-    		System.out.println("숙소의 상세이미지들 조회 됨~!");
+    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
     		room.setDetailImg1(at.get(0).getChangeName());
     		room.setDetailImg2(at.get(1).getChangeName());
     		room.setDetailImg3(at.get(2).getChangeName());
     		room.setDetailImg4(at.get(3).getChangeName());
     	}
+    	
+    	// room 객체에 파트너의 프로필사진 set
+    	room.setPaPofile(rService.getPartner(roNo).getChangeName());
+    	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
     	
     	System.out.println(room);
     	
@@ -599,11 +608,15 @@ public class RoomController {
     		mv.addObject("room", room);
     		mv.setViewName("user/roomDetails");
     	}else {
-    		mv.addObject("msg", "숙소검색 실패!!");
+    		mv.addObject("msg", "숙소상세 조회 실패!!");
             mv.setViewName("common/errorPage");
     	}
+    	
     	return mv;
+    	
     }
+    
+    
 	// ------------- 사용자 끝 --------------------------------------------------
 
 }

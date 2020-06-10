@@ -94,6 +94,24 @@ public class MemberDao {
 	public int updateBlockMemberOff(SqlSessionTemplate sqlSession, int mno) {
 		return sqlSession.update("memberMapper.updateBlockMemberOff", mno);
 	}
+	
+	public int memSearchCount(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.memSearchCount", m);
+		
+	}
+	
+	public ArrayList<Member> memSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Member m){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.memSearchList", m, rowBounds);
+		
+	}
+	
+	
+	
 	/*파트너용*/
 	public int aSelectPartnerListCount(SqlSessionTemplate sqlSession) {
 		

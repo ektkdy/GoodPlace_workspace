@@ -22,10 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
-import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.messages.model.vo.ChatRoom;
 
 @Controller
 public class MemberController {
@@ -385,6 +383,21 @@ public class MemberController {
 			mv.setViewName("redirect:aMemberList.me?currentPage=1");
 		}
 		return mv;
+    }
+    
+    @RequestMapping("memSearch.me")
+    public String memSearchList(int currentPage, Member m, Model model) {
+    	
+    	
+        int listCount = mService.memSearchCount(m); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Member> list = mService.memSearchList(pi, m);
+        model.addAttribute("list", list);
+        model.addAttribute("m", m);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_member";
     }
     
     /*파트너용*/

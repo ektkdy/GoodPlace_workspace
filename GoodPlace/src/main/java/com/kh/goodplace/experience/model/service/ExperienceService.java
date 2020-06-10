@@ -45,7 +45,8 @@ public interface ExperienceService {
 	// 6. 체험 삭제용 서비스
 	int deleteExp(int exNo);
 	
-	
+	// 7. 체험 휴면해제용 서비스
+	int endRestExp(int exNo);
 	
 	
 	

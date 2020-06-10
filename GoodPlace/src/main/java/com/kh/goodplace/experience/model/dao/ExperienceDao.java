@@ -64,7 +64,10 @@ public class ExperienceDao {
 		return sqlSession.update("expMapper.deleteExp", exNo);
 	}
 
-	
+	public int endRestExp(SqlSessionTemplate sqlSession, int exNo) {
+		return sqlSession.update("expMapper.endRestExp", exNo);
+	}
+
 	
 	
 	
@@ -119,6 +122,7 @@ public class ExperienceDao {
 		
 	}
 
+	
 	
 	
 	
