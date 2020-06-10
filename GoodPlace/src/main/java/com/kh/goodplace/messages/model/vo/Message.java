@@ -16,13 +16,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Message {
-	private String msgNo;
-	private String chNo;
+	private int msgNo;
+	private int chNo;
 	private String messageSender;
 	private String messageReceiver;
 	private String messageContent;
 	private String messageSendTime;
 	private String messageReadTime;
+	private int class_class_id;
 
 	
 	public static Message convertMessage(String source) {

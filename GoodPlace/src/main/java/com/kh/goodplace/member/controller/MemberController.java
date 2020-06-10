@@ -337,6 +337,11 @@ public class MemberController {
     
     // ------------------ 관리자 컨트롤러 시작 --------------------
     
+    
+    @RequestMapping("adminForm.me")
+    public String adminForm() {
+    	return "admin/a_main";
+    }
     /*회원용*/
     @RequestMapping("aMemberList.me")
     public String aSelectMemberList(int currentPage, Model model)
