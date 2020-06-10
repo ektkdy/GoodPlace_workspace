@@ -13,10 +13,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
     <!-- Swiper JS -->
-    <script src="../js/swiper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
     
 
     <style>
