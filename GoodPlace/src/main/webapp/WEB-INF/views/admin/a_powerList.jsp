@@ -73,15 +73,7 @@
             <br><br><br><br><br>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">파워등록목록</p></span>
-                <span class="up_btn_space">
-                    <select name="" id="searchSelect" style="width:100px; height:35px;">
-                        <option value="">선택</option>
-                        <option value="">이름</option>
-                        <option value="">파트너번호</option>
-                        <option value="">파트너타입</option>
-                    </select>
-                    <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
-                </span>
+
                 <div class="con2">
                     <table class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>

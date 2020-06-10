@@ -116,18 +116,7 @@
 	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;">${ b.noticeContent }</textarea>
 	                                </td>
 	                            </tr>
-	                            <tr class="file_input">
-	                                <td width="150px">
-	                                    <div>
-	                                        <label>
-	                                            	파일첨부
-	                                            <input type="file" onchange="javascript:document.getElementById('file_route').value=this.value">
-	                                        </label>
-	                                        
-	                                    </div>
-	                                </td>
-	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route" value="점검일정.hwp"></td>
-	                            </tr>
+
 	                        </tbody>
 	                    </table>
 	                    <br>

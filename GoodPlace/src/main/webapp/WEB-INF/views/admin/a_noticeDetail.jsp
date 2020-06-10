@@ -81,11 +81,10 @@
                     </table>
                     <br>
                     <div>
-                        <table>
+                        <table style="text-align:right">
                             <tr>
-                                <td><button>첨부파일</button></td>
-                                <td><input type="text" value="점검시간.hwp" style="width: 300px; height: 35px; padding-left: 10px;" readonly></td>
-                                <td style="padding-left: 350px;"><button id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로 가기</button></td>
+                                <td style="padding-left:700px"><button onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정하기</button></td>
+                                <td><button id="gotoList" onclick="location.href='aNoticeList.bo?currentPage=1'">목록으로 가기</button></td>
                             </tr>
                         </table>
 
