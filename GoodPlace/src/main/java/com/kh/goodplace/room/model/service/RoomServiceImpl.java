@@ -181,6 +181,11 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.roomDetail(sqlSession, roNo);
 	}
 
+	@Override
+	public ArrayList<Attachment> getDetailImages(int roNo) {
+		return rDao.getDetailImages(sqlSession, roNo);
+	}
+	
 	// --------- 숙소조회 끝 -------------------------
 
 	
@@ -189,6 +194,7 @@ public class RoomServiceImpl implements RoomService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	
 	
 }

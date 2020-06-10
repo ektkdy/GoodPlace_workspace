@@ -322,7 +322,7 @@
         ORDER BY RONO
 	</select>
 
-	<select id="selectRoomDetailImage" parameterType="_int" resultMap="attachmentResultSet">
+	<select id="selectDetailImages" parameterType="_int" resultMap="attachmentResultSet">
 		SELECT *
 		 FROM ATTACHMENT
 		WHERE RONO = #{roNo}
