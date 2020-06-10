@@ -109,7 +109,7 @@
                         <div class="msgContents" id="messageArea">
                         	<c:forEach items="${ meList }" var="m">
                   				<c:choose>
-                  					<c:when test="${ m.class_class_id eq 0 }">
+                  					<c:when test="${ m.class_class_id eq 1 }">
 			                            <div>
 			                            	<div class="chat_common">
 			                            		<img src= "${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${user.changeName}" width='28px' height='28px'>
