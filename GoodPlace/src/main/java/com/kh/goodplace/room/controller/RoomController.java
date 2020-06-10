@@ -500,7 +500,7 @@ public class RoomController {
         return mv;
    	}
 	
-	
+	// 숙소검색페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원)와 필터에 해당하는 숙소리스트 반환
 	@RequestMapping("searchRoWithFilter.ro")
    	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
@@ -577,6 +577,7 @@ public class RoomController {
 		return mv;
    	}
 	
+	// 숙소리스트 중에서 특정 숙소 클릭시 해당 숙소 상세페이지로 이동
     @RequestMapping("roomDe.ro")
     public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
     	System.out.println("roNo : " + roNo);

@@ -161,9 +161,6 @@
                     <div style="width:80%;">
                         <br><h1>강남에서 즐기는 유럽형 민박</h1>
                     </div><br>  
-                    <div class="category">
-                        <h3>쿠킹</h3>
-                    </div>
                     <div class="fullWidth">
                         <h4>서울, 강남구</h4>
                     </div>
