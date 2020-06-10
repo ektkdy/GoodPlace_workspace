@@ -169,7 +169,7 @@ public class RoomServiceImpl implements RoomService{
 	
 	// --------- 숙소관리 끝 --------------------------
 	
-	// --------- 숙소검색 시작 -------------------------
+	// --------- 숙소조회 시작 -------------------------
 	
 	@Override
 	public ArrayList<Room> searchRoom(Room room) {
@@ -177,15 +177,18 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
+	public Room roomDetail(int roNo) {
+		return rDao.roomDetail(sqlSession, roNo);
+	}
+
+	// --------- 숙소조회 끝 -------------------------
+
+	
+	@Override
 	public int updateRoomForm(int roNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-
-	
-	
 	
 	
 }

@@ -302,7 +302,7 @@
 	           	<div class="rooms power bottomArea">
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
 			               	<li class="roomDetail">
-			                    <a href="">
+			                    <a href="roomDe.ro?roNo=${ roomList.roNo }">
 			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
@@ -314,14 +314,14 @@
 	           	</div>
 
 				<script>
-	            	$(function(){
-	            		$(".roomDetail").click(function(){
-	            			var roNo = $(this).children(".roNo").val();
-	            			console.log(roNo);
+	            	//$(function(){
+	            		//$(".roomDetail").click(function(){
+	            			//var roNo = $(this).children(".roNo").val();
+	            			//console.log(roNo);
 	            			//location.href="roomDe.ro?roNo=" + roNo;
 	            			//console.log("roomDetail li 클릭됨");
-	            		});
-	            	});
+	            		//});
+	            	//});
 				</script>
 	        <!-- 페이징 바 -->
 	        <div class="pagingBar">
@@ -333,7 +333,7 @@
 	            <button>n</button>&nbsp;
 	            <button>&gt;</button>
 	        </div>
-	    </div>
+	    </div>	
 	    	
    	</div>
     <!-- /content -->

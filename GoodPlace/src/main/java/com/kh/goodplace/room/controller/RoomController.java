@@ -577,13 +577,22 @@ public class RoomController {
 		return mv;
    	}
 	
-//    @RequestMapping("roomDe.ro")
-//    public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
-//    	System.out.println("roNo : " + roNo);
-//    	//room  = rService.roomDetail(roNo);
-//    	
-//    	//return mv;
-//    }
+    @RequestMapping("roomDe.ro")
+    public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
+    	System.out.println("roNo : " + roNo);
+    	room  = rService.roomDetail(roNo);
+    	System.out.println(room);
+    	
+    	
+    	if(room != null) {
+    		mv.addObject("room", room);
+    		mv.setViewName("user/roomDetails");
+    	}else {
+    		mv.addObject("msg", "숙소검색 실패!!");
+            mv.setViewName("common/errorPage");
+    	}
+    	return mv;
+    }
 	// ------------- 사용자 끝 --------------------------------------------------
 
 }

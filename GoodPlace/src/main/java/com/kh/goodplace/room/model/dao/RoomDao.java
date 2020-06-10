@@ -178,15 +178,17 @@ public class RoomDao {
 	
 	// --------- 숙소관리 시작 -----------------
 	
-	// --------- 숙소검색 시작 -----------------
+	// --------- 숙소조회 시작 -----------------
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room); // 미완성
 	}
 
-	
+	public Room roomDetail(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.selectOne("roomMapper.selectRoom", roNo);
+	}
 
 	
-
+	// --------- 숙소조회 끝 -----------------
 	
 	
 	

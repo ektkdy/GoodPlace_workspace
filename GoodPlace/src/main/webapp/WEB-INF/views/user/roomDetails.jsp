@@ -13,7 +13,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}//swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/swiper.css">
 
     <!-- Swiper JS -->
     <script src="../js/swiper.min.js"></script>
