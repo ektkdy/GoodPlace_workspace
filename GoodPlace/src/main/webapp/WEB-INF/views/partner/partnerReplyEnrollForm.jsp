@@ -95,12 +95,12 @@
 	                    <c:choose>
 	                    	<c:when test="${empty r.reply }">
 			                    <div class="replyBtnArea" style="width:100%">
-			                        <button class="blue_btn" type="submit" >등록하기</button>
+			                        <button class="blue_btn" type="button">등록하기</button>
 			                    </div>
 		                    </c:when>
 		                    <c:otherwise>
 		                    	<div class="replyBtnArea" style="width:100%">
-			                        <button class="blue_btn" type="submit" >수정하기</button>
+			                        <button class="blue_btn" type="button">수정하기</button>
 			                    </div>
 		                    </c:otherwise>
 	                    </c:choose>
@@ -109,6 +109,17 @@
             </div>
         </div>
     </div>
+<!-- 섬머노트 비었을 경우 등록 안되게끔 -->
+<script>
+
+$('.blue_btn').click(function(){
+	if ($('#summernote').summernote('isEmpty')) {
+		  alert('내용을 입력해주세요.');
+		}else{
+			$("#insertReply").submit();
+		}
+});
+</script>
 <!-- 토글 -->
     <script>
         $(function(){

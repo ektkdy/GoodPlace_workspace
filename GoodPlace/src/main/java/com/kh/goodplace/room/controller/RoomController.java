@@ -263,6 +263,16 @@ public class RoomController {
 		
 		
 // ------------------------------ 파트너 예약관리 시작 ----------------------------------
+	
+
+// ------------------------------ 파트너 일정관리 시작 ----------------------------------
+	
+	@RequestMapping("calendarView.ca")
+	public String calendarView(Model model) {
+		
+		return "partner/partnerCalender";
+	}
+	
 
 // ------------- Power 관리 시작 --------------------------------------------------
 	
