@@ -40,6 +40,8 @@
 		<result column="FILE_PATH" property="filePath"/>
 		<result column="RPNO" property="rpNo"/>
 		<result column="POWER_KIND" property="powerKind"/>
+		<result column="PERIOD" property="period"/>
+		<result column="PRICE" property="powerPrice"/>
 	</resultMap>
 	
 	
@@ -153,6 +155,38 @@
 		insert into attachment
 		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 1, rono.currval, null)
 	</insert>
+	
+	<select id="selectRoomOkeyListCount" resultType="_int" parameterType="_int">
+		select count(*) 
+		  from rooms
+		 where usno=#{usNo} and status=1
+	</select>
+	
+	<select id="selectOkeyList" resultMap="roomAndRoomspayResultSet" parameterType="_int">
+		select r.status, r.rooms_title, r.usno, r.rono, r.add_basic,
+			   count(p.rono) as totalSal
+	      from rooms r
+	      left join roomspay p on (r.rono=p.rono)
+	     group by r.status, r.rooms_title, r.usno, r.rono, r.add_basic
+	    having r.usno = #{userNo}
+	     order by totalSal desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!-- 파워관리 시작-->
