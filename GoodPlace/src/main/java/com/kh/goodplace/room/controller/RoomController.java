@@ -464,11 +464,6 @@ public class RoomController {
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
    	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
-//		System.out.println("tripArea : " + tripArea);
-//		System.out.println("tripStartDate : " + tripStartDate);
-//		System.out.println("tripEndDate : " + tripEndDate);
-//		System.out.println("tripPeople : " + tripPeople);
-//		System.out.println("filterValue : " + filterValue);
 
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
@@ -478,16 +473,15 @@ public class RoomController {
 		
 		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		System.out.println(" roomList 조회 : " + roomList);
-    	System.out.println("roomList 의 크기 : " + roomList.size());
+   		//System.out.println(" roomList 조회 : " + roomList);
+    	//System.out.println("roomList 의 크기 : " + roomList.size());
     	
     	// roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 set
     	ArrayList<Board> reivew = null;
     	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
-    		//roomList.get(i).getFacility().contains(s)
-        	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
+        	//System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
     	}
 
         if(!roomList.isEmpty()){
@@ -503,7 +497,6 @@ public class RoomController {
             mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
-        System.out.println("ㅇㅇㅇㅇ");
         return mv;
    	}
 	
@@ -540,8 +533,8 @@ public class RoomController {
 			
 			String[] facilityList =  facility.split(",");
 			String[] serviceList =  service.split(",");
-			System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
-			System.out.println("service split : " + serviceList[0]);
+			//System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
+			//System.out.println("service split : " + serviceList[0]);
 			roomList2 = (ArrayList)mv.getModel().get("roomList");
 			
 			
@@ -549,8 +542,8 @@ public class RoomController {
 			for(Room compareRoom : roomList2) {
 				compareFacility = compareRoom.getFacility();
 				compareService = compareRoom.getService();
-				System.out.println("compareFacility : " + compareFacility);
-				System.out.println("compareService : " + compareService);
+				//System.out.println("compareFacility : " + compareFacility);
+				//System.out.println("compareService : " + compareService);
 				compareRoom.setFilterStatus("Y");
 				// 해당 compareRoom이 필터 조건에 만족하는지 for문 돌릴 것
 				for(int i=0; i<facilityList.length; i++) {
@@ -564,8 +557,8 @@ public class RoomController {
 					}
 				}
 				if(!compareRoom.getFilterStatus().equals("N")) {
-					System.out.println("compareRoom : " + compareRoom);
-					System.out.println("roomListWithFilter : " + roomListWithFilter);
+					//System.out.println("compareRoom : " + compareRoom);
+					//System.out.println("roomListWithFilter : " + roomListWithFilter);
 					roomListWithFilter.add(compareRoom);
 
 					count++;
@@ -573,7 +566,7 @@ public class RoomController {
 			}
 			
 			// 필터 조건 자국 남겨주기 위해 set
-			System.out.println("filterValue : " + filterValue);
+			//System.out.println("filterValue : " + filterValue);
 			mv.addObject("filterValue", filterValue);
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
@@ -584,8 +577,13 @@ public class RoomController {
 		return mv;
    	}
 	
-    
+//    @RequestMapping("roomDe.ro")
+//    public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
+//    	System.out.println("roNo : " + roNo);
+//    	//room  = rService.roomDetail(roNo);
+//    	
+//    	//return mv;
+//    }
 	// ------------- 사용자 끝 --------------------------------------------------
-    
 
 }
