@@ -54,6 +54,8 @@ public class Room {
 	private String filePath;	// 숙소썸네일 저장경로
 	private int status;			// 운영중(1),승인대기(2),승인거절(3),휴면(4),노출안됨(5)
 	
+	private int totalSal;
+	
 	/* 파워 등록 쪽 */
 	private int poNo1;			// 파워등록유무 (기본0)
 	private Date powerStart;	// 파워시작일
@@ -89,5 +91,5 @@ public class Room {
 	
 	/* DB에는 없지만 새로 생성한 변수 */
 	private int reviewCount;	// 숙소별 Review 개수
-	//private ArrayList<Board> review; // 숙소별 Review 리스트
+	private String filterStatus;// 필터 조건에 만족하는지 숙소의 상태값 설정
 }

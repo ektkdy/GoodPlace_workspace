@@ -113,11 +113,17 @@ public interface BoardService {
 
 	// ------------------------------------------------------ 
 	
-	//1-1.파트너  리뷰 전체 리스트 조회용 서비스 - 기하
-	int selectReviewCount(int userNo);
+	//1-1.파트너  리뷰 (답글전) 리스트 조회용 서비스 - 기하
+	int selectReviewCount1(int userNo);
 	
-	//1-2.리뷰 조회용서비스 - 기하
-	ArrayList<Board> reviewList(PageInfo pi, int userNo);
+	//1-1.파트너  리뷰 (답글후) 리스트 조회용 서비스 - 기하
+	int selectReviewCount2(int userNo);
+	
+	//1-2.답글전 리뷰  조회용서비스 - 기하
+	ArrayList<Board> reviewList1(PageInfo noReplyPi, int userNo);
+	
+	//1-2.답글후 리뷰  조회용서비스 - 기하
+	ArrayList<Board> reviewList2(PageInfo responsePi, int userNo);
 	
 	//1-3.리뷰 상세조회용(리뷰작성전) - 기하
 	Board selectReview(int reNo);

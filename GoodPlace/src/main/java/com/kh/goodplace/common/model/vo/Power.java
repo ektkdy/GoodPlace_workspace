@@ -19,6 +19,7 @@ public class Power {
 	private int price;		// 파워결제금액
 
 	/* 파워 컬럼들 */
+	private int poNo;			// 파워번호
 	private String powerKind;	// 파워종류
 	private int period;			// 파워기간
 	private int powerPrice;		// 파워금액

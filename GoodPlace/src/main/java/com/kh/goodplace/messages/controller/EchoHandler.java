@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -87,9 +88,8 @@ public class EchoHandler extends TextWebSocketHandler{
 	    	croom = cDao.selectChatRoom(roomVO); // 채팅방 정보 가져옴
 	    }
 	    
-	    // 데이터베이스에서 가져온 채팅방 정보를 다시 messageVO에 넣음 --> 채팅방이 없을 경우도 있으므로 그럴경우 채팅방을 생성하고 합치기 위해
-	    messageVO.setChNo(croom.getChNo()); 
-	    System.out.println(croom);
+	    // 채팅방의 chno를 외부키 객체로 넣어줌
+	    messageVO.setChNo(croom.getChNo());
 	    
 	    if(croom.getUserEmail().equals(messageVO.getMessageSender())) { // 보낸 사람이 채팅방의 유저1와 일치할 경우
 	    	messageVO.setMessageReceiver(roomVO.getTutorEmail());	// 상대방이름을 receiver에 넣음
@@ -98,16 +98,17 @@ public class EchoHandler extends TextWebSocketHandler{
 	  		messageVO.setMessageReceiver(roomVO.getUserEmail());		// 보낸사람이름을 receiver에 넣음
 	  		System.out.println("2");
 	    }
-	    System.out.println(sessions.get(messageVO.getMessageReceiver()));
-	   
-	    sessions.get(messageVO.getMessageSender()).sendMessage(new TextMessage(messageVO.getMessageContent()));
 	    
+	    System.out.println("messageVO : " + messageVO);
+	    int result = cDao.insertMessage(messageVO);
+	    
+	    // 자신에게 메세지 보냄													
+	    sessions.get(messageVO.getMessageSender()).sendMessage(new TextMessage(message.getPayload()));
 	    if(sessions.get(messageVO.getMessageReceiver()) != null) {	// 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
-	    	sessions.get(messageVO.getMessageReceiver()).sendMessage(new TextMessage(messageVO.getMessageContent()));
+	    	sessions.get(messageVO.getMessageReceiver()).sendMessage(new TextMessage(message.getPayload()));
 	    }
 	    
-	    System.out.println(messageVO);
-	    int result = cDao.insertMessage(messageVO);
+	    // 
 	    
 	    /*
 	    // 세션에 접속해있는 모두에게 메세지 전송

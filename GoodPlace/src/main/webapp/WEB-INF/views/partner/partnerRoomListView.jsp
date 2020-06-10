@@ -39,7 +39,7 @@ button:hover{cursor:pointer}
                     <p class="title_tt">숙소관리</p>
                 </span>
                 <span class="up_btn_space" style="margin-top:8px">
-                    <button class="blue_btn" onclick="location.href=''">파워등록신청</button>
+                    <button class="blue_btn" onclick="location.href='selectPower.ro?currentPage=1'">파워등록신청</button>
                     <button class="blue_btn" onclick="location.href='insertRoomForm.ro'">숙소등록</button>
                 </span>
                 
@@ -63,7 +63,7 @@ button:hover{cursor:pointer}
 				                    <tr>
 				                    <c:choose>
 				                    	<c:when test="${r.status eq 1}">
-				                        	<td w><div class="ing" style="margin:0 auto">운영중</div></td>
+				                        	<td><div class="ing" style="margin:0 auto">운영중</div></td>
 				                        </c:when>
 				                        <c:when test="${r.status eq 2 }">
 				                        	<td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>

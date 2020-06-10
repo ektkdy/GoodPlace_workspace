@@ -69,12 +69,18 @@ public class RoomServiceImpl implements RoomService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int selectRoomOkeyListCount(int usNo) {
+		return rDao.selectRoomOkeyListCount(sqlSession, usNo);
+	}
 
 	@Override
-	public int selectRoomList(int roNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo) {
+		return rDao.selectRoomsOkayList(sqlSession, pi, usNo);
 	}
+	
+	
 
 	@Override
 	public int payPower(int roNo) {
@@ -170,6 +176,7 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Room> searchRoom(Room room) {
 		return rDao.searchRoom(sqlSession, room);
 	}
+
 	
 	
 	

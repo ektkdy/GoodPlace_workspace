@@ -20,7 +20,7 @@ public class ChatController {
 	@RequestMapping("mTest.me")
 	public String mTest(ChatRoom cr, Model model) throws Exception {
 		cr.setTutorEmail("ektkdy@naver.com"); // 관리자 아이디
-		cr.setCLASS_class_id(1);
+		cr.setClass_class_id(1);
 		
 		ChatRoom room = cDao.selectChatRoom(cr); // 방 검색
 		
@@ -38,7 +38,7 @@ public class ChatController {
 	@RequestMapping(value="chatConect", produces="application/json; charset=utf-8")
 	public String chatConect(ChatRoom cr) throws Exception {
 		cr.setTutorEmail("ektkdy@naver.com"); // 관리자 아이디
-		cr.setCLASS_class_id(1);
+		cr.setClass_class_id(1);
 		
 		System.out.println(cr);
 		ChatRoom room = cDao.selectChatRoom(cr);

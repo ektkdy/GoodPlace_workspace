@@ -279,6 +279,11 @@ public class MemberController {
 		System.out.println("상대방 : " + tutor);
 		return new Gson().toJson(tutor);
 	}
+	
+	@RequestMapping("ReserveForm.ro")
+	public String selectReserve() {
+		return "user/reserve";
+	}
 
 
 

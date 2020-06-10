@@ -524,19 +524,47 @@ public class BoardController {
     
     
     @RequestMapping("reviewList.re")
-    public String reviewList(int currentPage, Model model, HttpSession session) {
+    public String reviewList(int currentPage, String status, Model model, HttpSession session) {
  	   
 		 Member m = (Member)session.getAttribute("loginUser");
-		 
 		 int userNo = m.getUsNo();
-		 
-		 int listCount = bService.selectReviewCount(userNo);
-		 
-		 PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		 
-		 ArrayList<Board> list = bService.reviewList(pi, userNo);
-		 model.addAttribute("pi", pi);
-		 model.addAttribute("list", list);
+		 		
+		if(status == null ) {
+			int responseListCount = bService.selectReviewCount2(userNo);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+
+			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
+			 
+			 model.addAttribute("responsePi", responsePi);
+			 model.addAttribute("reList", responseList);
+			 
+			 int noReplyListCount = bService.selectReviewCount1(userNo);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+
+			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
+
+			 model.addAttribute("noReplyPi", noReplyPi);
+			 model.addAttribute("noList", noreplyList);
+		}else if(status.equals("Y")){
+			 int responseListCount = bService.selectReviewCount2(userNo);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+
+			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
+			 
+			 model.addAttribute("status",status);
+			 model.addAttribute("responsePi", responsePi);
+			 model.addAttribute("reList", responseList);
+			 
+		}else {
+			 int noReplyListCount = bService.selectReviewCount1(userNo);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+
+			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
+
+			 model.addAttribute("noReplyPi", noReplyPi);
+			 model.addAttribute("noList", noreplyList);
+		}
+
 		 
 		 return "partner/partnerReplyListView";
     
@@ -553,7 +581,7 @@ public class BoardController {
     }
     
     @RequestMapping("insert.re")
-    public ModelAndView insertReply(int reNo, String reply, ModelAndView mv) {
+    public String insertReply(int reNo, String reply, Model model) {
     	
     	Board b = new Board();
     	
@@ -561,18 +589,20 @@ public class BoardController {
     	b.setReply(reply);
     	
     	int result = bService.insertReply(b);
+    	
+    	
+    	
     	if(result > 0){ // 게시글 상세조회 성공
             
             Board r = bService.selectReview(reNo);
-            mv.addObject("r", r);
-            mv.setViewName("partner/partnerReplyListView");
+            model.addAttribute("r", r);
+            return "redirect:reviewList.re?currentPage=1";
             
         }else{ // 게시글 상세조회 실패
         	
-            mv.addObject("msg", "리뷰 등록 실패!!");
-            mv.setViewName("common/errorPage");
+            model.addAttribute("msg", "리뷰 등록 실패!!");
+            return "common/errorPage";
         }
-        return mv;
     	
     }
     
@@ -586,5 +616,6 @@ public class BoardController {
 		 return "partner/partnerReplyDetailView";
     	
     }
+    
     
 }

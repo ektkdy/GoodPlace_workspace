@@ -115,7 +115,7 @@ public class RoomController {
 	
 		@RequestMapping("roomDetailView.ro")
 		public String roomDetailView(int rno, Model model ) {
-			System.out.println(rno);
+			
 			 Room r = rService.selectRoom(rno);
 			
 			model.addAttribute("r", r);
@@ -124,7 +124,11 @@ public class RoomController {
 		}
 		
 		@RequestMapping("updateRoomForm.ro")
-		public String updateRoomForm() {
+		public String updateRoomForm(int roNo, Model model) {
+			
+			Room r = rService.selectRoom(roNo);
+			
+			model.addAttribute("r", r);
 			
 			return "partner/partnerRoomUpdateForm";
 		}
@@ -170,6 +174,79 @@ public class RoomController {
 			return changeName;
 			
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		@RequestMapping("selectPower.ro")
+		public String selectPowerList(int currentPage, HttpSession session, Model model) {
+			
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
+			
+			int listCount = rService.selectRoomOkeyListCount(usNo);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
+			ArrayList<Room> plist = rService.selectPowerList();
+			
+			model.addAttribute("pi", pi);
+			model.addAttribute("list", list);
+			model.addAttribute("plist", plist);
+			
+			return "partner/partnerSelectPower";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+// ------------------------------ 파트너 예약관리 시작 ----------------------------------
+		
+		
 		
 	
 // ------------- Power 관리 시작 --------------------------------------------------
@@ -367,6 +444,7 @@ public class RoomController {
 //		System.out.println("tripEndDate : " + tripEndDate);
 //		System.out.println("tripPeople : " + tripPeople);
 //		System.out.println("filterValue : " + filterValue);
+
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
 		room.setStartDays(tripStartDate);
@@ -383,7 +461,7 @@ public class RoomController {
     	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
-    		
+    		//roomList.get(i).getFacility().contains(s)
         	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
     	}
 
@@ -400,10 +478,83 @@ public class RoomController {
             mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
+        System.out.println("ㅇㅇㅇㅇ");
         return mv;
    	}
-    
+	
+	
+	@SuppressWarnings("null")
+	@RequestMapping("searchRoWithFilter.ro")
+   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
+		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, filterValue, room, board, mv);
+		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
+		String serviceFull = "샴푸,화장지,바디워시,비누,짐보관서비스,수건,Free wifi";
+		
+		String facility = "";
+		String service = "";
+		
+		String compareFacility = "";
+		String compareService = "";
+		
+		ArrayList<Room> roomList2 = null;
+		
+		ArrayList<Room> roomListWithFilter = new ArrayList<>();
+		
+		int count = 0;
+		
+		if(!filterValue.equals("")) {
+			String[] filter = filterValue.split(",");
+			for(int i=0; i<filter.length; i++) {
+				if(facilityFull.contains(filter[i])) {
+					facility += (filter[i] + ",");
+				}
+				if(serviceFull.contains(filter[i])) {
+					service += (filter[i] + ",");
+				}
+			}
+			
+			String[] facilityList =  facility.split(",");
+			String[] serviceList =  service.split(",");
+			System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
+			System.out.println("service split : " + serviceList[0]);
+			roomList2 = (ArrayList)mv.getModel().get("roomList");
+			
+			
+			
+			for(Room compareRoom : roomList2) {
+				compareFacility = compareRoom.getFacility();
+				compareService = compareRoom.getService();
+				System.out.println("compareFacility : " + compareFacility);
+				System.out.println("compareService : " + compareService);
+				compareRoom.setFilterStatus("Y");
+				// 해당 compareRoom이 필터 조건에 만족하는지 for문 돌릴 것
+				for(int i=0; i<facilityList.length; i++) {
+					if(!compareFacility.contains(facilityList[i])) {
+						compareRoom.setFilterStatus("N");
+					}
+				}
+				for(int i=0; i<serviceList.length; i++) {
+					if(!compareService.contains(serviceList[i])) {
+						compareRoom.setFilterStatus("N");
+					}
+				}
+				if(!compareRoom.getFilterStatus().equals("N")) {
+					System.out.println("compareRoom : " + compareRoom);
+					System.out.println("roomListWithFilter : " + roomListWithFilter);
+					roomListWithFilter.add(compareRoom);
+
+					count++;
+				}
+			}
+			
+			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
+			mv.addObject("roomList", roomListWithFilter);
+		}
+
+		return mv;
+   	}
+	
     
 	// ------------- 사용자 끝 --------------------------------------------------
     

@@ -14,8 +14,8 @@
         <jsp:include page="../common/partnerMenubar.jsp"/>
         <div id="contents" style="width:980px" >
             <div id="tab">
-                <button class="on lt_tab">답글 전 후기</button>
-                <button class="off gt_tab">답글 후 후기</button>
+                <button class="on lt_tab">답변 전 후기</button>
+                <button class="off gt_tab">답변 완료 후기</button>
             </div>
             <div class="sitemap">
                 <a href="#">
@@ -25,14 +25,15 @@
                     <span style="height: 30px;">후기관리</span>&gt;
                 </a>
                 <a href="#">
-                    <span style="height: 30px;">답글 전 후기</span>&gt;
+                    <span style="height: 30px;">답변 전 후기</span>&gt;
                 </a>
                 <a href="#">
-                    <span style="height: 30px;">답글작성</span>
+                    <span style="height: 30px;">답변 작성</span>
                 </a>
             </div>
             <div class="con" style="float:left; color:#000; ">
-                <span id="page_title" style="margin-top:20px"><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;"><p class="title_tt">답글 전 후기</p></span>
+                <span id="page_title" style="margin-top:20px"><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" 
+                												style="vertical-align: middle;"><p class="title_tt">답변 전 후기</p></span>
                 <br clear="both">
                 <form action="insert.re"  id="insertReply" method="post" >
                 <input type="hidden" name="reNo" value="${r.reNo }">
@@ -40,7 +41,7 @@
 	                    <table class="replyDetail" cellpadding="0" cellspacing="0">
 	                        <thead>
 	                            <tr class="pdTop">
-	                                <td rowspan="2" width="70px" >
+	                                <td rowspan="2" width="70px" style="border-left:1px solid #bebebe">
 	                                    <div align="center">
 		                                    <c:choose>
 					                    		<c:when test="${empty r.changeName }">
@@ -54,12 +55,12 @@
 	                                </td>
 	                                <td width="250">여행자 : ${r.userName}</td>
 	                                <td width="300">예약자 평점 : ${r.score }</td>
-	                                <td width="250">연령대 : ${r.age }대</td>
+	                                <td width="250" style="border-right:1px solid #bebebe">연령대 : ${r.age }대</td>
 	                            </tr>
 	                            <tr class="pdBot">
 	                                <td>여행일 : ${r.endDays}</td>
 	                                <td>후기작성일 : ${r.reviewDate}</td>
-	                                <td>여행목적 : ${r.concept}</td>
+	                                <td style="border-right:1px solid #bebebe">여행목적 : ${r.concept}</td>
 	                            </tr>
 	                    </thead>
 	                    <tbody>
@@ -77,23 +78,32 @@
 		                        <c:when test="${empty r.reply }">
 			                        <tr>
 			                            <td colspan="4">
-			                                <textarea id="summernote" name="reply" class="replyAnswer" rows="10"></textarea>
+			                                <textarea id="summernote" name="reply" class="replyAnswer" rows="10" style="padding-left:15px"></textarea>
 			                            </td>
 			                        </tr>
 		                        </c:when>
 		                        <c:otherwise>
 		                        	<tr>
 			                            <td colspan="4">
-			                                <textarea id="summernote" name="reply" class="replyAnswer" rows="10">${r.reply }</textarea>
+			                                <textarea id="summernote" name="reply" class="replyAnswer"  rows="10" style="padding-left:15px">${r.reply }</textarea>
 			                            </td>
 			                        </tr>
 		                        </c:otherwise>
 	                        </c:choose>
 	                    </tfoot>
 	                    </table>
-	                    <div class="replyBtnArea" style="width:100%">
-	                        <button class="blue_btn" type="submit" >댓글등록</button>
-	                    </div>
+	                    <c:choose>
+	                    	<c:when test="${empty r.reply }">
+			                    <div class="replyBtnArea" style="width:100%">
+			                        <button class="blue_btn" type="submit" >등록하기</button>
+			                    </div>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<div class="replyBtnArea" style="width:100%">
+			                        <button class="blue_btn" type="submit" >수정하기</button>
+			                    </div>
+		                    </c:otherwise>
+	                    </c:choose>
                 	</div>
                 </form>
             </div>

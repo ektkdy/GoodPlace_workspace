@@ -364,15 +364,27 @@
 	
 	
 	<!-- 기하 partner review -->
-	<select id="selectReviewCount" parameterType="_int" resultType="_int">
+	<!-- 답글전 리뷰 리스트 조회 -->
+	<select id="selectReviewCount1" parameterType="_int" resultType="_int">
 		select count(*)
 		  from review
 		 where rono in(select rono
 		 				 from rooms
 		 				where usno= #{userNo})
+		   and reply_status = 'N'
 	</select>
 	
-	<select id="reviewList" parameterType="_int" resultMap="reviewResultSet" >
+	<!-- 답글후 리뷰 리스트 조회 -->
+	<select id="selectReviewCount2" parameterType="_int" resultType="_int">
+		select count(*)
+		  from review
+		 where rono in(select rono
+		 				 from rooms
+		 				where usno= #{userNo})
+		   and reply_status = 'Y'
+	</select>
+	<!-- 답글 전 조회용 -->
+	<select id="reviewList1" parameterType="_int" resultMap="reviewResultSet" >
 		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
 			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
 	   	  FROM REVIEW RE
@@ -381,6 +393,19 @@
 		 WHERE RE.RONO IN(SELECT R.RONO
                             FROM ROOMS 
                            WHERE R.USNO = #{userNo})
+           AND REPLY_STATUS = 'N'
+	</select>
+	<!-- 답글 후 조회용 -->
+	<select id="reviewList2" parameterType="_int" resultMap="reviewResultSet" >
+		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+	   	  FROM REVIEW RE
+		  JOIN MEMBER M ON(M.USNO = RE.USNO)
+		  JOIN ROOMS R ON(R.RONO = RE.RONO)
+		 WHERE RE.RONO IN(SELECT R.RONO
+                            FROM ROOMS 
+                           WHERE R.USNO = #{userNo})
+           AND REPLY_STATUS = 'Y'
 	</select>
 	
 	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
