@@ -114,6 +114,19 @@
 		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
 	
+	<!-- Attachment테이블 -->
+	<resultMap type="Attachment" id="attachmentResultSet">
+		<id column="FINO" property="fiNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="UPLOAD_DATE" property="uploadDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="CATEGORY" property="category"/>
+		<result column="RONO" property="roNo"/>
+		<result column="EXNO" property="exNo"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
 		select count(*)
 		  from rooms
@@ -293,20 +306,26 @@
 	
 	<!-- 숙소관리 끝-->
 
-	<!-- 숙소검색 시작 // 미완성 -->
+	<!-- 숙소조회 시작 -->
 	<select id="selectRoomSearch" parameterType="Room" resultMap="roomAndRoomspayResultSet">
 		SELECT *
-		FROM ROOMS
-		WHERE RONO NOT IN (
+		  FROM ROOMS
+		 WHERE RONO NOT IN (
 		                    SELECT R.RONO
 		                    FROM ROOMS R
 		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
 		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND (P.END_DAYS-1))
 		                        or (#{endDays} BETWEEN (P.START_DAYS+1) AND P.END_DAYS))
-				)
-        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
-        AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
+							)
+          AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
+          AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
         ORDER BY RONO
+	</select>
+
+	<select id="selectRoomDetailImage" parameterType="_int" resultMap="attachmentResultSet">
+		SELECT *
+		 FROM ATTACHMENT
+		WHERE RONO = #{roNo}
 	</select>
 
 	<!-- 숙소검색 끝 -->

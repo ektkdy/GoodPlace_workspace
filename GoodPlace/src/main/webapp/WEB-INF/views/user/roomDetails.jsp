@@ -147,7 +147,7 @@
                 <!-- Swiper -->
                 <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room1.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
                     <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room2.jpg" width="100%" height="100%"></div>
                     <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room3.jpg" width="100%" height="100%"></div>
                     <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/user/room4.jpg" width="100%" height="100%"></div>
