@@ -225,6 +225,13 @@
          WHERE E.USNO= #{ptno} 
          group by NVL(E.EXNO, NULL), NVL(E.EXP_TITLE, NULL), NVL(E.ADD_BASIC, NULL), NVL(E.START_DATE, NULL), NVL(E.STATUS, NULL)
 	</select>
-
+	
+	<!-- 파트너의 정보 조회 : 진아 -->
+	<select id="selectPartner" parameterType="_int" resultMap="memberResultSet">
+ 		SELECT *
+		  FROM MEMBER
+          JOIN PARTNER USING (PANO)
+		 WHERE USNO = #{roNo}
+	</select>
 
 </mapper>

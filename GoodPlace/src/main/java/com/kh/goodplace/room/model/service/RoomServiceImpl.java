@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -184,6 +185,11 @@ public class RoomServiceImpl implements RoomService{
 	@Override
 	public ArrayList<Attachment> getDetailImages(int roNo) {
 		return rDao.getDetailImages(sqlSession, roNo);
+	}
+	
+	@Override
+	public Member getPartner(int roNo) {
+		return  rDao.getPartner(sqlSession, roNo);
 	}
 	
 	// --------- 숙소조회 끝 -------------------------

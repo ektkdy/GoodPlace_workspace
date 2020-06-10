@@ -221,15 +221,7 @@
                         </div>
                         <div class="fullWidth">
                             <h3>특이사항</h3><br>
-                            <p>
-                                규정된 시간 외 체크인 시 사전에 협의 요망.<br>
-                                23시 이후 귀가 시 이웃 주민들에게 피해를 주지 않도록 조용하게 이동 바랍니다.<br>
-                                짐보관은 사전에 문의부탁드립니다.<br>
-                                모든 고객의 편의를 위하여 예약된 입실 인원 외 방문을 제한합니다.<br>
-                                귀중품의 파손 및 현금분실 등은 숙박업소에서 책임지지 않습니다.<br>
-                                숙소 내 금연/금주입니다.<br>
-                                예약 확정 후 받아보시는 카톡ID로 자세한 약도 등의 안내가 발송됩니다.<br>
-                            </p>
+                            ${ room.roomsNotice }
                         </div><br><br>
                     </div>
                     <div style="width:20%; margin-right:5%;">
@@ -237,7 +229,7 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div class="fullWidth">
-                            <div div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">서울시 강남구 논현로 111 302호 </h2></div>
+                            <div div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
                             <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
                         </div><br><br>
                         
@@ -250,22 +242,15 @@
                             <div class="fullWidth">
                                 <div class="p_profileArea">
                                     <div style="width:50%; text-align: center;">
-                                        <img src="../img/partnerImg.jpg" class="p_profile"/>
+                                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ room.paPofile }" class="p_profile"/>
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
-                                        <h1>홍플</h1><br>
+                                        <h1>${ room.roomsTitle }</h1><br>
                                         <div class="buttonStyle1" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
                                     </div>  
                                 </div><hr><br>
                                 <div class="fullWidth">
-                                    <p>
-                                        홍플에대한 설명 홍플에대한 설명문구1줄<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                    </p>
+                                    <p>${ room.partnerIntro }</p>
                                 </div>
                             </div><br><br>
                         </div>  

@@ -97,4 +97,7 @@ public class Room {
 	private String detailImg3;  // Attachment 테이블에 담겨있는 숙소상세이미지3
 	private String detailImg4;  // Attachment 테이블에 담겨있는 숙소상세이미지4
 	
+	/* Member테이블  + Partner테이블 */
+	private String paPofile;	// 프로필사진 변경이름
+	private String partnerIntro; // 파트너소개
 }

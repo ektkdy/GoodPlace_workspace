@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 public interface RoomService {
@@ -98,10 +99,11 @@ public interface RoomService {
 	//2. 숙소리스트에서 특정 숙소상세페이지 조회용 서비스 - 진아
 	Room roomDetail(int roNo);
 	
-	//3. 숙소의 필드에 상세이미지 파일명 저장용 서비스 - 진아
+	//3. 숙소 필드에 상세이미지 파일명 저장용 서비스 - 진아
 	ArrayList<Attachment> getDetailImages(int roNo);
 	
-	
+	//4. 파트너 정보 조회용 서비스 - 진아 
+	Member getPartner(int roNo);
 	
 	
 	
