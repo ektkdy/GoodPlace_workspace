@@ -21,6 +21,7 @@ import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
@@ -216,28 +217,45 @@ public class RoomController {
 		
 		
 		
-		@RequestMapping("selectPower.ro")
-		public String selectPowerList(int currentPage, HttpSession session, Model model) {
-			
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			int usNo = loginUser.getUsNo();
-			
-			int listCount = rService.selectRoomOkeyListCount(usNo);
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-			
-			ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
-			ArrayList<Room> plist = rService.selectPowerList();
-			
-			model.addAttribute("pi", pi);
-			model.addAttribute("list", list);
-			model.addAttribute("plist", plist);
-			
-			return "partner/partnerSelectPower";
-		}
+	@RequestMapping("selectPower.ro")
+	public String selectPowerList(int currentPage, HttpSession session, Model model) {
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
 		
+		int listCount = rService.selectRoomOkeyListCount(usNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
+		ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
+		ArrayList<Room> plist = rService.selectPowerList();
 		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		model.addAttribute("plist", plist);
+		
+		return "partner/partnerSelectPower";
+	}
+	
+	@RequestMapping("payPower.ro")
+	public String payPower(int roNo, int poNo, Model model) {
+		Room r = rService.selectRoom(roNo);
+		Room p = rService.selectPower(poNo);
+		
+		model.addAttribute("r", r);
+		model.addAttribute("p", p);
+		return "partner/payPower";
+	}
+	
+	@RequestMapping("paymentPower.ro")
+	public String paymentPower(int roNo) {
+		/*
+		 * Room r = rService.updateRoomPower(roNo);
+		 * 
+		 * model.addAttribute("r", r);
+		 */
+		
+		return "partner/paymentPower";
+	}
 		
 		
 		

@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,44 +59,61 @@
                         <p style="font-size: 25px; margin-left: 20px;">숙소정보</p>
                         <hr style="width: 950px;" align="left">
                         <div style="display: inline;">
-                            <img src="" style="width: 400px; height: 300px;">
+                            <img src="${pageContext.request.contextPath}/resources/uploadFiles/${r.changeName}" style="width: 400px; height: 300px;">
                         </div>
                         <div style="display: inline-block;">
                             <table id="roomInfo">
+                            	<input type="hidden" name="roNo" value="${ r.roNo }">
                                 <tr>
                                     <td>숙소명</td>
-                                    <td>홍길동의숙소1</td>
+                                    <td>${ r.roomsTitle }</td>
                                 </tr>
                                 <tr>
                                     <td>파워종류</td>
-                                    <td>파워종류</td>
+                                    <td>${ p.powerKind }</td>
                                 </tr>
                                 <tr>
                                     <td>파워기간</td>
-                                    <td>20.01.01~20.01.31(90일)</td>
+                                    <td>
+                                    	<jsp:useBean id="toDay" class="java.util.Date" />
+										<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/>부터
+										
+										${ p.period }일 간 
+									</td>
                                 </tr>
                                 <tr>
                                     <td>총 금액</td>
-                                    <td>1200000원</td>
+                                    <td><fmt:formatNumber value="${ p.powerPrice }"/>원</td>
                                 </tr>
                             </table>
                         </div>
                         <hr style="width: 950px;" align="left">
                         <div style="text-align:center; margin:50px 0px;">
                             <p>파워등록을 신청하시겠습니까? <br>
-                                신청 후 취소가 불가합니다.<br>
-                                신청하기를 누르면 결제 페이지로 이동합니다.
+                                                     신청 후 취소가 불가합니다.<br>
+                                                     신청하기를 누르면 결제 페이지로 이동합니다.
                             </p>
                         </div>
                     </div>
                     
                 </div>
                 <div id="btns">
-                    <button id="cancle">취소하기</button>
-                    <button id="next">신청하기</button>
+                    <button type="button" id="cancle" onclick="location.href='list.ro?currentPage=1'">취소하기</button>
+                    <button type="button" id="next">신청하기</button>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+     $(function(){
+		$("#next").click(function(){
+			var roNo = $("#roomInfo").children().eq(0).val();
+			//console.log(roNo)
+			location.herf='paymentPower.ro?roNo='+roNo;
+		});  	 
+     });
+    </script>
+    
 </body>
 </html>
