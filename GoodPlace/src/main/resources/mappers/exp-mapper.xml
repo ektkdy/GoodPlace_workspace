@@ -143,15 +143,21 @@
 		 where exno=#{exNo}
 	</update>
 
-	<update id="restExp" parameterType="Experience">
+	<update id="restExp" parameterType="_int">
 		update experience
 		   set status=4
 	     where exno=#{exNo}
 	</update>
 	
-	<update id="deleteExp" parameterType="Experience">
+	<update id="deleteExp" parameterType="_int">
 		update experience
 		   set status=5
+	     where exno=#{exNo}
+	</update>
+	
+	<update id="endRestExp" parameterType="_int">
+		update experience
+		   set status=1
 	     where exno=#{exNo}
 	</update>
 	

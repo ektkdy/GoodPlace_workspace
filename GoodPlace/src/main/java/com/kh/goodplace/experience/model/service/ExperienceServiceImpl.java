@@ -82,6 +82,10 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.deleteExp(sqlSession, exNo);
 	}
 
+	@Override
+	public int endRestExp(int exNo) {
+		return expDao.endRestExp(sqlSession, exNo);
+	}
 	
 	
 	
@@ -126,6 +130,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public int updateReject(Experience e) {
 		return expDao.updateReject(sqlSession, e);
 	}
+
+	
 
 	
 	

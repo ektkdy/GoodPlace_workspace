@@ -167,6 +167,7 @@
 			   count(p.rono) as totalSal
 	      from rooms r
 	      left join roomspay p on (r.rono=p.rono)
+	     where r.status=1 and r.pono is null
 	     group by r.status, r.rooms_title, r.usno, r.rono, r.add_basic
 	    having r.usno = #{userNo}
 	     order by totalSal desc

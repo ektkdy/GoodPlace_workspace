@@ -64,7 +64,6 @@
             </div>
             <form id="insertExp" action="insert.exp" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
-	             ${ e.expContent }
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="expCategory" value="${ e.expCategory }">
 	            	<input type="hidden" name="language" value="${ e.language }">
