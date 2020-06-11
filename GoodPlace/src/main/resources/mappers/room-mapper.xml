@@ -127,6 +127,24 @@
 		<result column="EXNO" property="exNo"/>
 	</resultMap>
 	
+	<!-- Review테이블 + Member테이블 + Partner테이블 -->
+	<resultMap type="Room" id="reviewAndMemberResultSet">
+		<id column="RENO" property="reNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="REVIEW_TITLE" property="reTitle"/>
+		<result column="REVIEW_CONTENT" property="reContent"/>
+		<result column="CREATE_DATE" property="reviewDate"/>
+		<result column="SCORE" property="score"/>
+		<result column="REPLY" property="reply"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+
+		<result column="ORIGIN_NAME" property="usOriginName"/>
+		<result column="CHANGE_NAME" property="usChangeName"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
 		select count(*)
 		  from rooms
@@ -328,8 +346,16 @@
 		 FROM ATTACHMENT
 		WHERE RONO = #{roNo}
 	</select>
+	
+	<select id="selectReviewList" parameterType="_int" resultMap="reviewAndMemberResultSet">
+		SELECT *
+		  FROM REVIEW
+		  JOIN MEMBER USING (USNO)
+		  JOIN PARTNER USING (PANO)
+		 WHERE RONO=#{roNo}
+	</select>
 
-	<!-- 숙소검색 끝 -->
+	<!-- 숙소조회 끝 -->
 
 
 

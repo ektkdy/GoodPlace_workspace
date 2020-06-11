@@ -245,7 +245,7 @@
                                         <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ room.paPofile }" class="p_profile"/>
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
-                                        <h1>${ room.roomsTitle }</h1><br>
+                                        <h1>${ room.paName }</h1><br>
                                         <div class="buttonStyle1" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
                                     </div>  
                                 </div><hr><br>
