@@ -44,6 +44,11 @@ public class BoardController {
         
         return "admin/a_faqList";
     }
+    // 마이페이지 위시리스트 이동
+    @RequestMapping("wishList.bo") 
+    	public String wishList() {
+    		return"user/wishList";
+    	}
     
     // 사용자 페이지 이벤트리스트 이동
     @RequestMapping("eventForm.bo")

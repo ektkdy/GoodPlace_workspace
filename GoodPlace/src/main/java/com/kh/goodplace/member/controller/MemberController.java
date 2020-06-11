@@ -285,8 +285,6 @@ public class MemberController {
 
 
 
-
-
     // ------------------ 파트너 계정관리 컨트롤러 --------------------
 
     @RequestMapping("partnerMain.me")
