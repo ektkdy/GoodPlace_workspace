@@ -165,6 +165,21 @@ public class BoardDao {
 		
 	}
 	
+	public int inquirySearchCount(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.selectOne("boardMapper.inquirySearchCount", b);
+		
+	}
+	
+	public ArrayList<Board> inquirySearchList(SqlSessionTemplate sqlSession, PageInfo pi, Board b){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.inquirySearchList", b, rowBounds);
+		
+	}
+	
 	// ------------------- 관리자 신고관리 ----------------------
 	
 	public int aSelectReportListCount(SqlSessionTemplate sqlSession) {

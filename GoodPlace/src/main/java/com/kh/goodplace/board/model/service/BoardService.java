@@ -80,6 +80,12 @@ public interface BoardService {
 	// 4.게시글 수정용 서비스-현영
 	int inquiryUpdate(Board b);
 	
+	//5. 1:1문의 검색 총갯수 조회용
+	int inquirySearchCount(Board b);
+	
+	//6. 1:1문의 검색 조회용
+	ArrayList<Board> inquirySearchList(PageInfo pi, Board b);
+	
 	//------------------------------------------------------
 	// 1. 관리자 신고관리 게시판 리스트 조회용 서비스-현영
 	// 1_1. 관리자 공지사항 게시판 총갯수 조회용 서비스

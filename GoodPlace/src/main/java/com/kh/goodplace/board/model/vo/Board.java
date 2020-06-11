@@ -69,6 +69,7 @@ public class Board {
 	
 	/*관리자 검색용 키워드*/
 	private String searchSelect;
+	private String searchSelect2;
 	private String keyword;
 
 	
