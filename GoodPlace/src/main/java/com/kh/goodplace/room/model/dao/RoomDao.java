@@ -180,6 +180,7 @@ public class RoomDao {
 	// --------- 숙소관리 시작 -----------------
 	
 	// --------- 숙소조회 시작 -----------------
+	
 	public ArrayList<Room> searchRoom(SqlSessionTemplate sqlSession, Room room){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomSearch", room);
 	}
@@ -196,6 +197,9 @@ public class RoomDao {
 		return sqlSession.selectOne("memberMapper.selectPartner", roNo);
 	}
 	
+	public ArrayList<Board> getReview(SqlSessionTemplate sqlSession, int roNo){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectReviewList", roNo);
+	}
 	
 	// --------- 숙소조회 끝 -----------------
 	

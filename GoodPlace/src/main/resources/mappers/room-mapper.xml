@@ -140,7 +140,7 @@
 		<result column="REPLY" property="reply"/>
 		<result column="REPLY_DATE" property="replyDate"/>
 		<result column="REPLY_STATUS" property="replyStatus"/>
-
+		<result column="STATUS" property="statusString"/>
 		<result column="ORIGIN_NAME" property="usOriginName"/>
 		<result column="CHANGE_NAME" property="usChangeName"/>
 	</resultMap>
@@ -350,8 +350,8 @@
 	<select id="selectReviewList" parameterType="_int" resultMap="reviewAndMemberResultSet">
 		SELECT *
 		  FROM REVIEW
-		  JOIN MEMBER USING (USNO)
-		  JOIN PARTNER USING (PANO)
+		  LEFT JOIN MEMBER USING (USNO)
+		  LEFT JOIN PARTNER USING (PANO)
 		 WHERE RONO=#{roNo}
 	</select>
 

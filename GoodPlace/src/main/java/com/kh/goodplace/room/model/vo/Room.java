@@ -118,7 +118,9 @@ public class Room {
 	private String age;				// 연령대
 	
 	/* DB에는 없지만 새로 생성한 변수 */
-	private String usOriginName;	//프로필사진 원본이름
-	private String usChangeName;	//프로필사진 변경이름
-	
+	private String usOriginName;	//댓글단회원 프로필사진 원본이름
+	private String usChangeName;	//댓글단회원 프로필사진 변경이름
+	private String region;			//지역 표시 ex)서울특별시, 강남구
+	ArrayList<Board> reviewList;		// Review테이블
+	private String statusString;	//에러 막으려고 만듬
 }

@@ -2,9 +2,9 @@ package com.kh.goodplace.room.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
-import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
@@ -105,7 +105,8 @@ public interface RoomService {
 	//4. 파트너 정보 조회용 서비스 - 진아 
 	Member getPartner(int roNo);
 	
-	
+	//5. 숙소별 리뷰 조회용 서비스 - 진아
+	ArrayList<Board> getReview(int roNo);
 	
 	
 	
