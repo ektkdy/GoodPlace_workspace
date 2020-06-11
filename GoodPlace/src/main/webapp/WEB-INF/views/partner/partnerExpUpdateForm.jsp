@@ -75,7 +75,7 @@
             </span><br>
             <div style="text-align: center; margin-bottom: 150px;"></div>
             <br clear="both">
-            <form action="" id="updateExp" method="post">
+            <form action="" id="updateExp" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="exNo" value="${ e.exNo }">
@@ -216,7 +216,8 @@
 								<ul id="ul">
 									<c:forEach items="${ list }" var="at">
 										<li class="li">
-											<a name="file" href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
+											<input class="fino" type="hidden" value="${ at.fiNo }">
+											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
 											<button class="del">x</button>
 										</li>
 									</c:forEach>
@@ -436,17 +437,21 @@
 
 <!-- 상세사진용  -->
 <script>
-	
 	$(function(){
 		
 		$(".del").click(function(){
 			$(this).parent(".li").remove();
 			
+			var arr = [];
+			arr.put
+			
+			$(this).siblings(".fino");
+			
 			if($(".li").length != 5){
 				if($("#ul").children().is(".addBtn")){
 					
 				}else{
-					$("#ul").append('<button class="addBtn">+</button>');
+					$("#ul").append('<button type="button" class="addBtn">+</button>');
 				}
 			}
 		});

@@ -217,6 +217,7 @@ public class ExperienceController {
 				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
 				Attachment at = new Attachment();
 				
+				at.setExNo(e.getExNo());
 				at.setOriginName(filelist[i].getOriginalFilename());
 				at.setChangeName(changeName);
 				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
