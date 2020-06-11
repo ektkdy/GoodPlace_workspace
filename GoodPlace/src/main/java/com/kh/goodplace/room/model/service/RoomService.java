@@ -59,11 +59,17 @@ public interface RoomService {
 	//리스트 카운트 예약 확정
 	int selectRvRoomConfirmListCount(int usNo);
 	
+	//리스트 카운트 예약 취소
+	int selectRvRoomCancelListCount(int usNo);
+	
 	//리스트 기본 
 	ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo);
 	
 	//예약확정 리스트
 	ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo);
+	
+	//예약확취소 리스트
+	ArrayList<Room> selectRvRoomCancelList(PageInfo pi, int usNo);
 	//9_2. 진행중인 예약 상세조회용 서비스
 	
 	

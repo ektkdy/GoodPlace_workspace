@@ -2,6 +2,7 @@ package com.kh.goodplace.room.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -416,12 +417,12 @@ public class RoomController {
 	// ------------- 사용자 시작 --------------------------------------------------
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, Date tripStartDate, Date tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
-		room.setStartDays(tripStartDate);
-		room.setEndDays(tripEndDate);
+		room.setStartDays((java.sql.Date) tripStartDate);
+		room.setEndDays((java.sql.Date) tripEndDate);
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
 		// 검색한 조건에 해당하는 Rooms리스트 조회
@@ -455,7 +456,7 @@ public class RoomController {
 	
 	// 숙소검색페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원)와 필터에 해당하는 숙소리스트 반환
 	@RequestMapping("searchRoWithFilter.ro")
-   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoWithFilter(String tripArea, Date tripStartDate, Date tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
 		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, filterValue, room, board, mv);
 		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
@@ -584,7 +585,7 @@ public class RoomController {
 			return "partner/partnerReservationView";
 		}
 
-
+		
 		@RequestMapping("rvRoomList.rv")
 		public String rvRoomList(Model model,  int currentPage, HttpSession session) {
 			
@@ -597,6 +598,8 @@ public class RoomController {
 		    
 		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
 		    
+		    
+		    
 		    model.addAttribute("pi", pi);
 		    model.addAttribute("list", list);
 		    
@@ -604,9 +607,46 @@ public class RoomController {
 		    return "partner/partnerReservationListView";
 		}
 		
+		//예약 확정
+		@ResponseBody
+		@RequestMapping(value="rvRoomListIng.rv", produces="application/json; charset=utf-8")
+		public String rvRoomListIng(int currentPage, HttpSession session) {
+			
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
+			
+			int listCount = rService.selectRvRoomListCount(usNo);
+		    
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    
+		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
+		    
+		    
+		    HashMap<String, Object> map = new HashMap<String, Object>();
+		    JsonObject jsonObject = new JsonObject();
+
+		    // Gson 객체 생성
+		    Gson gson = new Gson();
+
+		    // JSON Object를 맵으로 바꿈
+		    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+		     
+		    // key-value 형태로 맵에 저장
+		    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+		    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+
+		    // 맵을 JSON Object 문자열로 바꿈
+		    String jsonString = gson.toJson(map);
+
+					
+		    return jsonString;
+		}
+				
+		//예약 확정
 		@ResponseBody
 		@RequestMapping(value="rvRoomListConfirm.rv", produces="application/json; charset=utf-8")
-		public String rvRoomList(int currentPage, HttpSession session) {
+		public String rvRoomListConfirm(int currentPage, HttpSession session) {
 			
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			int usNo = loginUser.getUsNo();
@@ -639,7 +679,41 @@ public class RoomController {
 		    return jsonString;
 		}
 
+		//예약취소
+		@ResponseBody
+		@RequestMapping(value="rvRoomListCancel.rv", produces="application/json; charset=utf-8")
+		public String rvRoomListCancel(int currentPage, HttpSession session) {
+			
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
+			
+			int listCount = rService.selectRvRoomCancelListCount(usNo);
+		    
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    
+		    ArrayList<Room> list = rService.selectRvRoomCancelList(pi, usNo);
 
+
+		    HashMap<String, Object> map = new HashMap<String, Object>();
+		    JsonObject jsonObject = new JsonObject();
+
+		    // Gson 객체 생성
+		    Gson gson = new Gson();
+
+		    // JSON Object를 맵으로 바꿈
+		    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+		     
+		    // key-value 형태로 맵에 저장
+		    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+		    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+
+		    // 맵을 JSON Object 문자열로 바꿈
+		    String jsonString = gson.toJson(map);
+
+					
+		    return jsonString;
+		}
 		
 
 	// ------------------------------ 파트너 일정관리 시작 ----------------------------------

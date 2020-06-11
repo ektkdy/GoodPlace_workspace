@@ -218,6 +218,10 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.selectRvRoomConfirmListCount", userNo);
 	}
 	
+	//취소
+	public int selectRvRoomCancelListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectRvRoomCancelListCount", userNo);
+	}
 	
 	public ArrayList<Room> selectRvRoomList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
@@ -226,7 +230,7 @@ public class RoomDao {
 		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomList", userNo, rowBounds);
 	}
 
-	
+	//확정
 	public ArrayList<Room> selectRvRoomConfirmList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
@@ -234,9 +238,13 @@ public class RoomDao {
 		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomConfirmList", userNo, rowBounds);
 	}
 
-	
-	
-	
+	//취소=
+	public ArrayList<Room> selectRvRoomCancelList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomCancelList", userNo, rowBounds);
+	}
 	
 	
 	

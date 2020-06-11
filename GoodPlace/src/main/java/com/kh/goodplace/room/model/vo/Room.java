@@ -87,8 +87,8 @@ public class Room {
 	private int people;			// 인원수
 	private String concept;		// 여행컨셉
 	private String request;		// 요청사항
-	private String startDays;	// 예약시작일자
-	private String endDays;		// 예약끝일자
+	private Date startDays;	// 예약시작일자
+	private Date endDays;		// 예약끝일자
 	
 	/* DB에는 없지만 새로 생성한 변수 */
 	private int reviewCount;	// 숙소별 Review 개수
@@ -107,7 +107,6 @@ public class Room {
 	
 	/* 리뷰 관련 컬럼들 */
 	private int reNo;				// 리뷰번호
-	private String userName;		// 리뷰작정한 회원 이름 + 회원번호
 	private String reTitle;			// 리뷰제목
 	private String reContent;		// 리뷰내용
 	private Date reviewDate;		// 리뷰작성일

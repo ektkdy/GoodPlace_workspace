@@ -199,24 +199,34 @@ public class RoomServiceImpl implements RoomService{
 	public int selectRvRoomListCount(int usNo) {
 		return rDao.selectRvRoomListCount(sqlSession, usNo);
 	}
-	 
+	//예약확정
 	@Override
 	public int 	selectRvRoomConfirmListCount(int usNo) {
 		return rDao.selectRvRoomConfirmListCount(sqlSession, usNo);
 	}
-
+	//예약취소
+	@Override
+	public int 	selectRvRoomCancelListCount(int usNo) {
+		return rDao.selectRvRoomCancelListCount(sqlSession, usNo);
+	}
+	
 	@Override
 	public ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo) {
 		
 		return rDao.selectRvRoomList(sqlSession, pi, usNo);
 	}
-
+	//예약확정
 	@Override
 	public ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo){
 		
 		return rDao.selectRvRoomConfirmList(sqlSession, pi, usNo);
 	}
-
+	//예약취소
+	@Override
+	public ArrayList<Room> selectRvRoomCancelList(PageInfo pi, int usNo){
+		
+		return rDao.selectRvRoomCancelList(sqlSession, pi, usNo);
+	}
 
 	
 	@Override
