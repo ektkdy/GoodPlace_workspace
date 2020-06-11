@@ -99,7 +99,7 @@
 		<result column="ROOMS_NOTICE" property="roomsNotice"/>
 		
 		
-		
+		<result column="RPNO" property="rpNo"/>
 		<result column="AMOUNT" property="amount"/>
 		<result column="BIRTHDATE" property="birthday"/>
 		<result column="PAY_DATE" property="payDate"/>
@@ -125,6 +125,24 @@
 		<result column="CATEGORY" property="category"/>
 		<result column="RONO" property="roNo"/>
 		<result column="EXNO" property="exNo"/>
+	</resultMap>
+	
+	<!-- Review테이블 + Member테이블 + Partner테이블 -->
+	<resultMap type="Room" id="reviewAndMemberResultSet">
+		<id column="RENO" property="reNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="REVIEW_TITLE" property="reTitle"/>
+		<result column="REVIEW_CONTENT" property="reContent"/>
+		<result column="CREATE_DATE" property="reviewDate"/>
+		<result column="SCORE" property="score"/>
+		<result column="REPLY" property="reply"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+
+		<result column="ORIGIN_NAME" property="usOriginName"/>
+		<result column="CHANGE_NAME" property="usChangeName"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
@@ -186,19 +204,11 @@
 	     order by totalSal desc
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<update id="updateRoomPower" parameterType="Room">
+		update rooms
+		   set pono=#{poNo}, power_start=#{powerStart}, power_end=#{powerEnd}
+	     where rono=#{roNo}
+	</update>
 	
 	
 	
@@ -328,15 +338,66 @@
 		 FROM ATTACHMENT
 		WHERE RONO = #{roNo}
 	</select>
+	
+	<select id="selectReviewList" parameterType="_int" resultMap="reviewAndMemberResultSet">
+		SELECT *
+		  FROM REVIEW
+		  JOIN MEMBER USING (USNO)
+		  JOIN PARTNER USING (PANO)
+		 WHERE RONO=#{roNo}
+	</select>
 
-	<!-- 숙소검색 끝 -->
+	<!-- 숙소조회 끝 -->
 
 
-
-
-
-
-
+	<!-- 예약관리 -->
+	<!-- 페이징바 -->
+	<!-- 확정전 -->
+	<select id="selectRvRoomListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from roomspay
+		 where rono in (select rono 
+		                from rooms
+		                where usno= #{userNo})
+		  and reserve_status = 1
+	
+	</select>
+	<!-- 확정후 -->
+	<select id="selectRvRoomConfirmListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from roomspay
+		 where rono in (select rono 
+		                from rooms
+		                where usno= #{userNo})
+		  and reserve_status = 2
+	
+	</select>
+	<!-- 기본 리스트 -->
+	<select id="selectRvRoomList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
+		  from roomspay rp
+		  join rooms r on (r.rono = rp.rono)
+		  join member m on (m.usno = rp.usno)
+		 where rp.rono in (select r.rono 
+			                from rooms
+			                where usno =  #{userNo})
+		 and reserve_status = 1
+	</select>
+	
+	<!-- 예약확정 리스트-->
+	<select id="selectRvRoomConfirmList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
+		  from roomspay rp
+		  join rooms r on (r.rono = rp.rono)
+		  join member m on (m.usno = rp.usno)
+		 where rp.rono in (select r.rono 
+			                from rooms
+			                where usno =  #{userNo})
+	      and reserve_status = 2
+	</select>
+	
 
 
 

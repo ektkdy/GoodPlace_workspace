@@ -65,9 +65,8 @@
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">회원관리</span></a></div>
             <div id="searchArea" class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">회원관리<small style="font-size: 0.5em;">(총 회원수 0명)검색결과 0건</small></p></span>
-                <span class="up_btn_space">
-	                <form name="" method="" action="memSearch.me">
-	                
+	            <form name="" method="" action="memSearch.me">
+                	<span class="up_btn_space">
 	                    <select name="memSearchSelect" id="searchSelect" style="width:100px; height:35px;">
 	                        <option value="searchName">이름</option>
 	                        <option value="searchNo">회원번호</option>
@@ -75,9 +74,8 @@
 	                	</select>
 	                	<input type="text" id="searchInput" style="width:200px; height:33px; padding-left:5px;" name="keyword" value="${ keyword }"><button type="submit" class="search_btn">검색</button>
 						<input type="hidden" name="currentPage" value="1">
-	                
-	                </form>
-                </span>
+                	</span>
+	            </form>
                 
 				<script>
 					$(function(){
@@ -175,7 +173,7 @@
 								<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
 									<c:choose>
 										<c:when test="${ p eq pi.currentPage }">
-											<font color="red" size="4">${ p }</font>					
+											<a href="" style="color:red;">${ p }</a>
 										</c:when>
 										<c:otherwise>
 											<c:choose>
@@ -213,17 +211,6 @@
 										</c:otherwise>
 									</c:choose>
 				                </c:if>
-				                
-				                
-							        <c:choose>
-				                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-						                    <a>&gt;</a>
-						                </c:when>
-						                <c:otherwise>
-						                    <a href="aMemberList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
-						                </c:otherwise>
-				                    </c:choose>
-				                    
 				                
 	                            </div>
 	                        </th>

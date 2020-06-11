@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/partner/partnerCommon.css" />
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 <style>
     /*공통*/
     /* font */
@@ -64,9 +66,10 @@
                         <div style="display: inline-block;">
                             <table id="roomInfo">
                             	<input type="hidden" name="roNo" value="${ r.roNo }">
+                            	
                                 <tr>
                                     <td>숙소명</td>
-                                    <td>${ r.roomsTitle }</td>
+                                    <td>${ r.roomsTitle } / ${ p.poNo }</td>
                                 </tr>
                                 <tr>
                                     <td>파워종류</td>
@@ -75,10 +78,9 @@
                                 <tr>
                                     <td>파워기간</td>
                                     <td>
-                                    	<jsp:useBean id="toDay" class="java.util.Date" />
-										<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/>부터
-										
-										${ p.period }일 간 
+                                    	<span id="powerStart" name="powerStart"></span>  -  
+                                    	<span id="powerEnd" name="powerEnd"></span>
+										(${ p.period }일)
 									</td>
                                 </tr>
                                 <tr>
@@ -99,18 +101,77 @@
                 </div>
                 <div id="btns">
                     <button type="button" id="cancle" onclick="location.href='list.ro?currentPage=1'">취소하기</button>
-                    <button type="button" id="next" onclick="payNext();">신청하기</button>
+                    <button type="button" id="next">신청하기</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <form id="updateRoomPower" action="updateRoomPower.ro" method="post">
+    	<input type="hidden" name="roNo" value="${r.roNo}">
+    	<input type="hidden" name="poNo" value="${p.poNo}">
+    	<input type="hidden" id="powerStart2" name="powerStart" value="">
+    	<input type="hidden" id="powerEnd2" name="powerEnd" value="">
+    </form>
+    
     <script>
-	    function payNext(){
-	        var roNo = $("#roomInfo").children().eq(0).val();
-	        location.href='paymentPower.ro?roNo='+roNo;
-	     }
-    </script>
+	    $(function(){
+	    	$("#next").click(function(){
+	    		var IMP = window.IMP; // 생략가능
+	    		IMP.init('imp13454636'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	    		
+	    		// IMP.request_pay(param, callback) 호출
+	    		IMP.request_pay({	// param
+	    		    pg : ' html5_inicis', // version 1.1.0부터 지원.
+	    		    pay_method : 'card',
+	    		    merchant_uid : 'merchant_' + new Date().getTime(),
+	    		    name : '주문명:결제테스트',
+	    		    amount : 100,
+	    		    buyer_email : 'iamport@siot.do',
+	    		    buyer_name : '구매자이름',
+	    		    buyer_tel : '010-1234-5678',
+	    		    buyer_addr : '서울특별시 강남구 삼성동',
+	    		    buyer_postcode : '123-456',
+	    		    m_redirect_url : 'http://192.168.30.232:8888/goodplace'
+	    		}, function(rsp) {	// callback
+	    		    if ( rsp.success ) {
+	    		        var msg = '결제가 완료되었습니다.';
+	    		        //msg += '고유ID : ' + rsp.imp_uid;
+	    		        //msg += '상점 거래ID : ' + rsp.merchant_uid;
+	    		        //msg += '결제 금액 : ' + rsp.paid_amount;
+	    		        //msg += '카드 승인번호 : ' + rsp.apply_num;
+	    		        location.href="list.ro?currentPage=1";
+	    		        
+	    		        $("#updateRoomPower").submit();
+	    		        
+	    		    } else {
+	    		    	var msg = '결제실패.';
+	    		        msg += '에러내용 : ' + rsp.error_msg;
+	    		        location.href="list.ro?currentPage=1";
+	    		    }
+	    		    alert(msg);
+	    		});
+	    	});
+	    });
+	    
+	    
+	    $(function(){
+	    	var date = new Date();	// 오늘날짜(년월일시분초 담김)
+
+	    	var start = date.toISOString().substring(0,10);	// 포맷을 yyyy-MM-dd로 변환 후 년월일만 추출
+	    	$("#powerStart").text(start);
+	    	$("#powerStart2").val(start);
+	    	
+	    	date.setDate(date.getDate()+ ${p.period});	// period기간만큼 일정 늦어줌
+	    	var after = date.toISOString().substring(0,10);	
+	    	$("#powerEnd").text(after);
+	    	$("#powerEnd2").val(after);
+	    	
+	    	//console.log(start);
+	    	//console.log(after);
+	    	
+	    });
+	</script>
     
 </body>
 </html>

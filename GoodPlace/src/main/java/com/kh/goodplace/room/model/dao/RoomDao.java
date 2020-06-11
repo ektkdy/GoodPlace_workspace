@@ -63,7 +63,11 @@ public class RoomDao {
 		return (ArrayList)sqlSession.selectList("roomMapper.selectOkeyList", usNo, rowBounds);
 	}
 
-	
+
+	public int updateRoomPower(SqlSessionTemplate sqlSession, Room r) {
+		System.out.println(r);
+		return sqlSession.update("roomMapper.updateRoomPower", r);
+	}
 	
 	
 	
@@ -122,6 +126,8 @@ public class RoomDao {
 		
 		return (ArrayList)sqlSession.selectList("roomMapper.selectPowerRoomList", null, rowBounds);
 		
+	
+	
 	}
 	
 	
@@ -188,17 +194,46 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.selectRoom", roNo);
 	}
 
-	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
+		public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectDetailImages", roNo);
 	}
 	
 	public Member getPartner(SqlSessionTemplate sqlSession, int roNo){
 		return sqlSession.selectOne("memberMapper.selectPartner", roNo);
 	}
+
 	
 	
 	// --------- 숙소조회 끝 -----------------
 	
+
+	// -------------------------------- 예약관리 시작 ---------------------------------------
+	
+	public int selectRvRoomListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectRvRoomListCount", userNo);
+	}
+	
+	//확정 후
+	public int selectRvRoomConfirmListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectRvRoomConfirmListCount", userNo);
+	}
+	
+	
+	public ArrayList<Room> selectRvRoomList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomList", userNo, rowBounds);
+	}
+
+	
+	public ArrayList<Room> selectRvRoomConfirmList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomConfirmList", userNo, rowBounds);
+	}
+
 	
 	
 	

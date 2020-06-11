@@ -36,6 +36,8 @@ public class Accounts {
 	/* 공용 */
 	private String userName;
 	private String userNo;
+	private int chartamountExp;
+	private int chartPayExp;
 	private String section;			// 파트너 정산관리에서 사용
 	private String no;				// 파트너 정산관리에서 사용
 	private int amount;				// 파트너 정산관리에서 사용

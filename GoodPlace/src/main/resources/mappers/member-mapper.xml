@@ -265,6 +265,42 @@
          group by NVL(E.EXNO, NULL), NVL(E.EXP_TITLE, NULL), NVL(E.ADD_BASIC, NULL), NVL(E.START_DATE, NULL), NVL(E.STATUS, NULL)
 	</select>
 	
+	<select id="ptSearchCount" parameterType="Member" resultType="_int">
+        select count(*)
+		  from member m
+          left join partner p on(m.pano = p.pano)
+		 where user_kind=2
+	 	<if test="memSearchSelect == 'searchName'">
+			AND m.USER_NAME LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="memSearchSelect == 'searchNo'">
+			AND m.PANO LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="memSearchSelect == 'searchType'">
+			AND p.PARTNER_STATUS LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="ptSearchList" parameterType="Member" resultMap="memberResultSet">
+       select DISTINCT m.USNO, m.PANO, m.EMAIL, m.USER_NAME, PHONE, p.PA_ENROLL_DATE, p.PARTNER_STATUS, P.PA_YELLOW_CARD
+         from member m
+         left join partner p on(m.pano = p.pano)
+         where user_kind=2 
+	 	<if test="memSearchSelect == 'searchName'">
+			AND m.USER_NAME LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="memSearchSelect == 'searchNo'">
+			AND m.PANO LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="memSearchSelect == 'searchType'">
+			AND p.PARTNER_STATUS LIKE '%' || #{keyword} ||'%'
+		</if>
+		 order by m.PANO asc
+	</select>
+	
+	
+	
+	
 	<!-- 파트너의 정보 조회 : 진아 -->
 	<select id="selectPartner" parameterType="_int" resultMap="memberResultSet">
  		SELECT *

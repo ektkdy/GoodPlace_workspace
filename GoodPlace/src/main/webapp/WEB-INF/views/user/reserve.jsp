@@ -408,35 +408,10 @@
     </style>
 </head>
 <body>
-	 <!-- header -->
-    <div id="header">
-        <div id="header_wrap">
-            <div id="header_1">
-                <a href=""><img id="home-logo" src="images//common/투명배경.png" width="250px" height="40px" style="padding:10px"></a>
-            </div>
-            <div id="header_2">
-                <ul id="navi" style="padding-left: 30px; margin-top: 10px">
-                    <li>
-                        <input class="list search" type="text" placeholder="여행이나 체험을 검색해보세요" style="width: 300px; height: 19px; ">
-                        <div class="list searchBtn">
-                            <a href=""><img id="searchbtn" src="images//common/검색버튼.JPG" width="37px" height="37px"></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>    
-            <div id="header_3">
-                <ul id="navi" style="padding-left: 0px; margin-top: 12px;">
-                    <li style=" margin-top: 3px;">
-                        <a class="list qBtn" href="" style="font-size: 15px;">1:1채팅상담</a>
-                    </li>
-                    <li>
-                        <a href="#" class="list loginBtn">로그인</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+	
+	<!-- header -->
+	<jsp:include page="../common/menubar.jsp"/>
+	
     <!-- content -->
     <div id="content" class="main" style="text-align: center;">
        
@@ -567,32 +542,8 @@
         <button>&gt;</button>
     </div>
 </div>
-   
-    <!-- footer -->
-    <div id="footer">
-        <div class="footer_nav" align="center">
-            <div class="footer_menu">
-                <a href="">이용약관</a>
-            </div>
-            <div class="footer_menu">
-                <a href="">개인정보 처리방침</a>
-            </div>
-            <div class="footer_menu">
-                <a href="">취소 및 환불 정책</a>
-            </div>
-        </div>
-        <div class="footer_address">
-            <div>
-                <a href="#" class="serBtn">고객센터</a>
-            </div>
-            <p class="footerMargin">
-                상호명 (주)굿플레이스 | 대표 강보람 | 개인정보보호책임자 채희영 |사업자등록번호 209-81-55339 사업자정보확인 
-                <br>통신판매업신고번호 2019-서울서초-0260 | 서울특별시 서초구 강남대로 327, 대륭서초타워 18층(서초동)
-                <br>대표번호 : 1670-8208 | 일반 문의 09:00-22:00 | 연중무휴 / 점심 12:00-13:00
-                <br>굿플레이스는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품·거래정보 및 거래에 대하여 책임을 지지않습니다.
-                <br>자사는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다.
-            </p>
-        </div>
-    </div>
+   <!-- footer -->
+	<jsp:include page="../common/footer.jsp"/>
+    
 </body>
 </html>

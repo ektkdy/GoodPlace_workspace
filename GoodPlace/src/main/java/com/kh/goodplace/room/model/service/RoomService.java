@@ -50,12 +50,20 @@ public interface RoomService {
 	ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo);	// 해당 페이지에 보여질 운영중인 숙소 조회
 	
 	//8. 파워 신청 및 결제용 서비스 (파워등록용)
-	int payPower(int roNo);										// 숙소 update
-	
+	int updateRoomPower(Room r);										// 결제완료후 db에 insert
 	
 	//------------[예약관리]------------    (여긴 페이징바 필요없을까?)
 	//9_1. 진행중인 예약목록 조회용 서비스
+	int selectRvRoomListCount(int usNo);
 	
+	//리스트 카운트 예약 확정
+	int selectRvRoomConfirmListCount(int usNo);
+	
+	//리스트 기본 
+	ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo);
+	
+	//예약확정 리스트
+	ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo);
 	//9_2. 진행중인 예약 상세조회용 서비스
 	
 	

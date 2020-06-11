@@ -56,6 +56,16 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	@Override
+	public int faqSearchCount(Board b) {
+		return bDao.faqSearchCount(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Board> faqSearchList(PageInfo pi, Board b) {
+		return bDao.faqSearchList(sqlSession, pi, b);
+	}
+	
 	// ------------------- 관리자 공지사항 ----------------------
 
 	@Override
@@ -91,6 +101,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int noticeDelete(int nno) {
 		return 0;
+	}
+	
+	@Override
+	public int noticeSearchCount(Board b) {
+		return bDao.noticeSearchCount(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Board> noticeSearchList(PageInfo pi, Board b) {
+		return bDao.noticeSearchList(sqlSession, pi, b);
 	}
 	
 	// ------------------- 관리자 1:1문의 ----------------------
@@ -145,6 +165,8 @@ public class BoardServiceImpl implements BoardService {
 	public int yellowCardPlus(Board b) {
 		return bDao.yellowCardPlus(sqlSession, b);
 	}
+	
+	
 	
 	
 	// ------------------- 파트너 공지사항 ----------------------
@@ -221,6 +243,10 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
 	}
+
+
+
+
 
 
 

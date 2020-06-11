@@ -18,6 +18,11 @@
 		<result column="amount" property="amount"/>
 		<result column="pay_date" property="payDate"/>
 	</resultMap>
+	
+	<resultMap type="Chart" id="accountsChartResultSet">
+		<id column="EXPAmount" property="chartamountExp"/>
+		<id column="EXPpayDate" property="expPayDate"/>
+	</resultMap>
 
 	<select id="aSelectAccountListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -37,8 +42,31 @@
 		ORDER BY EP_DATE DESC, RP_DATE DESC
 	</select>
 
+	<select id="chartList" resultMap="accountsChartResultSet">
+		SELECT SUM(AMOUNT) AS "EXPAmount", TO_CHAR(PAY_DATE, 'YY/MM') AS "EXPpayDate"
+		FROM ROOMSPAY
+		GROUP BY TO_CHAR(PAY_DATE, 'YY/MM')
+	
+	</select>
 
-
+	<select id="chartList2" resultMap="accountsChartResultSet">
+		SELECT SUM(AMOUNT) AS "EXPAmount", TO_CHAR(PAY_DATE, 'YY/MM') AS "EXPpayDate"
+		FROM EXPPAY
+		GROUP BY TO_CHAR(PAY_DATE, 'YY/MM')
+	
+	</select>
+	
+	<select id="roNum" resultType="_int">
+		SELECT count(*)
+		from rooms
+		where status=1
+	</select>
+	
+	<select id="exNum" resultType="_int">
+		SELECT count(*)
+		from experience
+		where status=1
+	</select>
 
 
 

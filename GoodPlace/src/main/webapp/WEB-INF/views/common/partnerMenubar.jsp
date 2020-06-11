@@ -55,13 +55,13 @@
         <div id="sidenav">
             <ul>
                 <li><a href="partnerMain.me"><span class="icon1"></span><p>대시보드 </p></a></li>
-                <li><a href=""><span class="icon2"></span><p>예약관리</p></a></li>
+                <li><a href="reservationView.rv"><span class="icon2"></span><p>예약관리</p></a></li>
                 <li><a href="calendarView.ca"><span class="icon3"></span><p>일정관리</p></a></li>
                 <li><a href="list.ro?currentPage=1"><span class="icon4"></span><p>숙소관리</p></a></li>
                 <li><a href="reviewList.re?currentPage=1"><span class="icon5"></span><p>후기관리</p></a></li>
                 <li><a href="list.exp?currentPage=1"><span class="icon6"></span><p>체험관리</p></a></li>
                 <li><a href="partnerIncome.ac?currentPage=1"><span class="icon7"></span><p>정산관리</p></a></li>
-                <li><a href=""><span class="icon8"></span><p>메세지</p></a></li>
+                <li><a href="partnerMsg.me"><span class="icon8"></span><p>메세지</p></a></li>
                 <li><a href="pAccount.me"><span class="icon9"></span><p>계정관리</p></a></li>
                 <li><a href="pNoticeList.bo?currentPage=1"><span class="icon10"></span><p>공지사항</p></a></li>
             </ul>

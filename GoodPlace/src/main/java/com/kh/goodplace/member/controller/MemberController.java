@@ -285,8 +285,6 @@ public class MemberController {
 
 
 
-
-
     // ------------------ 파트너 계정관리 컨트롤러 --------------------
 
     @RequestMapping("partnerMain.me")
@@ -473,7 +471,20 @@ public class MemberController {
         return mv;
     } 
     
-    
+    @RequestMapping("ptSearch.me")
+    public String ptSearchList(int currentPage, Member m, Model model) {
+    	
+    	
+        int listCount = mService.ptSearchCount(m); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Member> list = mService.ptSearchList(pi, m);
+        model.addAttribute("list", list);
+        model.addAttribute("m", m);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_partner";
+    }
     
     
     // ------------------ 관리자 컨트롤러 끝 --------------------
