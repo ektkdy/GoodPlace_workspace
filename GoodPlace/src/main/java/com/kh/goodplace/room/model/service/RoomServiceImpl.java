@@ -183,6 +183,29 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	
+	//--------------- 예약관리 시작 -------------------
+	
+	@Override
+	public int selectRvRoomListCount(int usNo) {
+		return rDao.selectRvRoomListCount(sqlSession, usNo);
+	}
+	 
+	@Override
+	public int 	selectRvRoomConfirmListCount(int usNo) {
+		return rDao.selectRvRoomConfirmListCount(sqlSession, usNo);
+	}
+
+	@Override
+	public ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo) {
+		
+		return rDao.selectRvRoomList(sqlSession, pi, usNo);
+	}
+
+	@Override
+	public ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo){
+		
+		return rDao.selectRvRoomConfirmList(sqlSession, pi, usNo);
+	}
 
 	
 	

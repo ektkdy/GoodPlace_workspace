@@ -394,6 +394,7 @@
                             FROM ROOMS 
                            WHERE R.USNO = #{userNo})
            AND REPLY_STATUS = 'N'
+         ORDER BY CREATE_DATE DESC
 	</select>
 	<!-- 답글 후 조회용 -->
 	<select id="reviewList2" parameterType="_int" resultMap="reviewResultSet" >
@@ -406,6 +407,7 @@
                             FROM ROOMS 
                            WHERE R.USNO = #{userNo})
            AND REPLY_STATUS = 'Y'
+           ORDER BY REPLY_DATE DESC
 	</select>
 	
 	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">

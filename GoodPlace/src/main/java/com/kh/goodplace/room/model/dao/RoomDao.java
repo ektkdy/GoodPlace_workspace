@@ -185,10 +185,32 @@ public class RoomDao {
 
 	
 
+	// -------------------------------- 예약관리 시작 ---------------------------------------
 	
+	public int selectRvRoomListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectRvRoomListCount", userNo);
+	}
+	
+	//확정 후
+	public int selectRvRoomConfirmListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("roomMapper.selectRvRoomConfirmListCount", userNo);
+	}
+	
+	
+	public ArrayList<Room> selectRvRoomList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomList", userNo, rowBounds);
+	}
 
 	
-	
+	public ArrayList<Room> selectRvRoomConfirmList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomConfirmList", userNo, rowBounds);
+	}
 	
 	
 	

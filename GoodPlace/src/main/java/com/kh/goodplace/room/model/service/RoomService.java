@@ -54,7 +54,16 @@ public interface RoomService {
 	
 	//------------[예약관리]------------    (여긴 페이징바 필요없을까?)
 	//9_1. 진행중인 예약목록 조회용 서비스
+	int selectRvRoomListCount(int usNo);
 	
+	//리스트 카운트 예약 확정
+	int selectRvRoomConfirmListCount(int usNo);
+	
+	//리스트 기본 
+	ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo);
+	
+	//예약확정 리스트
+	ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo);
 	//9_2. 진행중인 예약 상세조회용 서비스
 	
 	

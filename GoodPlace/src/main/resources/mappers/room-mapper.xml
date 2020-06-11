@@ -99,7 +99,7 @@
 		<result column="ROOMS_NOTICE" property="roomsNotice"/>
 		
 		
-		
+		<result column="RPNO" property="rpNo"/>
 		<result column="AMOUNT" property="amount"/>
 		<result column="BIRTHDATE" property="birthday"/>
 		<result column="PAY_DATE" property="payDate"/>
@@ -312,11 +312,54 @@
 	<!-- 숙소검색 끝 -->
 
 
-
-
-
-
-
+	<!-- 예약관리 -->
+	<!-- 페이징바 -->
+	<!-- 확정전 -->
+	<select id="selectRvRoomListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from roomspay
+		 where rono in (select rono 
+		                from rooms
+		                where usno= #{userNo})
+		  and reserve_status = 1
+	
+	</select>
+	<!-- 확정후 -->
+	<select id="selectRvRoomConfirmListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from roomspay
+		 where rono in (select rono 
+		                from rooms
+		                where usno= #{userNo})
+		  and reserve_status = 2
+	
+	</select>
+	<!-- 기본 리스트 -->
+	<select id="selectRvRoomList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
+		  from roomspay rp
+		  join rooms r on (r.rono = rp.rono)
+		  join member m on (m.usno = rp.usno)
+		 where rp.rono in (select r.rono 
+			                from rooms
+			                where usno =  #{userNo})
+		 and reserve_status = 1
+	</select>
+	
+	<!-- 예약확정 리스트-->
+	<select id="selectRvRoomConfirmList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
+		  from roomspay rp
+		  join rooms r on (r.rono = rp.rono)
+		  join member m on (m.usno = rp.usno)
+		 where rp.rono in (select r.rono 
+			                from rooms
+			                where usno =  #{userNo})
+	      and reserve_status = 2
+	</select>
+	
 
 
 
