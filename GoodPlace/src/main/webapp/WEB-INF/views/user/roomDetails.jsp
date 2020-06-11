@@ -380,7 +380,7 @@
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
-            <a style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
+            <a href="javascript:history.back();" style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
         <br style="clear:both;">
 
