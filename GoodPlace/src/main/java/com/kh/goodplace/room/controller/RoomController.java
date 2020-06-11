@@ -417,12 +417,12 @@ public class RoomController {
 	// ------------- 사용자 시작 --------------------------------------------------
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, Date tripStartDate, Date tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
-		room.setStartDays((java.sql.Date) tripStartDate);
-		room.setEndDays((java.sql.Date) tripEndDate);
+		room.setStartDays(tripStartDate);
+		room.setEndDays(tripEndDate);
 		room.setPeople(Integer.parseInt((tripPeople)));
 		
 		// 검색한 조건에 해당하는 Rooms리스트 조회
@@ -456,7 +456,7 @@ public class RoomController {
 	
 	// 숙소검색페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원)와 필터에 해당하는 숙소리스트 반환
 	@RequestMapping("searchRoWithFilter.ro")
-   	public ModelAndView searchRoWithFilter(String tripArea, Date tripStartDate, Date tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
 		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, filterValue, room, board, mv);
 		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
@@ -525,11 +525,7 @@ public class RoomController {
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
 			
-			// 예약시작일자, 예약끝일자, 인원수 set
-			mv.addObject("startDays", tripStartDate);
-			mv.addObject("endDays", tripEndDate);
-			mv.addObject("endDays", tripEndDate);
-
+			
 		}
 
 		return mv;
@@ -546,17 +542,6 @@ public class RoomController {
     	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
     	room.setMeal(room.getMeal().replace(",", ", "));
     	
-    	// room객체에 숙소시설, 제공서비스 표시형식 보완
-    	room.setFacility(room.getFacility().replace(",", ", "));
-    	room.setService(room.getService().replace(",", ", "));
-    	
-    	// room객체에 지역 표시 set
-    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
-    	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
-    	String region = room.getAddBasic().substring(0, addLastIndex);
-    	//System.out.println("region : " + region);
-    	room.setRegion(region);
-    	
     	// room 객체에 상세이미지 set 
     	if(at != null) {
     		//System.out.println("숙소의 상세이미지들 조회 됨~!");
@@ -566,16 +551,10 @@ public class RoomController {
     		room.setDetailImg4(at.get(3).getChangeName());
     	}
     	
-    	
-    	
     	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(roNo).getChangeName());
     	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
     	room.setPaName(rService.getPartner(roNo).getUserName());
-    	
-    	// room 객체에 리뷰정보 set
-    	room.setReviewList(rService.getReview(roNo));
-    	//System.out.println("reviewList : " + rService.getReview(roNo));
     	
     	System.out.println(room);
     	
@@ -587,7 +566,7 @@ public class RoomController {
     		mv.addObject("msg", "숙소상세 조회 실패!!");
             mv.setViewName("common/errorPage");
     	}
-    	System.out.println();
+    	
     	return mv;
     	
     }
@@ -620,6 +599,8 @@ public class RoomController {
 		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
 		    
 		    
+		    
+		    System.out.println(list);
 		    
 		    model.addAttribute("pi", pi);
 		    model.addAttribute("list", list);
