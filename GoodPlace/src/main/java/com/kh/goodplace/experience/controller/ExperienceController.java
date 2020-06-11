@@ -186,15 +186,56 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExp(Experience e,  Model model) {
-		// exNo보내서 해당하는 e객체와 list불러와서 폼 내부에 뿌려주기
-		int result1 = expService.updateExp(e);
-		//int result2 = expService.updateAt(at);
-		
+	public String updateExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
+			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
+			HttpServletRequest request) {
 
-
+		if(!file.getOriginalFilename().equals("")) {
+			if(e.getChangeName() != null) {
+				deleteFile(e.getChangeName(), request);
+			}
+			String changeName = saveFile(file, request);
+			e.setOriginName(file.getOriginalFilename());
+			e.setChangeName(changeName);
+			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
+		int result1 = expService.updateExp(e);	// 객체 정보와 썸네일 넘어감
 		
-		return "partner/partnerExpUpdateForm";
+		int result = 1;
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 ---------------------- 이 이후로는 상세사진 쪽
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
+		for(int i=0; i<filelist.length; i++) {
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
+				if(filelist[i].getName() != null) {
+					deleteFile(e.getChangeName(), request);
+				}
+				
+				String changeName = saveFile(filelist[i], request);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result2 = expService.updateAt(at);
+				result = result1*result2;
+			}
+		}
+		
+		if(result>0) {
+			return "redirect:list.exp?currentPage=1";
+		}else {
+			return "common/errorPage";
+		}
 	}
 	
 	
