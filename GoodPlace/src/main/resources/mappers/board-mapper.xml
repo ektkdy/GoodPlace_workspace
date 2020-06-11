@@ -181,6 +181,37 @@
 	
 	</update>
 	
+	<select id="noticeSearchCount" parameterType="Board" resultType="_int">
+		select count(*)
+		  from notice
+		 where status='Y'
+	 	<if test="searchSelect == 'searchOp1'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="noticeSearchList" parameterType="Board" resultMap="boardNoticeResultSet">
+		select *
+		  from notice
+		 where status='Y'
+	 	<if test="searchSelect == 'searchOp1'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT '%' || #{keyword} ||'%'
+		</if>
+		 order by NONO desc
+	</select>
+	
 	<!-- 1:1문의 -->
 	
 	<select id="aSelectInquiryListCount" resultType="_int">

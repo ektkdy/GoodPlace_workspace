@@ -239,6 +239,22 @@ public class BoardController {
     	
     }
     
+    @RequestMapping("noticeSearch.bo")
+    public String noticeSearchList(int currentPage, Board b, Model model) {
+    	
+        int listCount = bService.noticeSearchCount(b); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.noticeSearchList(pi, b);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("b", b);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_noticeList";
+        
+    }
+    
     // 관리자 공지사항 끝
     
     // 관리자 1:1문의 시작

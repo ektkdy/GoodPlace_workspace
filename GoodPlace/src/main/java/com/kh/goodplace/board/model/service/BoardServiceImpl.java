@@ -93,6 +93,16 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 	
+	@Override
+	public int noticeSearchCount(Board b) {
+		return bDao.noticeSearchCount(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Board> noticeSearchList(PageInfo pi, Board b) {
+		return bDao.noticeSearchList(sqlSession, pi, b);
+	}
+	
 	// ------------------- 관리자 1:1문의 ----------------------
 
 	@Override
@@ -221,6 +231,8 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
 	}
+
+
 
 
 

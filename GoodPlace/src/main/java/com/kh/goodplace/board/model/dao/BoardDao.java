@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.member.model.vo.Member;
 
 @Repository("bDao")
 public class BoardDao {
@@ -95,6 +96,23 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.noticeUpdate", b);
 		
 	}
+	
+	public int noticeSearchCount(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.selectOne("boardMapper.noticeSearchCount", b);
+		
+	}
+	
+	public ArrayList<Board> noticeSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Board b){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.noticeSearchList", b, rowBounds);
+		
+	}
+	
+	
 	
 	//------------ 관리자 1:1문의 -----------------------------------------
 	

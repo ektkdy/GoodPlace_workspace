@@ -162,10 +162,10 @@
 	                            <c:if test="${ pi.currentPage ne 1 }">
 				                    <c:choose>
 					                	<c:when test="${ empty m.memSearchSelect }">
-						                    <a href="aMemberList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
+						                    <a href="aPartnerList.me?currentPage=${ pi.currentPage -1 }">&lt;</a>
 						                </c:when>
 						                <c:otherwise>
-					                    	<a href="aMemberList.me?memSearchSelect=${ m.memSearchSelect }&keyword=${m.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    	<a href="aPartnerList.me?memSearchSelect=${ m.memSearchSelect }&keyword=${m.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
 					                    </c:otherwise>
 				                    </c:choose>
 				                </c:if>
@@ -179,7 +179,7 @@
 										<c:otherwise>
 											<c:choose>
 												<c:when test = "${ empty m.memSearchSelect }">
-													<a class="page-link" href="aMemberList.me?currentPage=${ p }">${p}</a>
+													<a class="page-link" href="aPartnerList.me?currentPage=${ p }">${p}</a>
 												</c:when>
 												<c:otherwise>
 													<c:url value="memSearch.me" var="searchUrl">
@@ -200,7 +200,7 @@
 								<c:if test="${ pi.currentPage ne pi.maxPage }">
 									<c:choose>
 										<c:when test = "${ empty m.memSearchSelect }">
-											 <a href="aMemberList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
+											 <a href="aPartnerList.me?currentPage=${ pi.currentPage +1 }">&gt;</a>
 										</c:when>
 										<c:otherwise>
 											<c:url value="memSearch.me" var="searchUrl">

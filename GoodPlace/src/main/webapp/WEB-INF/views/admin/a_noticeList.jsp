@@ -85,16 +85,30 @@
             <div class="sitemap">
                 <a href="#"><span style="width: 30px;height: 30px;">공지사항관리</span></a>
             </div>
-            <div class="con" style="color:#000">
+            <div id="searchArea" class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">공지사항관리</p></span>
-                <span class="up_btn_space">
-                    <select name="" id="searchSelect" style="width:100px; height:35px;">
-                        <option value="">제목</option>
-                        <option value="">내용</option>
-                        <option value="">제목+내용</option>
-                    </select>
-                    <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
-                </span>
+                <form name="" method="" action="noticeSearch.bo">
+	                <span class="up_btn_space">
+	                    <select name="searchSelect" id="searchSelect" style="width:100px; height:35px;">
+	                        <option value="searchOp1">제목</option>
+	                        <option value="searchOp2">내용</option>
+	                        <option value="searchOp3">제목+내용</option>
+	                    </select>
+	                    <input id="searchInput" type="search" style="width:200px; height:35px;" name="keyword" value="${ keyword }"><button type="submit" class="search_btn">검색</button>
+	                    <input type="hidden" name="currentPage" value="1">
+	                </span>
+                </form>
+                
+                <script>
+					$(function(){
+						switch('${b.searchSelect}'){
+						case "searchOp1" : $("#searchArea option").eq(0).attr("selected", true); break;
+						case "searchOp2" : $("#searchArea option").eq(1).attr("selected", true); break;
+						case "searchOp3" : $("#searchArea option").eq(2).attr("selected", true); break;
+						}
+					});
+				</script>
+                
                 <div class="con2">
                     <table id="noticeList" class="common_tb" cellpadding="0" cellspacing="0">
                         <thead>
@@ -136,42 +150,60 @@
                         </th>
                         <th>
                             <div id="pagingArea" style="margin-top: 22px;">
-<!--                                 <a>&lt;</a>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a>5</a>
-                                <a>&gt;</a> -->
-                                
-                                <c:choose>
-				                	<c:when test="${ pi.currentPage eq 1 }">
-					                    <a href="#">&lt;</a>
-					                </c:when>
-					                <c:otherwise>
-				                    	<a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
-				                    </c:otherwise>
-			                    </c:choose>
-			                    
-						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-			                    	<c:choose>
-			                    		<c:when test="${ p eq pi.currentPage }">
-				                    		<a href="#">${p}</a>
-				                    	</c:when>
-				                    	<c:otherwise>
-				                    		<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
-				                    	</c:otherwise>
+	                            <!-- [이전] -->
+	                            <c:if test="${ pi.currentPage ne 1 }">
+				                    <c:choose>
+					                	<c:when test="${ empty b.searchSelect }">
+						                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+						                </c:when>
+						                <c:otherwise>
+					                    	<a href="aNoticeList.bo?memSearchSelect=${ b.searchSelect }&keyword=${b.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    </c:otherwise>
 				                    </c:choose>
-			                    </c:forEach>
-			                    
-						        <c:choose>
-			                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-					                    <a>&gt;</a>
-					                </c:when>
-					                <c:otherwise>
-					                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
-					                </c:otherwise>
-			                    </c:choose>
+				                </c:if>
+				                
+				                <!-- [번호들] -->
+								<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
+									<c:choose>
+										<c:when test="${ p eq pi.currentPage }">
+											<a href="" style="color:red;">${ p }</a>
+										</c:when>
+										<c:otherwise>
+											<c:choose>
+												<c:when test = "${ empty b.searchSelect }">
+													<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
+												</c:when>
+												<c:otherwise>
+													<c:url value="noticeSearch.bo" var="searchUrl">
+														<c:param name="condition" value="${ b.searchSelect }"/>
+														<c:param name="keyword" value="${ b.keyword }"/>
+														<c:param name="currentPage" value="${ p }"/>
+													</c:url>
+														
+													<a href="${ searchUrl }">${p}</a>
+												</c:otherwise>
+											</c:choose>
+										</c:otherwise>
+
+				               		</c:choose>    
+				                </c:forEach>   
+				                
+								<!-- [다음] -->
+								<c:if test="${ pi.currentPage ne pi.maxPage }">
+									<c:choose>
+										<c:when test = "${ empty b.searchSelect }">
+											 <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+										</c:when>
+										<c:otherwise>
+											<c:url value="noticeSearch.bo" var="searchUrl">
+												<c:param name="condition" value="${ b.searchSelect }"/>
+												<c:param name="keyword" value="${ b.keyword }"/>
+												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+											</c:url>										
+											<a href="${ searchUrl }">&gt;</a>
+										</c:otherwise>
+									</c:choose>
+				                </c:if>
                                 
                             </div>
                         </th>

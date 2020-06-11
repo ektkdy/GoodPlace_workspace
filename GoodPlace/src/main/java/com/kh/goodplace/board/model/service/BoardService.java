@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.member.model.vo.Member;
 
 public interface BoardService {
 	
@@ -49,6 +50,12 @@ public interface BoardService {
 	
 	// 5. 게시글 삭제용 서비스-현영
 	int noticeDelete(int nno);
+	
+	//6. 공지사항 검색 총갯수 조회용
+	int noticeSearchCount(Board b);
+	
+	//7. 공지사항 검색 조회용
+	ArrayList<Board> noticeSearchList(PageInfo pi, Board b);
 	
 	//------------------------------------------------------
 	// 1. 관리자 1:1문의 게시판 리스트 조회용 서비스-현영
