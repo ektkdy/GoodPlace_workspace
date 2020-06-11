@@ -84,9 +84,8 @@ public class RoomServiceImpl implements RoomService{
 	}
 	
 	@Override
-	public int payPower(int roNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateRoomPower(Room r) {
+		return rDao.updateRoomPower(sqlSession, r);
 	}
 
 	
@@ -187,8 +186,8 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Attachment> getDetailImages(int roNo) {
 		return rDao.getDetailImages(sqlSession, roNo);
 	}
-	
-	@Override
+
+		@Override
 	public Member getPartner(int roNo) {
 		return  rDao.getPartner(sqlSession, roNo);
 	}
@@ -199,6 +198,31 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	// --------- 숙소조회 끝 -------------------------
+	
+	//--------------- 예약관리 시작 -------------------
+	
+	@Override
+	public int selectRvRoomListCount(int usNo) {
+		return rDao.selectRvRoomListCount(sqlSession, usNo);
+	}
+	 
+	@Override
+	public int 	selectRvRoomConfirmListCount(int usNo) {
+		return rDao.selectRvRoomConfirmListCount(sqlSession, usNo);
+	}
+
+	@Override
+	public ArrayList<Room> selectRvRoomList(PageInfo pi, int usNo) {
+		
+		return rDao.selectRvRoomList(sqlSession, pi, usNo);
+	}
+
+	@Override
+	public ArrayList<Room> selectRvRoomConfirmList(PageInfo pi, int usNo){
+		
+		return rDao.selectRvRoomConfirmList(sqlSession, pi, usNo);
+	}
+
 
 	
 	@Override

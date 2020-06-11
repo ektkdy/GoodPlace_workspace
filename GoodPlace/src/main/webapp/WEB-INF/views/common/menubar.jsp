@@ -304,7 +304,7 @@
 		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
 		                                    <li><a href="">my굿플레이스</a></li>
 		                                    <li><a href="ReserveForm.ro">숙소예약내역</a></li>
-		                                    <li><a href="">위시리스트</a></li>
+		                                    <li><a href="wishList.bo">위시리스트</a></li>
 		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
 		                                    <c:if test="${ loginUser.userKind eq 0 }">
 		                                    	<li><a href="adminForm.me">관리자페이지</a></li>
@@ -391,6 +391,8 @@
 	    });
 		
 	    let sock = null;
+	    
+	    
 	    // 메세지
 	   	// 1:1상담문의 버튼을 클릭했을 때
 	    function boxSlide(){
@@ -400,15 +402,14 @@
 				$.ajax({
 					// ajax1.do?name=홍길동&age=20
 					url:"selectTutor",
-					data:{email:"ektkdy@naver.com"},
+					data:{email:"ektkdy@naver.com"},		// 관리자 이메일
 					type:"post",
-					success:function(tutor){
-						sock = new SockJS("http://localhost:8888/goodplace/echo/");
+					success:function(tutor){				// 관리자 이메일 정보를 찾아 가져옴
+						sock = new SockJS("http://localhost:8888/goodplace/echo/");	// 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
 						
 						$("#tutorChangeName").val(tutor.changeName);	// 관리자 이메일로 프로필 사진을 가져옴
-						console.log(tutor); // 상대방(관리자) 정보 -- 프로필 사진용
 					},error:function(){
 						console.log("ajax 통신 실패");
 					}
@@ -421,21 +422,21 @@
 			$('#message').text("");
 		});
 		
-		// 날짜
-		var Now = new Date();
+		
 		// 메시지 전송
 		function sendMessage() {
 			var msg = $("#message").val();
 			if(msg != ""){
 				message = {};
 			  	message.messageContent = $("#message").val();
-		  	  	message.messageReceiver = "ektkdy@naver.com"; // 관리자 이메일
+		  	  	message.messageReceiver = "ektkdy@naver.com";	// 관리자 이메일
 		  	  	message.messageSender = '${loginUser.email}';
-		  	  	message.class_class_id = 1;					  // 사용자가 보낸경우 1
-		  	  	message.messageSendTime = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간
+		  	  	message.class_class_id = 1;					 	// 사용자가 보낸경우 1
+		  	  	var Now = new Date();						 	// Now --> 메세지를 보낼때마다 현재시간으로 초기화 됨
+		  	  	message.messageSendTime = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간 포맷
 			}
 			console.log(message);
-			sock.send(JSON.stringify(message));
+			sock.send(JSON.stringify(message));					// 메세지 전송
 			$("#message").val("");
 		};
 		

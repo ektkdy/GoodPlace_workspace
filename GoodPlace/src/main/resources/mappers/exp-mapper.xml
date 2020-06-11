@@ -124,11 +124,10 @@
 		 where exno=#{exNo}
 	</update>
 
-	<!-- 체험 상세사진 업데이트 (승인거절된 체험 상세사진 업데이트 동일) -->
+	<!-- 체험 상세사진 업데이트 : 기존사진들 다 지우고 새로 insert함 -->
 	<update id="updateAt" parameterType="Attachment">
-		update attachment
-		   set origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath}, upload_date=sysdate, category=2
- 		 where exno=#{exNo}
+		insert into attachment
+		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, #{exNo})
 	</update>
 
 	<!-- 승인거절된 체험객체 업데이트 -->

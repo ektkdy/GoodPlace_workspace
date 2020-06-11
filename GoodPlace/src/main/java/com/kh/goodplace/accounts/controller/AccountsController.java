@@ -1,9 +1,11 @@
 package com.kh.goodplace.accounts.controller;
 
-import java.sql.Date;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
@@ -16,15 +18,16 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.goodplace.accounts.model.service.AccountsService;
 import com.kh.goodplace.accounts.model.vo.Accounts;
+import com.kh.goodplace.accounts.model.vo.Chart;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
@@ -49,6 +52,47 @@ public class AccountsController {
         
         return "admin/a_accountsList";
     }
+    
+    @RequestMapping("chartView.ac")
+    public String accountsChart(Model model) {
+    	
+    	return "admin/a_accountsDetail";
+    	
+    }
+    
+//    @ResponseBody
+//    @RequestMapping(value="chartList.ac", produces="application/json; charset=utf-8")
+//    public String chartList(HttpServletResponse response) {
+//    	
+//    	ArrayList<Chart> list = aService.chartList();
+//    	System.out.println(list);
+//    	return new Gson().toJson(list);
+//    }
+    
+    //@ResponseBody
+    @RequestMapping(value="chartList.ac")
+    public void chartList(HttpServletResponse response) throws JsonIOException, IOException {
+    	
+    	ArrayList<Chart> list = aService.chartList();
+    	ArrayList<Chart> list2= aService.chartList2();
+    	//System.out.println(list);
+    	//System.out.println(list2);
+    	
+    	int roNum = aService.roNum();
+    	int exNum = aService.exNum();
+    	
+    	HashMap<String, Object> map = new HashMap<>();
+    	map.put("list", list);
+    	map.put("list2", list2);
+    	map.put("roNum", roNum);
+    	map.put("exNum", exNum);
+    	
+    	
+    	response.setContentType("application/json; charset=utf-8");
+    	new Gson().toJson(map, response.getWriter());
+    }
+    
+    
     
     // 엑셀다운롣
     @RequestMapping("excelDown.do")

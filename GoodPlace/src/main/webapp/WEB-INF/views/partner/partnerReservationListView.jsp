@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,9 @@
         <jsp:include page="../common/partnerMenubar.jsp"/>
         <div id="contents" >
             <div id="tab">
-                <button class="on lt_tab">진행중인 예약</button>
-                <button class="off mid_tab">확정된 예약</button>
-                <button class="off gt_tab">취소된 예약</button>
+                <button id="ing" class="on lt_tab">진행중인 예약</button>
+                <button id="confirm" class="off mid_tab">확정된 예약</button>
+                <button id="cancel" class="off gt_tab">취소된 예약</button>
             </div>
             <div class="sitemap">
                 <a href="#">
@@ -28,8 +29,10 @@
                     <span>&gt;&nbsp;진행중인예약</span>
                 </a>
             </div>
+             <br clear="both"><br>
             <div class="con" style="color:#000">
-                <span id="page_title"><img src="${ pageContext.servletContext.contextPath }/resources/images/homelogo.jpg" style="vertical-align: middle;"><p class="title_tt">진행중인예약(0)</p></span>
+                <span id="page_title"><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;">
+                	<p class="title_tt">진행중인예약(${pi.listCount })</p></span>
                 <br clear="both">
                 <div class="choose_area"style="clear: both;">
                     <select class="select_st">
@@ -58,21 +61,77 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>gp0425</td>
-                                <td>확정대기</td>
-                                <td>방랑가</td>
-                                <td>2020-06-10 ~ 2020-06-15</td>
-                                <td>제주 협재(산들바람부는마을)</td>
-                                <td><button class="confirm_btn">확정하기</button></td>
-                            </tr>
+                        
+                        	<c:forEach var="r" items="${ list}">
+	                            <tr>
+	                                <td>${r.rpNo } </td>
+	                                <c:choose>
+	                                	<c:when test="${r.reserveStatus eq 1 }">
+	                                		<td>확정대기</td>
+	                                	</c:when>
+	                                	<c:when test="${r.reserveStatus eq 2 }">
+	                                		<td>확정완료</td>
+	                                	</c:when>
+	                                	<c:when test="${r.reserveStatus eq 3 }">
+	                                		<td>여행완료</td>
+	                                	</c:when>
+	                                </c:choose>
+	                                <td>${r.userName}</td>
+	                                <td>${r.startDays } ~ ${r.endDays }</td>
+	                                <td>${r.roomsTitle }</td>
+	                                <td><button class="confirm_btn">확정하기</button></td>
+	                            </tr>
+                           </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+<!-- tab메뉴 ajax -->
 
+
+<script>
+	$('#confirm').click(function(){
+	  $.ajax({
+		url:"rvRoomListConfirm.rv",
+		data:{currentPage:1, },
+		type:"post",
+		success:function(result){
+			
+			var list = result.list;
+			var pi = result.pi;
+			
+			var content = "";
+			
+			$(".reserv_tb tbody").empty();
+			$("#ing").attr('class', "off lt_tab");
+			$("#confirm").attr('class', "on mid_tab");
+			
+			for(var i in list){
+				if(list == ""){
+					content +=  "<tr>" +
+				 	"<td>"+ list[i].rpNo + "</td>" +
+				 	"<td>" + list[i].startDays + "~" + list[i].endDays + "</td>" +
+				 	"<td>" +  list[i].roomsTitle + "</td>" +
+				 	"<td><button class='confirm_btn'>" + 확정하기 + "</button></td>" +
+					"</tr>";
+					
+				}else{
+					content += "";
+					
+				}			 		
+			}
+			$(".reserv_tb tbody").html(content);
+
+		},error:function(){
+			console.log("통신실패!!");
+		}
+	 });
+	});
+  
+</script>
+<!-- 토글 -->
     <script>
         $(function(){
             

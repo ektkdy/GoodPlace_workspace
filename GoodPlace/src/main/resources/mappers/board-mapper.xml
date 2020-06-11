@@ -300,6 +300,95 @@
 	
 	</update>
 	
+	<select id="inquirySearchCount" resultType="_int">
+		select count(*)
+		  from INQUERY
+         where category != 5
+         <choose>
+         	<when test="searchSelect == 'searchOp1'">
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         	<when test="searchSelect == 'searchOp2'">
+         		and RE_STATUS = 2
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         	<when test="searchSelect == 'searchOp3'">
+         		and RE_STATUS = 1
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         </choose>
+	</select>
+	
+	<select id="inquirySearchList" resultMap="boardInquiryResultSet">
+        select *
+		  from INQUERY
+         where category != 5
+         <choose>
+         	<when test="searchSelect == 'searchOp1'">
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         	<when test="searchSelect == 'searchOp2'">
+         		and RE_STATUS = 2
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         	<when test="searchSelect == 'searchOp3'">
+         		and RE_STATUS = 1
+				<if test="searchSelect2 == 'searchOp4'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp5'">
+					and INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+				<if test="searchSelect2 == 'searchOp6'">
+					and INQUERY_TITLE LIKE '%' || #{keyword} ||'%' or INQUERY_CONTENT LIKE '%' || #{keyword} ||'%'
+				</if>
+         	</when>
+         </choose>
+		 order by inNO desc
+	</select>
+	
+	
+	
 	<select id="aSelectReportListCount" resultType="_int">
 		select count(*)
 		  from INQUERY
@@ -472,6 +561,7 @@
                             FROM ROOMS 
                            WHERE R.USNO = #{userNo})
            AND REPLY_STATUS = 'N'
+         ORDER BY CREATE_DATE DESC
 	</select>
 	<!-- 답글 후 조회용 -->
 	<select id="reviewList2" parameterType="_int" resultMap="reviewResultSet" >
@@ -484,6 +574,7 @@
                             FROM ROOMS 
                            WHERE R.USNO = #{userNo})
            AND REPLY_STATUS = 'Y'
+           ORDER BY REPLY_DATE DESC
 	</select>
 	
 	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">

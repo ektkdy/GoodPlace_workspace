@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.accounts.model.vo.Accounts;
+import com.kh.goodplace.accounts.model.vo.Chart;
 import com.kh.goodplace.common.model.vo.PageInfo;
 
 @Repository("aDao")
@@ -32,13 +33,27 @@ public class AccountsDao {
 		return (ArrayList)sqlSession.selectList("accountsMapper.aSelectAccountList");
 		
 	}
+	
+	public ArrayList<Chart> chartList(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.chartList");
+		
+	}
 
+	public ArrayList<Chart> chartList2(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.chartList2");
+		
+	}
+	
+	public int roNum(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("accountsMapper.roNum");
+	}
 	
 	
-	
-	
-	
-	
+	public int exNum(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("accountsMapper.exNum");
+	}
 	
 	
 	

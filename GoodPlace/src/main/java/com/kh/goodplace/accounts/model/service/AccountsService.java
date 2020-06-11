@@ -3,8 +3,8 @@ package com.kh.goodplace.accounts.model.service;
 import java.util.ArrayList;
 
 import com.kh.goodplace.accounts.model.vo.Accounts;
+import com.kh.goodplace.accounts.model.vo.Chart;
 import com.kh.goodplace.common.model.vo.PageInfo;
-import com.kh.goodplace.experience.model.vo.Experience;
 
 public interface AccountsService {
 	
@@ -17,7 +17,12 @@ public interface AccountsService {
 	
 	ArrayList<Accounts> selectAccountList();
 	
+	ArrayList<Chart> chartList();
 	
+	ArrayList<Chart> chartList2();
+	
+	int roNum();
+	int exNum();
 	
 	
 	
