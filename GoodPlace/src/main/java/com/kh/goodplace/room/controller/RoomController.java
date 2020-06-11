@@ -571,7 +571,11 @@ public class RoomController {
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
 			
-			
+			// 예약시작일자, 예약끝일자, 인원수 set
+			mv.addObject("startDays", tripStartDate);
+			mv.addObject("endDays", tripEndDate);
+			mv.addObject("endDays", tripEndDate);
+
 		}
 
 		return mv;
@@ -588,6 +592,17 @@ public class RoomController {
     	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
     	room.setMeal(room.getMeal().replace(",", ", "));
     	
+    	// room객체에 숙소시설, 제공서비스 표시형식 보완
+    	room.setFacility(room.getFacility().replace(",", ", "));
+    	room.setService(room.getService().replace(",", ", "));
+    	
+    	// room객체에 지역 표시 set
+    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
+    	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
+    	String region = room.getAddBasic().substring(0, addLastIndex);
+    	//System.out.println("region : " + region);
+    	room.setRegion(region);
+    	
     	// room 객체에 상세이미지 set 
     	if(at != null) {
     		//System.out.println("숙소의 상세이미지들 조회 됨~!");
@@ -597,10 +612,16 @@ public class RoomController {
     		room.setDetailImg4(at.get(3).getChangeName());
     	}
     	
+    	
+    	
     	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(roNo).getChangeName());
     	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
     	room.setPaName(rService.getPartner(roNo).getUserName());
+    	
+    	// room 객체에 리뷰정보 set
+    	room.setReviewList(rService.getReview(roNo));
+    	//System.out.println("reviewList : " + rService.getReview(roNo));
     	
     	System.out.println(room);
     	
@@ -612,7 +633,7 @@ public class RoomController {
     		mv.addObject("msg", "숙소상세 조회 실패!!");
             mv.setViewName("common/errorPage");
     	}
-    	
+    	System.out.println();
     	return mv;
     	
     }
