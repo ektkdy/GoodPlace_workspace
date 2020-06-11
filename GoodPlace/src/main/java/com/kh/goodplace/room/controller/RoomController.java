@@ -597,9 +597,10 @@ public class RoomController {
     		room.setDetailImg4(at.get(3).getChangeName());
     	}
     	
-    	// room 객체에 파트너의 프로필사진 set
+    	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(roNo).getChangeName());
     	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
+    	room.setPaName(rService.getPartner(roNo).getUserName());
     	
     	System.out.println(room);
     	

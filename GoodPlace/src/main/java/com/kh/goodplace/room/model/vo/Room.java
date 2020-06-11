@@ -99,5 +99,26 @@ public class Room {
 	
 	/* Member테이블  + Partner테이블 */
 	private String paPofile;	// 프로필사진 변경이름
-	private String partnerIntro; // 파트너소개
+	private String partnerIntro;// 파트너소개
+	private String paName;		// 파트너 이름
+	private String paAccountName; 	//은행명
+	private String paAccountNum;		//계좌번호
+	
+	/* 리뷰 관련 컬럼들 */
+	private int reNo;				// 리뷰번호
+	private String userName;		// 리뷰작정한 회원 이름 + 회원번호
+	private String reTitle;			// 리뷰제목
+	private String reContent;		// 리뷰내용
+	private Date reviewDate;		// 리뷰작성일
+	private int score;				// 평점
+	private String reply;			// 답글내용
+	private Date replyDate;			// 답글작성일
+	private String replyStatus;	    // 답글 상태
+		
+	private String age;				// 연령대
+	
+	/* DB에는 없지만 새로 생성한 변수 */
+	private String usOriginName;	//프로필사진 원본이름
+	private String usChangeName;	//프로필사진 변경이름
+	
 }
