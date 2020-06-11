@@ -83,9 +83,8 @@ public class RoomServiceImpl implements RoomService{
 	}
 	
 	@Override
-	public int payPower(int roNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateRoomPower(Room r) {
+		return rDao.updateRoomPower(sqlSession, r);
 	}
 
 	

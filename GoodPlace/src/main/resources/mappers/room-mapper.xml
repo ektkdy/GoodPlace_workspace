@@ -186,19 +186,11 @@
 	     order by totalSal desc
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<update id="updateRoomPower" parameterType="Room">
+		update rooms
+		   set pono=#{poNo}, power_start=#{powerStart}, power_end=#{powerEnd}
+	     where rono=#{roNo}
+	</update>
 	
 	
 	

@@ -63,7 +63,11 @@ public class RoomDao {
 		return (ArrayList)sqlSession.selectList("roomMapper.selectOkeyList", usNo, rowBounds);
 	}
 
-	
+
+	public int updateRoomPower(SqlSessionTemplate sqlSession, Room r) {
+		System.out.println(r);
+		return sqlSession.update("roomMapper.updateRoomPower", r);
+	}
 	
 	
 	
@@ -122,6 +126,8 @@ public class RoomDao {
 		
 		return (ArrayList)sqlSession.selectList("roomMapper.selectPowerRoomList", null, rowBounds);
 		
+	
+	
 	}
 	
 	
@@ -195,6 +201,7 @@ public class RoomDao {
 	public Member getPartner(SqlSessionTemplate sqlSession, int roNo){
 		return sqlSession.selectOne("memberMapper.selectPartner", roNo);
 	}
+
 	
 	
 	// --------- 숙소조회 끝 -----------------

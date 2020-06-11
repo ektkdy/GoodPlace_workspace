@@ -246,16 +246,19 @@ public class RoomController {
 		return "partner/payPower";
 	}
 	
-	@RequestMapping("paymentPower.ro")
-	public String paymentPower(int roNo) {
-		/*
-		 * Room r = rService.updateRoomPower(roNo);
-		 * 
-		 * model.addAttribute("r", r);
-		 */
+	@RequestMapping("updateRoomPower.ro")
+	public String updateRoomPower(Room r, Model model) {
+		int result = rService.updateRoomPower(r);
 		
-		return "partner/paymentPower";
+		if(result > 0) {
+			model.addAttribute("msg", "파워신청이 완료되었습니다.");
+			return "redirect:list.ro?currentPage=1";
+		}else {
+			model.addAttribute("msg", "이미 등록된 파워숙소가 있습니다.");
+			return "common/errorPage";
+		}
 	}
+	
 		
 		
 		
