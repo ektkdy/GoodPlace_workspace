@@ -2,6 +2,8 @@ package com.kh.goodplace.messages.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,11 +76,14 @@ public class ChatController {
 	
 	// 메세지 상세보기 페이지 (해당사용자와 주고받은 대화 내용 전부를 가져옴)
 	@RequestMapping("aMessageDetail.me")
-	public String aMessageDetail(int msn, Member m, Model model) {
+	public String aMessageDetail(int msn, int class_class_id , Member m, Model model , HttpSession session) {
 		ArrayList<Message> meList = cService.selectMessage(msn);
-
-		Member user = mService.loginMember(m);
 		
+		Member user = mService.loginMember(m);
+			
+		session.setAttribute("class_class_id", class_class_id);
+
+		model.addAttribute("class_class_id", class_class_id);
 		model.addAttribute("meList", meList);
 		model.addAttribute("user", user);
 		return "admin/a_messageDetail";

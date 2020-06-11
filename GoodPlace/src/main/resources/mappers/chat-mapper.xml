@@ -35,9 +35,8 @@
 	
 	<insert id = "createRoom" parameterType="ChatRoom">
 		insert into CHATROOM
-		values(chno.nextval,#{userEmail}, #{tutorEmail} , 1 )
+		values(chno.nextval, #{userEmail}, #{tutorEmail}, classid.nextval)
 	</insert>
-
 
 	<select id ="selectChatRoom" resultMap = "roomResultMap" parameterType="ChatRoom">
 	select * from CHATROOM WHERE USER_EMAIL = #{userEmail} and TUTOR_EMAIL = #{tutorEmail} 
@@ -53,8 +52,8 @@
              -->
 	<select id ="aSelectMessagesList" resultMap="chatListMap">
             SELECT CHNO, USER_EMAIL, TUTOR_EMAIL, CLASS_ID, MESSAGE_CONTENT, MESSAGE_READTIME
-            FROM (select CHNO, USER_EMAIL, TUTOR_EMAIL, M.CLASS_ID, MESSAGE_CONTENT, MESSAGE_READTIME,RANK() OVER (PARTITION BY CHNO ORDER BY MESSAGE_READTIME DESC) AS RECENT_ME
-                    from CHATROOM 
+            FROM (select CHNO, USER_EMAIL, TUTOR_EMAIL, C.CLASS_ID, MESSAGE_CONTENT, MESSAGE_READTIME,RANK() OVER (PARTITION BY CHNO ORDER BY MESSAGE_READTIME DESC) AS RECENT_ME
+                    from CHATROOM C
                     left join MESSAGE M USING(CHNO))
             WHERE RECENT_ME = 1
 	</select>

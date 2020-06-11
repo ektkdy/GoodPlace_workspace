@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -42,14 +41,19 @@ public class EchoHandler extends TextWebSocketHandler{
         Map<String, Object> user = session.getAttributes();	// session의 데이터를 가져옴
         System.out.println(user);
         Member loginUser = (Member)user.get("loginUser");		// loginUser의 회원정보를 가져옴
-    	System.out.println(loginUser.getEmail());				// 이메일) gmldud695@naver.com
+    	System.out.println(user.get("class_class_id"));				// 이메일) gmldud695@naver.com
         
+    	String loginUserEmail = loginUser.getEmail();
+    	
+    	if(loginUserEmail.equals("ektkdy@naver.com") ) {	// ektkdy@naver.com // 관리자일 경우
+    		loginUserEmail = loginUserEmail + user.get("class_class_id");
+    	}
         // 랜덤 세션넘버를
         System.out.println("세션 id" + session.getId());
         
         // 이메일을 세션의 이름과 매핑시킴
-        sessions.put(loginUser.getEmail(), session);// {"gmldud695@naver.com", "idmglanfwa"}	
-        logger.info("{} 연결됨", loginUser.getEmail()); 
+        sessions.put(loginUserEmail, session);// {"gmldud695@naver.com", "idmglanfwa"}	
+        logger.info("{} 연결됨", loginUserEmail); 
     }
 
     //클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
@@ -73,12 +77,11 @@ public class EchoHandler extends TextWebSocketHandler{
 	    if(!messageVO.getMessageSender().equals(messageVO.getMessageReceiver())) {
 	    	System.out.println("보내는사람과 받는사람이 같지 않음");
 	    	
-	    	
 	    	if(cDao.selectChatRoom(roomVO) == null ) {// 검색한 채팅방이 없는경우 (보내는 사람 아이디와 받는사람 아이디 and조건문 일치 없는경우)
 	    		  System.out.println("b");
 	    		  cDao.createRoom(roomVO);			  // 새로운 채팅방을 만듬 (insert)
 	    		  System.out.println("d");
-	    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom
+	    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom --> 관리자 이름 + 채팅방 번호
 
 	    	}else {	 // 검색한 채팅방이 있는경우
 	    		  System.out.println("C");
@@ -102,10 +105,10 @@ public class EchoHandler extends TextWebSocketHandler{
 	    System.out.println("messageVO : " + messageVO);
 	    int result = cDao.insertMessage(messageVO);
 	    
-	    // 자신에게 메세지 보냄													
+	    // 자신에게 메세지 보냄							
 	    sessions.get(messageVO.getMessageSender()).sendMessage(new TextMessage(message.getPayload()));
-	    if(sessions.get(messageVO.getMessageReceiver()) != null) {	// 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
-	    	sessions.get(messageVO.getMessageReceiver()).sendMessage(new TextMessage(message.getPayload()));
+	    if(sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()) != null) {	// 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
+	    	sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()).sendMessage(new TextMessage(message.getPayload()));
 	    }
 	    
 	    // 
