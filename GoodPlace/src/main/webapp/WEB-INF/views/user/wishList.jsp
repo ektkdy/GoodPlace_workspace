@@ -409,8 +409,7 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-	  <!-- header -->
-	  <jsp:include page="../common/menubar.jsp"/>
+	
     <div id="header">
         <div id="header_wrap">
             <div id="header_1">
@@ -531,8 +530,7 @@
            
     </div>
     
-    <!-- footer -->
-	<jsp:include page="../common/footer.jsp"/>
+  
 
     <script>
         /* 슬라이더 js */
