@@ -140,6 +140,53 @@
 	
 	</delete>
 	
+	<select id="faqSearchCount" parameterType="Board" resultType="_int">
+		select count(*)
+		  from faq
+	 	<if test="searchSelect == 'searchOp0'">
+			
+		</if>
+		<if test="searchSelect == 'searchOp1'">
+			where FAQ_CATEGORY LIKE '%' || '일반' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			where FAQ_CATEGORY LIKE '%' || '예약' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			where FAQ_CATEGORY LIKE '%' || '취소' ||'%' OR FAQ_CATEGORY LIKE '%' || '환불' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp4'">
+			where FAQ_CATEGORY LIKE '%' || '상품' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp5'">
+			where FAQ_CATEGORY LIKE '%' || '파트너' ||'%'
+		</if>
+	</select>
+	
+	<select id="faqSearchList" parameterType="Board" resultMap="boardFaqResultSet">
+		select *
+		  from faq
+	 	<if test="searchSelect == 'searchOp0'">
+			
+		</if>
+		<if test="searchSelect == 'searchOp1'">
+			where FAQ_CATEGORY LIKE '%' || '일반' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			where FAQ_CATEGORY LIKE '%' || '예약' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			where FAQ_CATEGORY LIKE '%' || '취소' ||'%' OR FAQ_CATEGORY LIKE '%' || '환불' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp4'">
+			where FAQ_CATEGORY LIKE '%' || '상품' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp5'">
+			where FAQ_CATEGORY LIKE '%' || '파트너' ||'%'
+		</if>
+		 order by FAQNO desc
+	</select>
+	
 	
 	<!-- 공지사항 -->
 	<select id="aSelectNoticeListCount" resultType="_int">

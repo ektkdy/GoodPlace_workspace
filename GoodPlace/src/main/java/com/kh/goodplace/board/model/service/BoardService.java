@@ -27,6 +27,12 @@ public interface BoardService {
 	// 5. 게시글 삭제용 서비스-현영
 	int faqDelete(int fno);
 	
+	//6. FAQ 검색 총갯수 조회용
+	int faqSearchCount(Board b);
+	
+	//7. FAQ 검색 조회용
+	ArrayList<Board> faqSearchList(PageInfo pi, Board b);
+	
 	//------------------------------------------------------
 	
 	// 1. 관리자 공지사항 게시판 리스트 조회용 서비스-현영

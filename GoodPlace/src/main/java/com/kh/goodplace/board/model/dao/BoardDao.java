@@ -54,6 +54,21 @@ public class BoardDao {
 		
 	}
 	
+	public int faqSearchCount(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.selectOne("boardMapper.faqSearchCount", b);
+		
+	}
+	
+	public ArrayList<Board> faqSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Board b){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.faqSearchList", b, rowBounds);
+		
+	}
+	
 	//------------ 관리자 공지사항 -----------------------------------------
 	
 	public int aSelectNoticeListCount(SqlSessionTemplate sqlSession) {

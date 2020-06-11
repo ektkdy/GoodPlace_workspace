@@ -157,7 +157,7 @@
 						                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
 						                </c:when>
 						                <c:otherwise>
-					                    	<a href="aNoticeList.bo?memSearchSelect=${ b.searchSelect }&keyword=${b.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
+					                    	<a href="aNoticeList.bo?searchSelect=${ b.searchSelect }&keyword=${b.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
 					                    </c:otherwise>
 				                    </c:choose>
 				                </c:if>

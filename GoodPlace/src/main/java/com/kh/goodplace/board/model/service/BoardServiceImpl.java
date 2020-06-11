@@ -56,6 +56,16 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	@Override
+	public int faqSearchCount(Board b) {
+		return bDao.faqSearchCount(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Board> faqSearchList(PageInfo pi, Board b) {
+		return bDao.faqSearchList(sqlSession, pi, b);
+	}
+	
 	// ------------------- 관리자 공지사항 ----------------------
 
 	@Override
@@ -157,6 +167,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+	
+	
 	// ------------------- 파트너 공지사항 ----------------------
 	
 	@Override
@@ -231,6 +243,8 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
 	}
+
+
 
 
 

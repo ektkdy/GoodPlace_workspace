@@ -149,6 +149,22 @@ public class BoardController {
         }
     	
     }
+    
+    @RequestMapping("faqSearch.bo")
+    public String faqSearchList(int currentPage, Board b, Model model) {
+    	
+        int listCount = bService.faqSearchCount(b); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.faqSearchList(pi, b);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("b", b);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_faqList";
+        
+    }
     // 관리자 FAQ 끝
 
     // 관리자 공지사항 시작
