@@ -173,6 +173,16 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.aSelectPartnerExp(sqlSession, ptno);
 		}
 
+		@Override
+		public int ptSearchCount(Member m) {
+			return mDao.ptSearchCount(sqlSession, m);
+		}
+
+		@Override
+		public ArrayList<Member> ptSearchList(PageInfo pi, Member m) {
+			return mDao.ptSearchList(sqlSession, pi, m);
+		}
+
 
 
 		

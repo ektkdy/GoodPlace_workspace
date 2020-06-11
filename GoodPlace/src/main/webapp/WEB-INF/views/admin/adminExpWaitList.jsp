@@ -63,15 +63,7 @@
                     <img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;">
                     <p class="title_tt">체험 승인대기 목록</p>
                 </span>
-                <span class="up_btn_space">
-                    <select name="selectOption" id="selectOption">
-                        <option value="all">전체</option>
-                        <option value="expName">체험명</option>
-                        <option value="city">지역</option>
-                    </select>
-                    <input id="search" type="text">
-                    <input type="button" id="searchBtn" value="검색">
-                </span>
+
                 <div class="con2">
                     <table id="ExpList" class="common_tb" cellpadding="0" cellspacing="0" >
                         <thead>
@@ -122,34 +114,36 @@
 		            </script>
                     
                     <div id="pagingArea" style="margin-top: 22px;">
-	                    <c:choose>
-		                	<c:when test="${ pi.currentPage eq 1 }">
-			                    <a href="#">&lt;</a>
-			                </c:when>
-			                <c:otherwise>
-		                    	<a href="aExpWaitList.ex?currentPage=${ pi.currentPage -1 }">&lt;</a>
-		                    </c:otherwise>
-	                    </c:choose>
-	                    
+	                    <c:if test="${ pi.currentPage ne 1 }">
+		                    <c:choose>
+			                	<c:when test="${ pi.currentPage eq 1 }">
+				                    <a href="#">&lt;</a>
+				                </c:when>
+				                <c:otherwise>
+			                    	<a href="aExpWaitList.ex?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    </c:otherwise>
+		                    </c:choose>
+		                 </c:if>  
 				        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 	                    	<c:choose>
 	                    		<c:when test="${ p eq pi.currentPage }">
-		                    		<a href="#">${p}</a>
+		                    		<a href="#" style="color:red;">${p}</a>
 		                    	</c:when>
 		                    	<c:otherwise>
 		                    		<a class="page-link" href="aExpWaitList.ex?currentPage=${ p }">${p}</a>
 		                    	</c:otherwise>
 		                    </c:choose>
 	                    </c:forEach>
-	                    
+	                    <c:if test="${ pi.currentPage ne pi.maxPage }">
 				        <c:choose>
-	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-			                    <a>&gt;</a>
-			                </c:when>
-			                <c:otherwise>
-			                    <a href="aExpWaitList.ex?currentPage=${ pi.currentPage +1 }">&gt;</a>
-			                </c:otherwise>
-	                    </c:choose>
+		                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+				                    <a>&gt;</a>
+				                </c:when>
+				                <c:otherwise>
+				                    <a href="aExpWaitList.ex?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                </c:otherwise>
+		                    </c:choose>
+	                    </c:if>
                     </div>
                 </div>
             </div>

@@ -155,5 +155,21 @@ public class MemberDao {
 	}
 	
 	
+	public int ptSearchCount(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.ptSearchCount", m);
+		
+	}
+	
+	public ArrayList<Member> ptSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Member m){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.ptSearchList", m, rowBounds);
+		
+	}
+	
+	
 	//-------------------------------------------------------------------
 }

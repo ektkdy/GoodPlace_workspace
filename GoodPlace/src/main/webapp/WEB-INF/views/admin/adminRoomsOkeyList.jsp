@@ -65,7 +65,7 @@
                 <span class="up_btn_space">
                     <select name="selectOption" id="selectOption">
                         <option value="all">전체</option>
-                        <option value="expName">체험명</option>
+                        <option value="expName">숙소명</option>
                         <option value="city">지역</option>
                     </select>
                     <input id="search" type="text">
@@ -77,7 +77,7 @@
                             <tr>
                                 <td width="100px">번호</td>
                                 <td width="200px">지역</td>
-                                <td width="200px">숙소신청일</td>
+                                <td width="200px">숙소승인일</td>
                                 <td width="500px">숙소명</td>
                                 <td width="200px">숙박가격(1인1박)</td>
                                 <td width="200px">상태</td>
@@ -97,7 +97,7 @@
 	                            <tr>
 	                                <td>${ r.roNo }</td>
 	                                <td>${ r.addBasic }</td>
-	                                <td>${ r.applyDate }</td>
+	                                <td>${ r.startDate }</td>
 	                                <td>${ r.roomsTitle }</td>
 	                                <td>${ r.price }원</td>
 	                                <td onclick="event.cancelBubble=true">

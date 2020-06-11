@@ -77,7 +77,7 @@
                             <tr>
                                 <td width="100px">번호</td>
                                 <td width="200px">지역</td>
-                                <td width="200px">체험신청일</td>
+                                <td width="200px">체험승인일</td>
                                 <td width="500px">체험명</td>
                                 <td width="200px">체험가격(1인)</td>
                                 <td width="200px">상태</td>
@@ -88,7 +88,7 @@
 	                            <tr>
 	                                <td>${ e.exNo }</td>
 	                                <td>${ e.addBasic }</td>
-	                                <td>${ e.applyDate }</td>
+	                                <td>${ e.startDate }</td>
 	                                <td>${ e.expTitle }</td>
 	                                <td>${ e.price }원</td>
 	                                <td onclick="event.cancelBubble=true">
