@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 public interface RoomService {
@@ -49,8 +50,7 @@ public interface RoomService {
 	ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo);	// 해당 페이지에 보여질 운영중인 숙소 조회
 	
 	//8. 파워 신청 및 결제용 서비스 (파워등록용)
-	int payPower(int roNo);										// 숙소 update
-	
+	int updateRoomPower(Room r);										// 결제완료후 db에 insert
 	
 	//------------[예약관리]------------    (여긴 페이징바 필요없을까?)
 	//9_1. 진행중인 예약목록 조회용 서비스
@@ -99,17 +99,19 @@ public interface RoomService {
 	//14_3. 답글 후 후기 상세조회용 서비스
 	
 	
-	//------------[숙소검색]------------
+	//------------[숙소조회]------------
 	
-	//15. 메뉴바에서 검색한 조건에 해당하는 숙소리스트 조회용 서비스
+	//1. 메뉴바에서 검색한 조건에 해당하는 숙소리스트 조회용 서비스 - 진아
 	ArrayList<Room> searchRoom(Room room);
 	
+	//2. 숙소리스트에서 특정 숙소상세페이지 조회용 서비스 - 진아
+	Room roomDetail(int roNo);
 	
+	//3. 숙소 필드에 상세이미지 파일명 저장용 서비스 - 진아
+	ArrayList<Attachment> getDetailImages(int roNo);
 	
-	
-	
-	
-	
+	//4. 파트너 정보 조회용 서비스 - 진아 
+	Member getPartner(int roNo);
 	
 	
 	

@@ -1,11 +1,11 @@
 package com.kh.goodplace.messages.model.dao;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.messages.model.vo.ChatRoom;
@@ -18,7 +18,7 @@ public class ChatDao{
 	private SqlSession session;
 
 	
-	
+	// 채팅룸 생성
 	public void createRoom(ChatRoom vo) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("테이블 생성중...");
@@ -27,7 +27,7 @@ public class ChatDao{
 	}
 
 
-
+	// 채팅룸 조회
 	public ChatRoom selectChatRoom(ChatRoom vo) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -39,13 +39,17 @@ public class ChatDao{
 	}
 
 
-
+	// 채팅 내용 메세지테이블 입력
 	public int insertMessage(Message vo) throws Exception {
-		// TODO Auto-generated method stub
-		
 		return session.insert("chatMapper.insertMessage" , vo);
-		
 	}
-
+	
+	public ArrayList<ChatRoom> aSelectMessagesList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("chatMapper.aSelectMessagesList");
+	}
+	
+	public ArrayList<Message> selectMessage(SqlSessionTemplate sqlSession, int msn) {
+		return (ArrayList)sqlSession.selectList("chatMapper.selectMessage",msn);
+	}
 	
 }

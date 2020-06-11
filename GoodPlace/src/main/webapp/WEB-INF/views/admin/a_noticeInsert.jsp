@@ -115,18 +115,7 @@
 	                                    <textarea name="noticeContent" id="noticeContent" style="padding-left: 10px; border:1px solid #bebebe;" required></textarea>
 	                                </td>
 	                            </tr>
-	                            <tr class="file_input">
-	                                <td width="150px">
-	                                    <div>
-	                                        <label>
-	                                            	파일첨부
-	                                            <input type="file" id="upfile" onchange="javascript:document.getElementById('file_route').value=this.value" name="uploadFile">
-	                                        </label>
-	                                        
-	                                    </div>
-	                                </td>
-	                                <td colspan="3" style="background: white; text-align: left; padding-left: 5%;"><input type="text" readonly="readonly" title="File Route" id="file_route"></td>
-	                            </tr>
+
 	                        </tbody>
 	                    </table>
 	                    <br>

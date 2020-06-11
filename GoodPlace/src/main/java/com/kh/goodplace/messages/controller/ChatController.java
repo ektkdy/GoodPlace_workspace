@@ -1,5 +1,7 @@
 package com.kh.goodplace.messages.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,14 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.goodplace.member.model.service.MemberService;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.messages.model.dao.ChatDao;
+import com.kh.goodplace.messages.model.service.ChatService;
 import com.kh.goodplace.messages.model.vo.ChatRoom;
+import com.kh.goodplace.messages.model.vo.Message;
 
 @Controller
 public class ChatController {
 	
 	@Autowired // DI
 	private ChatDao cDao;
+	
+	@Autowired // DI
+	private ChatService cService;
+	
+	@Autowired // DI
+	private MemberService mService;
 	
 	// 메세지 테스트
 	@RequestMapping("mTest.me")
@@ -53,9 +65,23 @@ public class ChatController {
 	@RequestMapping("aMessagesList.me")
 	public String aSelectMessagesList(Model model) {
 		
+		ArrayList<ChatRoom> cList = cService.aSelectMessagesList();
 		
+		model.addAttribute("cList", cList);
 		return "admin/a_message";
+	}
+
+	
+	// 메세지 상세보기 페이지 (해당사용자와 주고받은 대화 내용 전부를 가져옴)
+	@RequestMapping("aMessageDetail.me")
+	public String aMessageDetail(int msn, Member m, Model model) {
+		ArrayList<Message> meList = cService.selectMessage(msn);
+
+		Member user = mService.loginMember(m);
 		
+		model.addAttribute("meList", meList);
+		model.addAttribute("user", user);
+		return "admin/a_messageDetail";
 	}
 	
 	

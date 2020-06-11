@@ -124,6 +124,16 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.updateBlockMemberOff(sqlSession, mno);
 			
 		}
+		
+		@Override
+		public int memSearchCount(Member m) {
+			return mDao.memSearchCount(sqlSession, m);
+		}
+
+		@Override
+		public ArrayList<Member> memSearchList(PageInfo pi, Member m) {
+			return mDao.memSearchList(sqlSession, pi, m);
+		}
 
 		/*파트너용*/
 		@Override
@@ -162,6 +172,18 @@ public class MemberServiceImpl implements MemberService {
 		public ArrayList<Experience> aSelectPartnerExp(int ptno) {
 			return mDao.aSelectPartnerExp(sqlSession, ptno);
 		}
+
+		@Override
+		public int ptSearchCount(Member m) {
+			return mDao.ptSearchCount(sqlSession, m);
+		}
+
+		@Override
+		public ArrayList<Member> ptSearchList(PageInfo pi, Member m) {
+			return mDao.ptSearchList(sqlSession, pi, m);
+		}
+
+
 
 		
 		

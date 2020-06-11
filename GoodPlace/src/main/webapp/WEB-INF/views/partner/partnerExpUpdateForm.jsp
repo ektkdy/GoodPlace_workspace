@@ -73,6 +73,7 @@
             <form action="" id="updateExp" method="post">
 	            <div id="stepOne">
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
+	            	<input type="hidden" name="exNo" value="${ e.exNo }">
 	            	
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
 	                    1. 기본 정보</div>
@@ -204,8 +205,14 @@
 	                    </tr>
 	                    <tr>
 	                        <th>* 상세 사진</th>
+	                        
+	                        
 	                        <td class="photo_btn" colspan="2">
 								<div id="parah"></div>
+								<c:forEach items="${ list }" var="at">
+									<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a><br>
+									<input type="file" name="file">
+								</c:forEach>
 	                        	<input type="button" value="추가" onclick="addInput();" style="width:50px; height:35px; background:#184c88; color:#fff; border:none; border-radius:4px;" />
 								<input type="button" value="삭제" onclick="deleteInput();" style="width:50px; height:35px; border:none; border-radius:4px;"/>
 								<p class="hh">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
@@ -239,9 +246,27 @@
                     <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
 		                </span>
 		                <div style="text-align:right; margin-top: -40px;">
-		                    <button id="delete" onclick="expSubmit(1);">삭제하기</button>
-		                    <button id="rest" onclick="expSubmit(2);">휴면하기</button>
-		                    <button id="modify" onclick="expSubmit(3);">수정하기</button>
+		                <c:choose>
+		                	<c:when test="${ e.status eq 1}"><!-- 운영중 -->
+		                		<button id="delete" onclick="expSubmit(1);">삭제하기</button>
+		                    	<button id="rest" onclick="expSubmit(2);">휴면하기</button>
+		                    	<button id="modify" onclick="expSubmit(3);">수정하기</button>
+		                	</c:when>
+		                	<c:when test="${ e.status eq 2}"><!-- 승인대기 -->
+		                		
+		                	</c:when>
+		                	<c:when test="${ e.status eq 3}"><!-- 승인거절 -->
+		                		<button id="delete" onclick="expSubmit(1);">삭제하기</button>
+		                    	<button id="modify" onclick="expSubmit(3);">수정하기</button>
+		                	</c:when>
+		                	<c:when test="${ e.status eq 4}"><!-- 휴면 -->
+		                		<button id="delete" onclick="expSubmit(1);">삭제하기</button>
+		                    	<button id="rest" onclick="expSubmit(4);">휴면해제하기</button>
+		                	</c:when>
+		                	<c:otherwise><!-- 삭제 -->
+		                	
+		                	</c:otherwise>
+		                </c:choose>
 		                </div>
 		            </div>
 		        </form>
@@ -260,13 +285,15 @@
 
 
 <script>
-	function expSubmit(num){	// num에는 1,2,3중 하나가 넘어옴
-		if(num==1){		// 삭제하기 클릭시
+	function expSubmit(num){	// num에는 1,2,3,4중 하나가 넘어옴
+		if(num==1){			// 삭제하기 클릭시
 			$("#updateExp").attr("action", "delete.exp");
 		}else if(num==2){	// 휴면하기 클릭시
 			$("#updateExp").attr("action", "rest.exp");
-		}else{	// 수정하기 클릭시
+		}else if(num==3){	// 수정하기 클릭시
 			$("#updateExp").attr("action", "updateExp.exp");
+		}else{				// 휴면해제하기
+			$("#updateExp").attr("action", "endRest.exp");
 		}
 		$("#updateExp").submit();
 	}
@@ -392,7 +419,7 @@
       			reader.readAsDataURL(inputFile.files[0]);
       			
       			//파일 읽기가 완료 되었을때 실행할 메소드
-			// e : 현재 이벤트가 발생한 이벤트객체
+				// e : 현재 이벤트가 발생한 이벤트객체
       			reader.onload = function(e){
 				$("#titleImg").attr("src", e.target.result); 
 			};
@@ -414,8 +441,19 @@
   		maxAppend--;
   	}
 </script>
+
+<!-- 업로드된 파일 이름 가져오기 -->
+<script>
+	$(function(){
+		$('input[type="file"]').change(function(e){
+			var fileName = e.target.files[0].name;	//getting the file name 
+			var display = $(".file");				//where to display
+			display.html(fileName);
+		});
+	});
+</script>
    
-   <!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
+<!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
 <script>
 	$(function(){
 		// 이벤트 걸고자하는 input요소

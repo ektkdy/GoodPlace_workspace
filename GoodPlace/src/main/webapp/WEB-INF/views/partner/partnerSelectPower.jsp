@@ -108,6 +108,9 @@
 		                                </form>
 			                        </c:forEach>
 	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<tr><td colspan="8">운영중인 숙소가 없습니다.</td></tr>
+	                    		</c:otherwise>
 	                    	</c:choose>
                         </tbody>
                     </table>

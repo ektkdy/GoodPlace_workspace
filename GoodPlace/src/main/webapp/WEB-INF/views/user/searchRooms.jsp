@@ -291,27 +291,38 @@
             </div>
         </div>
 
-	        <!-- 검색된 숙소 : 미완성 -->
+	        <!-- 검색된 숙소 -->
 	        <div id="roomList">
 	            <div style="margin:50px 0 20px 0; height:30px; width:100%;">
 	                <div class="halfWidth" style="height:30px;"><h3 style="margin:0px;">검색된 숙소 (n개)</h3></div>
 	                <div class="halfWidth" style="height:30px; width:50%; text-align: right;"><a href="#">리뷰 많은 순</a> | <a href="#">가격 낮은 순</a> | <a href="#">가격 높은 순</a></div>
 	            </div>
 	            
-	            
+
 	           	<div class="rooms power bottomArea">
-	           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
-			               	<li>
-			                    <a href="">
+		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
+			               	<li class="roomDetail">
+			                    <a href="roomDe.ro?roNo=${ roomList.roNo }">
 			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
 			                    </a>
+			                    <input type="hidden" class="roNo" value="${ roomList.roNo }" />
 	                		</li>
-	               	 </c:forEach>
+	               	 	</c:forEach>
 	           	</div>
-	
+
+				<script>
+	            	//$(function(){
+	            		//$(".roomDetail").click(function(){
+	            			//var roNo = $(this).children(".roNo").val();
+	            			//console.log(roNo);
+	            			//location.href="roomDe.ro?roNo=" + roNo;
+	            			//console.log("roomDetail li 클릭됨");
+	            		//});
+	            	//});
+				</script>
 	        <!-- 페이징 바 -->
 	        <div class="pagingBar">
 	            <button>&lt;</button>&nbsp;
@@ -322,7 +333,7 @@
 	            <button>n</button>&nbsp;
 	            <button>&gt;</button>
 	        </div>
-	    </div>
+	    </div>	
 	    	
    	</div>
     <!-- /content -->

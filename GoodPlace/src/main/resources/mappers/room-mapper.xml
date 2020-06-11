@@ -114,6 +114,37 @@
 		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
 	
+	<!-- Attachment테이블 -->
+	<resultMap type="Attachment" id="attachmentResultSet">
+		<id column="FINO" property="fiNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="UPLOAD_DATE" property="uploadDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="CATEGORY" property="category"/>
+		<result column="RONO" property="roNo"/>
+		<result column="EXNO" property="exNo"/>
+	</resultMap>
+	
+	<!-- Review테이블 + Member테이블 + Partner테이블 -->
+	<resultMap type="Room" id="reviewAndMemberResultSet">
+		<id column="RENO" property="reNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="REVIEW_TITLE" property="reTitle"/>
+		<result column="REVIEW_CONTENT" property="reContent"/>
+		<result column="CREATE_DATE" property="reviewDate"/>
+		<result column="SCORE" property="score"/>
+		<result column="REPLY" property="reply"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+
+		<result column="ORIGIN_NAME" property="usOriginName"/>
+		<result column="CHANGE_NAME" property="usChangeName"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
 		select count(*)
 		  from rooms
@@ -167,24 +198,17 @@
 			   count(p.rono) as totalSal
 	      from rooms r
 	      left join roomspay p on (r.rono=p.rono)
+	     where r.status=1 and r.pono is null
 	     group by r.status, r.rooms_title, r.usno, r.rono, r.add_basic
 	    having r.usno = #{userNo}
 	     order by totalSal desc
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<update id="updateRoomPower" parameterType="Room">
+		update rooms
+		   set pono=#{poNo}, power_start=#{powerStart}, power_end=#{powerEnd}
+	     where rono=#{roNo}
+	</update>
 	
 	
 	
@@ -293,23 +317,37 @@
 	
 	<!-- 숙소관리 끝-->
 
-	<!-- 숙소검색 시작 // 미완성 -->
+	<!-- 숙소조회 시작 -->
 	<select id="selectRoomSearch" parameterType="Room" resultMap="roomAndRoomspayResultSet">
 		SELECT *
-		FROM ROOMS
-		WHERE RONO NOT IN (
+		  FROM ROOMS
+		 WHERE RONO NOT IN (
 		                    SELECT R.RONO
 		                    FROM ROOMS R
 		                    JOIN ROOMSPAY P ON(R.RONO = P.RONO)
 		                    WHERE ((#{startDays} BETWEEN P.START_DAYS AND (P.END_DAYS-1))
 		                        or (#{endDays} BETWEEN (P.START_DAYS+1) AND P.END_DAYS))
-				)
-        AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
-        AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
+							)
+          AND (#{people} BETWEEN MIN_PEOPLE AND MAX_PEOPLE)
+          AND ((ADD_BASIC LIKE '%' || #{addBasic} || '%') OR (ADD_REF LIKE '%' || #{addBasic} || '%'))
         ORDER BY RONO
 	</select>
 
-	<!-- 숙소검색 끝 -->
+	<select id="selectDetailImages" parameterType="_int" resultMap="attachmentResultSet">
+		SELECT *
+		 FROM ATTACHMENT
+		WHERE RONO = #{roNo}
+	</select>
+	
+	<select id="selectReviewList" parameterType="_int" resultMap="reviewAndMemberResultSet">
+		SELECT *
+		  FROM REVIEW
+		  JOIN MEMBER USING (USNO)
+		  JOIN PARTNER USING (PANO)
+		 WHERE RONO=#{roNo}
+	</select>
+
+	<!-- 숙소조회 끝 -->
 
 
 	<!-- 예약관리 -->

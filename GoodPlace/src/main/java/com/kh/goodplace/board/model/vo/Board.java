@@ -66,6 +66,10 @@ public class Board {
 	/*1:1문의 detail select 용*/
 	private String email;
 	private String expTitle;
+	
+	/*관리자 검색용 키워드*/
+	private String searchSelect;
+	private String keyword;
 
 	
 	/*신고관리 select 용*/

@@ -42,6 +42,11 @@ public class Member {
 	private int rpNo;				//결제번호
 	private Timestamp payDate; 		//결제일자 selectIncomeList()
 	private int amount;				//결제금액
+	
+	
+	/*관리자 회원검색용 키워드*/
+	private String memSearchSelect;
+	private String keyword;
 		
 	
 }

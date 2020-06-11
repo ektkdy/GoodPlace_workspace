@@ -55,6 +55,12 @@ public interface MemberService {
 	//3. 회원 정지해지
 	int updateBlockMemberOff(int mno);
 	
+	//4. 회원 검색 총갯수 조회용
+	int memSearchCount(Member m);
+	
+	//5. 회원 검색 조회용
+	ArrayList<Member> memSearchList(PageInfo pi, Member m);
+	
 	/*파트너용*/
 	//1_1. 게시판 총갯수 조회용 서비스
 	int aSelectPartnerListCount();
@@ -72,6 +78,12 @@ public interface MemberService {
 	Member aSelectPartnerMember(int ptno);
 	ArrayList<Room> aSelectPartnerRoom(int ptno);
 	ArrayList<Experience> aSelectPartnerExp(int ptno);
+	
+	//4. 회원 검색 총갯수 조회용
+	int ptSearchCount(Member m);
+	
+	//5. 회원 검색 조회용
+	ArrayList<Member> ptSearchList(PageInfo pi, Member m);
 	
 	
 	//-------------------------------------------------------------------

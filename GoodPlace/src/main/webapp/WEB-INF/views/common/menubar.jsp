@@ -304,9 +304,11 @@
 		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
 		                                    <li><a href="">my굿플레이스</a></li>
 		                                    <li><a href="ReserveForm.ro">숙소예약내역</a></li>
-		                                    <li><a href="">위시리스트</a></li>
+		                                    <li><a href="wishList.bo">위시리스트</a></li>
 		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
-		                                    <li><a href="">관리자페이지</a></li>
+		                                    <c:if test="${ loginUser.userKind eq 0 }">
+		                                    	<li><a href="adminForm.me">관리자페이지</a></li>
+		                                    </c:if>
 		                                    <li><a href="logout.me">로그아웃</a></li>
 		                                </ul>
 		                            </li>
@@ -429,7 +431,7 @@
 			  	message.messageContent = $("#message").val();
 		  	  	message.messageReceiver = "ektkdy@naver.com"; // 관리자 이메일
 		  	  	message.messageSender = '${loginUser.email}';
-		  	  	message.CLASS_class_id = 1;
+		  	  	message.class_class_id = 1;					  // 사용자가 보낸경우 1
 		  	  	message.messageSendTime = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간
 			}
 			console.log(message);
@@ -443,7 +445,7 @@
 			var name = $("#myName").val();						// 내 이름
 			var tutorChangeName = $("#tutorChangeName").val();	// 관리자 프로필
 
-			if(data.messageSender != '${loginUser.email}'){		// 메세지를 보낸 이메일과 현재 로그인한 이메일이 다른경우(관리자가 보낸 메세지일 경우)
+			if(data.class_class_id != 1){		// 1 : 사용자 (사용자가 보낸 메세지가 아닐때)
 				$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + tutorChangeName +"' width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_admin'>"+ data.messageContent + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'>" + data.messageSendTime + "</div></div>");
 			} else {
 				$("#messageArea").append("<div><div class="+"'chat_common chat_userId'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + $("#myChangeName").val() +"' width='28px' height='28px'><span>"+ name +"</span></div><div class='chat chat_user'>"+ data.messageContent + "</div><div class='chat_date chat_userDate'>" + data.messageSendTime + "</div></div>");

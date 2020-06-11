@@ -90,7 +90,7 @@
 		ORDER BY RENO
 	</select>
 	
-	<!-- 진아 : 숙소별 리뷰 개수 조회 : 미완성 -->
+	<!-- 진아 : 숙소별 리뷰 개수 조회 -->
 	<select id="reviewListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW
@@ -140,6 +140,53 @@
 	
 	</delete>
 	
+	<select id="faqSearchCount" parameterType="Board" resultType="_int">
+		select count(*)
+		  from faq
+	 	<if test="searchSelect == 'searchOp0'">
+			
+		</if>
+		<if test="searchSelect == 'searchOp1'">
+			where FAQ_CATEGORY LIKE '%' || '일반' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			where FAQ_CATEGORY LIKE '%' || '예약' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			where FAQ_CATEGORY LIKE '%' || '취소' ||'%' OR FAQ_CATEGORY LIKE '%' || '환불' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp4'">
+			where FAQ_CATEGORY LIKE '%' || '상품' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp5'">
+			where FAQ_CATEGORY LIKE '%' || '파트너' ||'%'
+		</if>
+	</select>
+	
+	<select id="faqSearchList" parameterType="Board" resultMap="boardFaqResultSet">
+		select *
+		  from faq
+	 	<if test="searchSelect == 'searchOp0'">
+			
+		</if>
+		<if test="searchSelect == 'searchOp1'">
+			where FAQ_CATEGORY LIKE '%' || '일반' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			where FAQ_CATEGORY LIKE '%' || '예약' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			where FAQ_CATEGORY LIKE '%' || '취소' ||'%' OR FAQ_CATEGORY LIKE '%' || '환불' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp4'">
+			where FAQ_CATEGORY LIKE '%' || '상품' ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp5'">
+			where FAQ_CATEGORY LIKE '%' || '파트너' ||'%'
+		</if>
+		 order by FAQNO desc
+	</select>
+	
 	
 	<!-- 공지사항 -->
 	<select id="aSelectNoticeListCount" resultType="_int">
@@ -180,6 +227,37 @@
 		 where nono=#{noNo}
 	
 	</update>
+	
+	<select id="noticeSearchCount" parameterType="Board" resultType="_int">
+		select count(*)
+		  from notice
+		 where status='Y'
+	 	<if test="searchSelect == 'searchOp1'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="noticeSearchList" parameterType="Board" resultMap="boardNoticeResultSet">
+		select *
+		  from notice
+		 where status='Y'
+	 	<if test="searchSelect == 'searchOp1'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp3'">
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT '%' || #{keyword} ||'%'
+		</if>
+		 order by NONO desc
+	</select>
 	
 	<!-- 1:1문의 -->
 	

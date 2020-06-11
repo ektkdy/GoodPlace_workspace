@@ -11,6 +11,28 @@
 		<result column="CLASS_ID" property="class_class_id"/>
 	</resultMap>
 	
+	<resultMap id="chatListMap" type="ChatRoom">
+		<id column="CHNO" property="chNo"/>
+		<result column="USER_EMAIL" property="userEmail"/>
+		<result column="TUTOR_EMAIL" property="tutorEmail"/>
+		<result column="CLASS_ID" property="class_class_id"/>
+		<result column="MESSAGE_CONTENT" property="recentMessage"/>
+		<result column="MESSAGE_READTIME" property="recentTime"/>
+	</resultMap>
+	
+	<resultMap id="messageListMap" type="Message">
+		<id column="MSGNO" property="msgNo"/>
+		<result column="CHNO" property="chNo"/>
+		<result column="MESSAGE_SENDER" property="messageSender"/>
+		<result column="MESSAGE_RECEIVER" property="messageReceiver"/>
+		<result column="MESSAGE_CONTENT" property="messageContent"/>
+		<result column="MESSAGE_SENDTIME" property="messageSendTime"/>
+		<result column="MESSAGE_READTIME" property="messageReadTime"/>
+		<result column="CLASS_ID" property="class_class_id"/>
+	</resultMap>
+	
+	<!--   -->
+	
 	<insert id = "createRoom" parameterType="ChatRoom">
 		insert into CHATROOM
 		values(chno.nextval,#{userEmail}, #{tutorEmail} , 1 )
@@ -23,7 +45,24 @@
 
 	<insert id = "insertMessage" parameterType="Message">
 		insert into MESSAGE
-		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, SYSDATE)
+		values(msgno.nextval, #{chNo}, #{messageSender}, #{messageReceiver}, #{messageContent}, #{messageSendTime}, SYSDATE, #{class_class_id})
 	</insert>
+	
+			    <!-- 
 
+             -->
+	<select id ="aSelectMessagesList" resultMap="chatListMap">
+            SELECT CHNO, USER_EMAIL, TUTOR_EMAIL, CLASS_ID, MESSAGE_CONTENT, MESSAGE_READTIME
+            FROM (select CHNO, USER_EMAIL, TUTOR_EMAIL, M.CLASS_ID, MESSAGE_CONTENT, MESSAGE_READTIME,RANK() OVER (PARTITION BY CHNO ORDER BY MESSAGE_READTIME DESC) AS RECENT_ME
+                    from CHATROOM 
+                    left join MESSAGE M USING(CHNO))
+            WHERE RECENT_ME = 1
+	</select>
+	
+	<select id="selectMessage" resultMap="messageListMap" parameterType="_int">
+		select *
+		  from message
+		 where chno = #{chNo}
+		 order by message_readtime
+ 	</select>
 </mapper>

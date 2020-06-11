@@ -39,7 +39,9 @@ button:hover{cursor:pointer}
                     <p class="title_tt">숙소관리</p>
                 </span>
                 <span class="up_btn_space" style="margin-top:8px">
-                    <button class="blue_btn" onclick="location.href='selectPower.ro?currentPage=1'">파워등록신청</button>
+                	<c:if test="${ !empty list }">
+		            	<button class="blue_btn" onclick="location.href='selectPower.ro?currentPage=1'">파워등록신청</button>
+                	</c:if>
                     <button class="blue_btn" onclick="location.href='insertRoomForm.ro'">숙소등록</button>
                 </span>
                 
