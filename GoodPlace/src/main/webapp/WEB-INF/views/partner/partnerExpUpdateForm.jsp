@@ -216,7 +216,7 @@
 								<ul id="ul">
 									<c:forEach items="${ list }" var="at">
 										<li class="li">
-											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
+											<a name="file" href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
 											<button class="del">x</button>
 										</li>
 									</c:forEach>

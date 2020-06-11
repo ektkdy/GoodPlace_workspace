@@ -203,7 +203,7 @@ public class ExperienceController {
 		
 		int result = 1;
 		
-		// 상세사진 전용 비어있는 리스트를 생성한 뒤 ---------------------- 이 이후로는 상세사진 쪽
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 ---------------------- 이 이후로는 상세사진 쪽 ---
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
@@ -211,10 +211,6 @@ public class ExperienceController {
 			
 			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
 			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
-				
-				if(filelist[i].getName() != null) {
-					deleteFile(e.getChangeName(), request);
-				}
 				
 				String changeName = saveFile(filelist[i], request);
 				
@@ -343,8 +339,10 @@ public class ExperienceController {
 	}
 	
 	
-	
-	
+	@RequestMapping("partnerMsg.me")
+	public String partnerMsg() {
+		return "partner/partnerMessage";
+	}
 	
 	
 	
