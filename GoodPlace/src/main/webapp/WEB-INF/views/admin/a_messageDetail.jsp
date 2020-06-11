@@ -80,7 +80,7 @@
     }
 
     /*채팅 회원(사용자)*/
-    .msgContents .chat_userId>img, .chat_content .chat_userId>span, .chat_content .chat_user, .chat_content .chat_userDate{
+    .msgContents .chat_userId>img, .msgContents .chat_userId>span, .msgContents .chat_user, .msgContents .chat_userDate{
         float: right;
     }
     .msgContents .chat_user{
@@ -102,7 +102,7 @@
                 <div class="con2">
                     <div class="msgDetail">
                         <div class="msgUser">
-                            <p> <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${user.changeName}"> ${ user.userName } 님과의 대화</p>
+                            <br><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${user.changeName}" width="50px" height="50px"> ${ user.userName } 님과의 대화
                         </div>
                         
                         

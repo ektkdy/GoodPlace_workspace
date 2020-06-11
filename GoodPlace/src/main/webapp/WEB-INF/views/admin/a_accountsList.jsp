@@ -115,7 +115,7 @@
                     <table>
                         <th>
                             <br>
-                            <button class="blue_btn">차트화면</button>
+                            <button class="blue_btn" onclick="location.href='chartView.ac'">차트화면</button>
                             <button class="blue_btn" onclick="location.href='excelDown.do'">엑셀 다운로드</button>
                         </th>
                         <th>

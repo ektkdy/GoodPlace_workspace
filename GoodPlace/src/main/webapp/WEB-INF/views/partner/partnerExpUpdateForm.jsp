@@ -39,6 +39,11 @@
     .maxPeople {width: 200px; height: 30px; border-radius: 4px; border: 1px solid #dbdbdb; padding-left: 5px;}
     #oprateTimes input{width:100px; height:30px;border-radius:4px; border: 1px solid #dbdbdb; padding-left:5px;}
     
+    .addBtn {border:1px solid #bebebe; border-radius:4px; background-color:#fff; width:25px; height:25px; font-size:18px; margin-bottum:10px;}
+    .del{border:0px; background-color:#fff; font-size:15px; color:#bebebe; margin-left:10px;}
+    ul{   list-style:none;   }
+    
+    
     /*하단 버튼 css*/
     #btns{width:950px; margin-top: 20px; margin-bottom: 20px; margin-right: 20px;}
     #btns button{width:100px; height:35px; border-radius: 4px; font-size: 15px;}
@@ -70,7 +75,7 @@
             </span><br>
             <div style="text-align: center; margin-bottom: 150px;"></div>
             <br clear="both">
-            <form action="" id="updateExp" method="post">
+            <form action="" id="updateExp" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="exNo" value="${ e.exNo }">
@@ -208,13 +213,16 @@
 	                        
 	                        
 	                        <td class="photo_btn" colspan="2">
-								<div id="parah"></div>
-								<c:forEach items="${ list }" var="at">
-									<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a><br>
-									<input type="file" name="file">
-								</c:forEach>
-	                        	<input type="button" value="추가" onclick="addInput();" style="width:50px; height:35px; background:#184c88; color:#fff; border:none; border-radius:4px;" />
-								<input type="button" value="삭제" onclick="deleteInput();" style="width:50px; height:35px; border:none; border-radius:4px;"/>
+								<ul id="ul">
+									<c:forEach items="${ list }" var="at">
+										<li class="li">
+											<input class="fino" type="hidden" value="${ at.fiNo }">
+											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
+											<button class="del">x</button>
+										</li>
+									</c:forEach>
+								</ul>
+								<div id="photoDiv"></div>
 								<p class="hh">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
 							</td>
 	                    </tr>
@@ -427,30 +435,36 @@
 	}
 </script>
 
-<!-- 상세사진용 input 추가 -->
-<script>
-	var maxAppend = 0; 
-  	function addInput(){
-  		if (maxAppend >= 5) return; 
-  		$("#parah").append('<input type="file" name="file">');
-  		maxAppend++;
-  	}
-  	
-  	function deleteInput(){
-  		$("#parah input:last-child").remove();
-  		maxAppend--;
-  	}
-</script>
-
-<!-- 업로드된 파일 이름 가져오기 -->
+<!-- 상세사진용  -->
 <script>
 	$(function(){
-		$('input[type="file"]').change(function(e){
-			var fileName = e.target.files[0].name;	//getting the file name 
-			var display = $(".file");				//where to display
-			display.html(fileName);
+		
+		$(".del").click(function(){
+			$(this).parent(".li").remove();
+			
+			var arr = [];
+			arr.put
+			
+			$(this).siblings(".fino");
+			
+			if($(".li").length != 5){
+				if($("#ul").children().is(".addBtn")){
+					
+				}else{
+					$("#ul").append('<button type="button" class="addBtn">+</button>');
+				}
+			}
+		});
+		
+		//$(".addBtn").click(function(){
+		$("#ul").on("click", ".addBtn", function(){
+			if($("input[name=file]").length < (5-$(".li").length)){
+				$("#photoDiv").append('<input type="file" name="file">');
+			}
 		});
 	});
+	
+	
 </script>
    
 <!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->

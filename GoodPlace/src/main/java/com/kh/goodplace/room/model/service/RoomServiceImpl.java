@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.Power;
@@ -191,6 +192,11 @@ public class RoomServiceImpl implements RoomService{
 		return  rDao.getPartner(sqlSession, roNo);
 	}
 	
+	@Override
+	public ArrayList<Board> getReview(int roNo) {
+		return rDao.getReview(sqlSession, roNo);
+	}
+
 	// --------- 숙소조회 끝 -------------------------
 	
 	//--------------- 예약관리 시작 -------------------
@@ -234,6 +240,7 @@ public class RoomServiceImpl implements RoomService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 	

@@ -18,7 +18,9 @@
     <!-- Swiper JS -->
     <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
     
-
+	<!-- 결제 API 관련 -->
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	
     <style>
         /* content 시작*/
         /* 여백 초기화 */
@@ -163,7 +165,7 @@
                         <br><h1>${ room.roomsTitle }</h1>
                     </div><br>  
                     <div class="fullWidth">
-                        <h4>서울, 강남구</h4>
+                        <h4>${ room.region }</h4>
                     </div>
                 </div>
                 <div style="width:80%; margin:0 10%;">
@@ -181,18 +183,11 @@
                         </div>
                         <div class="fullWidth marginBottom_40px">
                             <div style="width:50%;"><h3>숙소시설</h3></div><br><br>
-                            <p>세탁기, 침구,<br>
-                                주방, 공용PC, 전자레인지,<br>
-                                커피포트, 드라이기, 주차가능<br>
-                            </p>
+                            <p>${ room.facility }</p>
                         </div>
                         <div class="fullWidth marginBottom_40px">
                             <h3>제공서비스</h3><br>
-                            <p>세면도구(비누, 샴푸, 바디워시)<br>
-                                수건(1박당 1개 제공)<br>
-                                Free wifi<br>
-                                짐보관서비스(사전에 문의요망)<br>
-                            </p>
+                            <p>${ room.service }</p>
                         </div>
                         <div class="fullWidth marginBottom_60px">
                             <h3>포함사항</h3><br>
@@ -259,98 +254,67 @@
                     <hr style="border:1px solid lightgray;">
                     <br><br>
                     <div class="fullWidth">
-                        <div style="width:20%; margin-right:5%;">
+                        <div style="width:20%; margin-right:5%; position:absolute;">
                             <h1 style="text-align:left;">후기</h1>
                         </div>
-                        <div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle1">
+                        
+                        <c:forEach items="${ room.reviewList }" var="review" varStatus="status">
+                        
+                        	<div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
                             <div class="fullWidth">
                                 <div class="c_profileArea">
-                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
+                                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
                                 </div>
                                 <div style="width:85%; margin-top:5px;">
                                     <div style="width:20%;">
-                                        <h4>김가가</h4>
+                                        <h4>${ review.userName }</h4>
                                     </div>
                                     <div style="width:80%;">
-                                        <h4>20.04.27</h4>
+                                        <h4>${ review.reviewDate }</h4>
                                     </div>
                                 </div>
-                                <h3>★★★☆☆</h3>
+                                <h3>
+                                	<c:forEach begin="1" end="5" varStatus="currentNum">
+                                		<c:choose>
+                                			<c:when test="${currentNum.current le review.score }"><c:out value="★"/></c:when>
+                                			<c:otherwise><c:out value="☆"/></c:otherwise>
+                                		</c:choose>
+                                	</c:forEach>
+                                </h3>
                             </div>
-                            <div class="fullWidth">
-                                <p>
-                                    후기 짱짱 좋았어요 ~~~~ 내용 ~~<br>
-                                    내용2줄<br>
-                                    내용3줄<br>
-                                    내용4줄<br>
-                                </p>
-                            </div>
-                        </div>
-                        <div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-                            <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
-                            <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
-                            <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
-                            <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-                        </div>
+	                            <div class="fullWidth">
+	                                <p>${ review.reContent }</p>
+	                            </div>
+                        	</div>
+                        	
+							<c:choose>
+		                    	<c:when test="${ loginUser.usNo } eq ${ room.userNo}">
+		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
+				                    </div>
+		                    	</c:when>
+		                    	<c:when test="${ loginUser.usNo } eq ${ review.userNo}">
+		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
+				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
+				                    </div>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+				                         <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
+				                    </div>
+                    			</c:otherwise>
+                    		</c:choose>
+                    		
+                        </c:forEach>
+
                     </div>
-                    <div class="fullWidth">
-                        <div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
-                            <div class="fullWidth">
-                                <div class="c_profileArea">
-                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
-                                </div>
-                                <div style="width:85%; margin-top:5px;">
-                                    <div style="width:20%;">
-                                        <h4>김가가</h4>
-                                    </div>
-                                    <div style="width:80%;">
-                                        <h4>20.04.27</h4>
-                                    </div>
-                                </div>
-                                <h3>★★★☆☆</h3>
-                            </div>
-                            <div class="fullWidth">
-                                <p>
-                                    후기 짱짱 좋았어요 ~~~~ 내용 ~~<br>
-                                    내용2줄<br>
-                                    내용3줄<br>
-                                    내용4줄<br>
-                                </p>
-                            </div>
-                        </div>
-                        <div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-                            <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
-                            <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-                        </div>
-                    </div>
-                    <div class="fullWidth">
-                        <div style="width:75%; margin-left:25%;"  class="marginBottom_10px padding_10px replyStyle2">
-                            <div class="fullWidth">
-                                <div class="c_profileArea">
-                                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
-                                </div>
-                                <div style="width:85%; margin-top:5px;">
-                                    <div style="width:20%;">
-                                        <h4>김가가</h4>
-                                    </div>
-                                    <div style="width:80%;">
-                                        <h4>20.04.27</h4>
-                                    </div>
-                                </div>
-                                <h3>★★★☆☆</h3>
-                            </div>
-                            <div class="fullWidth">
-                                <p>
-                                    후기 짱짱 좋았어요 ~~~~ 내용 ~~<br>
-                                    내용2줄<br>
-                                    내용3줄<br>
-                                    내용4줄<br>
-                                </p>
-                            </div>
-                        </div>
-                        <div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-                            <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-                        </div>
+                    
+                   	<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
+                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
+                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
+                         <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
                     </div>
                 </div>
                 
@@ -398,7 +362,7 @@
         <div id="receipt" class="hide" style="width:500px; height:400px; position:relative; z-index:2; left:200px; top:200px; border:2px solid lightgray; background-color:white; float:unset;">
             <div style="float:unset; width:100%; height:200px; border-bottom:2px solid lightgray;">
                 <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;">예약날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20.03.05 (월) &nbsp;~&nbsp; 20.03.07 (화)</h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">30,000원 x 5명</h3></div>
+                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : 100,000원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : 0원</h3></div>
                 <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;">150,000원</h2>
                     <div style="height:40px; width:50%; padding:8px; float:unset; position:relative; z-index:3;">
                         <h2 style="position: absolute;">총 금액</h2>
@@ -409,7 +373,7 @@
             <div style="float:unset; width:100%; padding:30px 30px 12px 30px;">
                 <p style="position:absolute;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;해당 내용으로 예약하시겠습니까?</p>
                 <p style="position:absolute; margin-top:40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확인버튼을 누르면 예약이 진행됩니다.</p>
-                    <button style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
+                    <button style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2" id="payRoom">확인</button>
                     <button id="closeReceipt" style="width:80px; height:40px; position:absolute; z-index:4; left:240px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle1">취소</button>
             </div>
 
@@ -426,7 +390,12 @@
         <br style="clear:both;">
 
     </div>
-
+    <!-- Roompay 테이블에 넘겨줄 값-->
+	<form action="" id="">
+		<input type="hidden" id="" name=""/>
+		<input type="hidden" id="" name=""/>
+		<input type="hidden" id="" name=""/>
+	</form>
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {
@@ -506,6 +475,45 @@
             }
             
         });
+        
+        // 예약하기 -> 결제페이지
+        var IMP = window.IMP;
+        IMP.init('imp13454636'); 
+        
+        $('#payRoom').click(function(){
+          IMP.request_pay({
+               pg : 'inicis', // version 1.1.0부터 지원.
+               pay_method : 'card',
+               merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
+               name : '주문명:${ room.roomsTitle }',               	// 숙소이름
+               amount : 100,                              		// 가격
+               buyer_email : '${ loginUser.email }',					// 결제자이메일
+               buyer_name : '${ loginUser.userName }',						// 결제자이름
+               buyer_tel : '${ loginUser.phone }',						// 결제자 휴대폰번호
+               buyer_addr : '서울특별시 강남구 삼성동',
+               buyer_postcode : '123-456',
+               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+           }, function(rsp) {
+               if ( rsp.success ) {	// 결제 성공			
+                   var msg = '결제가 완료되었습니다.';
+                   msg += '고유ID : ' + rsp.imp_uid;
+                   msg += '상점 거래ID : ' + rsp.merchant_uid;
+                   msg += '결제 금액 : ' + rsp.paid_amount;
+                   msg += '카드 승인번호 : ' + rsp.apply_num;
+                   
+                   $('#payNo').val(rsp.imp_uid);
+                   $('#reserveNo').val('R-' +  rsp.imp_uid);
+                   
+                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
+                   $("#resultForm").submit();
+               } else {	// 결제 실패
+                   var msg = '결제에 실패하였습니다.';
+                   msg += '에러내용 : ' + rsp.error_msg;
+               }
+               alert(msg);
+           });
+       });
+        
     </script>
 
     <!-- /content -->

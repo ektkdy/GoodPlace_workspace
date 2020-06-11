@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.goodplace.accounts.model.dao.AccountsDao;
 import com.kh.goodplace.accounts.model.vo.Accounts;
+import com.kh.goodplace.accounts.model.vo.Chart;
 import com.kh.goodplace.common.model.vo.PageInfo;
-import com.kh.goodplace.experience.model.vo.Experience;
 
 @Service("aService")
 public class AccountsServiceImpl implements AccountsService{
@@ -33,13 +33,24 @@ public class AccountsServiceImpl implements AccountsService{
 		return aDao.selectAccountList(sqlSession);
 	}
 	
+	@Override
+	public ArrayList<Chart> chartList() {
+		return aDao.chartList(sqlSession);
+	}
 	
+	@Override
+	public ArrayList<Chart> chartList2() {
+		return aDao.chartList2(sqlSession);
+	}
 	
-	
-	
-	
-	
-	
+	@Override
+	public int roNum() {
+		return aDao.roNum(sqlSession);
+	}
+	@Override
+	public int exNum() {
+		return aDao.exNum(sqlSession);
+	}
 	
 	
 	
@@ -65,6 +76,9 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> selectIncomeList(int usNo) {
 		return aDao.selectIncomeList(sqlSession, usNo);
 	}
+
+
+
 
 
 

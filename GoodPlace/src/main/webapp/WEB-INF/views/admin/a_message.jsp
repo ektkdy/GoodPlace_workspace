@@ -64,6 +64,7 @@
                         <tbody>
                         	<c:forEach items="${ cList }" var="c">
 	                            <tr>
+	                            	<input type="hidden" name="class_class_id" value="${ c.class_class_id }">
 	                                <td width="200px">${ c.chNo }</td>
 	                                <td width="200px">${ c.userEmail }</td>
 	                                <td width="200px">${ c.recentTime }</td>
@@ -78,7 +79,7 @@
 		            	$(function(){
 		            		
  	            		    $("#messageList tbody tr").click(function(){
-		            			location.href="aMessageDetail.me?msn=" + $(this).children().eq(0).text() +"&email=" + $(this).children().eq(1).text();
+		            			location.href="aMessageDetail.me?msn=" + $(this).children().eq(1).text() +"&email=" + $(this).children().eq(2).text() + "&class_class_id=" + $(this).children().eq(0).val();
 		            		});  
  	            		    
 		            	});

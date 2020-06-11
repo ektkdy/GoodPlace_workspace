@@ -373,6 +373,21 @@ public class BoardController {
         return "admin/a_inquiryAnswerUpdate";
     }
     
+    @RequestMapping("inquirySearch.bo")
+    public String inquirySearchList(int currentPage, Board b, Model model) {
+    	
+        int listCount = bService.inquirySearchCount(b); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.inquirySearchList(pi, b);
+        model.addAttribute("list", list);
+        model.addAttribute("b", b);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_inquiry";
+        
+    }
+    
     // 관리자 1:1문의 끝
     
     // 관리자 신고관리 시작

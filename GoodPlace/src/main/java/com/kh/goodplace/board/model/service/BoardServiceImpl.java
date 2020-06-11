@@ -139,6 +139,16 @@ public class BoardServiceImpl implements BoardService {
 	public int inquiryUpdate(Board b) {
 		return bDao.inquiryUpdate(sqlSession, b);
 	}
+	
+	@Override
+	public int inquirySearchCount(Board b) {
+		return bDao.inquirySearchCount(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Board> inquirySearchList(PageInfo pi, Board b) {
+		return bDao.inquirySearchList(sqlSession, pi, b);
+	}
 	// ------------------- 관리자 신고관리 ----------------------
 	
 	@Override
@@ -243,6 +253,8 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
 	}
+
+
 
 
 
