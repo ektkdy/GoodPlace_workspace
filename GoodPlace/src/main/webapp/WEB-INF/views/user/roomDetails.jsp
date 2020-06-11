@@ -380,7 +380,7 @@
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
-            <a id="showMore" style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
+            <a style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
         <br style="clear:both;">
 
@@ -538,12 +538,6 @@
         $('.inquirePartner').click(function(){
         	
        	});
-        // 더보기 : 숙소검색 페이지로 이동
-        $('#showMore').click(function(){
-        	//alert("더보기 클릭됨 : " + ${ room.tripArea } + ", "+ ${ tripStartDate } + ", " + ${ tripEndDate } + ", " + ${ tripPeople } + ", " + ${ filterValue } + ", ");
-        	location.href="searchRoAgain.ro?searchCondition=<c:out value="${ searchCondition }"/>";
-       	});
-        
         
     </script>
 
