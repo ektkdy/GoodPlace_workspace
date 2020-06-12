@@ -211,6 +211,30 @@
 		 where exno=#{exNo}
 	
 	</update>
+	
+	<select id="expSearchCount" parameterType="Experience" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and EXP_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="expSearchList" parameterType="Experience" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and EXP_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
 	<!-- 체험관리 끝 -->
 
 

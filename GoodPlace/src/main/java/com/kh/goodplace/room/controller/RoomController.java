@@ -411,6 +411,22 @@ public class RoomController {
     	
     	
     }
+    
+    @RequestMapping("roomOkSearch.ro")
+    public String roomSearchList(int currentPage, Room r, Model model) {
+    	
+        int listCount = rService.roomSearchCount(r); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Room> list = rService.roomSearchList(pi, r);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("r", r);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminRoomsOkeyList";
+        
+    }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	

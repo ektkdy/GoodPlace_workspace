@@ -2,6 +2,7 @@ package com.kh.goodplace.experience.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
@@ -80,7 +81,11 @@ public interface ExperienceService {
 	// 3_3.게시글 거절용 서비스-현영
 	int updateReject(Experience e);
 
-
+	//4. 공지사항 검색 총갯수 조회용
+	int expSearchCount(Experience e);
+	
+	//5. 공지사항 검색 조회용
+	ArrayList<Experience> expSearchList(PageInfo pi, Experience e);
 	
 	
 }

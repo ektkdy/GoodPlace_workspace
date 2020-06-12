@@ -131,6 +131,16 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.updateReject(sqlSession, e);
 	}
 
+	@Override
+	public int expSearchCount(Experience e) {
+		return expDao.expSearchCount(sqlSession, e);
+	}
+
+	@Override
+	public ArrayList<Experience> expSearchList(PageInfo pi, Experience e) {
+		return expDao.expSearchList(sqlSession, pi, e);
+	}
+
 	
 
 	
