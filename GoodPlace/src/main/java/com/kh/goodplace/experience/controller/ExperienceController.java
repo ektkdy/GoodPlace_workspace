@@ -421,6 +421,13 @@ public class ExperienceController {
         
     }
 	
+	//------- 체험조회 시작 ---------------------------------------------------
+	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
+	@RequestMapping("showExp.exp")
+	public ModelAndView showExp(int currentPage, ModelAndView mv) {
+		
+		return mv;
+	}
 	
 	
 	
