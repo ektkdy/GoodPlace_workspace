@@ -218,7 +218,9 @@
 	                	<span>
 	                    	<button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
 		                </span>
-                        <button type="submit" class="enroll">재심사요청</button>
+		                <div style="text-align:right; margin-top: -40px;">
+                        	<button type="submit" class="enroll" id="modify">재심사요청</button>
+                        </div>
                     </div>
                 </form>
                 </div>

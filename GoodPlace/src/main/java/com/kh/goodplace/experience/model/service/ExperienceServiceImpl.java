@@ -162,7 +162,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 	@Override
 	public Experience reservationDetailView(int epno) {
-		return expDao.selectRvExpCancelList(sqlSession, epno);
+		return expDao.reservationDetailView(sqlSession, epno);
 	}
 
 	
