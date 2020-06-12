@@ -340,11 +340,6 @@ public class ExperienceController {
 	}
 	
 	
-	@RequestMapping("partnerMsg.me")
-	public String partnerMsg() {
-		return "partner/partnerMessage";
-	}
-	
 	
 	
 	
