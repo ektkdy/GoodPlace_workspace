@@ -54,7 +54,7 @@ button:hover{cursor:pointer}
                                 <td>지역</td>
                                 <td>숙소개시일</td>
                                 <td>숙소명</td>
-                                <td>총판매수</td>
+                                <!-- <td>총판매수</td> -->
                                 <td>비고</td>
                             </tr>
                         </thead>
@@ -63,20 +63,23 @@ button:hover{cursor:pointer}
                            	<c:when  test="${!empty list }">
 	                           <c:forEach items="${ list }" var="r">
 				                    <tr>
-				                    <c:choose>
-				                    	<c:when test="${r.status eq 1}">
-				                        	<td><div class="ing" style="margin:0 auto">운영중</div></td>
-				                        </c:when>
-				                        <c:when test="${r.status eq 2 }">
-				                        	<td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>
-				                        </c:when>
-				                       	<c:when test="${r.status eq 3}">
-				                       		<td><div class="cancel" style="margin:0 auto">승인거절</div></td>
-				                       	</c:when>
-				                       	<c:otherwise>
-				                       		<td><div class="rest" style="margin:0 auto">휴면중</div></td>
-				                       	</c:otherwise>
-				                    </c:choose>
+					                    <c:choose>
+					                    	<c:when test="${r.status eq 1}">
+					                        	<td><div class="ing" style="margin:0 auto">운영중</div></td>
+					                        </c:when>
+					                        <c:when test="${r.status eq 2 }">
+					                        	<td><div class="confirm_ing" style="margin:0 auto">심사진행중</div></td>
+					                        </c:when>
+					                       	<c:when test="${r.status eq 3}">
+					                       		<td><div class="cancel" style="margin:0 auto">승인거절</div></td>
+					                       	</c:when>
+					                       	<c:when test="${ r.status eq 4}">
+		                            			<td><div class="rest" style="margin:0 auto">휴면</div></td>
+		                            		</c:when>
+		                            		<c:otherwise>
+		                            			<td>삭제</td>
+		                            		</c:otherwise>
+					                    </c:choose>
 										<td>${r.roNo }</td>
 				                        <td width="8%">${fn:substring(r.addBasic,0,2)}</td>
 				                        <c:choose>
@@ -88,10 +91,10 @@ button:hover{cursor:pointer}
 				                        	</c:when>
 				                       	</c:choose>
 				                        <td width="32%">${r.roomsTitle}</td>
-				                        <td width="10%">50</td>
+				                        <!-- <td width="10%">50</td> -->
 				                        <td width="0%">
-			                        	    <button class="detail_btn" onclick="location.href='roomDetailView.ro?rno='+${r.roNo}">보기</button>
-	                                    	<button class="schedule_btn">수정</button>
+			                        	    <button type=button class="detail_btn" onclick="location.href='roomDetailView.ro?rno='+${r.roNo}">보기</button>
+	                                    	<button type=button class="roomUpdate schedule_btn">수정</button>
 	                                    	<!-- <button class="schedule_btn">일정관리</button> -->
 				                        </td>
 				                    </tr>
@@ -105,13 +108,22 @@ button:hover{cursor:pointer}
 				            </c:choose>
                         </tbody>
                     </table>
-                    <!-- 공지사항 상세조회용 서비스 -->
+                    
+                    
                     <script type="text/javascript">
 			             $(function(){
-			            	 $("#noticeList tbody tr").click(function(){
-								 location.href="pNoticeListDetail.bo?noNo="+$(this).children().eq(0).text();           		 
-			            	 });
-			             });
+							$(".roomUpdate").click(function(){
+			                	
+								//console.log($(this).parent().siblings().eq(1).text());
+								//console.log($(this).parent().siblings().eq(0).text())
+								
+								if($(this).parent().siblings().eq(0).text()=="승인거절"){	// 체험번호의 상태가 승인거절(3)일 경우 거절사유가 적힌 폼으로 이동
+			                		location.href="updateReRoomForm.ro?roNo="+$(this).parent().siblings().eq(1).text();
+			                	}else{	// 그 외에는 수정폼으로 이동
+			                		location.href="updateRoomForm.ro?roNo="+$(this).parent().siblings().eq(1).text();
+			                	}
+							});
+		                });
 		            </script>
                     
                     <c:if test="${ !empty list }">

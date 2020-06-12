@@ -442,9 +442,9 @@
 		$(".del").click(function(){
 			$(this).parent(".li").remove();
 			
-			var arr = [];
+			/* var arr = [];
 			arr.put
-			
+ */			
 			$(this).siblings(".fino");
 			
 			if($(".li").length != 5){
