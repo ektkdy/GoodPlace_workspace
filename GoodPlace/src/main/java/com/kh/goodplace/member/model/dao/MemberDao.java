@@ -7,9 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Repository("mDao")
 public class MemberDao {
@@ -169,6 +171,31 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.ptSearchList", m, rowBounds);
 		
 	}
+	
+	/* 관리자 메인 */
+	
+	public Member mainExp1(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.mainExp1");
+		
+	}
+	public Member mainRoom1(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.mainRoom1");
+		
+	}
+	
+	public Member mainExp2(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.mainExp2");
+		
+	}
+	public Member mainRoom2(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.mainRoom2");
+		
+	}
+	
 	
 	
 	//-------------------------------------------------------------------

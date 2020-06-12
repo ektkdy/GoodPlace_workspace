@@ -298,8 +298,44 @@
 		 order by m.PANO asc
 	</select>
 	
+	<resultMap id="adminMainExpResultSet" type="Member">
+		<id column="sumAmount" property="sumAmount"/>
+		<result column="countNo" property="countNo"/>
+		<result column="today" property="sysdate"/>
+	</resultMap>
+		<resultMap id="adminMainRoomResultSet" type="Member">
+		<id column="sumAmount" property="sumAmount"/>
+		<result column="countNo" property="countNo"/>
+		<result column="today" property="sysdate"/>
+	</resultMap>
+	
+	<select id="mainExp1" resultMap="adminMainExpResultSet">
+		SELECT SUM(AMOUNT) as "sumAmount", COUNT(epno) as "countNo"
+		FROM EXPPAY
+		WHERE TO_CHAR(PAY_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD') 
+	</select>
+	<select id="mainRoom1" resultMap="adminMainRoomResultSet">
+		SELECT SUM(AMOUNT) as "sumAmount", COUNT(rono) as "countNo"
+		FROM ROOMSPAY
+		WHERE TO_CHAR(PAY_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
+	</select>
+	
+	<select id="mainExp2" resultMap="adminMainExpResultSet">
+		SELECT COUNT(epno) as "countNo"
+		FROM EXPPAY
+		WHERE TO_CHAR(PAY_DATE, 'YY/MM') = TO_CHAR(SYSDATE, 'YY/MM')
+	</select>
+	<select id="mainRoom2" resultMap="adminMainRoomResultSet">
+		SELECT COUNT(rono) as "countNo"
+		FROM ROOMSPAY
+		WHERE TO_CHAR(PAY_DATE, 'YY/MM') = TO_CHAR(SYSDATE, 'YY/MM') 
+	</select>
 	
 	
+	
+	
+	
+	<!-- 관리자 끝 -->
 	
 	<!-- 파트너의 정보 조회 : 진아 -->
 	<select id="selectPartner" parameterType="_int" resultMap="memberResultSet">

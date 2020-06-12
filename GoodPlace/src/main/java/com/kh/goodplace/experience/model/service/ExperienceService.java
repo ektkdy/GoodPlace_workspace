@@ -2,6 +2,7 @@ package com.kh.goodplace.experience.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
@@ -25,28 +26,30 @@ public interface ExperienceService {
 	// 3. 체험 상세조회용 서비스 
 	ArrayList<Experience> selectExp(int exNo);
 	
-	// [공통] 체험객체(썸네일포함 모든 컬럼) 조회용 서비스
+	// 4. 체험 수정폼에서 내용 조회용 서비스
+	// 4_1. 체험객체(썸네일포함 모든 컬럼) 조회용 서비스
 	Experience selectExpOne(int exNo);
 	
-	// [공통] 체험번호에 해당하는 상세사진 조회용 서비스
+	// 4_2. 체험번호에 해당하는 상세사진 조회용 서비스
 	ArrayList<Attachment> selectAt(int exNo);
 	
-	// [공통] 변경된 내용으로 체험객체 업데이트
+	// 5. 체험 수정용 서비스
+	// 5_1. 변경된 내용으로 체험객체 업데이트
 	int updateExp(Experience e);
 	
-	// [공통] 변경된 내용으로 상세사진 업데이트
+	// 5_2. 변경된 내용으로 상세사진 업데이트
 	int updateAt(Attachment at);
 	
-	// 승인거절된 체험객체 업데이트
+	// 6. 승인거절된 체험객체 업데이트(상세사진은 5_2이용하여 업데이트)
 	int updateReExp(Experience e);
 	
-	// 5. 체험 휴면용 서비스
+	// 7. 체험 휴면용 서비스
 	int restExp(int exNo);
 	
-	// 6. 체험 삭제용 서비스
+	// 8. 체험 삭제용 서비스
 	int deleteExp(int exNo);
 	
-	// 7. 체험 휴면해제용 서비스
+	// 9. 체험 휴면해제용 서비스
 	int endRestExp(int exNo);
 	
 	
@@ -98,4 +101,15 @@ public interface ExperienceService {
 	
 	//예약 내역 상세페이지
 	Experience reservationDetailView(int epno);
+	//4. 공지사항 검색 총갯수 조회용
+	int expSearchCount(Experience e);
+	
+	//5. 공지사항 검색 조회용
+	ArrayList<Experience> expSearchList(PageInfo pi, Experience e);
+	
+	//------------[체험조회 시작]------------
+	ArrayList<Experience> selectExpListUser(Experience exp);
+	
+	//------------[체험조회 끝]------------
+
 }

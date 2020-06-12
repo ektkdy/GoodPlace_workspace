@@ -200,7 +200,7 @@
                     </div>
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">
-                            <div div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
+                            <div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
                         </div>
                     </div>
                     <div style="width:20%; margin-right:5%;">
@@ -208,10 +208,10 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div style="margin-bottom: 28px;" class="fullWidth marginBottom_40px">
-                            <div div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
+                            <div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
                             <br><br>
-                            <div div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
-                        	<div div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
+                            <div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
+                        	<div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
                         	
                         </div>
                         <div class="fullWidth">
@@ -224,7 +224,7 @@
                     </div>
                     <div style="width:75%;" class="marginBottom_60px">
                         <div class="fullWidth">
-                            <div div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
+                            <div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
                             <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
                         </div><br><br>
                         
@@ -241,7 +241,7 @@
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
                                         <h1>${ room.paName }</h1><br>
-                                        <div class="buttonStyle1" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
+                                        <div class="buttonStyle1 inquirePartner" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
                                     </div>  
                                 </div><hr><br>
                                 <div class="fullWidth">
@@ -283,25 +283,26 @@
                                 </h3>
                             </div>
 	                            <div class="fullWidth">
-	                                <p>${ review.reContent }</p>
+	                                <p class="reviewContainer">${ review.reContent }</p>
 	                            </div>
                         	</div>
                         	
 							<c:choose>
-		                    	<c:when test="${ loginUser.usNo } eq ${ room.userNo}">
+		                    	<c:when test="${ loginUser.usNo eq room.userNo }">
 		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
+				                        <button class="category postComment" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
+				                    	<button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
 				                    </div>
 		                    	</c:when>
-		                    	<c:when test="${ loginUser.usNo } eq ${ review.userNo}">
+		                    	<c:when test="${ loginUser.usNo eq review.userNo }">
 		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
-				                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
+				                         <button class="category modifyReview" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
+				                         <button class="category saveReview" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
 				                    </div>
 		                    	</c:when>
 		                    	<c:otherwise>
 		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                         <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
+				                         <button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
 				                    </div>
                     			</c:otherwise>
                     		</c:choose>
@@ -310,12 +311,6 @@
 
                     </div>
                     
-                   	<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
-                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
-                         <button class="category" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
-                         <button class="category" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-                    </div>
                 </div>
                 
             <!-- 페이징 바 -->
@@ -342,7 +337,7 @@
                         <h2 style="font-weight:unset; padding-top:10px;">5명</h2>
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
-                    <a id="addWishList" class="buttonStyle1 aTagStyle1">위시리스트에 담기</a>
+                    <a id="addWishList" class="buttonStyle1 aTagStyle1 inquirePartner">위시리스트에 담기</a>
                 </div>
             </div>
             <hr style="margin:unset;">
@@ -385,7 +380,7 @@
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
-            <a style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
+            <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
         <br style="clear:both;">
 
@@ -440,7 +435,6 @@
                 $("#receipt").css({ marginTop:'0px'
                                         });
             }                          
-            console.log(position);
         });
         
        // 영수증 펼치기
@@ -480,7 +474,7 @@
         var IMP = window.IMP;
         IMP.init('imp13454636'); 
         
-        $('#payRoom').click(function(){
+   		$('#payRoom').click(function(){
           IMP.request_pay({
                pg : 'inicis', // version 1.1.0부터 지원.
                pay_method : 'card',
@@ -512,7 +506,38 @@
                }
                alert(msg);
            });
-       });
+       	});
+        // 후기 내용 저장용 필드
+        var reviewContent = "";
+        // 댓글달기
+        $('.postComment').click(function(){
+        	
+       	});
+        // 후기 수정
+        $('.modifyReview').click(function(){
+        	var reviewContainer = $(this).parent().prev().find(".reviewContainer");
+        	reviewContainer.text("");
+        	
+        	reviewContainer.parent().append("<textarea class='newReview'>");
+       	});
+        // 후기 작성 // ajax로 해야될듯 물어보기!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        $('.newReview').click(function(){
+       		
+       	});
+        // 후기 저장
+        $('.saveReview').click(function(){
+        	var	newReview = $(this).prev().parent().prev().find(".newReview").text();
+        	//var newReviwe = getContent.replace("</teatarea>", "");
+        	console.log("newReview : " + newReview);
+       	});
+        // 후기신고
+        $('.reportReview').click(function(){
+        	
+       	});
+        // 문의하기
+        $('.inquirePartner').click(function(){
+        	
+       	});
         
     </script>
 

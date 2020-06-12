@@ -27,6 +27,7 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.Room;
@@ -39,6 +40,57 @@ public class RoomController {
 	
     @Autowired // DI
     private BoardService bService;
+    
+    
+    // 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
+	// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		// 파일을 업로드 시킬 폴더 경로(String savePath)
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		//웹컨테이너의 resources의 물리적인 경로 알아내는 것		
+	
+		String savePath = resources + "\\uploadFiles\\";
+		
+		// 원본명(aaa.jpg)
+		String originName = file.getOriginalFilename();
+		
+		// 수정명(20200522202011.jpg 년월일시분초.기존의원본의확장자)
+		// 년월일시분초 (String currentTime)
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		
+		// 확장자(String ext)
+		String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
+				//lastIndexOf : 원본명이름중에 . 이후 ~ 마지막 까지 선택
+		String changeName = currentTime + (int)(Math.random()*1000)+1 + ext ;
+		
+		try {
+			file.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} //
+		// transferTo : 어떤 폴더에 어떤 이름으로 저장할지 지정하는 메소드
+		
+		return changeName;
+		
+	}
+	
+	// 전달받은 파일명을 가지고 서버로부터 삭제하는 메소드 
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources +"\\uploadFiles\\";
+		
+		File deleteFile = new File(savePath + fileName);
+		deleteFile.delete();
+	};
+		
+
+	//-----------------------------------------------------------------------------------------------------
+		
+		
+		
 	
 	 @RequestMapping("list.ro")
 	 public String selectRoomsList(int currentPage, Model model, 
@@ -65,120 +117,182 @@ public class RoomController {
 		
 		return "partner/partnerRoomEnrollForm";
 	}
+	
 	@RequestMapping("insert.ro")
 	public String insertRoom(Room r, @RequestParam(name="thumb", required=false) MultipartFile file,
 							 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 							 HttpServletRequest request, Attachment at) {
 		
-			//현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 r 주섬주섬 담기
-			if(!file.getOriginalFilename().equals("")) {//넘어온 파일명이  빈 문자열이 아닐경우
+		//현재 넘어온 파일이 있을 경우 서버에 업로드 후 원본명, 수정명 뽑아서 r 주섬주섬 담기
+		if(!file.getOriginalFilename().equals("")) {//넘어온 파일명이  빈 문자열이 아닐경우
+		
+			//서버에 파일 업로드 --> 공통모듈로써 메소드 따로 빼서 정의할 것 savaFile  --> 
+			String changeName = saveFile(file, request);
 			
-				//서버에 파일 업로드 --> 공통모듈로써 메소드 따로 빼서 정의할 것 savaFile  --> 
-				String changeName = saveFile(file, request);
-				
-				r.setOriginName(file.getOriginalFilename());
-				r.setChangeName(changeName);
-				r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
-			
+			r.setOriginName(file.getOriginalFilename());
+			r.setChangeName(changeName);
+			r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		
+		}
+		
+		int result = rService.insertRoom(r);
+		
+		int rono = rService.selectRono();
+		int result1 = 1;
+		for(int i=0; i<filelist.length; i++) {
+			   if(!filelist[i].getOriginalFilename().equals("")){
+			      String changeName = saveFile(filelist[i], request);
+			      at.setOriginName(filelist[i].getOriginalFilename());
+			      at.setChangeName(changeName);
+			      at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+			      at.setRoNo(rono);
+			      int result2 = rService.insertAttachment(at);
+			      result1 = result1 * result2;
+			   }
 			}
-			
-			int result = rService.insertRoom(r);
-			
-			int rono = rService.selectRono();
-			int result1 = 1;
-			for(int i=0; i<filelist.length; i++) {
-				   if(!filelist[i].getOriginalFilename().equals("")){
-				      String changeName = saveFile(filelist[i], request);
-				      at.setOriginName(filelist[i].getOriginalFilename());
-				      at.setChangeName(changeName);
-				      at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
-				      at.setRoNo(rono);
-				      int result2 = rService.insertAttachment(at);
-				      result1 = result1 * result2;
-				   }
-				}
-			
-			
-			
-			if(result*result1 > 0) {
-				return "redirect:list.ro?currentPage=1";
-			}else {
-				return "common/errorPage";
-			}
-			
-//			
-//			if(result > 0) { //숙소 등록 성공 --> 갱신된 리스트가 보여지는 게시글 리스트 페이지 보여지도록 해야함
-//				
-//				return "redirect:list.ro?currentPage=1";
-//			}else { //게시글 작성 실패
-//				
-//				//메세지
-//				return "common/errorPage";
-//			}	
+		
+		
+		
+		if(result*result1 > 0) {
+			return "redirect:list.ro?currentPage=1";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("roomDetailView.ro")
+	public String roomDetailView(int rno, Model model ) {
+		
+		 Room r = rService.selectRoom(rno);
+		
+		model.addAttribute("r", r);
+		
+		return "partner/partnerRoomDetailView";
+	}
+	
+		
+	@RequestMapping("updateRoomForm.ro")
+	public String updateRoomForm(int roNo, Model model) {
+		Room r = rService.selectRoom(roNo);
+		ArrayList<Attachment> list = rService.selectAt(roNo);
+		
+		model.addAttribute("r", r);
+		model.addAttribute("list", list);
+		
+		return "partner/partnerRoomUpdateForm";
+		
+	}
+
+	@RequestMapping("updateReRoomForm.ro")
+	public String updateReRoomForm(int roNo, Model model) {
+		Room r = rService.selectRoom(roNo);
+		ArrayList<Attachment> list = rService.selectAt(roNo);
+		
+		model.addAttribute("r", r);
+		model.addAttribute("list", list);
+		
+		return "partner/partnerRoomEnrollReturn";
 		
 	}
 	
-		@RequestMapping("roomDetailView.ro")
-		public String roomDetailView(int rno, Model model ) {
-			
-			 Room r = rService.selectRoom(rno);
-			
-			model.addAttribute("r", r);
-			
-			return "partner/partnerRoomDetailView";
+	@RequestMapping("delete.ro")
+	public String deleteRoom(int roNo) {
+		
+		int result = rService.deleteRoom(roNo);
+		
+		if(result>0) {
+			return "redirect:list.ro?currentPage=1"; 
+		}else {
+			return "common/errorPage";
 		}
 		
-		@RequestMapping("updateRoomForm.ro")
-		public String updateRoomForm(int roNo, Model model) {
-			
-			Room r = rService.selectRoom(roNo);
-			
-			model.addAttribute("r", r);
-			
-			return "partner/partnerRoomUpdateForm";
+	}
+	
+	@RequestMapping("rest.ro")
+	public String restRoom(int roNo) {
+		
+		int result = rService.restRoom(roNo);
+		
+		if(result>0) {
+			return "redirect:list.ro?currentPage=1"; 
+		}else {
+			return "common/errorPage";
 		}
 		
-		@RequestMapping("updateRoom.ro")
-		public String updateRoom() {
-			
-			return "";
-		}
-
+	}
+	
+	@RequestMapping("endRest.ro")
+	public String endRestRoom(int roNo) {
 		
-		// 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
-		// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
-		public String saveFile(MultipartFile file, HttpServletRequest request) {
-			
-			// 파일을 업로드 시킬 폴더 경로(String savePath)
-			String resources = request.getSession().getServletContext().getRealPath("resources");
-			//웹컨테이너의 resources의 물리적인 경로 알아내는 것		
+		int result = rService.endRestRoom(roNo);
 		
-			String savePath = resources + "\\uploadFiles\\";
-			
-			// 원본명(aaa.jpg)
-			String originName = file.getOriginalFilename();
-			
-			// 수정명(20200522202011.jpg 년월일시분초.기존의원본의확장자)
-			// 년월일시분초 (String currentTime)
-			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			
-			// 확장자(String ext)
-			String ext = originName.substring(originName.lastIndexOf(".")); // ".jpg"
-					//lastIndexOf : 원본명이름중에 . 이후 ~ 마지막 까지 선택
-			String changeName = currentTime + (int)(Math.random()*1000)+1 + ext ;
-			
-			try {
-				file.transferTo(new File(savePath + changeName));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} //
-			// transferTo : 어떤 폴더에 어떤 이름으로 저장할지 지정하는 메소드
-			
-			return changeName;
-			
+		if(result>0) {
+			return "redirect:list.ro?currentPage=1"; 
+		}else {
+			return "common/errorPage";
 		}
+		
+	}
+	
+	
+	//--------------------------------------------이거 수정해야됨!
+	@RequestMapping("updateRoom.ro")
+	public String updateRoom(Room r, @RequestParam(name="thumb", required=true) MultipartFile file,
+			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
+			HttpServletRequest request) {
+		
+		if(!file.getOriginalFilename().equals("")) {
+			if(r.getChangeName() != null) {
+				deleteFile(r.getChangeName(), request);
+			}
+			String changeName = saveFile(file, request);
+			r.setOriginName(file.getOriginalFilename());
+			r.setChangeName(changeName);
+			r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
+		int result1 = rService.updateRoom(r);
+		
+		int result = 1;
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
+		for(int i=0; i<filelist.length; i++) {
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
+				if(filelist[i].getName() != null) {
+					deleteFile(r.getChangeName(), request);
+				}
+				
+				String changeName = saveFile(filelist[i], request);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result2 = rService.insertAttachment(at);
+				result = result1*result2;
+			}
+		}
+		
+		
+		if(result>0) {
+			return "redirect:list.ro?currentPage=1"; 
+		}else {
+			return "common/errorPage";
+		}
+		
+	}
+	
+	
+	
 		
 		
 	@RequestMapping("selectPower.ro")
@@ -411,6 +525,22 @@ public class RoomController {
     	
     	
     }
+    
+    @RequestMapping("roomOkSearch.ro")
+    public String roomSearchList(int currentPage, Room r, Model model) {
+    	
+        int listCount = rService.roomSearchCount(r); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Room> list = rService.roomSearchList(pi, r);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("r", r);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminRoomsOkeyList";
+        
+    }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
@@ -525,7 +655,11 @@ public class RoomController {
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
 			
-			
+			// 예약시작일자, 예약끝일자, 인원수 set
+			mv.addObject("startDays", tripStartDate);
+			mv.addObject("endDays", tripEndDate);
+			mv.addObject("endDays", tripEndDate);
+
 		}
 
 		return mv;
@@ -542,6 +676,17 @@ public class RoomController {
     	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
     	room.setMeal(room.getMeal().replace(",", ", "));
     	
+    	// room객체에 숙소시설, 제공서비스 표시형식 보완
+    	room.setFacility(room.getFacility().replace(",", ", "));
+    	room.setService(room.getService().replace(",", ", "));
+    	
+    	// room객체에 지역 표시 set
+    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
+    	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
+    	String region = room.getAddBasic().substring(0, addLastIndex);
+    	//System.out.println("region : " + region);
+    	room.setRegion(region);
+    	
     	// room 객체에 상세이미지 set 
     	if(at != null) {
     		//System.out.println("숙소의 상세이미지들 조회 됨~!");
@@ -555,6 +700,10 @@ public class RoomController {
     	room.setPaPofile(rService.getPartner(roNo).getChangeName());
     	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
     	room.setPaName(rService.getPartner(roNo).getUserName());
+    	
+    	// room 객체에 리뷰정보 set
+    	room.setReviewList(rService.getReview(roNo));
+    	//System.out.println("reviewList : " + rService.getReview(roNo));
     	
     	System.out.println(room);
     	

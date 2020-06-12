@@ -42,6 +42,8 @@
 		<result column="people" property="people"/>
 		
 		<result column="change_name_1" property="atChangeName"/>
+		
+		<result column="exp_date" property="expDateString"/>
 	</resultMap>
 	
 	<resultMap type="Attachment" id="AttachmentResultSet">
@@ -108,6 +110,49 @@
 	</resultMap>
 	
 	
+	
+	<!-- id="ExperienceResultSet" 와 다른점 : exp_date를 vo객체에 String 자료형으로 매핑시킨다. -->
+	<resultMap type="Experience" id="ExperienceResultSetUser">
+		<id column="exno" property="exNo"/>
+		<result column="usno" property="usNo"/>
+		<result column="language" property="language"/>
+		<result column="exp_category" property="expCategory"/>
+		<result column="exp_tag" property="expTag"/>
+		<result column="exp_title" property="expTitle"/>
+		<result column="exp_content" property="expContent"/>
+		<result column="activity" property="activity"/>
+		<result column="max_people" property="maxPeople"/>
+		<result column="exp_date" property="expDateString"/>
+		<result column="start_time" property="startTime"/>
+		<result column="end_time" property="endTime"/>
+		<result column="use_time" property="useTime"/>
+		<result column="interval_time" property="intervalTime"/>
+		<result column="supplies" property="supplies"/>
+		<result column="deadline" property="deadline"/>
+		<result column="price" property="price"/>
+		<result column="add_basic" property="addBasic"/>
+		<result column="add_detail" property="addDetail"/>
+		<result column="add_ref" property="addRef"/>
+		<result column="zip_code" property="zipCode"/>
+		<result column="apply_date" property="applyDate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="operate_day" property="operateDay"/>
+		<result column="status" property="status"/>
+		<result column="deny" property="deny"/>
+		<result column="deny_content" property="denyContent"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+
+		<result column="epno" property="epNo"/>
+		<result column="amount" property="amount"/>
+		<result column="pay_date" property="payDate"/>
+		<result column="exp_date" property="expDate"/>
+		<result column="people" property="people"/>
+		
+		<result column="change_name_1" property="atChangeName"/>
+	</resultMap>
 	
 	<!-- 사용자의 체험 전체 목록 조회  -->
 	<select id="selectExpListCount" resultType="_int">
@@ -264,6 +309,30 @@
 		 where exno=#{exNo}
 	
 	</update>
+	
+	<select id="expSearchCount" parameterType="Experience" resultType="_int">
+		select count(*)
+		  from EXPERIENCE
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and EXP_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="expSearchList" parameterType="Experience" resultMap="ExperienceResultSet">
+		select *
+		  from EXPERIENCE
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and EXP_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
 	<!-- 체험관리 끝 -->
 	
 	<!-- ////////////////// 예약관리 시작 ////////////////// -->
@@ -342,6 +411,14 @@
 	
 	<!--/////////////////// 예약관리 끝 //////////////////-->
 
+	<!-- 체험조회 시작 -->
+	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
+		SELECT *
+		  FROM EXPERIENCE
+		  LEFT JOIN EXPPAY USING(EXNO)
+		 WHERE EXNO=#{exNo}
+	</select>
+	<!-- 체험조회 끝 -->
 
 
 </mapper>

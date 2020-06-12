@@ -22,8 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Controller
 public class MemberController {
@@ -335,7 +337,18 @@ public class MemberController {
     
     
     @RequestMapping("adminForm.me")
-    public String adminForm() {
+    public String adminForm(Model model) {
+    	
+    	Member e1 = mService.mainExp1();
+    	Member e2 = mService.mainExp2();
+    	Member r1 = mService.mainRoom1();
+    	Member r2 = mService.mainRoom2();
+    	
+    	model.addAttribute("e1", e1);
+    	model.addAttribute("e2", e2);
+    	model.addAttribute("r1", r1);
+    	model.addAttribute("r2", r2);
+   
     	return "admin/a_main";
     }
     /*회원용*/

@@ -33,8 +33,6 @@
                 </span>
                 <br clear="both">
                 <div class="con2">
-                <form action="updateRoomForm.ro" id="updateRoom" method="post"  >
-                	<input type="hidden" name="roNo" value="${r.reNo }">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr class="pdTop">
@@ -53,10 +51,7 @@
                                 <th >상세사진</th>
                                 <td colspan="2">썸네일.png</td>
                             </tr>
-                            <tr class="pdBtom">
-                                <th >예약 시간</th>
-                                <td colspan="2">${r.deadline }시간 전 부터 예약을 받지 않겠습니다.</td>
-                            </tr>
+                            
                             <tr class="pdBtom">
                                 <th>객실정보</th>
                                 <td colspan="2">침대수 : ${r.bedCount }<br>
@@ -91,20 +86,18 @@
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <th>* 필수안내</th>
+                                <th>필수안내</th>
                                 <td colspan="2">
                                     <c:out value="${r.roomsNotice }" escapeXml="false" />
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>이용안내</th>
-                                <td>체크인 시간 : ${r.checkIn }</td>
-                                <td>체크아웃 시간 : ${r.checkOut }</td>
+                                <td>체크인 시간 : ${r.checkIn } <br> 체크아웃 시간 : ${r.checkOut }</td>
                             </tr>
                     </table>
                     <div class="btnArea">
-                        <button class="cancel" onclick="location.href='list.ro?currentPage=1'">목록으로</button>
-                        <button class="enroll" type="submit">수정하기</button>
+                        <button type="button" class="cancel" onclick="location.href='list.ro?currentPage=1'">목록으로</button>
                     </div>
                     </form>
                 </div>

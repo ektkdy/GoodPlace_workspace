@@ -166,7 +166,28 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	
+	@Override
+	public int expSearchCount(Experience e) {
+		return expDao.expSearchCount(sqlSession, e);
+	}
 
+	@Override
+	public ArrayList<Experience> expSearchList(PageInfo pi, Experience e) {
+		return expDao.expSearchList(sqlSession, pi, e);
+	}
+
+
+	//------------[체험조회 시작]------------
+	@Override
+	public ArrayList<Experience> selectExpListUser(Experience exp) {
+		return expDao.selectExpListUser(sqlSession, exp);
+	}
+	
+	
+	
+	
+	
+	//------------[체험조회 끝]------------
 	
 	
 	

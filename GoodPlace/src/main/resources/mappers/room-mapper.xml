@@ -187,6 +187,66 @@
 		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 1, rono.currval, null)
 	</insert>
 	
+	<!-- 숙소번호에 해당하는 숙소 상세사진 조회 -->
+	<select id="selectAt" resultMap="attachmentResultSet" parameterType="_int">
+		select * 
+		  from attachment
+		 where rono=#{roNo}
+	</select>
+	
+	<!-- 숙소객체 업데이트 -->
+	<update id="updateRoom" parameterType="Room" >
+		update rooms
+		   set rooms_title=#{roomsTitle}, min_people=#{minPeople}, max_people=#{maxPeople},
+		   	   price=#{price}, rooms_tag=#{roomsTag}, room_count=#{roomCount},
+		   	   bed_count=#{bedCount}, bath_count=#{bathCount}, restroom_count=#{restroomCount},
+		   	   facility=#{facility}, service=#{service}, meal=#{meal}, deadline=#{deadline}, 
+		   	   add_basic=#{addBasic}, add_detail=#{addDetail}, add_ref=#{addRef}, zip_code=#{zipCode}, 
+			   check_in=#{checkIn}, check_out=#{checkOut}, rooms_notice=#{roomsNotice},
+			   origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath}
+		 where rono=#{roNo}
+	</update>
+	
+	<!-- 숙소상세사진 업데이트  -->
+	<update id="updateAt" parameterType="Attachment" >
+		insert into attachment
+		values(fino.nextval, #{originName}, #{changeName}, #{filePath}, sysdate, 'Y', 2, null, #{exNo})
+	</update>
+	
+	<!-- 승인거절된 숙소객체 업데이트  -->
+	<update id="updateReRoom" parameterType="Room" >
+		update rooms
+		   set rooms_title=#{roomsTitle}, min_people=#{minPeople}, max_people=#{maxPeople},
+		   	   price=#{price}, rooms_tag=#{roomsTag}, room_count=#{roomCount},
+		   	   bed_count=#{bedCount}, bath_count=#{bathCount}, restroom_count=#{restroomCount},
+		   	   facility=#{facility}, service=#{service}, meal=#{meal}, deadline=#{deadline}, 
+		   	   add_basic=#{addBasic}, add_detail=#{addDetail}, add_ref=#{addRef}, zip_code=#{zipCode}, 
+			   check_in=#{checkIn}, check_out=#{checkOut}, rooms_notice=#{roomsNotice},
+			   origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath},
+		 	   status=2, deny=null, deny_content=null
+		 where rono=#{roNo}
+	</update>
+	
+	<update id="deleteRoom" parameterType="_int">
+		update rooms
+		   set status=5
+	     where rono=#{roNo}
+	</update>
+	
+	<update id="restRoom" parameterType="_int">
+		update rooms
+		   set status=4
+	     where rono=#{roNo}
+	</update>
+	
+	<update id="endRestRoom" parameterType="_int">
+		update rooms
+		   set status=1
+	     where rono=#{roNo}
+	</update>
+	
+	
+	<!-- 숙소관리 >파워등록 -->
 	<select id="selectRoomOkeyListCount" resultType="_int" parameterType="_int">
 		select count(*) 
 		  from rooms
@@ -209,7 +269,7 @@
 		   set pono=#{poNo}, power_start=#{powerStart}, power_end=#{powerEnd}
 	     where rono=#{roNo}
 	</update>
-	
+	<!-- // 숙소관리 >파워등록 -->
 	
 	
 	
@@ -314,6 +374,30 @@
 		 where RONO=#{roNo}
 	
 	</update>
+	
+	<select id="roomSearchCount" parameterType="Room" resultType="_int">
+		select count(*)
+		  from rooms
+		 where status = 1
+		 <if test="searchSelect == 'searchOp1'">
+			and ROOMS_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="roomSearchList" parameterType="Room" resultMap="roomResultSet">
+		select *
+		  from rooms
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and ROOMS_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
 	
 	<!-- 숙소관리 끝-->
 
