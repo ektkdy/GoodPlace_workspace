@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.dao.MemberDao;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Service("mService")	// 구체화 된 빈 (즉, 이 객체는 서비스의 역할을 수행하는 빈으로 등록)
 public class MemberServiceImpl implements MemberService {
@@ -181,6 +183,27 @@ public class MemberServiceImpl implements MemberService {
 		@Override
 		public ArrayList<Member> ptSearchList(PageInfo pi, Member m) {
 			return mDao.ptSearchList(sqlSession, pi, m);
+		}
+		
+		/* 관리자 메인 */
+		@Override
+		public Member mainExp1() {
+			return mDao.mainExp1(sqlSession);
+		}
+
+		@Override
+		public Member mainRoom1() {
+			return mDao.mainRoom1(sqlSession);
+		}
+
+		@Override
+		public Member mainExp2() {
+			return mDao.mainExp2(sqlSession);
+		}
+
+		@Override
+		public Member mainRoom2() {
+			return mDao.mainRoom2(sqlSession);
 		}
 
 

@@ -3,9 +3,11 @@ package com.kh.goodplace.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 public interface MemberService {
 	
@@ -84,6 +86,12 @@ public interface MemberService {
 	
 	//5. 회원 검색 조회용
 	ArrayList<Member> ptSearchList(PageInfo pi, Member m);
+	
+	//6. 관리자 메인페이지
+	Member mainExp1();
+	Member mainRoom1();
+	Member mainExp2();
+	Member mainRoom2();
 	
 	
 	//-------------------------------------------------------------------
