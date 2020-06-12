@@ -47,6 +47,11 @@ public class Member {
 	/*관리자 회원검색용 키워드*/
 	private String memSearchSelect;
 	private String keyword;
+	
+	/*관리자 메인 페이지용*/
+	private int sumAmount;
+	private int countNo;
+	private Date sysdate;
 		
 	
 }

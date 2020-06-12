@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
@@ -121,6 +122,21 @@ public class ExperienceDao {
 		return sqlSession.update("expMapper.updateReject", e);
 		
 	}
+	
+	public int expSearchCount(SqlSessionTemplate sqlSession, Experience e) {
+		
+		return sqlSession.selectOne("expMapper.expSearchCount", e);
+		
+	}
+	
+	public ArrayList<Experience> expSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Experience e){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("expMapper.expSearchList", e, rowBounds);
+		
+	}
 
 	
 	
@@ -134,5 +150,45 @@ public class ExperienceDao {
 	
 	
 	// --------- 체험관리 시작 -----------------
+	
+	//------------[체험조회 시작]------------
+	public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
+	}
+	
+	
+	
+	
+	//------------[체험조회 끝]------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

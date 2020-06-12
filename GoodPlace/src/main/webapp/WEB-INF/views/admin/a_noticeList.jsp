@@ -175,7 +175,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="noticeSearch.bo" var="searchUrl">
-														<c:param name="condition" value="${ b.searchSelect }"/>
+														<c:param name="searchSelect" value="${ b.searchSelect }"/>
 														<c:param name="keyword" value="${ b.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>
@@ -196,7 +196,7 @@
 										</c:when>
 										<c:otherwise>
 											<c:url value="noticeSearch.bo" var="searchUrl">
-												<c:param name="condition" value="${ b.searchSelect }"/>
+												<c:param name="searchSelect" value="${ b.searchSelect }"/>
 												<c:param name="keyword" value="${ b.keyword }"/>
 												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 											</c:url>										

@@ -2,6 +2,7 @@ package com.kh.goodplace.experience.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -340,11 +342,6 @@ public class ExperienceController {
 	}
 	
 	
-	@RequestMapping("partnerMsg.me")
-	public String partnerMsg() {
-		return "partner/partnerMessage";
-	}
-	
 	
 	
 	
@@ -409,9 +406,52 @@ public class ExperienceController {
 		return "admin/adminExpOkeyList";
 	}
 	
+    @RequestMapping("expOkSearch.ex")
+    public String expSearchList(int currentPage, Experience e, Model model) {
+    	
+        int listCount = expService.expSearchCount(e); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Experience> list = expService.expSearchList(pi, e);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("e", e);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminExpOkeyList";
+        
+    }
 	
-	
-	
+	//------- 체험조회 시작 ---------------------------------------------------
+	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
+	@RequestMapping("showExp.exp")
+	public ModelAndView showExp(String expCategoryString, String expDateString, String expTitle, Experience exp, ModelAndView mv) {
+		//System.out.println("expCategory : " + expCategory + ", " + "expDate : " + expDate + ", " + "expTitle : " + expTitle);
+		
+		// expCategory 필드 설정
+		int expCategory = 0;
+		if(expCategoryString.equals("라이프 및 스타일")) {
+			expCategory = 1;
+		}else if(expCategoryString.equals("문화와 역사")){
+			expCategory = 2;
+		}else if(expCategoryString.equals("학술과 디자인")){
+			expCategory = 3;
+		}else if(expCategoryString.equals("스포츠&피트니스")){
+			expCategory = 4;
+		}else if(expCategoryString.equals("야외활동")){
+			expCategory = 5;
+		}
+		
+		// 넘겨받은 여행조건들 exp객체에 set
+		exp.setExpCategory(expCategory);
+		exp.setExpDateString(expDateString);
+		exp.setExpTitle(expTitle);
+
+		// 검색한 조건에 해당하는 exp리스트 조회
+		ArrayList<Experience> expList = expService.selectExpListUser(exp);
+		
+		return mv;
+	}
 	
 	
 	

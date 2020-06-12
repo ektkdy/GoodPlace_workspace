@@ -53,7 +53,7 @@
     </div>
     <div id="sidenav">
         <ul>
-            <li><a href=""><span class="icon1"></span><p>대시보드</p></a></li>
+            <li><a href="adminForm.me"><span class="icon1"></span><p>대시보드</p></a></li>
             <li><a href="aMemberList.me?currentPage=1"><span class="icon2"></span><p>회원관리</p></a></li>
             <li><a href="aReportList.bo?currentPage=1"><span class="icon3"></span><p>신고관리</p></a></li>
             <li><a href=""><span class="icon4"></span><p>후기관리</p></a></li>

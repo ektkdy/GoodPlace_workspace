@@ -200,6 +200,23 @@ public class RoomDao {
 		
 	}
 	
+	public int roomSearchCount(SqlSessionTemplate sqlSession, Room r) {
+		
+		return sqlSession.selectOne("roomMapper.roomSearchCount", r);
+		
+	}
+	
+	public ArrayList<Room> roomSearchList(SqlSessionTemplate sqlSession, PageInfo pi, Room r){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("roomMapper.roomSearchList", r, rowBounds);
+		
+	}
+	
+	
+	
 	// --------- 숙소관리 시작 -----------------
 	
 	// --------- 숙소조회 시작 -----------------

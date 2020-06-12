@@ -185,6 +185,17 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.updateReject(sqlSession, r);
 	}
 	
+	@Override
+	public int roomSearchCount(Room r) {
+		return rDao.roomSearchCount(sqlSession, r);
+	}
+
+	@Override
+	public ArrayList<Room> roomSearchList(PageInfo pi, Room r) {
+		return rDao.roomSearchList(sqlSession, pi, r);
+	}
+
+	
 	// --------- 숙소관리 끝 --------------------------
 	
 	// --------- 숙소조회 시작 -------------------------
@@ -250,6 +261,7 @@ public class RoomServiceImpl implements RoomService{
 		
 		return rDao.selectRvRoomCancelList(sqlSession, pi, usNo);
 	}
+
 
 	
 	

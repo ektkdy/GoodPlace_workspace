@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/adminCommon.css" />
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <style>
     /*공통*/
     /* font */
@@ -33,6 +34,10 @@
         height: 2px;
         border:0px;
         margin-bottom: 20px;
+    }
+    #myChart {
+      width: 100%;
+      height: 300px;
     }
 </style>   
 </head>
@@ -59,32 +64,32 @@
                         <th rowspan="2" height="150px" width="100px">
                             <img src="${pageContext.request.contextPath}/resources/images/admin/calendar2.png" style="vertical-align: middle; width: 70px; height: 70px; padding-left: 60%;">
                         </th>
-                        <th rowspan="2" width="200px" style="padding-left: 3%;">예약<small>(9건)</small><br><b>11,809,827</b> 원</th>
+                        <th rowspan="2" width="200px" style="padding-left: 3%;">총매출<small>(${ r1.countNo + e1.countNo }건)</small><br><b>${ r1.sumAmount +  e1.sumAmount }</b> 원</th>
                         <th rowspan="2" height="150px" width="100px">
                             <img src="${pageContext.request.contextPath}/resources/images/admin/cash2.png" style="vertical-align: middle; width: 70px; height: 70px; padding-left: 60%;">
                         </th>
-                        <th rowspan="2" width="200px">결제<small>(0건)</small><br><b>0</b> 원</th>
+                        <th rowspan="2" width="200px">숙소<small>(${ r1.countNo }건)</small><br><b>${ r1.sumAmount }</b> 원</th>
                         <th rowspan="2" height="150px" width="100px">
                             <img src="${pageContext.request.contextPath}/resources/images/admin/nocash2.png" style="vertical-align: middle; width: 70px; height: 70px; padding-left: 60%;">
                         </th>
-                        <th rowspan="2" width="200px">환불<small>(0건)</small><br><b>0</b> 원</th>
+                        <th rowspan="2" width="200px">체험<small>(${ e1.countNo }건)</small><br><b>${ e1.sumAmount }</b> 원</th>
                     </table>
                     <br>
                     <hr class="bline">
 
-                    <span><b style="font-weight:bold; font-size: 1.3em;">예약 현황</b> <small>(최근 1개월 기준)</small></span>
+                    <span><b style="font-weight:bold; font-size: 1.3em;">예약 현황</b> <small>월</small></span>
                     <br>
                     
                     <table id="dbTable01">
                         <tr height="100px">
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
+                            <th width="300px"><b style="font-size: 2.0em;">${ r2.countNo + e2.countNo }</b></th>
+                            <th width="300px"><b style="font-size: 2.0em;">${ r2.countNo }</b></th>
+                            <th width="300px"><b style="font-size: 2.0em;">${ e2.countNo }</b></th>
                         </tr>
                         <tr>
-                            <th width="300px" style="color:#34538a"><b>예약</b></th>
-                            <th width="300px" style="color:#34538a"><b>입금완료</b></th>
-                            <th width="300px" style="color:#34538a"><b>취소</b></th>
+                            <th width="300px" style="color:#34538a"><b>전체예약</b></th>
+                            <th width="300px" style="color:#34538a"><b>숙소</b></th>
+                            <th width="300px" style="color:#34538a"><b>체험</b></th>
                         </tr>
                     </table>
                     <br>
@@ -94,18 +99,55 @@
                     <br>
                     
                     <table id="dbTable01">
-                        <tr height="100px">
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
-                            <th width="300px"><b style="font-size: 2.0em;">0</b></th>
-                        </tr>
-                        <tr>
-                            <th width="300px" style="color:#34538a"><b>일반회원</b></th>
-                            <th width="300px" style="color:#34538a"><b>파트너</b></th>
-                            <th width="300px" style="color:#34538a"><b>정지회원</b></th>
-                        </tr>
+						<div id='myChart'></div>
                     </table>
-                    
+                      
+					  <script>
+					  /*
+					  $(function(){
+						 
+						  $.ajax({
+							 url:"mainchartList.mc",
+							 success:function(data){
+								 
+							 }, error:function(){
+								 console.log("통계 자료용 ajax 통신실패");
+							 }
+							  
+							  
+						  });
+						 
+						  
+					  });
+					  */
+					    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+					    var myConfig = {
+					      type: "bar",
+					      plotarea: {
+					        adjustLayout: true
+					      },
+					      scaleX: {
+					        label: {
+					          text: "회원 & 파트너 현황"
+					        },
+					        labels: ["회원&정지회원", "파트너&정지파트너"]
+					      },
+					      series: [{
+					          values: [20, 90]
+					        },
+					        {
+					          values: [5, 30]
+					        }
+					      ]
+					    };
+					 
+					    zingchart.render({
+					      id: 'myChart',
+					      data: myConfig,
+					      height: "100%",
+					      width: "100%"
+					    });
+					  </script>
                     
                     
                 </div>
