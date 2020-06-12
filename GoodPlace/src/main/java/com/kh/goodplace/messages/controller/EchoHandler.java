@@ -43,11 +43,11 @@ public class EchoHandler extends TextWebSocketHandler{
         Member loginUser = (Member)user.get("loginUser");		// loginUser의 회원정보를 가져옴
     	System.out.println(user.get("class_class_id"));				// 이메일) gmldud695@naver.com
         
-    	String loginUserEmail = loginUser.getEmail();
+    	String loginUserEmail = loginUser.getEmail() + user.get("class_class_id");
     	
-    	if(loginUserEmail.equals("ektkdy@naver.com") ) {	// ektkdy@naver.com // 관리자일 경우
-    		loginUserEmail = loginUserEmail + user.get("class_class_id");
-    	}
+    	//if(loginUserEmail.equals("ektkdy@naver.com") ) {	// ektkdy@naver.com // 관리자일 경우
+    	//	loginUserEmail = loginUserEmail + user.get("class_class_id");
+    	//}
         // 랜덤 세션넘버를
         System.out.println("세션 id" + session.getId());
         
@@ -74,23 +74,33 @@ public class EchoHandler extends TextWebSocketHandler{
 	      
 	    ChatRoom croom =null;
 	    // 받사람과 보내는사람이 같지 않을경우 (정상일경우)
+	    /*
 	    if(!messageVO.getMessageSender().equals(messageVO.getMessageReceiver())) {
 	    	System.out.println("보내는사람과 받는사람이 같지 않음");
 	    	
-	    	if(cDao.selectChatRoom(roomVO) == null ) {// 검색한 채팅방이 없는경우 (보내는 사람 아이디와 받는사람 아이디 and조건문 일치 없는경우)
-	    		  System.out.println("b");
-	    		  cDao.createRoom(roomVO);			  // 새로운 채팅방을 만듬 (insert)
-	    		  System.out.println("d");
-	    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom --> 관리자 이름 + 채팅방 번호
-
-	    	}else {	 // 검색한 채팅방이 있는경우
-	    		  System.out.println("C");
-	    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom
+	    	if(roomVO.getTutorEmail().equals("ektkdy@naver.com")) {
+		    	if(cDao.selectChatRoom(roomVO) == null ) {// 검색한 채팅방이 없는경우 (보내는 사람 아이디와 받는사람 아이디 and조건문 일치 없는경우)
+		    		  System.out.println("b");
+		    		  cDao.createRoom(roomVO);			  // 새로운 채팅방을 만듬 (insert)
+		    		  System.out.println("d");
+		    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom --> 관리자 이름 + 채팅방 번호
+	
+		    	}else {	 // 검색한 채팅방이 있는경우
+		    		  System.out.println("C");
+		    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom
+		    	}
+	    	} else {
+	    		croom = cDao.selectpChatRoom(roomVO);
 	    	}
 	    } else {
 	    	croom = cDao.selectChatRoom(roomVO); // 채팅방 정보 가져옴
 	    }
-	    
+	    */
+	    if(roomVO.getTutorEmail().equals("ektkdy@naver.com")) {
+	    	croom = cDao.selectChatRoom(roomVO);
+	    } else {
+	    	croom = cDao.selectpChatRoom(roomVO);
+	    }
 	    // 채팅방의 chno를 외부키 객체로 넣어줌
 	    messageVO.setChNo(croom.getChNo());
 	    
@@ -102,11 +112,18 @@ public class EchoHandler extends TextWebSocketHandler{
 	  		System.out.println("2");
 	    }
 	    
+	    int result = 0;
 	    System.out.println("messageVO : " + messageVO);
-	    int result = cDao.insertMessage(messageVO);
+	    if(messageVO.getMessageReceiver().equals("ektkdy@naver.com")) {	// 관리자에 대한 채팅내용일 경우
+	    	result = cDao.insertMessage(messageVO);					// MESSAGE테이블에 채팅 입력
+	    	
+	    } else {														// 파트너와 숙소 사용자 간의 채팅일 경우
+	    	result = cDao.insertpMessage(messageVO);														// PMESSAGE테이블에 채팅 입력
+	    }
+	    
 	    
 	    // 자신에게 메세지 보냄							
-	    sessions.get(messageVO.getMessageSender()).sendMessage(new TextMessage(message.getPayload()));
+	    sessions.get(messageVO.getMessageSender()+croom.getClass_class_id()).sendMessage(new TextMessage(message.getPayload()));
 	    if(sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()) != null) {	// 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
 	    	sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()).sendMessage(new TextMessage(message.getPayload()));
 	    }

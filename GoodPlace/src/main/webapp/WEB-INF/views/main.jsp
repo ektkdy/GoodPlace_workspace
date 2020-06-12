@@ -195,6 +195,7 @@
         </div>
     </div><!-- /content -->
 	
+	<input type="button" onclick="location.href='roomChatForm.ro?email=${loginUser.email}&roNo=1'" value="숙소채팅 테스트">
 	<!-- footer -->
 	<jsp:include page="common/footer.jsp"/>
 	

@@ -81,7 +81,7 @@ public class ChatController {
 		
 		Member user = mService.loginMember(m);
 			
-		session.setAttribute("class_class_id", class_class_id);
+		session.setAttribute("class_class_id", class_class_id); // 소켓 세션에 연결할 때 구분하기 위해 전송함
 
 		model.addAttribute("class_class_id", class_class_id);
 		model.addAttribute("meList", meList);
@@ -89,6 +89,62 @@ public class ChatController {
 		return "admin/a_messageDetail";
 	}
 	
+	//사용자- 파트너 채팅리스트 
+	@RequestMapping("partnerMsg.me")
+	public String partnerMsg(Model model) {
+		
+		ArrayList<ChatRoom> cList = cService.pSelectMessagesList();
+		
+		model.addAttribute("cList", cList);
+
+		return "partner/partnerMessage";
+	}
+	
+	// 파트너 메세지 채팅방
+	@RequestMapping("pMessageDetail.me")
+	public String pMessageDetail(int msn, int class_class_id, Member m, Model model, HttpSession session) {
+		
+		ArrayList<Message> meList = cService.selectpMessage(msn);
+		
+		Member user = mService.loginMember(m);
+			
+		session.setAttribute("class_class_id", class_class_id);
+
+		model.addAttribute("class_class_id", class_class_id);
+		model.addAttribute("meList", meList);
+		model.addAttribute("user", user);
+			
+		return "partner/partnerMessageDetail";
+	}
+	
+	// 사용자 숙소 채팅방
+	@RequestMapping("roomChatForm.ro")
+	public String roomChatForm(int roNo, String email, HttpSession session, Model model) {
+		
+		ChatRoom cr = new ChatRoom();
+		
+		cr.setUserEmail(email);
+		cr.setClass_class_id(roNo);
+		
+		System.out.println(cr);
+		cr = cService.selectRoomChat(cr); 
+
+		// 상대방 정보 검색
+		Member m = new Member();
+		m.setEmail(cr.getTutorEmail());
+		Member user = mService.loginMember(m);
+		
+		System.out.println(cr);
+		ArrayList<Message> meList = cService.selectpMessage(cr.getChNo());
+		
+		session.setAttribute("class_class_id", cr.getClass_class_id());
+		
+		model.addAttribute("class_class_id", cr.getClass_class_id());
+		model.addAttribute("meList", meList);
+		model.addAttribute("user", user);
+		
+		return "common/roomChat";
+	}
 	
 	
 	

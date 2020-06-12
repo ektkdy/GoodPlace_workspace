@@ -7,10 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/adminCommon.css" />
 <script src="resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/adminCommon.css" />
 <style>
     /*공통*/
     /* font */
@@ -21,7 +21,7 @@
     a {color: #333333; text-decoration: none;}
     /* body css */
     body {background: #fff;}
-    #wrap {width: 1200px; margin: 0 auto; height: 900px; margin: 0 auto; font-size: 18px; color: #fff; text-align: center; text-transform: uppercase; }
+    #wrap {width: 1200px; margin: 0 auto; margin: 0 auto; font-size: 18px; color: #fff; text-align: center; text-transform: uppercase; }
 
     /* 메세지 상세 */
     .msgDetail{ width: 980px; padding-top:50px;}
@@ -92,8 +92,6 @@
 <body>
     <div id="wrap">
 
-		<jsp:include page="../common/partnerMenubar.jsp"/>
-
         <div id="contents" style="width:980px">
             <div id="tab"></div>
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px; margin-right: 30px;">메세지상세</span></a></div>
@@ -109,7 +107,7 @@
                         <div class="msgContents" id="messageArea">
                         	<c:forEach items="${ meList }" var="m">
                   				<c:choose>
-                  					<c:when test="${ m.class_class_id eq 1 }">
+                  					<c:when test="${ m.class_class_id eq 2 }">
 			                            <div>
 			                            	<div class="chat_common">
 			                            		<img src= "${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${user.changeName}" width='28px' height='28px'>
@@ -152,6 +150,14 @@
     </div>
 	<input type="hidden" id="userEmail" value="${ user.email }">
     <script>
+    	
+	// 날짜
+		var Now = new Date();
+		// 메시지 전송
+    	let sock = new SockJS("http://localhost:8888/goodplace/echo/");
+		sock.onmessage = onMessage;
+		sock.onclose = onClose;
+    
         $(function(){
             $(".arrow").click(function(){
                 $("#slide_menu").slideToggle(500);
@@ -159,29 +165,21 @@
         });
         
  
-	    // 메세지
-
-	    
-
+	    // 메세지   
 		function sendBtn(){
 			sendMessage();
 			$('#message').text("");
 	    }
 		
-		// 날짜
-		var Now = new Date();
-		// 메시지 전송
-	    let sock = new SockJS("http://localhost:8888/goodplace/echo/");
-   		sock.onmessage = onMessage;
-   		sock.onclose = onClose;
+
 		function sendMessage() {
 			var msg = $("#message").val();
 			if(msg != ""){
 				message = {};
 			  	message.messageContent = $("#message").val();
-		  	  	message.messageReceiver =  '${loginUser.email}';
-		  	  	message.messageSender = '${user.email}';
-		  	  	message.class_class_id = 2;
+		  	  	message.messageReceiver =  '${user.email}';
+		  	  	message.messageSender = '${loginUser.email}';
+		  	  	message.class_class_id = 1;
 		  	  	message.messageSendTime = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간
 			}
 			console.log(message);
@@ -195,7 +193,7 @@
 			var name = $("#myName").val();						// 내 이름
 			var tutorChangeName = $("#tutorChangeName").val();	// 관리자 프로필
 
-			if(data.class_class_id != 1){		// 0: 회원  (회원이 보낸 메세지가 아닐때)
+			if(data.class_class_id != 2){		// 0: 관리자  (관리자가 보낸 메세지가 아닐때)
 				$("#messageArea").append("<div><div class="+"'chat_common chat_userId'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + '${loginUser.changeName}' +"' width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_user'>"+ data.messageContent + "</div><div class='chat_date chat_userDate'>" + data.messageSendTime + "</div></div>");
 			} else {							// 내가 보낸 메세지 일때
 				$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + '${user.changeName}' +"' width='28px' height='28px'><span>"+ '${user.userName }' +"</span></div><div class='chat chat_admin'>"+ data.messageContent + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'>" + data.messageSendTime + "</div></div>");

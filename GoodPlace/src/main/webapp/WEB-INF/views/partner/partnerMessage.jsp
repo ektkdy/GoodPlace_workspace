@@ -57,22 +57,38 @@
                 <input type="button" id="searchBtn" value="검색">
             </span>
             <div class="con2">
-                <table class="common_tb" cellpadding="0" cellspacing="0" >
+                <table id="messageList" class="common_tb" cellpadding="0" cellspacing="0" >
                     <thead>
                         <tr>
-                            <td width="200px">메세지보낸사람</td>
-                            <td width="200px">시간</td>
-                            <td width="500pc">메세지내용</td>
+                                <td width="200px">채팅번호</td>
+                                <td width="200px">메세지보낸사람</td>
+                                <td width="200px">시간</td>
+                                <td width="500pc">마지막메세지</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td width="200px">메세지보낸사람</td>
-                            <td width="200px">시간</td>
-                            <td width="500pc">메세지내용</td>
-                        </tr>
+                      	<c:forEach items="${ cList }" var="c">
+	                           <tr>
+	                           	<input type="hidden" name="class_class_id" value="${ c.class_class_id }">
+	                               <td width="200px">${ c.chNo }</td>
+	                               <td width="200px">${ c.userEmail }</td>
+	                               <td width="200px">${ c.recentTime }</td>
+	                               <td width="500pc">${ c.recentMessage }</td>
+	                           </tr>
+                          </c:forEach>
                     </tbody>
                 </table>
+                
+                <script>
+		            	$(function(){
+		            		
+ 	            		    $("#messageList tbody tr").click(function(){
+		            			location.href="pMessageDetail.me?msn=" + $(this).children().eq(1).text() +"&email=" + $(this).children().eq(2).text() + "&class_class_id=" + $(this).children().eq(0).val();
+		            		});  
+ 	            		    
+		            	});
+		        </script>
+                
                 <div id="pagingArea" style="margin-top: 22px;">
                     <a>&lt;</a>
                     <a>1</a>

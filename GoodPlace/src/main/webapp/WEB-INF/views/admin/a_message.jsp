@@ -75,7 +75,7 @@
                     </table>
                     
                     
-                    		            <script>
+                  	<script>
 		            	$(function(){
 		            		
  	            		    $("#messageList tbody tr").click(function(){

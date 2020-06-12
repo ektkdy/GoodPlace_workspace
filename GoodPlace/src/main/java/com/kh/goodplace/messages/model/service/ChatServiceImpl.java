@@ -29,6 +29,24 @@ public class ChatServiceImpl implements ChatService {
 	public ArrayList<Message> selectMessage(int msn) {
 		return cDao.selectMessage(sqlSession, msn);
 	}
+
+
+	@Override
+	public ArrayList<ChatRoom> pSelectMessagesList() {
+		return cDao.pSelectMessagesList(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Message> selectpMessage(int pmsn) {
+		return cDao.selectpMessage(sqlSession, pmsn);
+	}
+
+
+	@Override
+	public ChatRoom selectRoomChat(ChatRoom cr) {
+		return cDao.selectRoomChat(sqlSession, cr);
+	}
 	
 	
 }

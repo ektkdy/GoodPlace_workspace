@@ -44,6 +44,8 @@ public class ChatDao{
 		return session.insert("chatMapper.insertMessage" , vo);
 	}
 	
+	
+	// 관리자 메세지 리스트 가져오기
 	public ArrayList<ChatRoom> aSelectMessagesList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("chatMapper.aSelectMessagesList");
 	}
@@ -51,5 +53,29 @@ public class ChatDao{
 	public ArrayList<Message> selectMessage(SqlSessionTemplate sqlSession, int msn) {
 		return (ArrayList)sqlSession.selectList("chatMapper.selectMessage",msn);
 	}
+	
+	// 파트너 메세지 리스트 가져오기
+	public ArrayList<ChatRoom> pSelectMessagesList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("chatMapper.pSelectMessagesList");
+	}
+
+
+	public ArrayList<Message> selectpMessage(SqlSessionTemplate sqlSession, int pmsn) {
+		return (ArrayList)sqlSession.selectList("chatMapper.selectpMessage", pmsn);
+	}
+	
+	public ChatRoom selectRoomChat(SqlSessionTemplate sqlSession, ChatRoom cr) {
+		 return sqlSession.selectOne("chatMapper.selectRoomChat", cr);
+	}
+	
+	
+	public ChatRoom selectpChatRoom(ChatRoom cr) {
+		return session.selectOne("chatMapper.selectpChatRoom", cr);
+	}
+	// 채팅 내용 메세지테이블 입력
+	public int insertpMessage(Message vo) throws Exception {
+		return session.insert("chatMapper.insertpMessage" , vo);
+	}
+	
 	
 }

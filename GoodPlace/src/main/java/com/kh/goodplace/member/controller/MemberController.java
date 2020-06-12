@@ -22,16 +22,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
-import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.RoomPay;
+import com.kh.goodplace.messages.model.dao.ChatDao;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 
 @Controller
 public class MemberController {
 
 	@Autowired // DI
 	private MemberService mService;
+	
+	@Autowired // DI
+	private ChatDao cDao;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -272,10 +275,25 @@ public class MemberController {
     // 채팅 상대방 정보 가져오기
 	@ResponseBody
 	@RequestMapping(value="selectTutor", produces="application/json; charset=utf-8")
-	public String selectTutor(Member m) throws Exception {
-
-		Member tutor = mService.loginMember(m);
+	public String selectTutor(Member m, String loginEmail, HttpSession session) throws Exception {
 		
+		Member tutor = mService.loginMember(m);
+		System.out.println(tutor + "/" + loginEmail );
+		
+		ChatRoom cr = new ChatRoom();
+		cr.setTutorEmail(tutor.getEmail());
+		cr.setUserEmail(loginEmail);
+		
+		if(cDao.selectChatRoom(cr) == null) {
+			cDao.createRoom(cr);
+			cr = cDao.selectChatRoom(cr);
+		}
+		
+		cr = cDao.selectChatRoom(cr);
+		
+		session.setAttribute("class_class_id", cr.getClass_class_id());
+		
+		System.out.println("cr : " + cr);
 		System.out.println("상대방 : " + tutor);
 		return new Gson().toJson(tutor);
 	}
