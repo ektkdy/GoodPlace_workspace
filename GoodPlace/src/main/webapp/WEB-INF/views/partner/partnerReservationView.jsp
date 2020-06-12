@@ -50,7 +50,7 @@
 		width:480px;
 		height:350px;
 		border:1px solid #bebebe;
-		margin-left:20px
+		margin-left:16px
 	}
 	#go_exps:hover{
 		border:1px solid #184c88;
@@ -85,7 +85,7 @@
 <body>
  <div id="wrap">
         <jsp:include page="../common/partnerMenubar.jsp"/>
-        <div id="contents" >
+        <div id="contents" style="width:980px">
             <div id="tab">
             </div>
             <div class="sitemap">
@@ -122,7 +122,7 @@
 			})
 			
 			$("#go_exps").click(function(){
-				location.href='';
+				location.href='rvExpList.rv?currentPage='+ 1;
 			})
 		});
 	</script>

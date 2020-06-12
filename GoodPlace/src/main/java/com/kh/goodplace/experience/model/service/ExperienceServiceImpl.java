@@ -131,6 +131,40 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.updateReject(sqlSession, e);
 	}
 
+	@Override
+	public int selectRvExpListCount(int usNo) {
+		return expDao.selectRvExpListCount(sqlSession, usNo) ;
+	}
+
+	@Override
+	public int selectRvExpConfirmListCount(int usNo) {
+		return expDao.selectRvExpConfirmListCount(sqlSession, usNo) ;
+	}
+
+	@Override
+	public int selectRvExpCancelListCount(int usNo) {
+		return expDao.selectRvExpCancelListCount(sqlSession, usNo) ;
+	}
+	@Override
+	public ArrayList<Experience> selectRvExpList(PageInfo pi, int usNo) {
+		return expDao.selectRvExpList(sqlSession, pi, usNo);
+	}
+
+	@Override
+	public ArrayList<Experience> selectRvExpConfirmList(PageInfo pi, int usNo) {
+		return expDao.selectRvExpConfirmList(sqlSession, pi, usNo);
+	}
+
+	@Override
+	public ArrayList<Experience> selectRvExpCancelList(PageInfo pi, int usNo) {
+		return expDao.selectRvExpCancelList(sqlSession, pi, usNo);
+	}
+
+	@Override
+	public Experience reservationDetailView(int epno) {
+		return expDao.selectRvExpCancelList(sqlSession, epno);
+	}
+
 	
 
 	

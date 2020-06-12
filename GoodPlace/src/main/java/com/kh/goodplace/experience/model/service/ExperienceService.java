@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.room.model.vo.Room;
 
 public interface ExperienceService {
 	
@@ -79,6 +80,22 @@ public interface ExperienceService {
 	int updateReject(Experience e);
 
 
+	//--------------[예약관리]---------------
+	//예약목록 조회용 서비스
+	int selectRvExpListCount(int usNo);
+	//리스트 카운트 예약 확정
+	int selectRvExpConfirmListCount(int usNo);
+	//리스트 카운트 예약 취소
+	int selectRvExpCancelListCount(int usNo);
+	//리스트 기본 
+	ArrayList<Experience> selectRvExpList(PageInfo pi, int usNo);
 	
+	//예약확정 리스트
+	ArrayList<Experience> selectRvExpConfirmList(PageInfo pi, int usNo);
 	
+	//예약확취소 리스트
+	ArrayList<Experience> selectRvExpCancelList(PageInfo pi, int usNo);
+	
+	//예약 내역 상세페이지
+	Experience reservationDetailView(int epno);
 }

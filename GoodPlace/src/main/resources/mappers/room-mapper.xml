@@ -360,7 +360,6 @@
 		                from rooms
 		                where usno= #{userNo})
 		  and reserve_status = 1
-	
 	</select>
 	<!-- 확정후 -->
 	<select id="selectRvRoomConfirmListCount" parameterType="_int" resultType="_int">
@@ -369,8 +368,7 @@
 		 where rono in (select rono 
 		                from rooms
 		                where usno= #{userNo})
-		  and reserve_status = 2
-	
+		  and reserve_status in (2, 3)
 	</select>
 	<!-- 취소 -->
 	<select id="selectRvRoomCancelListCount" parameterType="_int" resultType="_int">
@@ -379,8 +377,7 @@
 		 where rono in (select rono 
 		                from rooms
 		                where usno= #{userNo})
-		  and reserve_status = 3
-	
+		  and reserve_status = 4
 	</select>
 	<!-- 기본 리스트 -->
 	<select id="selectRvRoomList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
@@ -406,7 +403,7 @@
 		 where rp.rono in (select r.rono 
 			                from rooms
 			                where usno =  #{userNo})
-	      and reserve_status = 2
+	      and reserve_status in (2, 3)
 	     order by rp.rpno desc
 	</select>
 	<!-- 예약취소 리스트-->
@@ -419,7 +416,7 @@
 		 where rp.rono in (select r.rono 
 			                from rooms
 			                where usno =  #{userNo})
-	      and reserve_status = 3
+	      and reserve_status = 4
 	     order by rp.rpno desc
 	</select>
 

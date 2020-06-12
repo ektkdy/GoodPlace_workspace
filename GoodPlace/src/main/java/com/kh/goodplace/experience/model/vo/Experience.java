@@ -1,6 +1,7 @@
 package com.kh.goodplace.experience.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,5 +51,14 @@ public class Experience {
 	
 	private String local;			// 지역
 	private String totalSal;		// 누적판매수
+	
+	/* 체험결제 컬럼들 */
+	private int epNo; 				// 체험결제번호
+	private int amount;				// 체험결제금액
+	private Timestamp payDate;		// 체험결제일
+	private Timestamp expDateUser;	// 체험신청일
+	private int people;				// 인원수
+	private int statusExp;			// 체험상태(승인1~)
+
 
 }

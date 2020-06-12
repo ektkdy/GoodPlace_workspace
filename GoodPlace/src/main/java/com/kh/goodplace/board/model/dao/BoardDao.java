@@ -248,24 +248,24 @@ public class BoardDao {
 	}
 	
 	
-	// ---------------------------------- 사용자 리뷰 ----------------------------------
+	// ---------------------------------- 파트너 리뷰 ----------------------------------
 	
-	// 답글전 리뷰 전체 리스트 조회
+	// 답글전 리뷰 수 조회
 	public int selectReviewCount1(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("boardMapper.selectReviewCount1", userNo);
 	}
 	
-	// 답글후 리뷰 전체 리스트 조회
+	// 답글후 리뷰 수 조회
 	public int selectReviewCount2(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("boardMapper.selectReviewCount2", userNo);
 	}
-	// 답글전 리뷰  조회용
+	// 답글전 리뷰 리스트  조회용
 	public ArrayList<Board> reviewList1(SqlSessionTemplate sqlSession, int userNo,  PageInfo noReplyPi) {
 		int offset = (noReplyPi.getCurrentPage() -1) * noReplyPi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, noReplyPi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("boardMapper.reviewList1", userNo, rowBounds);
 	}
-	// 답글후 리뷰  조회용
+	// 답글후 리뷰 리스트  조회용
 	public ArrayList<Board> reviewList2(SqlSessionTemplate sqlSession, int userNo,  PageInfo responsePi) {
 		int offset = (responsePi.getCurrentPage() -1) * responsePi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, responsePi.getBoardLimit());

@@ -123,16 +123,50 @@ public class ExperienceDao {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
 	// --------- 체험관리 시작 -----------------
+	
+	
+	// ---------- [예약관리 시작] ------------
+	
+	public int selectRvExpListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("expMapper.selectRvExpListCount", userNo);
+	}
+	//확정 후
+	public int selectRvExpConfirmListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("expMapper.selectRvExpConfirmListCount", userNo);
+	}
+	
+	//취소
+	public int selectRvExpCancelListCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("expMapper.selectRvExpCancelListCount", userNo);
+	}
+	
+	public ArrayList<Experience> selectRvExpList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return  (ArrayList)sqlSession.selectList("expMapper.selectRvExpList", userNo, rowBounds);
+	}
+	
+	//확정
+		public ArrayList<Experience> selectRvExpConfirmList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+			int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+			RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+			
+			return  (ArrayList)sqlSession.selectList("expMapper.selectRvExpConfirmList", userNo, rowBounds);
+		}
+
+		//취소=
+		public ArrayList<Experience> selectRvExpCancelList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
+			int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+			RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+			
+			return  (ArrayList)sqlSession.selectList("expMapper.selectRvExpCancelList", userNo, rowBounds);
+		}
+
+		public Experience reservationDetailView(SqlSessionTemplate sqlSession, int epno) {
+			return sqlSession.selectOne("expMapper.reservationDetailView", epno);
+		}
+		
 
 }

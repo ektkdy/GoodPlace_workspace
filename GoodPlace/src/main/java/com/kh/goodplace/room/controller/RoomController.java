@@ -599,9 +599,6 @@ public class RoomController {
 		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
 		    
 		    
-		    
-		    System.out.println(list);
-		    
 		    model.addAttribute("pi", pi);
 		    model.addAttribute("list", list);
 		    

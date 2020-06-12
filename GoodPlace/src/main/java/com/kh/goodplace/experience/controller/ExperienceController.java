@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,15 +15,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -410,15 +415,149 @@ public class ExperienceController {
 	}
 	
 	
+	// ------------------------------ 파트너 예약관리 시작 ----------------------------------
 	
+			
+			@RequestMapping("rvExpList.rv")
+			public String rvExpList(Model model,  int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = expService.selectRvExpListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    
+			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
+			    
+			    
+			    model.addAttribute("pi", pi);
+			    model.addAttribute("list", list);
+			    
+				
+			    return "partner/partnerExpReservationListView";
+			}
 	
+			//예약 확정
+			@ResponseBody
+			@RequestMapping(value="rvExpListIng.rv", produces="application/json; charset=utf-8")
+			public String rvRoomListIng(int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = expService.selectRvExpListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    
+			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
+			    
+			    
+			    HashMap<String, Object> map = new HashMap<String, Object>();
+			    JsonObject jsonObject = new JsonObject();
+
+			    // Gson 객체 생성
+			    Gson gson = new Gson();
+
+			    // JSON Object를 맵으로 바꿈
+			    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+			     
+			    // key-value 형태로 맵에 저장
+			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+
+			    // 맵을 JSON Object 문자열로 바꿈
+			    String jsonString = gson.toJson(map);
+
+						
+			    return jsonString;
+			}
+			
+			//예약 확정
+			@ResponseBody
+			@RequestMapping(value="rvExpListConfirm.rv", produces="application/json; charset=utf-8")
+			public String rvRoomListConfirm(int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = expService.selectRvExpConfirmListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    
+			    ArrayList<Experience> list = expService.selectRvExpConfirmList(pi, usNo);
+
+
+			    HashMap<String, Object> map = new HashMap<String, Object>();
+			    JsonObject jsonObject = new JsonObject();
+
+			    // Gson 객체 생성
+			    Gson gson = new Gson();
+
+			    // JSON Object를 맵으로 바꿈
+			    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+			     
+			    // key-value 형태로 맵에 저장
+			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+
+			    // 맵을 JSON Object 문자열로 바꿈
+			    String jsonString = gson.toJson(map);
+
+						
+			    return jsonString;
+			}
+
+			//예약취소
+			@ResponseBody
+			@RequestMapping(value="rvExpListCancel.rv", produces="application/json; charset=utf-8")
+			public String rvRoomListCancel(int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = expService.selectRvExpCancelListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    
+			    ArrayList<Experience> list = expService.selectRvExpCancelList(pi, usNo);
+
+
+			    HashMap<String, Object> map = new HashMap<String, Object>();
+			    JsonObject jsonObject = new JsonObject();
+
+			    // Gson 객체 생성
+			    Gson gson = new Gson();
+
+			    // JSON Object를 맵으로 바꿈
+			    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+			     
+			    // key-value 형태로 맵에 저장
+			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+			    System.out.println(pi);
+			    System.out.println(list);
+			    // 맵을 JSON Object 문자열로 바꿈
+			    String jsonString = gson.toJson(map);
+
+						
+			    return jsonString;
+			}
 	
+			//예약상세
+			@RequestMapping("reservationDetailView.rv")
+			public String reservationDetailView(int epNo, Model model) {
+					
+				Experience e = expService.reservationDetailView(epNo);
+				
+				model.addAttribute("e", e);
+				return "partner/partnerReservationDetailView";
+			}
 	
-	
-	
-	
-	
-	
+			
 	
 	
 	

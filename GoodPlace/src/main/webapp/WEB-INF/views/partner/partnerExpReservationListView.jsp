@@ -61,30 +61,27 @@
                         <tbody>
                         	
                         	
-                        	<c:forEach var="r" items="${ list}">
+                        	<c:forEach var="r" items="${ list }">
 	                            <tr>
-	                                <td>${r.rpNo } </td>
+	                                <td>${r.epNo } </td>
 	                                <c:choose>
-	                                	<c:when test="${r.reserveStatus eq 1 }">
+	                                	<c:when test="${r.statusExp eq 1 }">
 	                                		<td>확정대기</td>
 	                                	</c:when>
-	                                	<c:when test="${r.reserveStatus eq 2 }">
+	                                	<c:when test="${r.statusExp eq 2 and 3 }">
 	                                		<td>확정완료</td>
 	                                	</c:when>
-	                                	<c:when test="${r.reserveStatus eq 3 }">
+	                                	<c:when test="${r.statusExp eq 4 }">
 	                                		<td>여행완료</td>
 	                                	</c:when>
 	                                </c:choose>
 	                                <td>${r.userName}</td>
 	                                <td>
-	                                <c:set var="TextValue1" value="${r.startDays }"/>
+	                                <c:set var="TextValue1" value="${r.expDateUser }"/>
 	                                	${fn:substring(TextValue1,0,10) }
 
-	                                	~
-	                                	<c:set var="TextValue2" value="${r.endDays }"/>
-	                                	${fn:substring(TextValue2,0,10) }
 	                                </td>
-	                                <td>${r.roomsTitle }</td>
+	                                <td>${r.expTitle }</td>
 	                                <td><button class="confirm_btn">확정하기</button></td>
 	                            </tr>
                            </c:forEach>
@@ -95,12 +92,16 @@
         </div>
     </div>
 <!-- tab메뉴 ajax -->
-
+<script>
+	$("#reserv_tb tbody tr").click(function(){
+		location.href=""
+	});
+</script>
 <script>
 //진행중인예약 
 $('#ing').click(function(){
   $.ajax({
-	url:"rvRoomListIng.rv",
+	url:"rvExpListIng.rv",
 	data:{currentPage:1 },
 	type:"post",
 	success:function(result){
@@ -140,19 +141,18 @@ $('#ing').click(function(){
 			}else{
 				
 				for(var i in list){
-					var start = list[i].startDays;
-					var end = list[i].endDays;
+					var start = list[i].expDateUser;
 						content +=  "<tr>" +
-								 	"<td>" + list[i].rpNo + "</td>" +
-								 	"<td>예약확정</td>" +
+								 	"<td>" + list[i].epNo + "</td>" +
+								 	"<td>예약진행중</td>" +
 								 	"<td>" + list[i].userName +"</td>" + 
-								 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
-								 	"<td>" +  list[i].roomsTitle + "</td>" +
+								 	"<td>" + start.substr(0,10) + "</td>" +
+								 	"<td>" +  list[i].expTitle + "</td>" +
 								 	"<td><button class='confirm_btn' disabled>예약완료</button></td>" +
 									"</tr>";
 									
 						selectCon += 
-								"<option>" + list[i].roomsTitle + "</option>";
+								"<option>" + list[i].expTitle + "</option>";
 						
 								  }
 			}		
@@ -166,14 +166,12 @@ $('#ing').click(function(){
 	}
  });
 });
-</script>
-<script>
 	
 	
 	// 확정된예약
 	$('#confirm').click(function(){
 	  $.ajax({
-		url:"rvRoomListConfirm.rv",
+		url:"rvExpListConfirm.rv",
 		data:{currentPage:1 },
 		type:"post",
 		success:function(result){
@@ -212,19 +210,17 @@ $('#ing').click(function(){
 
 
 					for(var i in list){
-						var start = list[i].startDays;
-						var end = list[i].endDays;
-							content +=  "<tr>" +
-										 	"<td>" + list[i].rpNo + "</td>" +
+						var start = list[i].expDateUser;
+								content +=  "<tr>" +
+										 	"<td>" + list[i].epNo + "</td>" +
 										 	"<td>예약확정</td>" +
 										 	"<td>" + list[i].userName +"</td>" + 
-										 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
-										 	"<td>" +  list[i].roomsTitle + "</td>" +
-										 	"<td>" + 
-									 		"<button class='confirm_btn' style='background:#f1f1f1; border:1px solid #bebebe; color:#333 'disabled>예약완료</button>" + 
+										 	"<td>" + start.substr(0,10) + "</td>" +
+										 	"<td>" + list[i].expTitle + "</td>" +
+												 		"<button class='confirm_btn' style='background:#f1f1f1; border:1px solid #bebebe; color:#333 'disabled>예약완료</button>" + 
 										 	"</td>" +
 										"</tr>";
-							selectCon += "<option>" + list[i].roomsTitle + "</option>";
+							selectCon += "<option>" + list[i].expTitle + "</option>";
 									  }
 				}			 		
 				
@@ -241,7 +237,7 @@ $('#ing').click(function(){
 	//취소된예약
 	$('#cancel').click(function(){
 	  $.ajax({
-		url:"rvRoomListCancel.rv",
+		url:"rvExpListCancel.rv",
 		data:{currentPage:1 },
 		type:"post",
 		success:function(result){
@@ -279,19 +275,18 @@ $('#ing').click(function(){
 			}else{
 				
 				for(var i in list){
-					var start = list[i].startDays;
-					var end = list[i].endDays;
-						content +=  "<tr>" +
-									 	"<td>" + list[i].rpNo + "</td>" +
+					var start = list[i].expDateUser;
+							content +=  "<tr>" +
+									 	"<td>" + list[i].epNo + "</td>" +
 									 	"<td>예약취소</td>" +
 									 	"<td>" + list[i].userName +"</td>" + 
-									 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
-									 	"<td>" +  list[i].roomsTitle + "</td>" +
+									 	"<td>" + start.substr(0,10) + "</td>" +
+									 	"<td>" +  list[i].expTitle + "</td>" +
 									 	"<td>" + 
 									 		"<button class='confirm_btn' style='background:#d22d32; border:1px solid #d22d32; color:#fff 'disabled>예약취소</button>" + 
 									 	"</td>" +
 									"</tr>";
-						selectCon += "<option>" + list[i].roomsTitle + "</option>";
+						selectCon += "<option>" + list[i].expTitle + "</option>";
 								  }
 			}			 		
 			

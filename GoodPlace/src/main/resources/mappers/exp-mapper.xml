@@ -55,6 +55,59 @@
 		<result column="rono" property="roNo"/>
 		<result column="exno" property="exNo"/>
 	</resultMap>
+
+	<!-- 체험 + 체험결제 -->
+	<resultMap type="Experience" id="ExperiencePayResultSet">
+		<id column="exno" property="exNo"/>
+		<result column="usno" property="usNo"/>
+		<result column="language" property="language"/>
+		<result column="exp_category" property="expCategory"/>
+		<result column="exp_tag" property="expTag"/>
+		<result column="exp_title" property="expTitle"/>
+		<result column="exp_content" property="expContent"/>
+		<result column="activity" property="activity"/>
+		<result column="max_people" property="maxPeople"/>
+		<result column="exp_date" property="expDate"/>
+		<result column="start_time" property="startTime"/>
+		<result column="end_time" property="endTime"/>
+		<result column="use_time" property="useTime"/>
+		<result column="interval_time" property="intervalTime"/>
+		<result column="supplies" property="supplies"/>
+		<result column="deadline" property="deadline"/>
+		<result column="price" property="price"/>
+		<result column="add_basic" property="addBasic"/>
+		<result column="add_detail" property="addDetail"/>
+		<result column="add_ref" property="addRef"/>
+		<result column="zip_code" property="zipCode"/>
+		<result column="apply_date" property="applyDate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="operate_day" property="operateDay"/>
+		<result column="status" property="status"/>
+		<result column="deny" property="deny"/>
+		<result column="deny_content" property="denyContent"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+
+		<result column="epno" property="epNo"/>
+		<result column="amount" property="amount"/>
+		<result column="pay_date" property="payDate"/>
+		<result column="exp_date" property="expDate"/>
+		<result column="people" property="people"/>
+		
+		<result column="change_name_1" property="atChangeName"/>
+		
+		<!-- 결제 걸럼 -->
+		<result column="EPNO" property="epNo"/>
+		<result column="AMOUNT" property="amount"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="EXP_DATE" property="expDateUser"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="STATUS" property="statusExp"/>
+	</resultMap>
+	
+	
 	
 	<!-- 사용자의 체험 전체 목록 조회  -->
 	<select id="selectExpListCount" resultType="_int">
@@ -212,6 +265,82 @@
 	
 	</update>
 	<!-- 체험관리 끝 -->
+	
+	<!-- ////////////////// 예약관리 시작 ////////////////// -->
+	<!-- 확정전 -->
+	<select id="selectRvExpListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from exppay ep
+		 where exno in (select exno
+		                  from experience ex
+		                 where usno = #{userNo})
+		and status = 1
+	</select>
+	<!-- 확정후 -->
+	<select id="selectRvExpConfirmListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from exppay ep
+		 where exno in (select exno
+		                  from experience ex
+		                 where usno = #{userNo})
+		and status in (2, 3)
+	</select>
+	<!-- 취소 -->
+	<select id="selectRvExpCancelListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		  from exppay ep
+		 where exno in (select exno
+		                  from experience ex
+		                 where usno = #{userNo})
+		and status = 4
+	</select>
+	
+	<select id="selectRvExpList" parameterType="_int" resultMap="ExperiencePayResultSet" >
+		select epno, ex.exno, user_name, amount, pay_date, ep.exp_date, people, ep.status,
+     		   exp_category, exp_title, use_time, add_basic, exp_content
+		  from exppay ep
+		  join experience ex on (ex.exno = ep.exno)
+		  join member m on (m.usno = ep.usno)
+		 where ep.exno in (select ex.exno 
+		                from experience
+		                where usno = #{userNo})
+		   and ep.status = 1
+		   order by ep.epno desc
+	</select>
+	<!-- 예약확정 리스트-->
+	<select id="selectRvExpConfirmList" parameterType="_int" resultMap="ExperiencePayResultSet" >
+		select epno, ex.exno, user_name, amount, pay_date, ep.exp_date, people, ep.status,
+     		   exp_category, exp_title, use_time, add_basic, exp_content
+		  from exppay ep
+		  join experience ex on (ex.exno = ep.exno)
+		  join member m on (m.usno = ep.usno)
+		 where ep.exno in (select ex.exno 
+		                from experience
+		                where usno = #{userNo})
+		   and ep.status in (2, 3)
+		   order by ep.epno desc
+	</select>
+	<!-- 예약취소 리스트-->
+	<select id="selectRvExpCancelList" parameterType="_int" resultMap="ExperiencePayResultSet" >
+		select epno, ex.exno, user_name, amount, pay_date, ep.exp_date, people, ep.status,
+     		   exp_category, exp_title, use_time, add_basic, exp_content
+		  from exppay ep
+		  join experience ex on (ex.exno = ep.exno)
+		  join member m on (m.usno = ep.usno)
+		 where ep.exno in (select ex.exno 
+		                from experience
+		                where usno = #{userNo})
+		   and ep.status = 4
+		   order by ep.epno desc
+	</select>
+	
+	<select id="" parameterType="_int" >
+		
+	</select>
+	
+	
+	
+	<!--/////////////////// 예약관리 끝 //////////////////-->
 
 
 
