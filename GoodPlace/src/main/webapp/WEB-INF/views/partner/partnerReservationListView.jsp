@@ -41,9 +41,16 @@
                 <br clear="both">
                 <div class="choose_area"style="clear: both;">
                     <select id="roomTitle" class="select_st">
-                    <c:forEach var="r" items="${ list}">
-                        <option>${r.roomsTitle }</option>
-                    </c:forEach>
+                    <c:choose>
+                    	<c:when test="${!empty list }">
+		                    <c:forEach var="r" items="${ list}">
+		                        <option>${r.roomsTitle }</option>
+		                    </c:forEach>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<option>목록이 없습니다.</option>
+	                    </c:otherwise>
+                    </c:choose>
                     </select>
                     <input class="ch_date" type="date">
                     <select class="select_st">
@@ -153,7 +160,7 @@ $('#ing').click(function(){
 						   "<td colspan='6'>예약 목록이 없습니다.</td>" +
 						   "</tr>";
 						   
-				selectCon += "<option>값이 없습니다.</option>";
+				selectCon += "<option>목록이 없습니다.</option>";
 			}else{
 				
 				for(var i in list){
@@ -228,7 +235,7 @@ $('#ing').click(function(){
 					content += "<tr>" +
 							   "<td colspan='6'>예약 목록이 없습니다.</td>" +
 							   "</tr>";
-					selectCon += "<option>값이 없습니다.</option>";
+					selectCon += "<option>목록이 없습니다.</option>";
 				}else{
 
 
@@ -296,7 +303,7 @@ $('#ing').click(function(){
 				content += "<tr>" +
 						   "<td colspan='6'>예약 목록이 없습니다.</td>" +
 						   "</tr>";
-				selectCon += "<option>값이 없습니다.</option>";
+				selectCon += "<option>목록이 없습니다.</option>";
 			}else{
 				
 				for(var i in list){

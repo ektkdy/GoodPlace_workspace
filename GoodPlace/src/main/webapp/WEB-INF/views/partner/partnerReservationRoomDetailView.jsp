@@ -10,8 +10,18 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerReservationStep.css" />
 <style>
-
-
+#confirm_btn:hover{
+	background:#fff;
+	border: 1.5px solid #184c88;
+	color:#184c88;
+	font-weight:500;
+}
+#cancel_btn:hover{
+	background:#d22d32;
+	border: 1.5px solid #d22d32;
+	color:#fff;
+	font-weight:500;
+}
 </style>
 
 </head>
@@ -66,6 +76,12 @@
                 	</c:choose>
                 </span>
                 <br clear="both">
+                <form id="confirmForm" action="roomConfirm.rv" method="post">
+                  <input type="hidden" name="rpNo" value='${r.rpNo}'>
+                 </form>
+                <form id="cancelForm" action="roomCancel.rv" method="post">
+                  <input type="hidden" name="rpNo" value='${r.rpNo}'>
+                 </form>
                 <table class="step_tb" cellpadding="0" cellspacing="0">
                     <thead>
                         <tr>
@@ -170,13 +186,22 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5" class="step_btn">
-                                <button class="confirm" id="confirm_btn">확정하기</button>
-                                <button class="cancel" id="cancel_btn">예약취소</button>
-                            </td>
+                           <td colspan="5" class="step_btn">
+                           	<c:choose>
+                           		<c:when test="${r.reserveStatus == 1 }">
+                               		<button class="confirm" id="confirm_btn">확정하기</button>
+		                            <button class="cancel" id="cancel_btn">예약취소</button>
+		                        </c:when>
+		                        <c:otherwise>
+		                        	<button class="confirm" id="confirm_btn" disabled>확정하기</button>
+		                            <button class="cancel" id="cancel_btn"  disabled>예약취소</button>
+		                        </c:otherwise>
+                            </c:choose>
+                           </td>
                         </tr>
                     </tfoot>
                 </table>
+                
                 <br>
                 <table class="info_tb" cellpadding="0" cellspacing="0">
                     <thead>
@@ -307,7 +332,31 @@
     <script>
     	$(function(){
     		$("#confirm_btn").click(function(){
-    			location.href='roomConfirm.rv';
+    			var result = confirm('정말로 예약을 확정하시겠습니까?'); 
+    			
+    			if(result) { 
+    				
+    				$("#confirmForm").submit();
+    				
+    			} else { 
+    				
+    			}
+
+    		});
+    	});
+    	
+    	$(function(){
+    		$("#cancel_btn").click(function(){
+    			var result = confirm('정말로 예약을 취소하시겠습니까?'); 
+    			
+    			if(result) { 
+    				
+    				$("#cancelForm").submit();
+    				
+    			} else { 
+    				
+    			}
+
     		});
     	});
     </script>

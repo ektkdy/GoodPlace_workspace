@@ -596,7 +596,7 @@ public class ExperienceController {
 		Experience e = expService.reservationExpDetailView(epNo);
 		
 		model.addAttribute("e", e);
-		return "partner/partnerReservationDetailView";
+		return "partner/partnerReservationExpDetailView";
 	}
 
 			

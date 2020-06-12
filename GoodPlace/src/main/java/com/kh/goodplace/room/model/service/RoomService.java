@@ -90,6 +90,13 @@ public interface RoomService {
 	
 	Room reservationRoomDetailView(int rpNo);
 	
+	// 예약확정
+	
+	int roomConfirm(int rpNo);
+	
+	// 예약취소
+	
+	int roomCancel(int rpNo);
 	
 	//11. 취소된 예약목록 조회용 서비스
 	

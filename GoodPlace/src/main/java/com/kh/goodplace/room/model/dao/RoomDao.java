@@ -290,11 +290,17 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.reservationRoomDetailView", rpNo);
 	}
 	
+	//예약확정
+	public int roomConfirm(SqlSessionTemplate sqlSession, int rpNo) {
+		
+		return sqlSession.update("roomMapper.roomConfirm", rpNo);
+	}
 	
-	
-	
-	
-	
+	//예약취소
+		public int roomCancel(SqlSessionTemplate sqlSession, int rpNo) {
+			
+			return sqlSession.update("roomMapper.roomCancel", rpNo);
+		}
 	
 	
 	

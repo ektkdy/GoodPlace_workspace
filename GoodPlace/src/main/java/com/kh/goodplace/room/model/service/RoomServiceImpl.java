@@ -267,7 +267,15 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.reservationRoomDetailView(sqlSession, rpNo);
 	}
 
+	@Override
+	public int roomConfirm(int rpNo) {
+		return rDao.roomConfirm(sqlSession, rpNo);
+	}
 
+	@Override
+	public int roomCancel(int rpNo) {
+		return rDao.roomCancel(sqlSession, rpNo);
+	}
 	
 	
 	
