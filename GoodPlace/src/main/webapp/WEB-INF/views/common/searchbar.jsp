@@ -131,7 +131,7 @@
                 <div class="experience input" style="display: none;">
                     <li class="liBox1">
                         <b>태그</b>
-                        <select name="category" placeholder="체험 목록을 선택하세요">
+                        <select name="expCategoryString" placeholder="체험 목록을 선택하세요">
                         	<option value="라이프 및 스타일">라이프 및 스타일</option>
                         	<option value="문화와 역사">문화와 역사</option>
                         	<option value="학술과 디자인">학술과 디자인</option>
@@ -141,11 +141,11 @@
                     </li>
                     <li class="liBox1">
                         <b>날짜</b>
-                        <input type="date" name="expDate" placeholder="날짜를 입력하세요" >
+                        <input type="date" name="expDateString" placeholder="날짜를 입력하세요" >
                     </li>
                     <li class="liBox1">
                         <b>키워드</b>
-                        <input type="number" name="expTitle" placeholder="키워드를 입력하세요">
+                        <input type="text" name="expTitle" placeholder="키워드를 입력하세요">
                     </li>
                     <li style="margin: auto; text-align: center;">
                         <input id="subExpInfo" type="button" value="체험검색">

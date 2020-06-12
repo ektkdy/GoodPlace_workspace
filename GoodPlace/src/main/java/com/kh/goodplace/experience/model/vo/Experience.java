@@ -54,5 +54,8 @@ public class Experience {
 	/*관리자 검색용 키워드*/
 	private String searchSelect;
 	private String keyword;
+	
+	/* DB에는 없지만 추가한 필드 */
+	private String expDateString;	// 체험날짜
 
 }

@@ -150,5 +150,45 @@ public class ExperienceDao {
 	
 	
 	// --------- 체험관리 시작 -----------------
+	
+	//------------[체험조회 시작]------------
+	public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
+	}
+	
+	
+	
+	
+	//------------[체험조회 끝]------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

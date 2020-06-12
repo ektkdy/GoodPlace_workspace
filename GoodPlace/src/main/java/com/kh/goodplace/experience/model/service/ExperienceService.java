@@ -87,5 +87,9 @@ public interface ExperienceService {
 	//5. 공지사항 검색 조회용
 	ArrayList<Experience> expSearchList(PageInfo pi, Experience e);
 	
+	//------------[체험조회 시작]------------
+	ArrayList<Experience> selectExpListUser(Experience exp);
 	
+	//------------[체험조회 끝]------------
+
 }
