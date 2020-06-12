@@ -23,6 +23,7 @@ import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -404,7 +405,21 @@ public class ExperienceController {
 		return "admin/adminExpOkeyList";
 	}
 	
-	
+    @RequestMapping("expOkSearch.ex")
+    public String expSearchList(int currentPage, Experience e, Model model) {
+    	
+        int listCount = expService.expSearchCount(e); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Experience> list = expService.expSearchList(pi, e);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("e", e);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminExpOkeyList";
+        
+    }
 	
 	
 	

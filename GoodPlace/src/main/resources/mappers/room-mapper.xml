@@ -315,6 +315,30 @@
 	
 	</update>
 	
+	<select id="roomSearchCount" parameterType="Room" resultType="_int">
+		select count(*)
+		  from rooms
+		 where status = 1
+		 <if test="searchSelect == 'searchOp1'">
+			and ROOMS_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="roomSearchList" parameterType="Room" resultMap="roomResultSet">
+		select *
+		  from rooms
+		 where status = 1
+		<if test="searchSelect == 'searchOp1'">
+			and ROOMS_TITLE LIKE '%' || #{keyword} ||'%'
+		</if>
+		<if test="searchSelect == 'searchOp2'">
+			and ADD_BASIC LIKE '%' || #{keyword} ||'%'
+		</if>
+	</select>
+	
 	<!-- 숙소관리 끝-->
 
 	<!-- 숙소조회 시작 -->

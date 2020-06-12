@@ -50,5 +50,9 @@ public class Experience {
 	
 	private String local;			// 지역
 	private String totalSal;		// 누적판매수
+	
+	/*관리자 검색용 키워드*/
+	private String searchSelect;
+	private String keyword;
 
 }

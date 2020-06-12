@@ -210,7 +210,11 @@ public interface RoomService {
 	// 3_3.게시글 거절용 서비스-현영
 	int updateReject(Room r);
 
+	//4. 공지사항 검색 총갯수 조회용
+	int roomSearchCount(Room r);
 	
+	//5. 공지사항 검색 조회용
+	ArrayList<Room> roomSearchList(PageInfo pi, Room r);
 
 
 	

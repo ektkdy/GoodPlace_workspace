@@ -7,6 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>체험메인</title>
+    
+    <!-- 슬라이더를 생성하는 부분 -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
+
+     <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
+
+    <!-- Swiper JS -->
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+    
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
     <style>
         /* content 스타일 시작*/
