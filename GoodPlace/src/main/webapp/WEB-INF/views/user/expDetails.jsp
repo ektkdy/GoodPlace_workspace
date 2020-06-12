@@ -13,11 +13,14 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
 
      <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
     <!-- Swiper JS -->
     <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-
+    
+	<!-- 결제 API 관련 -->
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	
     <style>
         /* content 시작*/
         /* 여백 초기화 */
