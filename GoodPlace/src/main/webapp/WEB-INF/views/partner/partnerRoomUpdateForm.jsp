@@ -13,6 +13,8 @@
 	.addBtn {border:1px solid #bebebe; border-radius:4px; background-color:#fff; width:25px; height:25px; font-size:18px; margin-bottum:10px;}
     .del{border:0px; background-color:#fff; font-size:15px; color:#bebebe; margin-left:10px;}
     ul{   list-style:none;   }
+    roomEnroll_tb>tbody th{padding-right:100px;}
+    #rodetail>input{width:80px;}
     
 	/*하단 버튼 css*/
     #btns{width:950px; margin-top: 20px; margin-bottom: 20px; margin-right: 20px;}
@@ -67,8 +69,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th rowspan="2">* 숙소명</th>
-                                <td colspan="2" class="instyle"><input type="text" name="roomsTitle" value="${ r.roomsTitle }" required></td>
+                                <th rowspan="2" style="width:230px;">* 숙소명</th>
+                                <td colspan="2" class="instyle"><input type="text" name="roomsTitle" value="${ r.roomsTitle }" style="padding-left:5px;" required></td>
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
@@ -113,76 +115,84 @@
 							</tr>
                             <tr>
                                 <th rowspan="2">* 객실정보</th>
-                                <td colspan="2">
-                                	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" name="bedCount" value="${ r.bedCount }"class="putNum mgRight" style="margin-bottom:10px" name="bedCount">
-                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum" name="bathCount" value="${ r.bathCount }" style="margin-bottom:10px" ><br>
-                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight" name="restroomCount" value="${ r.restroomCount }" style="margin-bottom:10px" >
-                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight" name="minPeople" value="${ r.minPeople }" style="margin-bottom:10px" ><br>
-                                	최대 인원 : <input type="number" min="1" value="1" class="putNum" name="maxPeople" value="${ r.maxPeople }" style="margin-bottom:10px" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                	방  &nbsp;개  &nbsp;수&nbsp;: <input type="number" min="1" value="1" class="putNum" name="roomCount" value="${ r.roomCount }"style="margin-bottom:10px" ><br>
-                                	1박 금액   &nbsp;: <input type="number" min="10000" value="10000" step="1000" class="putNum" name="price" value="${ r.price }" style="width:100px"><br>
+                                <td colspan="2" id="rodetail">
+                                	침  &nbsp;대  &nbsp;수 : <input type="number" min="1" name="bedCount" value="${ r.bedCount }"class="putNum mgRight" style="margin-bottom:10px; margin-right:5px;" name="bedCount">개<br>
+                                	샤워실 수 : <input type="number" min="1" value="1" class="putNum" name="bathCount" value="${ r.bathCount }" style="margin-bottom:10px;margin-right:5px;" >개<br>
+                                	화장실 수 : <input type="number" min="1" value="1" class="putNum mgRight" name="restroomCount" value="${ r.restroomCount }" style="margin-bottom:10px;margin-right:5px;" >개<br>
+                                	최소 인원 : <input type="number" min="1" value="1" class="putNum mgRight" name="minPeople" value="${ r.minPeople }" style="margin-bottom:10px;margin-right:5px;" >명<br>
+                                	최대 인원 : <input type="number" min="1" value="1" class="putNum" name="maxPeople" value="${ r.maxPeople }" style="margin-bottom:10px;margin-right:5px;" >명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                	방  &nbsp;개  &nbsp;수&nbsp;: <input type="number" min="1" value="1" class="putNum" name="roomCount" value="${ r.roomCount }"style="margin-bottom:10px;margin-right:5px;" >명<br>
+                                	1박 금액   &nbsp;: <input type="number" min="10000" value="10000" step="1000" class="putNum" name="price" value="${ r.price }" style="width:100px;margin-right:5px;">원<br>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
-                                <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. 최소인원 이상일 경우 1인당 일정금액이 추가되며 <br>최대인원수 이상 받을수 없습니다.</td>
+                                <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. <br>최소인원 이상일 경우 1인당 일정금액이 추가되며 최대인원수 이상 받을수 없습니다.</td>
                             </tr>
                             <tr class="pdBtom">
                                 <th >* 숙소시설</th>
                                 <td colspan="2">
-                                	<label><input type="checkbox" name="facility" value="침구">침구</label>
-	                                <label><input type="checkbox" name="facility" value="아기침대" style="margin-left:132px">아기침대</label><br>
-	                                <label><input type="checkbox" name="facility" value="여분의침구">여분의침구</label>
-                                    <label><input type="checkbox" name="facility" value="다리미" style="margin-left:91px">다리미</label><br>
-                                    <label><input type="checkbox" name="facility" value="주방">주방</label>
-                                    <label><input type="checkbox" name="facility" value="식기류" style="margin-left:132px">식기류</label><br>
-                                    <label><input type="checkbox" name="facility" value="냉장고">냉장고</label>
-                                    <label><input type="checkbox" name="facility" value="전자레인지" style="margin-left:118px">전자레인지</label><br>
-                                    <label><input type="checkbox" name="facility" value="인덕션">인덕션</label>
-                                    <label><input type="checkbox" name="facility" value="조리도구(냄비 등)" style="margin-left:118px">조리도구(냄비 등)</label><br>
-                                    <label><input type="checkbox" name="facility" value="커피포트">커피포트</label>
-                                    <label><input type="checkbox" name="facility" value="세탁기" style="margin-left:104px">세탁기</label><br>
-                                    <label><input type="checkbox" name="facility" value="에어컨">에어컨</label>
-                                    <label><input type="checkbox" name="facility" value="공용PC" style="margin-left:118px">공용PC</label><br>
-                                    <label><input type="checkbox" name="facility" value="케이블TV">케이블TV</label>
-                                    <label><input type="checkbox" name="facility" value="드라이기" style="margin-left:99px">드라이기</label><br>
-                                    <label><input type="checkbox" name="facility" value="아기욕조">아기욕조</label>
-                                    <label><input type="checkbox" name="facility" value="온수및난방" style="margin-left:104px">온수 및 난방</label><br>
-                                    <label><input type="checkbox" name="facility" value="옷걸이">옷걸이</label>
-                                    <label><input type="checkbox" name="facility" value="주차가능" style="margin-left:118px">주차가능</label>
+                                	<label><input type="checkbox" name="facility" id="bedding" value="침구">  침구</label>
+	                                <label><input type="checkbox" name="facility" id="babyBed" value="아기침대" style="margin-left:132px">  아기침대</label><br>
+	                                <label><input type="checkbox" name="facility" id="extraBed" value="여분의침구">  여분의침구</label>
+                                    <label><input type="checkbox" name="facility" id="iron" value="다리미" style="margin-left:91px">  다리미</label><br>
+                                    <label><input type="checkbox" name="facility" id="kitchen" value="주방">  주방</label>
+                                    <label><input type="checkbox" name="facility" id="dish" value="식기류" style="margin-left:132px">  식기류</label><br>
+                                    <label><input type="checkbox" name="facility" id="fridge" value="냉장고">  냉장고</label>
+                                    <label><input type="checkbox" name="facility" id="microOven" value="전자레인지" style="margin-left:118px">  전자레인지</label><br>
+                                    <label><input type="checkbox" name="facility" id="induction" value="인덕션">  인덕션</label>
+                                    <label><input type="checkbox" name="facility" id="kitchenTools" value="조리도구(냄비 등)" style="margin-left:118px">  조리도구(냄비 등)</label><br>
+                                    <label><input type="checkbox" name="facility" id="coffeePot" value="커피포트">  커피포트</label>
+                                    <label><input type="checkbox" name="facility" id="washer" value="세탁기" style="margin-left:104px">  세탁기</label><br>
+                                    <label><input type="checkbox" name="facility" id="aircon" value="에어컨">  에어컨</label>
+                                    <label><input type="checkbox" name="facility" id="pc" value="공용PC" style="margin-left:118px">  공용PC</label><br>
+                                    <label><input type="checkbox" name="facility" id="tv" value="케이블TV">  케이블TV</label>
+                                    <label><input type="checkbox" name="facility" id="dryer" value="드라이기" style="margin-left:99px">  드라이기</label><br>
+                                    <label><input type="checkbox" name="facility" id="babyBath" value="아기욕조">  아기욕조</label>
+                                    <label><input type="checkbox" name="facility" id="heating" value="온수및난방" style="margin-left:104px">  온수 및 난방</label><br>
+                                    <label><input type="checkbox" name="facility" id="hanger" value="옷걸이">  옷걸이</label>
+                                    <label><input type="checkbox" name="facility" id="parking" value="주차가능" style="margin-left:118px">  주차가능</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 제공서비스</th>
                                 <td colspan="2">
-                                    <label><input type="checkbox" name="service" value="샴푸">샴푸</label>
-                                    <label><input type="checkbox" name="service" value="화장지" style="margin-left:132px">화장지 </label><br>
-                                    <label><input type="checkbox" name="service" value="바디워시">바디워시</label>
-                                    <label><input type="checkbox" name="service" value="비누" style="margin-left:104px">비누</label> <br>
-                                    <label><input type="checkbox" name="service" value="수건">수건</label>
-                                    <label><input type="checkbox" name="service" value="FreeWifi" style="margin-left:132px">Free wifi</label>
+                                    <label><input type="checkbox" name="service" id="shampoo" value="샴푸">  샴푸</label>
+                                    <label><input type="checkbox" name="service" id="tissue" value="화장지" style="margin-left:132px">  화장지 </label><br>
+                                    <label><input type="checkbox" name="service" id="bodywash" value="바디워시">  바디워시</label>
+                                    <label><input type="checkbox" name="service" id="soap" value="비누" style="margin-left:104px">  비누</label> <br>
+                                    <label><input type="checkbox" name="service" id="towel" value="수건">  수건</label>
+                                    <label><input type="checkbox" name="service" id="FreeWifi" value="FreeWifi" style="margin-left:132px">  Free wifi</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>포함사항</th>
                                 <td colspan="2">
-                                    <label><input type="checkbox" name="meal" value="조식">조식</label>
-                                    <label><input type="checkbox" name="meal" value="중식" style="margin-left:132px">중식 </label><br>
-                                    <label><input type="checkbox" name="meal" value="석식">석식</label>
-                                    <label><input type="checkbox" name="meal" value="없음" style="margin-left:132px">없음</label>
+                                    <label><input type="checkbox" name="meal" id="breakfast" value="조식">  조식</label>
+                                    <label><input type="checkbox" name="meal" id="lunch" value="중식" style="margin-left:132px">  중식 </label><br>
+                                    <label><input type="checkbox" name="meal" id="dinner" value="석식">  석식</label>
+                                    <label><input type="checkbox" name="meal" id="none" value="없음" style="margin-left:132px">  없음</label>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 숙소검색태그</th>
                                 <td colspan="2">
-                                    <label><input type="checkbox" name="roomsTag" value="신축건물">신축건물</label>
-                                    <label><input type="checkbox" name="roomsTag" value="교통이 편리한" style="margin-left:104px">교통이 편리한</label> <br>
-                                    <label><input type="checkbox" name="roomsTag" value="관광명소가 가까운">관광명소가 가까운</label>
-                                    <label><input type="checkbox" name="roomsTag" value="무인으로 운영되는" style="margin-left:44.5px">무인으로 운영되는</label><br>
-                                    <label><input type="checkbox" name="roomsTag" value="커플숙소">커플숙소</label>
-                                    <label><input type="checkbox" name="roomsTag" value="비주얼이예쁜" style="margin-left:104px">비주얼이 예쁜</label><br>
-                                    <label><input type="checkbox" name="roomsTag" value="이색숙소">이색숙소</label>
-                                    <label><input type="checkbox" name="roomsTag" value="조식이포함된" style="margin-left:104px">조식이 포함된</label><br>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="new" value="신축건물">  신축건물</label>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="transport" value="교통이 편리한" style="margin-left:104px">  교통이 편리한</label> <br>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="nearTour" value="관광명소가 가까운">  관광명소가 가까운</label>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="manless" value="무인으로 운영되는" style="margin-left:44.5px">  무인으로 운영되는</label><br>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="couple" value="커플숙소">  커플숙소</label>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="visual" value="비주얼이예쁜" style="margin-left:104px">  비주얼이 예쁜</label><br>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="novelty" value="이색숙소">  이색숙소</label>
+                                    <label><input type="checkbox" class="roomsTag" name="roomsTag" id="includeFood" value="조식이포함된" style="margin-left:104px">  조식이 포함된</label><br>
                                 </td>
+                            </tr>
+                            <tr class="pdBtom">
+                            	<th></th>
+                                <td colspan="2" class="enrollInfo" style="border-right:1px solid #bebebe;">• 숙소검색태그를 선택하세요. 최대 2개까지 가능합니다.</td>
+                            </tr>
+                            <tr class="pdBtom">
+                                <th>* 이용안내</th>
+                                <td style="border-right:1px solid #bebebe;">&nbsp;&nbsp;체크인 시간 : <input type="time" name="checkIn" value="${ r.checkIn }"><br><br>체크아웃 시간 : <input type="time" name="checkOut" value="${ r.checkOut }"></td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
@@ -190,42 +200,39 @@
                                     <textarea id="summernote" name="roomsNotice" style="height:100px; border:1px solid red">${ r.roomsNotice }</textarea>
                                 </td>
                             </tr>
-                            <tr class="pdBtom">
-                                <th>* 이용안내</th>
-                                <td>체크인 시간 : <input type="time" values="${ r.checkIn }"><br><br>체크아웃 시간 : <input type="time"  values="${ r.checkOut }"></td>
-                            </tr>
+                            
                     </table>
+                    
                     <div id="btns">
 	                	<span>
 	                    	<button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
 		                </span>
-		                <div style="text-align:right; margin-top: -40px;">
-	                	<c:choose>
-		                	<c:when test="${ r.status eq 1}"><!-- 운영중 -->
-		                		<button id="delete" onclick="roomsSubmit(1);">삭제하기</button>
-		                    	<button id="rest" onclick="roomsSubmit(2);">휴면하기</button>
-		                    	<button id="modify" onclick="roomsSubmit(3);">수정하기</button>
-		                	</c:when>
-		                	<c:when test="${ r.status eq 2}"><!-- 승인대기 -->
-		                		
-		                	</c:when>
-		                	<c:when test="${ r.status eq 3}"><!-- 승인거절 -->
-		                		<button id="delete" onclick="roomsSubmit(1);">삭제하기</button>
-		                    	<button id="modify" onclick="roomsSubmit(3);">수정하기</button>
-		                	</c:when>
-		                	<c:when test="${ r.status eq 4}"><!-- 휴면 -->
-		                		<button id="delete" onclick="roomsSubmit(1);">삭제하기</button>
-		                    	<button id="rest" onclick="roomsSubmit(4);">휴면해제하기</button>
-		                	</c:when>
-		                	<c:otherwise><!-- 삭제 -->
-		                	
-		                	</c:otherwise>
-	                	</c:choose>
+		                <span style="float:right;">
+			                <c:choose>
+			                	<c:when test="${ r.status eq 1}"><!-- 운영중 -->
+			                		<button id="delete" onclick="roomsSubmit(1);" >삭제하기</button>
+			                    	<button id="rest" onclick="roomsSubmit(2);">휴면하기</button>
+			                    	<button id="modify" onclick="roomsSubmit(3);">수정하기</button>
+			                	</c:when>
+			                	<c:when test="${ r.status eq 2}"><!-- 승인대기 -->
+			                		
+			                	</c:when>
+			                	<c:when test="${ r.status eq 3}"><!-- 승인거절 -->
+			                		<button id="delete" onclick="roomsSubmit(1);">삭제하기</button>
+			                    	<button id="modify" onclick="roomsSubmit(3);">수정하기</button>
+			                	</c:when>
+			                	<c:when test="${ r.status eq 4}"><!-- 휴면 -->
+			                		<button id="delete" onclick="roomsSubmit(1);">삭제하기</button>
+			                    	<button id="rest" onclick="roomsSubmit(4);">휴면해제하기</button>
+			                	</c:when>
+			                	<c:otherwise><!-- 삭제 -->
+			                	
+			                	</c:otherwise>
+		                	</c:choose>
+	                	</span>
 	                </div>
-		            </div>
                 </form>
-                
-                
+                <br><br><br>
                 </div>
             </div>
         </div>
@@ -237,6 +244,7 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- summernote -->
+
 
 <script>
 	function roomsSubmit(num){	// num에는 1,2,3,4중 하나가 넘어옴
@@ -254,12 +262,114 @@
 </script>
 
 
+
+
+<script>
+	$(function(){
+		var tag1 = ('${r.facility}').split(",");
+
+		for(var i=0; i<tag1.length; i++){
+			switch(tag1[i]){
+			case "침구" : $("#bedding").prop("checked", true); break;
+			case "아기침대" : $("#babyBed").prop("checked", true); break;
+			case "여분의침구" : $("#extraBed").prop("checked", true); break;
+			case "다리미" : $("#iron").prop("checked", true); break;
+			case "주방" : $("#kitchen").prop("checked", true); break;
+			case "식기류" : $("#dish").prop("checked", true); break;
+			case "냉장고" : $("#fridge").prop("checked", true); break;
+			case "전자레인지" : $("#microOven").prop("checked", true); break;
+			case "인덕션" : $("#induction").prop("checked", true); break;
+			case "조리도구(냄비 등)" : $("#kitchenTools").prop("checked", true); break;
+			case "커피포트" : $("#coffeePot").prop("checked", true); break;
+			case "세탁기" : $("#washer").prop("checked", true); break;
+			case "에어컨" : $("#aircon").prop("checked", true); break;
+			case "공용PC" : $("#pc").prop("checked", true); break;
+			case "케이블TV" : $("#tv").prop("checked", true); break;
+			case "드라이기" : $("#dryer").prop("checked", true); break;
+			case "아기욕조" : $("#babyBath").prop("checked", true); break;
+			case "온수및난방" : $("#heating").prop("checked", true); break;
+			case "옷걸이" : $("#hanger").prop("checked", true); break;
+			case "주차가능" : $("#parking").prop("checked", true); break;
+			}
+		}
+	});
+	
+	
+</script>
+
 <script type="text/javascript">
-
-
-
+$(function(){
+	var tag2 = ('${r.service}').split(",")
+	
+	for(var i=0; i<tag2.length; i++){
+		switch(tag2[i]){
+		case "샴푸" : $("#shampoo").prop("checked", true); break;
+		case "화장지" : $("#tissue").prop("checked", true); break;
+		case "바디워시" : $("#bodywash").prop("checked", true); break;
+		case "비누" : $("#soap").prop("checked", true); break;
+		case "수건" : $("#towel").prop("checked", true); break;
+		case "FreeWifi" : $("#FreeWifi").prop("checked", true); break;
+		}
+	}
+});
 
 </script>
+
+<script type="text/javascript">
+$(function(){
+	var tag3 = ('${r.meal}').split(",")
+	
+	for(var i=0; i<tag3.length; i++){
+		switch(tag3[i]){
+		case "조식" : $("#breakfast").prop("checked", true); break;
+		case "중식" : $("#lunch").prop("checked", true); break;
+		case "석식" : $("#dinner").prop("checked", true); break;
+		case "없음" : $("#none").prop("checked", true); break;
+		}
+	}
+});
+
+</script>
+
+<script>
+	$(function(){
+		$(".roomsTag").click(function(){
+			if($("input[name=roomsTag]:checked").length>2){
+				alert("2개까지 선택가능합니다.");
+				return false;
+			}
+			if($("input[name=roomsTag]:checked").length<1){
+				alert("최소1개는 선택해야합니다");
+				return false;
+			}
+		});
+	});
+</script>
+
+<script>
+$(function(){
+	var tag4 = ('${r.roomsTag}').split(",")
+	
+	for(var i=0; i<tag4.length; i++){
+		switch(tag4[i]){
+		case "신축건물" : $("#new").prop("checked", true); break;
+		case "교통이 편리한" : $("#transport").prop("checked", true); break;
+		case "관광명소가 가까운" : $("#nearTour").prop("checked", true); break;
+		case "무인으로 운영되는" : $("#manless").prop("checked", true); break;
+		case "커플숙소" : $("#couple").prop("checked", true); break;
+		case "비주얼이예쁜" : $("#visual").prop("checked", true); break;
+		case "이색숙소" : $("#novelty").prop("checked", true); break;
+		case "조식이포함된" : $("#includeFood").prop("checked", true); break;
+
+		}
+	}
+});
+
+</script>
+
+
+
+
 
 <!-- 상세사진용  -->
 <script>
