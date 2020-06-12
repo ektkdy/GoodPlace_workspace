@@ -66,5 +66,8 @@ public class Experience {
 	
 	/* DB에는 없지만 추가한 필드 */
 	private String expDateString;	// 체험날짜
+	
+	/* DB에도 추가한 필드 */
+	private int expClassCount;		// 하루에 진행되는 수업 개수
 
 }
