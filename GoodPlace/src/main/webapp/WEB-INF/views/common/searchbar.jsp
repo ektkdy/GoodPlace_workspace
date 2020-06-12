@@ -127,7 +127,7 @@
             	});
             </script>
             <!-- 체험검색 -->
-            <form action="exp.exp" id="expSearchArea" post="get">
+            <form action="showExp.exp" id="expSearchArea" method="get">
                 <div class="experience input" style="display: none;">
                     <li class="liBox1">
                         <b>태그</b>
@@ -146,6 +146,15 @@
                     </li>
                 </div>
             </form>
+            <script>
+            	$(function(){
+            		$("#expSearchArea #subExpInfo").click(function(){
+
+            			$("#expSearchArea").submit();
+            			
+            		});
+            	});
+            </script>
         </div>
     </div><!-- /searchbar -->
 	<script>
