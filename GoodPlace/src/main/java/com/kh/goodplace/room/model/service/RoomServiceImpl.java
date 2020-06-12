@@ -54,23 +54,40 @@ public class RoomServiceImpl implements RoomService{
 	public Room selectRoom(int rno) {
 		return rDao.selectRoom(sqlSession, rno);
 	}
+	
+	@Override
+	public ArrayList<Attachment> selectAt(int roNo) {
+		return rDao.selectAt(sqlSession, roNo);
+	}
 
 	@Override
-	public int deleteRoom(int rno) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateAt(Attachment at) {
+		return rDao.updateAt(sqlSession, at);
+	}
+
+	@Override
+	public int updateReRoom(int roNo) {
+		return rDao.updateReRoom(sqlSession, roNo);
+	}
+
+	@Override
+	public int endRestRoom(int roNo) {
+		return rDao.endRestRoom(sqlSession, roNo);
+	}
+
+	@Override
+	public int deleteRoom(int roNo) {
+		return rDao.deleteRoom(sqlSession, roNo);
 	}
 
 	@Override
 	public int updateRoom(Room r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rDao.updateRoom(sqlSession, r);
 	}
 
 	@Override
-	public int restRoom(int rno) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int restRoom(int roNo) {
+		return rDao.restRoom(sqlSession, roNo);
 	}
 	
 	@Override
@@ -235,13 +252,6 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	
-	@Override
-	public int updateRoomForm(int roNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 	
 	
 }

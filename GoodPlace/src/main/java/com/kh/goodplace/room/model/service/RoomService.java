@@ -15,44 +15,60 @@ public interface RoomService {
 	
 	//------------[숙소관리]------------
 	
-	//1.숙소리스트 조회용 서비스
-	//1_1. 숙소 총 갯수 조회용 서비스
+	// 1.숙소리스트 조회용 서비스
+	// 1_1. 숙소 총 갯수 조회용 서비스
 	int selectListCount(int userNo);
 	
-	//1_2.요청한 페이지에 보여질 숙소 리스트 조회용 서비스
+	// 1_2.요청한 페이지에 보여질 숙소 리스트 조회용 서비스
 	ArrayList<Room> selectRoomsList(PageInfo pi, int userNo);
 	
-	//2.숙소등록 서비스
+	// 2. 숙소 등록용 서비스
+	// 2_1.숙소등록 서비스(상태==2)
 	int insertRoom(Room r);
 	
-	//+숙소 번호 가져오는 서비스(CURRVAL안되서..)
+	// 2_2. 숙소 번호 가져오는 서비스(CURRVAL안되서..)
 	int selectRono();
 	
-	//+ 숙소 상세이미지 등록 서비스
+	// 2-3. 숙소 상세이미지 등록 서비스
 	int insertAttachment(Attachment at);
 	
-	//3.숙소 조회용 서비스
+	// 3. 숙소 상세조회용 서비스(정보+썸네일)
 	Room selectRoom(int rno);
 	
-	//4.숙소 삭제용 서비스
+	// 4. 숙소번호에 해당하는 상세사진 조회용 서비스(숙소객체+썸네일은 3번 이용)
+	ArrayList<Attachment> selectAt(int roNo);
+	
+	// 5. 숙소 수정용 서비스
+	// 5_1. 숙소객체(정보+썸네일) 수정용 서비스
+	int updateRoom(Room r);
+		
+	// 5_2. 숙소객체 상세사진 수정용 서비스 
+	int updateAt(Attachment at);
+	
+	// 6. 승인거절된 숙소객체 수정용 서비스(상세사진은 5_2이용하여 업데이트)
+	int updateReRoom(int roNo);
+	
+	// 7.숙소 삭제용 서비스(상태==5)
 	int deleteRoom(int rno);
 	
-	//5.숙소 수정용 서비스
-	int updateRoom(Room r);
-	
-	int updateRoomForm(int roNo);
-	
-	//6.숙소 휴면용 서비스
+	// 8. 숙소 휴면용 서비스
 	int restRoom(int rno);
 	
-	//7. 운영중인 숙소 조회용 서비스 (파워등록용)
-	int selectRoomOkeyListCount(int usNo);						// 운영중인 숙소 전체 갯수 조회
-	ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo);	// 해당 페이지에 보여질 운영중인 숙소 조회
+	// 9. 숙소 휴면해제용 서비스				
+	int endRestRoom(int roNo);
+						
+	// 10. 운영중인 숙소 조회용 서비스 (파워등록용)
+	// 10_1. 운영중인 숙소 전체 갯수 조회
+	int selectRoomOkeyListCount(int usNo);
+	// 10_2. 해당 페이지에 보여질 운영중인 숙소 조회
+	ArrayList<Room> selectRoomOkeyList(PageInfo pi,int usNo);
 	
-	//8. 파워 신청 및 결제용 서비스 (파워등록용)
-	int updateRoomPower(Room r);										// 결제완료후 db에 insert
+	// 11. 파워 신청 및 결제용 서비스 (파워등록용) : 결제완료후 db의 숙소정보 updat
+	int updateRoomPower(Room r);
 	
-	//------------[예약관리]------------    (여긴 페이징바 필요없을까?)
+	
+	
+	//------------[예약관리]------------    
 	//9_1. 진행중인 예약목록 조회용 서비스
 	int selectRvRoomListCount(int usNo);
 	

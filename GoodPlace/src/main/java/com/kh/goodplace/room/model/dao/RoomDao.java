@@ -22,35 +22,52 @@ public class RoomDao {
 	
 	public ArrayList<Room> selectRoomsList(SqlSessionTemplate sqlSession, PageInfo pi, int userNo){
 		int offset =(pi.getCurrentPage()-1) * pi.getBoardLimit();
-		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomsList", userNo, rowBounds);
-		
 	}
 	
 	public int insertRoom(SqlSessionTemplate sqlSession, Room r) {
-		
 		return sqlSession.insert("roomMapper.insertRoom", r);
 	}
 	
-	
 	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {
-		
 		return sqlSession.insert("roomMapper.insertAttachment", at);
 	}
 	
 	public int selectRono(SqlSessionTemplate sqlSession) {
-		
-		
 		return sqlSession.selectOne("roomMapper.selectRono");
-	
 	}
 	
 	public Room selectRoom(SqlSessionTemplate sqlSession, int rno) {
-		
-		
 		return sqlSession.selectOne("roomMapper.selectRoom", rno);
+	}
+	
+	public ArrayList<Attachment> selectAt(SqlSessionTemplate sqlSession, int roNo) {
+		return (ArrayList)sqlSession.selectList("roomMapper.selectAt", roNo);
+	}
+
+	public int updateAt(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.update("roomMapper.updateAt", at);
+	}
+
+	public int updateReRoom(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.update("roomMapper.updateReRoom", roNo);
+	}
+
+	public int endRestRoom(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.update("roomMapper.endRestRoom", roNo);
+	}
+
+	public int deleteRoom(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.update("roomMapper.deleteRoom", roNo);
+	}
+
+	public int updateRoom(SqlSessionTemplate sqlSession, Room r) {
+		return sqlSession.update("roomMapper.updateRoom", r);
+	}
+
+	public int restRoom(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.update("roomMapper.restRoom", roNo);
 	}
 	
 	public int selectRoomOkeyListCount(SqlSessionTemplate sqlSession, int usNo) {
@@ -249,6 +266,7 @@ public class RoomDao {
 		
 		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomCancelList", userNo, rowBounds);
 	}
+
 	
 	
 	
