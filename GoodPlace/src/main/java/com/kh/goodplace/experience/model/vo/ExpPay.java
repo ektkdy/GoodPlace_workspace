@@ -24,5 +24,5 @@ public class ExpPay {
 	private Timestamp expDate;	// 체험신청일
 	private int people;			// 인원수
 	private int status;			// 체험상태(승인1~)
-
+	private int expClassNo;		// 선택한 수업의 교시
 }

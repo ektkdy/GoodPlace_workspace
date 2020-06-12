@@ -165,29 +165,24 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.reservationDetailView(sqlSession, epno);
 	}
 
-	
 	@Override
 	public int expSearchCount(Experience e) {
-		return expDao.expSearchCount(sqlSession, e);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public ArrayList<Experience> expSearchList(PageInfo pi, Experience e) {
-		return expDao.expSearchList(sqlSession, pi, e);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
-	//------------[체험조회 시작]------------
 	@Override
 	public ArrayList<Experience> selectExpListUser(Experience exp) {
-		return expDao.selectExpListUser(sqlSession, exp);
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	
-	
-	
-	
-	//------------[체험조회 끝]------------
+
 	
 	
 	
