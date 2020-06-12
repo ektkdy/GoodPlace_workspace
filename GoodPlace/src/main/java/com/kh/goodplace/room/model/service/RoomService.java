@@ -86,12 +86,9 @@ public interface RoomService {
 	
 	//예약확취소 리스트
 	ArrayList<Room> selectRvRoomCancelList(PageInfo pi, int usNo);
-	//9_2. 진행중인 예약 상세조회용 서비스
+	//9_2.  예약 상세조회용 서비스
 	
-	
-	//10_1. 확정된 예약목록 조회용 서비스
-	
-	//10_2. 확정된 예약 상세조회용 서비스
+	Room reservationRoomDetailView(int rpNo);
 	
 	
 	//11. 취소된 예약목록 조회용 서비스

@@ -590,10 +590,10 @@ public class ExperienceController {
 	}
 	
 	//예약상세
-	@RequestMapping("reservationDetailView.rv")
+	@RequestMapping("reservationExpDetailView.rv")
 	public String reservationDetailView(int epNo, Model model) {
 			
-		Experience e = expService.reservationDetailView(epNo);
+		Experience e = expService.reservationExpDetailView(epNo);
 		
 		model.addAttribute("e", e);
 		return "partner/partnerReservationDetailView";

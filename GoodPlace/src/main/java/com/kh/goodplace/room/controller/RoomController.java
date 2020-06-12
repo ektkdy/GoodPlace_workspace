@@ -863,6 +863,17 @@ public class RoomController {
 		    return jsonString;
 		}
 		
+		//디테일
+		@RequestMapping("reservationRoomDetailView.rv")
+		public String reservationRoomDetailView(int rpNo, Model model) {
+			
+			Room r = rService.reservationRoomDetailView(rpNo);
+			
+			model.addAttribute("r", r);
+			
+			return "partner/partnerReservationRoomDetailView";
+			
+		}
 
 	// ------------------------------ 파트너 일정관리 시작 ----------------------------------
 		

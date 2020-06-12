@@ -180,7 +180,7 @@
 		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle},
 			  #{activity}, #{maxPeople}, null, #{startTime}, #{endTime}, #{useTime}, #{intervalTime}, 
 			  #{supplies}, #{deadline}, #{price}, #{addBasic}, #{addDetail}, #{addRef}, #{zipCode}, 
-			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent})
+			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent},null)
 	</insert>
 	
 	<!-- 체험 상세사진 등록 -->
@@ -403,8 +403,10 @@
 		   order by ep.epno desc
 	</select>
 	
-	<select id="" parameterType="_int" >
-		
+	<select id="reservationExpDetailView" parameterType="_int" >
+		select 
+		  from
+		where epno = #{epNo}
 	</select>
 	
 	

@@ -100,7 +100,7 @@ public interface ExperienceService {
 	ArrayList<Experience> selectRvExpCancelList(PageInfo pi, int usNo);
 	
 	//예약 내역 상세페이지
-	Experience reservationDetailView(int epno);
+	Experience reservationExpDetailView(int epno);
 	//4. 공지사항 검색 총갯수 조회용
 	int expSearchCount(Experience e);
 	

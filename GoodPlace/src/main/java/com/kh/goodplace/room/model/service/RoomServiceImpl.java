@@ -262,6 +262,11 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectRvRoomCancelList(sqlSession, pi, usNo);
 	}
 
+	@Override
+	public Room reservationRoomDetailView(int rpNo) {
+		return rDao.reservationRoomDetailView(sqlSession, rpNo);
+	}
+
 
 	
 	

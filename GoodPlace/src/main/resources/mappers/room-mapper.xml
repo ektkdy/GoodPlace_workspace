@@ -112,6 +112,7 @@
 		<result column="REQUEST" property="request"/>
 		<result column="START_DAYS" property="startDays"/>
 		<result column="END_DAYS" property="endDays"/>
+		<result column="DAYS" property="days"/>
 	</resultMap>
 	
 	<!-- Attachment테이블 -->
@@ -504,7 +505,15 @@
 	     order by rp.rpno desc
 	</select>
 
-
+	<select id="reservationRoomDetailView" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.reserve_status, rp.rpno, rooms_title, start_days, end_days, 
+			   user_name, rp.people, birthdate, phone, TRUNC(TO_DATE(END_DAYS))-TO_DATE(START_DAYS) as days, concept, request,
+			   amount
+		  from roomspay rp
+		  join member m on (rp.usno = m.usno)
+		  join rooms r on (rp.rono = r.rono)
+		 where rp.rpno = #{roNo}
+	</select>
 
 
 

@@ -9,6 +9,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerReservationList.css" />
+<style>
+.reserv_tb tbody tr:hover{
+	background:#c1d9f0;
+	color:#34538a
+}
+</style>
+
 </head>
 <body>
  <div id="wrap">
@@ -60,40 +67,50 @@
                         </thead>
                         <tbody>
                         	
-                        	
-                        	<c:forEach var="r" items="${ list}">
-	                            <tr>
-	                                <td>${r.rpNo } </td>
-	                                <c:choose>
-	                                	<c:when test="${r.reserveStatus eq 1 }">
-	                                		<td>확정대기</td>
-	                                	</c:when>
-	                                	<c:when test="${r.reserveStatus eq 2 }">
-	                                		<td>확정완료</td>
-	                                	</c:when>
-	                                	<c:when test="${r.reserveStatus eq 3 }">
-	                                		<td>여행완료</td>
-	                                	</c:when>
-	                                </c:choose>
-	                                <td>${r.userName}</td>
-	                                <td>
-	                                <c:set var="TextValue1" value="${r.startDays }"/>
-	                                	${fn:substring(TextValue1,0,10) }
-
-	                                	~
-	                                	<c:set var="TextValue2" value="${r.endDays }"/>
-	                                	${fn:substring(TextValue2,0,10) }
-	                                </td>
-	                                <td>${r.roomsTitle }</td>
-	                                <td><button class="confirm_btn">확정하기</button></td>
-	                            </tr>
-                           </c:forEach>
+                        	<c:choose>
+                        		<c:when test="${!empty list }">
+		                        	<c:forEach var="r" items="${ list}">
+			                            <tr>
+			                                <td>${r.rpNo } </td>
+			                                <c:choose>
+			                                	<c:when test="${r.reserveStatus eq 1 }">
+			                                		<td>확정대기</td>
+			                                	</c:when>
+			                                	<c:when test="${r.reserveStatus eq 2 }">
+			                                		<td>확정완료</td>
+			                                	</c:when>
+			                                	<c:when test="${r.reserveStatus eq 3 }">
+			                                		<td>여행완료</td>
+			                                	</c:when>
+			                                </c:choose>
+			                                <td>${r.userName}</td>
+			                                <td>
+			                                <c:set var="TextValue1" value="${r.startDays }"/>
+			                                	${fn:substring(TextValue1,0,10) }
+		
+			                                	~
+			                                	<c:set var="TextValue2" value="${r.endDays }"/>
+			                                	${fn:substring(TextValue2,0,10) }
+			                                </td>
+			                                <td>${r.roomsTitle }</td>
+			                                <td><button class="confirm_btn">확정하기</button></td>
+			                            </tr>
+		                           </c:forEach>
+	                           </c:when>
+		                       <c:otherwise>
+		                       	<tr>
+		                       		<td colspan="6">예약목록이 없습니다.</td>
+		                       	</tr>
+		                       </c:otherwise>    
+	                        </c:choose>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+<!-- 디테일뷰 -->
+
 <!-- tab메뉴 ajax -->
 
 <script>
@@ -161,11 +178,15 @@ $('#ing').click(function(){
 			$("#roomTitle").html(selectCon);
 			
 
+
+
 	},error:function(){
 		console.log("통신실패!!");
 	}
  });
 });
+
+
 </script>
 <script>
 	
@@ -306,14 +327,20 @@ $('#ing').click(function(){
 });
 </script>
 
-    <script>
-        $(function(){
-            
-            $(".arrow").click(function(){
-                $("#slide_menu").slideToggle(500);
-            });
-        });
-    </script>
+<script>
+	$(function(){
+	    
+	    $(".arrow").click(function(){
+	        $("#slide_menu").slideToggle(500);
+	    });
+	});
+</script>
+<script>
+$(document).on('click', ".reserv_tb tbody tr", function(){
+	location.href="reservationRoomDetailView.rv?rpNo="+$(this).children().eq(0).html();
+	
+});
+</script>
 
 </body>
 </html>
