@@ -284,7 +284,10 @@
 
 	<!-- 체험조회 시작 -->
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
-		
+		SELECT *
+		  FROM EXPERIENCE
+		  LEFT JOIN EXPPAY USING(EXNO)
+		 WHERE EXNO=#{exNo}
 	</select>
 	<!-- 체험조회 끝 -->
 
