@@ -59,7 +59,7 @@
 	</resultMap>
 	
 	<!-- id="ExperienceResultSet" 와 다른점 : exp_date를 vo객체에 String 자료형으로 매핑시킨다. -->
-	<resultMap type="Experience" id="ExperienceResultSet">
+	<resultMap type="Experience" id="ExperienceResultSetUser">
 		<id column="exno" property="exNo"/>
 		<result column="usno" property="usNo"/>
 		<result column="language" property="language"/>
@@ -282,6 +282,11 @@
 	</select>
 	<!-- 체험관리 끝 -->
 
+	<!-- 체험조회 시작 -->
+	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
+		
+	</select>
+	<!-- 체험조회 끝 -->
 
 
 </mapper>
