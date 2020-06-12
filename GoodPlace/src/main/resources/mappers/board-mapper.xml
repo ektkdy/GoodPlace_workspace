@@ -136,7 +136,7 @@
 	
 		delete 
 		  from faq
-		 where where faqno=#{fno}
+		 where faqno=#{fno}
 	
 	</delete>
 	

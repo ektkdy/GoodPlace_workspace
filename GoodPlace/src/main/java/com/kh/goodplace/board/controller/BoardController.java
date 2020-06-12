@@ -1,10 +1,7 @@
 package com.kh.goodplace.board.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goodplace.board.model.service.BoardService;
@@ -22,7 +18,6 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class BoardController {
@@ -136,22 +131,28 @@ public class BoardController {
     
 
     @RequestMapping("faqDelete.bo")
-    public String faqDelete(int fno, Model model) {
+    public String faqDelete(@RequestParam("checkfaqNo") List<Integer> ids) {
+		
     	
-    	int result = bService.faqDelete(fno);
     	
-        if(result > 0)
-        {   // 게시글 삭제 성공
+    	for(Integer fno : ids) bService.faqDelete(fno);
+    	
+    	return "redirect:aFaqList.bo?currentPage=1";
+
+    	//int result = bService.faqDelete(checkfaqNo);
+    	
+       // if(result > 0)
+        //{   // 게시글 삭제 성공
             
-            return "redirect:aFaqList.bo?currentPage=1";
+            //return "redirect:aFaqList.bo?currentPage=1";
             
-        }
-        else
-        {   // 게시글 삭제 실패
+        //}
+       // else
+        //{   // 게시글 삭제 실패
             
-            model.addAttribute("msg", "게시글 삭제 실패!!");
-            return "common/errorPage";
-        }
+          //  model.addAttribute("msg", "게시글 삭제 실패!!");
+          //  return "common/errorPage";
+       // }
     	
     }
     

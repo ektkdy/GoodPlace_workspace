@@ -126,140 +126,137 @@
                 
                 
                 <div class="con2">
-                    <table id="faqList" class="common_tb" cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <td width="100">선택</td>
-                                <td width="100">번호</td>
-                                <td width="300">제목</td>
-                                <td width="200">분류</td>
-                                <td width="200">수정</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	<!-- 
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>1</td>
-                                <td>예약이 안될 때</td>
-                                <td>예약관련</td>
-                                <td>134</td>
-                                <td><button class="modifiyBtn">수정</button></td>
-                            </tr>
-                             -->
-                             <c:forEach items="${ list }" var="b">
+	                <form id="deleteForm" method="" action="">
+	                    <table id="faqList" class="common_tb" cellpadding="0" cellspacing="0">
+	                        <thead>
 	                            <tr>
-	                                <td onclick="event.cancelBubble=true"><input type="checkbox"  id="faqDelete" name="checkRow" value="${ b.faqNo }"></td>
-	                                <td>${ b.faqNo }</td>
-	                                <td>${ b.faqTitle }</td>
-	                                <td>${ b.faqCategory }</td>
-	                                <td onclick="event.cancelBubble=true"><button id="faqUpdate" class="modifiyBtn" onclick="location.href='faqUpdateForm.bo?fno=${ b.faqNo }'">수정</button></td>
+	                                <td width="100"><input type="checkbox"  id="checkall" name=""></td>
+	                                <td width="100">번호</td>
+	                                <td width="300">제목</td>
+	                                <td width="200">분류</td>
+	                                <td width="200">수정</td>
 	                            </tr>
-	                         </c:forEach>
+	                        </thead>
+	                        <tbody>
+	                             <c:forEach items="${ list }" var="b">
+		                            <tr>
+		                                <td onclick="event.cancelBubble=true"><input type="checkbox"  id="faqDelete" name="checkfaqNo" value="${ b.faqNo }"></td>
+		                                <td>${ b.faqNo }</td>
+		                                <td>${ b.faqTitle }</td>
+		                                <td>${ b.faqCategory }</td>
+		                                <td onclick="event.cancelBubble=true"><button id="faqUpdate" class="modifiyBtn" onclick="location.href='faqUpdateForm.bo?fno=${ b.faqNo }'">수정</button></td>
+		                            </tr>
+		                         </c:forEach>
+	
+	                        </tbody>
+	                    </table>
+	                    
+			            <script>
+			            	$(function(){
+			            		
+	 	            		    $("#faqList tbody tr").click(function(){
+			            			location.href="aFaqDetail.bo?fno=" + $(this).children().eq(1).text();
+			            		});  
+	 	            		    
+			            	});
+			            </script>
+			            
+			            <script>
+				            $(function(){
+				                //최상단 체크박스 클릭
+				                $("#checkall").click(function(){
+				                    if($("#checkall").prop("checked")){
+				                        $("input[name=checkfaqNo]").prop("checked",true);
+				                    }else{
+				                        $("input[name=checkfaqNo]").prop("checked",false);
+				                    }
+				                });
+				            });
+			            
+			            </script>
+			            
 
-                        </tbody>
-                    </table>
-                    
-		            <script>
-		            	$(function(){
-		            		
- 	            		    $("#faqList tbody tr").click(function(){
-		            			location.href="aFaqDetail.bo?fno=" + $(this).children().eq(1).text();
-		            		});  
- 	            		    
-		            	});
-		            </script>
-		            
-            
-<!-- 		           	<script>
-		            	$(function(){
-		            		
- 	            		    $("#delete_btn").click(function(){
- 	            		    	confirm("삭제하시겠습니까?");
- 	            	            $("input[name=checkRow]:checked").each(function(){
- 	            	                var fno =$(this).val();
-									console.log(fno);
-									location.href="faqDelete.bo?=" + fno;
- 	            	            });
- 	            		    	
-		            		});  
- 	            		    
-		            	});
-		            </script> -->
-		            
-
-                    
-                    <table>
-                        <th>
-                            <br>
-                            <button class="blue_btn" onclick="location.href='faqEnrollForm.bo'">등록하기</button>
-                            <button class="blue_btn" id="delete_btn">삭제</button>
-                        </th>
-                        <th>
-                            <div id="pagingArea" style="margin-top: 22px;">
-                            	
-	                            <!-- [이전] -->
-	                            <c:if test="${ pi.currentPage ne 1 }">
-				                    <c:choose>
-					                	<c:when test="${ empty b.searchSelect }">
-						                    <a href="aFaqList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
-						                </c:when>
-						                <c:otherwise>
-					                    	<a href="aFaqList.bo?searchSelect=${ b.searchSelect }&currentPage=${ pi.currentPage -1 }">&lt;</a>
-					                    </c:otherwise>
-				                    </c:choose>
-				                </c:if>
-				                
-				                <!-- [번호들] -->
-								<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
-									<c:choose>
-										<c:when test="${ p eq pi.currentPage }">
-											<a href="" style="color:red;">${ p }</a>
-										</c:when>
-										<c:otherwise>
-											<c:choose>
-												<c:when test = "${ empty b.searchSelect }">
-													<a class="page-link" href="aFaqList.bo?currentPage=${ p }">${p}</a>
-												</c:when>
-												<c:otherwise>
-													<c:url value="noticeSearch.bo" var="searchUrl">
-														<c:param name="condition" value="${ b.searchSelect }"/>
-														<c:param name="currentPage" value="${ p }"/>
-													</c:url>
-														
-													<a href="${ searchUrl }">${p}</a>
-												</c:otherwise>
-											</c:choose>
-										</c:otherwise>
-
-				               		</c:choose>    
-				                </c:forEach>   
-				                
-								<!-- [다음] -->
-								<c:if test="${ pi.currentPage ne pi.maxPage }">
-									<c:choose>
-										<c:when test = "${ empty b.searchSelect }">
-											 <a href="aFaqList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
-										</c:when>
-										<c:otherwise>
-											<c:url value="noticeSearch.bo" var="searchUrl">
-												<c:param name="condition" value="${ b.searchSelect }"/>
-												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-											</c:url>										
-											<a href="${ searchUrl }">&gt;</a>
-										</c:otherwise>
-									</c:choose>
-				                </c:if>
-				                
-                            </div>
-                        </th>
-    
-                    </table>
-    
+			            
+	                    <table>
+	                        <th>
+	                            <br>
+	                            <button type="button" class="blue_btn" onclick="location.href='faqEnrollForm.bo'">등록하기</button>
+	                            <button class="blue_btn" id="delete_btn" onclick="postDeleteSubmit()">삭제</button>
+	                        </th>
+	                        <th>
+	                            <div id="pagingArea" style="margin-top: 22px;">
+	                            	
+		                            <!-- [이전] -->
+		                            <c:if test="${ pi.currentPage ne 1 }">
+					                    <c:choose>
+						                	<c:when test="${ empty b.searchSelect }">
+							                    <a href="aFaqList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+							                </c:when>
+							                <c:otherwise>
+						                    	<a href="aFaqList.bo?searchSelect=${ b.searchSelect }&currentPage=${ pi.currentPage -1 }">&lt;</a>
+						                    </c:otherwise>
+					                    </c:choose>
+					                </c:if>
+					                
+					                <!-- [번호들] -->
+									<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
+										<c:choose>
+											<c:when test="${ p eq pi.currentPage }">
+												<a href="" style="color:red;">${ p }</a>
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test = "${ empty b.searchSelect }">
+														<a class="page-link" href="aFaqList.bo?currentPage=${ p }">${p}</a>
+													</c:when>
+													<c:otherwise>
+														<c:url value="noticeSearch.bo" var="searchUrl">
+															<c:param name="condition" value="${ b.searchSelect }"/>
+															<c:param name="currentPage" value="${ p }"/>
+														</c:url>
+															
+														<a href="${ searchUrl }">${p}</a>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+	
+					               		</c:choose>    
+					                </c:forEach>   
+					                
+									<!-- [다음] -->
+									<c:if test="${ pi.currentPage ne pi.maxPage }">
+										<c:choose>
+											<c:when test = "${ empty b.searchSelect }">
+												 <a href="aFaqList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+											</c:when>
+											<c:otherwise>
+												<c:url value="noticeSearch.bo" var="searchUrl">
+													<c:param name="condition" value="${ b.searchSelect }"/>
+													<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+												</c:url>										
+												<a href="${ searchUrl }">&gt;</a>
+											</c:otherwise>
+										</c:choose>
+					                </c:if>
+					                
+	                            </div>
+	                        </th>
+	    
+	                    </table>
+	    			</form>
                 </div>
             </div>
         </div>
     </div>
+	    
+	<script>
+		function postDeleteSubmit(){
+			confirm("삭제하시겠습니까?");
+			$("#deleteForm").attr("action", "faqDelete.bo");
+			$("#deleteForm").submit();
+	    }
+	</script>
+    
 
     <script>
         $(function(){
