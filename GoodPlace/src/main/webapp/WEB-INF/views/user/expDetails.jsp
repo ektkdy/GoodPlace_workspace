@@ -14,8 +14,6 @@
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
-
-    
 	<!-- 결제 API 관련 -->
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	
@@ -244,14 +242,15 @@
                     </div>
                     <div id="timeArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         
-                        <div style="width:100%; height:38px; padding:5px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136); font-weight: 900;">
+                        <div id="bookExpMenu" style="width:100%; height:38px; padding:5px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136); font-weight: 900;">
                             <div style="width:30%; text-align:right;">시작 ~ 끝</div><div style="width:70%; text-align:center;">(남은자리/최대인원)</div>
                         </div>
                         
                         <c:forEach items="${ exp.expClass }" var="classInfo" end="${ exp.expClassCount }">
-                        	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                           		<div style="width:55%; text-align:right;">${ classInfo }</div><div class="peopleInfo" style="width:45%; text-align:center;"></div>
-                        	</div>
+                       	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
+                       		<div style="width:55%; text-align:right;">${ classInfo }</div>
+                       		<div class="peopleInfo" style="width:45%; text-align:center;"></div>
+                       	</div>
                         </c:forEach>
                        	
                     	
@@ -325,7 +324,7 @@
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
-            <a style="display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
+            <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
         
 
@@ -453,8 +452,23 @@
         });
         
         // 체험 예약가능한 인원반영
-       	(function(){
-        	console.log("여기 : " + $(".peopleInfo"));
+       	$(function(){
+       		var paidPeople = ${ exp.acceptedPeople };
+       		var max = ${ exp.maxPeople };
+			console.log(paidPeople);
+       		for(var i=0; i<"${ exp.expClassCount}"; i++){
+       			switch(i){
+       			case 0: $("#bookExpMenu").next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 1: $("#bookExpMenu").next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 2: $("#bookExpMenu").next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 3: $("#bookExpMenu").next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 4: $("#bookExpMenu").next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 6: $("#bookExpMenu").next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 7: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 8: $("#bookExpMenu").next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			}
+       		};
+       		
 		});
         
     </script>
@@ -462,7 +476,7 @@
     <!-- /content -->
 
     <!-- footer -->
-	<jsp:include page="../common/footer.jsp"/>
+	<jsp:include page="../common/footer.jsp"/>	
     
     
 </body>
