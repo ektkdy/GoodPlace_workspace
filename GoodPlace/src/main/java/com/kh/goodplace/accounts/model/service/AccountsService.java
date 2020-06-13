@@ -24,6 +24,9 @@ public interface AccountsService {
 	int roNum();
 	int exNum();
 	
+	ArrayList<Chart> mainChartList();
+	ArrayList<Chart> mainChartList2();
+	
 	
 	
 	

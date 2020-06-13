@@ -73,7 +73,7 @@
                 <br><br><br><br><br>
                 <div id="backgroundImg"></div>
                 <div id="personalImg">
-                    <img src="#" width="100px" height="100px" style="border-radius: 50px; background-color: darkblue;">
+                    <img id="profileImg" src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ m.changeName }" width="100px" height="100px" style="border-radius: 50px;" required>
                     
                 </div>
                 <div id="pContent">

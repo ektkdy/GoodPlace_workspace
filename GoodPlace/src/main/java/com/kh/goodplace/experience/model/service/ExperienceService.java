@@ -53,7 +53,8 @@ public interface ExperienceService {
 	int endRestExp(int exNo);
 	
 	
-	
+	// 10. 어태치먼트 테이블 삭제 서비스
+	int deleteAt(String deList);
 	
 	
 	
@@ -109,6 +110,8 @@ public interface ExperienceService {
 	
 	//------------[체험조회 시작]------------
 	ArrayList<Experience> selectExpListUser(Experience exp);
+	ArrayList<Integer> selectExpCountUser();
+	Experience selectExpUser(int exNo);
 	
 	//------------[체험조회 끝]------------
 

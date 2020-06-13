@@ -112,6 +112,10 @@ public class BoardDao {
 		
 	}
 	
+	public int noticeDelete(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.update("boardMapper.noticeDelete", nno);
+	}
+	
 	public int noticeSearchCount(SqlSessionTemplate sqlSession, Board b) {
 		
 		return sqlSession.selectOne("boardMapper.noticeSearchCount", b);

@@ -235,12 +235,27 @@ public class RoomController {
 	}
 	
 	
-	//--------------------------------------------이거 수정해야됨!
 	@RequestMapping("updateRoom.ro")
-	public String updateRoom(Room r, @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateRoom(Room r, String[] deList, String count ,@RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request) {
 		
+		//System.out.println(count); 	
+		int count1 = Integer.parseInt(count);
+	
+		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+		for(int i= 0 ; i<count1 ; i++) {
+			//System.out.println(deList[i]);
+			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+		
+			File deleteFile = new File(savePath + deList[i]); 
+			deleteFile.delete();
+			
+			int result1 = rService.deleteAt(deList[i]); 
+		}
+	
+		// 객체+썸네일 부분
+		// 썸네일 변경시 기존파일 삭제하고 재업로드
 		if(!file.getOriginalFilename().equals("")) {
 			if(r.getChangeName() != null) {
 				deleteFile(r.getChangeName(), request);
@@ -250,11 +265,12 @@ public class RoomController {
 			r.setChangeName(changeName);
 			r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
-		int result1 = rService.updateRoom(r);
+		int result2 = rService.updateRoom(r);
 		
 		int result = 1;
 		
-		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		// 새롭게 넣고자하는 상세사진을 insert한다
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
@@ -263,22 +279,19 @@ public class RoomController {
 			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
 			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
 				
-				if(filelist[i].getName() != null) {
-					deleteFile(r.getChangeName(), request);
-				}
-				
 				String changeName = saveFile(filelist[i], request);
 				
 				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
 				Attachment at = new Attachment();
 				
+				at.setExNo(r.getRoNo());
 				at.setOriginName(filelist[i].getOriginalFilename());
 				at.setChangeName(changeName);
 				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 				
 				// 잘 추가되었다면 1이 리턴
-				int result2 = rService.insertAttachment(at);
-				result = result1*result2;
+				int result3 = rService.updateAt(at);
+				result = result2*result3;
 			}
 		}
 		
@@ -337,7 +350,75 @@ public class RoomController {
 		}
 	}
 	
+	
+	@RequestMapping("updateReRoom.ro")
+	public String updateReRoom(Room r, String[] deList, String count ,@RequestParam(name="thumb", required=true) MultipartFile file,
+			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
+			HttpServletRequest request) {
 		
+		//System.out.println(count); 	
+		int count1 = Integer.parseInt(count);
+	
+		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+		for(int i= 0 ; i<count1 ; i++) {
+			//System.out.println(deList[i]);
+			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+		
+			File deleteFile = new File(savePath + deList[i]); 
+			deleteFile.delete();
+			
+			int result1 = rService.deleteAt(deList[i]); 
+		}
+	
+		// 객체+썸네일 부분
+		// 썸네일 변경시 기존파일 삭제하고 재업로드
+		if(!file.getOriginalFilename().equals("")) {
+			if(r.getChangeName() != null) {
+				deleteFile(r.getChangeName(), request);
+			}
+			String changeName = saveFile(file, request);
+			r.setOriginName(file.getOriginalFilename());
+			r.setChangeName(changeName);
+			r.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+		}
+		int result2 = rService.updateReRoom(r);
+		
+		int result = 1;
+		
+		// 새롭게 넣고자하는 상세사진을 insert한다
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
+		for(int i=0; i<filelist.length; i++) {
+			
+			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
+			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
+				
+				String changeName = saveFile(filelist[i], request);
+				
+				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
+				Attachment at = new Attachment();
+				
+				at.setExNo(r.getRoNo());
+				at.setOriginName(filelist[i].getOriginalFilename());
+				at.setChangeName(changeName);
+				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
+				
+				// 잘 추가되었다면 1이 리턴
+				int result3 = rService.updateAt(at);
+				result = result2*result3;
+			}
+		}
+		
+		
+		if(result>0) {
+			return "redirect:list.ro?currentPage=1"; 
+		}else {
+			return "common/errorPage";
+		}
+		
+	}
 		
 		
 
@@ -472,11 +553,12 @@ public class RoomController {
     {	
     	
     	Room r = rService.selectRoomWaitDetail(rno);
-    	
+    	ArrayList<Attachment> list = rService.selectAt(rno);
         if(r != null)
         { // 게시글 상세조회 성공
             
             mv.addObject("r", r);
+            mv.addObject("list", list);
             mv.setViewName("admin/adminRoomsListDetail");
         }
         else

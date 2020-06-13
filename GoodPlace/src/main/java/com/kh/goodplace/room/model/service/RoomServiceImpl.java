@@ -66,8 +66,8 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public int updateReRoom(int roNo) {
-		return rDao.updateReRoom(sqlSession, roNo);
+	public int updateReRoom(Room r) {
+		return rDao.updateReRoom(sqlSession, r);
 	}
 
 	@Override
@@ -104,6 +104,12 @@ public class RoomServiceImpl implements RoomService{
 	public int updateRoomPower(Room r) {
 		return rDao.updateRoomPower(sqlSession, r);
 	}
+	
+	@Override
+	public int deleteAt(String deList) {
+		return rDao.deleteAt(sqlSession, deList);
+	}
+	
 
 	
 	// --------- 파워관리 시작 --------------------------
@@ -276,6 +282,7 @@ public class RoomServiceImpl implements RoomService{
 	public int roomCancel(int rpNo) {
 		return rDao.roomCancel(sqlSession, rpNo);
 	}
+
 	
 	
 	

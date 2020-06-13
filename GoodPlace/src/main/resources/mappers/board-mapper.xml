@@ -213,6 +213,12 @@
 		 where nono = #{nno} and status = 'Y'
 	</update>
 	
+	<update id="noticeDelete" parameterType="_int">
+		update notice
+		   set status = 'N'
+		 where nono = #{nno} and status = 'Y'
+	</update>
+	
 	<select id="selectNotice" parameterType="_int" resultMap="boardNoticeResultSet">
 		select *
 		  from notice

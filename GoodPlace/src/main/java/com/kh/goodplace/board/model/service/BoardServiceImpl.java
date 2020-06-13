@@ -100,7 +100,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int noticeDelete(int nno) {
-		return 0;
+		return bDao.noticeDelete(sqlSession, nno);
 	}
 	
 	@Override

@@ -229,6 +229,11 @@
 		 where rono=#{roNo}
 	</update>
 	
+	<delete id="deleteAt" parameterType="string">
+		DELETE FROM ATTACHMENT
+		WHERE CHANGE_NAME = #{deList}
+	</delete>
+	
 	<update id="deleteRoom" parameterType="_int">
 		update rooms
 		   set status=5

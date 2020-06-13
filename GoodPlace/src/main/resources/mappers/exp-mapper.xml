@@ -154,6 +154,8 @@
 		<result column="people" property="people"/>
 		
 		<result column="change_name_1" property="atChangeName"/>
+		
+		<result column="user_name" property="paName"/>
 	</resultMap>
 	
 	<!-- 사용자의 체험 전체 목록 조회  -->
@@ -241,6 +243,11 @@
       		   status=2, deny=null, deny_content=null
 		 where exno=#{exNo}
 	</update>
+	
+	<delete id="deleteAt" parameterType="string">
+		DELETE FROM ATTACHMENT
+		WHERE CHANGE_NAME = #{deList}
+	</delete>
 
 	<update id="restExp" parameterType="_int">
 		update experience
@@ -423,9 +430,34 @@
 		SELECT *
 		  FROM EXPERIENCE
 		  LEFT JOIN EXPPAY USING(EXNO)
+		 WHERE EXP_CATEGORY=#{expCategory}
+           AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
+         ORDER BY EXNO
+	</select>
+	
+	<select id="selectExpCountUser" resultType="_int">
+		SELECT COUNT(*)
+		  FROM EXPERIENCE
+		 GROUP BY EXP_CATEGORY
+		 ORDER BY EXP_CATEGORY
+	</select>
+	
+	
+	<select id="selectExpUser" parameterType="_int" resultMap="ExperienceResultSetUser">
+		SELECT *
+		  FROM EXPERIENCE E
+          LEFT JOIN MEMBER M USING(USNO)
+          LEFT JOIN PARTNER P USING (PANO)
 		 WHERE EXNO=#{exNo}
 	</select>
+	
+	
+	
+	
+	
+	
+	
 	<!-- 체험조회 끝 -->
 
-
+	
 </mapper>

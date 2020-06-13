@@ -75,7 +75,7 @@ public class ExperienceController {
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources +"\\uploadFiles\\";
 		
-		File deleteFile = new File(savePath + fileName);
+		File deleteFile = new File(savePath + fileName); 
 		deleteFile.delete();
 	};
 		
@@ -192,10 +192,26 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateExpc(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request) {
-
+			HttpServletRequest request, Model model) {
+			
+			//System.out.println(count); 	
+			int count1 = Integer.parseInt(count);
+		
+		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+		for(int i= 0 ; i<count1 ; i++) {
+			//System.out.println(deList[i]);
+			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+		
+			File deleteFile = new File(savePath + deList[i]); 
+			deleteFile.delete();
+			
+			int result1 = expService.deleteAt(deList[i]); 
+		}
+		
+		// 객체+썸네일 부분
+		// 썸네일 변경시 기존파일 삭제하고 재업로드
 		if(!file.getOriginalFilename().equals("")) {
 			if(e.getChangeName() != null) {
 				deleteFile(e.getChangeName(), request);
@@ -205,11 +221,13 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
-		int result1 = expService.updateExp(e);	// 객체 정보와 썸네일 넘어감
+		int result2 = expService.updateExp(e);
+		
 		
 		int result = 1;
 		
-		// 상세사진 전용 비어있는 리스트를 생성한 뒤 ---------------------- 이 이후로는 상세사진 쪽 ---
+		// 새롭게 넣고자하는 상세사진을 insert한다
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
@@ -229,16 +247,18 @@ public class ExperienceController {
 				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 				
 				// 잘 추가되었다면 1이 리턴
-				int result2 = expService.updateAt(at);
-				result = result1*result2;
+				int result3 = expService.updateAt(at);
+				result = result2*result3;
 			}
 		}
 		
 		if(result>0) {
+			model.addAttribute("msg", "체험정보가 수정되었습니다.");
 			return "redirect:list.exp?currentPage=1";
 		}else {
 			return "common/errorPage";
 		}
+		
 	}
 	
 	
@@ -258,10 +278,26 @@ public class ExperienceController {
 	
 	/* 5_2. 거절사유 확인후 수정하고 재심사요청 */
 	@RequestMapping("updateReExp.exp")
-	public String updateReExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateReExp(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request) {
+			HttpServletRequest request, Model model) {
 		
+		//System.out.println(count); 	
+			int count1 = Integer.parseInt(count);
+		
+		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+		for(int i= 0 ; i<count1 ; i++) {
+			//System.out.println(deList[i]);
+			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+		
+			File deleteFile = new File(savePath + deList[i]); 
+			deleteFile.delete();
+			
+			int result1 = expService.deleteAt(deList[i]); 
+		}
+		
+		// 객체+썸네일 부분
+		// 썸네일 변경시 기존파일 삭제하고 재업로드
 		if(!file.getOriginalFilename().equals("")) {
 			if(e.getChangeName() != null) {
 				deleteFile(e.getChangeName(), request);
@@ -271,11 +307,13 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
-		int result1 = expService.updateReExp(e);
+		int result2 = expService.updateReExp(e);
+		
 		
 		int result = 1;
 		
-		// 상세사진 전용 비어있는 리스트를 생성한 뒤
+		// 새롭게 넣고자하는 상세사진을 insert한다
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
@@ -284,31 +322,28 @@ public class ExperienceController {
 			// 파일은 무조건 1개는 넘어오며, 비어있는 객체는 제외되도록 조건처리
 			if(!filelist[i].getOriginalFilename().isEmpty()) { 	
 				
-				if(filelist[i].getName() != null) {
-					deleteFile(e.getChangeName(), request);
-				}
-				
 				String changeName = saveFile(filelist[i], request);
 				
 				// attachment객체를 생성해서 담는다(테이블에 한 행이 추가되는 것)
 				Attachment at = new Attachment();
 				
+				at.setExNo(e.getExNo());
 				at.setOriginName(filelist[i].getOriginalFilename());
 				at.setChangeName(changeName);
 				at.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 				
 				// 잘 추가되었다면 1이 리턴
-				int result2 = expService.insertAttachment(at);
-				result = result1*result2;
+				int result3 = expService.updateAt(at);
+				result = result2*result3;
 			}
 		}
 		
 		if(result>0) {
+			model.addAttribute("msg", "재심사신청이 완료되었습니다.");
 			return "redirect:list.exp?currentPage=1";
 		}else {
 			return "common/errorPage";
 		}
-		
 	}
 	
 	
@@ -380,6 +415,30 @@ public class ExperienceController {
 	
 	
 	//------------[체험관리]------------
+	
+    @RequestMapping("aExpDetail.ex")
+    public ModelAndView selectExpmWaitDetail(int eno, ModelAndView mv)
+    {	
+    	
+    	Experience e = expService.selectExpmWaitDetail(eno);
+    	ArrayList<Experience> list = expService.selectExp(eno);
+        if(e != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("e", e);
+            mv.addObject("list", list);
+            mv.setViewName("admin/adminExpListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+	
 	@RequestMapping("aExpWaitList.ex")
 	public String selectExpWaitList(int currentPage, Model model) {
 		
@@ -571,9 +630,23 @@ public class ExperienceController {
 	
 	//------- 체험조회 시작 ---------------------------------------------------
 	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
-	@RequestMapping("showExp.exp")
-	public ModelAndView showExp(String expCategoryString, String expDateString, String expTitle, Experience exp, ModelAndView mv) {
-		//System.out.println("expCategory : " + expCategory + ", " + "expDate : " + expDate + ", " + "expTitle : " + expTitle);
+	@RequestMapping("showExpList.exp")
+	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
+		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
+		System.out.println("지점1");
+		 
+		// 카테고리별 체험 등록 개수 set
+		Experience exp = new Experience();
+		exp.setExpCountPerCategory(expService.selectExpCountUser());
+		
+		// 카테고리명 set
+		ArrayList<String> expCategoryList = new ArrayList<>();
+		expCategoryList.add("라이프 및 스타일");
+		expCategoryList.add("문화와 역사");
+		expCategoryList.add("미술과 디자인");
+		expCategoryList.add("스포츠&피트니스");
+		expCategoryList.add("야외활동");
+		exp.setExpCategoryList(expCategoryList);
 		
 		// expCategory 필드 설정
 		int expCategory = 0;
@@ -581,7 +654,7 @@ public class ExperienceController {
 			expCategory = 1;
 		}else if(expCategoryString.equals("문화와 역사")){
 			expCategory = 2;
-		}else if(expCategoryString.equals("학술과 디자인")){
+		}else if(expCategoryString.equals("미술과 디자인")){
 			expCategory = 3;
 		}else if(expCategoryString.equals("스포츠&피트니스")){
 			expCategory = 4;
@@ -597,8 +670,80 @@ public class ExperienceController {
 		// 검색한 조건에 해당하는 exp리스트 조회
 		ArrayList<Experience> expList = expService.selectExpListUser(exp);
 		
+		// 조회된 expCategory에 해당하는 카테고리명 set
+		for(int i=0; i<expList.size(); i++) {
+			switch(expList.get(i).getExpCategory()) {
+			case 1: expList.get(i).setExpCategoryString("라이프 및 스타일"); break;
+			case 2: expList.get(i).setExpCategoryString("문화와 역사"); break;
+			case 3: expList.get(i).setExpCategoryString("미술과 디자인"); break;
+			case 4: expList.get(i).setExpCategoryString("스포츠&피트니스"); break;
+			case 5: expList.get(i).setExpCategoryString("야외활동"); break;
+			}
+			
+	    	// expList객체 체험태그의 표시형식 보완
+			expList.get(i).setExpTag("#" + (expList.get(i).getExpTag().replace(",", " #")));
+		}
+		
+
+		
+		if(expList != null) {
+			mv.addObject("exp", exp);
+			mv.addObject("expList", expList);
+			mv.setViewName("user/exp");
+		}else {
+			mv.addObject("msg", "체험리스트 조회 실패!!");
+			mv.setViewName("common/errorPage");
+		}	
+		
+		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
+		System.out.println(" expList : " + expList);
+		
 		return mv;
 	}
+
+	@RequestMapping("showExp.exp")
+	public String showExp(int exNo, ModelAndView mv) {
+		System.out.println("지점 2: exNo : " + exNo);
+		
+		Experience exp = expService.selectExpUser(exNo);
+		
+		System.out.println(exp);
+		
+		// 수업교시 계산 후 set
+		int startHour = Integer.parseInt(exp.getStartTime().substring(0, 2));
+		int startMinute = Integer.parseInt(exp.getStartTime().substring(3, 4));
+		int intervalMinute = Integer.parseInt(exp.getIntervalTime());
+		int useTime = Integer.parseInt(exp.getUseTime());
+		
+		double startMinuteDouble = 0.0;
+		double intervalMinuteDouble = 0.0;
+		
+		// 이 부분 파트너딴과 안 맞으면 에러 난다!!!!!!!
+		switch(startMinute) {
+		case 3: startMinuteDouble = 0.5; break;
+		}
+		
+		switch(intervalMinute) {
+		case 30: intervalMinuteDouble = 0.5; break;
+		case 60: intervalMinuteDouble = 1.0; break;
+		case 120: intervalMinuteDouble = 2.0; break;
+		case 180: intervalMinuteDouble = 3.0; break;
+		default: break;
+		}
+		
+		double startTimeCal = startHour + startMinuteDouble;
+		double nextClass = startTimeCal + useTime + intervalMinuteDouble;
+		
+		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute);
+		System.out.println("startMinuteDouble : " + startMinuteDouble + ", intervalMinuteDouble : " + intervalMinuteDouble);
+		System.out.println("startTimeCal : " + startTimeCal + ", nextClass : " + nextClass);
+		
+		return "";
+		//return mv;
+	}
+	
+	
+	//------- 체험조회 끝 ---------------------------------------------------
 	
 			
 	

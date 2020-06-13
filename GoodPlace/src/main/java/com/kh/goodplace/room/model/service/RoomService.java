@@ -45,8 +45,12 @@ public interface RoomService {
 	// 5_2. 숙소객체 상세사진 수정용 서비스 
 	int updateAt(Attachment at);
 	
-	// 6. 승인거절된 숙소객체 수정용 서비스(상세사진은 5_2이용하여 업데이트)
-	int updateReRoom(int roNo);
+	// 6. 승인거절된 숙소 수정용 서비스
+	// 6_1. 승인거절된 숙소객체 수정용 서비스(상세사진은 5_2이용하여 업데이트)
+	int updateReRoom(Room r);
+	
+	// 6_2. 삭제요청한 사진 서버 및 디비에서 삭제
+	int deleteAt(String deList);
 	
 	// 7.숙소 삭제용 서비스(상태==5)
 	int deleteRoom(int rno);
@@ -219,6 +223,8 @@ public interface RoomService {
 	
 	//5. 공지사항 검색 조회용
 	ArrayList<Room> roomSearchList(PageInfo pi, Room r);
+
+	
 
 
 	

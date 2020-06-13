@@ -50,8 +50,8 @@ public class RoomDao {
 		return sqlSession.update("roomMapper.updateAt", at);
 	}
 
-	public int updateReRoom(SqlSessionTemplate sqlSession, int roNo) {
-		return sqlSession.update("roomMapper.updateReRoom", roNo);
+	public int updateReRoom(SqlSessionTemplate sqlSession, Room r) {
+		return sqlSession.update("roomMapper.updateReRoom", r);
 	}
 
 	public int endRestRoom(SqlSessionTemplate sqlSession, int roNo) {
@@ -82,11 +82,14 @@ public class RoomDao {
 
 
 	public int updateRoomPower(SqlSessionTemplate sqlSession, Room r) {
-		System.out.println(r);
+		//System.out.println(r);
 		return sqlSession.update("roomMapper.updateRoomPower", r);
 	}
 	
-	
+	public int deleteAt(SqlSessionTemplate sqlSession, String deList) {
+		return sqlSession.delete("roomMapper.deleteAt", deList);
+	}
+
 	
 	
 	
@@ -301,7 +304,8 @@ public class RoomDao {
 			
 			return sqlSession.update("roomMapper.roomCancel", rpNo);
 		}
-	
+
+		
 	
 	
 

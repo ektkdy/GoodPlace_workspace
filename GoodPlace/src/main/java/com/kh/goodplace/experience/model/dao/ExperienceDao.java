@@ -68,7 +68,10 @@ public class ExperienceDao {
 	public int endRestExp(SqlSessionTemplate sqlSession, int exNo) {
 		return sqlSession.update("expMapper.endRestExp", exNo);
 	}
-
+	
+	public int deleteAt(SqlSessionTemplate sqlSession, String deList) {
+		return sqlSession.delete("expMapper.deleteAt", deList);
+	}
 	
 	
 	
@@ -223,6 +226,14 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
 	}
 	
+	public ArrayList<Integer> selectExpCountUser(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpCountUser");
+	}
+	
+	public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
+		System.out.println("selectExpUser 다오까지 옴");
+		return sqlSession.selectOne("expMapper.selectExpUser", exNo);
+	}
 	
 	
 	
