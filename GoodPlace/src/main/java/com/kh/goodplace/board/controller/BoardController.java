@@ -277,6 +277,18 @@ public class BoardController {
         
     }
     
+    @RequestMapping("noticeDelete.bo")
+    public String noticeDelete(@RequestParam("checkNo") List<Integer> ids) {
+		
+    	
+    	
+    	for(Integer nno : ids) bService.noticeDelete(nno);
+    	
+    	return "redirect:aNoticeList.bo?currentPage=1";
+
+   	
+    }
+    
     // 관리자 공지사항 끝
     
     // 관리자 1:1문의 시작

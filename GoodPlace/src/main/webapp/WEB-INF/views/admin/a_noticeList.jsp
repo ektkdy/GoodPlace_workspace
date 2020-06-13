@@ -110,110 +110,131 @@
 				</script>
                 
                 <div class="con2">
-                    <table id="noticeList" class="common_tb" cellpadding="0" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <td width="100">선택</td>
-                                <td width="100">번호</td>
-                                <td width="500">제목</td>
-                                <td width="100">조회수</td>
-                                <td width="200">수정</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-	                        <c:forEach items="${ list }" var="b">
+	                <form id="deleteForm" method="" action="">
+	                    <table id="noticeList" class="common_tb" cellpadding="0" cellspacing="0">
+	                        <thead>
 	                            <tr>
-	                                <td onclick="event.cancelBubble=true"><input type="checkbox"></td>
-	                                <td>${ b.noNo }</td>
-	                                <td>${ b.noticeTitle }</td>
-	                                <td>${ b.count }</td>
-	                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn" onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정</button></td>
+	                                <td width="100"><input type="checkbox"  id="checkall" name=""></td>
+	                                <td width="100">번호</td>
+	                                <td width="500">제목</td>
+	                                <td width="100">조회수</td>
+	                                <td width="200">수정</td>
 	                            </tr>
-							</c:forEach>
-                        </tbody>
-                    </table>
-                    
-                    
-		            <script>
-		            	$(function(){
-		            		$("#noticeList tbody tr").click(function(){
-		            			location.href="aNoticeDetail.bo?nno=" + $(this).children().eq(1).text();
-		            		})
-		            	});
-		            </script>
-                    
-                    <table>
-                        <th>
-                            <br>
-                            <button class="blue_btn" onclick="location.href='noticeEnrollForm.bo'">등록하기</button>
-                            <button class="blue_btn" id="delete_btn">삭제</button>
-                        </th>
-                        <th>
-                            <div id="pagingArea" style="margin-top: 22px;">
-	                            <!-- [이전] -->
-	                            <c:if test="${ pi.currentPage ne 1 }">
-				                    <c:choose>
-					                	<c:when test="${ empty b.searchSelect }">
-						                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
-						                </c:when>
-						                <c:otherwise>
-					                    	<a href="aNoticeList.bo?searchSelect=${ b.searchSelect }&keyword=${b.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
-					                    </c:otherwise>
-				                    </c:choose>
-				                </c:if>
-				                
-				                <!-- [번호들] -->
-								<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
-									<c:choose>
-										<c:when test="${ p eq pi.currentPage }">
-											<a href="" style="color:red;">${ p }</a>
-										</c:when>
-										<c:otherwise>
-											<c:choose>
-												<c:when test = "${ empty b.searchSelect }">
-													<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
-												</c:when>
-												<c:otherwise>
-													<c:url value="noticeSearch.bo" var="searchUrl">
-														<c:param name="searchSelect" value="${ b.searchSelect }"/>
-														<c:param name="keyword" value="${ b.keyword }"/>
-														<c:param name="currentPage" value="${ p }"/>
-													</c:url>
-														
-													<a href="${ searchUrl }">${p}</a>
-												</c:otherwise>
-											</c:choose>
-										</c:otherwise>
-
-				               		</c:choose>    
-				                </c:forEach>   
-				                
-								<!-- [다음] -->
-								<c:if test="${ pi.currentPage ne pi.maxPage }">
-									<c:choose>
-										<c:when test = "${ empty b.searchSelect }">
-											 <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
-										</c:when>
-										<c:otherwise>
-											<c:url value="noticeSearch.bo" var="searchUrl">
-												<c:param name="searchSelect" value="${ b.searchSelect }"/>
-												<c:param name="keyword" value="${ b.keyword }"/>
-												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-											</c:url>										
-											<a href="${ searchUrl }">&gt;</a>
-										</c:otherwise>
-									</c:choose>
-				                </c:if>
-                                
-                            </div>
-                        </th>
-    
-                    </table>
-    
+	                        </thead>
+	                        <tbody>
+		                        <c:forEach items="${ list }" var="b">
+		                            <tr>
+		                                <td onclick="event.cancelBubble=true"><input type="checkbox"  id="noticeDelete" name="checkNo" value="${ b.noNo }"></td>
+		                                <td>${ b.noNo }</td>
+		                                <td>${ b.noticeTitle }</td>
+		                                <td>${ b.count }</td>
+		                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn" onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정</button></td>
+		                            </tr>
+								</c:forEach>
+	                        </tbody>
+	                    </table>
+	                    
+	                    
+			            <script>
+			            	$(function(){
+			            		$("#noticeList tbody tr").click(function(){
+			            			location.href="aNoticeDetail.bo?nno=" + $(this).children().eq(1).text();
+			            		})
+			            	});
+			            </script>
+			            
+			            <script>
+				            $(function(){
+				                $("#checkall").click(function(){
+				                    if($("#checkall").prop("checked")){
+				                        $("input[name=checkNo]").prop("checked",true);
+				                    }else{
+				                        $("input[name=checkNo]").prop("checked",false);
+				                    }
+				                });
+				            });
+						</script>
+	                    
+	                    <table>
+	                        <th>
+	                            <br>
+	                            <button class="blue_btn" onclick="location.href='noticeEnrollForm.bo'">등록하기</button>
+	                            <button class="blue_btn" id="delete_btn" onclick="postDeleteSubmit()">삭제</button>
+	                        </th>
+	                        <th>
+	                            <div id="pagingArea" style="margin-top: 22px;">
+		                            <!-- [이전] -->
+		                            <c:if test="${ pi.currentPage ne 1 }">
+					                    <c:choose>
+						                	<c:when test="${ empty b.searchSelect }">
+							                    <a href="aNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+							                </c:when>
+							                <c:otherwise>
+						                    	<a href="aNoticeList.bo?searchSelect=${ b.searchSelect }&keyword=${b.keyword}&currentPage=${ pi.currentPage -1 }">&lt;</a>
+						                    </c:otherwise>
+					                    </c:choose>
+					                </c:if>
+					                
+					                <!-- [번호들] -->
+									<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
+										<c:choose>
+											<c:when test="${ p eq pi.currentPage }">
+												<a href="" style="color:red;">${ p }</a>
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test = "${ empty b.searchSelect }">
+														<a class="page-link" href="aNoticeList.bo?currentPage=${ p }">${p}</a>
+													</c:when>
+													<c:otherwise>
+														<c:url value="noticeSearch.bo" var="searchUrl">
+															<c:param name="searchSelect" value="${ b.searchSelect }"/>
+															<c:param name="keyword" value="${ b.keyword }"/>
+															<c:param name="currentPage" value="${ p }"/>
+														</c:url>
+															
+														<a href="${ searchUrl }">${p}</a>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+	
+					               		</c:choose>    
+					                </c:forEach>   
+					                
+									<!-- [다음] -->
+									<c:if test="${ pi.currentPage ne pi.maxPage }">
+										<c:choose>
+											<c:when test = "${ empty b.searchSelect }">
+												 <a href="aNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+											</c:when>
+											<c:otherwise>
+												<c:url value="noticeSearch.bo" var="searchUrl">
+													<c:param name="searchSelect" value="${ b.searchSelect }"/>
+													<c:param name="keyword" value="${ b.keyword }"/>
+													<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+												</c:url>										
+												<a href="${ searchUrl }">&gt;</a>
+											</c:otherwise>
+										</c:choose>
+					                </c:if>
+	                                
+	                            </div>
+	                        </th>
+	    
+	                    </table>
+				    </form>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+		function postDeleteSubmit(){
+			confirm("삭제하시겠습니까?");
+			$("#deleteForm").attr("action", "noticeDelete.bo");
+			$("#deleteForm").submit();
+	    }
+	</script>
 
     <script>
         $(function(){
