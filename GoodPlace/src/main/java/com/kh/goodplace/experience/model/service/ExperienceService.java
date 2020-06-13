@@ -110,7 +110,7 @@ public interface ExperienceService {
 	
 	//------------[체험조회 시작]------------
 	ArrayList<Experience> selectExpListUser(Experience exp);
-	
+	ArrayList<Integer> selectExpCountUser();
 	//------------[체험조회 끝]------------
 
 }

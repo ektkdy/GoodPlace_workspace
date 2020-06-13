@@ -179,8 +179,12 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 	@Override
 	public ArrayList<Experience> selectExpListUser(Experience exp) {
-		// TODO Auto-generated method stub
-		return null;
+		return expDao.selectExpListUser(sqlSession, exp);
+	}
+
+	@Override
+	public ArrayList<Integer> selectExpCountUser() {
+		return expDao.selectExpCountUser(sqlSession);
 	}
 
 	@Override

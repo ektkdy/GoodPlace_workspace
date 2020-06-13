@@ -55,7 +55,17 @@ public class AccountsDao {
 		return sqlSession.selectOne("accountsMapper.exNum");
 	}
 	
-	
+	public ArrayList<Chart> mainChartList(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.mainChartList");
+		
+	}
+
+	public ArrayList<Chart> mainChartList2(SqlSessionTemplate sqlSession){
+		
+		return (ArrayList)sqlSession.selectList("accountsMapper.mainChartList2");
+		
+	}
 	
 	
 	

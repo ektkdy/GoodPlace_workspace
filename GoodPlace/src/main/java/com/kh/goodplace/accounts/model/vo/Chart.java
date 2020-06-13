@@ -17,5 +17,8 @@ public class Chart {
 	
 	private int chartamountExp;
 	private String expPayDate;
+	
+	private int mainChartBlockOff;
+	private int mainChartBlockOn;
 
 }

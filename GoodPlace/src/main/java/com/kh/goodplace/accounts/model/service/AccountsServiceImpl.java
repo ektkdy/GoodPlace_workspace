@@ -53,7 +53,14 @@ public class AccountsServiceImpl implements AccountsService{
 	}
 	
 	
-	
+	@Override
+	public ArrayList<Chart> mainChartList() {
+		return aDao.mainChartList(sqlSession);
+	}
+	@Override
+	public ArrayList<Chart> mainChartList2() {
+		return aDao.mainChartList2(sqlSession);
+	}
 	
 	
 	
@@ -76,6 +83,7 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> selectIncomeList(int usNo) {
 		return aDao.selectIncomeList(sqlSession, usNo);
 	}
+
 
 
 
