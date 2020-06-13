@@ -145,186 +145,185 @@
     <!-- content -->
     <br>
     <div id="content">
-            <div style="width:70%;">
-                <!-- Swiper -->
-                <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
-                    <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
-                    </div>
-                    <!-- Add Arrows -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-
-                <div style="width:80%; height:120px; margin:0 10%;">
-                    <div style="width:80%;">
-                        <br><h1>${ room.roomsTitle }</h1>
-                    </div><br>  
-                    <div class="fullWidth">
-                        <h4>${ room.region }</h4>
-                    </div>
-                </div>
-                <div style="width:80%; margin:0 10%;">
-                    <div style="width:20%; margin-right:5%;">
-                        <h1 style="text-align:left;">시설 및<br>서비스</h1>
-                    </div>
-                    <div style="width:75%;">
-                        <div class="fullWidth marginBottom_40px">
-                            <div style="width:50%;"><h3>객실정보</h3></div><div style="width:30%; margin-left:20%; background-color:tomato; color:white; font-weight:900;" class="category">숙소 신고하기</div><br><br>
-                            <p>
-                          		방 ${ room.roomCount }개, 침대 ${ room.bedCount }개, 	화장실 ${ room.restroomCount }개, 샤워실 ${ room.bathCount }개<br>
-                              	기본인원 ${ room.minPeople }명, 최대인원 ${ room.maxPeople }명<br>
-                              	1박 금액 : ${ room.price }원<br>
-                            </p>
-                        </div>
-                        <div class="fullWidth marginBottom_40px">
-                            <div style="width:50%;"><h3>숙소시설</h3></div><br><br>
-                            <p>${ room.facility }</p>
-                        </div>
-                        <div class="fullWidth marginBottom_40px">
-                            <h3>제공서비스</h3><br>
-                            <p>${ room.service }</p>
-                        </div>
-                        <div class="fullWidth marginBottom_60px">
-                            <h3>포함사항</h3><br>
-                            <p>${ room.meal }
-                            </p>
-                        </div>
-                    </div>
-                    <div style="width:20%; margin-right:5%;">
-                        <h1 style="text-align:left;">숙소태그</h1>
-                    </div>
-                    <div style="width:75%;">
-                        <div class="fullWidth marginBottom_40px">
-                            <div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
-                        </div>
-                    </div>
-                    <div style="width:20%; margin-right:5%;">
-                        <h1 style="text-align:left;">이용안내</h1>
-                    </div>
-                    <div style="width:75%;" class="marginBottom_60px">
-                        <div style="margin-bottom: 28px;" class="fullWidth marginBottom_40px">
-                            <div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
-                            <br><br>
-                            <div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
-                        	<div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
-                        	
-                        </div>
-                        <div class="fullWidth">
-                            <h3>특이사항</h3><br>
-                            ${ room.roomsNotice }
-                        </div><br><br>
-                    </div>
-                    <div style="width:20%; margin-right:5%;">
-                        <h1 style="text-align: left;">오시는길</h1>
-                    </div>
-                    <div style="width:75%;" class="marginBottom_60px">
-                        <div class="fullWidth">
-                            <div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
-                            <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
-                        </div><br><br>
-                        
-                    </div>
-                    <div class="fullWidth"> 
-                        <div style="width:20%; margin-right:5%;">
-                            <h1 style="text-align: left;">호스트</h1>
-                        </div>
-                        <div style="width:75%; padding:10px;"  class="marginBottom_60px replyStyle1">
-                            <div class="fullWidth">
-                                <div class="p_profileArea">
-                                    <div style="width:50%; text-align: center;">
-                                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ room.paPofile }" class="p_profile"/>
-                                    </div>
-                                    <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
-                                        <h1>${ room.paName }</h1><br>
-                                        <div class="buttonStyle1 inquirePartner" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
-                                    </div>  
-                                </div><hr><br>
-                                <div class="fullWidth">
-                                    <p>${ room.partnerIntro }</p>
-                                </div>
-                            </div><br><br>
-                        </div>  
-                    </div>
-                    <br><br>    
-                    <hr style="border:1px solid lightgray;">
-                    <br><br>
-                    <div class="fullWidth">
-                        <div style="width:20%; margin-right:5%; position:absolute;">
-                            <h1 style="text-align:left;">후기</h1>
-                        </div>
-                        
-                        <c:forEach items="${ room.reviewList }" var="review" varStatus="status">
-                        
-                        	<div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
-                            <div class="fullWidth">
-                                <div class="c_profileArea">
-                                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
-                                </div>
-                                <div style="width:85%; margin-top:5px;">
-                                    <div style="width:20%;">
-                                        <h4>${ review.userName }</h4>
-                                    </div>
-                                    <div style="width:80%;">
-                                        <h4>${ review.reviewDate }</h4>
-                                    </div>
-                                </div>
-                                <h3>
-                                	<c:forEach begin="1" end="5" varStatus="currentNum">
-                                		<c:choose>
-                                			<c:when test="${currentNum.current le review.score }"><c:out value="★"/></c:when>
-                                			<c:otherwise><c:out value="☆"/></c:otherwise>
-                                		</c:choose>
-                                	</c:forEach>
-                                </h3>
-                            </div>
-	                            <div class="fullWidth">
-	                                <p class="reviewContainer">${ review.reContent }</p>
+	    <div style="width:70%;">
+	        <!-- Swiper -->
+	        <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
+	            <div class="swiper-wrapper">
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
+	            </div>
+	            <!-- Add Arrows -->
+	            <div class="swiper-button-next"></div>
+	            <div class="swiper-button-prev"></div>
+	        </div>
+	
+	        <div style="width:80%; height:120px; margin:0 10%;">
+	            <div style="width:80%;">
+	                <br><h1>${ room.roomsTitle }</h1>
+	            </div><br>  
+	            <div class="fullWidth">
+	                <h4>${ room.region }</h4>
+	            </div>
+	        </div>
+	        <div style="width:80%; margin:0 10%;">
+	            <div style="width:20%; margin-right:5%;">
+	                <h1 style="text-align:left;">시설 및<br>서비스</h1>
+	            </div>
+	            <div style="width:75%;">
+	                <div class="fullWidth marginBottom_40px">
+	                    <div style="width:50%;"><h3>객실정보</h3></div><div style="width:30%; margin-left:20%; background-color:tomato; color:white; font-weight:900;" class="category">숙소 신고하기</div><br><br>
+	                    <p>
+	                  		방 ${ room.roomCount }개, 침대 ${ room.bedCount }개, 	화장실 ${ room.restroomCount }개, 샤워실 ${ room.bathCount }개<br>
+	                      	기본인원 ${ room.minPeople }명, 최대인원 ${ room.maxPeople }명<br>
+	                      	1박 금액 : ${ room.price }원<br>
+	                    </p>
+	                </div>
+	                <div class="fullWidth marginBottom_40px">
+	                    <div style="width:50%;"><h3>숙소시설</h3></div><br><br>
+	                    <p>${ room.facility }</p>
+	                </div>
+	                <div class="fullWidth marginBottom_40px">
+	                    <h3>제공서비스</h3><br>
+	                    <p>${ room.service }</p>
+	                </div>
+	                <div class="fullWidth marginBottom_60px">
+	                    <h3>포함사항</h3><br>
+	                    <p>${ room.meal }
+	                    </p>
+	                </div>
+	            </div>
+	            <div style="width:20%; margin-right:5%;">
+	                <h1 style="text-align:left;">숙소태그</h1>
+	            </div>
+	            <div style="width:75%;">
+	                <div class="fullWidth marginBottom_40px">
+	                    <div style="width:100%;"><h2 style="margin-top:6px; font-weight:546; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ room.roomsTag }</h2></div>
+	                </div>
+	            </div>
+	            <div style="width:20%; margin-right:5%;">
+	                <h1 style="text-align:left;">이용안내</h1>
+	            </div>
+	            <div style="width:75%;" class="marginBottom_60px">
+	                <div style="margin-bottom: 28px;" class="fullWidth marginBottom_40px">
+	                    <div style="width:40%;"><h2 class="pointColor"style="margin-top:2px;">체크인 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkIn }</h2></div>
+	                    <br><br>
+	                    <div style="width:40%;"><h2 class="pointColor" style="margin-top:6px;">체크아웃 시간</h2></div><div style="width:60%;"><h2 class="pointColor">${ room.checkOut }</h2></div>
+	                	<div style="width:80%;"><h3 style="color:tomato; margin-top:12px;">※ 예약은 이용일 36시간 전까지 가능합니다.</h3></div>
+	                	
+	                </div>
+	                <div class="fullWidth">
+	                    <h3>특이사항</h3><br>
+	                    ${ room.roomsNotice }
+	                </div><br><br>
+	            </div>
+	            <div style="width:20%; margin-right:5%;">
+	                <h1 style="text-align: left;">오시는길</h1>
+	            </div>
+	            <div style="width:75%;" class="marginBottom_60px">
+	                <div class="fullWidth">
+	                    <div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
+	                    <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
+	                </div><br><br>
+	                
+	            </div>
+	            <div class="fullWidth"> 
+	                <div style="width:20%; margin-right:5%;">
+	                    <h1 style="text-align: left;">호스트</h1>
+	                </div>
+	                <div style="width:75%; padding:10px;"  class="marginBottom_60px replyStyle1">
+	                    <div class="fullWidth">
+	                        <div class="p_profileArea">
+	                            <div style="width:50%; text-align: center;">
+	                                <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ room.paPofile }" class="p_profile"/>
 	                            </div>
-                        	</div>
-                        	
-							<c:choose>
-		                    	<c:when test="${ loginUser.usNo eq room.userNo }">
-		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                        <button class="category postComment" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
-				                    	<button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-				                    </div>
-		                    	</c:when>
-		                    	<c:when test="${ loginUser.usNo eq review.userNo }">
-		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                         <button class="category modifyReview" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
-				                         <button class="category saveReview" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
-				                    </div>
-		                    	</c:when>
-		                    	<c:otherwise>
-		                    		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-				                         <button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-				                    </div>
-                    			</c:otherwise>
-                    		</c:choose>
-                    		
-                        </c:forEach>
-
-                    </div>
-                    
-                </div>
-                
-            <!-- 페이징 바 -->
-            <div class="pagingBar">
-                <button>&lt;</button>
-                <button id="currentPage">n</button>
-                <button>n</button>
-                <button>n</button>
-                <button>n</button>
-                <button>n</button>            
-                <button>&gt;</button>
-            </div>
-
-        </div>
+	                            <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
+	                                <h1>${ room.paName }</h1><br>
+	                                <div class="buttonStyle1 inquirePartner" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
+	                            </div>  
+	                        </div><hr><br>
+	                        <div class="fullWidth">
+	                            <p>${ room.partnerIntro }</p>
+	                        </div>
+	                    </div><br><br>
+	                </div>  
+	            </div>
+	            <br><br>    
+	            <hr style="border:1px solid lightgray;">
+	            <br><br>
+	            <div class="fullWidth">
+	                <div style="width:20%; margin-right:5%; position:absolute;">
+	                    <h1 style="text-align:left;">후기</h1>
+	                </div>
+	                
+	                <c:forEach items="${ room.reviewList }" var="review" varStatus="status">
+	                
+	                	<div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
+	                    <div class="fullWidth">
+	                        <div class="c_profileArea">
+	                            <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
+	                        </div>
+	                        <div style="width:85%; margin-top:5px;">
+	                            <div style="width:20%;">
+	                                <h4>${ review.userName }</h4>
+	                            </div>
+	                            <div style="width:80%;">
+	                                <h4>${ review.reviewDate }</h4>
+	                            </div>
+	                        </div>
+	                        <h3>
+	                        	<c:forEach begin="1" end="5" varStatus="currentNum">
+	                        		<c:choose>
+	                        			<c:when test="${currentNum.current le review.score }"><c:out value="★"/></c:when>
+	                        			<c:otherwise><c:out value="☆"/></c:otherwise>
+	                        		</c:choose>
+	                        	</c:forEach>
+	                        </h3>
+	                    </div>
+	                     <div class="fullWidth">
+	                         <p class="reviewContainer">${ review.reContent }</p>
+	                     </div>
+	                	</div>
+	                	
+						<c:choose>
+			              	<c:when test="${ loginUser.usNo eq room.userNo }">
+			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+			                    <button class="category postComment" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
+			                	<button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
+			                </div>
+			              	</c:when>
+			              	<c:when test="${ loginUser.usNo eq review.userNo }">
+			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+			                     <button class="category modifyReview" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
+			                     <button class="category saveReview" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
+			                </div>
+			              	</c:when>
+			              	<c:otherwise>
+			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
+			                     <button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
+			                </div>
+	            			</c:otherwise>
+	            		</c:choose>
+	                </c:forEach>
+	
+	            </div>
+	            
+	        </div>
+	        
+		    <!-- 페이징 바 -->
+		    <div class="pagingBar">
+		        <button>&lt;</button>
+		        <button id="currentPage">n</button>
+		        <button>n</button>
+		        <button>n</button>
+		        <button>n</button>
+		        <button>n</button>            
+		        <button>&gt;</button>
+		    </div>
+	
+		</div>
 
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">

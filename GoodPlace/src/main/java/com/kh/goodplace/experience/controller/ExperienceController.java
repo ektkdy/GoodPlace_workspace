@@ -815,6 +815,26 @@ public class ExperienceController {
 		
 		System.out.println("acceptedPeople : " + acceptedPeopleList);
 		
+    	// exp 객체에 파트너정보 set
+    	exp.setPaPofile(expService.getPartner(exp.getUsNo()).getChangeName());
+    	exp.setPartnerIntro(expService.getPartner(exp.getUsNo()).getPartnerIntro());
+    	exp.setPaName(expService.getPartner(exp.getUsNo()).getUserName());
+    	exp.setPaAccountName(expService.getPartner(exp.getUsNo()).getAccountName());
+    	exp.setPaAccountNum(expService.getPartner(exp.getUsNo()).getAccountNum());
+
+		// 체험 상세 이미지 get
+		ArrayList<Attachment> at = expService.getDetailImages(exp.getExNo());
+		
+    	// 체험 상세 이미지 set
+    	if(at != null) {
+    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
+    		exp.setDetailImg1(at.get(0).getChangeName());
+    		exp.setDetailImg2(at.get(1).getChangeName());
+    		exp.setDetailImg3(at.get(2).getChangeName());
+    		exp.setDetailImg4(at.get(3).getChangeName());
+    		exp.setDetailImg5(at.get(4).getChangeName());
+    	}
+    	
 		if(exp != null) {
 			mv.addObject("exp", exp);
 			mv.setViewName("user/expDetails");

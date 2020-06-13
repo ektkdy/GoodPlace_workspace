@@ -10,6 +10,7 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("expDao")
@@ -241,7 +242,13 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectAcceptedPeople", exp);
 	}
 	
+	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int exNo){
+		return (ArrayList)sqlSession.selectList("expMapper.selectDetailImages", exNo);
+	}
 	
+	public Member getPartner(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("memberMapper.selectPartner", usNo);
+	}
 	//------------[체험조회 끝]------------
 	
 	

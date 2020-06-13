@@ -10,6 +10,7 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.dao.ExperienceDao;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 
@@ -200,6 +201,16 @@ public class ExperienceServiceImpl implements ExperienceService {
 	@Override
 	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo) {
 		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo);
+	}
+
+	@Override
+	public ArrayList<Attachment> getDetailImages(int exNo) {
+		return expDao.getDetailImages(sqlSession, exNo);
+	}
+
+	@Override
+	public Member getPartner(int usNo) {
+		return expDao.getPartner(sqlSession, usNo);
 	}
 	
 	

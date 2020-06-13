@@ -151,10 +151,12 @@
                 <!-- Swiper -->
                 <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="../img/exp1.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/exp2.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/exp3.jpg" width="100%" height="100%"></div>
-                    <div class="swiper-slide"><img src="../img/exp4.jpg" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.detailImg1 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.detailImg2 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.detailImg3 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.detailImg4 }" width="100%" height="100%"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.detailImg5 }" width="100%" height="100%"></div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
@@ -163,10 +165,10 @@
 
                 <div style="width:80%; height:120px; margin:0 10%;">
                     <div style="width:80%;">
-                        <br><h1>투명한 아름다움 레진 아트</h1>
+                        <br><h1>${ exp.expTitle }</h1>
                     </div><br>
                     <div style="float:left;">
-                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>
+                        <h3 style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ exp.expTag }</h3>
                     </div>
                 </div>
                 <div style="width:80%; margin:0 10%;">

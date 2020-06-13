@@ -458,7 +458,11 @@
 		   AND EXP_CLASS_NO=#{expClassNo}
 	</select>
 	
-	
+	<select id="selectDetailImages" parameterType="_int" resultMap="AttachmentResultSet">
+		SELECT *
+		 FROM ATTACHMENT
+		WHERE EXNO = #{exNo}
+	</select>
 	
 	
 	
