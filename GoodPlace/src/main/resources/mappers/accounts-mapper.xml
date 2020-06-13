@@ -21,7 +21,14 @@
 	
 	<resultMap type="Chart" id="accountsChartResultSet">
 		<id column="EXPAmount" property="chartamountExp"/>
-		<id column="EXPpayDate" property="expPayDate"/>
+		<result column="EXPpayDate" property="expPayDate"/>
+	</resultMap>
+	
+	<resultMap type="Chart" id="mainChartResultSet">
+		<id column="mainChartBlockOff" property="mainChartBlockOff"/>
+	</resultMap>
+	<resultMap type="Chart" id="mainOnChartResultSet">
+		<id column="mainChartBlockOn" property="mainChartBlockOn"/>
 	</resultMap>
 
 	<select id="aSelectAccountListCount" resultType="_int">
@@ -69,7 +76,25 @@
 	</select>
 
 
+	<select id="mainChartList" resultMap="mainChartResultSet">
+		SELECT COUNT(M.USNO) as "mainChartBlockOff"
+		FROM MEMBER M
+		WHERE M.STATUS = 'Y'
+		UNION ALL
+		SELECT COUNT(PANO)
+		FROM PARTNER
+		WHERE PARTNER_STATUS = 'Y'
+	</select>
 
+	<select id="mainChartList2" resultMap="mainOnChartResultSet">
+		SELECT COUNT(M.USNO)as "mainChartBlockOn"
+		FROM MEMBER M
+		WHERE M.STATUS = 'N'
+		UNION ALL
+		SELECT COUNT(PANO)
+		FROM PARTNER
+		WHERE PARTNER_STATUS = 'N'
+	</select>
 
 
 

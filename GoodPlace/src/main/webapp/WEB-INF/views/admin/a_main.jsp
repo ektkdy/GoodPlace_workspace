@@ -57,7 +57,7 @@
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">대시보드</p></span>
                 <br><br><br><br><br><br>
                 <div style="height:200px;">
-                    <span ><b style="font-weight:bold; font-size: 1.3em;">오늘매출현황</b> <small>(05월17일 13:10 기준)</small></span>
+                    <span ><b style="font-weight:bold; font-size: 1.3em;">오늘매출현황</b> <span id="todayAmount" style="font-size:0.8em">(05월17일 13:10 기준)</span>
                     <br>
                     
                     <table id="dbTable01">
@@ -74,10 +74,31 @@
                         </th>
                         <th rowspan="2" width="200px">체험<small>(${ e1.countNo }건)</small><br><b>${ e1.sumAmount }</b> 원</th>
                     </table>
+                    
+                    <script>
+                    
+	                    let today = new Date();   
+	
+	                    let year = today.getFullYear(); // 년도
+	                    let month = today.getMonth() + 1;  // 월
+	                    let date = today.getDate();  // 날짜
+	                    let day = today.getDay();  // 요일
+	                  
+	                    $(function(){
+	                    	$("#todayAmount").html("(" + year + '/' + month + '/' + date + ")");
+	                    })
+	                    
+	                    $(function(){
+	                    	$("#month").html("(" + month + "월" + ")");
+	                    })
+	                    
+	                    
+                    </script>
+                    
                     <br>
                     <hr class="bline">
 
-                    <span><b style="font-weight:bold; font-size: 1.3em;">예약 현황</b> <small>월</small></span>
+                    <span><b style="font-weight:bold; font-size: 1.3em;">예약 현황</b> <small id="month">월</small></span>
                     <br>
                     
                     <table id="dbTable01">
@@ -103,12 +124,45 @@
                     </table>
                       
 					  <script>
-					  /*
+					  
 					  $(function(){
 						 
 						  $.ajax({
 							 url:"mainchartList.mc",
 							 success:function(data){
+								 
+								 console.log(data);
+								 
+								 var value= [];
+								 var value2= [];
+								 
+								 for(var i in data.list){
+									 value.push(data.list[i].mainChartBlockOff);
+								 }
+								 
+								 
+								 for(var i in data.list2){
+									 value2.push(data.list2[i].mainChartBlockOn);
+								 }
+								 
+								 console.log(value);
+								 console.log(value2);
+								 
+								 console.log(myConfig);
+								 console.log(myConfig.series[0].values);
+								 console.log(myConfig.series[1].values);
+								 
+								 myConfig.series[0].values = value;
+								 myConfig.series[1].values = value2;
+								 
+							    zingchart.render({
+								      id: 'myChart',
+								      data: myConfig,
+								      height: "100%",
+								      width: "100%"
+							    });
+								 
+								 
 								 
 							 }, error:function(){
 								 console.log("통계 자료용 ajax 통신실패");
@@ -118,8 +172,8 @@
 						  });
 						 
 						  
-					  });
-					  */
+					  
+					  
 					    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
 					    var myConfig = {
 					      type: "bar",
@@ -147,6 +201,8 @@
 					      height: "100%",
 					      width: "100%"
 					    });
+					    
+					  });
 					  </script>
                     
                     

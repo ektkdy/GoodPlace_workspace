@@ -92,6 +92,24 @@ public class AccountsController {
     	new Gson().toJson(map, response.getWriter());
     }
     
+    @RequestMapping(value="mainchartList.mc")
+    public void mainChartList(HttpServletResponse response) throws JsonIOException, IOException {
+    	
+    	ArrayList<Chart> list = aService.mainChartList();
+    	ArrayList<Chart> list2= aService.mainChartList2();
+    	//System.out.println(list);
+    	//System.out.println(list2);
+    	
+    	
+    	HashMap<String, Object> map = new HashMap<>();
+    	map.put("list", list);
+    	map.put("list2", list2);
+    	
+    	
+    	response.setContentType("application/json; charset=utf-8");
+    	new Gson().toJson(map, response.getWriter());
+    }
+    
     
     
     // 엑셀다운롣
