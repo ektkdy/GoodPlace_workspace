@@ -75,7 +75,7 @@ public class ExperienceController {
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources +"\\uploadFiles\\";
 		
-		File deleteFile = new File(savePath + fileName);
+		File deleteFile = new File(savePath + fileName); 
 		deleteFile.delete();
 	};
 		
@@ -192,10 +192,25 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateExpc(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request) {
-
+			
+			//System.out.println(count); 	
+			int count1 = Integer.parseInt(count);
+		
+		
+		for(int i= 0 ; i<count1 ; i++) {
+			//System.out.println(deList[i]);
+			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+		
+			File deleteFile = new File(savePath + deList[i]); 
+			deleteFile.delete();
+			
+			int result = expService.deleteAt(deList[i]); 
+		}
+		
+		
 		if(!file.getOriginalFilename().equals("")) {
 			if(e.getChangeName() != null) {
 				deleteFile(e.getChangeName(), request);
@@ -205,11 +220,13 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
-		int result1 = expService.updateExp(e);	// 객체 정보와 썸네일 넘어감
+		int result1 = expService.updateExp(e);	// 객체 정보와 썸네일
 		
 		int result = 1;
 		
-		// 상세사진 전용 비어있는 리스트를 생성한 뒤 ---------------------- 이 이후로는 상세사진 쪽 ---
+		
+		
+		// 상세사진 전용 비어있는 리스트를 생성한 뒤 
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		// filelist로 넘어온 파일들을 하나씩 attachment객체로 생성한다
@@ -239,6 +256,7 @@ public class ExperienceController {
 		}else {
 			return "common/errorPage";
 		}
+		
 	}
 	
 	

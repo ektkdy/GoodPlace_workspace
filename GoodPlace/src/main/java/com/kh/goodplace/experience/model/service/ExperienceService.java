@@ -53,7 +53,8 @@ public interface ExperienceService {
 	int endRestExp(int exNo);
 	
 	
-	
+	// 10. 어태치먼트 테이블 삭제 서비스
+	int deleteAt(String deList);
 	
 	
 	

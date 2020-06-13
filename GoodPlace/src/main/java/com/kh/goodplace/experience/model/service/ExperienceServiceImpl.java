@@ -183,6 +183,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return null;
 	}
 
+	@Override
+	public int deleteAt(String deList) {
+		return expDao.deleteAt(sqlSession, deList);
+	}
+	
+	
+	
 	
 	
 	

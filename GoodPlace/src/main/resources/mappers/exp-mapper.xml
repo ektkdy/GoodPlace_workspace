@@ -420,5 +420,8 @@
 	</select>
 	<!-- 체험조회 끝 -->
 
-
+	<delete id="deleteAt" parameterType="string">
+		DELETE FROM ATTACHMENT
+		WHERE CHANGE_NAME = #{deList}
+	</delete>
 </mapper>

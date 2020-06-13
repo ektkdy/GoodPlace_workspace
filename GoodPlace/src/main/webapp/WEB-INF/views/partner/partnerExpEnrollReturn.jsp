@@ -263,7 +263,7 @@
 	            </div>
 	            <div id="btns">
                <span>
-                   <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
+                   <button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
 	                </span>
 	                <div style="text-align:right; margin-top: -40px;">
 	                    <button id="modify" onclick="expSubmit();">재심사요청</button>

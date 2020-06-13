@@ -90,7 +90,16 @@ button:hover{cursor:pointer}
 				                        		<td width="10%">심사중</td>
 				                        	</c:when>
 				                       	</c:choose>
-				                        <td width="32%">${r.roomsTitle}</td>
+				                        <td width="32%">${r.roomsTitle}
+				                        	<c:choose>
+				                        		<c:when test="${ r.status eq 1 }">
+				                        			<c:if test="${ r.poNo ne 0 }">
+						                        		<span style="color:red; font-size:5px; font-weight:bold;">POWER</span>
+						                        	</c:if>	
+				                        		</c:when>
+				                        	</c:choose>
+				                        
+				                        </td>
 				                        <!-- <td width="10%">50</td> -->
 				                        <td width="0%">
 			                        	    <button type=button class="detail_btn" onclick="location.href='roomDetailView.ro?rno='+${r.roNo}">보기</button>

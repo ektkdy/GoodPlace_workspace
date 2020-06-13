@@ -79,6 +79,9 @@
 	            <div id="stepOne">
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="exNo" value="${ e.exNo }">
+	            	<input type="hidden" name="atList" value="${ list }">
+	            	<input type="hiiden" id="count" name="count" value="">
+ 	            	
 	            	
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
 	                    1. 기본 정보</div>
@@ -211,18 +214,22 @@
 	                    <tr>
 	                        <th>* 상세 사진</th>
 	                        
-	                        
 	                        <td class="photo_btn" colspan="2">
 								<ul id="ul">
 									<c:forEach items="${ list }" var="at">
 										<li class="li">
-											<input class="fino" type="hidden" value="${ at.fiNo }">
+											<input type="text" class="fiName" value="${ at.changeName }">
 											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
 											<button class="del">x</button>
 										</li>
 									</c:forEach>
 								</ul>
 								<div id="photoDiv"></div>
+								
+								
+								<div id="delFino"></div>
+								
+								
 								<p class="hh">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
 							</td>
 	                    </tr>
@@ -269,7 +276,7 @@
 		                	</c:when>
 		                	<c:when test="${ e.status eq 4}"><!-- 휴면 -->
 		                		<button id="delete" onclick="expSubmit(1);">삭제하기</button>
-		                    	<button id="rest" onclick="expSubmit(4);">휴면해제하기</button>
+		                    	<button id="rest" onclick="expSubmit(4);">휴면해제하기</button> 
 		                	</c:when>
 		                	<c:otherwise><!-- 삭제 -->
 		                	
@@ -300,6 +307,7 @@
 			$("#updateExp").attr("action", "rest.exp");
 		}else if(num==3){	// 수정하기 클릭시
 			$("#updateExp").attr("action", "updateExp.exp");
+			$("#deleteList").val();
 		}else{				// 휴면해제하기
 			$("#updateExp").attr("action", "endRest.exp");
 		}
@@ -438,15 +446,16 @@
 <!-- 상세사진용  -->
 <script>
 	$(function(){
-		
-		$(".del").click(function(){
+		//fiNo = new Array(); 
+		var count = 0;
+		$(".del").click(function(){  
+			fino = $(this).siblings().eq(0).val();		// 삭제하려고 x를 누른 파일의 changeName
+			
+			$("#delFino").append('<input type="text" name="deList" value="' + fino + '">');
+			count++;
+			$("#count").val(count);
+			
 			$(this).parent(".li").remove();
-			
-			/* var arr = [];
-			arr.put
- */			
-			$(this).siblings(".fino");
-			
 			if($(".li").length != 5){
 				if($("#ul").children().is(".addBtn")){
 					
@@ -463,8 +472,6 @@
 			}
 		});
 	});
-	
-	
 </script>
    
 <!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
