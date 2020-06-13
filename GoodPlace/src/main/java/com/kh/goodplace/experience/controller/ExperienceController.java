@@ -627,9 +627,12 @@ public class ExperienceController {
 			case 4: expList.get(i).setExpCategoryString("스포츠&피트니스"); break;
 			case 5: expList.get(i).setExpCategoryString("야외활동"); break;
 			}
+			
+	    	// expList객체 체험태그의 표시형식 보완
+			expList.get(i).setExpTag("#" + (expList.get(i).getExpTag().replace(",", " #")));
 		}
 		
-		
+
 		
 		if(expList != null) {
 			mv.addObject("exp", exp);

@@ -210,28 +210,43 @@
 	            		});
 	            	});
 	            </script>
-            <!-- 체험검색 -->
-	            <form action="" post="get">
-	                <div class="experience input" style="display: none;">
-	                    <li class="liBox1">
-	                        <b>태그</b>
-	                        <input type="text" placeholder="체험 목록을 선택하세요" >
-	                    </li>
-	                    <li class="liBox1">
-	                        <b>날짜</b>
-	                        <input type="date" placeholder="날짜를 입력하세요" >
-	                    </li>
-	                    <li class="liBox1">
-	                        <b>키워드</b>
-	                        <input type="number" placeholder="키워드를 입력하세요">
-	                    </li>
-	                    <li style="margin: auto; text-align: center;">
-	                        <input id="sub"type="submit" value="체험검색">
-	                    </li>
-	                </div>
-	            </form>
-        	</div>
-    	</div><!-- /searchbar -->
+           	 	<!-- 체험검색 -->
+		            <form action="showExp.exp" id="expSearchArea" method="get">
+		                <div class="experience input" style="display: none;">
+		                    <li class="liBox1">
+		                        <b>태그</b>
+		                        <select name="expCategoryString" placeholder="체험 목록을 선택하세요">
+		                        	<option value="라이프 및 스타일">라이프 및 스타일</option>
+		                        	<option value="문화와 역사">문화와 역사</option>
+		                        	<option value="미술과 디자인">미술과 디자인</option>
+		                        	<option value="스포츠&피트니스">스포츠&피트니스</option>
+		                        	<option value="야외활동">야외활동</option>
+		                        </select>
+		                    </li>
+		                    <li class="liBox1">
+		                        <b>날짜</b>
+		                        <input type="date" name="expDateString" placeholder="날짜를 입력하세요" >
+		                    </li>
+		                    <li class="liBox1">
+		                        <b>키워드</b>
+		                        <input type="text" name="expTitle" placeholder="키워드를 입력하세요">
+		                    </li>
+		                    <li style="margin: auto; text-align: center;">
+		                        <input id="subExpInfo" type="button" value="체험검색">
+		                    </li>
+		                </div>
+		            </form>
+		            <script>
+		            	$(function(){
+		            		$("#expSearchArea #subExpInfo").click(function(){
+		
+		            			$("#expSearchArea").submit();
+		            			
+		            		});
+		            	});
+		            </script>
+		        </div>
+	    	</div><!-- /searchbar -->
 		
 		<script>
 	    function searchView1(){
