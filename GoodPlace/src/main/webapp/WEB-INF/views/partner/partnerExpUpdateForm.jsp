@@ -80,7 +80,7 @@
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="exNo" value="${ e.exNo }">
 	            	<input type="hidden" name="atList" value="${ list }">
-	            	<input type="hiiden" id="count" name="count" value="">
+	            	<input type="hidden" id="count" name="count" value="">
  	            	
 	            	
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
@@ -218,29 +218,25 @@
 								<ul id="ul">
 									<c:forEach items="${ list }" var="at">
 										<li class="li">
-											<input type="text" class="fiName" value="${ at.changeName }">
+											<input type="hidden" class="fiName" value="${ at.changeName }">
 											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
 											<button class="del">x</button>
 										</li>
 									</c:forEach>
+									<c:if test="${ list.size() ne 5 }">
+										<button type="button" class="addBtn">+</button>
+									</c:if>
 								</ul>
 								<div id="photoDiv"></div>
 								
 								
-								<div id="delFino"></div>
+								<div id="delChangeName"></div>
 								
 								
 								<p class="hh">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
 							</td>
 	                    </tr>
-	                    <tr>
-	                        <th>* 예약 설정</th>
-	                        <td>
-	                        	<input type="number" name="deadline" value="${ e.deadline }" id="deadline" min=1 style="padding-rignt:5px; text-align:right;">시간 전 부터 예약을 받지 않겠습니다.
-	                            <p class="hh">• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
-	                                	나중에 언제든지 변경하실수 있습니다.</p>
-	                        </td>
-	                    </tr>
+	                    
 	                    <tr>
 	                        <th>* 요금 책정</th>
 	                        <td>
@@ -446,16 +442,26 @@
 <!-- 상세사진용  -->
 <script>
 	$(function(){
-		//fiNo = new Array(); 
-		var count = 0;
+
+		var count = 0;	// 누른 x의 갯수
 		$(".del").click(function(){  
-			fino = $(this).siblings().eq(0).val();		// 삭제하려고 x를 누른 파일의 changeName
 			
-			$("#delFino").append('<input type="text" name="deList" value="' + fino + '">');
+			// 삭제하려고 x를 누른 파일의 changeName을 변수로 선언
+			delChangeName = $(this).siblings().eq(0).val();		
+			
+			// name이 deList인 input요소에 x를 누른 파일의 changeName값을 넣어 폼안쪽에 넣어준다
+			$("#delChangeName").append('<input type="hidden" name="deList" value="' + delChangeName + '">');
+			
+			// 누른 x의 갯수를 1증가시킨다
 			count++;
+			
+			// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
 			$("#count").val(count);
 			
+			// 파일명+x버튼 한 줄을 삭제한다
 			$(this).parent(".li").remove();
+			
+			// li길이가 5가 아닐 경우 파일추가할수 있는 버튼을 생성한다
 			if($(".li").length != 5){
 				if($("#ul").children().is(".addBtn")){
 					
@@ -465,8 +471,11 @@
 			}
 		});
 		
+		// 동적으로 만들어진 요소는 on메소드를 이용하여 이벤트 작성
 		//$(".addBtn").click(function(){
 		$("#ul").on("click", ".addBtn", function(){
+			
+			// name이 file인 input요소는 최대5개까지 생성
 			if($("input[name=file]").length < (5-$(".li").length)){
 				$("#photoDiv").append('<input type="file" name="file">');
 			}
