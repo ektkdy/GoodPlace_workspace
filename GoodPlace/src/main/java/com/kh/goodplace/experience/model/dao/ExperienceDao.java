@@ -183,8 +183,8 @@ public class ExperienceDao {
 			return  (ArrayList)sqlSession.selectList("expMapper.selectRvExpCancelList", userNo, rowBounds);
 		}
 
-		public Experience reservationDetailView(SqlSessionTemplate sqlSession, int epno) {
-			return sqlSession.selectOne("expMapper.reservationDetailView", epno);
+		public Experience reservationExpDetailView(SqlSessionTemplate sqlSession, int epno) {
+			return sqlSession.selectOne("expMapper.reservationExpDetailView", epno);
 		}
 		
 	

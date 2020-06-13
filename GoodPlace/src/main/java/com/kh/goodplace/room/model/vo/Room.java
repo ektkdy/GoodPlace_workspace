@@ -85,7 +85,7 @@ public class Room {
 	private String payDate;		// 결제날짜
 	private int addPoint;		// 추가포인트
 	private String CheckInTime;	// 예약자가 직접 입력한 체크인시간
-	private int reserveStatus;	// 확정대기(1),확정(2),여행완료(3)
+	private int reserveStatus;	// 확정대기(1),확정(2),여행완료(3),취소(4)
 	private int usePoint;		// 사용포인트
 	private int people;			// 인원수
 	private String concept;		// 여행컨셉
@@ -100,6 +100,7 @@ public class Room {
 	private String detailImg2;  // Attachment 테이블에 담겨있는 숙소상세이미지2
 	private String detailImg3;  // Attachment 테이블에 담겨있는 숙소상세이미지3
 	private String detailImg4;  // Attachment 테이블에 담겨있는 숙소상세이미지4
+	private int days;
 	
 	/* Member테이블  + Partner테이블 */
 	private String paPofile;	// 프로필사진 변경이름

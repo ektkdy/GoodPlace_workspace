@@ -39,7 +39,7 @@
 
 
 /* step icon */
-.step_tb tbody tr td span{float:left; width: 80px; height: 80px; background: url(../image/reservation_step.jpg) no-repeat;}
+.step_tb tbody tr td span{float:left; width: 80px; height: 80px; background: url(../../images/partner/reservation_step.jpg) no-repeat;}
 .step_tb tbody tr td .step_img1_on{background-position: 0 0;}
 .step_tb tbody tr td .step_img1_off{background-position: -80px 0;}
 .step_tb tbody tr td .step_img2_on{background-position: 0 -80px}

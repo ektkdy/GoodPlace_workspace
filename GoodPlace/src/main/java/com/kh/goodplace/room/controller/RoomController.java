@@ -863,7 +863,45 @@ public class RoomController {
 		    return jsonString;
 		}
 		
-
+		//디테일
+		@RequestMapping("reservationRoomDetailView.rv")
+		public String reservationRoomDetailView(int rpNo, Model model) {
+			
+			Room r = rService.reservationRoomDetailView(rpNo);
+			
+			model.addAttribute("r", r);
+			
+			return "partner/partnerReservationRoomDetailView";
+			
+		}
+		
+		//예약확정하기
+		@RequestMapping("roomConfirm.rv")
+		public String roomConfirm(int rpNo, Model model) {
+			System.out.println(rpNo);
+			int result = rService.roomConfirm(rpNo);
+			
+			if(result>0) {
+				return "redirect:rvRoomList.rv?currentPage=1";
+			}else {
+				return "common/errorPage";
+			}
+			
+		}
+		
+		//예약취소하기
+		@RequestMapping("roomCancel.rv")
+		public String roomCancel(int rpNo, Model model) {
+			System.out.println(rpNo);
+			int result = rService.roomCancel(rpNo);
+			
+			if(result>0) {
+				return "redirect:rvRoomList.rv?currentPage=1";
+			}else {
+				return "common/errorPage";
+			}
+			
+		}
 	// ------------------------------ 파트너 일정관리 시작 ----------------------------------
 		
 		@RequestMapping("calendarView.ca")

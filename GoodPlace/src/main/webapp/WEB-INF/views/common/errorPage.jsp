@@ -14,7 +14,10 @@
 
     <br>
     <div align="center">	
-        <img src="https://cdn2.iconfinder.com/data/icons/oops-404-error/64/208_balloon-bubble-chat-conversation-sorry-speech-512.png" width="300">
+        <!--  <img src="https://cdn2.iconfinder.com/data/icons/oops-404-error/64/208_balloon-bubble-chat-conversation-sorry-speech-512.png" width="300">
+		-->
+		<img src="${ pageContext.servletContext.contextPath }/resources/images/errorPage.jpg" >
+		
         <br><br>
         <h1 style="font-weight:bold">${ msg }</h1>
     </div>
