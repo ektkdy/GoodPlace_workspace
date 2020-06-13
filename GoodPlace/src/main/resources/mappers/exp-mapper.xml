@@ -429,7 +429,8 @@
 	<!-- 체험조회 시작 -->
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
-		  FROM EXPERIENCE
+		  FROM EXPERIENCE E
+          JOIN MEMBER M USING(USNO)
 		 WHERE EXP_CATEGORY=#{expCategory}
            AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
          ORDER BY EXNO

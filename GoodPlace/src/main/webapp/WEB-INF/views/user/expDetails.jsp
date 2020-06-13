@@ -8,15 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>체험검색 > 체험상세</title>
 
-    <!-- 슬라이더를 생성하는 부분 -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
-
-     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
-
     <!-- Swiper JS -->
     <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+    
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
+
+
     
 	<!-- 결제 API 관련 -->
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
@@ -189,22 +187,17 @@
                     <div style="width:75%;" class="marginBottom_60px">
                         <div class="fullWidth">
                             <h3 style="margin:10px 0;">소개</h3>
-                            <p>
-                                규정된 시간 외 체크인 시 사전에 협의 요망.<br>
-                                23시 이후 귀가 시 이웃 주민들에게 피해를 주지 않도록 조용하게 이동 바랍니다.<br>
-                                짐보관은 사전에 문의부탁드립니다.<br>
-                                모든 고객의 편의를 위하여 예약된 입실 인원 외 방문을 제한합니다.<br>
-                                귀중품의 파손 및 현금분실 등은 숙박업소에서 책임지지 않습니다.<br>
-                                숙소 내 금연/금주입니다.<br>
-                                예약 확정 후 받아보시는 카톡ID로 자세한 약도 등의 안내가 발송됩니다.<br>
-                            </p>
-                            <h3 style="margin:10px 0;">포함사항</h3>
-                            <p>
-                                규정된 시간 외 체크인 시 사전에 협의 요망.<br>
-                                23시 이후 귀가 시 이웃 주민들에게 피해를 주지 않도록 조용하게 이동 바랍니다.<br>
-                                짐보관은 사전에 문의부탁드립니다.<br>
-                                모든 고객의 편의를 위하여 예약된 입실 인원 외 방문을 제한합니다.<br>
-                            </p>
+                            <p>${ exp.expContent }</p>
+                            <c:choose>
+	                            <c:when test="${exp.supplies ne null}">
+	                            	<h3 style="margin:10px 0;">준비물</h3>
+	                            	<p>${ exp.supplies }</p>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<h3 style="margin:10px 0;">준비물</h3>
+	                            	<p>별도의 준비물이 필요 없습니다.</p>
+	                            </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="fullWidth"> 
@@ -215,22 +208,15 @@
                             <div class="fullWidth">
                                 <div class="p_profileArea">
                                     <div style="width:50%; text-align: center;">
-                                        <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg2.jpg" class="p_profile"/>
+                                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ exp.paPofile }" class="p_profile"/>
                                     </div>
                                     <div style="width:50%; text-align:center; height:166px; padding:20px 0;">
-                                        <h1>파트너명</h1><br>
+                                        <h1>${ exp.paName }</h1><br>
                                         <div class="buttonStyle1" style="margin-left:21.8%;"><a style="display:inline-block; width:150px; height:50px; font-size:20px; padding-top:20px;">문의하기</a></div>
                                     </div>  
                                 </div><hr><br>
                                 <div class="fullWidth">
-                                    <p>
-                                        홍플에대한 설명 홍플에대한 설명문구1줄<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                        하지만 이렇게 글자를 무작위로 나열하는 것은 아무런 의미를<br>
-                                    </p>
+                                    <p>${ exp.partnerIntro }</p>
                                 </div>
                             </div>
                         </div>  
@@ -245,7 +231,7 @@
 
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">30,000원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;">${ exp.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div id="getPeriod" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/calendarLetter.jpg" alt="날짜선택"/>
@@ -257,24 +243,20 @@
                         <img src="${pageContext.request.contextPath}/resources/images/user/chooseTime.jpg" alt="시간선택"/>
                     </div>
                     <div id="timeArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
+                        
                         <div style="width:100%; height:38px; padding:5px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136); font-weight: 900;">
                             <div style="width:30%; text-align:right;">시작 ~ 끝</div><div style="width:70%; text-align:center;">(남은자리/최대인원)</div>
                         </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            <div style="width:55%; text-align:right;">10:00 ~ 11:00</div><div style="width:45%; text-align:center;">(3/5)</div>
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            <div style="width:55%; text-align:right;">11:30 ~ 12:30</div><div style="width:45%; text-align:center;">(2/5)</div>
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            <div style="width:55%; text-align:right;">13:00 ~ 14:00</div><div style="width:45%; text-align:center;">(1/5)</div>
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px; color:black;" class="buttonStyle2">
-                            <div style="width:55%; text-align:right;">14:30 ~ 15:30</div><div style="width:45%; text-align:center;">(0/5)</div>
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            <div style="width:55%; text-align:right;">16:00 ~ 17:00</div><div style="width:45%; text-align:center;">(4/5)</div>
-                        </div>
+                        
+                        <c:forEach items="${ exp.expClass }" var="classInfo" end="${ exp.expClassCount }">
+                        	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
+                           		<div style="width:55%; text-align:right;">${ classInfo }</div><div class="peopleInfo" style="width:45%; text-align:center;"></div>
+                        	</div>
+                        </c:forEach>
+                       	
+                    	
+                        
+                        
                     </div>
                     <div id="getPeople" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 8px 0 0 34px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
@@ -469,6 +451,12 @@
         $('#peopleArea>div').mouseleave(function(){
                 $(this).toggleClass('hover');
         });
+        
+        // 체험 예약가능한 인원반영
+       	(function(){
+        	console.log("여기 : " + $(".peopleInfo"));
+		});
+        
     </script>
 
     <!-- /content -->
