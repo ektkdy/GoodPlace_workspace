@@ -39,10 +39,10 @@
 <body>
     <div id="header">
         <span id="gotomain">
-            <a href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/배경없는_굿플로고.png" id="logo" alt="logo" ><p class="title_name">관리자</p></a>
+            <a href="adminForm.me"><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/배경없는_굿플로고.png" id="logo" alt="logo" ><p class="title_name">관리자</p></a>
         </span>
         <span id="p_info">
-            <a href="" style="float:left; "><img src="#" class="userphoto"><p>나관리</p></a><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/arrow.png" class="arrow">
+            <a href="" style="float:left; "><img src="${pageContext.request.contextPath}/resources/images/admin/admin.jpg" class="userphoto"><p>나관리</p></a><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/arrow.png" class="arrow">
         </span>
         <div id="slide_menu">
             <ul>
