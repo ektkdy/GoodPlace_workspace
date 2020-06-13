@@ -2,6 +2,7 @@ package com.kh.goodplace.experience.model.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,8 +67,10 @@ public class Experience {
 	
 	/* DB에는 없지만 추가한 필드 */
 	private String expDateString;	// 체험날짜
-	
+	private ArrayList<Integer> expCountPerCategory;	// 카테고리별 등록된 체험 개수
+	private ArrayList<String> expCategoryList;		// 카테고리명 뷰에 표시하는 용도
 	/* DB에도 추가한 필드 */
 	private int expClassCount;		// 하루에 진행되는 수업 개수
 
+	
 }

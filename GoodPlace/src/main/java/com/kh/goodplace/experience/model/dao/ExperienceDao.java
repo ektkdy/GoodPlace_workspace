@@ -225,9 +225,10 @@ public class ExperienceDao {
 	public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
 	}
-
-
 	
+	public ArrayList<Integer> selectExpCountUser(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpCountUser");
+	}
 	
 	
 	

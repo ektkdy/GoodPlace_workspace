@@ -134,7 +134,7 @@
                         <select name="expCategoryString" placeholder="체험 목록을 선택하세요">
                         	<option value="라이프 및 스타일">라이프 및 스타일</option>
                         	<option value="문화와 역사">문화와 역사</option>
-                        	<option value="학술과 디자인">학술과 디자인</option>
+                        	<option value="미술과 디자인">미술과 디자인</option>
                         	<option value="스포츠&피트니스">스포츠&피트니스</option>
                         	<option value="야외활동">야외활동</option>
                         </select>

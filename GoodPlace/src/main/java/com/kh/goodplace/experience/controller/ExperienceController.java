@@ -579,8 +579,22 @@ public class ExperienceController {
 	//------- 체험조회 시작 ---------------------------------------------------
 	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("showExp.exp")
-	public ModelAndView showExp(String expCategoryString, String expDateString, String expTitle, Experience exp, ModelAndView mv) {
-		//System.out.println("expCategory : " + expCategory + ", " + "expDate : " + expDate + ", " + "expTitle : " + expTitle);
+	public ModelAndView showExp(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
+		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
+		System.out.println("지점1");
+		 
+		// 카테고리별 체험 등록 개수 set
+		Experience exp = new Experience();
+		exp.setExpCountPerCategory(expService.selectExpCountUser());
+		
+		// 카테고리명 set
+		ArrayList<String> expCategoryList = new ArrayList<>();
+		expCategoryList.add("라이프 및 스타일");
+		expCategoryList.add("문화와 역사");
+		expCategoryList.add("미술과 디자인");
+		expCategoryList.add("스포츠&피트니스");
+		expCategoryList.add("야외활동");
+		exp.setExpCategoryList(expCategoryList);
 		
 		// expCategory 필드 설정
 		int expCategory = 0;
@@ -588,7 +602,7 @@ public class ExperienceController {
 			expCategory = 1;
 		}else if(expCategoryString.equals("문화와 역사")){
 			expCategory = 2;
-		}else if(expCategoryString.equals("학술과 디자인")){
+		}else if(expCategoryString.equals("미술과 디자인")){
 			expCategory = 3;
 		}else if(expCategoryString.equals("스포츠&피트니스")){
 			expCategory = 4;
@@ -604,8 +618,22 @@ public class ExperienceController {
 		// 검색한 조건에 해당하는 exp리스트 조회
 		ArrayList<Experience> expList = expService.selectExpListUser(exp);
 		
+		if(expList != null) {
+			mv.addObject("exp", exp);
+			mv.addObject("expList", expList);
+			mv.setViewName("user/exp");
+		}else {
+			mv.addObject("msg", "체험리스트 조회 실패!!");
+			mv.setViewName("common/errorPage");
+		}
+		
+		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
+		System.out.println(" expList : " + expList);
+		
 		return mv;
 	}
+	
+	//------- 체험조회 끝 ---------------------------------------------------
 	
 	//예약상세
 	@RequestMapping("reservationExpDetailView.rv")

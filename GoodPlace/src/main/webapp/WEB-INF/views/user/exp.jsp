@@ -131,32 +131,24 @@
 
     <!-- content -->
     <div id="content">
+    	<!-- 체험 카테고리, 카테고리별 등록 개수 -->
         <div style="width:100%; height:180px;">
             <div class="categoryPile">
-                <div class="smallCategory">
-                    <h3 class="expCategory">라이프 및 스타일</h3>
-                    <p class="expCount expCategory">체험 10개</p>
-                </div>
-                <div class="smallCategory">
-                    <h3 class="expCategory">문화와 역사</h3>
-                    <p class="expCount">체험 10개</p>
-                </div>
-                <div class="smallCategory">
-                    <h3 class="expCategory">미술과 디자인</h3>
-                    <p class="expCount">체험 10개</p>
-                </div>
-                <div class="smallCategory">
-                    <h3 class="expCategory">스포츠&피트니스</h3>
-                    <p class="expCount">체험 10개</p>
-                </div>
-                <div class="smallCategory">
-                    <h3 class="expCategory">야외활동</h3>
-                    <p class="expCount">체험 10개</p>
-                </div>
+            	<c:forEach items="${ exp.expCountPerCategory }" var="count" varStatus="status">
+	                <div class="smallCategory">
+	                	<c:if test="${status.index eq 0}"><h3 class="expCategory">라이프 및 스타일</h3></c:if>
+	                    <c:if test="${status.index eq 1}"><h3 class="expCategory">문화와 역사</h3></c:if>
+	                    <c:if test="${status.index eq 2}"><h3 class="expCategory">미술과 디자인</h3></c:if>
+	                    <c:if test="${status.index eq 3}"><h3 class="expCategory">스포츠&피트니스</h3></c:if>
+	                    <c:if test="${status.index eq 4}"><h3 class="expCategory">야외활동</h3></c:if>
+	                    <p class="expCount expCategory">체험 ${ count }개</p>
+	                </div>
+                </c:forEach>
             </div>
         </div>
         
         <div style="width:100%;">
+        
             <div style="width:100%; height:58px;">
                 <div style="width:50%; height:100%; padding-top:14px;"><h2>모든 체험</h2></div>
                 <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a class="sort">가격 높은 순</a></div>
@@ -258,8 +250,6 @@
                     </div>
                 </div>
             </div>
-
-
             
         </div>
 

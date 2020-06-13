@@ -418,8 +418,27 @@
 		SELECT *
 		  FROM EXPERIENCE
 		  LEFT JOIN EXPPAY USING(EXNO)
-		 WHERE EXNO=#{exNo}
+		 WHERE EXP_CATEGORY=#{expCategory}
+           AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
+         ORDER BY EXNO
 	</select>
+	
+	<select id="selectExpCountUser" resultType="_int">
+		SELECT COUNT(*)
+		  FROM EXPERIENCE
+		 GROUP BY EXP_CATEGORY
+		 ORDER BY EXP_CATEGORY
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 체험조회 끝 -->
 
 	<delete id="deleteAt" parameterType="string">
