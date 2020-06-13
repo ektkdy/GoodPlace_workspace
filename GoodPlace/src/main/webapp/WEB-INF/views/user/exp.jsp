@@ -154,27 +154,32 @@
                 <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a class="sort">가격 높은 순</a></div>
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
+            
 			<c:forEach items="${ expList }" var="exp" varStatus="status">
 	            <div style="width:100%;">
 	                <div style="width:94%;"  class="expArea">
 	                    <div style="width:26%; height:180px;">
 	                        <img src="${pageContext.request.contextPath}/resources/images/user/${ exp.changeName } width="100%;" height="100%;"/>
 	                    </div>
-	                    <div style="width:37%; height:180px;">
+	                    <div style="height:auto; width:830px; float:left;">
+	                    <div style="width:50%; height:auto;">
 	                        <h3 class="exp1">${ exp.expCategoryString }</h3>
 	                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
-	                        <h3 class="exp1">홍길동</h3>
-	                        	
-	                        <h3 class="exp1">2시간 소요 * 장비포함</h3>
+	                        <h3 class="exp1">${ exp.paName }</h3>
+	                        <h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">#태그1 #태그2</h3>	
+	                        <h3 class="exp1">${ exp.useTime }시간 소요</h3>
+	                        <h3 class="exp1">준비물 : ${ exp.supplies }</h3>
 	                    </div>
-	                    <div style="width:37%; height:180px;" class="alignRight">
+	                    <div style="width:50%;" class="alignRight">
 	                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
-	                        <br><br><br>
-	                        <h3 class="exp3">1인당 6,0000원</h3>
+	                        <br><br><br><br><br>
+	                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+	                    </div>
 	                    </div>
 	                </div>
 	            </div>
           	</c:forEach>
+          	
             <div id="expArea2" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
