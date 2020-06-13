@@ -423,9 +423,8 @@
 	<!-- 체험조회 시작 -->
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
-		  FROM EXPERIENCE E
-          LEFT JOIN MEMBER M USING(USNO)
-          LEFT JOIN PARTNER P USING (PANO)
+		  FROM EXPERIENCE
+		  LEFT JOIN EXPPAY USING(EXNO)
 		 WHERE EXP_CATEGORY=#{expCategory}
            AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
          ORDER BY EXNO
@@ -439,7 +438,13 @@
 	</select>
 	
 	
-	
+	<select id="selectExpUser" parameterType="_int" resultMap="ExperienceResultSetUser">
+		SELECT *
+		  FROM EXPERIENCE E
+          LEFT JOIN MEMBER M USING(USNO)
+          LEFT JOIN PARTNER P USING (PANO)
+		 WHERE EXNO=#{exNo}
+	</select>
 	
 	
 	

@@ -230,6 +230,11 @@ public class ExperienceDao {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpCountUser");
 	}
 	
+	public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
+		System.out.println("selectExpUser 다오까지 옴");
+		return sqlSession.selectOne("expMapper.selectExpUser", exNo);
+	}
+	
 	
 	
 	//------------[체험조회 끝]------------

@@ -18,7 +18,6 @@
     <!-- Swiper JS -->
     <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
     
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
     <style>
         /* content 스타일 시작*/
        	/* 여백 초기화 */
@@ -156,7 +155,7 @@
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
             
 			<c:forEach items="${ expList }" var="exp" varStatus="status">
-	            <div style="width:100%;">
+	            <div style="width:100%;" class="expContainer">
 	                <div style="width:94%;"  class="expArea">
 	                    <div style="height:216px; width:292px;">
 	                        <img src="${pageContext.request.contextPath}/resources/images/user/${ exp.changeName }" width="100%;" height="100%;"/>
@@ -178,13 +177,13 @@
 	                    </div>
 	                </div>
 	                <form action="">
-	                	<input type="hidden" name="exNo"/>
+	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
 	                </form>
 	            </div>
           	</c:forEach>
             
         </div>
-
+		
         <!-- 페이징 바 -->
         <div class="pagingBar">
             <button>&lt;</button>
@@ -215,6 +214,15 @@
                 }
             });
         });
+    
+    	// 체험상세 페이지로 이동
+    	$(".expContainer").click(function(){
+    		//console.log("expContainer클릭됨");
+    		var exNo = $(this).find("input[name=exNo]").val();
+    		//console.log(exNo);
+    		location.href="showExp.exp?exNo=" + exNo;
+    	});
+    	
     </script>
 	
     <!-- footer -->

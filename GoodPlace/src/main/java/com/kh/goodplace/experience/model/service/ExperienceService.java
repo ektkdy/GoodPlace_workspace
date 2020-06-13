@@ -111,6 +111,8 @@ public interface ExperienceService {
 	//------------[체험조회 시작]------------
 	ArrayList<Experience> selectExpListUser(Experience exp);
 	ArrayList<Integer> selectExpCountUser();
+	Experience selectExpUser(int exNo);
+	
 	//------------[체험조회 끝]------------
 
 }

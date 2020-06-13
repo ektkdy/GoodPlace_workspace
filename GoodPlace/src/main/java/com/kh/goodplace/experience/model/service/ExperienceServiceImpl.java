@@ -192,7 +192,10 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return expDao.deleteAt(sqlSession, deList);
 	}
 	
-	
+	@Override
+	public Experience selectExpUser(int exNo) {
+		return expDao.selectExpUser(sqlSession, exNo);
+	}
 	
 	
 	

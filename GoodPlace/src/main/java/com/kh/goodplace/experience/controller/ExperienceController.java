@@ -595,8 +595,8 @@ public class ExperienceController {
 	
 	//------- 체험조회 시작 ---------------------------------------------------
 	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
-	@RequestMapping("showExp.exp")
-	public ModelAndView showExp(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
+	@RequestMapping("showExpList.exp")
+	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
 		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
 		System.out.println("지점1");
 		 
@@ -665,6 +665,48 @@ public class ExperienceController {
 		
 		return mv;
 	}
+
+	@RequestMapping("showExp.exp")
+	public String showExp(int exNo, ModelAndView mv) {
+		System.out.println("지점 2: exNo : " + exNo);
+		
+		Experience exp = expService.selectExpUser(exNo);
+		
+		System.out.println(exp);
+		
+		// 수업교시 계산 후 set
+		int startHour = Integer.parseInt(exp.getStartTime().substring(0, 2));
+		int startMinute = Integer.parseInt(exp.getStartTime().substring(3, 4));
+		int intervalMinute = Integer.parseInt(exp.getIntervalTime());
+		int useTime = Integer.parseInt(exp.getUseTime());
+		
+		double startMinuteDouble = 0.0;
+		double intervalMinuteDouble = 0.0;
+		
+		// 이 부분 파트너딴과 안 맞으면 에러 난다!!!!!!!
+		switch(startMinute) {
+		case 3: startMinuteDouble = 0.5; break;
+		}
+		
+		switch(intervalMinute) {
+		case 30: intervalMinuteDouble = 0.5; break;
+		case 60: intervalMinuteDouble = 1.0; break;
+		case 120: intervalMinuteDouble = 2.0; break;
+		case 180: intervalMinuteDouble = 3.0; break;
+		default: break;
+		}
+		
+		double startTimeCal = startHour + startMinuteDouble;
+		double nextClass = startTimeCal + useTime + intervalMinuteDouble;
+		
+		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute);
+		System.out.println("startMinuteDouble : " + startMinuteDouble + ", intervalMinuteDouble : " + intervalMinuteDouble);
+		System.out.println("startTimeCal : " + startTimeCal + ", nextClass : " + nextClass);
+		
+		return "";
+		//return mv;
+	}
+	
 	
 	//------- 체험조회 끝 ---------------------------------------------------
 	
