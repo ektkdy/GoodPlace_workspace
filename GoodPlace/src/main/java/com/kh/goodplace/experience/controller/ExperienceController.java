@@ -415,6 +415,30 @@ public class ExperienceController {
 	
 	
 	//------------[체험관리]------------
+	
+    @RequestMapping("aExpDetail.ex")
+    public ModelAndView selectExpmWaitDetail(int eno, ModelAndView mv)
+    {	
+    	
+    	Experience e = expService.selectExpmWaitDetail(eno);
+    	ArrayList<Experience> list = expService.selectExp(eno);
+        if(e != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("e", e);
+            mv.addObject("list", list);
+            mv.setViewName("admin/adminExpListDetail");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    	
+    }
+	
 	@RequestMapping("aExpWaitList.ex")
 	public String selectExpWaitList(int currentPage, Model model) {
 		

@@ -165,15 +165,22 @@
                         <tr>
                             <th>* 대표 사진</th>
                             <td>
-                                <input type="file">
+                                <img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
+	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
                                 <h5 class="h5Cl enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
                             </td>
                         </tr>
                         <tr>
                             <th>* 상세 사진</th>
                             <td>
-                                <input type="file" value="사진등록">
-                                <h5 class="h5Cl enrollInfo">• 1장 이상의 상세 사진을 등록해주세요. 최대 10장까지 가능합니다.</h5>
+                            	<ul id="ulExp">
+									<c:forEach items="${ list }" var="at">
+										<li class="liExp">
+											<input type="hidden" class="fiName" value="${ at.changeName }">
+											<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
+										</li>
+									</c:forEach>
+								</ul>
                             </td>
                         </tr>
                         <tr>

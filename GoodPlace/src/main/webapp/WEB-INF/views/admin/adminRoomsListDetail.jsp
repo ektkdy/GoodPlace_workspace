@@ -62,14 +62,14 @@
                     <span>숙소관리</span>&gt;
                 </a>
                 <a href="#">
-                    <span>숙소등록</span>
+                    <span>숙소승인</span>
                 </a>
             </div>
             <br clear="both">
             <div class="con" style="width:980px; color:#000">
                 <span id="page_title">
                     <img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;">
-                    <p class="title_tt">숙소등록</p>
+                    <p class="title_tt">숙소승인</p>
                 </span>
                 <br clear="both">
                 <div class="con2">
@@ -97,7 +97,7 @@
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
                                 <td rowspan="2"><div style="width: 150px; height: 150px; border:1px solid black;">
-                                    <img src="../image/집로고.jpg" style="vertical-align: middle; width:100%; height: 100%;">
+                                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }" style="vertical-align: middle; width:100%; height: 100%;">
                                 </div></td>
 
                             </tr>
@@ -105,15 +105,20 @@
                                 <td class="enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 승인 거절 할 수 있습니다.</td>
                             </tr>
                             <tr>
-                                <th rowspan="5">* 상세사진</th>
-                            </tr>
-                            <tr><td colspan="2">썸네일.png</td></tr>
-                            <tr><td colspan="2">썸네일.png</td></tr>
-                            <tr><td colspan="2">썸네일.png</td></tr>
-                            <tr><td colspan="2">썸네일.png</td></tr>
-
-                            
-                            <tr>
+                           <tr class="pdBtom">
+                                <th>* 상세사진</th>
+	                            <td class="photo_btn" colspan="2">
+									<ul id="ul">
+										<c:forEach items="${ list }" var="at">
+											<li class="li">
+												<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
+											</li>
+										</c:forEach>
+									</ul>
+									<div id="photoDiv"></div>
+									<p class="enrollInfo">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
+								</td>
+							</tr>
                                 <th rowspan="2"  style="padding-top: 30px;">* 예약 설정</th>
                                 <td colspan="2"  style="padding-top: 30px;"> <strong>${ r.deadline }</strong> 시간 전 부터 예약을 받지 않겠습니다.</td>
                             </tr>

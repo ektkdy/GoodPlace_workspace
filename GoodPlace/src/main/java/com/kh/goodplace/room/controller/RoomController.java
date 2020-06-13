@@ -553,11 +553,12 @@ public class RoomController {
     {	
     	
     	Room r = rService.selectRoomWaitDetail(rno);
-    	
+    	ArrayList<Attachment> list = rService.selectAt(rno);
         if(r != null)
         { // 게시글 상세조회 성공
             
             mv.addObject("r", r);
+            mv.addObject("list", list);
             mv.setViewName("admin/adminRoomsListDetail");
         }
         else
