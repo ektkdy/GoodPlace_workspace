@@ -629,7 +629,8 @@ public class ExperienceController {
     }
 	
 	//------- 체험조회 시작 ---------------------------------------------------
-	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
+    
+	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
 	@RequestMapping("showExpList.exp")
 	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
 		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
@@ -702,14 +703,12 @@ public class ExperienceController {
 	}
 
 	@RequestMapping("showExp.exp")
-	public String showExp(int exNo, ModelAndView mv) {
+	public ModelAndView showExp(int exNo, ModelAndView mv) {
 		System.out.println("지점 2: exNo : " + exNo);
 		
 		Experience exp = expService.selectExpUser(exNo);
 		
 		System.out.println(exp);
-		
-		
 		
 		// 수업교시 계산 후 set
 		int startTimeFirstLetterFlag = 0; // 운영시작시간의 첫글자 에 따라 값이 변하는 상태 변수 -> 경우1_첫 글자가 "0" : 0 / 경우2_첫 글자가 "1" 혹은 "2" : 1 
@@ -734,7 +733,7 @@ public class ExperienceController {
 		double startMinuteDouble = 0.0;
 		double intervalMinuteDouble = 0.0;
 		
-		// 이 부분 조건들이 파트너딴과 안 맞으면 에러 난다!!!!!!!
+		// 조건들이 파트너딴과 안 맞으면 에러 난다!!!!!!!
 		switch(startMinute) {
 		case 3: startMinuteDouble = 0.5; break;
 		}
@@ -792,13 +791,39 @@ public class ExperienceController {
 			}
 		}
 
+		exp.setExpClass(expClass);
+		
 		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute +", useTime : " + useTime);
 		System.out.println("startMinuteDouble : " + startMinuteDouble + ", intervalMinuteDouble : " + intervalMinuteDouble);
 		System.out.println("startTimeCal : " + startTimeCal + ", nextClass : " + nextClass);
 		System.out.println("스트링으로 변환 -> " + "startTimeCal : " + String.valueOf(startTimeCal) + ", nextClass : " + String.valueOf(nextClass));
 		System.out.println("expClass : " + expClass);
 	
-		return "";
+		// 접수된 인원 계산후 set
+		ArrayList<Integer> acceptedPeopleList = new ArrayList<>();
+		
+		for(int i=0; i<exp.getExpClassCount(); i++) {
+			int peopleTotalPerClass = 0;
+			ArrayList<Experience> exppayListPerClassNo = expService.getAcceptedPeople(exp.getExNo(), (i+1));
+			for(int y=0; y<exppayListPerClassNo.size(); y++) {
+				peopleTotalPerClass += exppayListPerClassNo.get(y).getPeople();
+			}
+			acceptedPeopleList.add(peopleTotalPerClass);
+		}
+		
+		exp.setAcceptedPeople(acceptedPeopleList);
+		
+		System.out.println("acceptedPeople : " + acceptedPeopleList);
+		
+		if(exp != null) {
+			mv.addObject("exp", exp);
+			mv.setViewName("user/expDetails");
+		}else {
+			mv.addObject("msg", "체험상세 페이지 조회 실패!!");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
 		
 	}
 	

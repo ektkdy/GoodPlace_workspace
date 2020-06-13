@@ -231,10 +231,15 @@ public class ExperienceDao {
 	}
 	
 	public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
-		System.out.println("selectExpUser 다오까지 옴");
 		return sqlSession.selectOne("expMapper.selectExpUser", exNo);
 	}
 	
+	public ArrayList<Experience> getAcceptedPeople(SqlSessionTemplate sqlSession, int exNo, int expClassNo) {
+		Experience exp = new Experience();
+		exp.setExNo(exNo);
+		exp.setExpClassNo(expClassNo);
+		return (ArrayList)sqlSession.selectList("expMapper.selectAcceptedPeople", exp);
+	}
 	
 	
 	//------------[체험조회 끝]------------

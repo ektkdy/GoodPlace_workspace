@@ -140,7 +140,7 @@
         /* content 끝*/
     </style>
 </head>
-	
+<body>
     <!-- header -->
 	<jsp:include page="../common/menubar.jsp"/>
    

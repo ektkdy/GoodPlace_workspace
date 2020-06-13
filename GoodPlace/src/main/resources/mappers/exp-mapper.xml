@@ -430,7 +430,6 @@
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPERIENCE
-		  LEFT JOIN EXPPAY USING(EXNO)
 		 WHERE EXP_CATEGORY=#{expCategory}
            AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
          ORDER BY EXNO
@@ -443,7 +442,6 @@
 		 ORDER BY EXP_CATEGORY
 	</select>
 	
-	
 	<select id="selectExpUser" parameterType="_int" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPERIENCE E
@@ -452,6 +450,13 @@
 		 WHERE EXNO=#{exNo}
 	</select>
 	
+	<select id="selectAcceptedPeople" parameterType="Experience" resultMap="ExperienceResultSetUser">
+		SELECT *
+		  FROM EXPPAY
+		 WHERE STATUS = 3
+		   AND EXNO=#{exNo}
+		   AND EXP_CLASS_NO=#{expClassNo}
+	</select>
 	
 	
 	

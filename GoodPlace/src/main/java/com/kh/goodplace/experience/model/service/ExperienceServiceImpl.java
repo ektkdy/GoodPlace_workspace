@@ -196,6 +196,11 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public Experience selectExpUser(int exNo) {
 		return expDao.selectExpUser(sqlSession, exNo);
 	}
+
+	@Override
+	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo) {
+		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo);
+	}
 	
 	
 	

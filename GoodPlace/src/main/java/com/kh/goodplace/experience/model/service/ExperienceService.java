@@ -112,7 +112,7 @@ public interface ExperienceService {
 	ArrayList<Experience> selectExpListUser(Experience exp);
 	ArrayList<Integer> selectExpCountUser();
 	Experience selectExpUser(int exNo);
-	
+	ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo);
 	//------------[체험조회 끝]------------
 
 }
