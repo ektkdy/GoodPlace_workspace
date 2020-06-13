@@ -156,6 +156,7 @@
 		<result column="change_name_1" property="atChangeName"/>
 		
 		<result column="user_name" property="paName"/>
+		<result column="exp_class_count" property="expClassCount"/>
 	</resultMap>
 	
 	<!-- 사용자의 체험 전체 목록 조회  -->

@@ -74,6 +74,7 @@ public class Experience {
 	private ArrayList<String> expCategoryList;		// 카테고리명 뷰에 표시하는 용도
 	private String expCategoryString;	// 카테고리 표시용
 	private String paName;			// 파트너 이름
+	private ArrayList<String> expClass;	// 수업교시정보
 	
 	/* DB에도 추가한 필드 */
 	private int expClassCount;		// 하루에 진행되는 수업 개수
