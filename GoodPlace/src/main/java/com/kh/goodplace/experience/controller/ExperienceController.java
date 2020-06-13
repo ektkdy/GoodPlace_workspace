@@ -618,6 +618,19 @@ public class ExperienceController {
 		// 검색한 조건에 해당하는 exp리스트 조회
 		ArrayList<Experience> expList = expService.selectExpListUser(exp);
 		
+		// 조회된 expCategory에 해당하는 카테고리명 set
+		for(int i=0; i<expList.size(); i++) {
+			switch(expList.get(i).getExpCategory()) {
+			case 1: expList.get(i).setExpCategoryString("라이프 및 스타일"); break;
+			case 2: expList.get(i).setExpCategoryString("문화와 역사"); break;
+			case 3: expList.get(i).setExpCategoryString("미술과 디자인"); break;
+			case 4: expList.get(i).setExpCategoryString("스포츠&피트니스"); break;
+			case 5: expList.get(i).setExpCategoryString("야외활동"); break;
+			}
+		}
+		
+		
+		
 		if(expList != null) {
 			mv.addObject("exp", exp);
 			mv.addObject("expList", expList);
@@ -625,7 +638,7 @@ public class ExperienceController {
 		}else {
 			mv.addObject("msg", "체험리스트 조회 실패!!");
 			mv.setViewName("common/errorPage");
-		}
+		}	
 		
 		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
 		System.out.println(" expList : " + expList);

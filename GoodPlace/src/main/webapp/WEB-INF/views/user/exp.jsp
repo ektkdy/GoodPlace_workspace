@@ -143,10 +143,10 @@
 	                    <c:if test="${status.index eq 4}"><h3 class="expCategory">야외활동</h3></c:if>
 	                    <p class="expCount expCategory">체험 ${ count }개</p>
 	                </div>
+	                	<input type="hidden" name="expCategory" value="${status.count}"/>
                 </c:forEach>
             </div>
         </div>
-        
         <div style="width:100%;">
         
             <div style="width:100%; height:58px;">
@@ -154,26 +154,27 @@
                 <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a class="sort">가격 높은 순</a></div>
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
-
-            <div id="expArea1" style="width:100%;">
-                <div style="width:94%;"  class="expArea">
-                    <div style="width:26%; height:180px;">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/exp.jpg" width="100%;" height="100%;"/>
-                    </div>
-                    <div style="width:37%; height:180px;">
-                        <h3 class="exp1">쿠킹</h3>
-                        <h3 class="exp1" style="color:black;">자연속에서 함께하는 쿠킹클래스</h3>
-                        <h3 class="exp1">홍길동</h3>
-                        	
-                        <h3 class="exp1">2시간 소요 * 장비포함</h3>
-                    </div>
-                    <div style="width:37%; height:180px;" class="alignRight">
-                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
-                        <br><br><br>
-                        <h3 class="exp3">1인당 6,0000원</h3>
-                    </div>
-                </div>
-            </div>
+			<c:forEach items="${ expList }" var="exp" varStatus="status">
+	            <div style="width:100%;">
+	                <div style="width:94%;"  class="expArea">
+	                    <div style="width:26%; height:180px;">
+	                        <img src="${pageContext.request.contextPath}/resources/images/user/${ exp.changeName } width="100%;" height="100%;"/>
+	                    </div>
+	                    <div style="width:37%; height:180px;">
+	                        <h3 class="exp1">${ exp.expCategoryString }</h3>
+	                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
+	                        <h3 class="exp1">홍길동</h3>
+	                        	
+	                        <h3 class="exp1">2시간 소요 * 장비포함</h3>
+	                    </div>
+	                    <div style="width:37%; height:180px;" class="alignRight">
+	                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
+	                        <br><br><br>
+	                        <h3 class="exp3">1인당 6,0000원</h3>
+	                    </div>
+	                </div>
+	            </div>
+          	</c:forEach>
             <div id="expArea2" style="width:100%;">
                 <div style="width:94%;"  class="expArea">
                     <div style="width:26%; height:180px;">
