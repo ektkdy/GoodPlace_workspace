@@ -448,7 +448,6 @@ public class ExperienceController {
 			    
 			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
 			    
-			    
 			    HashMap<String, Object> map = new HashMap<String, Object>();
 			    JsonObject jsonObject = new JsonObject();
 
@@ -534,14 +533,26 @@ public class ExperienceController {
 			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
-			    System.out.println(pi);
-			    System.out.println(list);
 			    // 맵을 JSON Object 문자열로 바꿈
 			    String jsonString = gson.toJson(map);
 
 						
 			    return jsonString;
 			}
+			
+			
+			//디테일
+			@RequestMapping("reservationExpDetailView.rv")
+			public String reservationExpDetailView(int epNo, Model model) {
+				
+				Experience e = expService.reservationExpDetailView(epNo);
+				
+				model.addAttribute("e", e);
+				
+				return "partner/partnerReservationExpDetailView";
+				
+			}
+			
     @RequestMapping("expOkSearch.ex")
     public String expSearchList(int currentPage, Experience e, Model model) {
     	
@@ -589,16 +600,6 @@ public class ExperienceController {
 		return mv;
 	}
 	
-	//예약상세
-	@RequestMapping("reservationExpDetailView.rv")
-	public String reservationDetailView(int epNo, Model model) {
-			
-		Experience e = expService.reservationExpDetailView(epNo);
-		
-		model.addAttribute("e", e);
-		return "partner/partnerReservationExpDetailView";
-	}
-
 			
 	
 	

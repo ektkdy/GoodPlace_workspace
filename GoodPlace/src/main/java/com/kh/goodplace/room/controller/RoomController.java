@@ -892,7 +892,6 @@ public class RoomController {
 		//예약취소하기
 		@RequestMapping("roomCancel.rv")
 		public String roomCancel(int rpNo, Model model) {
-			System.out.println(rpNo);
 			int result = rService.roomCancel(rpNo);
 			
 			if(result>0) {

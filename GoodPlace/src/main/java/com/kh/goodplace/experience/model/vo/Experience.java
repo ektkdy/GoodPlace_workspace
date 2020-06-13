@@ -59,6 +59,9 @@ public class Experience {
 	private Timestamp expDateUser;	// 체험신청일
 	private int people;				// 인원수
 	private int statusExp;			// 체험상태(승인1~)
+	private String userName;	    // 예약자 이름
+	private int expClassNo;		    // 교시 (수업시간)
+	private String phone;			// 핸드폰번호
 
 	/*관리자 검색용 키워드*/
 	private String searchSelect;

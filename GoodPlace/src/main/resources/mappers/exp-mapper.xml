@@ -98,6 +98,8 @@
 		<result column="exp_date" property="expDate"/>
 		<result column="people" property="people"/>
 		
+		<result column="user_name" property="userName"/>
+		
 		<result column="change_name_1" property="atChangeName"/>
 		
 		<!-- 결제 걸럼 -->
@@ -403,9 +405,12 @@
 		   order by ep.epno desc
 	</select>
 	
-	<select id="reservationExpDetailView" parameterType="_int" >
-		select 
-		  from
+	<select id="reservationExpDetailView" parameterType="_int" resultMap="ExperiencePayResultSet">
+		select ep.status, epno, exp_title, ep.exp_date, ep.people, user_name, phone,
+        amount, exp_class_no
+		from experience ex
+		join exppay ep on (ex.exno = ep.exno)
+		join member m on (ep.usno = m.usno)
 		where epno = #{epNo}
 	</select>
 	

@@ -31,12 +31,12 @@
          <div id="contents" style="width:980px">
             <div id="tab">
             <c:choose>
-            	<c:when test="${r.reserveStatus == 1}">
+            	<c:when test="${e.statusExp == 1}">
 	                <button class="on lt_tab">진행중인 예약</button>
 	                <button class="off mid_tab">확정된 예약</button>
 	                <button class="off gt_tab">취소된 예약</button>
             	</c:when>
-            	<c:when test="${r.reserveStatus == 2 || r.reserveStatus == 3}">
+            	<c:when test="${e.statusExp == 2 || e.statusExp == 3}">
             		<button class="off lt_tab">진행중인 예약</button>
 	                <button class="on mid_tab">확정된 예약</button>
 	                <button class="off gt_tab">취소된 예약</button>
@@ -64,10 +64,10 @@
                 <span id="page_title">
                 	<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;">
                 	<c:choose>
-                		<c:when test="${r.reserveStatus == 1}">
+                		<c:when test="${e.statusExp == 1}">
                 			<p class="title_tt">진행중인예약</p>
                 		</c:when>
-                		<c:when test="${r.reserveStatus == 2 || r.reserveStatus == 3}">
+                		<c:when test="${e.statusExp == 2 || e.statusExp == 3}">
                 			<p class="title_tt">확정된 예약</p>
                 		</c:when>
                 		<c:otherwise>
@@ -77,17 +77,17 @@
                 </span>
                 <br clear="both">
                 <form id="confirmForm" action="roomConfirm.rv" method="post">
-                  <input type="hidden" name="rpNo" value='${r.rpNo}'>
+                  <input type="hidden" name="rpNo" value='${e.epNo}'>
                  </form>
                 <form id="cancelForm" action="roomCancel.rv" method="post">
-                  <input type="hidden" name="rpNo" value='${r.rpNo}'>
+                  <input type="hidden" name="rpNo" value='${e.epNo}'>
                  </form>
                 <table class="step_tb" cellpadding="0" cellspacing="0">
                     <thead>
                         <tr>
                             <td colspan="5">
                             	<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png" style="vertical-align:bottom">
-                            	<span>${r.userName} 님과 함께하는 여행</span>
+                            	<span>${e.userName} 님과 함께하는 여행</span>
                             </td>
                         </tr>
                     </thead>
@@ -95,7 +95,7 @@
                         <tr class="stepArea">
                         
                        	<c:choose>
-                       		<c:when test="${r.reserveStatus == 1}">
+                       		<c:when test="${e.statusExp == 1}">
 	                            <td>
 	                                <span class="step_img1_on"></span>
 	                                <br clear="both">확정대기
@@ -115,7 +115,7 @@
 	                                <br clear="both">여행완료
 	                            </td>
                             </c:when>
-                            <c:when test="${r.reserveStatus == 2 }">
+                            <c:when test="${e.statusExp == 2 }">
 	                            <td>
 	                                <span class="step_img1_off"></span>
 	                                <br clear="both">확정대기
@@ -162,14 +162,14 @@
                         <tr>
                             <td colspan="5" class="step_notice">
                             <c:choose>
-                            	<c:when test="${r.reserveStatus == 1}">
+                            	<c:when test="${e.statusExp == 1}">
 	                                <p>*예약이 접수되었습니다. 24시간 내에 확정여부를 알려주세요.
 	                                    <br><br>
 	                                    숙박 가능 여부를 확인해주세요. 예약 진행이 가능하면 "예약확정"을, 불가능하면 "예약취소"를 해주세요.<br>
 	                                    예약 취소시 다른 날짜에 대해 안내하거나, 불가능한 이유에 대해 정중하게 알려주시기 바랍니다.
 	                                </p>
                                 </c:when>
-                                <c:when test="${r.reserveStatus == 2 || r.reserveStatus == 3 }">
+                                <c:when test="${e.statusExp == 2 || e.statusExp == 3 }">
                                 	<p>*예약이 확정되었습니다. 
                                     <br><br>
                                     공지사항 및 예약자님에게 전달할 사항이 있으시다면. 1:1 채팅을 통해서 미리 공지해주세요. <br>
@@ -188,7 +188,7 @@
                         <tr>
                            <td colspan="5" class="step_btn">
                            	<c:choose>
-                           		<c:when test="${r.reserveStatus == 1 }">
+                           		<c:when test="${e.statusExp == 1 }">
                                		<button class="confirm" id="confirm_btn">확정하기</button>
 		                            <button class="cancel" id="cancel_btn">예약취소</button>
 		                        </c:when>
@@ -208,70 +208,49 @@
                         <tr>
                             <td colspan="2">
                             	<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png"style="vertical-align:bottom">
-                            	<span>${r.roomsTitle }</span>
+                            	<span>${e.expTitle }</span>
                             </td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td width="250">예약번호</td>
-                            <td>${r.rpNo}</td>
+                            <td>${e.epNo}</td>
                         </tr>
                         <tr>
                             <td>예약일자</td>
                             <td>
-                            <c:set var="TextValue1" value="${r.startDays }"/>
+                            <c:set var="TextValue1" value="${e.expDateUser }"/>
 			                                	${fn:substring(TextValue1,0,10) }
-			                                	~
-                           	<c:set var="TextValue2" value="${r.endDays }"/>
-			                                	${fn:substring(TextValue2,0,10) }
 			                </td>
                         </tr>
                         <tr>
                             <td>예약자</td>
-                            <td>${r.userName}</td>
+                            <td>${e.userName}</td>
                         </tr>
                         <tr>
                             <td rowspan="4">예약자 정보</td>
-                            <td class="no_border">예약인원:${r.people }</td>
+                            <td class="no_border">예약인원:${e.people }</td>
                         </tr>
-                        <tr><td class="no_border">이름 : ${r.userName }</td></tr>
-                        <tr><td class="no_border">생년월일 : 
-                        <c:set var="birthday" value="${r.birthday }"/>
-			                                	${fn:substring(birthday,2,8) }
-                        </td></tr>
+                        <tr><td class="no_border">이름 : ${e.userName }</td></tr>
+                        <tr><td class="no_border">체험시간 : ${e.expClassNo }</td></tr>
                         <tr>
                         	<c:choose>
-                        		<c:when test="${r.reserveStatus == 1 || r.reserveStatus == 4}">
+                        		<c:when test="${e.statusExp == 1 || e.statusExp == 4}">
                         			<td>연락처는 예약이 확정후 보여집니다.</td>
   								</c:when>
   								<c:otherwise>
-  									<td>${r.phone }</td>
+  									<td>${e.phone }</td>
   								</c:otherwise>
 							</c:choose>	
                         </tr>
                         <tr>
-                            <td>예약일수</td>
-                            <td>총 ${r.days }일</td>
-                        </tr>
-                        <tr>
-                            <td>여행컨셉</td>
-                            <td>${r.concept }</td>
-                        </tr>
-                        <tr>
-                            <td>요청사항</td>
-                            <c:choose>
-	                            <c:when test="${r.request eq '' }">
-	                            	<td>없음</td>
-	                            </c:when>
-	                            <c:otherwise>
-	                            	<td>${r.request }</td>
-	                            </c:otherwise>
-	                        </c:choose>
+                            <td>인원수</td>
+                            <td>${e.people }</td>
                         </tr>
                         <tr>
                             <td>결제금액</td>
-                            <td><fmt:formatNumber value="${r.amount }" type="currency"/></td>
+                            <td><fmt:formatNumber value="${e.amount }" type="currency"/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -280,7 +259,7 @@
                         <tr>
                             <td colspan="2">
                             	<span><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon3.png" style="vertical-align:bottom" >
-                            	${r.userName } 님과의 대화</span>
+                            	${e.userName } 님과의 대화</span>
                             </td>
                         </tr>
                     </thead>

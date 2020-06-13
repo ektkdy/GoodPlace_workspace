@@ -108,6 +108,7 @@ public class Room {
 	private String paName;		// 파트너 이름
 	private String paAccountName; 	//은행명
 	private String paAccountNum;		//계좌번호
+	private String phone; //전화번호
 	
 	/* 리뷰 관련 컬럼들 */
 	private int reNo;				// 리뷰번호
