@@ -339,7 +339,7 @@ public class ExperienceController {
 		}
 		
 		if(result>0) {
-			model.addAttribute("msg", "체험정보가 수정되었습니다.");
+			model.addAttribute("msg", "재심사신청이 완료되었습니다.");
 			return "redirect:list.exp?currentPage=1";
 		}else {
 			return "common/errorPage";

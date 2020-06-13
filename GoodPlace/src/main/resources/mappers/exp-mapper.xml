@@ -241,6 +241,11 @@
       		   status=2, deny=null, deny_content=null
 		 where exno=#{exNo}
 	</update>
+	
+	<delete id="deleteAt" parameterType="string">
+		DELETE FROM ATTACHMENT
+		WHERE CHANGE_NAME = #{deList}
+	</delete>
 
 	<update id="restExp" parameterType="_int">
 		update experience
@@ -444,8 +449,5 @@
 	
 	<!-- 체험조회 끝 -->
 
-	<delete id="deleteAt" parameterType="string">
-		DELETE FROM ATTACHMENT
-		WHERE CHANGE_NAME = #{deList}
-	</delete>
+	
 </mapper>
