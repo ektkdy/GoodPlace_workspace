@@ -60,34 +60,34 @@
                     <tr>
                         <th>* 카테고리</th>
                         <c:choose>
-                        	<c:when test="${ list[0].expCategory eq 1 }">
+                        	<c:when test="${ e.expCategory eq 1 }">
                         		<td>라이프 및 스타일(뷰티/패션/쇼핑)</td>
                         	</c:when>
-                        	<c:when test="${ list[0].expCategory eq 2 }">
+                        	<c:when test="${ e.expCategory eq 2 }">
                         		<td>문화와 역사(과학/경제/역사/봉사활동)</td>
                         	</c:when>
-                        	<c:when test="${ list[0].expCategory eq 3 }">
+                        	<c:when test="${ e.expCategory eq 3 }">
                         		<td>스포츠 및 피트니스(자전거/요가/러닝/근력운동)</td>
                         	</c:when>
-                        	<c:when test="${ list[0].expCategory eq 4 }">
+                        	<c:when test="${ e.expCategory eq 4 }">
                         		<td>미술과 디자인(그림/전시/목공/사진/일러스트)</td>
                         	</c:when>
-                        	<c:when test="${ list[0].expCategory eq 5 }">
+                        	<c:when test="${ e.expCategory eq 5 }">
                         		<td>야외활동(별관찰/농촌투어/캠핑/하이킹)</td>
                         	</c:when>
                         </c:choose>
                     </tr>
                     <tr>
                         <th>* 언어</th>
-                        <td>${ list[0].language }</td>
+                        <td>${ e.language }</td>
                     </tr>
                     <tr>
                         <th>* 체험 태그</th>
-                        <td>${ list[0].expTag }</td>
+                        <td>${ e.expTag }</td>
                     </tr>
                     <tr>
                         <th>* 체험 제목</th>
-                        <td>${ list[0].expTitle }</td>
+                        <td>${ e.expTitle }</td>
                     </tr>
                     <tr>
                         <th>* 체험 소개</th>
@@ -97,55 +97,55 @@
                     </tr>
                     <tr>
                         <th>* 체험 장소</th>
-                        <td>우편번호 : ${ list[0].zipCode } <br>
-                        	${ list[0].addBasic } ${ list[0].addRef } ${ list[0].addDetail }</td>
+                        <td>우편번호 : ${ e.zipCode } <br>
+                        	${ e.addBasic } ${ e.addRef } ${ e.addDetail }</td>
                     </tr>
                     <tr>
 	                    <th>* 활동강도</th>
 	                    <c:choose>
-                        	<c:when test="${ list[0].activity eq 1 }">
+                        	<c:when test="${ e.activity eq 1 }">
                         		<td>1단계 : 가벼움</td>
                         	</c:when>
-                        	<c:when test="${ list[0].activity eq 2 }">
+                        	<c:when test="${ e.activity eq 2 }">
                         		<td>2단계 : 보통</td>
                         	</c:when>
-                        	<c:when test="${ list[0].activity eq 3 }">
+                        	<c:when test="${ e.activity eq 3 }">
                         		<td>3단계 : 격렬함</td>
                         	</c:when>
-                        	<c:when test="${ list[0].activity eq 4 }">
+                        	<c:when test="${ e.activity eq 4 }">
                         		<td>4단계 : 익스트림</td>
                         	</c:when>
                         </c:choose>
 	                    </tr>
 	                    <tr>
 	                        <th>* 최대 인원수</th>
-	                        <td>${ list[0].maxPeople } 명 / 1회차 당</td>
+	                        <td>${ e.maxPeople } 명 / 1회차 당</td>
 	                    </tr>
 	                    <tr>
 	                        <th>* 체험 시간</th>
 							<td id="oprateTimes">
-								운영 시작 시간은 ${ list[0].startTime } 입니다.<br><br>
-								운영 마감 시간은 ${ list[0].endTime } 입니다.<br><br>
-								체험 소요 시간은 ${ list[0].useTime } 시간 입니다. <br><br>
-								체험 운영 간격은 ${ list[0].intervalTime }분 입니다.
+								운영 시작 시간은 ${ e.startTime } 입니다.<br><br>
+								운영 마감 시간은 ${ e.endTime } 입니다.<br><br>
+								체험 소요 시간은 ${ e.useTime } 시간 입니다. <br><br>
+								체험 운영 간격은 ${ e.intervalTime }분 입니다.
 							</td>
 						</tr>
 	                    <tr>
 	                        <th>* 게스트 준비물</th>
-	                        <td>${ list[0].supplies }</td>
+	                        <td>${ e.supplies }</td>
 	                    </tr>
 	                    <tr>
 	                        <th>* 대표 사진</th>
 	                        <td colspan="2">
-	                          	<img src="${pageContext.request.contextPath}/resources/uploadFiles/${list[0].changeName}"
+	                          	<img src="${pageContext.request.contextPath}/resources/uploadFiles/${e.changeName}"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
 	                       </td>
 	                    </tr>
 	                    <tr>
 	                        <th>* 상세 사진</th>
 	                        <td class="photo_btn" colspan="2">
-								<c:forEach items="${ list }" var="exp">
-									<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeNameAt }"
+								<c:forEach items="${ list }" var="at">
+									<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ at.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px">
 								</c:forEach>
 							</td>
@@ -155,7 +155,8 @@
 	                        <th>* 요금 책정</th>
 	                        <td>
 	                            <span>1인 예약시 요금</span>
-	                            <span>${ list[0].price }원</span>
+	                            <span>${ e.price }원</span>
+	                            <br><br><br><br>
 	                        </td>
 	                    </tr>
                 </table>
@@ -164,7 +165,9 @@
             <div id="btns">
                 <button type="button" id="next" onclick="location.href='list.exp?currentPage=1'">목록으로</button>
             </div>
+            <br><br><br><br>
             </form>
+            
         </div>
     </div>
 </div>
@@ -172,15 +175,7 @@
 
 <script>
 	$(function(){
-		
-         // 1. 단순히 에디터 폼만 보이게 하는거
-         //$("#summernote").summernote();
-
-         // 2. 추가적인 속성들 부여 가능
-         // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
-
-         $("#summer").html('${ list[0].expContent }');
-	
+         $("#summer").html('${ e.expContent }');
 	});
 </script>
 </body>

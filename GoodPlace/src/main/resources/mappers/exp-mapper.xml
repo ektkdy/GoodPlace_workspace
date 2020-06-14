@@ -322,7 +322,7 @@
 	<update id="updateOkay" parameterType="_int">
 	
 		update EXPERIENCE
-		   set STATUS = 1
+		   set STATUS = 1, START_DATE = SYSDATE
 		 where exno=#{eno}
 	
 	</update>

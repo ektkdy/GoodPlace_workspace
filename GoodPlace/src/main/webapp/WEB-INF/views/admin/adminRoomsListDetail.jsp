@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,14 +72,16 @@
                     <img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;">
                     <p class="title_tt">숙소승인</p>
                 </span>
+                <br>
                 <br clear="both">
                 <div class="con2">
                     <table class="roomEnroll_tb" cellpadding="0" cellspacing="0">
                         <thead>
-                            <tr>
+                        	
+                             <tr>
                                 <th colspan="3" class="enrollInfo pdTopBtom">
-                                    • 안내에 따라 여행 내용을 정확하게 설명하여 주세요.<br>
-                                    • 상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다.
+                                   <!-- • 안내에 따라 여행 내용을 정확하게 설명하여 주세요.<br>
+                                    • 상품 등록이 완료되면, 승인을 위한 심사가 진행됩니다. -->
                                 </th>
                             </tr>
                         </thead>
@@ -88,12 +91,13 @@
                                 <td colspan="2"><strong>${ r.roomsTitle }</strong></td>
                             </tr>
                             <tr class="pdBtom">
-                                <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td>
+                                <!-- <td colspan="2" class="enrollInfo">• 정확하고 간결하게 표현해주세요.</td> -->
                             </tr>
                             <tr class="pdBtom">
-                                <th>*숙소위치</th>
-                                <td colspan="2"><strong>${ r.addBasic }</strong></td>
-                            </tr>
+	                        	<th><br>* 체험 장소</th>
+		                        <td><br>우편번호 : ${ r.zipCode } <br>
+		                        	${ r.addBasic } ${ r.addRef } ${ r.addDetail }</td>
+		                    </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
                                 <td rowspan="2"><img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }"
@@ -101,27 +105,25 @@
 
                             </tr>
                             <tr class="pdBtom">
-                                <td class="enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 승인 거절 할 수 있습니다.</td>
+                                <!-- <td class="enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 승인 거절 할 수 있습니다.</td> -->
                             </tr>
                             <tr>
                            <tr class="pdBtom">
-                                <th>* 상세사진</th>
+                                <th><br>* 상세사진</th>
 	                            <td class="photo_btn" colspan="2">
+	                            	<br>
 									<ul id="ul">
 										<c:forEach items="${ list }" var="at">
-											<li class="li">
+											<li class="li" style="list-style:none;">
 												<a href="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${ at.changeName }">${ at.originName }</a>
 											</li>
 										</c:forEach>
 									</ul>
 									<div id="photoDiv"></div>
-									<p class="enrollInfo">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
+									<!--<p class="enrollInfo">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>  -->
 								</td>
 							</tr>
-                                <th rowspan="2"  style="padding-top: 30px;">* 예약 설정</th>
-                                <td colspan="2"  style="padding-top: 30px;"> <strong>${ r.deadline }</strong> 시간 전 부터 예약을 받지 않겠습니다.</td>
-                            </tr>
-                            <tr class="pdBtom"><td colspan="2" class="enrollInfo">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
+                                
                             <tr>
                                 <th rowspan="4">* 객실정보</th>
                                 <td>침대수 : <strong>${ r.bedCount }</strong></td>
@@ -135,52 +137,53 @@
                                 <td>최소인원 : <strong>${ r.minPeople }</strong></td>
                                 <td>최대인원 : <strong>${ r.maxPeople }</strong></td>
                             </tr>
-                            <tr class="pdBtom">
-                                <td colspan="2" class="enrollInfo">• 1박 금액은 승인심사 이후 변경될수 있습니다. 최소인원 이상일 경우 1인당 일정금액이 추가되며 <br>최대인원수 이상 받을수 없습니다.</td>
-                            </tr>
+                            
                             <tr>
                                 <tr class="pdBtom">
-                                    <th>* 숙소시설</th>
+                                    <th><br>* 숙소시설</th>
                                     <td colspan="2">
-                                        <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:200px;" readonly>${ r.facility }</textarea>
+                                        <br>${ r.facility }
                                     </td>
                                 </tr>
                             <tr class="pdBtom">
                                 <th>* 제공서비스</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.service }</textarea>
+                                    ${ r.service }
                                 </td>
                             </tr>
                             <tr>
                                 <th rowspan="2">포함사항</th>
                                 <td>
-                                    <input type="checkbox" id="includeService1" name="includeService" value="${r.meal}">조식
+                                    <input type="checkbox" id="includeService1" name="includeService" value="${r.meal}">조식 &nbsp; &nbsp;
+                                    <input type="checkbox" id="includeService2" name="includeService" value="${r.meal}">중식 &nbsp; &nbsp;
+                                    <input type="checkbox" id="includeService3" name="includeService" value="${r.meal}">석식 &nbsp; &nbsp;
+                                    <input type="checkbox" id="includeService4" name="includeService" value="${r.meal}">없음 
                                 </td>
-                                <td>
-                                    <input type="checkbox" id="includeService2" name="includeService" value="${r.meal}">중식
-                                </td>
+                                
                             </tr>
                             <tr class="pdBtom">
                                 <td colspan="2">
-                                    <input type="checkbox" id="includeService3" name="includeService" value="${r.meal}">석식
+                                    
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 숙소검색태그</th>
                                 <td colspan="2">
-                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%; height:100px;" readonly>${ r.roomsTag }</textarea>
+                                    ${ r.roomsTag }
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>
-                                <td colspan="2">
-                                    <textarea rows="10" cols="80" style="width:720px; padding-top: 1%; padding-left: 1%;" readonly>${ r.roomsNotice }</textarea>
+                                <td colspan="2" id="summer">
+                                    
                                 </td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 이용안내</th>
-                                <td>체크인 시간 : <strong>${ r.checkIn }</strong></td>
-                                <td>체크아웃 시간 : <strong>${ r.checkOut }</strong></td>
+                                <td> &nbsp;체크인 시간 : <strong>${ r.checkIn }</strong><br>
+                                	체크아웃 시간 : <strong>${ r.checkOut }</strong>
+                                </td>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -200,7 +203,13 @@
     </div>
 
 	<script>
+	 	$(function(){
+	 		$("#summer").html('${ r.roomsNotice }');	
+	 	});
+	 	
 		$(function(){
+			
+			
 			switch('${r.meal}'){
 			case "조식" : $("#includeService1").prop("checked", true); break;
 			case "중식" : $("#includeService2").prop("checked", true); break;

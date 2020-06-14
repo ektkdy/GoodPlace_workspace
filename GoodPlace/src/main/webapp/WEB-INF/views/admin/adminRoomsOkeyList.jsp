@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +109,7 @@
                             <c:forEach items="${ list }" var="r">
 	                            <tr>
 	                                <td>${ r.roNo }</td>
-	                                <td>${ r.addBasic }</td>
+	                                <td>${fn:substring(r.addBasic,0,2)}</td>
 	                                <td>${ r.startDate }</td>
 	                                <td>${ r.roomsTitle }</td>
 	                                <td>${ r.price }원</td>
@@ -145,7 +146,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="roomOkSearch.ro" var="searchUrl">
-														<c:param name="condition" value="${ r.searchSelect }"/>
+														<c:param name="searchSelect" value="${ r.searchSelect }"/>
 														<c:param name="keyword" value="${ r.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>

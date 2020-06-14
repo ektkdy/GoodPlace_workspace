@@ -166,18 +166,15 @@ public class ExperienceController {
 	
 	/* 3. 체험 상세보기용 서비스 */
 	@RequestMapping("expDetail.exp")
-	public ModelAndView selectExp(int exNo, ModelAndView mv) {
+	public String selectExp(int exNo, Model model) {
 		// Experience테이블과 Attachment테이블 join하여 데이터 가져옴
-		ArrayList<Experience> list = expService.selectExp(exNo);
+		Experience e = expService.selectExpOne(exNo);
+		ArrayList<Attachment> list = expService.selectAt(exNo);
 		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.setViewName("partner/partnerExpDetail");
-		}else {
-			mv.addObject("msg", "상세보기 실패");
-			mv.setViewName("partner/partnerExpList");
-		}
-		return mv;
+		model.addAttribute("e", e);
+		model.addAttribute("list", list);
+		
+		return "partner/partnerExpDetail";
 	}
 	
 	/* 4_1. 체험수정폼 요청용 서비스 */
@@ -506,6 +503,22 @@ public class ExperienceController {
     	
     	
     }
+    
+    @RequestMapping("expOkSearch.ex")
+    public String expSearchList(int currentPage, Experience e, Model model) {
+    	
+        int listCount = expService.expSearchCount(e); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
+        ArrayList<Experience> list = expService.expSearchList(pi, e);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("e", e);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminExpOkeyList";
+        
+    }
 	
 	
 	// ------------------------------ 파트너 예약관리 시작 ----------------------------------
@@ -650,21 +663,7 @@ public class ExperienceController {
 				
 			}
 			
-    @RequestMapping("expOkSearch.ex")
-    public String expSearchList(int currentPage, Experience e, Model model) {
-    	
-        int listCount = expService.expSearchCount(e); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-        
-        ArrayList<Experience> list = expService.expSearchList(pi, e);
-        
-        model.addAttribute("list", list);
-        model.addAttribute("e", e);
-        model.addAttribute("pi", pi);
-        
-        return "admin/adminExpOkeyList";
-        
-    }
+
 	
   //------- 체험조회 시작 ---------------------------------------------------
     
