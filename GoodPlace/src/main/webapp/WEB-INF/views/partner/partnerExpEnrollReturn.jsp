@@ -261,7 +261,7 @@
 													<option value="22:00">22:00
 													<option value="22:30">22:30
 													<option value="23:00">23:00
-													<option value="23:30">23:00
+													<option value="23:30">23:30
 												</select> 입니다.<br><br>
 								운영 마감 시간은<select name="endTime" id="endTime">
 													<option value="00:00">00:00
@@ -318,12 +318,11 @@
 								체험 운영 간격은	<select name="intervalTime" id="intervalTime">
 													<option value="30" selected>30분간격
 													<option value="60">60분(1시간)간격
-													<option value="90">90분(1시간반)간격
 													<option value="120">120분(2시간)간격
-													<option value="150">150분(2시간반)간격
 													<option value="180">180분(3시간)간격
 												</select>분 입니다.
 								<h5>• 최소 운영간격은 30분입니다.</h5>
+								
 							</td>
 	                    </tr>
 	                    <tr>

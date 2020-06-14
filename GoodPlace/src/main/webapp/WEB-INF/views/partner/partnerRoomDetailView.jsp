@@ -45,7 +45,9 @@
                             </tr>
                             <tr>
                                 <th width=" ">대표사진</th>
-                                <td colspan="2"><img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/${r.changeName }" style="width:200px; height:150px"></td>
+                                <td colspan="2"><div style="width: 150px; height: 150px; border:1px solid black;">
+                                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }" style="vertical-align: middle; width:100%; height: 100%;">
+                                </div></td>
                             </tr>
                             <tr class="pdTop">
                                 <th >상세사진</th>

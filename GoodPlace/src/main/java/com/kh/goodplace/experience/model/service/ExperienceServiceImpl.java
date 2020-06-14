@@ -200,10 +200,24 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo) {
-		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo);
+	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo, String expDateString) {
+		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo, expDateString);
+	}
+	
+	@Override
+	public int payExp(ExpPay expPay) {
+		return expDao.payExp(sqlSession, expPay);
 	}
 
+	@Override
+	public Experience getPayInfo(int epNo) {
+		return expDao.getPayInfo(sqlSession, epNo);
+	}
+
+	@Override
+	public ArrayList<Integer> getEpNo() {
+		return expDao.getEpNo(sqlSession);
+	}
 	@Override
 	public ArrayList<Attachment> getDetailImages(int exNo) {
 		return expDao.getDetailImages(sqlSession, exNo);

@@ -288,7 +288,7 @@
           x: '0px',
           y: '50%',
           title: {
-            text: 'Top Month',
+            text: 'Exp & Room',
             paddingLeft: '25px',
             backgroundColor: 'none',
             fontColor: '#505050',
@@ -299,7 +299,7 @@
             textAlign: 'left'
           },
           subtitle: {
-            text: 'August',
+            text: 'Rate',
             paddingTop: '20px',
             paddingLeft: '25px',
             alpha: 0.7,
@@ -333,7 +333,7 @@
             refAngle: 40
           },
           labels: [{
-            text: '2,174',
+            text: 'compare',
             anchor: 'c',
             fontColor: '#505050',
             fontFamily: 'arial',

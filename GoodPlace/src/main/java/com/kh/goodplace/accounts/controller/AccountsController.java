@@ -43,7 +43,7 @@ public class AccountsController {
     public String aSelectAccountList(int currentPage, Model model) {
     	
         int listCount = aService.aSelectAccountListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Accounts> list = aService.aSelectAccountList(pi);
         
@@ -362,7 +362,7 @@ public class AccountsController {
 		int usNo = loginUser.getUsNo();
 		
 		int listCount = aService.selectIncomeListCount(usNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Accounts> list = aService.selectIncomeList(pi, usNo);
 		model.addAttribute("pi", pi);

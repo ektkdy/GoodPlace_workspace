@@ -92,7 +92,7 @@
                             <tr class="pdBtom">
                                 <th>* 대표사진</th>
                                 <td colspan="2">
-	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
+	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
 	                         	<div id="fileArea">
 									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
@@ -203,7 +203,7 @@
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 이용안내</th>
-                                <td style="border-right:1px solid #bebebe;">&nbsp;&nbsp;체크인 시간 : <input type="time" name="checkIn" value="${ r.checkIn }"><br><br>체크아웃 시간 : <input type="time" name="checkOut" value="${ r.checkOut }"></td>
+                                <td style="border-right:1px solid #bebebe;">체크인 시간 : <input type="time" name="checkIn" value="${ r.checkIn }"><br><br>체크아웃 시간 : <input type="time" name="checkOut" value="${ r.checkOut }"></td>
                             </tr>
                             <tr class="pdBtom">
                                 <th>* 필수안내</th>

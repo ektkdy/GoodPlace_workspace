@@ -10,6 +10,32 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerReservationList.css" />
 </head>
+<style>
+button{
+	cursor:pointer;
+}
+.reserv_tb tbody tr:hover{
+	background:#c1d9f0;
+	color:#34538a;
+	cursor:pointer;
+}
+
+.search_btn img {
+    width: 25px;
+    height: 26px;
+    vertical-align:bottom;    
+}
+.search_btn{
+	vertical-align: middle;
+	width:32px; height:35px; 
+	background:#fff; 
+	border:1px solid #bebebe;
+	border-left:none;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	corsor:pointer;
+}
+</style>
 <body>
  <div id="wrap">
         <jsp:include page="../common/partnerMenubar.jsp"/>
@@ -44,7 +70,9 @@
                         <option>여행임박일순</option>
                     </select>
                     <input type="text" name="keyword" class="keyword_search" placeholder="검색할 키워드를 입력해주세요.">
-                    <button class="search_btn"type="submit" style=" vertical-align: middle;"><img  src="" style="width: 30px;height: 27px; background: gray;"></button>
+                    <button class="search_btn"type="submit" style=" vertical-align: middle;">
+                    	<img  src="${ pageContext.servletContext.contextPath }/resources/images/partner/search.png" >
+                    </button>
                 </div>
                 <div>
                     <table class="reserv_tb"cellpadding="0" cellspacing="0">

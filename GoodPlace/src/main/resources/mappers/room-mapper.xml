@@ -306,13 +306,14 @@
 	<select id="selectPowerList" resultMap="powerResultSet">
 		select *
 	      from power
+	     order by price asc
 	</select>
 	
 		
 	<insert id="insertPower" parameterType="Room">
 		insert into power
 		values(pono.nextval, #{powerKind}, #{period}, #{powerPrice})
-		 order by price asc
+		
 	</insert>
 	
 	<update id="updatePower" parameterType="Room">

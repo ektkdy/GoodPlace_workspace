@@ -133,6 +133,10 @@ public class BoardDao {
 	}
 	
 	
+	//------------ 사용자 1:1문의 -----------------------------------------
+	public int insertInq(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertInq",b);
+	}
 	
 	//------------ 관리자 1:1문의 -----------------------------------------
 	
@@ -300,7 +304,7 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.reviewList2", userNo, rowBounds);
 	}
 	
-	public Board selectReview(SqlSessionTemplate sqlSession, int reNo) {
+	public Board selectReview(SqlSessionTemplate sqlSession,int reNo) {
 		return sqlSession.selectOne("boardMapper.selectReview", reNo);
 	}
 	

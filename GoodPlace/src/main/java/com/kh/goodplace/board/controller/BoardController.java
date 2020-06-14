@@ -1,6 +1,7 @@
 package com.kh.goodplace.board.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +12,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.service.RoomService;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Controller
 public class BoardController {
@@ -26,12 +32,15 @@ public class BoardController {
     @Autowired
     private BoardService bService;
     
+	@Autowired // DI
+	private RoomService rService;
+    
     // 관리자 FAQ 시작
     @RequestMapping("aFaqList.bo")
     public String aSelectFaqList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectFaqListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectFaqList(pi);
         
@@ -40,6 +49,29 @@ public class BoardController {
         
         return "admin/a_faqList";
     }
+    // 마이페이지 1대1 작성하기 이동
+    @RequestMapping("inqueryEnroll.bo")
+    public String inqueryEnroll(HttpSession session, Model model) {
+    	Member m = (Member)session.getAttribute("loginUser");
+    	
+    	ArrayList<RoomPay> myRoomPay = rService.selectRoomPayList(m);
+    	
+    	model.addAttribute("myRoomPay", myRoomPay);
+    	return "user/myInqueryEnroll";
+    }
+    
+    // 마이페이지 1대1 등록
+    @RequestMapping("enrollInquery.bo")
+    public String enrollInquery(Board b) {
+    	
+    	System.out.println("전부 가져온 값 : " + b);
+    	
+    	int result = bService.insertInq(b);
+    	
+    	
+    	return "redirect:inQuiry.bo";
+    }
+    
     // 마이페이지 위시리스트 이동
     @RequestMapping("wishList.bo") 
     	public String selectwishList(HttpSession session, Model model) {
@@ -170,7 +202,7 @@ public class BoardController {
     public String faqSearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.faqSearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.faqSearchList(pi, b);
         
@@ -189,7 +221,7 @@ public class BoardController {
     public String aSelectNoticeList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectNoticeList(pi);
         
@@ -275,7 +307,7 @@ public class BoardController {
     public String noticeSearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.noticeSearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.noticeSearchList(pi, b);
         
@@ -307,7 +339,7 @@ public class BoardController {
     public String aSelectInquiryList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectInquiryListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectInquiryList(pi);
         
@@ -400,7 +432,7 @@ public class BoardController {
     public String inquirySearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.inquirySearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.inquirySearchList(pi, b);
         model.addAttribute("list", list);
@@ -418,7 +450,7 @@ public class BoardController {
     public String aSelectReportList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectReportListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectReportList(pi);
         model.addAttribute("list", list);
@@ -498,7 +530,7 @@ public class BoardController {
     public String aReplyList(int currentPage, Model model) {
     	
         int listCount = bService.aReplyCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aReplyList(pi);
         
@@ -557,7 +589,7 @@ public class BoardController {
     public String pSelectNoticeList(int currentPage, Model model) {
     	
         int listCount = bService.pSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
         //System.out.println(list);
@@ -647,7 +679,7 @@ public class BoardController {
 		 		
 		if(status == null ) {
 			int responseListCount = bService.selectReviewCount2(userNo);
-			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
 			 
@@ -655,7 +687,7 @@ public class BoardController {
 			 model.addAttribute("reList", responseList);
 			 
 			 int noReplyListCount = bService.selectReviewCount1(userNo);
-			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
 
@@ -663,7 +695,7 @@ public class BoardController {
 			 model.addAttribute("noList", noreplyList);
 		}else if(status.equals("Y")){
 			 int responseListCount = bService.selectReviewCount2(userNo);
-			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
 			 
@@ -673,7 +705,7 @@ public class BoardController {
 			 
 		}else {
 			 int noReplyListCount = bService.selectReviewCount1(userNo);
-			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
 
@@ -723,8 +755,13 @@ public class BoardController {
     }
     
     @RequestMapping("reviewDetailView.re")
-    public String reviewDetailView(int reNo,  Model model) {
+    public String reviewDetailView(int reNo, int rpNo, Model model) {
     	
+//    		Board b = new Board();
+//    		
+//    		b.setReNo(reNo);
+//    		b.setRpNo(rpNo);
+    				
     	 Board r = bService.selectReview(reNo);
     	 
     	 model.addAttribute("r", r);
@@ -733,5 +770,49 @@ public class BoardController {
     	
     }
     
+    ////////////////////////// 대쉬보드
+    @RequestMapping("pNoticeListDashboard.bo")
+    public String pNoticeListDashboard(int currentPage, Model model) {
+    	
+        int listCount = bService.pSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
+        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+        //System.out.println(list);
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "partner/partnerNotice";
+    }
+    
+    @ResponseBody
+	@RequestMapping(value="pNoticeListDashboard.bo", produces="application/json; charset=utf-8")
+	public String pNoticeListDashboard(int currentPage, HttpSession session) {
+		
+    	int listCount = bService.pSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
+        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    JsonObject jsonObject = new JsonObject();
+
+	    // Gson 객체 생성
+	    Gson gson = new Gson();
+
+	    // JSON Object를 맵으로 바꿈
+	    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+	     
+	    // key-value 형태로 맵에 저장
+	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+	    System.out.println(list);
+
+	    // 맵을 JSON Object 문자열로 바꿈
+	    String jsonString = gson.toJson(map);
+
+				
+	    return jsonString;
+	}
     
 }

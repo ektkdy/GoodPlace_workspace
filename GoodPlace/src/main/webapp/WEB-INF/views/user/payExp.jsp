@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숙소결제</title>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
     <style>
         /* content 스타일 시작*/
         /* 여백 초기화 */
@@ -74,7 +74,7 @@
 
                     <h2 style="font-weight:500;">체험 정보</h2><hr style="border:2px solid lightgray; margin:15px 0 18px 0;"> 
                     <div style="width:34%; height:180px;">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/street.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:20%; height:180px; padding:10px 0 0 16px;">
                         <h3 style="margin-bottom:10px;">체험명</h3>
@@ -85,12 +85,12 @@
                         <h3 style="margin-bottom:10px;">총 금액</h3>
                     </div>
                     <div style="width:46%; height:180px; padding:10px 0 0 16px; ">
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">유럽갬성 강남역세권 게스트하우스</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">2020.03.06 ~ 2020.03.07</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">14:00 (소요시간 : 3시간)</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">2명</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">30,000원</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">60,000원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ exp.expTitle }</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.startTimeString } (소요시간 : ${ exp.useTime }시간)</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.people }명</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price }원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price * expPay.people }원</p3>
                     </div>
 
                 </div>
@@ -121,9 +121,9 @@
                         <h3 style="margin-bottom:34px; padding-top:14px;">이메일</h3>
                     </div>
                     <div style="width:66%; height:235px;">
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:20px 0 14px 0; padding-left:8px; font-size:16px;" disabled placeholder="홍길동"/>
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="010-0000-8282"/>
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="happy@gmail.com""/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:20px 0 14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.userName }"/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.phone }"/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.email }"/>
                     </div>
                     
                 </div>
@@ -141,16 +141,16 @@
                     <h3>포인트 할인</h3>
                 </div>
                 <div style="width:50%;padding:22px 14px; text-align:right;">
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">30,000원</h3>
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">60,000원</h3>
-                    <h3 style="color:dimgray; font-weight:550;">-1,000원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price }원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price * expPay.people }원</h3>
+                    <h3 style="color:dimgray; font-weight:550;">0원</h3>
                 </div>
                 <hr>
                 <div style="width:50%; height:70px; padding:22px 14px;">
                     <h3 style="margin-bottom:10px;">총 결제 금액</h3>
                 </div>
                 <div style="width:50%; height:70px; padding:22px 14px; text-align:right;">
-                    <h3 style="color:dimgray; font-weight:550;">59,000원</h3>
+                    <h3 style="color:dimgray; font-weight:550;">${ exp.price * expPay.people }원</h3>
                 </div>
                 <hr>
                 <div style="width:100%; padding:22px 14px 0px 14px;">
@@ -163,7 +163,7 @@
                 </div>
                 <hr>
                 <div style="width:100%; height:120px; padding:22px 14px; text-align:center;">
-                    <input type="button" style="height:58px; width:180px; font-size:18px; font-weight:900; border:1px solid gray; background-color:white; color:gray; margin:10px auto;"  value="결제하기"/>
+                    <input id="payIt" type="button" style="height:58px; width:180px; font-size:18px; font-weight:900; border:1px solid gray; background-color:white; color:gray; margin:10px auto;"  value="결제하기"/>
                 </div>
                 <hr>
             </div>
@@ -195,24 +195,63 @@
         });
 
         $(window).scroll(function(){
-        var position = $(document).scrollTop();
-
-        console.log(position);
-        $("#receipt").css({ width:'310px',
-                            margin:'314px 0 0 20px;'
-                                    });
-
-        if($(document).scrollTop() != 0){
-            $("#receipt").stop().animate({top:position+30+"px"}, 1); //해당 오브젝트 위치값 재설정
-
-        }else{
-            $("#receipt").stop().animate({top:position+204+"px"}, 1); //해당 오브젝트 위치값 재설정
-            $("#receipt").css({ width:'310px',
-                            margin:'0 0 0 20px;'
-                                    });
-        }
-    });
-
+	        var position = $(document).scrollTop();
+	
+	        console.log(position);
+	        $("#receipt").css({ width:'310px',
+	                            margin:'314px 0 0 20px;'
+	                                    });
+	
+	        if($(document).scrollTop() != 0){
+	            $("#receipt").stop().animate({top:position+30+"px"}, 1); //해당 오브젝트 위치값 재설정
+	
+	        }else{
+	            $("#receipt").stop().animate({top:position+204+"px"}, 1); //해당 오브젝트 위치값 재설정
+	            $("#receipt").css({ width:'310px',
+	                            margin:'0 0 0 20px;'
+	                                    });
+	        }
+    	});
+        
+        var IMP = window.IMP;
+        IMP.init('imp13454636');
+        
+        // 결제하기 기능
+        $('#payIt').click(function(){
+          IMP.request_pay({
+               pg : 'inicis', // version 1.1.0부터 지원.
+               pay_method : 'card',
+               merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
+               name : '주문명:${  }',               // 주문명
+               amount : 100,                              // 가격
+               buyer_email : '${ loginUser.email }',
+               buyer_name : '${ loginUser.userName }',
+               buyer_tel : '${ loginUser.phone }',
+               buyer_addr : '',
+               buyer_postcode : '123-456',
+               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+           }, function(rsp) {
+               if ( rsp.success ) {
+                   var msg = '결제가 완료되었습니다.';
+                   msg += '고유ID : ' + rsp.imp_uid;
+                   msg += '상점 거래ID : ' + rsp.merchant_uid;
+                   msg += '결제 금액 : ' + rsp.paid_amount;
+                   msg += '카드 승인번호 : ' + rsp.apply_num;
+                   
+                   $('#payNo').val(rsp.imp_uid);
+                   $('#reserveNo').val('R-' +  rsp.imp_uid);
+                   
+                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
+                   $("#resultForm").submit();
+               } else {
+                   var msg = '결제에 실패하였습니다.';
+                   msg += '에러내용 : ' + rsp.error_msg;
+               }
+               alert(msg);
+           });
+       });
+        
+        
     </script>
 
    	<!-- footer -->

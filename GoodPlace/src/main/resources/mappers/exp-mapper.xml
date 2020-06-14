@@ -468,12 +468,12 @@
 		 WHERE EXNO=#{exNo}
 	</select>
 	
-	<!-- 체험조회 끝 -->
 	<select id="selectAcceptedPeople" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPPAY
 		 WHERE STATUS = 3
 		   AND EXNO=#{exNo}
+		   AND EXP_DATE=TO_DATE(#{expDateString},'YYYY-MM-DD')
 		   AND EXP_CLASS_NO=#{expClassNo}
 	</select>
 	
@@ -482,6 +482,28 @@
 		 FROM ATTACHMENT
 		WHERE EXNO = #{exNo}
 	</select>
+	
+	<update id="updateExpPay" parameterType="ExpPay">
+		INSERT INTO EXPPAY
+		VALUES (EXNO.NEXTVAL, #{exNo}, #{usNo}, #{amount}, TO_DATE(SYSDATE), TO_DATE(#{expDateString}, 'YYYY-MM-DD'), #{people}, 1, #{expClassNo})
+	</update>
+	
+	<select id="selectExpPayInfo" parameterType="_int" resultMap="ExperiencePayResultSet">
+		SELECT *
+		  FROM EXPERIENCE E
+		  JOIN EXPPAY EP USING (EXNO)
+		  JOIN MEMBER M ON (EP.USNO = M.USNO)
+		 WHERE EPNO = #{epNo}
+	</select>
+	
+	<select id="selectEpNoList" resultType="_int">
+		SELECT EPNO
+		  FROM EXPPAY
+		 ORDER BY EPNO DESC
+	</select>
+	
+	<!-- 체험조회 끝 -->
+
 	
 	
 	<!-- 마이페이지 -->

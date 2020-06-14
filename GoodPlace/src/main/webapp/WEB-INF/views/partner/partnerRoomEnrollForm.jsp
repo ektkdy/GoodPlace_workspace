@@ -86,11 +86,6 @@ button{cursor: pointer}
 							</tr>
 							
                             <tr>
-                                <th rowspan="2">* 예약 설정</th>
-                                <td colspan="2" ><input type="number" min="36" max="72" value="36" style="padding-left:5px">시간 전 부터 예약을 받지 않겠습니다.</td>
-                            </tr>
-                            <tr class="pdBtom"><td colspan="2" class="enrollInfo" name="deadline">• 최소 몇시간 전까지 예약을 받길 원하시나요? 기본은 36시간 입니다.</td></tr>
-                            <tr>
                                 <th rowspan="2">* 객실정보</th>
                                 <td colspan="2">
                                 	침  &nbsp;대  &nbsp;수&nbsp;:&nbsp;<input type="number" min="1" value="1"class="putNum mgRight" style="margin-bottom:10px" name="bedCount">
