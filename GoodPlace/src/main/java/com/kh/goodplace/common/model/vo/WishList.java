@@ -21,5 +21,7 @@ public class WishList {
 	private int userNo;		// 회원번호
 	private int roNo;		// 숙소번호
 	private int exNo;		// 체험번호
+	
+	private String roomsTitle; // 숙소이름
 
 }

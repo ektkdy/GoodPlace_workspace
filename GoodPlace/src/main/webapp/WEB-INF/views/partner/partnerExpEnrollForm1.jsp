@@ -220,7 +220,6 @@
 
 
 
-<!-- summernote api -->
 <script>
 	$(function(){
 

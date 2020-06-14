@@ -424,7 +424,7 @@ public class MemberController {
     public String aSelectMemberList(int currentPage, Model model)
     {
         int listCount = mService.aSelectMemberListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Member> list = mService.aSelectMemberList(pi);
         
@@ -469,7 +469,7 @@ public class MemberController {
     	
     	
         int listCount = mService.memSearchCount(m); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Member> list = mService.memSearchList(pi, m);
         model.addAttribute("list", list);
@@ -484,7 +484,7 @@ public class MemberController {
     public String selectPartnerList(int currentPage, Model model)
     {
         int listCount = mService.aSelectPartnerListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Member> list = mService.aSelectPartnerList(pi);
         
@@ -557,7 +557,7 @@ public class MemberController {
     	
     	
         int listCount = mService.ptSearchCount(m); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Member> list = mService.ptSearchList(pi, m);
         model.addAttribute("list", list);

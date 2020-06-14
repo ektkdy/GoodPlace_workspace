@@ -114,6 +114,12 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> noticeSearchList(PageInfo pi, Board b) {
 		return bDao.noticeSearchList(sqlSession, pi, b);
 	}
+	// ------------------- 사용자 1:1문의 ----------------------
+	@Override
+	public int insertInq(Board b) {
+		return bDao.insertInq(sqlSession, b);
+	}
+	
 	
 	// ------------------- 관리자 1:1문의 ----------------------
 
@@ -277,6 +283,8 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<WishList> selectwishList(Member m) {
 		return bDao.selectwishList(sqlSession, m);
 	}
+
+
 
 
 

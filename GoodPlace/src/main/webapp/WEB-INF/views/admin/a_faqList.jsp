@@ -144,7 +144,7 @@
 		                                <td>${ b.faqNo }</td>
 		                                <td>${ b.faqTitle }</td>
 		                                <td>${ b.faqCategory }</td>
-		                                <td onclick="event.cancelBubble=true"><button id="faqUpdate" class="modifiyBtn" onclick="location.href='faqUpdateForm.bo?fno=${ b.faqNo }'">수정</button></td>
+		                                <td onclick="event.cancelBubble=true"><button type="button" id="faqUpdate" class="modifiyBtn" onclick="location.href='faqUpdateForm.bo?fno=${ b.faqNo }'">수정</button></td>
 		                            </tr>
 		                         </c:forEach>
 	
@@ -210,7 +210,7 @@
 														<a class="page-link" href="aFaqList.bo?currentPage=${ p }">${p}</a>
 													</c:when>
 													<c:otherwise>
-														<c:url value="noticeSearch.bo" var="searchUrl">
+														<c:url value="faqSearch.bo" var="searchUrl">
 															<c:param name="condition" value="${ b.searchSelect }"/>
 															<c:param name="currentPage" value="${ p }"/>
 														</c:url>
@@ -230,7 +230,7 @@
 												 <a href="aFaqList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
 											</c:when>
 											<c:otherwise>
-												<c:url value="noticeSearch.bo" var="searchUrl">
+												<c:url value="faqSearch.bo" var="searchUrl">
 													<c:param name="condition" value="${ b.searchSelect }"/>
 													<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 												</c:url>										

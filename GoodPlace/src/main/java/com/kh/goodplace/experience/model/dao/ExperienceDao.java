@@ -222,35 +222,49 @@ public class ExperienceDao {
 		
 	// --------- 체험관리 시작 -----------------
 	
-	//------------[체험조회 시작]------------
-	public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
-		return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
-	}
-	
-	public ArrayList<Integer> selectExpCountUser(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("expMapper.selectExpCountUser");
-	}
-	
-	public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
-		return sqlSession.selectOne("expMapper.selectExpUser", exNo);
-	}
-	
-	public ArrayList<Experience> getAcceptedPeople(SqlSessionTemplate sqlSession, int exNo, int expClassNo) {
-		Experience exp = new Experience();
-		exp.setExNo(exNo);
-		exp.setExpClassNo(expClassNo);
-		return (ArrayList)sqlSession.selectList("expMapper.selectAcceptedPeople", exp);
-	}
-	
-	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int exNo){
-		return (ArrayList)sqlSession.selectList("expMapper.selectDetailImages", exNo);
-	}
-	
-	public Member getPartner(SqlSessionTemplate sqlSession, int usNo) {
-		return sqlSession.selectOne("memberMapper.selectPartner", usNo);
-	}
-	//------------[체험조회 끝]------------
-	
+		//------------[체험조회 시작]------------
+		public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
+			return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
+		}
+		
+		public ArrayList<Integer> selectExpCountUser(SqlSessionTemplate sqlSession){
+			return (ArrayList)sqlSession.selectList("expMapper.selectExpCountUser");
+		}
+		
+		public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
+			return sqlSession.selectOne("expMapper.selectExpUser", exNo);
+		}
+		
+		public ArrayList<Experience> getAcceptedPeople(SqlSessionTemplate sqlSession, int exNo, int expClassNo, String expDateString) {
+			Experience exp = new Experience();
+			exp.setExNo(exNo);
+			exp.setExpClassNo(expClassNo);
+			exp.setExpDateString(expDateString);
+			return (ArrayList)sqlSession.selectList("expMapper.selectAcceptedPeople", exp);
+		}
+		
+		public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int exNo){
+			return (ArrayList)sqlSession.selectList("expMapper.selectDetailImages", exNo);
+		}
+		
+		public Member getPartner(SqlSessionTemplate sqlSession, int usNo) {
+			return sqlSession.selectOne("memberMapper.selectPartner", usNo);
+		}
+		
+		public int payExp(SqlSessionTemplate sqlSession, ExpPay expPay) {
+			return sqlSession.update("expMapper.updateExpPay", expPay);
+		}
+		
+		public Experience getPayInfo(SqlSessionTemplate sqlSession, int epNo) {
+			return sqlSession.selectOne("expMapper.selectExpPayInfo", epNo);
+		}
+		
+		public ArrayList<Integer> getEpNo(SqlSessionTemplate sqlSession){
+			return (ArrayList)sqlSession.selectList("expMapper.selectEpNoList");
+		}
+		
+		//------------[체험조회 끝]------------
+		
 	// 마이페이지
 	public ArrayList<ExpPay> selectExpPayList(SqlSessionTemplate sqlSession, Member m) {
 		return (ArrayList)sqlSession.selectList("expMapper.selectExpPayList", m);

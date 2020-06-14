@@ -128,7 +128,7 @@
 		                                <td>${ b.noNo }</td>
 		                                <td>${ b.noticeTitle }</td>
 		                                <td>${ b.count }</td>
-		                                <td onclick="event.cancelBubble=true"><button class="modifiyBtn" onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정</button></td>
+		                                <td onclick="event.cancelBubble=true"><button type="button" class="modifiyBtn" onclick="location.href='noticeUpdateForm.bo?nno=${ b.noNo }'">수정</button></td>
 		                            </tr>
 								</c:forEach>
 	                        </tbody>
@@ -158,7 +158,7 @@
 	                    <table>
 	                        <th>
 	                            <br>
-	                            <button class="blue_btn" onclick="location.href='noticeEnrollForm.bo'">등록하기</button>
+	                            <button type="button" class="blue_btn" onclick="location.href='noticeEnrollForm.bo'">등록하기</button>
 	                            <button class="blue_btn" id="delete_btn" onclick="postDeleteSubmit()">삭제</button>
 	                        </th>
 	                        <th>

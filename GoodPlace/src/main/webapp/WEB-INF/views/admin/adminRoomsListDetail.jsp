@@ -96,9 +96,8 @@
                             </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>
-                                <td rowspan="2"><div style="width: 150px; height: 150px; border:1px solid black;">
-                                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }" style="vertical-align: middle; width:100%; height: 100%;">
-                                </div></td>
+                                <td rowspan="2"><img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }"
+	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" ></td>
 
                             </tr>
                             <tr class="pdBtom">

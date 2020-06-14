@@ -133,6 +133,10 @@ public class BoardDao {
 	}
 	
 	
+	//------------ 사용자 1:1문의 -----------------------------------------
+	public int insertInq(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertInq",b);
+	}
 	
 	//------------ 관리자 1:1문의 -----------------------------------------
 	

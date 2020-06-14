@@ -307,13 +307,14 @@
 	<select id="selectPowerList" resultMap="powerResultSet">
 		select *
 	      from power
+	     order by price asc
 	</select>
 	
 		
 	<insert id="insertPower" parameterType="Room">
 		insert into power
 		values(pono.nextval, #{powerKind}, #{period}, #{powerPrice})
-		 order by price asc
+		
 	</insert>
 	
 	<update id="updatePower" parameterType="Room">
@@ -562,7 +563,7 @@
 	<!-- 마이페이지 -->
 
 	<select id="selectRoomPayList" resultMap="selectRoomPayList" parameterType="Member">
-		select RPNO, p.RONO, p.USNO, p.AMOUNT, p.BIRTHDATE, p.PAY_DATE, p.ADD_POINT, p.CHECK_IN, p.RESERVE_STATUS, p.USE_POINT, p.PEOPLE, p.CONCEPT, p.REQUEST, p.START_DAYS, p.END_DAYS,  r.ROOMS_TITLE,r.CHANGE_NAME 
+	  select RPNO, p.RONO, p.USNO, p.AMOUNT, p.BIRTHDATE, p.PAY_DATE, p.ADD_POINT, p.CHECK_IN, p.RESERVE_STATUS, p.USE_POINT, p.PEOPLE, p.CONCEPT, p.REQUEST, p.START_DAYS, p.END_DAYS,  r.ROOMS_TITLE,r.CHANGE_NAME 
 		  from roomspay p
           left join rooms r on(p.rono = r.rono)
          where p.usno = #{usNo}

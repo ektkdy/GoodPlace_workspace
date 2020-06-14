@@ -75,8 +75,8 @@
 	                                    <span class="up_btn_space">
 	                                        <select name="faqCategory" id="faqCategory" style="width:100px; height:35px;">
 	                                            <option value="일반">일반문의</option>
-	                                            <option value="숙소">숙소문의</option>
-	                                            <option value="체험">체험문의</option>
+	                                            <option value="취소환불">취소환불문의</option>
+	                                            <option value="상품">상품문의</option>
 	                                            <option value="예약">예약문의</option>
 	                                            <option value="파트너">파트너</option>
 	                                        </select>

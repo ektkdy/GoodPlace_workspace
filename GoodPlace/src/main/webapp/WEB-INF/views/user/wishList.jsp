@@ -7,11 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <link rel="stylesheet" href="../main_css/jquery.bxslider.css">
-    <!-- 슬라이더 버튼들 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <!-- 슬라이더를 생성하는 부분 -->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <script src="../js/jquery.bxslider.js"></script>
+ 
     <style>
         /* header(메뉴바) 시작 */
         html{ height:100%}
@@ -417,15 +413,8 @@
     <!-- content -->
     <br>
     <div id="content" style="height:100%">
-       
-        <div class="tab_st" >
-            <button class="button_on" style="margin-left: 10px;">위시리스트</button>
-            <button>예약내역</button>
-            <button>나의체험</button>
-            <button>포인트</button>
-            <button>1:1문의</button>
-            <button>메세지</button>
-        </div>
+       <jsp:include page="../common/myPageMenubar.jsp"/>
+      
         <!-- 인기등록 숙소-->
         <div id="roomList" style="width:100%; margin:0 auto;" >
             <h1 style="width:100%; padding-left:80px">위시리스트</h1>
@@ -433,7 +422,7 @@
                 <li>
                     <a href="">
                         <img src="images/common/굿플레이스로고02.jpg"  height="150px"><br>
-                        숙소 타이틀<br>
+           ${wList.roNo}<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
@@ -441,15 +430,15 @@
                 <li>
                     <a href="">
                         <img src="images/common/굿플레이스로고02.jpg" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
+            ${wList.roNo}<br>
+                        ${wList.roomsTitle }<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
                 </li>
                 <li>
                     <a href="">
                         <img src="images/common/굿플레이스로고02.jpg" height="150px"><br>
-                        숙소 타이틀<br>
+           ${wList.roNo}<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>
@@ -457,7 +446,7 @@
                 <li>
                     <a href="">
                         <img src="images/common/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
+           ${wList.roNo}<br>
                         숙소 간단한 설명<br>
                         <p style="text-align:center; margin:unset;">n개의 이용후기</p>
                     </a>

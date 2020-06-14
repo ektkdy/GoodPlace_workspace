@@ -117,7 +117,7 @@ public class RoomController {
 	    
 	    int listCount = rService.selectListCount(userNo);
 	    
-	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 	    
 	    ArrayList<Room> list = rService.selectRoomsList(pi, userNo);
 	    
@@ -330,7 +330,7 @@ public class RoomController {
 		int usNo = loginUser.getUsNo();
 		
 		int listCount = rService.selectRoomOkeyListCount(usNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 		
 		ArrayList<Room> list = rService.selectRoomOkeyList(pi, usNo);
 		ArrayList<Room> plist = rService.selectPowerList();
@@ -520,7 +520,7 @@ public class RoomController {
     {
      
         int listCount = rService.aSelectPowerListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
     	
         ArrayList<Room> list = rService.selectPowerRoomList(pi);
         
@@ -538,7 +538,7 @@ public class RoomController {
 		
 		int listCount = rService.selectListRoomsWaitCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Room> list = rService.selectRoomsWaitList(pi);
 		
@@ -553,7 +553,7 @@ public class RoomController {
 		
 		int listCount = rService.selectListRoomsOkayCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Room> list = rService.selectRoomsOkayList(pi);
 		
@@ -627,7 +627,7 @@ public class RoomController {
     public String roomSearchList(int currentPage, Room r, Model model) {
     	
         int listCount = rService.roomSearchCount(r); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Room> list = rService.roomSearchList(pi, r);
         
@@ -842,7 +842,7 @@ public class RoomController {
 			
 			int listCount = rService.selectRvRoomListCount(usNo);
 		    
-		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 		    
 		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
 		    
@@ -864,7 +864,7 @@ public class RoomController {
 			
 			int listCount = rService.selectRvRoomListCount(usNo);
 		    
-		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 		    
 		    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
 		    
@@ -900,7 +900,7 @@ public class RoomController {
 			
 			int listCount = rService.selectRvRoomConfirmListCount(usNo);
 		    
-		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage,5,5);
 		    
 		    ArrayList<Room> list = rService.selectRvRoomConfirmList(pi, usNo);
 
@@ -936,7 +936,7 @@ public class RoomController {
 			
 			int listCount = rService.selectRvRoomCancelListCount(usNo);
 		    
-		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+		    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 		    
 		    ArrayList<Room> list = rService.selectRvRoomCancelList(pi, usNo);
 
