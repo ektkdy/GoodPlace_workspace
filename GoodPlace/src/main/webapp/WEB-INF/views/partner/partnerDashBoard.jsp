@@ -43,8 +43,8 @@ button:hover{cursor:pointer}
                 <div class="con2">
                     <div class="reservationArea" style="float:left; margin-top: 20px;">
 	                    <div class="divTitle" style="float: left;">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png" width="24px"height="24px;" style="float: left;">
-	                        <p>예약현황</p><span style="font-size: 15px;">|새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png"  style="float:left; padding-left:10px; vertical-align:bottom">
+	                        <p>예약현황</p><span style="font-size: 15px;">&nbsp;|&nbsp;새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
 	                    </div>
 	                </div>
 	                <div class="calendar" style="margin-top:20px">
@@ -53,7 +53,7 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="rvRoomList.rv?currentPage=1"  style="font-size: 18px;">더보기+</a></span></div>
 	                    <div style="float:left; margin-top:30px">
 	                        <table id="roomReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
@@ -76,7 +76,7 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>체험예약목록</p>
 	                        <span style="float:right; margin-right:10px;">
 	                            <a href="rvExpList.rv?currentPage=1" style="font-size: 18px;">더보기+</a>
@@ -102,10 +102,10 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reviewDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/review_icon.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/review_icon.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>최근등록후기</p>
 	                        <span style="float:right; margin-right:10px;">
-	                            <a href="#" style="font-size: 18px;">더보기+</a>
+	                            <a href="reviewList.re?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
 	                    <div style="float: left;">
@@ -118,7 +118,7 @@ button:hover{cursor:pointer}
 	                </div>
 	                <div class="noticeDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/notice_icon.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/notice_icon.jpg"  style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>공지사항</p>
 	                        <span style="float:right; margin-right:10px;">
 	                            <a href="pNoticeList.bo?currentPage=1" style="font-size: 18px;">더보기+</a>
@@ -158,10 +158,10 @@ button:hover{cursor:pointer}
  				}else{
  					
  					for(var i in list){
- 						var start = list[i].noticeDate;
+ 						var start = list[i].reviewDate;
  								content +=  "<tr>" +
  										 	"<td>" + list[i].reContent + "</td>" +
- 										 	"<td>" +  list[i].reviewDate +"</td>" +
+ 										 	"<td>" + start.substring( 0, 10 )+"</td>" +
  										"</tr>";
  									  }
  				}			 		
@@ -196,8 +196,8 @@ button:hover{cursor:pointer}
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
- 										 	"<td>" + list[i].noticeTitle + "</td>" +
- 										 	"<td>" + list1[i].noticeDate + "</td>" +
+ 										 	"<td width='80%'>" + list[i].noticeTitle + "</td>" +
+ 										 	"<td width='20%'>" + start.substring( 0, 5)+"일</td>" +
  										"</tr>";
  									  }
  				}			 		
