@@ -83,9 +83,6 @@
 	            	<input type="hidden" name="atList" value="${ list }">
 	            	<input type="hidden" id="count" name="count" value="">
  	            	
-	            	${ e.startTime }
-	            	${ e.endTime }
-	            	${ e.intervalTime }
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
 	                    1. 기본 정보</div>
 		                <table>
@@ -187,7 +184,6 @@
 	                    <tr>
 	                        <th>* 체험 시간</th>
 	                        <td id="oprateTimes">
-	                        ${e.startTime}
 								운영 시작 시간은 <select name="startTime" id="startTime">
 													<option value="00:00">00:00
 													<option value="00:30">00:30
@@ -424,19 +420,23 @@
 <!-- 체험시간 select option -->
 <script>
 	$(function(){
-		 var a = $('${e.startTime}').text();
-		 var b = $('${e.endTime}').val();
-		 var c = $('${e.intervalTime}');
-		 console.log(a);
-		 console.log(b);
-		 console.log(c);
-		 
 		 $("#startTime option").each(function(i, option){
 			 if('${e.startTime}'==option.value){
-				 console.log("1");
+				$(this).attr("selected", true);				 
 			 }
 		 });
-		 /. .MN BVC/
+		 
+		 $("#endTime option").each(function(i, option){
+			 if('${e.endTime}'==option.value){
+				$(this).attr("selected", true);				 
+			 }
+		 });
+		 
+		 $("#intervalTime option").each(function(i, option){
+			 if('${e.intervalTime}'==option.value){
+				$(this).attr("selected", true);				 
+			 }
+		 });
 	});
 </script>
 
@@ -454,7 +454,7 @@
 				$("#supplies").attr("disabled", false);
 			}
 		});
-	});
+	})
 </script>
 
 <script>
@@ -586,9 +586,6 @@
 			// 누른 x의 갯수를 1증가시킨다
 			count++;
 			
-			// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
-			$("#count").val(count);
-			
 			// 파일명+x버튼 한 줄을 삭제한다
 			$(this).parent(".li").remove();
 			
@@ -601,6 +598,9 @@
 				}
 			}
 		});
+		
+		// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
+		$("#count").val(count);
 		
 		// 동적으로 만들어진 요소는 on메소드를 이용하여 이벤트 작성
 		//$(".addBtn").click(function(){

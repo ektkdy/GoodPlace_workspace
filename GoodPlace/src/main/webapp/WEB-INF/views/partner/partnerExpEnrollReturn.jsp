@@ -430,6 +430,29 @@
 	});
 </script>
 
+<!-- 체험시간 select option -->
+<script>
+	$(function(){
+		 $("#startTime option").each(function(i, option){
+			 if('${e.startTime}'==option.value){
+				$(this).attr("selected", true);				 
+			 }
+		 });
+		 
+		 $("#endTime option").each(function(i, option){
+			 if('${e.endTime}'==option.value){
+				$(this).attr("selected", true);				 
+			 }
+		 });
+		 
+		 $("#intervalTime option").each(function(i, option){
+			 if('${e.intervalTime}'==option.value){
+				$(this).attr("selected", true);				 
+			 }
+		 });
+	});
+</script>
+
 <script>
 	$(function(){
 		if('${e.supplies}'=="장비포함"){

@@ -192,22 +192,26 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExpc(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateExp(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request, Model model) {
 			
+		//System.out.println("count : " + count);
+		
+		if(!count.equals("0")) {
 			//System.out.println(count); 	
 			int count1 = Integer.parseInt(count);
-		
-		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
-		for(int i= 0 ; i<count1 ; i++) {
-			//System.out.println(deList[i]);
-			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
-		
-			File deleteFile = new File(savePath + deList[i]); 
-			deleteFile.delete();
 			
-			int result1 = expService.deleteAt(deList[i]); 
+			// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+			for(int i= 0 ; i<count1 ; i++) {
+				//System.out.println(deList[i]);
+				String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+			
+				File deleteFile = new File(savePath + deList[i]); 
+				deleteFile.delete();
+				
+				int result1 = expService.deleteAt(deList[i]); 
+			}
 		}
 		
 		// 객체+썸네일 부분
