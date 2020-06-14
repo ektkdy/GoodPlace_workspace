@@ -71,6 +71,15 @@
 		<result column="AGE" property="age"/>
 		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
+	
+	<resultMap type="WishList" id="selectwishList">
+		<id column="WISH_NO" property="wishNo"/>
+		<result column="WISH_DATE" property="wishDate"/>
+		<result column="USNO" property="userNo"/>
+		<result column="userNo" property="roNo"/>
+		<result column="EXNO" property="exNo"/>
+	</resultMap>
+	
 
 
 
@@ -601,6 +610,12 @@
 	</update>
 	
 	<!-- /기하 partner review -->
+	
+	<!-- 현우 -->
+	<select id="selectwishList" resultMap="selectwishList" parameterType="Member">
+		select  
+	</select>
+	
 	
 
 </mapper>

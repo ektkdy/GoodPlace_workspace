@@ -6,11 +6,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
-import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.member.model.vo.Member;
 
 @Repository("expDao")
 public class ExperienceDao {
@@ -239,7 +239,10 @@ public class ExperienceDao {
 	
 	//------------[체험조회 끝]------------
 	
-	
+	// 마이페이지
+	public ArrayList<ExpPay> selectExpPayList(SqlSessionTemplate sqlSession, Member m) {
+		return (ArrayList)sqlSession.selectList("expMapper.selectExpPayList", m);
+	}
 	
 	
 	

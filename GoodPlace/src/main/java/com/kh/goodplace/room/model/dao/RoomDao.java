@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
-import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Repository("rDao")
 public class RoomDao {
@@ -300,13 +300,17 @@ public class RoomDao {
 	}
 	
 	//예약취소
-		public int roomCancel(SqlSessionTemplate sqlSession, int rpNo) {
-			
-			return sqlSession.update("roomMapper.roomCancel", rpNo);
-		}
+	public int roomCancel(SqlSessionTemplate sqlSession, int rpNo) {
+		
+		return sqlSession.update("roomMapper.roomCancel", rpNo);
+	}
 
 		
 	
+	// 마이페이지 
+	public ArrayList<RoomPay> selectRoomPayList(SqlSessionTemplate sqlSession, Member m) {
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomPayList", m);
+	}
 	
 
 }

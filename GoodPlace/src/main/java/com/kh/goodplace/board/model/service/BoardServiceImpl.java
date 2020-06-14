@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.board.model.dao.BoardDao;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
+import com.kh.goodplace.member.model.vo.Member;
 
 @Service("bService")
 public class BoardServiceImpl implements BoardService {
@@ -252,6 +254,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertReply(Board b) {
 		return bDao.insertReply(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<WishList> selectwishList(Member m) {
+		return bDao.selectwishList(sqlSession, m);
 	}
 
 

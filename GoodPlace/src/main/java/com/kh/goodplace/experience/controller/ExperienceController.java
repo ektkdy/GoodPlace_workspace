@@ -2,7 +2,6 @@ package com.kh.goodplace.experience.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +25,9 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -381,28 +380,23 @@ public class ExperienceController {
 	}
 	
 	
+	@RequestMapping("mpExp.exp")
+	public String selectExperience(HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		ArrayList<ExpPay> ePayList = expService.selectExpPayList(m);
+		
+		model.addAttribute("ePayList",ePayList);
+		return "user/mpExp";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("myExperienceDetail.exp")
+	public String myExperienceDetail(ExpPay ep, Model model) {
+		System.out.println(ep);
+		
+		
+		model.addAttribute("ep", ep);
+		return "user/myExperienceDetail";
+	}
 	
 	
 	

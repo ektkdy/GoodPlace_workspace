@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
 
@@ -41,9 +42,18 @@ public class BoardController {
     }
     // 마이페이지 위시리스트 이동
     @RequestMapping("wishList.bo") 
-    	public String wishList() {
+    	public String selectwishList(HttpSession session, Model model) {
+    		Member m = (Member)session.getAttribute("loginUser");
+    		ArrayList<WishList> wList = bService.selectwishList(m);
+    	
     		return"user/wishList";
     	}
+    // 마이페이지 1대1문의 이동
+    @RequestMapping("inQuiry.bo")
+    public String inQuiry() {
+    	return "user/mpInquery";
+    }
+    
     
     // 사용자 페이지 이벤트리스트 이동
     @RequestMapping("eventForm.bo")

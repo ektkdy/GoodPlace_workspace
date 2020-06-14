@@ -25,4 +25,10 @@ public class ExpPay {
 	private int people;			// 인원수
 	private int status;			// 체험상태(승인1~)
 	private int expClassNo;		// 선택한 수업의 교시
+	private String expTitle;
+	private String changeName;
+	
+	private String supplies;	// 준비물
+	private String useTime;	// 소요시간
+	private String addBasic;
 }

@@ -146,6 +146,27 @@
 		<result column="CHANGE_NAME" property="usChangeName"/>
 	</resultMap>
 	
+	<resultMap id="selectRoomPayList" type="RoomPay">
+		<id column="RENO" property="reNo"/>
+		<result column="RPNO" property="rpNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="AMOUNT" property="amount"/>
+		<result column="BIRTHDATE" property="brithDate"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="ADD_POINT" property="addPoint"/>
+		<result column="CHECK_IN" property="checkIn"/>
+		<result column="RESERVE_STATUS" property="reserveStatus"/>
+		<result column="USE_POINT" property="usePoint"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="CONCEPT" property="concept"/>
+		<result column="REQUEST" property="request"/>
+		<result column="START_DAYS" property="startDays"/>
+		<result column="END_DAYS" property="endDays"/>
+		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int" parameterType="_int">
 		select count(*)
 		  from rooms
@@ -534,9 +555,15 @@
 		 where rpno = #{rpNo}
 	</update>
 
+	
+	<!-- 마이페이지 -->
 
-
-
+	<select id="selectRoomPayList" resultMap="selectRoomPayList" parameterType="Member">
+		select RPNO, p.RONO, p.USNO, p.AMOUNT, p.BIRTHDATE, p.PAY_DATE, p.ADD_POINT, p.CHECK_IN, p.RESERVE_STATUS, p.USE_POINT, p.PEOPLE, p.CONCEPT, p.REQUEST, p.START_DAYS, p.END_DAYS, r.ROOMS_TITLE,r.CHANGE_NAME 
+		  from roomspay p
+          left join rooms r on(p.rono = r.rono)
+         where p.usno = #{usNo}
+	</select>
 
 
 

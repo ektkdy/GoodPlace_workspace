@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <style>
         /* 페이징바 시작 */ 
         .pagingBar{
@@ -95,8 +96,8 @@
        
         <div style=" width:1000px; margin-left: 100px;">
             <jsp:include page="../common/myPageMenubar.jsp"/>
-        <h1 style="width:200px; float: left;">나의 예약</h1>
             
+     <h1 style="width:200px; float: left;">나의 체험</h1>
 <!--             <select name="status" style="float: right; width:200px;">
                 <option>진행중인 예약</option>
                 <option>승인대기 예약</option>
@@ -104,41 +105,39 @@
         </div>
         <hr width="1000px">
         <div style="margin: 20px auto; text-align: center; width: 1000px; height: 1000px;">
-        	<c:forEach items="${ rPayList }" var="rPayList">
-	        	<div>
-	        		<form id="submitDetail" action="myReserveDetail.ro" method="post">
-	        			<input type="hidden" name="rpNo" value="${ rPayList.rpNo }">
-	        			<input type="hidden" name="roNo" value="${ rPayList.roNo }">
-	        			<input type="hidden" name="userNo" value="${ rPayList.userNo }">
-	        			<input type="hidden" name="amount" value="${ rPayList.amount }">
-	        			<input type="hidden" name="brithDate" value="${ rPayList.brithDate }">
-	        			<input type="hidden" name="payDate" value="${ rPayList.payDate }">
-	        			<input type="hidden" name="addPoint" value="${ rPayList.addPoint }">
-	        			<input type="hidden" name="checkIn" value="${ rPayList.checkIn }">
-	        			<input type="hidden" name="reserveStatus" value="${ rPayList.reserveStatus }">
-	        			<input type="hidden" name="usePoint" value="${ rPayList.usePoint }">
-	        			<input type="hidden" name="people" value="${ rPayList.people }">
-	        			<input type="hidden" name="concept" value="${ rPayList.concept }">
-	        			<input type="hidden" name="request" value="${ rPayList.request }">
-	        			<input type="hidden" name="startDays" value="${ rPayList.startDays }">
-	        			<input type="hidden" name="endDays" value="${ rPayList.endDays }">
-	        			<input type="hidden" name="roomsTitle" value="${ rPayList.roomsTitle }">
-	        			<input type="hidden" name="changeName" value="${ rPayList.changeName }">
+        	<c:forEach items="${ ePayList }" var="ePayList">
+        		<div>	
+	                <form id="submitDetail" action="myExperienceDetail.exp" method="post">
+	        			<input type="hidden" name="epNo" value="${ ePayList.epNo }">
+	        			<input type="hidden" name="exNo" value="${ ePayList.exNo }">
+	        			<input type="hidden" name="usNo" value="${ ePayList.usNo }">
+	        			<input type="hidden" name="amount" value="${ ePayList.amount }">
+	        			<input type="hidden" name="payDate" value="${ ePayList.payDate }">
+	        			<input type="hidden" name="expDate" value="${ ePayList.expDate }">
+	        			<input type="hidden" name="people" value="${ ePayList.people }">
+	        			<input type="hidden" name="status" value="${ ePayList.status }">
+	        			<input type="hidden" name="expClassNo" value="${ ePayList.expClassNo }">
+	        			<input type="hidden" name="people" value="${ ePayList.expTitle }">
+	        			<input type="hidden" name="changeName" value="${ ePayList.changeName }">
+	        			<input type="hidden" name="supplies" value="${ ePayList.supplies }">
+	        			<input type="hidden" name="useTime" value="${ ePayList.useTime }">
+	        			<input type="hidden" name="addBasic" value="${ ePayList.addBasic }">
+	   
 	        		</form>
-		            <div id="detailView" style="border: 1px solid lightgray; margin: 0 30px; height: 200px;">            
-		                <dvi style="float: left; width: 30%; height: 200px; background-color: gray;">
-		                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/${rPayList.changeName}" width="100%" height="100%" style="padding: 10px; box-sizing: border-box;">
-		                </dvi>
+	        		<div id="detailView" style="border: 1px solid lightgray; margin: 0 30px; height: 200px;">
+		               	<dvi style="float: left; width: 30%; height: 200px; background-color: gray;">
+		                	<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ePayList.changeName}" width="100%" height="100%" style="padding: 10px; box-sizing: border-box;">
+		               	</dvi>
 		                
 		                <div style=" width: 50%; height: 200px; text-align: left; float: left; padding: 30px 30px; box-sizing: border-box;">
 		                    <div style="box-sizing: border-box;  height: 20%; font-size: 20px; font-weight: 700;">
-		                        ${ rPayList.roomsTitle }
+		                        ${ ePayList.expTitle }
 		                    </div>
 		                    <div style="box-sizing: border-box;  height: 60%; font-size: 16px;">
-		                    	${rPayList.concept }
+		                    	
 		                    </div>
 		                    <div style="box-sizing: border-box;  height: 20%; font-size: 15px;">
-		                        ${ rPayList.startDays } ~ ${ rPayList.endDays }
+		                        ${ ePayList.expDate }
 		                    </div>
 		                </div>
 		                <div style="width: 20%; height: 100%; box-sizing: border-box; float:right;">
@@ -146,8 +145,8 @@
 					        	완료된예약
 					    	</div>
 					    </div>
-		            </div>
-		            <hr style="clear: both; margin: 20px 0;">
+	            	</div>
+	            	<hr style="clear: both; margin: 20px 0;">
 	            </div>
 			</c:forEach>
             
@@ -169,11 +168,12 @@
 </div>
    <!-- footer -->
 	<jsp:include page="../common/footer.jsp"/>
-    
-    <script>
+	
+	 <script>
     	$("#detailView").click(function(){
     		$(this).siblings().eq(0).submit();
     	});
     </script>
+    
 </body>
 </html>

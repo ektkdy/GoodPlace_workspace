@@ -298,12 +298,7 @@ public class MemberController {
 		return new Gson().toJson(tutor);
 	}
 	
-	@RequestMapping("ReserveForm.ro")
-	public String selectReserve() {
-		return "user/reserve";
-	}
-
-
+	
 
     // ------------------ 파트너 계정관리 컨트롤러 --------------------
 

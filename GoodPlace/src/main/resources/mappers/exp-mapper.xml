@@ -156,6 +156,22 @@
 		<result column="user_name" property="paName"/>
 	</resultMap>
 	
+	<resultMap id="selectExpPayList" type="ExpPay">
+		<id column="EPNO" property="epNo"/>
+		<result column="EXNO" property="exNo"/>
+		<result column="USNO" property="usNo"/>
+		<result column="AMOUNT" property="amount"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="EXP_DATE" property="expDate"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="STATUS" property="status"/>
+		<result column="EXP_TITLE" property="expTitle"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="SUPPLIES" property="supplies"/>
+		<result column="USE_TIME" property="useTime"/>
+		<result column="ADD_BASIC" property="addBasic"/>
+	</resultMap>
+	
 	<!-- 사용자의 체험 전체 목록 조회  -->
 	<select id="selectExpListCount" resultType="_int">
 		select count(*)
@@ -446,13 +462,16 @@
 		 WHERE EXNO=#{exNo}
 	</select>
 	
-	
-	
-	
-	
-	
-	
 	<!-- 체험조회 끝 -->
-
 	
+	
+	
+	
+	<!-- 마이페이지 -->
+	<select id="selectExpPayList" resultMap="selectExpPayList" parameterType="Member">
+    select EPNO, ep.EXNO, ep.USNO, ep.AMOUNT, ep.PAY_DATE, ep.EXP_DATE, ep.PEOPLE, ep.STATUS, ex.EXP_TITLE, EX.CHANGE_NAME, EX.SUPPLIES, EX.USE_TIME, EX.ADD_BASIC
+	  from exppay ep
+	  join experience ex on (ep.exno = ex.exno)
+     where ep.usno = #{usNo}
+	</select>
 </mapper>

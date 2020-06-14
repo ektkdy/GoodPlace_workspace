@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.member.model.vo.Member;
 
 @Repository("bDao")
@@ -294,9 +295,10 @@ public class BoardDao {
 		return (sqlSession.selectOne("boardMapper.reviewListCount", roNo));
 	}
 	
-	
-	
-	
+	// 마이페이지
+	public ArrayList<WishList> selectwishList(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectwishList", m);
+	}
 	
 	
 	

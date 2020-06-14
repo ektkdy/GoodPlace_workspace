@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.member.model.vo.Member;
 
 public interface BoardService {
@@ -149,5 +150,8 @@ public interface BoardService {
 	
 	//2.리뷰 댓글 작성용서비스 - 기하
 	int insertReply(Board b);
+	
+	// 1. 마이페이지에서 현재 로그인한 회원에 위시리스트정보를 가져옴
+	public ArrayList<WishList> selectwishList(Member m);
 	
 }

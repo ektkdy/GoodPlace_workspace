@@ -7,6 +7,7 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 public interface RoomService {
 	
@@ -148,6 +149,10 @@ public interface RoomService {
 	
 	
 	
+	// ---------- 결제 정보 조회 ----------------
+	
+	//1. 마이페이지에서 현재 로그인한 회원의 결제정보를 가져옴
+	public ArrayList<RoomPay> selectRoomPayList(Member m);
 	
 	
 	
