@@ -692,21 +692,25 @@ public class BoardController {
     }
     
     @RequestMapping("reviewForm.re")
-    public String reviewForm(int reNo, Model model) {
-
-    	Board r = bService.selectReview(reNo);
+    public String reviewForm(int reNo, int rpNo, Model model) {
+    	Board b = new Board();
+    	
+    	b.setReNo(reNo);
+    	b.setRpNo(rpNo);
+    	
+    	Board r = bService.selectReview(b);
     	
     	model.addAttribute("r", r);
-    	
     	return "partner/partnerReplyEnrollForm";
     }
     
     @RequestMapping("insert.re")
-    public String insertReply(int reNo, String reply, Model model) {
+    public String insertReply(int reNo, int rpNo,String reply, Model model) {
     	
     	Board b = new Board();
     	
     	b.setReNo(reNo);
+    	b.setRpNo(rpNo);
     	b.setReply(reply);
     	
     	int result = bService.insertReply(b);
@@ -715,7 +719,7 @@ public class BoardController {
     	
     	if(result > 0){ // 게시글 상세조회 성공
             
-            Board r = bService.selectReview(reNo);
+            Board r = bService.selectReview(b);
             model.addAttribute("r", r);
             return "redirect:reviewList.re?currentPage=1";
             
@@ -730,12 +734,12 @@ public class BoardController {
     @RequestMapping("reviewDetailView.re")
     public String reviewDetailView(int reNo, int rpNo, Model model) {
     	
-//    		Board b = new Board();
-//    		
-//    		b.setReNo(reNo);
-//    		b.setRpNo(rpNo);
+    		Board b = new Board();
+    		
+    		b.setReNo(reNo);
+    		b.setRpNo(rpNo);
     				
-    	 Board r = bService.selectReview(reNo);
+    	 Board r = bService.selectReview(b);
     	 
     	 model.addAttribute("r", r);
 		 

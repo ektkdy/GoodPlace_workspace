@@ -1,6 +1,7 @@
 package com.kh.goodplace.board.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -106,5 +107,17 @@ public class Board {
 	private String concept;			// 여행컨셉
 	private String age;				// 연령대
 	private Date endDays;			// 여행날짜
+	
+	/* 숙소 결제 컬럼들 */
+	private int amount;		// 결제금액
+	private String brithDate;	// 예약자 생년월일
+	private Timestamp payDate;	// 결제날짜
+	private int addPoint;	// 적립포인트
+	private String checkIn;	// 체크인시간
+	private int reserveStatus; 	// 예약상태
+	private int usePoint;	// 사용포인트
+	private int people;		// 예약인원수
+	private String request;	// 요청사항
+	private Date startDays;	// 예약시작일자
 
 }

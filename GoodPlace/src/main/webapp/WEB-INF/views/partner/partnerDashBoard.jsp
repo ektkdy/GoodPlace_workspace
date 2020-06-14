@@ -54,9 +54,9 @@ button:hover{cursor:pointer}
 	                <div class="reservDiv">
 	                    <div class="divTitle">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" width="24px"height="24px" style="float:left">
-	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="#"  style="font-size: 18px;">더보기+</a></span></div>
+	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="rvRoomList.rv?currentPage=1"  style="font-size: 18px;">더보기+</a></span></div>
 	                    <div style="float:left; margin-top:30px">
-	                        <table class="reservTb" cellpadding="0" cellspacing="0">
+	                        <table id="roomReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
 	                            <thead>
 	                                <tr>
 	                                    <th>예약번호</th>
@@ -68,11 +68,6 @@ button:hover{cursor:pointer}
 	                            </thead>
 	                            <tbody>
 	                                <tr>
-	                                    <td>gp0423</td>
-	                                    <td>방기남</td>
-	                                    <td>2020-06-10~2020-06-30</td>
-	                                    <td>제주 협재(산들바람피는마을)</td>
-	                                    <td>확정완료</td>
 	                                </tr>
 	                            </tbody>
 	                        </table>
@@ -115,26 +110,6 @@ button:hover{cursor:pointer}
 	                    </div>
 	                    <div style="float: left;">
 	                        <table class="reviewTb">
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
 	                            <tr class="reviewTr">
 	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
 	                                <td>별점(5.0)</td>
@@ -221,19 +196,19 @@ button:hover{cursor:pointer}
  				}else{
  					var arr = list;
  					
- 					arr.slice(0, 6);
+ 					var temp = arr.slice(0, 6);
  					
- 					for(var i in arr){
+ 					for(var i in temp){
  						var start = list[i].expDateUser;
  						content +=  "<tr>" +
 					 	"<td>" + list[i].epNo + "</td>" +
 					 	"<td>" + list[i].userName +"</td>" + 
 					 	"<td>" + start.substr(0,10) +"</td>" +
 					 	"<td>" +  list[i].expTitle + "</td>" +
-					 	"<td>예약완료</td>" +
+					 	"<td>예약확정</td>" +
 					 	"</tr>";
- 									  }
- 					}	 		
+ 					}
+ 				}	 		
  				
  				$("#expReservationTb tbody").html(content);
  			
@@ -243,7 +218,48 @@ button:hover{cursor:pointer}
  		}
  	 });
 
- 	
+ 		//숙소예약
+ 		$.ajax({
+ 			url:"dashboardRoomList.rv",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var pi = result.pi;
+ 				var list = result.list;
+ 				
+ 				console.log(list);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='5' style='text-align:center'>예약목록이 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					var temp2 = list.slice(0, 6);
+ 					
+ 					for(var i in temp2){
+ 						var start = list[i].startDays;
+ 						var end = list[i].endDays;
+ 							content +=  "<tr>" +
+ 										 	"<td>" + list[i].rpNo + "</td>" +
+ 										 	"<td>" + list[i].userName +"</td>" + 
+ 										 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
+ 										 	"<td>" +  list[i].roomsTitle + "</td>" +
+ 										 	"<td>예약확정</td>" +
+ 										"</tr>";
+ 									  }
+ 					}	 		
+ 				
+ 				$("#roomReservationTb tbody").html(content);
+ 			
+
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+
  	});
  </script>
 <script>

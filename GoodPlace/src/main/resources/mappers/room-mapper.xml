@@ -179,6 +179,7 @@
 		select *
 	      from rooms 
 	     where usno = #{userNo}
+	     order by status asc
 	</select>
 	
 	<select id="selectRoom" resultMap="roomResultSet" parameterType="_int">
