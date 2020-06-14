@@ -270,13 +270,12 @@
             <hr style="margin:unset;">
             <div class="fullWidth" style=" height:100px;">
                 <div class="c_profileArea" style="width:70px; margin:24px;">
-                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg2.jpg" class="c_profile"/>
+                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ exp.paPofile }" class="c_profile"/>
                 </div>
-                <h3 style="margin:40px 10px 0 0; float: left;">김가가</h3>
+                <h3 style="margin:40px 10px 0 0; float: left;">${ exp.paName }</h3>
                 <div style="width:160px;">
                     <a style="float: left; padding:10px; text-align:center; margin:30px 20px;" class="buttonStyle1">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기
-                    </a>
+			 			<img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기</a>
                 </div>
             </div>
         </div>
@@ -301,8 +300,8 @@
 
             
             <form>
-                <input type="hidden" value="히든으로 필요한 값들 적어서 넘기기">
-                
+                <input type="hidden" name="expDateString" value="${ exp.expDateString }">
+                <input type="hidden" name="classSeq" value="">
             </form>
         </div>
 
@@ -461,15 +460,6 @@
    			}
 
         });
-        
-     	// 인원선택
-        //$('#getPeople #peopleArea').(function(){
-        //    $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>"명</div>")
-       // });
-       // $('#getPeople' & '#peopleArea').mouseleave(function(){
-       //     $('#peopleArea').toggleClass('hide');
-       // });
-       
         
     </script>
 

@@ -178,6 +178,7 @@
 	                </div>
 	                <form action="">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
+	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
 	                </form>
 	            </div>
           	</c:forEach>

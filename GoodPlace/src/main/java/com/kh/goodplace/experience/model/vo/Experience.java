@@ -89,5 +89,5 @@ public class Experience {
 	private String paPofile;	 	// 프로필사진 변경이름
 	private String partnerIntro;	// 파트너소개
 	private String paAccountName; 	//은행명
-	private String paAccountNum;	//계좌번호
+	private String paAccountNum;		//계좌번호
 }

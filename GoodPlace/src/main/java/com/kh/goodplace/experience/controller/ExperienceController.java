@@ -683,6 +683,7 @@ public class ExperienceController {
 			
 	    	// expList객체 체험태그의 표시형식 보완
 			expList.get(i).setExpTag("#" + (expList.get(i).getExpTag().replace(",", " #")));
+			expList.get(i).setExpDateString(expDateString);
 		}
 		
 
@@ -703,10 +704,11 @@ public class ExperienceController {
 	}
 
 	@RequestMapping("showExp.exp")
-	public ModelAndView showExp(int exNo, ModelAndView mv) {
+	public ModelAndView showExp(int exNo, String expDateString, ModelAndView mv) {
 		System.out.println("지점 2: exNo : " + exNo);
 		
 		Experience exp = expService.selectExpUser(exNo);
+		exp.setExpDateString(expDateString);
 		
 		System.out.println(exp);
 		
