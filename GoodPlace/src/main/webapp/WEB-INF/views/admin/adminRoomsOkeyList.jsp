@@ -146,7 +146,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="roomOkSearch.ro" var="searchUrl">
-														<c:param name="condition" value="${ r.searchSelect }"/>
+														<c:param name="searchSelect" value="${ r.searchSelect }"/>
 														<c:param name="keyword" value="${ r.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>
