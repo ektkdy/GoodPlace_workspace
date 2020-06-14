@@ -710,6 +710,9 @@ public class ExperienceController {
 		Experience exp = expService.selectExpUser(exNo);
 		exp.setExpDateString(expDateString);
 		
+		// expList객체 체험태그의 표시형식 보완
+		exp.setExpTag("#" + (exp.getExpTag().replace(",", " #")));
+		
 		System.out.println(exp);
 		
 		// 수업교시 계산 후 set
