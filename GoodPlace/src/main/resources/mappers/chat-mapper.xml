@@ -27,6 +27,7 @@
 		<result column="CLASS_ID" property="class_class_id"/>
 		<result column="MESSAGE_CONTENT" property="recentMessage"/>
 		<result column="MESSAGE_READTIME" property="recentTime"/>
+		<result column="RONO" property="roNo"/>
 	</resultMap>
 	
 	<resultMap id="messageListMap" type="Message">

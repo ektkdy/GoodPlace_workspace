@@ -179,9 +179,10 @@
 	<jsp:include page="../../common/footer.jsp"/>
 	
 	<script>
+	
         // 인증번호 체크 스크립트
         function certify_check(){
-            if( $('.certify_input').val() == "111111"){ // 인증번호(랜덤)
+            if( $('.certify_input').val() == '${random}'){ // 인증번호(랜덤)
                 $('.certify_Msg').text("인증 성공!");
                 $('.certify_Msg').removeClass("failed_Msg");
                 $('.certify_Msg').addClass("success_Msg");

@@ -23,4 +23,5 @@ public class ChatRoom {
 	
 	private String recentMessage;
 	private Timestamp recentTime;
+	private int roNo;
 }

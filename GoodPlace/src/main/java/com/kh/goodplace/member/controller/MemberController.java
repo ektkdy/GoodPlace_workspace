@@ -6,10 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +41,9 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 
 	// 로그인 메인
@@ -69,9 +75,33 @@ public class MemberController {
 	public String emailCheck(String email, HttpSession session, Model model) {
 
 		int result = mService.emailCheck(email);
+		
+		String setfrom = "gmldud695@naver.com";
+		String tomail = email; // 받는 사람 이메일
+		String title = "GoodPlace 회원가입 인증 메일입니다."; // 제목
 
+		int random = (int)(Math.random()*1000000);
+		
+		String content = "인증번호 : " + random; // 내용
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		if( result > 0 ) {
 			model.addAttribute("email", email);
+			model.addAttribute("random",random);
 			return "user/member/pwdFind2";
 		} else {
 			session.setAttribute("msg", "가입된 이메일이 없습니다.");
@@ -166,9 +196,34 @@ public class MemberController {
 	public ModelAndView enrollEmailForm2(Member m, ModelAndView mv) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		//System.out.println("암호화후: " + encPwd);
+		
+		String setfrom = "gmldud695@naver.com";
+		String tomail = m.getEmail(); // 받는 사람 이메일
+		String title = "GoodPlace 회원가입 인증 메일입니다."; // 제목
+
+		int random = (int)(Math.random()*1000000);
+		
+		String content = "인증번호 : " + random; // 내용
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		m.setUserPwd(encPwd);
 
 		mv.addObject("m", m);
+		mv.addObject("random", random);
         mv.setViewName("user/member/enrollForm2");
 
 		return mv;
@@ -177,7 +232,7 @@ public class MemberController {
 	// 회원가입 성공
 	@RequestMapping("insertMember.me")
 	public ModelAndView insertMember(Member m, ModelAndView mv, HttpSession session) {
-
+		
 		int result = mService.insertMember(m);
 		if(result > 0) {	// 회원가입 성공
 			session.setAttribute("msg", "GoodPlace의 회원이 되신것을 축하합니다.");
