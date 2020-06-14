@@ -93,7 +93,7 @@
 	                    <table class="common_tb" cellpadding="0" cellspacing="0">
 	                        <thead>
 	                            <tr>
-	                                <td width="100"><input type="checkbox"></td>
+	                                <td width="100"><!-- <input type="checkbox"> --></td>
 	                                <td width="150">회원번호</td>
 	                                <td width="200">이름</td>
 	                                <td width="200">아이디</td>

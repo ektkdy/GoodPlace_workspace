@@ -35,10 +35,10 @@
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">등록된후기</p></span>
                 <span class="up_btn_space">
-                    <select style="width:250px; height:35px; border-radius: 5px;">
+                    <!-- <select style="width:250px; height:35px; border-radius: 5px;">
                         <option>등록일</option>
                         <option>별점</option>
-                    </select>
+                    </select>-->
                 </span>
                 <br clear="both">
                 <table id="replyList" class="reply_tb" cellpadding="0" cellspacing="0">

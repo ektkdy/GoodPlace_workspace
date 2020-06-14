@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +93,7 @@
                             </tr>
                             <tr class="pdBtom">
                                 <th>*숙소위치</th>
-                                <td colspan="2"><strong>${ r.addBasic }</strong></td>
+                                <td colspan="2"><strong>${fn:substring(r.addBasic,0,2)}</strong></td>
                             </tr>
                             <tr>
                                 <th rowspan="2" width=" ">* 대표사진</th>

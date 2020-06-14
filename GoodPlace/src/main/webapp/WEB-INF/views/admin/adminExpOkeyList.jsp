@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@
 							<c:forEach items="${ list }" var="e">
 	                            <tr>
 	                                <td>${ e.exNo }</td>
-	                                <td>${ e.addBasic }</td>
+	                                <td>${fn:substring(e.addBasic,0,2)}</td>
 	                                <td>${ e.startDate }</td>
 	                                <td>${ e.expTitle }</td>
 	                                <td>${ e.price }원</td>

@@ -93,17 +93,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>* 언어</th>
-                            <td>
-                                <h5 class="h5Cl enrollInfo">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</h5>
-                                <input type="checkbox" id="language1" name="ko" value="ko"><label class="language" for="ko" style="padding-right: 20px;">한국어</label>
-                                <input type="checkbox" id="language2" name="es" value="es"><label class="language" for="es" style="padding-right: 20px;">스페인어</label>
-                                <input type="checkbox" id="language3" name="jp" value="jp"><label class="language" for="jp">일본어</label><br>
-                                <input type="checkbox" id="language4" name="en" value="en"><label class="language" for="en" style="padding-right: 35px;">영어</label>
-                                <input type="checkbox" id="language5" name="ch" value="ch"><label class="language" for="ch" style="padding-right: 34px;">중국어</label>
-                                <input type="checkbox" id="language6" name="etc" value="etc"><label class="language" for="etc">그 외</label>
-                            </td>
-                        </tr>
+		                        <th>* 언어</th>
+		                        <td>
+		                        	<p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
+		                            <label><input type="checkbox" id="ko" name="language" value="한국어">한국어</label>
+		                            <label><input type="checkbox" id="es" name="language" value="스페인어" style="margin-left:20px;">스페인어</label>
+		                            <label><input type="checkbox" id="jp" name="language" value="일본어" style="margin-left:20px;">일본어</label>
+		                            <br>
+		                            <label><input type="checkbox" id="en" name="language" value="영어">영어</label>
+		                            <label><input type="checkbox" id="ch" name="language" value="중국어" style="margin-left:30px;">중국어</label>
+		                            <label><input type="checkbox" id="etc" name="language" value="그 외" style="margin-left:33px;">그 외</label>
+		                        </td>
+		                    </tr>
                         <tr>
                             <th>* 체험 태그</th>
                             <td>
@@ -114,23 +115,22 @@
                             <th>* 체험 제목</th>
                             <td>
                                 <strong>${ e.expTitle }</strong>
-                                <h5 class="expEnroll_tb enrollInfo">• 정확하고 간결하게 표현해주세요. <br>
+                                <!-- <h5 class="expEnroll_tb enrollInfo">• 정확하고 간결하게 표현해주세요. <br>
                                     • 지역명이 포함된 제목은 노출에 더 효과적입니다. <br>
-                                    (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5>
+                                    (도쿄, 산책하는 여행, 샌프란시스코 당일코드 등)</h5> -->
                             </td>
                         </tr>
                         <tr>
                             <th>* 체험 소개</th>
                             <td>
-                                <textarea class="enrollInfo" style="color:black;" placeholder="체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  &#13;&#10; 게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요. &#13;&#10; &#13;&#10;* 체험을 처음부터 끝까지 실제 진행 순서대로 설명해 주세요.&#13;&#10;- 게스트가 참여하게 될 체험활동을 구체적으로 설명하기&#13;&#10;- 게스트가 일정을 충분히 이해할 수 있도록 일정을 상세하게 설명하기">${ e.expContent }</textarea>
+                                <textarea class="enrollInfo" style="color:black;" >${ e.expContent }</textarea>
                             </td>
                         </tr>
                         <tr>
-                            <th>* 체험 장소</th>
-                            <td>
-                                 ${ e.addBasic }
-                            </td>
-                        </tr>
+	                        <th>* 체험 장소</th>
+	                        <td>우편번호 : ${ list[0].zipCode } <br>
+	                        	${ list[0].addBasic } ${ list[0].addRef } ${ list[0].addDetail }</td>
+	                    </tr>
                     </table>
                     <br>
                     <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
@@ -146,7 +146,7 @@
                             <th>* 최대 인원수</th>
                             <td>
                                 <strong>${ e.maxPeople }명</strong>
-                                <h5 class="h5Cl enrollInfo">• 최소 인원수는 1명입니다.</h5>
+                               <!-- <h5 class="h5Cl enrollInfo">• 최소 인원수는 1명입니다.</h5> -->
                             </td>
                         </tr>
                         <tr>
@@ -167,7 +167,7 @@
                             <td>
                                 <img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
-                                <h5 class="h5Cl enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5>
+                                <!-- <h5 class="h5Cl enrollInfo">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</h5> -->
                             </td>
                         </tr>
                         <tr>
@@ -183,14 +183,7 @@
 								</ul>
                             </td>
                         </tr>
-                        <tr>
-                            <th>* 예약 설정</th>
-                            <td>
-                                <strong>${ e.deadline }</strong>시간 전
-                                <h5 class="h5Cl enrollInfo">• 예약 마감 시간을 체험시작 1시간 전으로 설정하실 것을 권해드립니다.<br>
-                                    나중에 언제든지 변경하실수 있습니다.</h5>
-                            </td>
-                        </tr>
+                        
                     </table>
                     <br>
                 </div>
@@ -218,13 +211,17 @@
 		});
 		
 		$(function(){
-			switch('${e.language}'){
-			case "ko" : $("#language1").prop("checked", true); break;
-			case "es" : $("#language2").prop("checked", true); break;
-			case "jp" : $("#language3").prop("checked", true); break;
-			case "en" : $("#language4").prop("checked", true); break;
-			case "ch" : $("#language5").prop("checked", true); break;
-			case "etc" : $("#language6").prop("checked", true); break;
+			var language = ('${e.language}').split(",");
+			
+			for(var i=0; i<language.length; i++){
+				switch(language[i]){
+				case "한국어" : $("#ko").prop("checked", true); break;
+				case "스페인어" : $("#es").prop("checked", true); break;
+				case "일본어" : $("#jp").prop("checked", true); break;
+				case "영어" : $("#en").prop("checked", true); break;
+				case "중국어" : $("#ch").prop("checked", true); break;
+				case "그 외" : $("#etc").prop("checked", true); break;
+				}
 			}
 		});
 	</script>

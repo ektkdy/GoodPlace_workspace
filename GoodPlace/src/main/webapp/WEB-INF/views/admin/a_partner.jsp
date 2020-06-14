@@ -88,7 +88,7 @@
 	                    <table id="partnerList" class="common_tb" cellpadding="0" cellspacing="0">
 	                        <thead>
 	                            <tr>
-	                                <td width="100"><input type="checkbox"></td>
+	                                <td width="100"><!-- <input type="checkbox">--></td>
 	                                <td width="150">파트너번호</td>
 	                                <td width="100">회원번호</td>
 	                                <td width="150">이름</td>
