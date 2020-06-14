@@ -11,6 +11,7 @@ import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Repository("expDao")
 public class ExperienceDao {
@@ -231,12 +232,23 @@ public class ExperienceDao {
 	}
 	
 	public Experience selectExpUser(SqlSessionTemplate sqlSession, int exNo){
-		System.out.println("selectExpUser 다오까지 옴");
 		return sqlSession.selectOne("expMapper.selectExpUser", exNo);
 	}
 	
+	public ArrayList<Experience> getAcceptedPeople(SqlSessionTemplate sqlSession, int exNo, int expClassNo) {
+		Experience exp = new Experience();
+		exp.setExNo(exNo);
+		exp.setExpClassNo(expClassNo);
+		return (ArrayList)sqlSession.selectList("expMapper.selectAcceptedPeople", exp);
+	}
 	
+	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int exNo){
+		return (ArrayList)sqlSession.selectList("expMapper.selectDetailImages", exNo);
+	}
 	
+	public Member getPartner(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("memberMapper.selectPartner", usNo);
+	}
 	//------------[체험조회 끝]------------
 	
 	// 마이페이지

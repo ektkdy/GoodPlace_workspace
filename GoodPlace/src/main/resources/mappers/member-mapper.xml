@@ -342,7 +342,7 @@
  		SELECT *
 		  FROM MEMBER
           JOIN PARTNER USING (PANO)
-		 WHERE USNO = #{roNo}
+		 WHERE USNO = #{usNo}
 	</select>
-
+	
 </mapper>

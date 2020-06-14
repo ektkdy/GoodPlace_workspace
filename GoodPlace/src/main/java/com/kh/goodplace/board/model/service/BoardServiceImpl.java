@@ -178,8 +178,23 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.yellowCardPlus(sqlSession, b);
 	}
 	
+	// ------------------- 관리자 후기관리 ----------------------
 	
+	@Override
+	public int aReplyCount() {
+		return bDao.aReplyCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> aReplyList(PageInfo pi) {
+		return bDao.aReplyList(sqlSession, pi);
+	}
 	
+	@Override
+	public Board aReplyDetail(int reNo) {
+		return bDao.aReplyDetail(sqlSession, reNo);
+	}
+
 	
 	// ------------------- 파트너 공지사항 ----------------------
 	
@@ -260,6 +275,9 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<WishList> selectwishList(Member m) {
 		return bDao.selectwishList(sqlSession, m);
 	}
+
+
+
 
 
 

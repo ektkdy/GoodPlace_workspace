@@ -221,6 +221,29 @@ public class BoardDao {
 		
 	}
 	
+	// ------------------- 관리자 후기관리 ----------------------
+	
+	public int aReplyCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.aReplyCount");
+		
+	}
+	
+	public ArrayList<Board> aReplyList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.aReplyList", null, rowBounds);
+		
+	}
+	
+	public Board aReplyDetail(SqlSessionTemplate sqlSession, int reNo) {
+		
+		return sqlSession.selectOne("boardMapper.aReplyDetail", reNo);
+		
+	}
+	
 	
 	
 	//------------ 파트너 공지사항 -----------------------------------------

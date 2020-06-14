@@ -91,8 +91,8 @@
                     </tr>
                     <tr>
                         <th>* 체험 소개</th>
-                        <td>
-                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent">${ list[0].expContent }</textarea>
+                        <td id="summer">
+                        	
                         </td>
                     </tr>
                     <tr>
@@ -145,15 +145,12 @@
 	                        <th>* 상세 사진</th>
 	                        <td class="photo_btn" colspan="2">
 								<c:forEach items="${ list }" var="exp">
-									<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }"
+									<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeNameAt }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px">
 								</c:forEach>
 							</td>
 	                    </tr>
-	                    <tr>
-	                        <th>* 예약 설정</th>
-	                        <td>${ list[0].deadline }시간 전 부터 예약을 받지 않겠습니다.</td>
-	                    </tr>
+	                   
 	                    <tr>
 	                        <th>* 요금 책정</th>
 	                        <td>
@@ -172,13 +169,6 @@
     </div>
 </div>
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!-- summernote -->
 
 <script>
 	$(function(){
@@ -188,26 +178,8 @@
 
          // 2. 추가적인 속성들 부여 가능
          // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
-         $('#summernote').summernote({
-         	
-         	tabsize: 2,
-             height: 200,
-              width: 600
-        /*placeholder: '체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  '
-        			+'게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요.'
-             toolbar: [
-                 [groupName, [list of button]]
-                 ['Font Style', ['fontname']],
-                 ['style', ['bold', 'italic', 'underline']],
-                 ['font', ['strikethrough']],
-                 ['fontsize', ['fontsize']],
-                 ['color', ['color']],
-                 ['para', ['paragraph']],
-                 ['height', ['height']],
-                 ['Insert', ['picture']]
-             ] 
-             */
-     	});
+
+         $("#summer").html('${ list[0].expContent }');
 	
 	});
 </script>

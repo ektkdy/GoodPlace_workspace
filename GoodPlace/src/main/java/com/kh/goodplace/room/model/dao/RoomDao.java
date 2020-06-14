@@ -232,12 +232,12 @@ public class RoomDao {
 		return sqlSession.selectOne("roomMapper.selectRoom", roNo);
 	}
 
-		public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
+	public ArrayList<Attachment> getDetailImages(SqlSessionTemplate sqlSession, int roNo){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectDetailImages", roNo);
 	}
 	
-	public Member getPartner(SqlSessionTemplate sqlSession, int roNo){
-		return sqlSession.selectOne("memberMapper.selectPartner", roNo);
+	public Member getPartner(SqlSessionTemplate sqlSession, int usNo){
+		return sqlSession.selectOne("memberMapper.selectPartner", usNo);
 	}
 
 	

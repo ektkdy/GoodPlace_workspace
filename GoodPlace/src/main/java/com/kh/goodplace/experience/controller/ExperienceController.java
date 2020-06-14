@@ -106,8 +106,10 @@ public class ExperienceController {
 	
 	/* 2_2. 체험등록 폼2 요청 */
 	@RequestMapping("expEnrollForm2.exp")
-	public ModelAndView expForm2(Experience e, ModelAndView mv) {
+	public ModelAndView expForm2(Experience e, ModelAndView mv, HttpSession session) {
 		//System.out.println(e);
+		
+		session.setAttribute("expContent", e.getExpContent());
 		mv.addObject("e", e);
 		mv.setViewName("partner/partnerExpEnrollForm2");
 		return mv;
@@ -117,7 +119,7 @@ public class ExperienceController {
 	@RequestMapping("insert.exp")
 	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request/* , Attachment at */) {
+			HttpServletRequest request) {
 		
 		if(!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -125,6 +127,8 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
+	
+		//e.setExpContent((String)(session.getAttribute("expContent")));
 		int result1 = expService.insertExp(e);
 		
 		int result = 1;
@@ -191,22 +195,26 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExpc(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateExp(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request, Model model) {
 			
+		//System.out.println("count : " + count);
+		
+		if(!count.equals("0")) {
 			//System.out.println(count); 	
 			int count1 = Integer.parseInt(count);
-		
-		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
-		for(int i= 0 ; i<count1 ; i++) {
-			//System.out.println(deList[i]);
-			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
-		
-			File deleteFile = new File(savePath + deList[i]); 
-			deleteFile.delete();
 			
-			int result1 = expService.deleteAt(deList[i]); 
+			// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+			for(int i= 0 ; i<count1 ; i++) {
+				//System.out.println(deList[i]);
+				String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+			
+				File deleteFile = new File(savePath + deList[i]); 
+				deleteFile.delete();
+				
+				int result1 = expService.deleteAt(deList[i]); 
+			}
 		}
 		
 		// 객체+썸네일 부분
@@ -501,7 +509,6 @@ public class ExperienceController {
 			    
 			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
 			    
-			    
 			    HashMap<String, Object> map = new HashMap<String, Object>();
 			    JsonObject jsonObject = new JsonObject();
 
@@ -587,14 +594,26 @@ public class ExperienceController {
 			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
-			    System.out.println(pi);
-			    System.out.println(list);
 			    // 맵을 JSON Object 문자열로 바꿈
 			    String jsonString = gson.toJson(map);
 
 						
 			    return jsonString;
 			}
+			
+			
+			//디테일
+			@RequestMapping("reservationExpDetailView.rv")
+			public String reservationExpDetailView(int epNo, Model model) {
+				
+				Experience e = expService.reservationExpDetailView(epNo);
+				
+				model.addAttribute("e", e);
+				
+				return "partner/partnerReservationExpDetailView";
+				
+			}
+			
     @RequestMapping("expOkSearch.ex")
     public String expSearchList(int currentPage, Experience e, Model model) {
     	
@@ -612,7 +631,8 @@ public class ExperienceController {
     }
 	
 	//------- 체험조회 시작 ---------------------------------------------------
-	// 메인페이지에서 조건 3가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
+    
+	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
 	@RequestMapping("showExpList.exp")
 	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
 		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
@@ -665,6 +685,7 @@ public class ExperienceController {
 			
 	    	// expList객체 체험태그의 표시형식 보완
 			expList.get(i).setExpTag("#" + (expList.get(i).getExpTag().replace(",", " #")));
+			expList.get(i).setExpDateString(expDateString);
 		}
 		
 
@@ -683,17 +704,37 @@ public class ExperienceController {
 		
 		return mv;
 	}
-
+	
+	// 체험 상세페이지로 이동
 	@RequestMapping("showExp.exp")
-	public String showExp(int exNo, ModelAndView mv) {
+	public ModelAndView showExp(int exNo, String expDateString, ModelAndView mv) {
 		System.out.println("지점 2: exNo : " + exNo);
 		
 		Experience exp = expService.selectExpUser(exNo);
 		
+		
+		
+		// expList객체 체험태그의 표시형식 보완
+		exp.setExpTag("#" + (exp.getExpTag().replace(",", " #")));
+		
 		System.out.println(exp);
 		
 		// 수업교시 계산 후 set
-		int startHour = Integer.parseInt(exp.getStartTime().substring(0, 2));
+		int startTimeFirstLetterFlag = 0; // 운영시작시간의 첫글자 에 따라 값이 변하는 상태 변수 -> 경우1_첫 글자가 "0" : 0 / 경우2_첫 글자가 "1" 혹은 "2" : 1 
+		
+		if(!exp.getStartTime().substring(0, 1).equals("0")) { // 경우2
+			startTimeFirstLetterFlag = 1;
+		}else {													// 경우1 
+			startTimeFirstLetterFlag = 0;
+		}
+		
+		int startHour = 0;
+		if(startTimeFirstLetterFlag == 0) {
+			startHour = Integer.parseInt(exp.getStartTime().substring(1, 2)); 
+		}else {
+			startHour = Integer.parseInt(exp.getStartTime().substring(0, 2)); 
+		}
+		
 		int startMinute = Integer.parseInt(exp.getStartTime().substring(3, 4));
 		int intervalMinute = Integer.parseInt(exp.getIntervalTime());
 		int useTime = Integer.parseInt(exp.getUseTime());
@@ -701,7 +742,7 @@ public class ExperienceController {
 		double startMinuteDouble = 0.0;
 		double intervalMinuteDouble = 0.0;
 		
-		// 이 부분 파트너딴과 안 맞으면 에러 난다!!!!!!!
+		// 조건들이 파트너딴과 안 맞으면 에러 난다!!!!!!!
 		switch(startMinute) {
 		case 3: startMinuteDouble = 0.5; break;
 		}
@@ -717,27 +758,118 @@ public class ExperienceController {
 		double startTimeCal = startHour + startMinuteDouble;
 		double nextClass = startTimeCal + useTime + intervalMinuteDouble;
 		
-		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute);
+		ArrayList<String> expClass = new ArrayList<>();
+		for(int i=0; i<exp.getExpClassCount(); i++) {
+
+			if(i == 0) {
+				if(startTimeFirstLetterFlag == 0) {
+					if((startTimeCal + useTime) < 10.0) {
+						if(String.valueOf(startTimeCal).substring(2).equals("0")) {
+							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":00 ~ ") + ("0" + (String.valueOf(startTimeCal + useTime)).substring(0,1) + ":00"));
+						}else if(String.valueOf(startTimeCal).substring(2).equals("5")) {
+							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":30 ~ ") + ("0" + (String.valueOf(startTimeCal + useTime)).substring(0,1) + ":30"));
+						}
+					}else {
+						if(String.valueOf(startTimeCal).substring(2).equals("0")) {
+							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":00 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":00"));
+						}else if(String.valueOf(startTimeCal).substring(2).equals("5")) {
+							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":30 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":30"));
+						}
+					}
+				}else {
+					if(String.valueOf(startTimeCal).substring(3).equals("0")) {
+						expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":00 ~ ") + ((String.valueOf(startTimeCal + 1.0)).substring(0,2) + ":00"));
+					}else if(String.valueOf(startTimeCal).substring(3).equals("5")) {
+						expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":30 ~ ") + ((String.valueOf(startTimeCal + 1.0)).substring(0,2) + ":30"));
+					}
+				}
+				System.out.println(i + "번지까지 왔음, expClass[" + i + "] : " +  expClass.get(i));
+			}else if(i >= 1) {
+				switch(intervalMinute) {
+				case 30: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 0.5) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 0.5 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+				case 60: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 1.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 1.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+				case 120: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 2.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 2.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+				case 180: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 3.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 3.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+				default: break;
+				}
+				if(String.valueOf(startTimeCal).substring(3).equals("0")) {
+					expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":00 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":00"));
+				}else if(String.valueOf(startTimeCal).substring(3).equals("5")) {
+					expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":30 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":30"));
+				}
+			}
+		}
+
+		exp.setExpClass(expClass);
+		
+		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute +", useTime : " + useTime);
 		System.out.println("startMinuteDouble : " + startMinuteDouble + ", intervalMinuteDouble : " + intervalMinuteDouble);
 		System.out.println("startTimeCal : " + startTimeCal + ", nextClass : " + nextClass);
+		System.out.println("스트링으로 변환 -> " + "startTimeCal : " + String.valueOf(startTimeCal) + ", nextClass : " + String.valueOf(nextClass));
+		System.out.println("expClass : " + expClass);
+	
+		// 접수된 인원 계산후 set
+		ArrayList<Integer> acceptedPeopleList = new ArrayList<>();
+		
+		for(int i=0; i<exp.getExpClassCount(); i++) {
+			int peopleTotalPerClass = 0;
+			ArrayList<Experience> exppayListPerClassNo = expService.getAcceptedPeople(exp.getExNo(), (i+1));
+			for(int y=0; y<exppayListPerClassNo.size(); y++) {
+				peopleTotalPerClass += exppayListPerClassNo.get(y).getPeople();
+			}
+			acceptedPeopleList.add(peopleTotalPerClass);
+		}
+		
+		exp.setAcceptedPeople(acceptedPeopleList);
+		
+		System.out.println("acceptedPeople : " + acceptedPeopleList);
+		
+    	// exp 객체에 파트너정보 set
+    	exp.setPaPofile(expService.getPartner(exp.getUsNo()).getChangeName());
+    	exp.setPartnerIntro(expService.getPartner(exp.getUsNo()).getPartnerIntro());
+    	exp.setPaName(expService.getPartner(exp.getUsNo()).getUserName());
+    	exp.setPaAccountName(expService.getPartner(exp.getUsNo()).getAccountName());
+    	exp.setPaAccountNum(expService.getPartner(exp.getUsNo()).getAccountNum());
+
+		// 체험 상세 이미지 get
+		ArrayList<Attachment> at = expService.getDetailImages(exp.getExNo());
+		
+    	// 체험 상세 이미지 set
+    	if(at != null) {
+    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
+    		exp.setDetailImg1(at.get(0).getChangeName());
+    		exp.setDetailImg2(at.get(1).getChangeName());
+    		exp.setDetailImg3(at.get(2).getChangeName());
+    		exp.setDetailImg4(at.get(3).getChangeName());
+    		exp.setDetailImg5(at.get(4).getChangeName());
+    	}
+    	
+    	// 메뉴바에서 조건 검색한 날자 set
+    	exp.setExpDateString(expDateString);
+    	
+    	System.out.println("expDetails.jsp 로 보내기전 : " + exp);
+		if(exp != null) {
+			mv.addObject("exp", exp);
+			mv.setViewName("user/expDetails");
+		}else {
+			mv.addObject("msg", "체험상세 페이지 조회 실패!!");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+		
+	}
+	
+	// 체험 결제페이지로 이동
+	@RequestMapping("payExp.exp")
+	public String payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo) {
+		
+		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
 		
 		return "";
-		//return mv;
 	}
-	
-	
 	//------- 체험조회 끝 ---------------------------------------------------
 	
-	//예약상세
-	@RequestMapping("reservationExpDetailView.rv")
-	public String reservationDetailView(int epNo, Model model) {
-			
-		Experience e = expService.reservationExpDetailView(epNo);
-		
-		model.addAttribute("e", e);
-		return "partner/partnerReservationExpDetailView";
-	}
-
 			
 	
 	

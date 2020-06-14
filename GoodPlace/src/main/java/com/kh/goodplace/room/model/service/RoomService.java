@@ -142,7 +142,7 @@ public interface RoomService {
 	ArrayList<Attachment> getDetailImages(int roNo);
 	
 	//4. 파트너 정보 조회용 서비스 - 진아 
-	Member getPartner(int roNo);
+	Member getPartner(int usNo);
 	
 	//5. 숙소별 리뷰 조회용 서비스 - 진아
 	ArrayList<Board> getReview(int roNo);

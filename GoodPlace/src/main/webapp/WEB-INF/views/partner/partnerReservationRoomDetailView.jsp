@@ -252,7 +252,7 @@
                         </tr>
                         <tr>
                             <td>예약일수</td>
-                            <td>${r.days }</td>
+                            <td>총 ${r.days }일</td>
                         </tr>
                         <tr>
                             <td>여행컨셉</td>
@@ -271,7 +271,7 @@
                         </tr>
                         <tr>
                             <td>결제금액</td>
-                            <td>${r.amount }원</td>
+                            <td><fmt:formatNumber value="${r.amount }" type="currency"/></td>
                         </tr>
                     </tbody>
                 </table>

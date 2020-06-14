@@ -222,9 +222,9 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.getDetailImages(sqlSession, roNo);
 	}
 
-		@Override
-	public Member getPartner(int roNo) {
-		return  rDao.getPartner(sqlSession, roNo);
+	@Override
+	public Member getPartner(int usNo) {
+		return  rDao.getPartner(sqlSession, usNo);
 	}
 	
 	@Override

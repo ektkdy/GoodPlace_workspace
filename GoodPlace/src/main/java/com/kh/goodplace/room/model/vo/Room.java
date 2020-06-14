@@ -108,6 +108,7 @@ public class Room {
 	private String paName;		// 파트너 이름
 	private String paAccountName; 	//은행명
 	private String paAccountNum;		//계좌번호
+	private String phone; //전화번호
 	
 	/* 리뷰 관련 컬럼들 */
 	private int reNo;				// 리뷰번호
@@ -125,7 +126,7 @@ public class Room {
 	/* DB에는 없지만 새로 생성한 변수 */
 	private String usOriginName;	//댓글단회원 프로필사진 원본이름
 	private String usChangeName;	//댓글단회원 프로필사진 변경이름
-	private String region;			//지역 표시 ex)서울특별시, 강남구
-	ArrayList<Board> reviewList;		// Review테이블
+	private String region;			//지역 표시 ex)서울특별시 강남구
+	ArrayList<Board> reviewList;	// Review테이블
 	private String statusString;	//에러 막으려고 만듬
 }

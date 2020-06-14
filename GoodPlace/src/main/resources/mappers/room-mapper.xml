@@ -104,6 +104,7 @@
 		<result column="BIRTHDATE" property="birthday"/>
 		<result column="PAY_DATE" property="payDate"/>
 		<result column="ADD_POINT" property="addPoint"/>
+		<result column="PHONE" property="phone"/>
 		
 		<result column="RESERVE_STATUS" property="reserveStatus"/>
 		<result column="USE_POINT" property="usePoint"/>

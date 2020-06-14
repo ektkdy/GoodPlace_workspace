@@ -794,9 +794,11 @@ public class RoomController {
     	}
     	
     	// room 객체에 파트너정보 set
-    	room.setPaPofile(rService.getPartner(roNo).getChangeName());
-    	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
-    	room.setPaName(rService.getPartner(roNo).getUserName());
+    	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
+    	room.setPartnerIntro(rService.getPartner(room.getUserNo()).getPartnerIntro());
+    	room.setPaName(rService.getPartner(room.getUserNo()).getUserName());
+    	room.setPaAccountName(rService.getPartner(room.getUserNo()).getAccountName());
+    	room.setPaAccountNum(rService.getPartner(room.getUserNo()).getAccountNum());
     	
     	// room 객체에 리뷰정보 set
     	room.setReviewList(rService.getReview(roNo));
@@ -989,7 +991,6 @@ public class RoomController {
 		//예약취소하기
 		@RequestMapping("roomCancel.rv")
 		public String roomCancel(int rpNo, Model model) {
-			System.out.println(rpNo);
 			int result = rService.roomCancel(rpNo);
 			
 			if(result>0) {

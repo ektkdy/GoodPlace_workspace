@@ -34,6 +34,7 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="file_path" property="filePath"/>
+		<result column="change_name_1" property="changeNameAt"/>
 
 		<result column="epno" property="epNo"/>
 		<result column="amount" property="amount"/>
@@ -98,6 +99,8 @@
 		<result column="exp_date" property="expDate"/>
 		<result column="people" property="people"/>
 		
+		<result column="user_name" property="userName"/>
+		
 		<result column="change_name_1" property="atChangeName"/>
 		
 		<!-- 결제 걸럼 -->
@@ -154,6 +157,7 @@
 		<result column="change_name_1" property="atChangeName"/>
 		
 		<result column="user_name" property="paName"/>
+		<result column="exp_class_count" property="expClassCount"/>
 	</resultMap>
 	
 	<resultMap id="selectExpPayList" type="ExpPay">
@@ -198,7 +202,7 @@
 		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle},
 			  #{activity}, #{maxPeople}, null, #{startTime}, #{endTime}, #{useTime}, #{intervalTime}, 
 			  #{supplies}, #{deadline}, #{price}, #{addBasic}, #{addDetail}, #{addRef}, #{zipCode}, 
-			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent},null)
+			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent}, null)
 	</insert>
 	
 	<!-- 체험 상세사진 등록 -->
@@ -426,9 +430,12 @@
 		   order by ep.epno desc
 	</select>
 	
-	<select id="reservationExpDetailView" parameterType="_int" >
-		select 
-		  from
+	<select id="reservationExpDetailView" parameterType="_int" resultMap="ExperiencePayResultSet">
+		select ep.status, epno, exp_title, ep.exp_date, ep.people, user_name, phone,
+        amount, exp_class_no
+		from experience ex
+		join exppay ep on (ex.exno = ep.exno)
+		join member m on (ep.usno = m.usno)
 		where epno = #{epNo}
 	</select>
 	
@@ -439,8 +446,8 @@
 	<!-- 체험조회 시작 -->
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
-		  FROM EXPERIENCE
-		  LEFT JOIN EXPPAY USING(EXNO)
+		  FROM EXPERIENCE E
+          JOIN MEMBER M USING(USNO)
 		 WHERE EXP_CATEGORY=#{expCategory}
            AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
          ORDER BY EXNO
@@ -453,7 +460,6 @@
 		 ORDER BY EXP_CATEGORY
 	</select>
 	
-	
 	<select id="selectExpUser" parameterType="_int" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPERIENCE E
@@ -463,8 +469,19 @@
 	</select>
 	
 	<!-- 체험조회 끝 -->
+	<select id="selectAcceptedPeople" parameterType="Experience" resultMap="ExperienceResultSetUser">
+		SELECT *
+		  FROM EXPPAY
+		 WHERE STATUS = 3
+		   AND EXNO=#{exNo}
+		   AND EXP_CLASS_NO=#{expClassNo}
+	</select>
 	
-	
+	<select id="selectDetailImages" parameterType="_int" resultMap="AttachmentResultSet">
+		SELECT *
+		 FROM ATTACHMENT
+		WHERE EXNO = #{exNo}
+	</select>
 	
 	
 	<!-- 마이페이지 -->

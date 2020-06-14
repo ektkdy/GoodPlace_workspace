@@ -33,9 +33,9 @@
                 	<p class="title_tt">진행중인예약(${pi.listCount })</p></span>
                 <br clear="both">
                 <div class="choose_area"style="clear: both;">
-                    <select id="roomTitle" class="select_st">
+                    <select id="expTitle" class="select_st">
                     <c:forEach var="r" items="${ list}">
-                        <option>${r.roomsTitle }</option>
+                        <option>${r.expTitle }</option>
                     </c:forEach>
                     </select>
                     <input class="ch_date" type="date">
@@ -59,8 +59,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	
-                        	
                         	<c:forEach var="r" items="${ list }">
 	                            <tr>
 	                                <td>${r.epNo } </td>
@@ -93,81 +91,79 @@
     </div>
 <!-- tab메뉴 ajax -->
 <script>
-	$("#reserv_tb tbody tr").click(function(){
-		location.href=""
-	});
+$(document).on('click', ".reserv_tb tbody tr", function(){
+	location.href="reservationExpDetailView.rv?epNo="+$(this).children().eq(0).html();
+	
+});
 </script>
 <script>
 //진행중인예약 
 $('#ing').click(function(){
-  $.ajax({
-	url:"rvExpListIng.rv",
-	data:{currentPage:1 },
-	type:"post",
-	success:function(result){
-		
-			var list = result.list;
-			var pi = result.pi;
+	  $.ajax({
+		url:"rvExpListIng.rv",
+		data:{currentPage:1 },
+		type:"post",
+		success:function(result){
 			
-			//tbody에 값 넣을 변수 선언
-			var content = "";
-			
-			//select에 값 넣을 변수 선언
-			var selectCon = "";
-			
-			//tbody 부분 비우기
-			$(".reserv_tb tbody").empty();
-			
-			//select 부분 비우기
-			$('#roomTitle').empty();
-			
-			//페이지 제목 변경
-			var title = "진행중인예약(" + list.length + ")" ;
-			$('.title_tt').empty();
-			$('.title_tt').text(title);
-			
-			//button class 바꿔주기
-			$("#ing").attr('class', "on lt_tab");
-			$("#confirm").attr('class', "off mid_tab");
-			$("#cancel").attr('class', "off gt_tab");
-			
-			if(list.length == 0){
-					
-				content += "<tr>" +
-						   "<td colspan='6'>예약 목록이 없습니다.</td>" +
-						   "</tr>";
-						   
-				selectCon += "<option>값이 없습니다.</option>";
-			}else{
+				var list = result.list;
+				var pi = result.pi;
+				//tbody에 값 넣을 변수 선언
+				var content = "";
 				
-				for(var i in list){
-					var start = list[i].expDateUser;
-						content +=  "<tr>" +
-								 	"<td>" + list[i].epNo + "</td>" +
-								 	"<td>예약진행중</td>" +
-								 	"<td>" + list[i].userName +"</td>" + 
-								 	"<td>" + start.substr(0,10) + "</td>" +
-								 	"<td>" +  list[i].expTitle + "</td>" +
-								 	"<td><button class='confirm_btn' disabled>예약완료</button></td>" +
-									"</tr>";
-									
-						selectCon += 
-								"<option>" + list[i].expTitle + "</option>";
+				//select에 값 넣을 변수 선언
+				var selectCon = "";
+				
+				//tbody 부분 비우기
+				$(".reserv_tb tbody").empty();
+				
+				//select 부분 비우기
+				$('#expTitle').empty();
+				
+				//페이지 제목 변경
+				var title = "진행중인  예약(" + list.length + ")";
+				$('.title_tt').empty();
+				$('.title_tt').text(title);
+				
+				//button class 바꿔주기
+				$("#ing").attr('class', "on lt_tab");
+				$("#confirm").attr('class', "off mid_tab");
+				$("#cancel").attr('class', "off gt_tab");
+				
+				if(list.length == 0){
 						
-								  }
-			}		
-			
-			$(".reserv_tb tbody").html(content);
-			$("#roomTitle").html(selectCon);
+					content += "<tr>" +
+							   "<td colspan='6'>예약 목록이 없습니다.</td>" +
+							   "</tr>";
+					selectCon += "<option>목록이 없습니다.</option>";
+				}else{
+
+
+					for(var i in list){
+						var start = list[i].expDateUser;
+								content +=  "<tr>" +
+										 	"<td>" + list[i].epNo + "</td>" +
+										 	"<td>예약확정</td>" +
+										 	"<td>" + list[i].userName +"</td>" + 
+										 	"<td>" + start.substr(0,10) + "</td>" +
+										 	"<td>" + list[i].expTitle + "</td>" +
+										    "<td><button class='confirm_btn' style='background:#f1f1f1; border:1px solid #bebebe; color:#333 'disabled>예약완료</button></td>" + 
+										 	"</td>" +
+										"</tr>";
+							selectCon += "<option>" + list[i].expTitle + "</option>";
+									  }
+				}			 		
+				
+				$(".reserv_tb tbody").html(content);
+				$("#expTitle").html(selectCon);
 			
 
-	},error:function(){
-		console.log("통신실패!!");
-	}
- });
-});
-	
-	
+		},error:function(){
+			console.log("통신실패!!");
+		}
+	 });
+	});
+</script>
+<script>	
 	// 확정된예약
 	$('#confirm').click(function(){
 	  $.ajax({
@@ -188,7 +184,7 @@ $('#ing').click(function(){
 				$(".reserv_tb tbody").empty();
 				
 				//select 부분 비우기
-				$('#roomTitle').empty();
+				$('#expTitle').empty();
 				
 				//페이지 제목 변경
 				var title = "확정된 예약(" + list.length + ")";
@@ -205,7 +201,7 @@ $('#ing').click(function(){
 					content += "<tr>" +
 							   "<td colspan='6'>예약 목록이 없습니다.</td>" +
 							   "</tr>";
-					selectCon += "<option>값이 없습니다.</option>";
+					selectCon += "<option>목록이 없습니다.</option>";
 				}else{
 
 
@@ -217,7 +213,7 @@ $('#ing').click(function(){
 										 	"<td>" + list[i].userName +"</td>" + 
 										 	"<td>" + start.substr(0,10) + "</td>" +
 										 	"<td>" + list[i].expTitle + "</td>" +
-												 		"<button class='confirm_btn' style='background:#f1f1f1; border:1px solid #bebebe; color:#333 'disabled>예약완료</button>" + 
+										    "<td><button class='confirm_btn' style='background:#f1f1f1; border:1px solid #bebebe; color:#333 'disabled>예약완료</button></td>" + 
 										 	"</td>" +
 										"</tr>";
 							selectCon += "<option>" + list[i].expTitle + "</option>";
@@ -225,7 +221,7 @@ $('#ing').click(function(){
 				}			 		
 				
 				$(".reserv_tb tbody").html(content);
-				$("#roomTitle").html(selectCon);
+				$("#expTitle").html(selectCon);
 			
 
 		},error:function(){
@@ -254,7 +250,7 @@ $('#ing').click(function(){
 			$(".reserv_tb tbody").empty();
 			
 			//select 부분 비우기
-			$('#roomTitle').empty();
+			$('#expTitle').empty();
 			
 			//페이지 제목 변경
 			var title = "취소된 예약(" + list.length + ")" ;
@@ -271,7 +267,7 @@ $('#ing').click(function(){
 				content += "<tr>" +
 						   "<td colspan='6'>예약 목록이 없습니다.</td>" +
 						   "</tr>";
-				selectCon += "<option>값이 없습니다.</option>";
+				selectCon += "<option>목록이 없습니다.</option>";
 			}else{
 				
 				for(var i in list){
@@ -291,7 +287,7 @@ $('#ing').click(function(){
 			}			 		
 			
 			$(".reserv_tb tbody").html(content);
-			$("#roomTitle").html(selectCon);
+			$("#expTitle").html(selectCon);
 		
 
 	},error:function(){
