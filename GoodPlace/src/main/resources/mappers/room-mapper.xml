@@ -391,7 +391,7 @@
 	<update id="updateOkay" parameterType="_int">
 	
 		update rooms
-		   set STATUS = 1
+		   set STATUS = 1, START_DATE = SYSDATE
 		 where RONO=#{rno}
 	
 	</update>
