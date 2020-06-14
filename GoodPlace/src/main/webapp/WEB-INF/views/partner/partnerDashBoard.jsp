@@ -140,6 +140,44 @@ button:hover{cursor:pointer}
     </div>
  <script>
  	$(function(){
+ 		//후기
+ 		$.ajax({
+ 			url:"reviewListDashboard.bo",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var list = result.list;
+ 				
+ 				console.log(result);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='2' style='text-align:center'>공지사항이 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					
+ 					for(var i in list){
+ 						var start = list[i].noticeDate;
+ 								content +=  "<tr>" +
+ 										 	"<td>" + list[i].reContent + "</td>" +
+ 										 	"<td>" +  list[i].reviewDate + "</td>" +
+ 										"</tr>";
+ 									  }
+ 				}			 		
+ 				
+ 				$(".reviewTb tbody").html(content);
+ 			
+
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+ 		
+ 		
+ 		//공지사항
  		$.ajax({
  			url:"pNoticeListDashboard.bo",
  			data:{currentPage:1 },

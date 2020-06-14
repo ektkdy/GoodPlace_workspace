@@ -531,7 +531,7 @@ public class ExperienceController {
 			    return "partner/partnerExpReservationListView";
 			}
 	
-			//예약 확정
+			//예약 
 			@ResponseBody
 			@RequestMapping(value="rvExpListIng.rv", produces="application/json; charset=utf-8")
 			public String rvRoomListIng(int currentPage, HttpSession session) {
@@ -980,7 +980,7 @@ public class ExperienceController {
 			
 	//---대쉬보드
 	
-	//예약 확정
+	//예약 진행
 	@ResponseBody
 	@RequestMapping(value="dashboardExpList.rv", produces="application/json; charset=utf-8")
 	public String dashboardExpList(int currentPage, HttpSession session) {
@@ -988,13 +988,12 @@ public class ExperienceController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int usNo = loginUser.getUsNo();
 		
-		int listCount = expService.selectRvExpConfirmListCount(usNo);
+		int listCount = expService.selectRvExpListCount(usNo);
 	    
 	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 	    
-	    ArrayList<Experience> list = expService.selectRvExpConfirmList(pi, usNo);
-
-
+	    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
+	    
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
 
@@ -1008,17 +1007,13 @@ public class ExperienceController {
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
+
 	    // 맵을 JSON Object 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
 
 				
 	    return jsonString;
 	}
-	
-	
-	
-	
-	
 	
 	
 	

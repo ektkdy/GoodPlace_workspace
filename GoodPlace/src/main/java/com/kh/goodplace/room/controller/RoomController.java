@@ -854,7 +854,7 @@ public class RoomController {
 		    return "partner/partnerReservationListView";
 		}
 		
-		//예약 확정
+		//예약 진행
 		@ResponseBody
 		@RequestMapping(value="rvRoomListIng.rv", produces="application/json; charset=utf-8")
 		public String rvRoomListIng(int currentPage, HttpSession session) {
@@ -1010,40 +1010,40 @@ public class RoomController {
 		
 		
 	// ------------------------------대쉬보드
-		
-		//예약 확정
-				@ResponseBody
-				@RequestMapping(value="dashboardRoomList.rv", produces="application/json; charset=utf-8")
-				public String dashboardRoomList(int currentPage, HttpSession session) {
-					
-					Member loginUser = (Member)session.getAttribute("loginUser");
-					int usNo = loginUser.getUsNo();
-					
-					int listCount = rService.selectRvRoomConfirmListCount(usNo);
-				    
-				    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
-				    
-				    ArrayList<Room> list = rService.selectRvRoomConfirmList(pi, usNo);
+				
+			//예약 진행
+			@ResponseBody
+			@RequestMapping(value="dashboardRoomList.rv", produces="application/json; charset=utf-8")
+			public String dashboardRoomList(int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = rService.selectRvRoomListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
+			    
+			    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
+			    
+			    
+			    HashMap<String, Object> map = new HashMap<String, Object>();
+			    JsonObject jsonObject = new JsonObject();
+
+			    // Gson 객체 생성
+			    Gson gson = new Gson();
+
+			    // JSON Object를 맵으로 바꿈
+			    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+			     
+			    // key-value 형태로 맵에 저장
+			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
 
-				    HashMap<String, Object> map = new HashMap<String, Object>();
-				    JsonObject jsonObject = new JsonObject();
+			    // 맵을 JSON Object 문자열로 바꿈
+			    String jsonString = gson.toJson(map);
 
-				    // Gson 객체 생성
-				    Gson gson = new Gson();
-
-				    // JSON Object를 맵으로 바꿈
-				    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
-				     
-				    // key-value 형태로 맵에 저장
-				    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
-				    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
-
-
-				    // 맵을 JSON Object 문자열로 바꿈
-				    String jsonString = gson.toJson(map);
-
-							
-				    return jsonString;
-				}
+						
+			    return jsonString;
+			}
 }

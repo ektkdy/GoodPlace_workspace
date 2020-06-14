@@ -732,12 +732,11 @@ public class BoardController {
     }
     
     @RequestMapping("insert.re")
-    public String insertReply(int reNo, int rpNo,String reply, Model model) {
+    public String insertReply(int reNo,String reply, Model model) {
     	
     	Board b = new Board();
     	
     	b.setReNo(reNo);
-    	b.setRpNo(rpNo);
     	b.setReply(reply);
     	
     	int result = bService.insertReply(b);
@@ -797,6 +796,43 @@ public class BoardController {
         PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
+
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    JsonObject jsonObject = new JsonObject();
+
+	    // Gson 객체 생성
+	    Gson gson = new Gson();
+
+	    // JSON Object를 맵으로 바꿈
+	    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+	     
+	    // key-value 형태로 맵에 저장
+	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+	    System.out.println(list);
+
+	    // 맵을 JSON Object 문자열로 바꿈
+	    String jsonString = gson.toJson(map);
+
+				
+	    return jsonString;
+	}
+    
+    @ResponseBody
+	@RequestMapping(value="reviewListDashboard.bo", produces="application/json; charset=utf-8")
+	public String reviewListDashboard(int currentPage, HttpSession session) {
+    	 
+    	Member m = (Member)session.getAttribute("loginUser");
+		int userNo = m.getUsNo();
+		 		
+		 
+		int noReplyListCount = bService.selectReviewCount1(userNo);
+    	int listCount = bService.pSelectNoticeListCount(); 
+    	
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
+
+		ArrayList<Board> list = bService.reviewList1(noReplyPi, userNo);
 
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
