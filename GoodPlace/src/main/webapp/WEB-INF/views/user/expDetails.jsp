@@ -252,6 +252,7 @@
                        		<div class="peopleInfo" style="width:45%; text-align:center;"></div>
                        	</div>
                        	<input type="hidden" name="availablePeople" value="${ exp.maxPeople - exp.acceptedPeople[status.index]}"/>
+                       	<input type="hidden" name="expClassNo" value="${ status.count }"/>
                         </c:forEach>
                        	
                     	
@@ -261,8 +262,7 @@
                     <div id="getPeople" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 8px 0 0 34px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
                     </div>
-                    <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-
+                    <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1">
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
                     <a id="addWishList" class="buttonStyle1 aTagStyle1">위시리스트에 담기</a>
@@ -271,13 +271,12 @@
             <hr style="margin:unset;">
             <div class="fullWidth" style=" height:100px;">
                 <div class="c_profileArea" style="width:70px; margin:24px;">
-                    <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg2.jpg" class="c_profile"/>
+                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ exp.paPofile }" class="c_profile"/>
                 </div>
-                <h3 style="margin:40px 10px 0 0; float: left;">김가가</h3>
+                <h3 style="margin:40px 10px 0 0; float: left;">${ exp.paName }</h3>
                 <div style="width:160px;">
                     <a style="float: left; padding:10px; text-align:center; margin:30px 20px;" class="buttonStyle1">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기
-                    </a>
+			 			<img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기</a>
                 </div>
             </div>
         </div>
@@ -301,16 +300,19 @@
             </div>
 
             
-            <form>
-                <input type="hidden" value="히든으로 필요한 값들 적어서 넘기기">
-                
+            <form action="payExp.exp" id="payExp">
+            	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
+            	<input type="hidden" name="usNo" value="${ loginUser.usNo }"/>
+            	<input type="hidden" name="amount" value="${ exp.price }"/>
+            	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+            	<input type="hidden" name="people"/>
+                <input type="hidden" name="expClassNo"/>
             </form>
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
             <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
-        
 
     </div>
 
@@ -435,13 +437,13 @@
        		for(var i=0; i<"${ exp.expClassCount}"; i++){
        			switch(i){
        			case 0: $("#bookExpMenu").next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 1: $("#bookExpMenu").next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 2: $("#bookExpMenu").next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 3: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 4: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 6: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 7: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 8: $("#bookExpMenu").next().next().next().next().next().next().next().next().children().next().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 1: $("#bookExpMenu").next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 2: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 3: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 4: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 6: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 7: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().children().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 8: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().next().children().next().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
        			}
        		};
        		
@@ -449,25 +451,42 @@
         
         // 해당 교시의 예약 가능한 최대인원
         $(".choiceClass").click(function(){
-        	//alert($(this).next().val());
+        	
+        	// 전에 남아 있던 인원선택 칸 지우기
+        	$('#peopleArea *').remove();
+
         	var availablePeople = $(this).next().val();
-        	
-        	// 인원선택 칸 만듦
-       		$('#getPeople #peopleArea');
-       			for(var i=0; i<availablePeople; i++){
-                   $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>" + i + "명</div>");
-       			}
-       		
-        	
+        	// 접수 가능한 인원수 없으면 결제 막기
+   			if(availablePeople == 0){
+   				alert("해당 체험은 접수가 마감되었습니다.");
+   			}{
+   	        	// 인원선택 칸 만듦
+   	   			for(var i=1; i<=availablePeople; i++){
+   	   				var peopleArea = $('#peopleArea');
+   	   				peopleArea.append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1 person'>" + i + "명<input type='hidden' class='adjustPeople' value='" + i + "'/></div>");
+   	   			}
+   	        	// 선택한 수업의 교시 set
+   	   			$("input[name=expClassNo]").val($(this).next().next().val());
+   	   			alert($(this).next().next().val() + " 교시를 선택하였습니다.");
+   			}
+   			
         });
         
-     	// 인원선택
-        //$('#getPeople #peopleArea').(function(){
-        //    $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>"명</div>")
-       // });
-       // $('#getPeople' & '#peopleArea').mouseleave(function(){
-       //     $('#peopleArea').toggleClass('hide');
-       // });
+     	// 선택한 인원수 input hidden 요소에 set
+     	$(document).on("click",".person",function(){
+
+        //$(".person").click(function(){
+        	var people = $(this).children(".adjustPeople").val();
+        	alert(people + "명 접수를 선택 하였습니다.");
+        	$("input[name=people]").val(people);
+        });
+        
+     	// 예약하기 클릭시 체험결제 페이지로 이동
+    	$(function(){
+    		$("#bookIt #bookItButton").click(function(){
+    			$("#payExp").submit();
+    		});
+    	});
     </script>
 
     <!-- /content -->

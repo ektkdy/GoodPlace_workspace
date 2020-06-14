@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.member.model.vo.Member;
 
 @Repository("bDao")
@@ -220,6 +221,29 @@ public class BoardDao {
 		
 	}
 	
+	// ------------------- 관리자 후기관리 ----------------------
+	
+	public int aReplyCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.aReplyCount");
+		
+	}
+	
+	public ArrayList<Board> aReplyList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.aReplyList", null, rowBounds);
+		
+	}
+	
+	public Board aReplyDetail(SqlSessionTemplate sqlSession, int reNo) {
+		
+		return sqlSession.selectOne("boardMapper.aReplyDetail", reNo);
+		
+	}
+	
 	
 	
 	//------------ 파트너 공지사항 -----------------------------------------
@@ -294,9 +318,10 @@ public class BoardDao {
 		return (sqlSession.selectOne("boardMapper.reviewListCount", roNo));
 	}
 	
-	
-	
-	
+	// 마이페이지
+	public ArrayList<WishList> selectwishList(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectwishList", m);
+	}
 	
 	
 	

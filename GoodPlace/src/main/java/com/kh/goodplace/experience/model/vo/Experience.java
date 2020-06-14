@@ -49,6 +49,7 @@ public class Experience {
 	private String changeName;		// 파일수정명(체험썸네일)
 	private String filePath;		// 파일저장경로(체험썸네일)
 	private String expContent;		// 체험내용
+	private String changeNameAt;
 	
 	private String local;			// 지역
 	private String totalSal;		// 누적판매수
@@ -89,5 +90,5 @@ public class Experience {
 	private String paPofile;	 	// 프로필사진 변경이름
 	private String partnerIntro;	// 파트너소개
 	private String paAccountName; 	//은행명
-	private String paAccountNum;	//계좌번호
+	private String paAccountNum;		//계좌번호
 }

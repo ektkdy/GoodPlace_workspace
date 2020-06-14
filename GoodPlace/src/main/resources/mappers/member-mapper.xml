@@ -93,7 +93,7 @@
 	
 	<insert id="insertPartner" parameterType="Member">
 		insert into partner
-		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'N')
+		values(pano.nextval,#{partnerIntro},SYSDATE,null,null,null,default,'Y')
 	</insert>
 
 

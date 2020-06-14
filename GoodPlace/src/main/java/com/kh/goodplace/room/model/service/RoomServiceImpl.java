@@ -13,6 +13,7 @@ import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Service("rService")
 public class RoomServiceImpl implements RoomService{
@@ -284,6 +285,13 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	
+	//------ 현우 마이페이지
 	
+	// 현재 로그인한 회원의 결제정보를 가져오는 서비스
+	@Override
+	public ArrayList<RoomPay> selectRoomPayList(Member m) {
+		return rDao.selectRoomPayList(sqlSession, m);
+	}
+
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.member.model.vo.Member;
 
 public interface BoardService {
@@ -104,7 +105,17 @@ public interface BoardService {
 	int yellowCardPlus(Board b);
 	
 	//------------------------------------------------------
+	// 1. 관리자 후기관리 게시판 리스트 조회용 서비스-현영
+	// 1_1. 관리자 후기관리 총갯수 조회용 서비스
+	int aReplyCount();
+	
+	// 1_2. 요청한 페이지에 보여질 후기 리스트 조회용 서비스-현영
+	ArrayList<Board> aReplyList(PageInfo pi);
+	
+	// 2. 1:1문의 상세조회용 서비스-현영
+	Board aReplyDetail(int reNo);
 
+	//------------------------------------------------------
 	
 	// 1_1.파트너 공지사항 전체 리스트 조회용 서비스 - 하정
 	int pSelectNoticeListCount();
@@ -149,5 +160,8 @@ public interface BoardService {
 	
 	//2.리뷰 댓글 작성용서비스 - 기하
 	int insertReply(Board b);
+	
+	// 1. 마이페이지에서 현재 로그인한 회원에 위시리스트정보를 가져옴
+	public ArrayList<WishList> selectwishList(Member m);
 	
 }

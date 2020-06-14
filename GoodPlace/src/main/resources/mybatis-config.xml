@@ -16,6 +16,9 @@
 		<typeAlias type="com.kh.goodplace.messages.model.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.kh.goodplace.accounts.model.vo.Accounts" alias="Accounts"/>
 		<typeAlias type="com.kh.goodplace.accounts.model.vo.Chart" alias="Chart"/>
+		<typeAlias type="com.kh.goodplace.room.model.vo.RoomPay" alias="RoomPay"/>
+		<typeAlias type="com.kh.goodplace.experience.model.vo.ExpPay" alias="ExpPay"/>
+		<typeAlias type="com.kh.goodplace.common.model.vo.WishList" alias="wishList"/>
 	</typeAliases>
 	
 	

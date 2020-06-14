@@ -2,7 +2,6 @@ package com.kh.goodplace.experience.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +25,9 @@ import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -107,8 +106,10 @@ public class ExperienceController {
 	
 	/* 2_2. 체험등록 폼2 요청 */
 	@RequestMapping("expEnrollForm2.exp")
-	public ModelAndView expForm2(Experience e, ModelAndView mv) {
+	public ModelAndView expForm2(Experience e, ModelAndView mv, HttpSession session) {
 		//System.out.println(e);
+		
+		session.setAttribute("expContent", e.getExpContent());
 		mv.addObject("e", e);
 		mv.setViewName("partner/partnerExpEnrollForm2");
 		return mv;
@@ -118,7 +119,7 @@ public class ExperienceController {
 	@RequestMapping("insert.exp")
 	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request/* , Attachment at */) {
+			HttpServletRequest request) {
 		
 		if(!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -126,6 +127,8 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
+	
+		//e.setExpContent((String)(session.getAttribute("expContent")));
 		int result1 = expService.insertExp(e);
 		
 		int result = 1;
@@ -192,22 +195,26 @@ public class ExperienceController {
 	
 	/* 4_2. 체험 업데이트 */
 	@RequestMapping("updateExp.exp")
-	public String updateExpc(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
+	public String updateExp(Experience e, String[] deList, String count , @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
 			HttpServletRequest request, Model model) {
 			
+		//System.out.println("count : " + count);
+		
+		if(!count.equals("0")) {
 			//System.out.println(count); 	
 			int count1 = Integer.parseInt(count);
-		
-		// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
-		for(int i= 0 ; i<count1 ; i++) {
-			//System.out.println(deList[i]);
-			String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
-		
-			File deleteFile = new File(savePath + deList[i]); 
-			deleteFile.delete();
 			
-			int result1 = expService.deleteAt(deList[i]); 
+			// x를 누른 수만큼, x에 해당하는 changeName 을 삭제한다 (서버+디비)
+			for(int i= 0 ; i<count1 ; i++) {
+				//System.out.println(deList[i]);
+				String savePath = request.getSession().getServletContext().getRealPath("resources") +"\\uploadFiles\\";
+			
+				File deleteFile = new File(savePath + deList[i]); 
+				deleteFile.delete();
+				
+				int result1 = expService.deleteAt(deList[i]); 
+			}
 		}
 		
 		// 객체+썸네일 부분
@@ -381,28 +388,23 @@ public class ExperienceController {
 	}
 	
 	
+	@RequestMapping("mpExp.exp")
+	public String selectExperience(HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		ArrayList<ExpPay> ePayList = expService.selectExpPayList(m);
+		
+		model.addAttribute("ePayList",ePayList);
+		return "user/mpExp";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("myExperienceDetail.exp")
+	public String myExperienceDetail(ExpPay ep, Model model) {
+		System.out.println(ep);
+		
+		
+		model.addAttribute("ep", ep);
+		return "user/myExperienceDetail";
+	}
 	
 	
 	
@@ -683,6 +685,7 @@ public class ExperienceController {
 			
 	    	// expList객체 체험태그의 표시형식 보완
 			expList.get(i).setExpTag("#" + (expList.get(i).getExpTag().replace(",", " #")));
+			expList.get(i).setExpDateString(expDateString);
 		}
 		
 
@@ -701,12 +704,18 @@ public class ExperienceController {
 		
 		return mv;
 	}
-
+	
+	// 체험 상세페이지로 이동
 	@RequestMapping("showExp.exp")
-	public ModelAndView showExp(int exNo, ModelAndView mv) {
+	public ModelAndView showExp(int exNo, String expDateString, ModelAndView mv) {
 		System.out.println("지점 2: exNo : " + exNo);
 		
 		Experience exp = expService.selectExpUser(exNo);
+		
+		
+		
+		// expList객체 체험태그의 표시형식 보완
+		exp.setExpTag("#" + (exp.getExpTag().replace(",", " #")));
 		
 		System.out.println(exp);
 		
@@ -835,6 +844,10 @@ public class ExperienceController {
     		exp.setDetailImg5(at.get(4).getChangeName());
     	}
     	
+    	// 메뉴바에서 조건 검색한 날자 set
+    	exp.setExpDateString(expDateString);
+    	
+    	System.out.println("expDetails.jsp 로 보내기전 : " + exp);
 		if(exp != null) {
 			mv.addObject("exp", exp);
 			mv.setViewName("user/expDetails");
@@ -847,7 +860,14 @@ public class ExperienceController {
 		
 	}
 	
-	
+	// 체험 결제페이지로 이동
+	@RequestMapping("payExp.exp")
+	public String payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo) {
+		
+		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
+		
+		return "";
+	}
 	//------- 체험조회 끝 ---------------------------------------------------
 	
 			

@@ -79,9 +79,9 @@
                         <tr>
                             <td width="100px">상태</td>
                             <td width="100px">지역</td>
-                            <td width="300px">체험명</td>
+                            <td width="400px">체험명</td>
                             <td width="200px">개시일(신청일)</td>
-                            <td width="200px">누적판매수</td>
+                            <td width="100px">누적판매수</td>
                             <td width="200px">비고</td>
                         </tr>
                     </thead>
