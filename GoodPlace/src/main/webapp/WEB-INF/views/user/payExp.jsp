@@ -87,10 +87,10 @@
                     <div style="width:46%; height:180px; padding:10px 0 0 16px; ">
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ exp.expTitle }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">14:00 (소요시간 : 3시간)</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">2명</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">30,000원</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">60,000원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.startTimeString } (소요시간 : ${ exp.useTime }시간)</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.people }명</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price }원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price * expPay.people }원</p3>
                     </div>
 
                 </div>
