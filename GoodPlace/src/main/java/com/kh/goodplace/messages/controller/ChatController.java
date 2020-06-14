@@ -128,7 +128,7 @@ public class ChatController {
 		
 		System.out.println(cr);
 		cr = cService.selectRoomChat(cr); 
-
+		System.out.println(cr);
 		// 상대방 정보 검색
 		Member m = new Member();
 		m.setEmail(cr.getTutorEmail());
