@@ -430,6 +430,7 @@ public class MemberController {
         
         model.addAttribute("list", list);
         model.addAttribute("pi", pi);
+        model.addAttribute("listCount", listCount);
         
         return "admin/a_member";
     }

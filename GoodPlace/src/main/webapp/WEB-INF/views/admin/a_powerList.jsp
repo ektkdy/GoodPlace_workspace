@@ -125,7 +125,7 @@
                             <div id="pagingArea" style="margin-top: 22px;">
       			                <c:choose>
 				                	<c:when test="${ pi.currentPage eq 1 }">
-					                    <a href="#">&lt;</a>
+					                    <a  href="">&lt;</a>
 					                </c:when>
 					                <c:otherwise>
 				                    	<a href="powerOkayList.po?currentPage=${ pi.currentPage -1 }">&lt;</a>
@@ -135,7 +135,7 @@
 						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 			                    	<c:choose>
 			                    		<c:when test="${ p eq pi.currentPage }">
-				                    		<a href="#">${p}</a>
+				                    		<a href="" style="color:red;">${p}</a>
 				                    	</c:when>
 				                    	<c:otherwise>
 				                    		<a class="page-link" href="powerOkayList.po?currentPage=${ p }">${p}</a>

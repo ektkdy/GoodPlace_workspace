@@ -270,7 +270,7 @@
 			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
 		</if>
 		<if test="searchSelect == 'searchOp3'">
-			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT '%' || #{keyword} ||'%'
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
 		</if>
 		 order by NONO desc
 	</select>
