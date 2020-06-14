@@ -74,7 +74,7 @@
 
                     <h2 style="font-weight:500;">체험 정보</h2><hr style="border:2px solid lightgray; margin:15px 0 18px 0;"> 
                     <div style="width:34%; height:180px;">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/street.jpg" width="100%;" height="100%;"/>
+                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
                     </div>
                     <div style="width:20%; height:180px; padding:10px 0 0 16px;">
                         <h3 style="margin-bottom:10px;">체험명</h3>
@@ -85,8 +85,8 @@
                         <h3 style="margin-bottom:10px;">총 금액</h3>
                     </div>
                     <div style="width:46%; height:180px; padding:10px 0 0 16px; ">
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">유럽갬성 강남역세권 게스트하우스</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">2020.03.06 ~ 2020.03.07</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ exp.expTitle }</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">14:00 (소요시간 : 3시간)</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">2명</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">30,000원</p3>
