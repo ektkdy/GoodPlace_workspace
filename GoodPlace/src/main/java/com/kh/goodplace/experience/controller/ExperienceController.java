@@ -849,7 +849,13 @@ public class ExperienceController {
 		
 	}
 	
-	
+	@RequestMapping("payExp.exp")
+	public String payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo) {
+		
+		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount" + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo" + expClassNo);		
+		
+		return "";
+	}
 	//------- 체험조회 끝 ---------------------------------------------------
 	
 			
