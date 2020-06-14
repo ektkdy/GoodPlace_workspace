@@ -55,12 +55,13 @@
     }
     #roomList .power>li{
         display: inline-block;
-        text-align: left;
         width: 20%;
     	vertical-align: top;
     }
     #roomList .power>li>a>div{
     	width: 200px;
+    	text-align: left;
+    	margin-left: 20px;
     }
     
     
