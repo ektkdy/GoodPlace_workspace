@@ -1,6 +1,7 @@
 package com.kh.goodplace.board.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class BoardController {
@@ -672,8 +677,13 @@ public class BoardController {
     }
     
     @RequestMapping("reviewDetailView.re")
-    public String reviewDetailView(int reNo,  Model model) {
+    public String reviewDetailView(int reNo, int rpNo, Model model) {
     	
+//    		Board b = new Board();
+//    		
+//    		b.setReNo(reNo);
+//    		b.setRpNo(rpNo);
+    				
     	 Board r = bService.selectReview(reNo);
     	 
     	 model.addAttribute("r", r);
@@ -682,5 +692,49 @@ public class BoardController {
     	
     }
     
+    ////////////////////////// 대쉬보드
+    @RequestMapping("pNoticeListDashboard.bo")
+    public String pNoticeListDashboard(int currentPage, Model model) {
+    	
+        int listCount = bService.pSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        
+        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+        //System.out.println(list);
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "partner/partnerNotice";
+    }
+    
+    @ResponseBody
+	@RequestMapping(value="pNoticeListDashboard.bo", produces="application/json; charset=utf-8")
+	public String pNoticeListDashboard(int currentPage, HttpSession session) {
+		
+    	int listCount = bService.pSelectNoticeListCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        
+        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    JsonObject jsonObject = new JsonObject();
+
+	    // Gson 객체 생성
+	    Gson gson = new Gson();
+
+	    // JSON Object를 맵으로 바꿈
+	    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+	     
+	    // key-value 형태로 맵에 저장
+	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+	    System.out.println(list);
+
+	    // 맵을 JSON Object 문자열로 바꿈
+	    String jsonString = gson.toJson(map);
+
+				
+	    return jsonString;
+	}
     
 }

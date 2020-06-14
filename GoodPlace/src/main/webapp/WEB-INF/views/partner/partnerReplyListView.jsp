@@ -195,6 +195,7 @@ body{box-sizing:border-box;}
 			                	<tbody>
 					                    <tr>
 					                    	<td style="display:none">${ r.reNo }</td>
+					                    	<td style="display:none">${ r.rpNo }</td>
 					                    	<c:choose>
 					                    		<c:when test="${empty r.changeName }">
 					                        		<td width="80px">
@@ -238,7 +239,7 @@ body{box-sizing:border-box;}
                     <script type="text/javascript">
 			             $(function(){
 			            	 $("#reply_tb tbody tr").click(function(){
-								 location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html();
+								 location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 			            	 });
 			             });
 		            </script>
@@ -269,7 +270,7 @@ body{box-sizing:border-box;}
 				                    <a>&gt;</a>
 				                </c:when>
 				                <c:otherwise>
-				                    <a href="reviewList.re?currentPage=${ responsePi.currentPage +1 }&status=fY">&gt;</a>
+				                    <a href="reviewList.re?currentPage=${ responsePi.currentPage +1 }&status=Y">&gt;</a>
 				                </c:otherwise>
 		                    </c:choose>
 	                    </div>

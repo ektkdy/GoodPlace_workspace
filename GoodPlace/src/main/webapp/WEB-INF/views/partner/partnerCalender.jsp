@@ -82,7 +82,7 @@ button:hover{cursor:pointer}
       defaultDate: '2020-05-12',
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
-      editable: true,
+      editable: false,
       events: [
         {
           title: 'Business Lunch',

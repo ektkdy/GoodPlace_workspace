@@ -43,7 +43,7 @@ button:hover{cursor:pointer}
                 <div class="con2">
                     <div class="reservationArea" style="float:left; margin-top: 20px;">
 	                    <div class="divTitle" style="float: left;">
-	                        <img src="" width="24px"height="24px;" style="float: left;">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png" width="24px"height="24px;" style="float: left;">
 	                        <p>예약현황</p><span style="font-size: 15px;">|새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
 	                    </div>
 	                </div>
@@ -53,7 +53,7 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" width="24px"height="24px" style="float:left">
 	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="#"  style="font-size: 18px;">더보기+</a></span></div>
 	                    <div style="float:left; margin-top:30px">
 	                        <table class="reservTb" cellpadding="0" cellspacing="0">
@@ -81,14 +81,14 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" width="24px"height="24px" style="float:left">
 	                        <p>체험예약목록</p>
 	                        <span style="float:right; margin-right:10px;">
-	                            <a href="#" style="font-size: 18px;">더보기+</a>
+	                            <a href="rvExpList.rv?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
 	                    <div style="float:left; margin-top:30px">
-	                        <table class="reservTb" cellpadding="0" cellspacing="0">
+	                        <table id="expReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
 	                            <thead>
 	                                <tr>
 	                                    <th>예약번호</th>
@@ -99,13 +99,7 @@ button:hover{cursor:pointer}
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-	                                <tr>
-	                                    <td>gp0423</td>
-	                                    <td>방기남</td>
-	                                    <td>2020-06-10</td>
-	                                    <td>나나와 함께하는 쿠킹클래스</td>
-	                                    <td>확정완료</td>
-	                                </tr>
+	                                
 	                            </tbody>
 	                        </table>
 	                    </div>
@@ -113,7 +107,7 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reviewDiv">
 	                    <div class="divTitle">
-	                        <img src="" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/review_icon.jpg" width="24px"height="24px" style="float:left">
 	                        <p>최근등록후기</p>
 	                        <span style="float:right; margin-right:10px;">
 	                            <a href="#" style="font-size: 18px;">더보기+</a>
@@ -151,39 +145,17 @@ button:hover{cursor:pointer}
 	                </div>
 	                <div class="noticeDiv">
 	                    <div class="divTitle">
-	                        <img src="" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/notice_icon.jpg" width="24px"height="24px" style="float:left">
 	                        <p>공지사항</p>
 	                        <span style="float:right; margin-right:10px;">
-	                            <a href="#" style="font-size: 18px;">더보기+</a>
+	                            <a href="pNoticeList.bo?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
 	                    <div>
 	                        <table class="noticeTb">
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            <tr>
-	                                <td> [공지] 코로나19 대응 취소 정책 안내</td>
-	                                <td>2020-06-10</td>
-	                            </tr>
-	                            
+	                        <tbody>
+	                        	
+	                        </tbody>
 	                        </table>
 	                    </div>
 	                </div>
@@ -191,14 +163,100 @@ button:hover{cursor:pointer}
             </div>
         </div>
     </div>
+ <script>
+ 	$(function(){
+ 		$.ajax({
+ 			url:"pNoticeListDashboard.bo",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var list = result.list;
+ 				
+ 				console.log(result);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='2' style='text-align:center'>공지사항이 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					
+ 					for(var i in list){
+ 						var start = list[i].noticeDate;
+ 								content +=  "<tr>" +
+ 										 	"<td>" + list[i].noticeTitle + "</td>" +
+ 										 	"<td>" +  list[i].noticeDate + "</td>" +
+ 										"</tr>";
+ 									  }
+ 				}			 		
+ 				
+ 				$(".noticeTb tbody").html(content);
+ 			
 
-    <script>
-        $(function(){
-            
-            $(".arrow").click(function(){
-                $("#slide_menu").slideToggle(500);
-            });
-        });
-    </script>
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+ 		
+ 	//체험예약
+ 		$.ajax({
+ 			url:"dashboardExpList.rv",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var pi = result.pi;
+ 				var list = result.list;
+ 				
+ 				console.log(list);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='5' style='text-align:center'>예약목록이 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					var arr = list;
+ 					
+ 					arr.slice(0, 6);
+ 					
+ 					for(var i in arr){
+ 						var start = list[i].expDateUser;
+ 						content +=  "<tr>" +
+					 	"<td>" + list[i].epNo + "</td>" +
+					 	"<td>" + list[i].userName +"</td>" + 
+					 	"<td>" + start.substr(0,10) +"</td>" +
+					 	"<td>" +  list[i].expTitle + "</td>" +
+					 	"<td>예약완료</td>" +
+					 	"</tr>";
+ 									  }
+ 					}	 		
+ 				
+ 				$("#expReservationTb tbody").html(content);
+ 			
+
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+
+ 	
+ 	});
+ </script>
+<script>
+	$(function(){
+ 		 	});
+</script>
+ <script>
+     $(function(){
+         
+         $(".arrow").click(function(){
+             $("#slide_menu").slideToggle(500);
+         });
+     });
+ </script>
 </body>
 </html>
