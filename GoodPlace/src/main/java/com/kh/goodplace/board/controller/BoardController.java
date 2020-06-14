@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
 
@@ -41,9 +42,18 @@ public class BoardController {
     }
     // 마이페이지 위시리스트 이동
     @RequestMapping("wishList.bo") 
-    	public String wishList() {
+    	public String selectwishList(HttpSession session, Model model) {
+    		Member m = (Member)session.getAttribute("loginUser");
+    		ArrayList<WishList> wList = bService.selectwishList(m);
+    	
     		return"user/wishList";
     	}
+    // 마이페이지 1대1문의 이동
+    @RequestMapping("inQuiry.bo")
+    public String inQuiry() {
+    	return "user/mpInquery";
+    }
+    
     
     // 사용자 페이지 이벤트리스트 이동
     @RequestMapping("eventForm.bo")
@@ -483,7 +493,48 @@ public class BoardController {
     
     // 관리자 신고관리 끝
     
+    // 관리자 후기
+    @RequestMapping("aReplyList.bo")
+    public String aReplyList(int currentPage, Model model) {
+    	
+        int listCount = bService.aReplyCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aReplyList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_replyList";
+        
+    }
     
+    @RequestMapping("aReplyDetail.bo")
+    public ModelAndView aReplyDetail(int reNo, ModelAndView mv) {
+    	
+    	
+    	Board b = bService.aReplyDetail(reNo);
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_replyDetailView");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    	
+    
+    
+    
+    
+    // 관리자 후기 끝
     
     
     

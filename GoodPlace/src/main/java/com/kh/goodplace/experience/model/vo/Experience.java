@@ -49,6 +49,7 @@ public class Experience {
 	private String changeName;		// 파일수정명(체험썸네일)
 	private String filePath;		// 파일저장경로(체험썸네일)
 	private String expContent;		// 체험내용
+	private String changeNameAt;
 	
 	private String local;			// 지역
 	private String totalSal;		// 누적판매수
@@ -75,9 +76,19 @@ public class Experience {
 	private String expCategoryString;	// 카테고리 표시용
 	private String paName;			// 파트너 이름
 	private ArrayList<String> expClass;	// 수업교시정보
+	private ArrayList<Integer> acceptedPeople; // 체험교시별 접수된 사람들
+	private String detailImg1;  // Attachment 테이블에 담겨있는 체험상세이미지1
+	private String detailImg2;  // Attachment 테이블에 담겨있는 체험상세이미지2
+	private String detailImg3;  // Attachment 테이블에 담겨있는 체험상세이미지3
+	private String detailImg4;  // Attachment 테이블에 담겨있는 체험상세이미지4
+	private String detailImg5;  // Attachment 테이블에 담겨있는 체험상세이미지5
 	
 	/* DB에도 추가한 필드 */
 	private int expClassCount;		// 하루에 진행되는 수업 개수
-
 	
+	/* Member테이블  + Partner테이블 */
+	private String paPofile;	 	// 프로필사진 변경이름
+	private String partnerIntro;	// 파트너소개
+	private String paAccountName; 	//은행명
+	private String paAccountNum;		//계좌번호
 }

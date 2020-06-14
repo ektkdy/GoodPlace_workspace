@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.experience.model.dao.ExperienceDao;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 
@@ -195,6 +197,29 @@ public class ExperienceServiceImpl implements ExperienceService {
 	@Override
 	public Experience selectExpUser(int exNo) {
 		return expDao.selectExpUser(sqlSession, exNo);
+	}
+
+	@Override
+	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo) {
+		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo);
+	}
+
+	@Override
+	public ArrayList<Attachment> getDetailImages(int exNo) {
+		return expDao.getDetailImages(sqlSession, exNo);
+	}
+
+	@Override
+	public Member getPartner(int usNo) {
+		return expDao.getPartner(sqlSession, usNo);
+	}
+	
+	// -------- 현우 마이페이지
+
+	// 현재 로그인한 회원의 결제정보를 가져오는 서비스
+	@Override
+	public ArrayList<ExpPay> selectExpPayList(Member m) {
+		return expDao.selectExpPayList(sqlSession, m);
 	}
 	
 	

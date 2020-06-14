@@ -2,7 +2,6 @@ package com.kh.goodplace.room.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,10 +26,10 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
-import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Controller
 public class RoomController {
@@ -85,7 +84,23 @@ public class RoomController {
 		File deleteFile = new File(savePath + fileName);
 		deleteFile.delete();
 	};
+	// 마이페이지 예약내역페이지 이동
+	@RequestMapping("ReserveForm.ro")
+	public String selectReserve(HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		ArrayList<RoomPay> rPayList = rService.selectRoomPayList(m);
 		
+		model.addAttribute("rPayList",rPayList);
+		return "user/reserve";
+	}
+	
+	@RequestMapping("myReserveDetail.ro")
+	public String myReserveDetail(RoomPay rp, Model model) {
+		System.out.println(rp);
+		
+		model.addAttribute("rp", rp);
+		return "user/myReserveDetail";
+	}
 
 	//-----------------------------------------------------------------------------------------------------
 		
@@ -779,9 +794,11 @@ public class RoomController {
     	}
     	
     	// room 객체에 파트너정보 set
-    	room.setPaPofile(rService.getPartner(roNo).getChangeName());
-    	room.setPartnerIntro(rService.getPartner(roNo).getPartnerIntro());
-    	room.setPaName(rService.getPartner(roNo).getUserName());
+    	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
+    	room.setPartnerIntro(rService.getPartner(room.getUserNo()).getPartnerIntro());
+    	room.setPaName(rService.getPartner(room.getUserNo()).getUserName());
+    	room.setPaAccountName(rService.getPartner(room.getUserNo()).getAccountName());
+    	room.setPaAccountNum(rService.getPartner(room.getUserNo()).getAccountNum());
     	
     	// room 객체에 리뷰정보 set
     	room.setReviewList(rService.getReview(roNo));

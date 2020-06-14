@@ -2,10 +2,11 @@ package com.kh.goodplace.experience.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
+import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.vo.Room;
 
 public interface ExperienceService {
@@ -109,10 +110,28 @@ public interface ExperienceService {
 	ArrayList<Experience> expSearchList(PageInfo pi, Experience e);
 	
 	//------------[체험조회 시작]------------
+	//1. 메뉴바에서 검색한 조건에 해당하는 체험리스트 조회용 서비스 - 진아
 	ArrayList<Experience> selectExpListUser(Experience exp);
+	
+	//2. 체험메인페이지에서 카테고리별 등록된 체험개수 조회용 서비스 - 진아
 	ArrayList<Integer> selectExpCountUser();
+	
+	//3. 체험상세페이지 조회용 서비스 - 진아
 	Experience selectExpUser(int exNo);
 	
+	//4. 체험상세페이지내에서 수업교시별 접수된 인원 조회용 서비스 - 진아
+	ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo);
+	
+	//5. 체험 필드에 상세이미지 저장용 서비스 - 진아
+	ArrayList<Attachment> getDetailImages(int exNo);
+	
+	//6. 파트너 정보 조회용 서비스 - 진아 
+	Member getPartner(int usNo);
 	//------------[체험조회 끝]------------
+	
+	//------------[결제 정보 조회 ]------------
+	
+	//1. 마이페이지에서 현재 로그인한 회원의 결제정보를 가져옴
+	public ArrayList<ExpPay> selectExpPayList(Member m);
 
 }

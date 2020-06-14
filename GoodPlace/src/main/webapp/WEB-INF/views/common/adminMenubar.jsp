@@ -56,7 +56,7 @@
             <li><a href="adminForm.me"><span class="icon1"></span><p>대시보드</p></a></li>
             <li><a href="aMemberList.me?currentPage=1"><span class="icon2"></span><p>회원관리</p></a></li>
             <li><a href="aReportList.bo?currentPage=1"><span class="icon3"></span><p>신고관리</p></a></li>
-            <li><a href=""><span class="icon4"></span><p>후기관리</p></a></li>
+            <li><a href="aReplyList.bo?currentPage=1"><span class="icon4"></span><p>후기관리</p></a></li>
             <li><a href="aPartnerList.me?currentPage=1"><span class="icon5"></span><p>파트너관리</p></a></li>
             <li><a href="aPowerList.po"><span class="icon6"></span><p>파워등록</p></a></li>
             <li><a href="aFaqList.bo?currentPage=1"><span class="icon7"></span><p>게시글관리</p></a></li>

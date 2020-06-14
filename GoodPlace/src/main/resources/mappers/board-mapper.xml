@@ -71,6 +71,15 @@
 		<result column="AGE" property="age"/>
 		<result column="END_DAYS" property="endDays"/>
 	</resultMap>
+	
+	<resultMap type="WishList" id="selectwishList">
+		<id column="WISH_NO" property="wishNo"/>
+		<result column="WISH_DATE" property="wishDate"/>
+		<result column="USNO" property="userNo"/>
+		<result column="userNo" property="roNo"/>
+		<result column="EXNO" property="exNo"/>
+	</resultMap>
+	
 
 
 
@@ -493,6 +502,33 @@
 	
 	</update>
 	
+	<select id="aReplyCount" resultType="_int">
+		select count(*)
+	   	  FROM REVIEW RE
+		  JOIN MEMBER M ON(M.USNO = RE.USNO)
+		  JOIN ROOMS R ON(R.RONO = RE.RONO)
+         ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="aReplyList" resultMap="reviewResultSet">
+		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+	   	  FROM REVIEW RE
+		  JOIN MEMBER M ON(M.USNO = RE.USNO)
+		  JOIN ROOMS R ON(R.RONO = RE.RONO)
+         ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="aReplyDetail" resultMap="reviewResultSet">
+         SELECT RE.RENO, RE.SCORE, RP.END_DAYS, RE.CREATE_DATE, RP.CONCEPT, RE.REVIEW_TITLE, RE.REVIEW_CONTENT, RE.REPLY,
+		        ME.USER_NAME, ME.CHANGE_NAME, TRUNC(TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(BIRTHDATE, 1, 4), 'YYYY')))/12, -1) AGE
+         FROM REVIEW RE
+         JOIN ROOMS RO ON(RE.RONO = RO.RONO)
+         JOIN ROOMSPAY RP ON(RO.RONO = RP.RONO)
+         JOIN MEMBER ME ON(RP.USNO = ME.USNO)
+         WHERE RE.RENO= #{reNo}
+	</select>
+	
 	
 	<!-- 현영  -->	
 	
@@ -601,6 +637,12 @@
 	</update>
 	
 	<!-- /기하 partner review -->
+	
+	<!-- 현우 -->
+	<select id="selectwishList" resultMap="selectwishList" parameterType="Member">
+		select  
+	</select>
+	
 	
 
 </mapper>
