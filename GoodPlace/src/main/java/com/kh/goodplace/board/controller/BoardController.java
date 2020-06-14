@@ -1,5 +1,6 @@
 package com.kh.goodplace.board.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -795,23 +797,21 @@ public class BoardController {
         PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectNoticeList(pi);
+        
 
+        // Gson 객체 생성
+        Gson gson = new Gson();
+
+        // JSON Object를 맵으로 바꿈
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
 
-	    // Gson 객체 생성
-	    Gson gson = new Gson();
-
-	    // JSON Object를 맵으로 바꿈
-	    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
-	     
 	    // key-value 형태로 맵에 저장
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
-	    // 맵을 JSON Object 문자열로 바꿈
+	    // 맵을 JSON Ob,ject 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
-
 				
 	    return jsonString;
 	}

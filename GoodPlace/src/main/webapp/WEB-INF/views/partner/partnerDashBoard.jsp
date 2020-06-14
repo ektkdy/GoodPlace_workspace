@@ -111,9 +111,7 @@ button:hover{cursor:pointer}
 	                    <div style="float: left;">
 	                        <table class="reviewTb">
 	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
+	                            
 	                            </tr>
 	                        </table>
 	                    </div>
@@ -163,7 +161,7 @@ button:hover{cursor:pointer}
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
  										 	"<td>" + list[i].reContent + "</td>" +
- 										 	"<td>" +  list[i].reviewDate + "</td>" +
+ 										 	"<td>" +  list[i].reviewDate +"</td>" +
  										"</tr>";
  									  }
  				}			 		
@@ -195,12 +193,11 @@ button:hover{cursor:pointer}
  							   	"</tr>";
  					
  				}else{
- 					
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
  										 	"<td>" + list[i].noticeTitle + "</td>" +
- 										 	"<td>" +  list[i].noticeDate + "</td>" +
+ 										 	"<td>" + list1[i].noticeDate + "</td>" +
  										"</tr>";
  									  }
  				}			 		

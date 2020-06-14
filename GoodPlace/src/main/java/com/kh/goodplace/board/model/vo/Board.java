@@ -98,7 +98,7 @@ public class Board {
 	private String userName;		// 리뷰작정한 회원 이름 + 회원번호
 	private String reTitle;			// 리뷰제목
 	private String reContent;		// 리뷰내용
-	private Date reviewDate;		// 리뷰작성일
+	private String reviewDate;		// 리뷰작성일
 	private String roomsTitle;		// 숙소명
 	private int score;				// 평점
 	private String reply;			// 답글내용

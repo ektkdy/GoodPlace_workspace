@@ -4,13 +4,13 @@
 .reservationArea{float:left; width: 590px; height: 300px; border: 1px solid #bebebe;}
 .calendar{float:left; border:1px solid #bebebe; width:350px; height:300px; margin-left:25px}
 .reservDiv{float:left; width:970px; height:450px; border:1px solid #bebebe; margin-top:30px}
-.reservTb {width: 905px ;border-top:1px solid #bebebe; margin-left:20px;}
-.reservTb thead th{font-size:20px;font-weight: 400; background: #f1f1f1; padding:12px 15px;border-bottom:1px solid #bebebe; text-align: center;}
+.reservTb {width: 905px ;border-top:1px solid #bebebe; margin-left:20px; font-size:13px}
+.reservTb thead th{font-size:20px;font-weight: 400; color:#333; background: #c1d9f0; padding:12px 15px;border-bottom:1px solid #bebebe; text-align: center;}
 .reservTb td{padding:10px 12px; text-align: center; border-bottom:1px solid #dbdbdb;}
 .reviewDiv{float:left; border: 1px solid #bebebe; width:470px; height: 300px;margin-top: 30px;}
 .reviewTb{float:left; width:100%; height:inherit}
 .reviewTb td{display: inline-block; padding:12px 15px; font-size:15px}
 .reviewCon{display: inline-block; width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.noticeDiv{float:left; border:1px solid #bebebe; width:470px; height: 300px; margin-top:30px; margin-left:28px}
+.noticeDiv{float:left; font-size:13px; border:1px solid #bebebe; width:470px; height: 300px; margin-top:30px; margin-left:28px}
 .noticeTb{width:100%}
 .noticeTb td{padding:6px 15px;  height:inherit}

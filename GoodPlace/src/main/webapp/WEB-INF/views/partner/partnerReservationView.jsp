@@ -50,7 +50,7 @@
 		width:480px;
 		height:350px;
 		border:1px solid #bebebe;
-		margin-left:16px
+		margin-left:15px
 	}
 	#go_exps:hover{
 		border:1px solid #184c88;
