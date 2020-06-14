@@ -179,7 +179,7 @@ button:hover{cursor:pointer}
  		
  		//공지사항
  		$.ajax({
- 			url:"pNoticeListDashboard.bo",
+ 			url:"noticeListDashboard.bo",
  			data:{currentPage:1 },
  			type:"post",
  			success:function(result){
