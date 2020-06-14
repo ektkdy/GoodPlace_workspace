@@ -640,7 +640,8 @@
 	
 	<!-- 현우 -->
 	<select id="selectwishList" resultMap="selectwishList" parameterType="Member">
-		select  
+    select *
+      from wishlist
 	</select>
 	
 	
