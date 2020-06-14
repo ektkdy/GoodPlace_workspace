@@ -92,7 +92,7 @@
                             <tr class="pdBtom">
                                 <th>* 대표사진</th>
                                 <td colspan="2">
-	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
+	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ r.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
 	                         	<div id="fileArea">
 									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>

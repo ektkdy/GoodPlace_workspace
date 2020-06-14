@@ -89,7 +89,7 @@ public class ExperienceController {
 		int usNo = loginUser.getUsNo();
 		
 		int listCount = expService.selectExpListCount(usNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Experience> list = expService.selectExpList(pi, usNo);
 		model.addAttribute("pi", pi);
@@ -446,7 +446,7 @@ public class ExperienceController {
 		
 		int listCount = expService.selectListExpWaitCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Experience> list = expService.selectExpWaitList(pi);
 		
@@ -461,7 +461,7 @@ public class ExperienceController {
 		
 		int listCount = expService.selectListExpOkayCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<Experience> list = expService.selectExpOkayList(pi);
 		
@@ -483,7 +483,7 @@ public class ExperienceController {
 				
 				int listCount = expService.selectRvExpListCount(usNo);
 			    
-			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 			    
 			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
 			    
@@ -505,7 +505,7 @@ public class ExperienceController {
 				
 				int listCount = expService.selectRvExpListCount(usNo);
 			    
-			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 			    
 			    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
 			    
@@ -540,7 +540,7 @@ public class ExperienceController {
 				
 				int listCount = expService.selectRvExpConfirmListCount(usNo);
 			    
-			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 			    
 			    ArrayList<Experience> list = expService.selectRvExpConfirmList(pi, usNo);
 
@@ -576,7 +576,7 @@ public class ExperienceController {
 				
 				int listCount = expService.selectRvExpCancelListCount(usNo);
 			    
-			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 			    
 			    ArrayList<Experience> list = expService.selectRvExpCancelList(pi, usNo);
 
@@ -618,7 +618,7 @@ public class ExperienceController {
     public String expSearchList(int currentPage, Experience e, Model model) {
     	
         int listCount = expService.expSearchCount(e); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Experience> list = expService.expSearchList(pi, e);
         
@@ -883,7 +883,7 @@ public class ExperienceController {
 		
 		int listCount = expService.selectRvExpConfirmListCount(usNo);
 	    
-	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 20);
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 	    
 	    ArrayList<Experience> list = expService.selectRvExpConfirmList(pi, usNo);
 

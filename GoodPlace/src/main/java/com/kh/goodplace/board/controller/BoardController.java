@@ -36,7 +36,7 @@ public class BoardController {
     public String aSelectFaqList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectFaqListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectFaqList(pi);
         
@@ -175,7 +175,7 @@ public class BoardController {
     public String faqSearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.faqSearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.faqSearchList(pi, b);
         
@@ -194,7 +194,7 @@ public class BoardController {
     public String aSelectNoticeList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectNoticeList(pi);
         
@@ -280,7 +280,7 @@ public class BoardController {
     public String noticeSearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.noticeSearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.noticeSearchList(pi, b);
         
@@ -312,7 +312,7 @@ public class BoardController {
     public String aSelectInquiryList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectInquiryListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectInquiryList(pi);
         
@@ -405,7 +405,7 @@ public class BoardController {
     public String inquirySearchList(int currentPage, Board b, Model model) {
     	
         int listCount = bService.inquirySearchCount(b); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.inquirySearchList(pi, b);
         model.addAttribute("list", list);
@@ -423,7 +423,7 @@ public class BoardController {
     public String aSelectReportList(int currentPage, Model model) {
     	
         int listCount = bService.aSelectReportListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aSelectReportList(pi);
         model.addAttribute("list", list);
@@ -503,7 +503,7 @@ public class BoardController {
     public String aReplyList(int currentPage, Model model) {
     	
         int listCount = bService.aReplyCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.aReplyList(pi);
         
@@ -562,7 +562,7 @@ public class BoardController {
     public String pSelectNoticeList(int currentPage, Model model) {
     	
         int listCount = bService.pSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
         //System.out.println(list);
@@ -652,7 +652,7 @@ public class BoardController {
 		 		
 		if(status == null ) {
 			int responseListCount = bService.selectReviewCount2(userNo);
-			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
 			 
@@ -660,7 +660,7 @@ public class BoardController {
 			 model.addAttribute("reList", responseList);
 			 
 			 int noReplyListCount = bService.selectReviewCount1(userNo);
-			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
 
@@ -668,7 +668,7 @@ public class BoardController {
 			 model.addAttribute("noList", noreplyList);
 		}else if(status.equals("Y")){
 			 int responseListCount = bService.selectReviewCount2(userNo);
-			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 10, 5);
+			 PageInfo responsePi = Pagination.getPageInfo(responseListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> responseList = bService.reviewList2(responsePi, userNo);
 			 
@@ -678,7 +678,7 @@ public class BoardController {
 			 
 		}else {
 			 int noReplyListCount = bService.selectReviewCount1(userNo);
-			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 10, 5);
+			 PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
 
 			 ArrayList<Board> noreplyList = bService.reviewList1(noReplyPi, userNo);
 
@@ -748,7 +748,7 @@ public class BoardController {
     public String pNoticeListDashboard(int currentPage, Model model) {
     	
         int listCount = bService.pSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
         //System.out.println(list);
@@ -763,7 +763,7 @@ public class BoardController {
 	public String pNoticeListDashboard(int currentPage, HttpSession session) {
 		
     	int listCount = bService.pSelectNoticeListCount(); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
         ArrayList<Board> list = bService.pSelectNoticeList(pi);
 
