@@ -261,8 +261,7 @@
                     <div id="getPeople" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 8px 0 0 34px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
                     </div>
-                    <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-
+                    <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1">
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
                     <a id="addWishList" class="buttonStyle1 aTagStyle1">위시리스트에 담기</a>
@@ -449,16 +448,18 @@
         
         // 해당 교시의 예약 가능한 최대인원
         $(".choiceClass").click(function(){
-        	//alert($(this).next().val());
+        	
+        	// 전에 남아 있던 인원선택 칸 지우기
+        	$('#peopleArea *').remove();
+
         	var availablePeople = $(this).next().val();
-        	
+        	alert(availablePeople);
         	// 인원선택 칸 만듦
-       		$('#getPeople #peopleArea');
-       			for(var i=0; i<availablePeople; i++){
-                   $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>" + i + "명</div>");
-       			}
-       		
-        	
+   			for(var i=1; i<=availablePeople; i++){
+   				var peopleArea = $('#peopleArea');
+   				peopleArea.append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1 person'>" + i + "명</div>");
+   			}
+
         });
         
      	// 인원선택
@@ -468,6 +469,8 @@
        // $('#getPeople' & '#peopleArea').mouseleave(function(){
        //     $('#peopleArea').toggleClass('hide');
        // });
+       
+        
     </script>
 
     <!-- /content -->
