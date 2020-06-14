@@ -67,6 +67,7 @@
                 <a href="#">
                     <span>체험승인</span>
                 </a>
+                
             </div>
             <br clear="both">
             <div class="con" style="width:980px; color:#000">
@@ -74,6 +75,7 @@
                     <img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;">
                     <p class="title_tt">체험승인</p>
                 </span>
+                <br>
                 <br clear="both">
                 <div id="expEnroll_stepOne">
                     <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
@@ -82,9 +84,9 @@
                         <tr>
                             <th>* 카테고리</th>
                             <td>
-                                <h5 class="h5Cl enrollInfo">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
+                                <!-- <h5 class="h5Cl enrollInfo">• 아래의 카테고리중 1개만 선택이 가능합니다. <br>
                                     상품을 가장 잘 표현하는 카테고리를 선택해 주세요. <br>
-                                    관리자 심사 후 수정될수 있습니다.</h5>
+                                    관리자 심사 후 수정될수 있습니다.</h5> -->
                                 <input type="radio" id="expCategory1" name="expCategory" value="lifeStyle"><label for="lifeStyle">라이프 및 스타일(뷰티/패션/쇼핑)</label><br>
                                 <input type="radio" id="expCategory2" name="expCategory" value="culture"><label for="culture">문화와 역사(과학/경제/역사/봉사활동)</label><br>
                                 <input type="radio" id="expCategory3" name="expCategory" value="fitness"><label for="fitness">스포츠 및 피트니스(자전거/요가/러닝/근력운동)</label><br>
@@ -95,7 +97,7 @@
                         <tr>
 		                        <th>* 언어</th>
 		                        <td>
-		                        	<p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p>
+		                        	<!-- <p class="hh">• 체험 진행 시 주로 사용되는 언어를 선택해주세요</p> -->
 		                            <label><input type="checkbox" id="ko" name="language" value="한국어">한국어</label>
 		                            <label><input type="checkbox" id="es" name="language" value="스페인어" style="margin-left:20px;">스페인어</label>
 		                            <label><input type="checkbox" id="jp" name="language" value="일본어" style="margin-left:20px;">일본어</label>
@@ -122,8 +124,7 @@
                         </tr>
                         <tr>
                             <th>* 체험 소개</th>
-                            <td>
-                                <textarea class="enrollInfo" style="color:black;" >${ e.expContent }</textarea>
+                            <td id="summer">
                             </td>
                         </tr>
                         <tr>
@@ -159,7 +160,7 @@
                         <tr>
                             <th>* 게스트 준비물</th>
                             <td>
-                                <input type="text" placeholder="게스트가 준비할 사항이 전혀 없습니다." name="" value="${ e.supplies }">
+                                ${ e.supplies }
                             </td>
                         </tr>
                         <tr>
@@ -173,7 +174,7 @@
                         <tr>
                             <th>* 상세 사진</th>
                             <td>
-                            	<ul id="ulExp">
+                            	<ul id="ulExp" style="list-style:none;">
 									<c:forEach items="${ list }" var="at">
 										<li class="liExp">
 											<input type="hidden" class="fiName" value="${ at.changeName }">
@@ -200,6 +201,10 @@
     
     
     <script>
+	    $(function(){
+	 		$("#summer").html('${ e.expContent }');	
+	 	});
+    
 		$(function(){
 			switch('${e.expCategory}'){
 			case "1" : $("#expCategory1").prop("checked", true); break;
@@ -258,10 +263,6 @@
         </div>
     </div>
     
-    
-    
-    
-    
 	<script>
         $(function(){
             
@@ -270,22 +271,6 @@
             });
         });
     </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 </body>
