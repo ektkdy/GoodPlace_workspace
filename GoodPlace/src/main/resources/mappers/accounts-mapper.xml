@@ -133,11 +133,11 @@
 		        (SELECT COUNT(*) AS RP FROM ROOMSPAY RP 
 		        LEFT JOIN MEMBER M ON(RP.USNO = M.USNO)     
 		        LEFT JOIN ROOMS R ON(RP.RONO= R.RONO)
-		        WHERE R.USNO = #{usNo}) RP;
+		        WHERE R.USNO = #{usNo}) RP
 	</select>
 	
 	<select id="selectIncomeList" resultMap="accountsResultSet" parameterType="_int">
-		SELECT RP.RPNO AS NO,M.USER_NAME, RP.PAY_DATE, RP.AMOUNT, '숙소' AS SECTION 
+		SELECT RP.RPNO AS NO, M.USER_NAME, RP.PAY_DATE, RP.AMOUNT, '숙소' AS SECTION 
 		  FROM ROOMSPAY RP 
 		  LEFT JOIN MEMBER M ON(RP.USNO = M.USNO)     
 		  LEFT JOIN ROOMS R ON(RP.RONO= R.RONO)
