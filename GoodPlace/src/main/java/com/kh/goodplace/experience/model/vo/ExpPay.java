@@ -31,4 +31,9 @@ public class ExpPay {
 	private String supplies;	// 준비물
 	private String useTime;	// 소요시간
 	private String addBasic;
+	
+	/* DB에는 없지만 추가한 필드 */
+	private String payDateString;	// 체험결제일 스트링
+	private String expDateString;	// 체험신청일 스트링
+	
 }

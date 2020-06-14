@@ -82,9 +82,11 @@ public class Experience {
 	private String detailImg3;  // Attachment 테이블에 담겨있는 체험상세이미지3
 	private String detailImg4;  // Attachment 테이블에 담겨있는 체험상세이미지4
 	private String detailImg5;  // Attachment 테이블에 담겨있는 체험상세이미지5
+	private String myClassStartTime; // 내가 예약한 수업교시의 시작시간
 	
 	/* DB에도 추가한 필드 */
 	private int expClassCount;		// 하루에 진행되는 수업 개수
+	private String email;			//이메일
 	
 	/* Member테이블  + Partner테이블 */
 	private String paPofile;	 	// 프로필사진 변경이름
