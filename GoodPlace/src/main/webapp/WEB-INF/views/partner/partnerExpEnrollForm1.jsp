@@ -122,7 +122,7 @@
                     <tr>
                         <th>* 체험 소개</th>
                         <td>
-                        	<textarea id="summernote" style="height:100px; border:1px solid red" name="expContent"></textarea>
+                            <textarea id="summernote" name="expContent"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -150,13 +150,7 @@
     </div>
 </div>
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!-- summernote -->
+
 
 <!-- expTag용 스크립트 -->
 <script type="text/javascript">
@@ -224,39 +218,47 @@
    }
 </script>
 
+
+
+<!-- summernote api -->
 <script>
 	$(function(){
-		
-         // 1. 단순히 에디터 폼만 보이게 하는거
-         //$("#summernote").summernote();
 
-         // 2. 추가적인 속성들 부여 가능
-         // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
-         $('#summernote').summernote({
-         	
-         	tabsize: 2,
-             height: 200,
-              width: 600,
-        placeholder: '체험 설명을 잘 작성하면 게스트의 예약과 참여를 유도할 수 있습니다.  '
-        			+'게스트를 위해 세심하게 고안한 체험 일정의 자세한 내용을 알려주세요.'
-             /*toolbar: [
-                 [groupName, [list of button]]
-                 ['Font Style', ['fontname']],
-                 ['style', ['bold', 'italic', 'underline']],
-                 ['font', ['strikethrough']],
-                 ['fontsize', ['fontsize']],
-                 ['color', ['color']],
-                 ['para', ['paragraph']],
-                 ['height', ['height']],
-                 ['Insert', ['picture']]
-             ] 
-             */
-     	});
+               // 1. 단순히 에디터 폼만 보이게 하는거
+               //$("#summernote").summernote();
+
+               // 2. 추가적인 속성들 부여 가능
+               // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
+               $('#summernote').summernote({
+               //placeholder:" ",
+               tabsize: 2,
+                   height: 200,
+                   width:600/*
+                   toolbar: [
+                       [groupName, [list of button]]
+                       ['Font Style', ['fontname']],
+                       ['style', ['bold', 'italic', 'underline']],
+                       ['font', ['strikethrough']],
+                       ['fontsize', ['fontsize']],
+                       ['color', ['color']],
+                       ['para', ['paragraph']],
+                       ['height', ['height']],
+                       ['Insert', ['picture']]
+                   ] 
+                   */
+           	});
+
+		});
 	
-	});
 </script>
 
-
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- summernote -->
 
 
 </body>

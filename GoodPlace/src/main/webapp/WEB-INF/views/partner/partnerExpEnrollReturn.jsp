@@ -566,7 +566,7 @@
 	}
 </script>
 
-<!-- 상세사진용 input 추가 -->
+<!-- 상세사진용  -->
 <script>
 	$(function(){
 
@@ -582,9 +582,6 @@
 			// 누른 x의 갯수를 1증가시킨다
 			count++;
 			
-			// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
-			$("#count").val(count);
-			
 			// 파일명+x버튼 한 줄을 삭제한다
 			$(this).parent(".li").remove();
 			
@@ -597,6 +594,9 @@
 				}
 			}
 		});
+		
+		// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
+		$("#count").val(count);
 		
 		// 동적으로 만들어진 요소는 on메소드를 이용하여 이벤트 작성
 		//$(".addBtn").click(function(){

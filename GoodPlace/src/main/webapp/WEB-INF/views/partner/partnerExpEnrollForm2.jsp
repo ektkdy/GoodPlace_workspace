@@ -70,7 +70,7 @@
 	            	<input type="hidden" name="language" value="${ e.language }">
 	            	<input type="hidden" name="expTag" value="${ e.expTag }">
 	            	<input type="hidden" name="expTitle" value="${ e.expTitle }">
-	            	<input type="hidden" name="expContent" value="${ e.expContent }">
+	            	<textarea name="expContent" style="display:none;">${ e.expContent }</textarea>
 	            	<input type="hidden" name="addBasic" value="${ e.addBasic }">
 	            	<input type="hidden" name="addDetail" value="${ e.addDetail }">
 	            	<input type="hidden" name="addRef" value="${ e.addRef }">
@@ -349,7 +349,7 @@ function loadImg(inputFile, num) {
 var maxAppend = 0; 
   	function addInput(){
   		if (maxAppend >= 5) return; 
-  		$("#parah").append('<input type="file" name="file">');
+  		$("#parah").append('<input type="file" name="file"><br>');
   		maxAppend++;
   	}
   	
@@ -357,7 +357,7 @@ var maxAppend = 0;
   		$("#parah input:last-child").remove();
   		maxAppend--;
   	}
-  </script>
+</script>
 
 <!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
 <script>

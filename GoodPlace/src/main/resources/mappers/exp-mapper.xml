@@ -34,6 +34,7 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="file_path" property="filePath"/>
+		<result column="change_name_1" property="changeNameAt"/>
 
 		<result column="epno" property="epNo"/>
 		<result column="amount" property="amount"/>
@@ -185,7 +186,7 @@
 		values(exno.nextval, #{usNo}, #{language}, #{expCategory}, #{expTag}, #{expTitle},
 			  #{activity}, #{maxPeople}, null, #{startTime}, #{endTime}, #{useTime}, #{intervalTime}, 
 			  #{supplies}, #{deadline}, #{price}, #{addBasic}, #{addDetail}, #{addRef}, #{zipCode}, 
-			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent},null)
+			  sysdate, null, null, null, 2, null, null, #{originName}, #{changeName}, #{filePath}, #{expContent}, null)
 	</insert>
 	
 	<!-- 체험 상세사진 등록 -->

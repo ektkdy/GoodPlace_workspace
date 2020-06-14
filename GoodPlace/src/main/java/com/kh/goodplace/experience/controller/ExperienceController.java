@@ -107,8 +107,10 @@ public class ExperienceController {
 	
 	/* 2_2. 체험등록 폼2 요청 */
 	@RequestMapping("expEnrollForm2.exp")
-	public ModelAndView expForm2(Experience e, ModelAndView mv) {
+	public ModelAndView expForm2(Experience e, ModelAndView mv, HttpSession session) {
 		//System.out.println(e);
+		
+		session.setAttribute("expContent", e.getExpContent());
 		mv.addObject("e", e);
 		mv.setViewName("partner/partnerExpEnrollForm2");
 		return mv;
@@ -118,7 +120,7 @@ public class ExperienceController {
 	@RequestMapping("insert.exp")
 	public String insertExp(Experience e, @RequestParam(name="thumb", required=true) MultipartFile file,
 			 @RequestParam(name="file", required=false) MultipartFile[] filelist,
-			HttpServletRequest request/* , Attachment at */) {
+			HttpServletRequest request) {
 		
 		if(!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -126,6 +128,8 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
+	
+		//e.setExpContent((String)(session.getAttribute("expContent")));
 		int result1 = expService.insertExp(e);
 		
 		int result = 1;
