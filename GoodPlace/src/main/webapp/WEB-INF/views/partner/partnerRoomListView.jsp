@@ -142,7 +142,7 @@ button:hover{cursor:pointer}
 				                    <a href="#">&lt;</a>
 				                </c:when>
 				                <c:otherwise>
-			                    	<a href="pNoticeList.bo?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    	<a href="list.ro?currentPage=${ pi.currentPage -1 }">&lt;</a>
 			                    </c:otherwise>
 		                    </c:choose>
 		                    
@@ -152,7 +152,7 @@ button:hover{cursor:pointer}
 			                    		<a href="#">${p}</a>
 			                    	</c:when>
 			                    	<c:otherwise>
-			                    		<a class="page-link" href="pNoticeList.bo?currentPage=${ p }">${p}</a>
+			                    		<a class="page-link" href="list.ro?currentPage=${ p }">${p}</a>
 			                    	</c:otherwise>
 			                    </c:choose>
 		                    </c:forEach>
@@ -162,7 +162,7 @@ button:hover{cursor:pointer}
 				                    <a>&gt;</a>
 				                </c:when>
 				                <c:otherwise>
-				                    <a href="pNoticeList.bo?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                    <a href="list.ro?currentPage=${ pi.currentPage +1 }">&gt;</a>
 				                </c:otherwise>
 		                    </c:choose>
 	                    </div>
