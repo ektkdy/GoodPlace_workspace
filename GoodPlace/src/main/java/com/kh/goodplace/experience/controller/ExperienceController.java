@@ -471,6 +471,42 @@ public class ExperienceController {
 		return "admin/adminExpOkeyList";
 	}
 	
+    @RequestMapping("aExpOkay.ex")
+    public String updateOkay(int eno, Model model, HttpServletRequest request) {
+    	
+        int result = expService.updateOkay(eno);
+        
+        if(result > 0)
+        {
+            return "redirect:aExpOkayList.ex?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "승인 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+    
+    @RequestMapping("aExpReject.ex")
+    public String updateReject(Experience e, Model model, HttpServletRequest request) {
+    	
+        int result = expService.updateReject(e);
+        
+        if(result > 0)
+        {
+            return "redirect:aExpWaitList.ex?currentPage=1";
+        }
+        else
+        {
+            model.addAttribute("msg", "거절 실패!!");
+            return "common/errorPage";
+        }
+    	
+    	
+    }
+	
 	
 	// ------------------------------ 파트너 예약관리 시작 ----------------------------------
 	
