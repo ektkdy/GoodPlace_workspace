@@ -28,7 +28,7 @@
     <div id="wrap">
 
 		<jsp:include page="../common/adminMenubar.jsp"/>
-
+aReplyDetail.bo
         <div id="contents" style="width:980px">
             <div id="tab"></div>
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">후기상세</span></a></div>
@@ -40,22 +40,22 @@
                         <thead>
                             <tr class="pdTop">
                                 <td rowspan="2" style="width:100px; ">
-                                    <div align="center"><img src="#" width="50px" height="50px"></div>
+                                    <div align="center"><img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${b.changeName}" width="50px" height="50px"></div>
                                 </td>
-                                <td width="250">예약자명 : 홍길동</td>
-                                <td width="300">예약자 평점 : 4.5</td>
-                                <td width="250">연령대 : 20대</td>
+                                <td width="250">예약자명 : ${ b.userName }</td>
+                                <td width="300">예약자 평점 : ${ b.score }</td>
+                                <td width="250">연령대 : ${ b.age }대</td>
                             </tr>
                             <tr class="pdBot">
-                                <td>여행일 : 20.04.27</td>
-                                <td>후기작성일 : 20.04.29</td>
-                                <td>여행목적 : 혼자가는여행</td>
+                                <td>여행일 : ${ b.endDays }</td>
+                                <td>후기작성일 : ${ b.reviewDate }</td>
+                                <td>여행목적 : ${ b.concept }</td>
                             </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td colspan="4">
-                                <div class="reply_con">너무 좋아요 잘지내다가 갑니다.</div>
+                                <div class="reply_con">${ b.reContent }</div>
                             </td>
                         </tr>
                     </tbody>
@@ -65,13 +65,13 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <textarea type="text" class="replyAnswer" rows="10" readonly>안녕하세요 후기 감사합니다.</textarea>
+                                <textarea type="text" class="replyAnswer" rows="10" readonly>${ b.reply }</textarea>
                             </td>
                         </tr>
                     </tfoot>
                     </table>
                     <div class="replyBtnArea" style="width:100%">
-                        <button class="blue_btn" >목록으로</button>
+                        <button class="blue_btn" onclick="javascript:history.go(-1);">목록으로</button>
                     </div>
                 </div>
             </div>

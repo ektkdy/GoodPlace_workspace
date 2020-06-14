@@ -483,7 +483,48 @@ public class BoardController {
     
     // 관리자 신고관리 끝
     
+    // 관리자 후기
+    @RequestMapping("aReplyList.bo")
+    public String aReplyList(int currentPage, Model model) {
+    	
+        int listCount = bService.aReplyCount(); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+        
+        ArrayList<Board> list = bService.aReplyList(pi);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("pi", pi);
+        
+        return "admin/a_replyList";
+        
+    }
     
+    @RequestMapping("aReplyDetail.bo")
+    public ModelAndView aReplyDetail(int reNo, ModelAndView mv) {
+    	
+    	
+    	Board b = bService.aReplyDetail(reNo);
+    	
+        if(b != null)
+        { // 게시글 상세조회 성공
+            
+            mv.addObject("b", b);
+            mv.setViewName("admin/a_replyDetailView");
+        }
+        else
+        { // 게시글 상세조회 실패
+            mv.addObject("msg", "게시글 상세조회 실패!");
+            mv.setViewName("common/errorPage");
+        }
+        
+        return mv;
+    }
+    	
+    
+    
+    
+    
+    // 관리자 후기 끝
     
     
     
