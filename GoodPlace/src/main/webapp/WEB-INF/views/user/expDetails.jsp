@@ -174,8 +174,8 @@
                     </div>
                     <div style="width:75%;">
                         <div class="fullWidth marginBottom_40px">   
-                            <p style="margin-bottom:14px; font-size:18px;">3시간</p>
-                            <p style="margin-bottom:14px; font-size:18px;">최대 6명</p>
+                            <p style="margin-bottom:14px; font-size:18px;">${ exp.useTime }시간</p>
+                            <p style="margin-bottom:14px; font-size:18px;">최대 ${ exp.maxPeople }명</p>
                         </div>
                         
                     </div>
@@ -246,11 +246,12 @@
                             <div style="width:30%; text-align:right;">시작 ~ 끝</div><div style="width:70%; text-align:center;">(남은자리/최대인원)</div>
                         </div>
                         
-                        <c:forEach items="${ exp.expClass }" var="classInfo" end="${ exp.expClassCount }">
-                       	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
+                        <c:forEach items="${ exp.expClass }" var="classInfo" end="${ exp.expClassCount }" varStatus="status">
+                       	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1 choiceClass">
                        		<div style="width:55%; text-align:right;">${ classInfo }</div>
                        		<div class="peopleInfo" style="width:45%; text-align:center;"></div>
                        	</div>
+                       	<input type="hidden" name="availablePeople" value="${ exp.maxPeople - exp.acceptedPeople[status.index]}"/>
                         </c:forEach>
                        	
                     	
@@ -261,24 +262,7 @@
                         <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
                     </div>
                     <div id="peopleArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            1명
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            2명
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            3명
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            4명
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            5명
-                        </div>
-                        <div style="width:100%; height:38px; padding:5px;" class="buttonStyle1">
-                            6명
-                        </div>
+
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
                     <a id="addWishList" class="buttonStyle1 aTagStyle1">위시리스트에 담기</a>
@@ -427,14 +411,6 @@
             $('#timeArea').toggleClass('hide');
         });
 
-        // 인원선택
-        $('#getPeople').mouseenter(function(){
-            $('#peopleArea').toggleClass('hide');
-        });
-        $('#getPeople' & '#peopleArea').mouseleave(function(){
-            $('#peopleArea').toggleClass('hide');
-        });
-
         // 시간선택 : 특정시간 칸에 마우스 올려놓을 시 컬러변경 이벤트
         $('#timeArea>.buttonStyle1').mouseover(function(){
             $(this).toggleClass('hover');
@@ -459,18 +435,39 @@
        		for(var i=0; i<"${ exp.expClassCount}"; i++){
        			switch(i){
        			case 0: $("#bookExpMenu").next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 1: $("#bookExpMenu").next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 2: $("#bookExpMenu").next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 3: $("#bookExpMenu").next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 4: $("#bookExpMenu").next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 6: $("#bookExpMenu").next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 7: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
-       			case 8: $("#bookExpMenu").next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 1: $("#bookExpMenu").next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 2: $("#bookExpMenu").next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 3: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 4: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 6: $("#bookExpMenu").next().next().next().next().next().next().next().next().next().next().next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 7: $("#bookExpMenu").next().next().next().next().next().next().next().children().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
+       			case 8: $("#bookExpMenu").next().next().next().next().next().next().next().next().children().next().next().next().next().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
        			}
        		};
        		
 		});
         
+        // 해당 교시의 예약 가능한 최대인원
+        $(".choiceClass").click(function(){
+        	//alert($(this).next().val());
+        	var availablePeople = $(this).next().val();
+        	
+        	// 인원선택 칸 만듦
+       		$('#getPeople #peopleArea');
+       			for(var i=0; i<availablePeople; i++){
+                   $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>" + i + "명</div>");
+       			}
+       		
+        	
+        });
+        
+     	// 인원선택
+        //$('#getPeople #peopleArea').(function(){
+        //    $(this).append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1'>"명</div>")
+       // });
+       // $('#getPeople' & '#peopleArea').mouseleave(function(){
+       //     $('#peopleArea').toggleClass('hide');
+       // });
     </script>
 
     <!-- /content -->
