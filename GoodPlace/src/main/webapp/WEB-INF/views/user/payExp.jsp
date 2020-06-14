@@ -121,9 +121,9 @@
                         <h3 style="margin-bottom:34px; padding-top:14px;">이메일</h3>
                     </div>
                     <div style="width:66%; height:235px;">
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:20px 0 14px 0; padding-left:8px; font-size:16px;" disabled placeholder="홍길동"/>
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="010-0000-8282"/>
-                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="happy@gmail.com""/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:20px 0 14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.userName }"/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.phone }"/>
+                        <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="${ loginUser.email }"/>
                     </div>
                     
                 </div>
@@ -141,16 +141,16 @@
                     <h3>포인트 할인</h3>
                 </div>
                 <div style="width:50%;padding:22px 14px; text-align:right;">
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">30,000원</h3>
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">60,000원</h3>
-                    <h3 style="color:dimgray; font-weight:550;">-1,000원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price }원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price * expPay.people }원</h3>
+                    <h3 style="color:dimgray; font-weight:550;">0원</h3>
                 </div>
                 <hr>
                 <div style="width:50%; height:70px; padding:22px 14px;">
                     <h3 style="margin-bottom:10px;">총 결제 금액</h3>
                 </div>
                 <div style="width:50%; height:70px; padding:22px 14px; text-align:right;">
-                    <h3 style="color:dimgray; font-weight:550;">59,000원</h3>
+                    <h3 style="color:dimgray; font-weight:550;">${ exp.price * expPay.people }원</h3>
                 </div>
                 <hr>
                 <div style="width:100%; padding:22px 14px 0px 14px;">
@@ -163,7 +163,7 @@
                 </div>
                 <hr>
                 <div style="width:100%; height:120px; padding:22px 14px; text-align:center;">
-                    <input type="button" style="height:58px; width:180px; font-size:18px; font-weight:900; border:1px solid gray; background-color:white; color:gray; margin:10px auto;"  value="결제하기"/>
+                    <input id="payIt" type="button" style="height:58px; width:180px; font-size:18px; font-weight:900; border:1px solid gray; background-color:white; color:gray; margin:10px auto;"  value="결제하기"/>
                 </div>
                 <hr>
             </div>
@@ -195,24 +195,28 @@
         });
 
         $(window).scroll(function(){
-        var position = $(document).scrollTop();
-
-        console.log(position);
-        $("#receipt").css({ width:'310px',
-                            margin:'314px 0 0 20px;'
-                                    });
-
-        if($(document).scrollTop() != 0){
-            $("#receipt").stop().animate({top:position+30+"px"}, 1); //해당 오브젝트 위치값 재설정
-
-        }else{
-            $("#receipt").stop().animate({top:position+204+"px"}, 1); //해당 오브젝트 위치값 재설정
-            $("#receipt").css({ width:'310px',
-                            margin:'0 0 0 20px;'
-                                    });
-        }
-    });
-
+	        var position = $(document).scrollTop();
+	
+	        console.log(position);
+	        $("#receipt").css({ width:'310px',
+	                            margin:'314px 0 0 20px;'
+	                                    });
+	
+	        if($(document).scrollTop() != 0){
+	            $("#receipt").stop().animate({top:position+30+"px"}, 1); //해당 오브젝트 위치값 재설정
+	
+	        }else{
+	            $("#receipt").stop().animate({top:position+204+"px"}, 1); //해당 오브젝트 위치값 재설정
+	            $("#receipt").css({ width:'310px',
+	                            margin:'0 0 0 20px;'
+	                                    });
+	        }
+    	});
+		
+        $("#payIt").click(function(){
+        	
+        });
+        
     </script>
 
    	<!-- footer -->
