@@ -183,7 +183,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="memSearch.me" var="searchUrl">
-														<c:param name="condition" value="${ m.memSearchSelect }"/>
+														<c:param name="memSearchSelect" value="${ m.memSearchSelect }"/>
 														<c:param name="keyword" value="${ m.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>
@@ -204,7 +204,7 @@
 										</c:when>
 										<c:otherwise>
 											<c:url value="memSearch.me" var="searchUrl">
-												<c:param name="condition" value="${ m.memSearchSelect }"/>
+												<c:param name="memSearchSelect" value="${ m.memSearchSelect }"/>
 												<c:param name="keyword" value="${ m.keyword }"/>
 												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 											</c:url>										

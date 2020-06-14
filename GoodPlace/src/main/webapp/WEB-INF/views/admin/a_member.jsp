@@ -64,7 +64,7 @@
             <div id="tab"></div>
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">회원관리</span></a></div>
             <div id="searchArea" class="con" style="color:#000">
-                <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">회원관리<small style="font-size: 0.5em;">(총 회원수 0명)검색결과 0건</small></p></span>
+                <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">회원관리<small style="font-size: 0.5em;">(총 회원수 ${ listCount }명)</small></p></span>
 	            <form name="" method="" action="memSearch.me">
                 	<span class="up_btn_space">
 	                    <select name="memSearchSelect" id="searchSelect" style="width:100px; height:35px;">
@@ -182,7 +182,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="memSearch.me" var="searchUrl">
-														<c:param name="condition" value="${ m.memSearchSelect }"/>
+														<c:param name="memSearchSelect" value="${ m.memSearchSelect }"/>
 														<c:param name="keyword" value="${ m.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>
@@ -203,7 +203,7 @@
 										</c:when>
 										<c:otherwise>
 											<c:url value="memSearch.me" var="searchUrl">
-												<c:param name="condition" value="${ m.memSearchSelect }"/>
+												<c:param name="memSearchSelect" value="${ m.memSearchSelect }"/>
 												<c:param name="keyword" value="${ m.keyword }"/>
 												<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 											</c:url>										
