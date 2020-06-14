@@ -176,7 +176,7 @@
 	                    </div>
 	                    </div>
 	                </div>
-	                <form id="showExpDetail">
+	                <form action="showExp.exp" id="showExpDetail">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
 	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
 	                </form>

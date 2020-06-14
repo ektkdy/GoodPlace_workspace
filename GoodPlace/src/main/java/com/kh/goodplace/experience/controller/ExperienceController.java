@@ -702,7 +702,8 @@ public class ExperienceController {
 		
 		return mv;
 	}
-
+	
+	// 체험 상세페이지로 이동
 	@RequestMapping("showExp.exp")
 	public ModelAndView showExp(int exNo, String expDateString, ModelAndView mv) {
 		System.out.println("지점 2: exNo : " + exNo);
@@ -857,8 +858,9 @@ public class ExperienceController {
 		
 	}
 	
+	// 체험 결제페이지로 이동
 	@RequestMapping("payExp.exp")
-	public String payExp(String exNo, String usNo, String amount, String expDateString, String people, String expClassNo) {
+	public String payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo) {
 		
 		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
 		
