@@ -56,6 +56,11 @@
     #roomList .power>li{
         display: inline-block;
         text-align: left;
+        width: 20%;
+    	vertical-align: top;
+    }
+    #roomList .power>li>a>div{
+    	width: 200px;
     }
     
     
@@ -117,35 +122,9 @@
             </div>
             <hr width="950px" style="margin-top: 0px;">
             <!-- 파워등록 숙소 -->
-            <div class="rooms power">
-                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
+            <div class="rooms power" id="powerList">
+
+
             </div>
             <br>
             <br>
@@ -170,21 +149,21 @@
                         숙소 간단한 설명
                     </a>
                 </li>
-                <li>
+                                <li>
                     <a href="">
                         <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명
                     </a>
                 </li>
-                <li>
+                                <li>
                     <a href="">
                         <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
                         숙소 간단한 설명
                     </a>
                 </li>
-                <li>
+                                <li>
                     <a href="">
                         <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
                         숙소 타이틀<br>
@@ -214,6 +193,34 @@
             pager:true
         });
     });
+    $(function(){
+        $.ajax({
+    		// ajax1.do?name=홍길동&age=20
+    		url:"selectRoomList.ro",
+    		data:{},		// 관리자 이메일
+    		type:"post",
+    		success:function(powerList){				// 관리자 이메일 정보를 찾아 가져옴
+				var value ="";
+				for(var i in powerList){
+					value += "<li>" +
+			                    "<a href='roomDe.ro?roNo="+ powerList[i].roNo +"'>" +
+			                        "<img src='resources/uploadFiles/" + powerList[i].changeName +"' width='200px' height='150px'><br>" +
+			                        	
+			                        "<div>" +
+			                        	powerList[i].roomsTitle + "<br>" +
+			                        	powerList[i].addBasic + 
+			                        "</div>" +	
+			                    "</a>" +
+			                "</li>";
+				}
+				
+				$("#powerList").html(value);
+    		},error:function(){
+    			console.log("ajax 통신 실패");
+    		}
+    	})
+    })
+    
     
    
 	</script>

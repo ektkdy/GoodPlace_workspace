@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -637,6 +638,29 @@ public class RoomController {
         
         return "admin/adminRoomsOkeyList";
         
+    }
+    
+	@ResponseBody
+    @RequestMapping(value="selectRoomList.ro", produces="application/json; charset=utf-8")
+    public String selectRoomList() {
+    	ArrayList<Room> powerAllList = rService.selectRoomList();
+
+    	Collections.shuffle(powerAllList);
+    	
+    	ArrayList<Room> powerList = new ArrayList<>();
+    	
+    	if(powerAllList.size() >= 4) {
+    		for(int i=0 ; i<4 ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	} else {
+    		for(int i=0 ; i<powerAllList.size() ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	}
+    	
+    	
+    	return new Gson().toJson(powerList);
     }
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------

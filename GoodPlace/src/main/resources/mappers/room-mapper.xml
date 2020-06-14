@@ -430,6 +430,11 @@
 		</if>
 	</select>
 	
+	<select id="selectRoomList" resultMap="roomResultSet">
+	  select *
+        from rooms 
+       where pono is null
+	</select>
 	<!-- 숙소관리 끝-->
 
 	<!-- 숙소조회 시작 -->
