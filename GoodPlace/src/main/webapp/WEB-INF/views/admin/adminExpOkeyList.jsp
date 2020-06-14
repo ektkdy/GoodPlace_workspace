@@ -64,15 +64,15 @@
                     <p class="title_tt">체험 승인 목록</p>
                 </span>
                 <form name="" method="" action="expOkSearch.ex">
-                <span class="up_btn_space">
-                    <select name="searchSelect" id="selectOption">
-                        <option value="searchOp1">체험명</option>
-                        <option value="searchOp2">지역</option>
-                    </select>
-                    <input id="search" type="text" name="keyword" value="${ keyword }">
-                    <input type="submit" id="searchBtn" value="검색">
-                    <input type="hidden" name="currentPage" value="1">
-                </span>
+	                <span class="up_btn_space">
+	                    <select name="searchSelect" id="selectOption">
+	                        <option value="searchOp1">체험명</option>
+	                        <option value="searchOp2">지역</option>
+	                    </select>
+	                    <input id="search" type="text" name="keyword" value="${ keyword }">
+	                    <input type="submit" id="searchBtn" value="검색">
+	                    <input type="hidden" name="currentPage" value="1">
+	                </span>
                 </form>
                 
                 <script>
@@ -137,7 +137,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:url value="expOkSearch.ex" var="searchUrl">
-														<c:param name="condition" value="${ e.searchSelect }"/>
+														<c:param name="searchSelect" value="${ e.searchSelect }"/>
 														<c:param name="keyword" value="${ e.keyword }"/>
 														<c:param name="currentPage" value="${ p }"/>
 													</c:url>

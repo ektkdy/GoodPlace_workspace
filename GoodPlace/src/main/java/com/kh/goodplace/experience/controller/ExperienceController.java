@@ -506,6 +506,22 @@ public class ExperienceController {
     	
     	
     }
+    
+    @RequestMapping("expOkSearch.ex")
+    public String expSearchList(int currentPage, Experience e, Model model) {
+    	
+        int listCount = expService.expSearchCount(e); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
+        ArrayList<Experience> list = expService.expSearchList(pi, e);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("e", e);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminExpOkeyList";
+        
+    }
 	
 	
 	// ------------------------------ 파트너 예약관리 시작 ----------------------------------
@@ -650,21 +666,7 @@ public class ExperienceController {
 				
 			}
 			
-    @RequestMapping("expOkSearch.ex")
-    public String expSearchList(int currentPage, Experience e, Model model) {
-    	
-        int listCount = expService.expSearchCount(e); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-        
-        ArrayList<Experience> list = expService.expSearchList(pi, e);
-        
-        model.addAttribute("list", list);
-        model.addAttribute("e", e);
-        model.addAttribute("pi", pi);
-        
-        return "admin/adminExpOkeyList";
-        
-    }
+
 	
   //------- 체험조회 시작 ---------------------------------------------------
     
