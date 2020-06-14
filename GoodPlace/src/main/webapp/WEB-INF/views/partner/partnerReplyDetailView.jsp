@@ -36,6 +36,7 @@
                 <br clear="both">
                 <form action="reviewForm.re"  id="insertReply" method="post" >
                 <input type="hidden" name="reNo" value=" ${r.reNo }">
+                <input type="hidden" name="rpNo" value="${r.rpNo }">
                 	<div>
 	                    <table class="replyDetail" cellpadding="0" cellspacing="0">
 	                        <thead>

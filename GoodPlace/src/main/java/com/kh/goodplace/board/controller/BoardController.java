@@ -721,7 +721,6 @@ public class BoardController {
     @RequestMapping("reviewForm.re")
     public String reviewForm(int reNo, int rpNo, Model model) {
     	Board b = new Board();
-    	
     	b.setReNo(reNo);
     	b.setRpNo(rpNo);
     	
@@ -789,13 +788,13 @@ public class BoardController {
     }
     
     @ResponseBody
-	@RequestMapping(value="pNoticeListDashboard.bo", produces="application/json; charset=utf-8")
+	@RequestMapping(value="noticeListDashboard.bo", produces="application/json; charset=utf-8")
 	public String pNoticeListDashboard(int currentPage, HttpSession session) {
 		
-    	int listCount = bService.pSelectNoticeListCount(); 
+    	int listCount = bService.aSelectNoticeListCount(); 
         PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
-        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+        ArrayList<Board> list = bService.aSelectNoticeList(pi);
 
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
@@ -809,7 +808,6 @@ public class BoardController {
 	    // key-value 형태로 맵에 저장
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
-	    System.out.println(list);
 
 	    // 맵을 JSON Object 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
@@ -846,7 +844,6 @@ public class BoardController {
 	    // key-value 형태로 맵에 저장
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
-	    System.out.println(list);
 
 	    // 맵을 JSON Object 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
@@ -855,4 +852,6 @@ public class BoardController {
 	    return jsonString;
 	}
     
+    
+  
 }
