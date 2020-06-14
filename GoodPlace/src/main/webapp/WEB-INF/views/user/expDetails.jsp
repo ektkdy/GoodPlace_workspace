@@ -301,7 +301,7 @@
 
             
             <form action="payExp.exp" id="payExp">
-            	<input type="hidden" name="exNo" value="${ exo.exNo }"/>
+            	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
             	<input type="hidden" name="usNo" value="${ loginUser.usNo }"/>
             	<input type="hidden" name="amount" value="${ exp.price }"/>
             	<input type="hidden" name="exp_date" value="${ exp.expDateString }"/>
@@ -473,8 +473,10 @@
         });
         
      	// 선택한 인원수 input hidden 요소에 set
-        $(".person").click(function(){
-        	var people = $(this).find(".adjustPeople").val();
+     	$(document).on("click",".person",function(){
+
+        //$(".person").click(function(){
+        	var people = $(this).children(".adjustPeople").val();
         	alert(people + "명 접수를 선택 하였습니다.");
         	$("input[name=people]").val(people);
         });

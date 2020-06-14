@@ -176,7 +176,7 @@
 	                    </div>
 	                    </div>
 	                </div>
-	                <form action="">
+	                <form id="showExpDetail">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
 	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
 	                </form>
@@ -217,13 +217,11 @@
         });
     
     	// 체험상세 페이지로 이동
-    	$(".expContainer").click(function(){
-    		//console.log("expContainer클릭됨");
-    		var exNo = $(this).find("input[name=exNo]").val();
-    		//console.log(exNo);
-    		location.href="showExp.exp?exNo=" + exNo;
+    	$(function(){
+    		$(".expContainer").click(function(){
+    			$("#showExpDetail").submit();
+    		});
     	});
-    	
     </script>
 	
     <!-- footer -->

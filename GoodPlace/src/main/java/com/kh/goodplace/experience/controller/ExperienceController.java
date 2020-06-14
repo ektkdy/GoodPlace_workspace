@@ -708,7 +708,8 @@ public class ExperienceController {
 		System.out.println("지점 2: exNo : " + exNo);
 		
 		Experience exp = expService.selectExpUser(exNo);
-		exp.setExpDateString(expDateString);
+		
+		
 		
 		// expList객체 체험태그의 표시형식 보완
 		exp.setExpTag("#" + (exp.getExpTag().replace(",", " #")));
@@ -840,6 +841,10 @@ public class ExperienceController {
     		exp.setDetailImg5(at.get(4).getChangeName());
     	}
     	
+    	// 메뉴바에서 조건 검색한 날자 set
+    	exp.setExpDateString(expDateString);
+    	
+    	System.out.println("expDetails.jsp 로 보내기전 : " + exp);
 		if(exp != null) {
 			mv.addObject("exp", exp);
 			mv.setViewName("user/expDetails");
@@ -853,9 +858,9 @@ public class ExperienceController {
 	}
 	
 	@RequestMapping("payExp.exp")
-	public String payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo) {
+	public String payExp(String exNo, String usNo, String amount, String expDateString, String people, String expClassNo) {
 		
-		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount" + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo" + expClassNo);		
+		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
 		
 		return "";
 	}
