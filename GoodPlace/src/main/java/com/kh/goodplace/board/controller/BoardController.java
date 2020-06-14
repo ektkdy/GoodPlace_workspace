@@ -23,13 +23,17 @@ import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.member.model.vo.Member;
-import com.kh.goodplace.room.model.vo.Room;
+import com.kh.goodplace.room.model.service.RoomService;
+import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Controller
 public class BoardController {
 
     @Autowired
     private BoardService bService;
+    
+	@Autowired // DI
+	private RoomService rService;
     
     // 관리자 FAQ 시작
     @RequestMapping("aFaqList.bo")
@@ -45,6 +49,29 @@ public class BoardController {
         
         return "admin/a_faqList";
     }
+    // 마이페이지 1대1 작성하기 이동
+    @RequestMapping("inqueryEnroll.bo")
+    public String inqueryEnroll(HttpSession session, Model model) {
+    	Member m = (Member)session.getAttribute("loginUser");
+    	
+    	ArrayList<RoomPay> myRoomPay = rService.selectRoomPayList(m);
+    	
+    	model.addAttribute("myRoomPay", myRoomPay);
+    	return "user/myInqueryEnroll";
+    }
+    
+    // 마이페이지 1대1 등록
+    @RequestMapping("enrollInquery.bo")
+    public String enrollInquery(Board b) {
+    	
+    	System.out.println("전부 가져온 값 : " + b);
+    	
+    	int result = bService.insertInq(b);
+    	
+    	
+    	return "redirect:inQuiry.bo";
+    }
+    
     // 마이페이지 위시리스트 이동
     @RequestMapping("wishList.bo") 
     	public String selectwishList(HttpSession session, Model model) {

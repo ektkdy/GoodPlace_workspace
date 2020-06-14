@@ -52,7 +52,8 @@ public class Board {
 	
 	/* 1:1 문의 관련 컬럼들 */
 	private int inNo;				// 문의번호
-	private int roNo; 				// 숙소번호
+	private int roNo;		// 숙소번호
+	private int exNo;
 	private int rpNo;				// 숙소결제번호
 	private int userNo;				// 회원번호
 	private int inqCategory;		// 일반(1),숙소/체험(2),취소환불(3),포인트(4),신고(5)

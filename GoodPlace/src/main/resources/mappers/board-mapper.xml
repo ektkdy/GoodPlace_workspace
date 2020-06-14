@@ -275,6 +275,10 @@
 	</select>
 	
 	<!-- 1:1문의 -->
+	<insert id="insertInq" parameterType="Board">
+		insert into INQUERY
+		values(inno.nextval, #{roNo}, #{exNo}, #{reNo}, #{rpNo}, #{userNo}, #{inqContent}, #{inqTitle}, #{inqReContent}, SYSDATE, null, null, 1, 'Y')
+	</insert>
 	
 	<select id="aSelectInquiryListCount" resultType="_int">
 		select count(*)

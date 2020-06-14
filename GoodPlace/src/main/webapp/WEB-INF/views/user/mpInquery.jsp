@@ -70,7 +70,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	
 	<!-- content -->
-	<div id="content" style="text-align: center;">
+	<div id="content">
 		<jsp:include page="../common/myPageMenubar.jsp"/>
 		
 		 <br>
@@ -80,8 +80,8 @@
         <!-- 인기등록 숙소-->
         <div id="roomList" style="width:100%; margin:0 auto;" >
             <div>
-                <h1 style="width:1000px; padding-left:80px;">1:1문의
-                    <input type="button" class="Btn" value="1:1문의하기">
+                <h1 style="width:1000px; padding-left:80px; text-align: center;">1:1문의
+                    <input type="button" onclick="location.href='inqueryEnroll.bo'" class="Btn" value="1:1문의하기">
                 </h1>
                 
             </div>
@@ -119,9 +119,10 @@
         <button>n</button>&nbsp;
         <button>&gt;</button>
     </div>
+    
     <!-- /content -->
     <br clear="both">
-	
+	</div></div>
 	
 	<!-- footer -->
 	<jsp:include page="../common/footer.jsp"/>
