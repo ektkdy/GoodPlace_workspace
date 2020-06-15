@@ -583,9 +583,20 @@
          where p.usno = #{usNo}
 	</select>
 
+	<!-- 일정관리 -->
 
-
-
+	<select id="roomReservation" parameterType="_int" resultMap="roomAndRoomspayResultSet">
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount,  people, 
+        	  concept, request, start_days, end_days, rooms_title, meal, m.change_name
+		from roomspay rp
+		join rooms r on (r.rono = rp.rono)
+		join member m on (m.usno = rp.usno)
+		where rp.rono in (select r.rono 
+		                    from rooms
+		                         where r.usno =  #{usNo})
+		and reserve_status in (2, 3)
+		order by rp.rpno desc
+	</select>
 
 
 

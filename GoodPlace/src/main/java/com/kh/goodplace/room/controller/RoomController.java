@@ -690,13 +690,7 @@ public class RoomController {
     	return new Gson().toJson(popList);
     }
 	
-	@RequestMapping("reviewInq.ro")
-	public String reviewInq(int reNo, Model model) {
-		Board review = bService.selectReviewOne(reNo);
-		
-		model.addAttribute("review", review);
-		return "user/myInqueryEnroll";
-	}
+	
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
@@ -886,14 +880,7 @@ public class RoomController {
 		//예약관리 첫페이지
 	
 		@RequestMapping("reservationView.rv")
-		public String rvRoomList(Model model,HttpSession session) {
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			int usNo = loginUser.getUsNo();
-			
-			ArrayList<Room> list = rService.roomReservation(usNo);
-			
-			model.addAttribute("list", list);
-			
+		public String rvRoomList(Model model) {
 			return "partner/partnerReservationView";
 		}
 
@@ -1067,8 +1054,13 @@ public class RoomController {
 	// ------------------------------ 파트너 일정관리 시작 ----------------------------------
 		
 		@RequestMapping("calendarView.ca")
-		public String calendarView(Model model) {
+		public String calendarView(Model model, HttpSession session) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
 			
+			ArrayList<Room> list = rService.roomReservation(usNo);
+			
+			model.addAttribute("list", list);
 			return "partner/partnerCalender";
 		}
 		
@@ -1126,19 +1118,6 @@ public class RoomController {
 			
 			
 
-//			//일정관리
-//			@ResponseBody
-//			@RequestMapping(value="roomReservation.da", produces="application/json; charset=utf-8")
-//			public String roomReservation(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {      
-//				
-//				Member loginUser = (Member)session.getAttribute("loginUser");
-//				int usNo = loginUser.getUsNo();
-//				
-//				ArrayList<Room> list = rService.roomReservation(usNo);
-//				
-//			    return new Gson().toJson(list);   
-//
-//			}
 			
 			
 }

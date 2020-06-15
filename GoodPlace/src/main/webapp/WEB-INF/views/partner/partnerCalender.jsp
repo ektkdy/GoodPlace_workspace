@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales/ko.js"></script>
 
+<script>
+	$(document).ready(function() {
+		setCalendar();
+	});
 
+	function setCalendar(){
+
+		var calendarEl = document.getElementById('calendar');
+
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			 plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+		      header: {
+		        left: 'prev,next today',
+		        center: 'title',
+		        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+			},
+			defaultView: 'dayGridMonth',
+			locale: 'ko',
+			navLinks: true, // can click day/week names to navigate views
+			editable: false,
+			allDaySlot: false,
+			eventLimit: true, // allow "more" link when too many events
+			minTime: '00:00:00',
+			maxTime: '24:00:00',
+			contentHeight: 'auto',
+			events : [
+
+				<c:forEach var="r" items="${list}">
+					{
+						start:'${r.startDays}',
+						end:'${r.endDays}'
+					},
+				</c:forEach>
+
+			]
+		});
+		
+		calendar.render();
+		
+	};
+	
+</script>
 <style>
 button:hover{cursor:pointer}
 
@@ -61,11 +103,7 @@ button:hover{cursor:pointer}
                 <br clear="both">
                 <br >
                 <div class="con2">
-                <div><c:forEach var="r" items="${list }">
-                	${r.roomsTitle }
-                </c:forEach>
-                </div>
-	<div id="calendar"></div>
+					<div id="calendar"></div>
                 </div>
             </div>
         </div>
@@ -81,53 +119,6 @@ button:hover{cursor:pointer}
         });
     </script>
 
-<script>
 
-	$(document).ready(function() {
-		setCalendar();
-	});
-
-	function setCalendar(){
-
-		var calendarEl = document.getElementById('calendar');
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			 plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-		      header: {
-		        left: 'prev,next today',
-		        center: 'title',
-		        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-			},
-			defaultView: 'dayGridMonth',
-			locale: 'ko',
-			navLinks: true, // can click day/week names to navigate views
-			editable: true,
-			allDaySlot: false,
-			eventLimit: true, // allow "more" link when too many events
-			minTime: '10:00:00',
-			maxTime: '24:00:00',
-			contentHeight: 'auto',
-			events : [
-					    {
-					      "title"  : "${list[0].roomsTitle}",
-					      "start"  : "2020-06-01T12:30:00"
-					    },
-					    {
-					      "title"  : "event2",
-					      "start"  : "2020-06-02T12:30:00",
-					      "end"    : "2020-06-15T12:30:00"
-					    },
-					    {
-					      "title"  : "event3",
-					      "start"  : "2019-09-09T12:30:00"
-					    }
-			]
-		});
-				
-		calendar.render();
-
-	}
-
-	</script>
 </body>
 </html>

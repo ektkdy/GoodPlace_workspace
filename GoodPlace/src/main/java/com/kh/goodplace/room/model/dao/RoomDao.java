@@ -324,7 +324,7 @@ public class RoomDao {
 	
 	public ArrayList<Room> roomReservation(SqlSessionTemplate sqlSession, int usNo){
 		
-		return  (ArrayList)sqlSession.selectList("roomMapper.selectRvRoomConfirmList", usNo);
+		return  (ArrayList)sqlSession.selectList("roomMapper.roomReservation", usNo);
 	}
 
 }
