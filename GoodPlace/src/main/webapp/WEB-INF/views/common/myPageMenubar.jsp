@@ -74,7 +74,7 @@
 	
     <!-- content -->
     <br>
-    <div id="content" style="height:100%">
+    <div style="height:100%">
         <div class="tab_st" >
         	<!-- class="button_on" style="margin-left: 10px;" -->
             <button><a href="wishList.bo">위시리스트</a></button>

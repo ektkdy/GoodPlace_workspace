@@ -168,4 +168,11 @@ public interface BoardService {
 	// 1. 마이페이지에서 현재 로그인한 회원에 위시리스트정보를 가져옴
 	public ArrayList<WishList> selectwishList(Member m);
 	
+	// 2. 마이페이지에서 1대1문의 리스트 정보 조회
+	public ArrayList<Board> selectInquiryList(Member m);
+	
+	// 3. 마이페이지 1대1문의 내용 정보 조회
+	Board selectInquiryDt(int inNo);
+	
+	
 }

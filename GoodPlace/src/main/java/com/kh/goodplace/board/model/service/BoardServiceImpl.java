@@ -282,6 +282,18 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.selectwishList(sqlSession, m);
 	}
 
+	@Override
+	public ArrayList<Board> selectInquiryList(Member m) {
+		return bDao.selectInquiryList(sqlSession, m);
+	}
+
+	@Override
+	public Board selectInquiryDt(int inNo) {
+		return bDao.selectInquiryDt(sqlSession, inNo);
+	}
+	
+	
+
 
 
 

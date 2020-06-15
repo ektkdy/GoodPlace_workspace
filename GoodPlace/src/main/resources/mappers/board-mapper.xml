@@ -74,12 +74,31 @@
 	
 	<resultMap type="WishList" id="selectwishList">
 		<id column="WISH_NO" property="wishNo"/>
-		<result column="WISH_DATE" property="wishDate"/>
 		<result column="USNO" property="userNo"/>
-		<result column="userNo" property="roNo"/>
+		<result column="RONO" property="roNo"/>
 		<result column="EXNO" property="exNo"/>
 		<result column="ROOMS_TITLE" property="roomsTitle"/>
+		<result column="EXP_TITLE" property="expTitle"/>
 	</resultMap>
+	
+	<resultMap type="Board" id="selectInquiryList">
+		<id column="INNO" property="inNo"/>
+		<result column="RONO" property="roNo"/>
+		<result column="EXNO" property="exNo"/>
+		<result column="RENO" property="reNo"/>
+		<result column="RPNO" property="rpNo"/>
+		<result column="USNO" property="userNo"/>
+		<result column="CATEGORY" property="inqCategory"/>
+		<result column="INQUERY_TITLE" property="inqTitle"/>
+		<result column="INQUERY_CONTENT" property="inqContent"/>
+		<result column="INQUERY_DATE" property="inqDate"/>
+		<result column="RE_TITLE" property="inqReTitle"/>
+		<result column="RE_CONTENT" property="inqReContent"/>
+		<result column="RE_STATUS" property="inqReStatus"/>
+		<result column="STATUS" property="inqStatus"/>
+	</resultMap>
+	
+	
 	
 
 
@@ -278,7 +297,40 @@
 	<!-- 1:1문의 -->
 	<insert id="insertInq" parameterType="Board">
 		insert into INQUERY
-		values(inno.nextval, #{roNo}, #{exNo}, #{reNo}, #{rpNo}, #{userNo}, #{inqContent}, #{inqTitle}, #{inqReContent}, SYSDATE, null, null, 1, 'Y')
+		values(inno.nextval,
+		<choose>
+			<when test="roNo != 0">
+				#{roNo},
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose> 
+		<choose>
+			<when test="exNo != 0">
+				#{exNo}, 
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose> 
+		<choose>
+			<when test="reNo != 0">
+				#{reNo},
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="rpNo != 0">
+				#{rpNo},
+			</when>
+			<otherwise>
+				null,
+			</otherwise>
+		</choose>
+		  #{userNo}, #{inqCategory}, #{inqTitle}, #{inqContent}, SYSDATE, null, null, 1, 'Y')
 	</insert>
 	
 	<select id="aSelectInquiryListCount" resultType="_int">
@@ -646,10 +698,24 @@
 	
 	<!-- 현우 -->
 	<select id="selectwishList" resultMap="selectwishList" parameterType="Member">
-     select w.wishNo, w.wishDate, w.userNo, w.roNo, w.exNo, r.rooms_title
+      select w.wish_no, w.usno, w.rono, w.exno, r.rooms_title, e.exp_title
       from wishlist w
       left join rooms r on(w.rono = r.rono)
-     where w.usno = 9;
+      left join experience e on(w.exno = e.exno)
+     where w.usno = #{usNo}
+	</select>
+	
+	<select id="selectInquiryList" resultMap="selectInquiryList" parameterType="Member">
+   select inno, rono, exno, reno, rpno,usno, category, INQUERY_TITLE,INQUERY_CONTENT,INQUERY_DATE,RE_TITLE,RE_CONTENT,RE_STATUS,STATUS
+     from inquery
+    where usno= #{usNo}
+	</select>
+	
+	<select id="selectInquiryDt" resultMap="selectInquiryList" parameterType="Board">
+   select inno, rono, exno, reno, rpno,usno, category, INQUERY_TITLE,INQUERY_CONTENT,INQUERY_DATE,RE_TITLE,RE_CONTENT,RE_STATUS,STATUS
+     from inquery
+    where inNo = #{inNo}
+		
 	</select>
 	
 	

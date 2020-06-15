@@ -22,6 +22,8 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.experience.model.service.ExperienceService;
+import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.RoomPay;
@@ -34,6 +36,9 @@ public class BoardController {
     
 	@Autowired // DI
 	private RoomService rService;
+	
+	@Autowired // DI
+	private ExperienceService expService;
     
     // 관리자 FAQ 시작
     @RequestMapping("aFaqList.bo")
@@ -55,20 +60,22 @@ public class BoardController {
     	Member m = (Member)session.getAttribute("loginUser");
     	
     	ArrayList<RoomPay> myRoomPay = rService.selectRoomPayList(m);
+    	ArrayList<ExpPay> myExpPay = expService.selectExpPayList(m);
     	
+    	
+    	model.addAttribute("myExpPay", myExpPay);
     	model.addAttribute("myRoomPay", myRoomPay);
+    	
     	return "user/myInqueryEnroll";
     }
     
     // 마이페이지 1대1 등록
     @RequestMapping("enrollInquery.bo")
-    public String enrollInquery(Board b) {
-    	
-    	System.out.println("전부 가져온 값 : " + b);
+    public String enrollInquery(Board b, HttpSession session) {
     	
     	int result = bService.insertInq(b);
     	
-    	
+    	session.setAttribute("msg", "성공적으로  문의가 등록되었습니다. 답변까지는 1~2일 정도가 소요됩니다.");
     	return "redirect:inQuiry.bo";
     }
     
@@ -77,13 +84,30 @@ public class BoardController {
     	public String selectwishList(HttpSession session, Model model) {
     		Member m = (Member)session.getAttribute("loginUser");
     		ArrayList<WishList> wList = bService.selectwishList(m);
-    	
+    		
+    		System.out.println(wList);
+    		
+    		model.addAttribute("wList",wList);
     		return"user/wishList";
     	}
     // 마이페이지 1대1문의 이동
     @RequestMapping("inQuiry.bo")
-    public String inQuiry() {
+    public String inQuiry(HttpSession session, Model model) {
+    	Member m = (Member)session.getAttribute("loginUser");
+    	
+    	ArrayList<Board> qList = bService.selectInquiryList(m);
+    	
+    	model.addAttribute("qList", qList);
     	return "user/mpInquery";
+    }
+    // 마이페이지 1대1문의 상세페이지 이동
+    @RequestMapping("inQuiryDt.bo")
+    public String inQuiryDt(int inNo,HttpSession session, Model model) {
+    	
+    	Board b = bService.selectInquiryDt(inNo);
+    	
+    	model.addAttribute("b", b);
+    	return "user/myInqueryEnrollDetail";
     }
     
     

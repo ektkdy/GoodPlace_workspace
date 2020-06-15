@@ -327,7 +327,15 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectwishList", m);
 	}
 	
+	public ArrayList<Board> selectInquiryList(SqlSessionTemplate sqlSession, Member m) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectInquiryList", m);
+	}
 	
+public Board selectInquiryDt(SqlSessionTemplate sqlSession, int inNo) {
+		
+		return sqlSession.selectOne("boardMapper.selectInquiryDt", inNo);
+		
+	}
 	
 	
 	

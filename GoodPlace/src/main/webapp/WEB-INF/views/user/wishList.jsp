@@ -419,41 +419,27 @@
         <div id="roomList" style="width:100%; margin:0 auto;" >
             <h1 style="width:100%; padding-left:80px">위시리스트</h1>
             <div class="rooms power">
+            	<c:forEach items="${ wList }" var="wList">
                 <li>
                     <a href="">
                         <img src="images/common/굿플레이스로고02.jpg"  height="150px"><br>
-           ${wList.roNo}<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
+           					
+           				<c:choose>
+           					<c:when test="${ empty wList.expTitle }">
+           						${wList.roNo}<br>
+           						${wList.roomsTitle }<br>
+           					</c:when>
+           					<c:otherwise>
+           						${wList.exNo }<br>
+           						${wList.expTitle }<br>
+           					</c:otherwise>
+           				</c:choose>
+      				</a>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="images/common/굿플레이스로고02.jpg" height="150px"><br>
-            ${wList.roNo}<br>
-                        ${wList.roomsTitle }<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/common/굿플레이스로고02.jpg" height="150px"><br>
-           ${wList.roNo}<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="images/common/굿플레이스로고02.jpg" width="200px" height="150px"><br>
-           ${wList.roNo}<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
+                </c:forEach>
             </div>
         </div>
-
+		
 
         <!-- 페이징 바 -->
         <div class="pagingBar">

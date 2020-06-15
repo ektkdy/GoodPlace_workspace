@@ -144,7 +144,9 @@
 		                <div style="width: 20%; height: 100%; box-sizing: border-box; float:right;">
 		                	<div style="width: 150px; height: 40px; margin: 83px 20px; border: 1px solid gray; font-size:25px;">
 					        	완료된예약
+					    		<button>후기작성</button>
 					    	</div>
+					    	
 					    </div>
 		            </div>
 		            <hr style="clear: both; margin: 20px 0;">
