@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -383,16 +384,18 @@
 		    </div>
 	
 		</div>
+	
 
+	
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">30,000원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.userName }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div style="height:54px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-                        <h2 style="font-weight:unset; padding-top:10px;">20.03.05 ~ 20.03.07</h2>
+                        <h2 style="font-weight:unset; padding-top:10px;">${ room.startDays } ~ ${ room.endDays }</h2>
                     </div>
                     <div style="height:54px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-                        <h2 style="font-weight:unset; padding-top:10px;">5명</h2>
+                        <h2 style="font-weight:unset; padding-top:10px;">${ room.people }명</h2>
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
                     <a id="addWishList" class="buttonStyle1 aTagStyle1 inquirePartner">위시리스트에 담기</a>
@@ -403,7 +406,7 @@
                 <div class="c_profileArea" style="width:70px; margin:24px;">
                     <img src="${pageContext.request.contextPath}/resources/images/user/partnerImg.jpg" class="c_profile"/>
                 </div>
-                <h3 style="margin:40px 10px 0 0; float: left;">김가가</h3>
+                <h3 style="margin:40px 10px 0 0; float: left;">${ room.userName }</h3>
                 <div style="width:160px;">
                     <a style="float: left; padding:10px; text-align:center; margin:30px 20px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/letterIcon.jpg" style="vertical-align:middle;">문의하기
@@ -411,12 +414,19 @@
                 </div>
             </div>
         </div>
-
+        
+        <c:set var="now" value="<%=new java.util.Date() %>"/>
+		<fmt:formatDate value="${now}" pattern="E" var="today" />
+		
+		<c:choose>
+			<c:when test="${ room.people > room.minPeople }"><c:set var="price" value="${ room.price + ( (room.people - room.minPeople) * 10000 ) }"></c:set></c:when>
+			<c:otherwise><c:set var="price" value="${ room.price}"></c:set></c:otherwise>
+		</c:choose>
         <div id="receipt" class="hide" style="width:500px; height:400px; position:relative; z-index:2; left:200px; top:200px; border:2px solid lightgray; background-color:white; float:unset;">
             <div style="float:unset; width:100%; height:200px; border-bottom:2px solid lightgray;">
                 <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;">예약날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20.03.05 (월) &nbsp;~&nbsp; 20.03.07 (화)</h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : 100,000원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : 0원</h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;">150,000원</h2>
+                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : ${ room.price }원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : <c:if test="${ room.people > room.minPeople }" >${ (room.people - room.minPeople) * 10000 }</c:if>원</h3></div>
+                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;">${ price }원</h2>
                     <div style="height:40px; width:50%; padding:8px; float:unset; position:relative; z-index:3;">
                         <h2 style="position: absolute;">총 금액</h2>
                     </div>  
