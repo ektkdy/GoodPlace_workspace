@@ -806,8 +806,8 @@ public class RoomController {
 			// 예약시작일자, 예약끝일자, 인원수 set
 			mv.addObject("startDays", tripStartDate);
 			mv.addObject("endDays", tripEndDate);
-			mv.addObject("endDays", tripEndDate);
-
+			mv.addObject("tripPeople", tripPeople);
+			
 		}
 
 		return mv;
@@ -815,10 +815,15 @@ public class RoomController {
 	
 	// 숙소리스트 중에서 특정 숙소 클릭시 해당 숙소 상세페이지로 이동
     @RequestMapping("roomDe.ro")
-    public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
+    public ModelAndView roomDetail(int roNo, String tripStartDate, String tripEndDate, int tripPeople, ModelAndView mv, Room room) {
     	//System.out.println("roNo : " + roNo);
     	room  = rService.roomDetail(roNo);
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
+    	
+    	// room 객체에 검색 조건 set
+    	room.setStartDays(tripStartDate);
+    	room.setEndDays(tripEndDate);
+    	room.setPeople(tripPeople);
     	
     	// room객체에 숙소태그, 포함사항의 표시형식 보완
     	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
@@ -835,15 +840,6 @@ public class RoomController {
     	//System.out.println("region : " + region);
     	room.setRegion(region);
     	
-    	// room 객체에 상세이미지 set 
-//    	if(at != null) {
-//    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
-//    		room.setDetailImg1(at.get(0).getChangeName());
-//    		room.setDetailImg2(at.get(1).getChangeName());
-//    		room.setDetailImg3(at.get(2).getChangeName());
-//    		room.setDetailImg4(at.get(3).getChangeName());
-//    	}
-    	
     	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
     	room.setPartnerIntro(rService.getPartner(room.getUserNo()).getPartnerIntro());
@@ -859,6 +855,7 @@ public class RoomController {
     	
     	
     	if(room != null) {
+    		
     		mv.addObject("at", at);
     		mv.addObject("room", room);
     		mv.setViewName("user/roomDetails");

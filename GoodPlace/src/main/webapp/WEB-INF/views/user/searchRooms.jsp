@@ -316,13 +316,16 @@
 	           	<div class="rooms power bottomArea">
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
 			               	<li class="roomDetail" style="margin:0 20px 20px 20px;">
-			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }">
+			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }&tripStartDate=${ tripStartDate }&tripEndDate=${ tripEndDate }&tripPeople=${ tripPeople }">
 			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
 			                    </a>
-			                    <input type="hidden" class="roNo" value="${ roomList.roNo }" />
+			                    <!-- <input type="hidden" name="roNo" value="${ roomList.roNo }" />
+			                    <input type="hidden" name="tripStartDate" value="${ tripStartDate }" />
+			                    <input type="hidden" name="tripEndDate" value="${ tripEndDate }" />
+			                    <input type="hidden" name="tripPeople" value="${ tripPeople }" /> -->
 	                		</li>
 	               	 	</c:forEach>
 	           	</div>
