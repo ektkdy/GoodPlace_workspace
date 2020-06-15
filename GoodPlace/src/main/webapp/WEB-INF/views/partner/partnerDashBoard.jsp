@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerCommon.css" />
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerDashBoard.css" />
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"> 
 <style>
 button:hover{cursor:pointer}
 table tr:hover{background:#f1f1f1; cursor:pointer}
@@ -95,7 +97,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    </div>
 	                </div>
 	                <div class="calendar" style="margin-top:20px">
-	
+						<canvas id="myChart" width="350" height="300"></canvas>
 	                </div>
 	                <br clear="both">
 	                <div class="reservDiv">
@@ -183,6 +185,97 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
             </div>
         </div>
     </div>
+    
+<script>
+
+	$(function(){
+		$.ajax({
+			url:"incomeChart.me",
+			success:function(result){
+
+				var listRo = result.listRo;
+				var listExp = result.listExp;
+				// console.log(listRo[0].month);	// "04"
+				// console.log(listExp[0].income); // 30000
+				
+				/*var months = [];
+				var roomIncome = [];
+				var expIncome = [];
+				
+				for(var i=5; i<0; i--){
+					months.push((i+1)+'월');
+					//listRo[i].month;
+					//console.log(listRo[i].month)
+				}
+				
+				console.log(months);*/
+				
+				//console.log(roomIncome);
+				
+				
+				
+				var ctx = document.getElementById('myChart');
+				var myChart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: months,
+						datasets: [{
+							label: '숙소',
+							backgroundColor: 'rgba(153, 102, 255, 0.2)',
+							fill:false,
+							data: roomIncome
+						},{
+							label : '체험',
+							backgroundColor : 'rgba(255, 159, 64, 0.2)', 
+							fill:false,
+							data : expIncome
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						title:{ 
+							diaplay : true,
+							text : '월별 수입내역' 
+						},
+						scales: {						
+							yAxes: [{
+								ticks: {
+									beginAtZero: true
+								}
+							}],
+							xAxes: [{
+								ticks: {
+									macTicksLimit:6,
+									beginAtZero: true
+								}
+							}]
+						},
+					}
+				});
+				
+			}, error:function(){
+				console.log("월별 수입내역 조회용 ajax 실패");
+			}
+		});
+	});
+
+	
+	
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
  <script>
  	$(function(){
  		//후기
@@ -193,7 +286,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
+ 				//console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -219,7 +312,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -236,7 +329,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
+ 				//console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -260,7 +353,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -278,7 +371,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
+ 				//console.log(list);
  				
  				var content = "";
  				if(list.length == 0){
@@ -308,7 +401,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  	
@@ -326,7 +419,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
+ 				//console.log(list);
  				
  				var content = "";
  				if(list.length == 0){
@@ -355,7 +448,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -367,10 +460,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 
  	});
  </script>
-<script>
-	$(function(){
- 		 	});
-</script>
+
  <script>
      $(function(){
          

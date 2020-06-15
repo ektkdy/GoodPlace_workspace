@@ -83,6 +83,14 @@ public class AccountsServiceImpl implements AccountsService{
 	public ArrayList<Accounts> selectIncomeList(int usNo) {
 		return aDao.selectIncomeList(sqlSession, usNo);
 	}
+	@Override
+	public ArrayList<Accounts> selectRoomIncomeChart(int usNo) {
+		return aDao.selectRoomIncomeChart(sqlSession, usNo);
+	}
+	@Override
+	public ArrayList<Accounts> selectExpIncomeChart(int usNo) {
+		return aDao.selectExpIncomeChart(sqlSession, usNo);
+	}
 
 
 
