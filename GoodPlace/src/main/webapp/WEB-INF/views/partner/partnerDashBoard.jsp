@@ -110,7 +110,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div style="float: left;">
-	                        <table class="reviewTb" cellpadding="0" cellspacing="0">
+	                        <table class="reviewTb" cellpadding="0" cellspacing="0" style="table-layout: fixed">
 	                            <tr class="reviewTr">
 	                            
 	                            </tr>
@@ -163,8 +163,8 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  								content +=  "<tr>" +
  											"<td style='display:none'>" + list[i].reNo + "</td>" +
  											"<td style='display:none'>" + list[i].rpNo + "</td>" +
- 										 	"<td style='width:335px'class='reviewCon'>" + list[i].reContent + "</td>" +
- 										 	"<td>" + start.substring( 0, 10 )+"</td>" +
+ 										 	"<td width='70%'style=' max-height:0.8em; line-height:1.5em; display: inline-block;max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;' id='cutCon'>" + list[i].reContent + "</td>" +
+ 										 	"<td width='20%' style='text-align:right'>" + start.substring( 0, 10 )+"</td>" +
  										"</tr>";
  									  }
  				}			 		
@@ -176,6 +176,26 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
+ 		$(function(){
+ 			
+ 			$("#cutCon").each(function(){
+
+ 	        var length = 10; //표시할 글자수 정하기
+
+ 	        $(this).each(function(){
+
+ 	            if( $(this).text().length >= length ){
+
+ 	                $(this).text( $(this).text().substr(0,length)+'...') 
+ 	                //지정할 글자수 이후 표시할 텍스트
+
+ 	            }
+
+ 	        });
+ 		});
+ 	    });	
+ 		
 	$(document).on('click', ".reviewTb tbody tr", function(){
 		location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 		
@@ -202,6 +222,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
+ 											"<td style='display:none'>" + list[i].noNo + "</td>" + 
  										 	"<td width='80%' class='reviewCon'>" + list[i].noticeTitle + "</td>" +
  										 	"<td width='20%'>" + start.substring( 0, 5)+"일</td>" +
  										"</tr>";
@@ -215,6 +236,11 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
+ 		$(document).on('click', ".noticeTb tbody tr", function(){
+ 			location.href="pNoticeListDetail.bo?noNo="+$(this).children().eq(0).text();
+ 			
+ 		});
  		
  	//체험예약
  		$.ajax({
@@ -258,6 +284,11 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 	
+ 		$(document).on('click', "#expReservationTb tbody tr", function(){
+ 			location.href="reservationExpDetailView.rv?epNo="+$(this).children().eq(0).html();
+ 			
+ 		});
 
  		//숙소예약
  		$.ajax({
@@ -300,6 +331,12 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
+ 		$(document).on('click', "#roomReservationTb tbody tr", function(){
+ 			location.href="reservationRoomDetailView.rv?rpNo="+$(this).children().eq(0).html();
+ 			
+ 		});
+
 
  	});
  </script>

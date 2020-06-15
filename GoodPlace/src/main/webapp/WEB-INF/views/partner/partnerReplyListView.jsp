@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +20,8 @@ body{box-sizing:border-box;}
 	#response:checked ~ #content2{
 		display:block;
 	}
+	
+	table tr:hover{background:#f1f1f1}
 </style>
 <body>
 <div id="wrap">
@@ -58,7 +62,10 @@ body{box-sizing:border-box;}
                 <span id="page_title"><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;"><p class="title_tt">답변 전 후기</p></span>
                 <span class="up_btn_space">
                     <select style="width:250px; height:35px; border-radius: 5px;">
-                        <option>숙소 선택하기</option>
+                    		<option>숙소 선택하기</option>
+                    	<c:forEach var="r" items="${ list}">
+                    		<option>${r.roomTitle }</option>
+                    	</c:forEach>
                     </select>
                 </span>
                 <table id="noReply_tb" class="reply_tb" cellpadding="0" cellspacing="0">
@@ -108,8 +115,8 @@ body{box-sizing:border-box;}
 					                       		<c:when test="${r.score eq 1 }">
 					                       			<td width="150">★</td>
 					                       		</c:when>
-					                        </c:choose>
-					                        <td width="100" class="text_center">작성일<p>${r.reviewDate }</p></td>
+					                        </c:choose><c:set var="TextValue" value="${r.reviewDate }"/>
+					                        <td width="100" class="text_center">작성일<p>${fn:substring(TextValue,0,10) }</p></td>
 					                    </tr>
 					                 </tbody>
 				                    </c:when>
@@ -227,8 +234,8 @@ body{box-sizing:border-box;}
 					                       		<c:when test="${r.score eq 1 }">
 					                       			<td width="150">★</td>
 					                       		</c:when>
-					                        </c:choose>
-					                        <td width="100" class="text_center">작성일<p>${r.reviewDate }</p></td>
+					                        </c:choose><c:set var="TextValue" value="${r.reviewDate }"/>
+					                        <td width="100" class="text_center">작성일<p>${fn:substring(TextValue,0,10) }</p></td>
 					                    </tr>
 					              </tbody>
 				                </c:if>
