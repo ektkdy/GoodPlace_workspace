@@ -185,7 +185,6 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
             </div>
         </div>
     </div>
-    
 <script>
 
 	$(function(){
@@ -195,25 +194,76 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 
 				var listRo = result.listRo;
 				var listExp = result.listExp;
-				// console.log(listRo[0].month);	// "04"
-				// console.log(listExp[0].income); // 30000
+				//console.log(listRo); 
+				//console.log(listExp);
 				
-				/*var months = [];
-				var roomIncome = [];
-				var expIncome = [];
-				
-				for(var i=5; i<0; i--){
-					months.push((i+1)+'월');
-					//listRo[i].month;
-					//console.log(listRo[i].month)
+				var today = new Date();		// 오늘날짜
+				var months = new Array();	// 월을 담을 배열
+				var num = 0;
+				for(var i = 0; i < 6; i++){
+					if((today.getMonth() + 1) - i > 0 && (today.getMonth() + 1) - i <= (today.getMonth() + 1)){
+						months[i] = (today.getMonth() + 1) - i;
+					}else{
+						months[i] = 12 - num;
+						num++;
+					}
+					
+					if(months[i] < 10){				
+						months[i] = "0" + months[i];		
+					}else{
+						months[i] = "" + months[i];
+					}
 				}
+				months.reverse();
+				//console.log(month);			// ["01", "02", "03", "04", "05", "06"]
+				//console.log(month.length);	// 6
 				
-				console.log(months);*/
+				var roomIncome = [];
+				/*for(var i=0; i<listRo.length; i++){
+					switch(listRo[i].month){
+						case months[0] : roomIncome[0] = listRo[0].income; break;
+						case months[1] : roomIncome[1] = listRo[1].income; break;
+						case months[2] : roomIncome[2] = listRo[2].income; break;
+						case months[3] : roomIncome[3] = listRo[3].income; break;
+						case months[4] : roomIncome[4] = listRo[4].income; break;
+						case months[5] : roomIncome[5] = listRo[5].income; break;
+					}
+				}*/
 				
+				for(var i= 0; i<months.length; i++){
+					for(var j=0; j<listRo.length; j++){
+						if(months[i]==listRo[j].month){
+							roomIncome[i] = listRo[j].income;
+						}
+					}
+				}
 				//console.log(roomIncome);
 				
+				var expIncome = [];
+				//console.log(listExp[0].month);
+				/*console.log(listExp[3].income);
 				
+				for(var i=0; i<listExp.length; i++){
+					switch(listExp[i].month){
+						case months[0] : expIncome[0] = listExp[0].income; break;
+						case months[1] : expIncome[1] = listExp[1].income; break;
+						case months[2] : expIncome[2] = listExp[2].income; break;
+						//case months[3] : expIncome[3] = listExp[3].income; break;
+						//case months[4] : expIncome[4] = listExp[4].income; break;
+						//case months[5] : expIncome[5] = listExp[5].income; break;
+					}
+				}*/
 				
+				for(var i= 0; i<months.length; i++){
+					for(var j=0; j<listExp.length; j++){
+						if(months[i]==listExp[j].month){
+							expIncome[i] = listExp[j].income;
+						}
+					}
+				}
+				//console.log(expIncome);
+			
+			
 				var ctx = document.getElementById('myChart');
 				var myChart = new Chart(ctx, {
 					type: 'bar',
@@ -258,23 +308,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 			}
 		});
 	});
-
-	
-	
 </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
  <script>
  	$(function(){
