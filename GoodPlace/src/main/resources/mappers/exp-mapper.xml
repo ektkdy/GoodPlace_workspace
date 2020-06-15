@@ -369,7 +369,7 @@
 		  from exppay ep
 		 where exno in (select exno
 		                  from experience ex
-		                 where usno = #{userNo})
+		                 where ex.usno = #{userNo})
 		and status = 1
 	</select>
 	<!-- 확정후 -->
@@ -378,7 +378,7 @@
 		  from exppay ep
 		 where exno in (select exno
 		                  from experience ex
-		                 where usno = #{userNo})
+		                 where ex.usno = #{userNo})
 		and status in (2, 3)
 	</select>
 	<!-- 취소 -->
@@ -387,7 +387,7 @@
 		  from exppay ep
 		 where exno in (select exno
 		                  from experience ex
-		                 where usno = #{userNo})
+		                 where ex.usno = #{userNo})
 		and status = 4
 	</select>
 	
@@ -399,7 +399,7 @@
 		  join member m on (m.usno = ep.usno)
 		 where ep.exno in (select ex.exno 
 		                from experience
-		                where usno = #{userNo})
+		                where ex.usno = #{userNo})
 		   and ep.status = 1
 		   order by ep.epno desc
 	</select>
@@ -412,7 +412,7 @@
 		  join member m on (m.usno = ep.usno)
 		 where ep.exno in (select ex.exno 
 		                from experience
-		                where usno = #{userNo})
+		                where ex.usno = #{userNo})
 		   and ep.status in (2, 3)
 		   order by ep.epno desc
 	</select>
@@ -425,7 +425,7 @@
 		  join member m on (m.usno = ep.usno)
 		 where ep.exno in (select ex.exno 
 		                from experience
-		                where usno = #{userNo})
+		                where ex.usno = #{userNo})
 		   and ep.status = 4
 		   order by ep.epno desc
 	</select>

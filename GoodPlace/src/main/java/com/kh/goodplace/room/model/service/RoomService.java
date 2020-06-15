@@ -232,7 +232,9 @@ public interface RoomService {
 	//5. 공지사항 검색 조회용
 	ArrayList<Room> roomSearchList(PageInfo pi, Room r);
 
+	//일정관리 - 숙소 예약정보 조회용
 	
+	ArrayList<Room> roomReservation(int usNo);
 
 
 	

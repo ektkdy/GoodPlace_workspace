@@ -21,7 +21,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
     #noticeList tr:hover{cursor:pointer;}
     
 .dash_img{
-    padding-top:35px
+    padding-top:45px
     }
     .dash_amount{
     font-size:20px;
@@ -72,7 +72,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">새로운 숙소 예약 내역<p>
-	                    		 <p class="dash_amount"><a href="#"><span class="amount">5</span>건</a></p>
+	                    		 <p class="dash_amount"><a href="rvRoomList.rv?currentPage=1"><span class="amount" id="roomCount">5</span>건</a></p>
 	                    	</div>
 	                    </div>
 	                    <div class="imgDiv">
@@ -81,16 +81,16 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">새로운 체험 예약 내역<p>
-	                    		  <p class="dash_amount"><a href="#"><span class="amount">10</span>건</a></p>
+	                    		  <p class="dash_amount"><a href="rvExpList.rv?currentPage=1"><span class="amount" id="expCount">10</span>건</a></p>
 	                    	</div>
 	                    </div>
 	                    <div class="imgDiv" >
 	                    	<div style="float:left; height: 65%;  width:100%">
-	                    		<img src="" width="70px" height="70px" class="dash_img">
+	                    		<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/money.png" width="70px" height="70px" class="dash_img">
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
-	                    		 <p class="dash_amount"><a href="#"><span class="amount">2,500,000</span>원</a></p>
+	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="amount">2,500,000</span>원</a></p>
 	                    	</div>
 	                    </div>
 	                </div>
@@ -172,7 +172,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div>
-	                        <table class="noticeTb" cellpadding="0" cellspacing="0">
+	                        <table class="noticeTb" cellpadding="0" cellspacing="0" style="margin-bottom:20px">
 	                        <tbody>
 	                        	
 	                        </tbody>
@@ -185,6 +185,33 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
     </div>
  <script>
  	$(function(){
+ 		//숙소 예약 count
+ 		$.ajax({
+ 			url:"dashboardRoomCount.rv",
+ 			data:{currentPage:1},
+ 			type:"post",
+ 			success:function(count){
+ 				var count = count;
+ 				
+ 				$("#roomCount").html(count);
+ 			},error:function(){
+ 	 			console.log("통신실패!!");
+ 	 		}
+ 	 	 });
+ 	 		//체험 예약 count
+ 	 		$.ajax({
+ 	 			url:"dashboardExpCount.rv",
+ 	 			type:"post",
+ 	 			success:function(count){
+ 	 				var count = count;
+ 	 				$("#expCount").html(count);
+ 	 			},error:function(){
+ 	 	 			console.log("통신실패!!");
+ 	 	 		}
+ 	 	 	 });
+ 	 		
+ 		
+ 		
  		//후기
  		$.ajax({
  			url:"reviewListDashboard.bo",
@@ -193,7 +220,6 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -236,7 +262,6 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -278,7 +303,6 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
  				
  				var content = "";
  				if(list.length == 0){
@@ -326,7 +350,6 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
  				
  				var content = "";
  				if(list.length == 0){

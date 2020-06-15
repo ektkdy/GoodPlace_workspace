@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
@@ -1014,7 +1016,18 @@ public class ExperienceController {
 	    return jsonString;
 	}
 	
-	
+	//예약 진행
+	@ResponseBody
+	@RequestMapping(value="dashboardExpCount.rv", produces="application/json; charset=utf-8")
+	public void dashboardExpCount( HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {      
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
+		
+		int listCount = expService.selectRvExpListCount(usNo);
+	    new Gson().toJson(listCount, response.getWriter());   
+
+	}
 	
 	
 	
