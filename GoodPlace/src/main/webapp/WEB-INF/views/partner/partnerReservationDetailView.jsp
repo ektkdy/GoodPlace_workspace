@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerReservationStep.css" />
+<style>
+#gotoList{border: 1px solid #dbdbdb;  width:100px; height:35px; border-radius:5px}
+#gotoList:hover{background-color: white; border: solid 1px #dbdbdb; }
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -126,7 +130,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <table class="message_tb">
+               <!-- <table class="message_tb">
                     <thead>
                         <tr>
                             <td colspan="2"><img src="../image/step_icon3.png" width="30px" height="30px" >방기남 님과의 대화</td>
@@ -164,7 +168,10 @@
                             </td>
                         </tr>
                     </tfoot>
-                </table>
+                </table>-->
+                <div style="height:10px"></div>
+                <button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
+                <div style="height:50px"></div>
             </div>
         </div>
     </div>
