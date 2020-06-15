@@ -322,7 +322,7 @@
 	<update id="updateOkay" parameterType="_int">
 	
 		update EXPERIENCE
-		   set STATUS = 1
+		   set STATUS = 1, START_DATE = SYSDATE
 		 where exno=#{eno}
 	
 	</update>
@@ -471,7 +471,7 @@
 	<select id="selectAcceptedPeople" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPPAY
-		 WHERE STATUS = 3
+		 WHERE STATUS IN (1, 2, 3)
 		   AND EXNO=#{exNo}
 		   AND EXP_DATE=TO_DATE(#{expDateString},'YYYY-MM-DD')
 		   AND EXP_CLASS_NO=#{expClassNo}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -638,31 +639,81 @@ public class RoomController {
         return "admin/adminRoomsOkeyList";
         
     }
+    
+	@ResponseBody
+    @RequestMapping(value="selectRoomList.ro", produces="application/json; charset=utf-8")
+    public String selectRoomList() {
+    	ArrayList<Room> powerAllList = rService.selectRoomList();
+
+    	Collections.shuffle(powerAllList);
+    	
+    	ArrayList<Room> powerList = new ArrayList<>();
+    	
+    	if(powerAllList.size() >= 4) {
+    		for(int i=0 ; i<4 ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	} else {
+    		for(int i=0 ; i<powerAllList.size() ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	}
+    	
+    	
+    	return new Gson().toJson(powerList);
+    }
+	
+	@ResponseBody
+    @RequestMapping(value="selectPopList.ro", produces="application/json; charset=utf-8")
+    public String selectPopList() {
+    	ArrayList<Room> popAllList = rService.selectPopList();
+    	
+    	System.out.println(popAllList);
+    	
+    	Collections.shuffle(popAllList);
+    	
+    	ArrayList<Room> popList = new ArrayList<>();
+    	
+    	if(popAllList.size() >= 4) {
+    		for(int i=0 ; i<4 ; i++) {
+    			popList.add(popAllList.get(i));
+    		}
+    	} else {
+    		for(int i=0 ; i<popAllList.size() ; i++) {
+    			popList.add(popAllList.get(i));
+    		}
+    	}
+    	
+    	
+    	return new Gson().toJson(popList);
+    }
+	
+	
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, Room room, Board board, ModelAndView mv ) {
 
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
 		room.setStartDays(tripStartDate);
 		room.setEndDays(tripEndDate);
-		room.setPeople(Integer.parseInt((tripPeople)));
+		room.setPeople(tripPeople);
 		
 		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
-   		//System.out.println(" roomList 조회 : " + roomList);
-    	//System.out.println("roomList 의 크기 : " + roomList.size());
+   		System.out.println(" roomList 조회 : " + roomList);
+    	System.out.println("roomList 의 크기 : " + roomList.size());
     	
-    	// roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 set
+    	//roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 세팅 하자
     	ArrayList<Board> reivew = null;
     	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
-        	//System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
+        	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
     	}
 
         if(!roomList.isEmpty()){
@@ -683,9 +734,9 @@ public class RoomController {
 	
 	// 숙소검색페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원)와 필터에 해당하는 숙소리스트 반환
 	@RequestMapping("searchRoWithFilter.ro")
-   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, String tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
 
-		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, filterValue, room, board, mv);
+		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, room, board, mv);
 		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
 		String serviceFull = "샴푸,화장지,바디워시,비누,짐보관서비스,수건,Free wifi";
 		
@@ -785,13 +836,13 @@ public class RoomController {
     	room.setRegion(region);
     	
     	// room 객체에 상세이미지 set 
-    	if(at != null) {
-    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
-    		room.setDetailImg1(at.get(0).getChangeName());
-    		room.setDetailImg2(at.get(1).getChangeName());
-    		room.setDetailImg3(at.get(2).getChangeName());
-    		room.setDetailImg4(at.get(3).getChangeName());
-    	}
+//    	if(at != null) {
+//    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
+//    		room.setDetailImg1(at.get(0).getChangeName());
+//    		room.setDetailImg2(at.get(1).getChangeName());
+//    		room.setDetailImg3(at.get(2).getChangeName());
+//    		room.setDetailImg4(at.get(3).getChangeName());
+//    	}
     	
     	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
@@ -808,6 +859,7 @@ public class RoomController {
     	
     	
     	if(room != null) {
+    		mv.addObject("at", at);
     		mv.addObject("room", room);
     		mv.setViewName("user/roomDetails");
     	}else {
@@ -854,7 +906,7 @@ public class RoomController {
 		    return "partner/partnerReservationListView";
 		}
 		
-		//예약 확정
+		//예약 진행
 		@ResponseBody
 		@RequestMapping(value="rvRoomListIng.rv", produces="application/json; charset=utf-8")
 		public String rvRoomListIng(int currentPage, HttpSession session) {
@@ -1008,4 +1060,42 @@ public class RoomController {
 			return "partner/partnerCalender";
 		}
 		
+		
+	// ------------------------------대쉬보드
+				
+			//예약 진행
+			@ResponseBody
+			@RequestMapping(value="dashboardRoomList.rv", produces="application/json; charset=utf-8")
+			public String dashboardRoomList(int currentPage, HttpSession session) {
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = rService.selectRvRoomListCount(usNo);
+			    
+			    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
+			    
+			    ArrayList<Room> list = rService.selectRvRoomList(pi, usNo);
+			    
+			    
+			    HashMap<String, Object> map = new HashMap<String, Object>();
+			    JsonObject jsonObject = new JsonObject();
+
+			    // Gson 객체 생성
+			    Gson gson = new Gson();
+
+			    // JSON Object를 맵으로 바꿈
+			    gson.fromJson(jsonObject, new HashMap<String, Object>().getClass());  
+			     
+			    // key-value 형태로 맵에 저장
+			    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+			    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+
+			    // 맵을 JSON Object 문자열로 바꿈
+			    String jsonString = gson.toJson(map);
+
+						
+			    return jsonString;
+			}
 }

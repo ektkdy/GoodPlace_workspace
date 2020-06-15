@@ -166,18 +166,15 @@ public class ExperienceController {
 	
 	/* 3. 체험 상세보기용 서비스 */
 	@RequestMapping("expDetail.exp")
-	public ModelAndView selectExp(int exNo, ModelAndView mv) {
+	public String selectExp(int exNo, Model model) {
 		// Experience테이블과 Attachment테이블 join하여 데이터 가져옴
-		ArrayList<Experience> list = expService.selectExp(exNo);
+		Experience e = expService.selectExpOne(exNo);
+		ArrayList<Attachment> list = expService.selectAt(exNo);
 		
-		if(list != null) {
-			mv.addObject("list", list);
-			mv.setViewName("partner/partnerExpDetail");
-		}else {
-			mv.addObject("msg", "상세보기 실패");
-			mv.setViewName("partner/partnerExpList");
-		}
-		return mv;
+		model.addAttribute("e", e);
+		model.addAttribute("list", list);
+		
+		return "partner/partnerExpDetail";
 	}
 	
 	/* 4_1. 체험수정폼 요청용 서비스 */
@@ -506,6 +503,22 @@ public class ExperienceController {
     	
     	
     }
+    
+    @RequestMapping("expOkSearch.ex")
+    public String expSearchList(int currentPage, Experience e, Model model) {
+    	
+        int listCount = expService.expSearchCount(e); 
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
+        ArrayList<Experience> list = expService.expSearchList(pi, e);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("e", e);
+        model.addAttribute("pi", pi);
+        
+        return "admin/adminExpOkeyList";
+        
+    }
 	
 	
 	// ------------------------------ 파트너 예약관리 시작 ----------------------------------
@@ -531,7 +544,7 @@ public class ExperienceController {
 			    return "partner/partnerExpReservationListView";
 			}
 	
-			//예약 확정
+			//예약 
 			@ResponseBody
 			@RequestMapping(value="rvExpListIng.rv", produces="application/json; charset=utf-8")
 			public String rvRoomListIng(int currentPage, HttpSession session) {
@@ -650,21 +663,7 @@ public class ExperienceController {
 				
 			}
 			
-    @RequestMapping("expOkSearch.ex")
-    public String expSearchList(int currentPage, Experience e, Model model) {
-    	
-        int listCount = expService.expSearchCount(e); 
-        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-        
-        ArrayList<Experience> list = expService.expSearchList(pi, e);
-        
-        model.addAttribute("list", list);
-        model.addAttribute("e", e);
-        model.addAttribute("pi", pi);
-        
-        return "admin/adminExpOkeyList";
-        
-    }
+
 	
   //------- 체험조회 시작 ---------------------------------------------------
     
@@ -980,7 +979,7 @@ public class ExperienceController {
 			
 	//---대쉬보드
 	
-	//예약 확정
+	//예약 진행
 	@ResponseBody
 	@RequestMapping(value="dashboardExpList.rv", produces="application/json; charset=utf-8")
 	public String dashboardExpList(int currentPage, HttpSession session) {
@@ -988,13 +987,12 @@ public class ExperienceController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int usNo = loginUser.getUsNo();
 		
-		int listCount = expService.selectRvExpConfirmListCount(usNo);
+		int listCount = expService.selectRvExpListCount(usNo);
 	    
 	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5,5);
 	    
-	    ArrayList<Experience> list = expService.selectRvExpConfirmList(pi, usNo);
-
-
+	    ArrayList<Experience> list = expService.selectRvExpList(pi, usNo);
+	    
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
 
@@ -1008,17 +1006,13 @@ public class ExperienceController {
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
 
+
 	    // 맵을 JSON Object 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
 
 				
 	    return jsonString;
 	}
-	
-	
-	
-	
-	
 	
 	
 	

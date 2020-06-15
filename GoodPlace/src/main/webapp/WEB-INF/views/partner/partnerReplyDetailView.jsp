@@ -36,6 +36,7 @@
                 <br clear="both">
                 <form action="reviewForm.re"  id="insertReply" method="post" >
                 <input type="hidden" name="reNo" value=" ${r.reNo }">
+                <input type="hidden" name="rpNo" value="${r.rpNo }">
                 	<div>
 	                    <table class="replyDetail" cellpadding="0" cellspacing="0">
 	                        <thead>
@@ -82,7 +83,7 @@
 	                    </table>
 	                    <div class="replyBtnArea" style="width:100%">
 	                        <button class="blue_btn" type="submit">수정하기</button>
-	                        <button class="gray_btn" type="button" onclick="location.href='reviewList.re?currentPage=1'">목록으로</button>
+	                        <button class="gray_btn" type="button" onclick="javascript:history.go(-1);">목록으로</button>
 	                    </div>
                 	</div>
                 </form>

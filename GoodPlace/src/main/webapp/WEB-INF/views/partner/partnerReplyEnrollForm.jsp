@@ -14,8 +14,8 @@
         <jsp:include page="../common/partnerMenubar.jsp"/>
         <div id="contents" style="width:980px" >
             <div id="tab">
-                <button class="on lt_tab">답변 전 후기</button>
-                <button class="off gt_tab">답변 완료 후기</button>
+                <button class="on lt_tab" onclick="location.href='reviewList.re?currentPage=1&status=N'">답변 전 후기</button>
+                <button class="off gt_tab"  onclick="location.href='reviewList.re?currentPage=1&status=Y'">답변 완료 후기</button>
             </div>
             <div class="sitemap">
                 <a href="#">
@@ -96,6 +96,7 @@
 	                    	<c:when test="${empty r.reply }">
 			                    <div class="replyBtnArea" style="width:100%">
 			                        <button class="blue_btn" type="button">등록하기</button>
+			                        <button class="gray_btn" type="button"  onclick="javascript:history.go(-1);" style="font-size:15px">목록으로</button>
 			                    </div>
 		                    </c:when>
 		                    <c:otherwise>

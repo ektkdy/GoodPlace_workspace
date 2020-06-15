@@ -22,6 +22,8 @@
 	color:#fff;
 	font-weight:500;
 }
+#gotoList{border: 1px solid #dbdbdb;  width:100px; height:35px; border-radius:5px}
+#gotoList:hover{background-color: white; border: solid 1px #dbdbdb; }
 </style>
 
 </head>
@@ -214,7 +216,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="250">예약번호</td>
+                            <td width="20%">예약번호</td>
                             <td>${e.epNo}</td>
                         </tr>
                         <tr>
@@ -250,11 +252,11 @@
                         </tr>
                         <tr>
                             <td>결제금액</td>
-                            <td><fmt:formatNumber value="${e.amount }" type="currency"/></td>
+                            <td><fmt:formatNumber value="${e.amount }" type="currency"/>(원)</td>
                         </tr>
                     </tbody>
                 </table>
-                <table class="message_tb">
+               <!--   <table class="message_tb">
                     <thead>
                         <tr>
                             <td colspan="2">
@@ -295,7 +297,10 @@
                             </td>
                         </tr>
                     </tfoot>
-                </table>
+                </table>-->
+                <div style="height:10px"></div>
+                <button type="button" id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
+                <div style="height:50px"></div>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 package com.kh.goodplace.board.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -566,24 +568,19 @@ public class BoardController {
     }
     
     @RequestMapping("aReplyDetail.bo")
-    public ModelAndView aReplyDetail(int reNo, ModelAndView mv) {
+    public String aReplyDetail(int reNo, int rpNo, Model model) {
     	
     	
-    	Board b = bService.aReplyDetail(reNo);
-    	
-        if(b != null)
-        { // 게시글 상세조회 성공
-            
-            mv.addObject("b", b);
-            mv.setViewName("admin/a_replyDetailView");
-        }
-        else
-        { // 게시글 상세조회 실패
-            mv.addObject("msg", "게시글 상세조회 실패!");
-            mv.setViewName("common/errorPage");
-        }
+        Board b = new Board();
         
-        return mv;
+        b.setReNo(reNo);
+        b.setRpNo(rpNo);
+              
+        Board r = bService.selectReview(b);
+         
+        model.addAttribute("r", r);
+        
+        return "admin/a_replyDetailView";
     }
     	
     
@@ -646,7 +643,7 @@ public class BoardController {
     //------------------------------------------- 파트너 공지사항 끝
     
     
-    // 사용자 FAQ 시작 -------------------------------------------------------------------------
+    // 진아 시작 -------------------------------------------------------------------------
     // Page_faq.jsp : get latest 3 faqTitle per faqCategory
     @RequestMapping("faq.bo")
     public ModelAndView selectFaqList(ModelAndView mv){
@@ -694,6 +691,22 @@ public class BoardController {
     	
     }
     
+    @RequestMapping("agreement.bo")
+    public String showAgreement() {
+    	return "user/agreement";
+    }
+    
+    @RequestMapping("personalInfoPolicy.bo")
+    public String showPersonalInfoPolicy() {
+    	return "user/personalInfoPolicy";
+    }
+    
+    @RequestMapping("refundPolicy.bo")
+    public String showRefundPolicy() {
+    	return "user/refundPolicy";
+    }
+    
+    // 진아 끝 -------------------------------------------------------------------------   
     
     @RequestMapping("reviewList.re")
     public String reviewList(int currentPage, String status, Model model, HttpSession session) {
@@ -743,17 +756,19 @@ public class BoardController {
     }
     
     @RequestMapping("reviewForm.re")
-    public String reviewForm(int reNo, Model model) {
-
-    	Board r = bService.selectReview(reNo);
+    public String reviewForm(int reNo, int rpNo, Model model) {
+    	Board b = new Board();
+    	b.setReNo(reNo);
+    	b.setRpNo(rpNo);
+    	
+    	Board r = bService.selectReview(b);
     	
     	model.addAttribute("r", r);
-    	
     	return "partner/partnerReplyEnrollForm";
     }
     
     @RequestMapping("insert.re")
-    public String insertReply(int reNo, String reply, Model model) {
+    public String insertReply(int reNo,String reply, Model model) {
     	
     	Board b = new Board();
     	
@@ -766,7 +781,7 @@ public class BoardController {
     	
     	if(result > 0){ // 게시글 상세조회 성공
             
-            Board r = bService.selectReview(reNo);
+            Board r = bService.selectReview(b);
             model.addAttribute("r", r);
             return "redirect:reviewList.re?currentPage=1";
             
@@ -781,12 +796,12 @@ public class BoardController {
     @RequestMapping("reviewDetailView.re")
     public String reviewDetailView(int reNo, int rpNo, Model model) {
     	
-//    		Board b = new Board();
-//    		
-//    		b.setReNo(reNo);
-//    		b.setRpNo(rpNo);
+    		Board b = new Board();
+    		
+    		b.setReNo(reNo);
+    		b.setRpNo(rpNo);
     				
-    	 Board r = bService.selectReview(reNo);
+    	 Board r = bService.selectReview(b);
     	 
     	 model.addAttribute("r", r);
 		 
@@ -810,13 +825,47 @@ public class BoardController {
     }
     
     @ResponseBody
-	@RequestMapping(value="pNoticeListDashboard.bo", produces="application/json; charset=utf-8")
+	@RequestMapping(value="noticeListDashboard.bo", produces="application/json; charset=utf-8")
 	public String pNoticeListDashboard(int currentPage, HttpSession session) {
 		
-    	int listCount = bService.pSelectNoticeListCount(); 
+    	int listCount = bService.aSelectNoticeListCount(); 
         PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
         
-        ArrayList<Board> list = bService.pSelectNoticeList(pi);
+        ArrayList<Board> list = bService.aSelectNoticeList(pi);
+        
+
+        // Gson 객체 생성
+        Gson gson = new Gson();
+
+        // JSON Object를 맵으로 바꿈
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    JsonObject jsonObject = new JsonObject();
+
+	    // key-value 형태로 맵에 저장
+	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
+	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
+
+	    // 맵을 JSON Ob,ject 문자열로 바꿈
+	    String jsonString = gson.toJson(map);
+				
+	    return jsonString;
+	}
+    
+    @ResponseBody
+	@RequestMapping(value="reviewListDashboard.bo", produces="application/json; charset=utf-8")
+	public String reviewListDashboard(int currentPage, HttpSession session) {
+    	 
+    	Member m = (Member)session.getAttribute("loginUser");
+		int userNo = m.getUsNo();
+		 		
+		 
+		int noReplyListCount = bService.selectReviewCount1(userNo);
+    	int listCount = bService.pSelectNoticeListCount(); 
+    	
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        PageInfo noReplyPi = Pagination.getPageInfo(noReplyListCount, currentPage, 5, 5);
+
+		ArrayList<Board> list = bService.reviewList1(noReplyPi, userNo);
 
 	    HashMap<String, Object> map = new HashMap<String, Object>();
 	    JsonObject jsonObject = new JsonObject();
@@ -830,7 +879,6 @@ public class BoardController {
 	    // key-value 형태로 맵에 저장
 	    map.put("pi", pi); // 받아온 쿼리 리스트를 hashmap에 담는다.
 	    map.put("list", list); // 받아온 문자열을 hashmap에 담는다.
-	    System.out.println(list);
 
 	    // 맵을 JSON Object 문자열로 바꿈
 	    String jsonString = gson.toJson(map);
@@ -839,4 +887,6 @@ public class BoardController {
 	    return jsonString;
 	}
     
+    
+  
 }

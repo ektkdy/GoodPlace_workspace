@@ -102,16 +102,16 @@
 	
 
 
+	<!-- 진아 범위 시작 -->
 
-
-	<!-- 진아  : faqCategory별 모든 제목 조회 -->
+	<!-- faqCategory별 모든 제목 조회 -->
 	<select id="selectFaqList" parameterType="string" resultMap="boardFaqResultSet">
 		select *
 		  from faq
 		  where faq_category = #{faqCategory}	
 	</select>
 	
-	<!-- 진아 : 숙소별 리뷰 조회 : 미완성 -->
+	<!-- 숙소별 리뷰 조회 : 미완성 -->
 	<select id="reviewListPerRoom" parameterType="_int" resultMap="reviewResultSet">
 		SELECT *
 		FROM REVIEW
@@ -119,12 +119,14 @@
 		ORDER BY RENO
 	</select>
 	
-	<!-- 진아 : 숙소별 리뷰 개수 조회 -->
+	<!-- 숙소별 리뷰 개수 조회 -->
 	<select id="reviewListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW
 		WHERE RONO = #{roNo}
 	</select>
+	
+	<!-- 진아 범위 끝 -->
 	
 	<!-- 현영  -->
 	<!-- FAQ -->
@@ -289,7 +291,7 @@
 			AND NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
 		</if>
 		<if test="searchSelect == 'searchOp3'">
-			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT '%' || #{keyword} ||'%'
+			AND NOTICE_TITLE LIKE '%' || #{keyword} ||'%' OR NOTICE_CONTENT LIKE '%' || #{keyword} ||'%'
 		</if>
 		 order by NONO desc
 	</select>
@@ -569,7 +571,7 @@
 	
 	<select id="aReplyList" resultMap="reviewResultSet">
 		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
-			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME,RE.RPNO
 	   	  FROM REVIEW RE
 		  JOIN MEMBER M ON(M.USNO = RE.USNO)
 		  JOIN ROOMS R ON(R.RONO = RE.RONO)
@@ -652,7 +654,7 @@
 	<!-- 답글 전 조회용 -->
 	<select id="reviewList1" parameterType="_int" resultMap="reviewResultSet" >
 		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
-			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME,RE.RPNO
 	   	  FROM REVIEW RE
 		  JOIN MEMBER M ON(M.USNO = RE.USNO)
 		  JOIN ROOMS R ON(R.RONO = RE.RONO)
@@ -665,7 +667,7 @@
 	<!-- 답글 후 조회용 -->
 	<select id="reviewList2" parameterType="_int" resultMap="reviewResultSet" >
 		SELECT RENO, RE.RONO, M.USNO, R.ROOMS_TITLE, USER_NAME, REVIEW_TITLE, REVIEW_CONTENT, 
-			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME 
+			   CREATE_DATE, SCORE, REPLY_DATE,REPLY_STATUS, REPLY, M.CHANGE_NAME,RE.RPNO
 	   	  FROM REVIEW RE
 		  JOIN MEMBER M ON(M.USNO = RE.USNO)
 		  JOIN ROOMS R ON(R.RONO = RE.RONO)
@@ -677,13 +679,14 @@
 	</select>
 	
 	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
-		 SELECT RE.RENO, RE.SCORE, RP.START_DAYS, RP.END_DAYS, RE.CREATE_DATE, RP.CONCEPT, RE.REVIEW_TITLE, RE.REVIEW_CONTENT, RE.REPLY,
-              ME.USER_NAME, ME.CHANGE_NAME, TRUNC(TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(BIRTHDATE, 1, 4), 'YYYY')))/12, -1) AGE
-         FROM REVIEW RE
-         JOIN ROOMS RO ON(RE.RONO = RO.RONO)
-         JOIN ROOMSPAY RP ON(RO.RONO = RP.RONO)
-         JOIN MEMBER ME ON(RP.USNO = ME.USNO)
-         WHERE RE.RENO = #{reNo}
+		 SELECT RE.RENO, RE.SCORE, RE.CREATE_DATE,  RE.REVIEW_TITLE, RE.REVIEW_CONTENT, RE.REPLY,
+		 RP.START_DAYS, RP.END_DAYS, RP.CONCEPT, RP.RPNO,
+		 TRUNC(TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(BIRTHDATE, 1, 4), 'YYYY')))/12, -1) AGE,
+		 ME.USER_NAME, ME.CHANGE_NAME
+		 FROM REVIEW RE
+		 JOIN ROOMSPAY RP ON(RE.RPNO = RP.RPNO)
+		 JOIN MEMBER ME ON(RP.USNO = ME.USNO)
+		 WHERE RE.RENO = #{reNo} AND RP.RPNO = #{rpNo}
 	</select>
 	
 	<update id="insertReply" parameterType="Board">

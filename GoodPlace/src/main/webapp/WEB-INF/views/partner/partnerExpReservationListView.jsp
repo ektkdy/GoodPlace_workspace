@@ -35,6 +35,11 @@ button{
 	border-bottom-right-radius: 5px;
 	corsor:pointer;
 }
+/*페이징바*/
+    #pagingArea{width: 980px; text-align: right;}
+    #pagingArea a{padding-left:12px; padding-right: 12px; padding-top: 5px; padding-bottom: 5px;border: 1px solid #dbdbdb; cursor: pointer; border-radius: 4px;}
+    #pagingArea a:hover{color: white; background-color: #34538a;}
+
 </style>
 <body>
  <div id="wrap">
@@ -113,6 +118,38 @@ button{
                            </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test="${ !empty list }">
+	                    <div id="pagingArea" style="margin-top: 22px;">
+	                       <c:choose>
+			                	<c:when test="${ pi.currentPage eq 1 }">
+				                    <a href="#">&lt;</a>
+				                </c:when>
+				                <c:otherwise>
+			                    	<a href="rvExpList.rv?currentPage=${ pi.currentPage -1 }">&lt;</a>
+			                    </c:otherwise>
+		                    </c:choose>
+		                    
+					        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    	<c:choose>
+		                    		<c:when test="${ p eq pi.currentPage }">
+			                    		<a href="#">${p}</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    		<a class="page-link" href="rvExpList.rv?currentPage=${ p }">${p}</a>
+			                    	</c:otherwise>
+			                    </c:choose>
+		                    </c:forEach>
+		                    
+					        <c:choose>
+		                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+				                    <a>&gt;</a>
+				                </c:when>
+				                <c:otherwise>
+				                    <a href="rvExpList.rv?currentPage=${ pi.currentPage +1 }">&gt;</a>
+				                </c:otherwise>
+		                    </c:choose>
+	                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>

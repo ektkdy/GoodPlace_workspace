@@ -201,6 +201,16 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Room> roomSearchList(PageInfo pi, Room r) {
 		return rDao.roomSearchList(sqlSession, pi, r);
 	}
+	
+	@Override
+	public ArrayList<Room> selectRoomList() {
+		return rDao.selectRoomList(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Room> selectPopList() {
+		return rDao.selectPopList(sqlSession);
+	}
 
 	
 	// --------- 숙소관리 끝 --------------------------
@@ -292,6 +302,9 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<RoomPay> selectRoomPayList(Member m) {
 		return rDao.selectRoomPayList(sqlSession, m);
 	}
+
+
+
 
 	
 }

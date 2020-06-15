@@ -268,8 +268,10 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.reviewList2(sqlSession, userNo, responsePi);
 	}
 	@Override
-	public Board selectReview(int reNo) {
-		return bDao.selectReview(sqlSession, reNo);
+	public Board selectReview(Board b) {
+		Board r = bDao.selectReview(sqlSession, b);
+		
+		return r;
 	}
 
 	@Override

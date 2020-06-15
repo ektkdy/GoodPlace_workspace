@@ -231,17 +231,10 @@
             <div class="fullWidth" style="margin-bottom:10px;">
                 <h1 style="float:left; margin:15px 0 15px 46px;">${ exp.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
-                    <div id="getPeriod" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/calendarLetter.jpg" alt="날짜선택"/>
-                    </div>
-                    <div id="calenderArea" style="height:260px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-                        calender API
-                    </div>
                     <div id="getTime" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/chooseTime.jpg" alt="시간선택"/>
                     </div>
                     <div id="timeArea" style="height:auto; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
-                        
                         <div id="bookExpMenu" style="width:100%; height:38px; padding:5px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136); font-weight: 900;">
                             <div style="width:30%; text-align:right;">시작 ~ 끝</div><div style="width:70%; text-align:center;">(남은자리/최대인원)</div>
                         </div>
@@ -254,11 +247,7 @@
                        	<input type="hidden" name="availablePeople" value="${ exp.maxPeople - exp.acceptedPeople[status.index]}"/>
                        	<input type="hidden" name="expClassNo" value="${ status.count }"/>
                         </c:forEach>
-                       	
-                    	
-                        
-                        
-                    </div>
+               		</div>
                     <div id="getPeople" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 8px 0 0 34px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/adjustPeople.jpg"  alt="인원선택"/>
                     </div>
@@ -266,7 +255,7 @@
                     </div>
                     <a id="bookItButton" class="buttonStyle2 aTagStyle1">예약하기</a>
                     <a id="addWishList" class="buttonStyle1 aTagStyle1">위시리스트에 담기</a>
-                </div>
+          		</div>
             </div>
             <hr style="margin:unset;">
             <div class="fullWidth" style=" height:100px;">
@@ -295,7 +284,7 @@
             <div style="float:unset; width:100%; padding:30px 30px 12px 30px;">
                 <p style="position:absolute;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;해당 내용으로 예약하시겠습니까?</p>
                 <p style="position:absolute; margin-top:40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확인버튼을 누르면 예약이 진행됩니다.</p>
-                    <button style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
+                    <button id="okay" style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
                     <button id="closeReceipt" style="width:80px; height:40px; position:absolute; z-index:4; left:240px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle1">취소</button>
             </div>
 
@@ -483,8 +472,8 @@
         
      	// 예약하기 클릭시 체험결제 페이지로 이동
     	$(function(){
-    		$("#bookIt #bookItButton").click(function(){
-    			$("#payExp").submit();
+    		$("#okay").click(function(){
+				$("#payExp").submit();
     		});
     	});
     </script>

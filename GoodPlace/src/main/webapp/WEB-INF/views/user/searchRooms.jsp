@@ -8,12 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숙소검색</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/mainPage/jquery.bxslider.css">
-    <!-- 슬라이더 버튼들 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <!-- 슬라이더를 생성하는 부분 -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
+    
     <style>
         /* content 시작*/
         #content{
@@ -153,6 +148,10 @@
             border:1px solid #dcdcdc;
         }
         /* 페이징바 끝 */
+        
+        a{
+        	color:black;
+        }
         /* content 끝*/
 
     </style>
@@ -316,9 +315,9 @@
 
 	           	<div class="rooms power bottomArea">
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
-			               	<li class="roomDetail">
-			                    <a href="roomDe.ro?roNo=${ roomList.roNo }">
-			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
+			               	<li class="roomDetail" style="margin:0 20px 20px 20px;">
+			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }">
+			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
@@ -341,11 +340,11 @@
 	        <!-- 페이징 바 -->
 	        <div class="pagingBar">
 	            <button>&lt;</button>&nbsp;
-	            <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
+	            <button style="background-color:rgb(24, 76, 136); color:white;">1</button>&nbsp;
+	            <button>2</button>&nbsp;
+	            <button>3</button>&nbsp;
+	            <button>4</button>&nbsp;
+	            <button>5</button>&nbsp;
 	            <button>&gt;</button>
 	        </div>
 	    </div>	

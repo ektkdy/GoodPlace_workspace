@@ -8,10 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숙소검색 > 숙소상세</title>
 
-    <!-- 슬라이더를 생성하는 부분 -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
-
      <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
@@ -148,13 +144,13 @@
 	    <div style="width:70%;">
 	        <!-- Swiper -->
 	        <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
+	        	
 	            <div class="swiper-wrapper">
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
+	            <c:forEach items="${ at }" var="detailImg" varStatus="status">
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ detailImg.changeName }" width="100%" height="100%"></div>
+	            </c:forEach>
 	            </div>
+	           
 	            <!-- Add Arrows -->
 	            <div class="swiper-button-next"></div>
 	            <div class="swiper-button-prev"></div>

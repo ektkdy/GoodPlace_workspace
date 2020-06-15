@@ -125,19 +125,29 @@
 
 
 	<select id="selectIncomeListCount" resultType="_int">
-		select ep+rp
-		  from (select count(*) as ep
-    	        from exppay join member using (usno) where usno=#{usNo}) ep, 
-  			   (select count(*) as rp
-   			    from roomspay join member using (usno) where usno=#{usNo}) rp
+		SELECT EP+RP 
+		  FROM (SELECT COUNT(*) AS EP FROM EXPPAY EP
+		        LEFT JOIN MEMBER M ON (EP.USNO=M.USNO)
+		        LEFT JOIN EXPERIENCE E ON (EP.EXNO=E.EXNO)
+		        WHERE E.USNO = #{usNo}) EP,
+		        (SELECT COUNT(*) AS RP FROM ROOMSPAY RP 
+		        LEFT JOIN MEMBER M ON(RP.USNO = M.USNO)     
+		        LEFT JOIN ROOMS R ON(RP.RONO= R.RONO)
+		        WHERE R.USNO = #{usNo}) RP
 	</select>
 	
 	<select id="selectIncomeList" resultMap="accountsResultSet" parameterType="_int">
-		select epno as no, pay_date, user_name, amount,'숙소' as section 
-		  from exppay join member using (usno) where usno=#{usNo}
-		 union
-		select rpno as no, pay_date, user_name, amount, '체험' as section
-		  from roomspay join member using (usno) where usno=#{usNo}
+		SELECT RP.RPNO AS NO, M.USER_NAME, RP.PAY_DATE, RP.AMOUNT, '숙소' AS SECTION 
+		  FROM ROOMSPAY RP 
+		  LEFT JOIN MEMBER M ON(RP.USNO = M.USNO)     
+		  LEFT JOIN ROOMS R ON(RP.RONO= R.RONO)
+		 WHERE R.USNO = #{usNo}
+		 UNION
+		SELECT EP.EPNO AS NO, M.USER_NAME, EP.PAY_DATE, EP.AMOUNT, '체험' AS SECTION
+		  FROM EXPPAY EP
+		  LEFT JOIN MEMBER M ON (EP.USNO=M.USNO)
+		  LEFT JOIN EXPERIENCE E ON (EP.EXNO=E.EXNO)
+		 WHERE E.USNO = #{usNo}
 	</select>
 
 

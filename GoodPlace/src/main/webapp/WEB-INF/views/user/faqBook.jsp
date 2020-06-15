@@ -7,12 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ 상세 > 예약방법</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/mainPage/jquery.bxslider.css">
-      
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
-    <style>
+
         /* content 스타일 시작*/
         /* 여백 초기화 */
         body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select, table, th, td, tr, textarea, button, form {margin: 0; padding: 0;}

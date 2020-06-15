@@ -43,7 +43,7 @@ body{box-sizing:border-box;}
 			<br>
             <!--  답글전  -->
             <section id="content1" style="flaot:left">
-            <div class="sitemap" style="float:left; position:absolute; top:70px; right:60px">
+            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1135px">
                 <a href="#">
                     <span style="height: 30px;">HOME</span>&gt;
                 </a>
@@ -75,8 +75,9 @@ body{box-sizing:border-box;}
 				                <c:choose>
 				                	<c:when test="${empty r.reply }">
 				                	<tbody>
-					                    <tr>
-					                    	<td style="display:none">${ r.reNo }</td>
+					                   <tr>
+					                    	<td style="display:none">${ r.reNo }</td> 
+					                    	<td style="display:none">${ r.rpNo }</td> 
 					                    	<c:choose>
 					                    		<c:when test="${empty r.changeName }">
 					                        		<td width="80px">
@@ -121,7 +122,7 @@ body{box-sizing:border-box;}
                     <script type="text/javascript">
 			             $(function(){
 			            	 $("#noReply_tb tbody tr").click(function(){
-								 location.href="reviewForm.re?reNo="+$(this).children().eq(0).html();
+			            		 location.href="reviewForm.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 			            	 });
 			             });
 		            </script>
@@ -162,7 +163,7 @@ body{box-sizing:border-box;}
             <!--  //답글전  -->
             <!-- 답글후 -->
             <section id="content2" style="flaot:left">
-            <div class="sitemap" style="float:left; position:absolute; top:70px; right:60px">
+            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1125px">
                 <a href="#">
                     <span style="height: 30px;">HOME</span>&gt;
                 </a>

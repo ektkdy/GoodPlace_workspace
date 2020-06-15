@@ -304,8 +304,8 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.reviewList2", userNo, rowBounds);
 	}
 	
-	public Board selectReview(SqlSessionTemplate sqlSession,int reNo) {
-		return sqlSession.selectOne("boardMapper.selectReview", reNo);
+	public Board selectReview(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.selectOne("boardMapper.selectReview", b);
 	}
 	
 	public int insertReply(SqlSessionTemplate sqlSession, Board b) {

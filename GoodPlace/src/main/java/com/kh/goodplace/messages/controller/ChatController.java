@@ -27,13 +27,13 @@ public class ChatController {
 	@Autowired // DI
 	private ChatService cService;
 	
-	@Autowired // DI
+	@Autowired // DI.
 	private MemberService mService;
 	
 	// 메세지 테스트
 	@RequestMapping("mTest.me")
 	public String mTest(ChatRoom cr, Model model) throws Exception {
-		cr.setTutorEmail("ektkdy@naver.com"); // 관리자 아이디
+		cr.setTutorEmail("admin@goodplace.com"); // 관리자 아이디
 		cr.setClass_class_id(1);
 		
 		ChatRoom room = cDao.selectChatRoom(cr); // 방 검색
@@ -41,7 +41,7 @@ public class ChatController {
 		System.out.println("room : " + room);
 		
 		model.addAttribute("room", room);
-		model.addAttribute("tutorEmail", "ektkdy@naver.com");
+		model.addAttribute("tutorEmail", "admin@goodplace.com");
 		return "common/mTest";
 		//return "common/messages";
 	}
@@ -51,7 +51,7 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping(value="chatConect", produces="application/json; charset=utf-8")
 	public String chatConect(ChatRoom cr) throws Exception {
-		cr.setTutorEmail("ektkdy@naver.com"); // 관리자 아이디
+		cr.setTutorEmail("admin@goodplace.com"); // 관리자 아이디
 		cr.setClass_class_id(1);
 		
 		System.out.println(cr);

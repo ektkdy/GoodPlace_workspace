@@ -35,17 +35,29 @@
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">등록된후기</p></span>
                 <span class="up_btn_space">
-                    <select style="width:250px; height:35px; border-radius: 5px;">
+                    <!-- <select style="width:250px; height:35px; border-radius: 5px;">
                         <option>등록일</option>
                         <option>별점</option>
-                    </select>
+                    </select>-->
                 </span>
                 <br clear="both">
                 <table id="replyList" class="reply_tb" cellpadding="0" cellspacing="0">
                     <c:forEach items="${ list }" var="r">
 	                    <tr>
 	                    	<td style="display:none">${ r.reNo }</td>
-	                        <td width="80px"><img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${r.changeName}"></td>
+	                    	<td style="display:none">${ r.rpNo }</td>
+	                        <c:choose>
+	                    		<c:when test="${empty r.changeName }">
+	                        		<td width="80px">
+	                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/default.jpg">
+	                        		</td>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<td width="80px">
+	                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${r.changeName}">
+	                        		</td>
+	                        	</c:otherwise>
+	                        </c:choose>
 	                        <td width="80px">${ r.userName }</td>
 	                        <td width="400px">${ r.reTitle }</td>
 	                        <c:choose>
@@ -74,7 +86,7 @@
 	            	$(function(){
 	            		
 	            		    $("#replyList tbody tr").click(function(){
-	            			location.href="aReplyDetail.bo?reNo=" +$(this).children().eq(0).html();
+	            			location.href="aReplyDetail.bo?reNo=" +$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 	            		});  
 	            		    
 	            	});

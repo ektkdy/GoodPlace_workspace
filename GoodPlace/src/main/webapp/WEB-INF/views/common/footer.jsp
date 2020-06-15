@@ -71,18 +71,18 @@
     <div id="footer">
         <div class="footer_nav" align="center">
             <div class="footer_menu">
-                <a href="">이용약관</a>
+                <a href="agreement.bo">이용약관</a>
             </div>
             <div class="footer_menu">
-                <a href="">개인정보 처리방침</a>
+                <a href="personalInfoPolicy.bo">개인정보 처리방침</a>
             </div>
             <div class="footer_menu">
-                <a href="">취소 및 환불 정책</a>
+                <a href="refundPolicy.bo">취소 및 환불 정책</a>
             </div>
         </div>
         <div class="footer_address">
             <div>
-                <a href="#" class="serBtn">고객센터</a>
+                <a href="faq.bo" class="serBtn">고객센터</a>
             </div>
             <p class="footerMargin">
                 상호명 (주)굿플레이스 | 대표 강보람 | 개인정보보호책임자 채희영 |사업자등록번호 209-81-55339 사업자정보확인 

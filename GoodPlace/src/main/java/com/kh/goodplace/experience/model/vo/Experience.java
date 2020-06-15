@@ -26,7 +26,7 @@ public class Experience {
 	private String expTitle;		// 체험명
 	private int activity;			// 활동강도
 	private int maxPeople;			// 최대인원수
-	private Date expDate;			// 체험날짜
+	private String expDate;			// 체험날짜
 	private String startTime;		// 운영시작시간
 	private String endTime;			// 운영끝시간
 	private String useTime;			// 체험소요시간
@@ -58,7 +58,7 @@ public class Experience {
 	private int epNo; 				// 체험결제번호
 	private int amount;				// 체험결제금액
 	private Timestamp payDate;		// 체험결제일
-	private Timestamp expDateUser;	// 체험신청일
+	private String expDateUser;	// 체험신청일
 	private int people;				// 인원수
 	private int statusExp;			// 체험상태(승인1~)
 	private String userName;	    // 예약자 이름

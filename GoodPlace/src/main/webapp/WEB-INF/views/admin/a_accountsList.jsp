@@ -67,13 +67,14 @@
             <div class="sitemap"><a href="#"><span style="width: 30px;height: 30px;">정산관리</span></a></div>
             <div class="con" style="color:#000">
                 <span id="page_title"><img src="${pageContext.request.contextPath}/resources/images/admin/집로고.jpg" style="vertical-align: middle;"><p class="title_tt">수익내역</p></span>
+                
                 <span class="up_btn_space">
-                    <select name="" id="searchSelect" style="width:100px; height:35px;">
+                    <!-- <select name="" id="searchSelect" style="width:100px; height:35px;">
                         <option value="">입금자명</option>
                         <option value="">입금일</option>
                         <option value="">유형</option>
                   </select>
-                    <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>
+                    <input id="searchInput" type="search" style="width:200px; height:35px;"><button class="search_btn">검색</button>-->
                 </span>
                 <div class="con2">
                     <table class="common_tb" cellpadding="0" cellspacing="0">
@@ -122,7 +123,7 @@
                             <div id="pagingArea" style="margin-top: 22px;">
 			                    <c:choose>
 				                	<c:when test="${ pi.currentPage eq 1 }">
-					                    <a href="#">&lt;</a>
+					                    <a href="">&lt;</a>
 					                </c:when>
 					                <c:otherwise>
 				                    	<a href="aAccountsList.ac?currentPage=${ pi.currentPage -1 }">&lt;</a>
@@ -132,7 +133,7 @@
 						        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 			                    	<c:choose>
 			                    		<c:when test="${ p eq pi.currentPage }">
-				                    		<a href="#">${p}</a>
+				                    		<a href=""  style="color:red;">${p}</a>
 				                    	</c:when>
 				                    	<c:otherwise>
 				                    		<a class="page-link" href="aAccountsList.ac?currentPage=${ p }">${p}</a>

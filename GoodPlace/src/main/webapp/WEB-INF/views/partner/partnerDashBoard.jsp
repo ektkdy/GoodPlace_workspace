@@ -11,6 +11,7 @@
 
 <style>
 button:hover{cursor:pointer}
+table tr:hover{background:#f1f1f1; cursor:pointer}
 
 /*페이징바*/
     #pagingArea{width: 980px; text-align: right;}
@@ -43,8 +44,8 @@ button:hover{cursor:pointer}
                 <div class="con2">
                     <div class="reservationArea" style="float:left; margin-top: 20px;">
 	                    <div class="divTitle" style="float: left;">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png" width="24px"height="24px;" style="float: left;">
-	                        <p>예약현황</p><span style="font-size: 15px;">|새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png"  style="float:left; padding-left:10px; vertical-align:bottom">
+	                        <p>예약현황</p><span style="font-size: 15px;">&nbsp;|&nbsp;새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
 	                    </div>
 	                </div>
 	                <div class="calendar" style="margin-top:20px">
@@ -53,10 +54,10 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" width="24px"height="24px" style="float:left">
-	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="#"  style="font-size: 18px;">더보기+</a></span></div>
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" style="float:left; padding-left:10px; vertical-align:bottom">
+	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="rvRoomList.rv?currentPage=1"  style="font-size: 18px;">더보기+</a></span></div>
 	                    <div style="float:left; margin-top:30px">
-	                        <table class="reservTb" cellpadding="0" cellspacing="0">
+	                        <table id="roomReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
 	                            <thead>
 	                                <tr>
 	                                    <th>예약번호</th>
@@ -68,11 +69,6 @@ button:hover{cursor:pointer}
 	                            </thead>
 	                            <tbody>
 	                                <tr>
-	                                    <td>gp0423</td>
-	                                    <td>방기남</td>
-	                                    <td>2020-06-10~2020-06-30</td>
-	                                    <td>제주 협재(산들바람피는마을)</td>
-	                                    <td>확정완료</td>
 	                                </tr>
 	                            </tbody>
 	                        </table>
@@ -81,7 +77,7 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reservDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>체험예약목록</p>
 	                        <span style="float:right; margin-right:10px;">
 	                            <a href="rvExpList.rv?currentPage=1" style="font-size: 18px;">더보기+</a>
@@ -107,52 +103,30 @@ button:hover{cursor:pointer}
 	                <br clear="both">
 	                <div class="reviewDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/review_icon.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/review_icon.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>최근등록후기</p>
 	                        <span style="float:right; margin-right:10px;">
-	                            <a href="#" style="font-size: 18px;">더보기+</a>
+	                            <a href="reviewList.re?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
 	                    <div style="float: left;">
-	                        <table class="reviewTb">
+	                        <table class="reviewTb" cellpadding="0" cellspacing="0">
 	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
-	                            </tr>
-	                            <tr class="reviewTr">
-	                                <td class="reviewCon">최고에요! 주인분이 너무 친철하시고ddddddddddddddddddd</td>
-	                                <td>별점(5.0)</td>
-	                                <td>04-14</td>
+	                            
 	                            </tr>
 	                        </table>
 	                    </div>
 	                </div>
 	                <div class="noticeDiv">
 	                    <div class="divTitle">
-	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/notice_icon.jpg" width="24px"height="24px" style="float:left">
+	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/notice_icon.jpg"  style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>공지사항</p>
 	                        <span style="float:right; margin-right:10px;">
 	                            <a href="pNoticeList.bo?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
 	                    <div>
-	                        <table class="noticeTb">
+	                        <table class="noticeTb" cellpadding="0" cellspacing="0">
 	                        <tbody>
 	                        	
 	                        </tbody>
@@ -165,8 +139,51 @@ button:hover{cursor:pointer}
     </div>
  <script>
  	$(function(){
+ 		//후기
  		$.ajax({
- 			url:"pNoticeListDashboard.bo",
+ 			url:"reviewListDashboard.bo",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var list = result.list;
+ 				
+ 				console.log(result);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='2' style='text-align:center'>후기가 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					
+ 					for(var i in list){
+ 						var start = list[i].reviewDate;
+ 								content +=  "<tr>" +
+ 											"<td style='display:none'>" + list[i].reNo + "</td>" +
+ 											"<td style='display:none'>" + list[i].rpNo + "</td>" +
+ 										 	"<td style='width:335px'class='reviewCon'>" + list[i].reContent + "</td>" +
+ 										 	"<td>" + start.substring( 0, 10 )+"</td>" +
+ 										"</tr>";
+ 									  }
+ 				}			 		
+ 				
+ 				$(".reviewTb tbody").html(content);
+ 			
+
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+	$(document).on('click', ".reviewTb tbody tr", function(){
+		location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
+		
+	});
+ 		
+ 		//공지사항
+ 		$.ajax({
+ 			url:"noticeListDashboard.bo",
  			data:{currentPage:1 },
  			type:"post",
  			success:function(result){
@@ -182,12 +199,11 @@ button:hover{cursor:pointer}
  							   	"</tr>";
  					
  				}else{
- 					
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
- 										 	"<td>" + list[i].noticeTitle + "</td>" +
- 										 	"<td>" +  list[i].noticeDate + "</td>" +
+ 										 	"<td width='80%' class='reviewCon'>" + list[i].noticeTitle + "</td>" +
+ 										 	"<td width='20%'>" + start.substring( 0, 5)+"일</td>" +
  										"</tr>";
  									  }
  				}			 		
@@ -221,19 +237,19 @@ button:hover{cursor:pointer}
  				}else{
  					var arr = list;
  					
- 					arr.slice(0, 6);
+ 					var temp = arr.slice(0, 6);
  					
- 					for(var i in arr){
+ 					for(var i in temp){
  						var start = list[i].expDateUser;
  						content +=  "<tr>" +
 					 	"<td>" + list[i].epNo + "</td>" +
 					 	"<td>" + list[i].userName +"</td>" + 
 					 	"<td>" + start.substr(0,10) +"</td>" +
 					 	"<td>" +  list[i].expTitle + "</td>" +
-					 	"<td>예약완료</td>" +
+					 	"<td>예약확정</td>" +
 					 	"</tr>";
- 									  }
- 					}	 		
+ 					}
+ 				}	 		
  				
  				$("#expReservationTb tbody").html(content);
  			
@@ -243,7 +259,48 @@ button:hover{cursor:pointer}
  		}
  	 });
 
- 	
+ 		//숙소예약
+ 		$.ajax({
+ 			url:"dashboardRoomList.rv",
+ 			data:{currentPage:1 },
+ 			type:"post",
+ 			success:function(result){
+ 				var pi = result.pi;
+ 				var list = result.list;
+ 				
+ 				console.log(list);
+ 				
+ 				var content = "";
+ 				if(list.length == 0){
+ 						
+ 					 content += '<tr>' +
+ 							   		"<td colspan='5' style='text-align:center'>예약목록이 없습니다.</td>" +
+ 							   	"</tr>";
+ 					
+ 				}else{
+ 					var temp2 = list.slice(0, 6);
+ 					
+ 					for(var i in temp2){
+ 						var start = list[i].startDays;
+ 						var end = list[i].endDays;
+ 							content +=  "<tr>" +
+ 										 	"<td>" + list[i].rpNo + "</td>" +
+ 										 	"<td>" + list[i].userName +"</td>" + 
+ 										 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
+ 										 	"<td>" +  list[i].roomsTitle + "</td>" +
+ 										 	"<td>예약확정</td>" +
+ 										"</tr>";
+ 									  }
+ 					}	 		
+ 				
+ 				$("#roomReservationTb tbody").html(content);
+ 			
+
+ 		},error:function(){
+ 			console.log("통신실패!!");
+ 		}
+ 	 });
+
  	});
  </script>
 <script>
