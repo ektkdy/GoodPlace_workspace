@@ -295,7 +295,7 @@
             <div style="float:unset; width:100%; padding:30px 30px 12px 30px;">
                 <p style="position:absolute;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;해당 내용으로 예약하시겠습니까?</p>
                 <p style="position:absolute; margin-top:40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확인버튼을 누르면 예약이 진행됩니다.</p>
-                    <button style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
+                    <button id="okay" style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
                     <button id="closeReceipt" style="width:80px; height:40px; position:absolute; z-index:4; left:240px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle1">취소</button>
             </div>
 
@@ -483,8 +483,8 @@
         
      	// 예약하기 클릭시 체험결제 페이지로 이동
     	$(function(){
-    		$("#bookIt #bookItButton").click(function(){
-    			$("#payExp").submit();
+    		$("#okay").click(function(){
+				$("#payExp").submit();
     		});
     	});
     </script>

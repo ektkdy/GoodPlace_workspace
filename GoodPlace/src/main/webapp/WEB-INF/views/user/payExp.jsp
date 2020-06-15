@@ -87,7 +87,7 @@
                     <div style="width:46%; height:180px; padding:10px 0 0 16px; ">
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ exp.expTitle }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.startTimeString } (소요시간 : ${ exp.useTime }시간)</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.myClassStartTime } (소요시간 : ${ exp.useTime }시간)</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.people }명</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price }원</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price * expPay.people }원</p3>
@@ -222,7 +222,7 @@
                pg : 'inicis', // version 1.1.0부터 지원.
                pay_method : 'card',
                merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
-               name : '주문명:${  }',               // 주문명
+               name : '주문명:${ exp.expTitle }',               // 주문명
                amount : 100,                              // 가격
                buyer_email : '${ loginUser.email }',
                buyer_name : '${ loginUser.userName }',
