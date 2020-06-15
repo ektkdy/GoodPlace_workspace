@@ -624,7 +624,7 @@ public class BoardController {
     //------------------------------------------- 파트너 공지사항 끝
     
     
-    // 사용자 FAQ 시작 -------------------------------------------------------------------------
+    // 진아 시작 -------------------------------------------------------------------------
     // Page_faq.jsp : get latest 3 faqTitle per faqCategory
     @RequestMapping("faq.bo")
     public ModelAndView selectFaqList(ModelAndView mv){
@@ -672,6 +672,22 @@ public class BoardController {
     	
     }
     
+    @RequestMapping("agreement.bo")
+    public String showAgreement() {
+    	return "user/agreement";
+    }
+    
+    @RequestMapping("personalInfoPolicy.bo")
+    public String showPersonalInfoPolicy() {
+    	return "user/personalInfoPolicy";
+    }
+    
+    @RequestMapping("refundPolicy.bo")
+    public String showRefundPolicy() {
+    	return "user/refundPolicy";
+    }
+    
+    // 진아 끝 -------------------------------------------------------------------------   
     
     @RequestMapping("reviewList.re")
     public String reviewList(int currentPage, String status, Model model, HttpSession session) {

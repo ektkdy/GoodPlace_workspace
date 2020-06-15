@@ -8,12 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숙소검색</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/mainPage/jquery.bxslider.css">
-    <!-- 슬라이더 버튼들 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <!-- 슬라이더를 생성하는 부분 -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.bxslider.js"></script>
+    
     <style>
         /* content 시작*/
         #content{
