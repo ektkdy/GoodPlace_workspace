@@ -11,6 +11,7 @@
 
 <style>
 button:hover{cursor:pointer}
+table tr:hover{background:#f1f1f1; cursor:pointer}
 
 /*페이징바*/
     #pagingArea{width: 980px; text-align: right;}
@@ -109,7 +110,7 @@ button:hover{cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div style="float: left;">
-	                        <table class="reviewTb">
+	                        <table class="reviewTb" cellpadding="0" cellspacing="0">
 	                            <tr class="reviewTr">
 	                            
 	                            </tr>
@@ -125,7 +126,7 @@ button:hover{cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div>
-	                        <table class="noticeTb">
+	                        <table class="noticeTb" cellpadding="0" cellspacing="0">
 	                        <tbody>
 	                        	
 	                        </tbody>
@@ -152,7 +153,7 @@ button:hover{cursor:pointer}
  				if(list.length == 0){
  						
  					 content += '<tr>' +
- 							   		"<td colspan='2' style='text-align:center'>공지사항이 없습니다.</td>" +
+ 							   		"<td colspan='2' style='text-align:center'>후기가 없습니다.</td>" +
  							   	"</tr>";
  					
  				}else{
@@ -160,7 +161,9 @@ button:hover{cursor:pointer}
  					for(var i in list){
  						var start = list[i].reviewDate;
  								content +=  "<tr>" +
- 										 	"<td>" + list[i].reContent + "</td>" +
+ 											"<td style='display:none'>" + list[i].reNo + "</td>" +
+ 											"<td style='display:none'>" + list[i].rpNo + "</td>" +
+ 										 	"<td style='width:335px'class='reviewCon'>" + list[i].reContent + "</td>" +
  										 	"<td>" + start.substring( 0, 10 )+"</td>" +
  										"</tr>";
  									  }
@@ -173,7 +176,10 @@ button:hover{cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
- 		
+	$(document).on('click', ".reviewTb tbody tr", function(){
+		location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
+		
+	});
  		
  		//공지사항
  		$.ajax({
@@ -196,7 +202,7 @@ button:hover{cursor:pointer}
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
- 										 	"<td width='80%'>" + list[i].noticeTitle + "</td>" +
+ 										 	"<td width='80%' class='reviewCon'>" + list[i].noticeTitle + "</td>" +
  										 	"<td width='20%'>" + start.substring( 0, 5)+"일</td>" +
  										"</tr>";
  									  }

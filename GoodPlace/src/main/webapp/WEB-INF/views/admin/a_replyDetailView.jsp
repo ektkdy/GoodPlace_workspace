@@ -40,22 +40,31 @@ aReplyDetail.bo
                         <thead>
                             <tr class="pdTop">
                                 <td rowspan="2" style="width:100px; ">
-                                    <div align="center"><img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${b.changeName}" width="50px" height="50px"></div>
+                                    <div align="center">
+	                                  	<c:choose>
+				                    		<c:when test="${empty r.changeName }">
+				                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/default.jpg"width="60px" style="border-radius:25px" >
+				                        	</c:when>
+				                        	<c:otherwise>
+				                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${r.changeName}">
+				                        	</c:otherwise>
+				                        </c:choose>
+                                    </div>
                                 </td>
-                                <td width="250">예약자명 : ${ b.userName }</td>
-                                <td width="300">예약자 평점 : ${ b.score }</td>
-                                <td width="250">연령대 : ${ b.age }대</td>
+                                <td width="250">예약자명 : ${ r.userName }</td>
+                                <td width="300">예약자 평점 : ${ r.score }</td>
+                                <td width="250">연령대 : ${ r.age }대</td>
                             </tr>
                             <tr class="pdBot">
-                                <td>여행일 : ${ b.endDays }</td>
-                                <td>후기작성일 : ${ b.reviewDate }</td>
-                                <td>여행목적 : ${ b.concept }</td>
+                                <td>여행일 : ${ r.endDays }</td>
+                                <td>후기작성일 : ${ r.reviewDate }</td>
+                                <td>여행목적 : ${ r.concept }</td>
                             </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td colspan="4">
-                                <div class="reply_con">${ b.reContent }</div>
+                                <div class="reply_con">${ r.reContent }</div>
                             </td>
                         </tr>
                     </tbody>
@@ -65,7 +74,7 @@ aReplyDetail.bo
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <textarea type="text" class="replyAnswer" rows="10" readonly>${ b.reply }</textarea>
+                                <textarea type="text" class="replyAnswer" rows="10" readonly>${ r.reply }</textarea>
                             </td>
                         </tr>
                     </tfoot>

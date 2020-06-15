@@ -169,14 +169,12 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 	@Override
 	public int expSearchCount(Experience e) {
-		// TODO Auto-generated method stub
-		return 0;
+		return expDao.expSearchCount(sqlSession, e);
 	}
 
 	@Override
 	public ArrayList<Experience> expSearchList(PageInfo pi, Experience e) {
-		// TODO Auto-generated method stub
-		return null;
+		return expDao.expSearchList(sqlSession, pi, e);
 	}
 
 	@Override

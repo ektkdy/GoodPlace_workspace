@@ -126,7 +126,7 @@
                                 
                             <tr>
                                 <th rowspan="4">* 객실정보</th>
-                                <td>침대수 : <strong>${ r.bedCount }</strong></td>
+                                <td style="width:300px;">침대수 : <strong>${ r.bedCount }</strong></td>
                                 <td>샤워실수 : <strong>${ r.bathCount }</strong></td>
                             </tr>
                             <tr>
@@ -153,7 +153,7 @@
                             </tr>
                             <tr>
                                 <th rowspan="2">포함사항</th>
-                                <td>
+                                <td style="width:350px;">
                                     <input type="checkbox" id="includeService1" name="includeService" value="${r.meal}">조식 &nbsp; &nbsp;
                                     <input type="checkbox" id="includeService2" name="includeService" value="${r.meal}">중식 &nbsp; &nbsp;
                                     <input type="checkbox" id="includeService3" name="includeService" value="${r.meal}">석식 &nbsp; &nbsp;
@@ -214,6 +214,7 @@
 			case "조식" : $("#includeService1").prop("checked", true); break;
 			case "중식" : $("#includeService2").prop("checked", true); break;
 			case "석식" : $("#includeService3").prop("checked", true); break;
+			case "없음" : $("#includeService4").prop("checked", true); break;
 			}
 		});
 	</script>

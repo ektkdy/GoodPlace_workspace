@@ -163,7 +163,7 @@ body{box-sizing:border-box;}
             <!--  //답글전  -->
             <!-- 답글후 -->
             <section id="content2" style="flaot:left">
-            <div class="sitemap" style="float:left; position:absolute; top:70px; right:60px">
+            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1125px">
                 <a href="#">
                     <span style="height: 30px;">HOME</span>&gt;
                 </a>

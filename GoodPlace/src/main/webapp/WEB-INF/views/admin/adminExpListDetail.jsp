@@ -139,9 +139,18 @@
                     <table class="expEnroll_tb">
                         <tr>
                             <th>* 활동강도</th>
-                            <td>
-                                <strong>${ e.activity }</strong>
-                            </td>
+                            <c:if test="${ e.activity eq 1 }">
+                            	<td><strong>가벼움</strong></td>
+                            </c:if>
+                            <c:if test="${ e.activity eq 2 }">
+                            	<td><strong>보통</strong></td>
+                            </c:if>
+                            <c:if test="${ e.activity eq 3 }">
+                            	<td><strong>격렬한</strong></td>
+                            </c:if>
+                            <c:if test="${ e.activity eq 4 }">
+                            	<td><strong>익스트림</strong></td>
+                            </c:if>
                         </tr>
                         <tr>
                             <th>* 최대 인원수</th>
@@ -159,9 +168,7 @@
                         </tr>
                         <tr>
                             <th>* 게스트 준비물</th>
-                            <td>
-                                ${ e.supplies }
-                            </td>
+                            <td><strong>${ e.supplies }</strong></td>
                         </tr>
                         <tr>
                             <th>* 대표 사진</th>

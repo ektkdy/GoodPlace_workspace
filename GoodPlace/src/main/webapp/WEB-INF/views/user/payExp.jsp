@@ -63,7 +63,7 @@
 
     <!-- content -->
     <div id="content">
-        <div style="width:100%; height:140px;" class="alignCenter backgroundGray">
+        <div style="width:100%; height:140px;" class="alignCenter">
             <h1 style="font-weight:4000; font-size:2.5em;  padding-top:40px;">예약결제</h1>
         </div>
         
@@ -87,7 +87,7 @@
                     <div style="width:46%; height:180px; padding:10px 0 0 16px; ">
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ exp.expTitle }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.startTimeString } (소요시간 : ${ exp.useTime }시간)</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.myClassStartTime } (소요시간 : ${ exp.useTime }시간)</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.people }명</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price }원</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price * expPay.people }원</p3>
@@ -218,37 +218,45 @@
         
         // 결제하기 기능
         $('#payIt').click(function(){
-          IMP.request_pay({
-               pg : 'inicis', // version 1.1.0부터 지원.
-               pay_method : 'card',
-               merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
-               name : '주문명:${  }',               // 주문명
-               amount : 100,                              // 가격
-               buyer_email : '${ loginUser.email }',
-               buyer_name : '${ loginUser.userName }',
-               buyer_tel : '${ loginUser.phone }',
-               buyer_addr : '',
-               buyer_postcode : '123-456',
-               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-           }, function(rsp) {
-               if ( rsp.success ) {
-                   var msg = '결제가 완료되었습니다.';
-                   msg += '고유ID : ' + rsp.imp_uid;
-                   msg += '상점 거래ID : ' + rsp.merchant_uid;
-                   msg += '결제 금액 : ' + rsp.paid_amount;
-                   msg += '카드 승인번호 : ' + rsp.apply_num;
-                   
-                   $('#payNo').val(rsp.imp_uid);
-                   $('#reserveNo').val('R-' +  rsp.imp_uid);
-                   
-                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
-                   $("#resultForm").submit();
-               } else {
-                   var msg = '결제에 실패하였습니다.';
-                   msg += '에러내용 : ' + rsp.error_msg;
-               }
-               alert(msg);
-           });
+        	
+        	// 동의 여부 확인
+        	if($("input:checkbox[name=clause]").is(":checked") == false){
+        		alert("동의여부를 체크해주세요.");
+        		$("input:checkbox[name=clause]").focus();
+        		
+        	}else{
+        		IMP.request_pay({
+                    pg : 'inicis', // version 1.1.0부터 지원.
+                    pay_method : 'card',
+                    merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
+                    name : '주문명:${ exp.expTitle }',               // 주문명
+                    amount : 100,                              // 가격
+                    buyer_email : '${ loginUser.email }',
+                    buyer_name : '${ loginUser.userName }',
+                    buyer_tel : '${ loginUser.phone }',
+                    buyer_addr : '',
+                    buyer_postcode : '123-456',
+                    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+                }, function(rsp) {
+                    if ( rsp.success ) {
+                        var msg = '결제가 완료되었습니다.';
+                        msg += '고유ID : ' + rsp.imp_uid;
+                        msg += '상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        $('#payNo').val(rsp.imp_uid);
+                        $('#reserveNo').val('R-' +  rsp.imp_uid);
+                        
+                        // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
+                        $("#resultForm").submit();
+                    } else {
+                        var msg = '결제에 실패하였습니다.';
+                        msg += '에러내용 : ' + rsp.error_msg;
+                    }
+                    alert(msg);
+                });
+        	}
        });
         
         

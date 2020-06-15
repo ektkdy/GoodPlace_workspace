@@ -16,7 +16,7 @@
             width: 1200px;
             margin: 0 auto;
             height: auto;
-        }
+        }		
         #content>div div{
             float:left; 
             box-sizing: border-box;
@@ -54,7 +54,7 @@
 
     <!-- content -->
     <div id="content">
-            <div style="width:100%; height:140px;" class="alignCenter backgroundGray">
+            <div style="width:100%; height:140px;" class="alignCenter">
                 <h1 style="font-weight:4000; font-size:2.5em; padding-top:40px;">자주묻는 질문 FAQ</h1>
             </div>
            
