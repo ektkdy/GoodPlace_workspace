@@ -688,7 +688,13 @@ public class RoomController {
     	return new Gson().toJson(popList);
     }
 	
-	
+	@RequestMapping("reviewInq.ro")
+	public String reviewInq(int reNo, Model model) {
+		Board review = bService.selectReviewOne(reNo);
+		
+		model.addAttribute("review", review);
+		return "user/myInqueryEnroll";
+	}
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
