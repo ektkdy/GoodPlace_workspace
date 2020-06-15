@@ -144,7 +144,9 @@ public interface BoardService {
 	
 	// 3. 숙소별  REVIEW 갯수 조회 - 진아
 	int reviewListCount(int roNo);
-
+	
+	// 4. 리뷰 정보 조회
+	Board selectReviewOne(int reNo);
 	// ------------------------------------------------------ 
 	
 	//1-1.파트너  리뷰 (답글전) 리스트 조회용 서비스 - 기하
