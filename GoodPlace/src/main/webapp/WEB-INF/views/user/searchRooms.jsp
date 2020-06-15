@@ -148,6 +148,10 @@
             border:1px solid #dcdcdc;
         }
         /* 페이징바 끝 */
+        
+        a{
+        	color:black;
+        }
         /* content 끝*/
 
     </style>
@@ -311,9 +315,9 @@
 
 	           	<div class="rooms power bottomArea">
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
-			               	<li class="roomDetail">
-			                    <a href="roomDe.ro?roNo=${ roomList.roNo }">
-			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
+			               	<li class="roomDetail" style="margin:0 20px 20px 20px;">
+			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }">
+			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
