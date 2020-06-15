@@ -1,6 +1,5 @@
 package com.kh.goodplace.board.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -26,8 +24,10 @@ import com.kh.goodplace.common.model.vo.WishList;
 import com.kh.goodplace.common.template.Pagination;
 import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.ExpPay;
+import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
 import com.kh.goodplace.room.model.service.RoomService;
+import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
 
 @Controller
@@ -107,6 +107,18 @@ public class BoardController {
     public String inQuiryDt(int inNo,HttpSession session, Model model) {
     	
     	Board b = bService.selectInquiryDt(inNo);
+    	Room result1 = null; 
+    	Experience result2 = null;
+    	Board result3 = null;
+    	
+    	if(b.getRoNo() != 0) {
+    		result1 = rService.selectRoom(b.getRoNo());
+    	}else if(b.getExNo() != 0) {
+    		result2 = expService.selectExpOne(b.getExNo());
+    	}else if(b.getReNo() != 0) {
+    		result3 = bService.selectReview(b);
+    	}
+    	
     	
     	model.addAttribute("b", b);
     	return "user/myInqueryEnrollDetail";
