@@ -293,5 +293,10 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectRoomPayList(sqlSession, m);
 	}
 
+	@Override
+	public ArrayList<Room> selectRoomList() {
+		return rDao.selectRoomList(sqlSession);
+	}
+
 	
 }

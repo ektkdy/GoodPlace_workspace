@@ -402,7 +402,7 @@
 				$.ajax({
 					// ajax1.do?name=홍길동&age=20
 					url:"selectTutor",
-					data:{email:"ektkdy@naver.com",
+					data:{email:"admin@goodplace.com",
 						  loginEmail : "${loginUser.email}"},		// 관리자 이메일
 					type:"post",
 					success:function(tutor){				// 관리자 이메일 정보를 찾아 가져옴
@@ -430,7 +430,7 @@
 			if(msg != ""){
 				message = {};
 			  	message.messageContent = $("#message").val();
-		  	  	message.messageReceiver = "ektkdy@naver.com";	// 관리자 이메일
+		  	  	message.messageReceiver = "admin@goodplace.com";	// 관리자 이메일
 		  	  	message.messageSender = '${loginUser.email}';
 		  	  	message.class_class_id = 1;					 	// 사용자가 보낸경우 1
 		  	  	var Now = new Date();						 	// Now --> 메세지를 보낼때마다 현재시간으로 초기화 됨

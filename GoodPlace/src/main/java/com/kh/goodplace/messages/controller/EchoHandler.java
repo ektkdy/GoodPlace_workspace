@@ -96,7 +96,7 @@ public class EchoHandler extends TextWebSocketHandler{
 	    	croom = cDao.selectChatRoom(roomVO); // 채팅방 정보 가져옴
 	    }
 	    */
-	    if(roomVO.getTutorEmail().equals("ektkdy@naver.com")) {
+	    if(roomVO.getTutorEmail().equals("admin@goodplace.com")) {
 	    	croom = cDao.selectChatRoom(roomVO);
 	    } else {
 	    	croom = cDao.selectpChatRoom(roomVO);
@@ -114,7 +114,7 @@ public class EchoHandler extends TextWebSocketHandler{
 	    
 	    int result = 0;
 	    System.out.println("messageVO : " + messageVO);
-	    if(messageVO.getMessageReceiver().equals("ektkdy@naver.com")) {	// 관리자에 대한 채팅내용일 경우
+	    if(messageVO.getMessageReceiver().equals("admin@goodplace.com")) {	// 관리자에 대한 채팅내용일 경우
 	    	result = cDao.insertMessage(messageVO);					// MESSAGE테이블에 채팅 입력
 	    	
 	    } else {														// 파트너와 숙소 사용자 간의 채팅일 경우

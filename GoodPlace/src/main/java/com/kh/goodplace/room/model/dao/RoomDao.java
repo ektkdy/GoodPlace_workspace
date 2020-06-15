@@ -218,6 +218,9 @@ public class RoomDao {
 		
 	}
 	
+	public ArrayList<Room> selectRoomList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomList");
+	}
 	
 	
 	// --------- 숙소관리 시작 -----------------
