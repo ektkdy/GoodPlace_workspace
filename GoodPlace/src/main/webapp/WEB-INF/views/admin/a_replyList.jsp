@@ -45,7 +45,19 @@
                     <c:forEach items="${ list }" var="r">
 	                    <tr>
 	                    	<td style="display:none">${ r.reNo }</td>
-	                        <td width="80px"><img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${r.changeName}"></td>
+	                    	<td style="display:none">${ r.rpNo }</td>
+	                        <c:choose>
+	                    		<c:when test="${empty r.changeName }">
+	                        		<td width="80px">
+	                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/default.jpg">
+	                        		</td>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<td width="80px">
+	                        			<img src="${ pageContext.servletContext.contextPath }/resources/uploadFiles/userProfile/${r.changeName}">
+	                        		</td>
+	                        	</c:otherwise>
+	                        </c:choose>
 	                        <td width="80px">${ r.userName }</td>
 	                        <td width="400px">${ r.reTitle }</td>
 	                        <c:choose>
@@ -74,7 +86,7 @@
 	            	$(function(){
 	            		
 	            		    $("#replyList tbody tr").click(function(){
-	            			location.href="aReplyDetail.bo?reNo=" +$(this).children().eq(0).html();
+	            			location.href="aReplyDetail.bo?reNo=" +$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 	            		});  
 	            		    
 	            	});

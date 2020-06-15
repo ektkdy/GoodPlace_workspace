@@ -544,24 +544,19 @@ public class BoardController {
     }
     
     @RequestMapping("aReplyDetail.bo")
-    public ModelAndView aReplyDetail(int reNo, ModelAndView mv) {
+    public String aReplyDetail(int reNo, int rpNo, Model model) {
     	
     	
-    	Board b = bService.aReplyDetail(reNo);
-    	
-        if(b != null)
-        { // 게시글 상세조회 성공
-            
-            mv.addObject("b", b);
-            mv.setViewName("admin/a_replyDetailView");
-        }
-        else
-        { // 게시글 상세조회 실패
-            mv.addObject("msg", "게시글 상세조회 실패!");
-            mv.setViewName("common/errorPage");
-        }
+        Board b = new Board();
         
-        return mv;
+        b.setReNo(reNo);
+        b.setRpNo(rpNo);
+              
+        Board r = bService.selectReview(b);
+         
+        model.addAttribute("r", r);
+        
+        return "admin/a_replyDetailView";
     }
     	
     
