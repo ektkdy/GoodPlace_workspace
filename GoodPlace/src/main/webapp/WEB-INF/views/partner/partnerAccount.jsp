@@ -67,7 +67,7 @@
                 <form action="updateAccount.me" method="post" enctype="multipart/form-data">
 	            <div id="stepOne">
 	                <div id="backgroundImg">
-	                    <img src="" width="100%" height="160px">
+	                    <img src="${pageContext.request.contextPath}/resources/images/partner/profileBackImg1.jpg" width="100%" height="160px">
 	                </div>
 	                <div id="personalImg">
 	                    <img id="profileImg" src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ loginUser.changeName }" width="100px" height="100px" style="border-radius: 50px;" required>

@@ -1,13 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerReplyDetailView.css" />
-
+<style>
+	sitemap a{text-decoration:none; color:#333}
+	a span{ color:#333}
+	
+	.replyHead{
+		background:#c1d9f0;
+		padding-top:15px; 
+		padding-bottom:10px; 
+		font-weight: 500;
+		font-size:16px;
+		padding-left:10px
+	}
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -19,13 +33,13 @@
             </div>
             <div class="sitemap">
                 <a href="#">
-                    <span style="height: 30px;">HOME</span>&gt;
+                    <span style="height: 30px;">HOME&gt;</span>
                 </a>
                 <a href="#">
-                    <span style="height: 30px;">후기관리</span>&gt;
+                    <span style="height: 30px;">후기관리&gt;</span>
                 </a>
                 <a href="#">
-                    <span style="height: 30px;">답변 전 후기</span>&gt;
+                    <span style="height: 30px;">답변 전 후기&gt;</span>
                 </a>
                 <a href="#">
                     <span style="height: 30px;">답변 작성</span>
@@ -53,14 +67,15 @@
 					                        </c:choose>
 	                                    </div>
 	                                </td>
-	                                <td width="250">여행자 : ${r.userName}</td>
-	                                <td width="300">예약자 평점 : ${r.score }</td>
-	                                <td width="250" style="border-right:1px solid #bebebe">연령대 : ${r.age }대</td>
+	                                <td width="250">&#187; 여행자 : ${r.userName} 님</td>
+	                                <td width="300">&#187; 예약자 평점 : ${r.score } 점</td>
+	                                <td width="250" style="border-right:1px solid #bebebe">&#187; 연령대 : ${r.age }대</td>
 	                            </tr>
 	                            <tr class="pdBot">
-	                                <td>여행일 : ${r.endDays}</td>
-	                                <td>후기작성일 : ${r.reviewDate}</td>
-	                                <td style="border-right:1px solid #bebebe">여행목적 : ${r.concept}</td>
+	                                <td>&#187; 여행일 : ${r.endDays}</td>
+	                                <c:set var="TextValue" value="${r.reviewDate }"/>
+					                 <td>&#187; 후기 작성일 : ${fn:substring(TextValue,0,10) }</td>
+	                                <td style="border-right:1px solid #bebebe">&#187; 여행목적 : ${r.concept}</td>
 	                            </tr>
 	                    </thead>
 	                    <tbody>
@@ -72,7 +87,7 @@
 	                    </tbody>
 	                    <tfoot>
 	                        <tr>
-	                            <td colspan="4" style="padding-top:15px; padding-bottom:10px; font-weight: 500;">답글등록</td>
+	                            <td colspan="4" class="replyHead" style="">&#187; 답글등록</td>
 	                        </tr>
 	                        <c:choose>
 		                        <c:when test="${empty r.reply }">
@@ -140,7 +155,7 @@ $('.blue_btn').click(function(){
                 // 2. 추가적인 속성들 부여 가능
                 // 간단하게 사이즈 조정(width, height) / 미리보기 값(placeholder)
                 $('#summernote').summernote({
-                //placeholder:" ",
+                placeholder:"성의있는 답변을 남겨주세요:)",
                 tabsize: 2,
                     height: 200,
                     width:980/*

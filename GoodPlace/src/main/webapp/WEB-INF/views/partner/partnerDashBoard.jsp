@@ -19,6 +19,25 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
     #pagingArea a:hover{color: white; background-color: #34538a;}
     
     #noticeList tr:hover{cursor:pointer;}
+    
+.dash_img{
+    padding-top:35px
+    }
+    .dash_amount{
+    font-size:20px;
+    padding-top:10px
+    }
+    .amount{
+    font-size:18px; 
+    font-weight:600
+    }
+    .imgDiv{
+    float:left;  
+    width:32.5%;
+    height:77.5%; 
+    margin-left:4px;
+    text-align:center;
+    }    
 </style>
 </head>
 <body>
@@ -45,7 +64,34 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
                     <div class="reservationArea" style="float:left; margin-top: 20px;">
 	                    <div class="divTitle" style="float: left;">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon1.png"  style="float:left; padding-left:10px; vertical-align:bottom">
-	                        <p>예약현황</p><span style="font-size: 15px;">&nbsp;|&nbsp;새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
+	                        <p>파트너 현황</p><span style="font-size: 15px;">&nbsp;|&nbsp;새로운 정보가 실시간으로 바뀌여 보여집니다.</span>
+	                    </div>
+	                    <div class="imgDiv" >
+	                    	<div style="float:left; height: 65%;  width:100%; text-align:center;">
+	                    		<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/building2.png"  width="70px" height="70px" class="dash_img">
+	                    	</div>
+	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
+	                    		<p style="font-size:15px; font-weigh:500">새로운 숙소 예약 내역<p>
+	                    		 <p class="dash_amount"><a href="#"><span class="amount">5</span>건</a></p>
+	                    	</div>
+	                    </div>
+	                    <div class="imgDiv">
+	                    	<div style="float:left; height: 65%;  width:100%">
+	                    		<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp2.png" width="70px" height="70px" class="dash_img">
+	                    	</div>
+	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
+	                    		<p style="font-size:15px; font-weigh:500">새로운 체험 예약 내역<p>
+	                    		  <p class="dash_amount"><a href="#"><span class="amount">10</span>건</a></p>
+	                    	</div>
+	                    </div>
+	                    <div class="imgDiv" >
+	                    	<div style="float:left; height: 65%;  width:100%">
+	                    		<img src="" width="70px" height="70px" class="dash_img">
+	                    	</div>
+	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
+	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
+	                    		 <p class="dash_amount"><a href="#"><span class="amount">2,500,000</span>원</a></p>
+	                    	</div>
 	                    </div>
 	                </div>
 	                <div class="calendar" style="margin-top:20px">
@@ -110,7 +156,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div style="float: left;">
-	                        <table class="reviewTb" cellpadding="0" cellspacing="0">
+	                        <table class="reviewTb" cellpadding="0" cellspacing="0" style="table-layout: fixed">
 	                            <tr class="reviewTr">
 	                            
 	                            </tr>
@@ -163,8 +209,8 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  								content +=  "<tr>" +
  											"<td style='display:none'>" + list[i].reNo + "</td>" +
  											"<td style='display:none'>" + list[i].rpNo + "</td>" +
- 										 	"<td style='width:335px'class='reviewCon'>" + list[i].reContent + "</td>" +
- 										 	"<td>" + start.substring( 0, 10 )+"</td>" +
+ 										 	"<td width='70%'style=' max-height:0.8em; line-height:1.5em; display: inline-block;max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;' id='cutCon'>" + list[i].reContent + "</td>" +
+ 										 	"<td width='20%' style='text-align:right'>" + start.substring( 0, 10 )+"</td>" +
  										"</tr>";
  									  }
  				}			 		
@@ -176,6 +222,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
 	$(document).on('click', ".reviewTb tbody tr", function(){
 		location.href="reviewDetailView.re?reNo="+$(this).children().eq(0).html()+"&rpNo="+$(this).children().eq(1).html();
 		
@@ -202,6 +249,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  					for(var i in list){
  						var start = list[i].noticeDate;
  								content +=  "<tr>" +
+ 											"<td style='display:none'>" + list[i].noNo + "</td>" + 
  										 	"<td width='80%' class='reviewCon'>" + list[i].noticeTitle + "</td>" +
  										 	"<td width='20%'>" + start.substring( 0, 5)+"일</td>" +
  										"</tr>";
@@ -215,6 +263,11 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
+ 		$(document).on('click', ".noticeTb tbody tr", function(){
+ 			location.href="pNoticeListDetail.bo?noNo="+$(this).children().eq(0).text();
+ 			
+ 		});
  		
  	//체험예약
  		$.ajax({
@@ -258,6 +311,11 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 	
+ 		$(document).on('click', "#expReservationTb tbody tr", function(){
+ 			location.href="reservationExpDetailView.rv?epNo="+$(this).children().eq(0).html();
+ 			
+ 		});
 
  		//숙소예약
  		$.ajax({
@@ -300,6 +358,12 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			console.log("통신실패!!");
  		}
  	 });
+ 		
+ 		$(document).on('click', "#roomReservationTb tbody tr", function(){
+ 			location.href="reservationRoomDetailView.rv?rpNo="+$(this).children().eq(0).html();
+ 			
+ 		});
+
 
  	});
  </script>

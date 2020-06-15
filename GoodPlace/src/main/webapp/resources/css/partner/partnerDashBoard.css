@@ -12,5 +12,5 @@
 .reviewTb td{display: inline-block; padding:12px 15px; font-size:13px}
 .reviewCon{display: inline-block; width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .noticeDiv{float:left; font-size:13px; border:1px solid #bebebe; width:470px; height: 300px; margin-top:30px; margin-left:28px}
-.noticeTb{width:100%}
+.noticeTb{width:100%; margin-bottom:50px}
 .noticeTb td{padding:6px 15px; height:inherit}
