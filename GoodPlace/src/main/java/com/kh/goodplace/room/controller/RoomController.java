@@ -809,13 +809,13 @@ public class RoomController {
     	room.setRegion(region);
     	
     	// room 객체에 상세이미지 set 
-    	if(at != null) {
-    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
-    		room.setDetailImg1(at.get(0).getChangeName());
-    		room.setDetailImg2(at.get(1).getChangeName());
-    		room.setDetailImg3(at.get(2).getChangeName());
-    		room.setDetailImg4(at.get(3).getChangeName());
-    	}
+//    	if(at != null) {
+//    		//System.out.println("숙소의 상세이미지들 조회 됨~!");
+//    		room.setDetailImg1(at.get(0).getChangeName());
+//    		room.setDetailImg2(at.get(1).getChangeName());
+//    		room.setDetailImg3(at.get(2).getChangeName());
+//    		room.setDetailImg4(at.get(3).getChangeName());
+//    	}
     	
     	// room 객체에 파트너정보 set
     	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
@@ -832,6 +832,7 @@ public class RoomController {
     	
     	
     	if(room != null) {
+    		mv.addObject("at", at);
     		mv.addObject("room", room);
     		mv.setViewName("user/roomDetails");
     	}else {

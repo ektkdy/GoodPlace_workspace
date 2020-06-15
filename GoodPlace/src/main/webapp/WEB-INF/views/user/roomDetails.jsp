@@ -144,13 +144,13 @@
 	    <div style="width:70%;">
 	        <!-- Swiper -->
 	        <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
+	        	
 	            <div class="swiper-wrapper">
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg1 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg2 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg3 }" width="100%" height="100%"></div>
-	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.detailImg4 }" width="100%" height="100%"></div>
+	            <c:forEach items="${ at }" var="detailImg" varStatus="status">
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ detailImg.changeName }" width="100%" height="100%"></div>
+	            </c:forEach>
 	            </div>
+	           
 	            <!-- Add Arrows -->
 	            <div class="swiper-button-next"></div>
 	            <div class="swiper-button-prev"></div>

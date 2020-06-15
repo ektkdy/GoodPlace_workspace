@@ -340,11 +340,11 @@
 	        <!-- 페이징 바 -->
 	        <div class="pagingBar">
 	            <button>&lt;</button>&nbsp;
-	            <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
-	            <button>n</button>&nbsp;
+	            <button style="background-color:rgb(24, 76, 136); color:white;">1</button>&nbsp;
+	            <button>2</button>&nbsp;
+	            <button>3</button>&nbsp;
+	            <button>4</button>&nbsp;
+	            <button>5</button>&nbsp;
 	            <button>&gt;</button>
 	        </div>
 	    </div>	
