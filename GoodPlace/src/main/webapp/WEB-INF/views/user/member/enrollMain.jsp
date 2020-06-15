@@ -75,7 +75,13 @@
 	<jsp:include page="../../common/footer.jsp"/>
 	
 	<script type="text/javascript">
-	
+		
+		$(function(){
+			// 수정해야댐
+			$("#kakao-login-btn").attr("src","resources/images/user/KakaoTalk_out.png");
+			$("#kakao-login-btn").attr("onmouseover","this.src='resources/images/user/KakaoTalk_out.png'");
+			$("#kakao-login-btn").attr("onmouseout","this.src='resources/images/user/KakaoTalk_on.png'");
+		});
 	  // input your appkey
 	  Kakao.init('62fda0bf46ca2ad372f7f5e69d04a01e')
 	  Kakao.Auth.createLoginButton({

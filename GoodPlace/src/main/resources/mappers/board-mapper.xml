@@ -126,6 +126,12 @@
 		WHERE RONO = #{roNo}
 	</select>
 	
+	<select id="selectReviewOne" resultMap="reviewResultSet" parameterType="_int">
+		SELECT *
+		FROM REVIEW
+		WHERE RENO = #{reNo}
+	</select>
+	
 	<!-- 진아 범위 끝 -->
 	
 	<!-- 현영  -->

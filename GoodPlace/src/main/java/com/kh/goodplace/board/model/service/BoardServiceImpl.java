@@ -244,6 +244,10 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.reviewListCount(sqlSession, roNo);
 	}
 	
+	@Override
+	public Board selectReviewOne(int reNo) {
+		return bDao.selectReviewOne(sqlSession, reNo);
+	}
 	// ------------------- 파트너 리뷰 ----------------------
 	//답글 전 리뷰 전체 리스트 조회용
 	@Override
@@ -293,6 +297,8 @@ public class BoardServiceImpl implements BoardService {
 	public Board selectInquiryDt(int inNo) {
 		return bDao.selectInquiryDt(sqlSession, inNo);
 	}
+
+
 	
 	
 

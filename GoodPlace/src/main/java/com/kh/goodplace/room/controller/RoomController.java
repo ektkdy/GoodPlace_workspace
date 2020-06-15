@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -688,7 +690,13 @@ public class RoomController {
     	return new Gson().toJson(popList);
     }
 	
-	
+	@RequestMapping("reviewInq.ro")
+	public String reviewInq(int reNo, Model model) {
+		Board review = bService.selectReviewOne(reNo);
+		
+		model.addAttribute("review", review);
+		return "user/myInqueryEnroll";
+	}
 	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
@@ -878,7 +886,14 @@ public class RoomController {
 		//예약관리 첫페이지
 	
 		@RequestMapping("reservationView.rv")
-		public String rvRoomList(Model model) {
+		public String rvRoomList(Model model,HttpSession session) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
+			
+			ArrayList<Room> list = rService.roomReservation(usNo);
+			
+			model.addAttribute("list", list);
+			
 			return "partner/partnerReservationView";
 		}
 
@@ -1095,4 +1110,35 @@ public class RoomController {
 						
 			    return jsonString;
 			}
+			
+			//예약 진행
+			@ResponseBody
+			@RequestMapping(value="dashboardRoomCount.rv", produces="application/json; charset=utf-8")
+			public void dashboardRoomCount(int currentPage, HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {      
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = rService.selectRvRoomListCount(usNo);
+			    new Gson().toJson(listCount, response.getWriter());   
+
+			}
+			
+			
+
+//			//일정관리
+//			@ResponseBody
+//			@RequestMapping(value="roomReservation.da", produces="application/json; charset=utf-8")
+//			public String roomReservation(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {      
+//				
+//				Member loginUser = (Member)session.getAttribute("loginUser");
+//				int usNo = loginUser.getUsNo();
+//				
+//				ArrayList<Room> list = rService.roomReservation(usNo);
+//				
+//			    return new Gson().toJson(list);   
+//
+//			}
+			
+			
 }

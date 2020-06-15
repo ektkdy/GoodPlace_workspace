@@ -171,7 +171,7 @@
 		// 날짜
 		var Now = new Date();
 		// 메시지 전송
-	    let sock = new SockJS("http://localhost:8888/goodplace/echo/");
+	    let sock = new SockJS("http://192.168.30.197:8888/goodplace/echo/");
    		sock.onmessage = onMessage;
    		sock.onclose = onClose;
 		function sendMessage() {

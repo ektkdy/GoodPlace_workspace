@@ -62,7 +62,7 @@ button{
              <br clear="both"><br>
             <div class="con" style="color:#000;">
                 <span id="page_title"><img src="${ pageContext.servletContext.contextPath }/resources/images/partner/homelogo.jpg" style="vertical-align: middle;">
-                	<p class="title_tt">진행중인예약(${pi.listCount +1})</p></span>
+                	<p class="title_tt">진행중인예약(${pi.listCount})</p></span>
                 <br clear="both">
                 <div class="choose_area"style="clear: both;">
                     <select id="roomTitle" class="select_st">

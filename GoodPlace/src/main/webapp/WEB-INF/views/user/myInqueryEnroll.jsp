@@ -138,46 +138,83 @@ section {
 					<thead>
 						<tr>
 							<th width="150px">상담구분</th>
-							<td class="category" colspan="3" width="600px"><input
-								type="radio" name="inqCategory" value="1" selected> 일반문의
-								<input type="radio" name="inqCategory" value="2"> 상품문의 <input
-								type="radio" name="inqCategory" value="3"> 취소, 환불 <input
-								type="radio" name="inqCategory" value="4"> 포인트 <input
-								id="declaration" type="radio" name="inqCategory" value="5">
-								숙소신고 <input id="declaration1" type="radio" name="inqCategory"
-								value="5"> 체험신고</td>
+							<c:choose>
+								<c:when test="${ !empty review }">
+									<td class="category" colspan="3" width="600px" style="padding-left: 20px;">
+										후기신고
+										<input type="hidden" name="inqCategory" value="5">
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td class="category" colspan="3" width="600px">
+										<input type="radio" name="inqCategory" value="1" selected> 일반문의
+										<input type="radio" name="inqCategory" value="2"> 상품문의 <input
+										type="radio" name="inqCategory" value="3"> 취소, 환불 
+										<input type="radio" name="inqCategory" value="4"> 포인트
+										<input id="declaration" type="radio" name="inqCategory" value="5"> 숙소신고 
+										<input id="declaration1" type="radio" name="inqCategory" value="5"> 체험신고
+									</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th>제목</th>
-							<td colspan="3" style="text-align: left;"><input type="text"
-								name="inqTitle" style="width: 400px; margin-left: 20px;"
-								required></td>
-						</tr>
-						<tr class="roomsDisable disable">
-							<th>신고숙소</th>
-							<td style="text-align: left;"><select class="requiredOption"
-								name="roNo" style="margin-left: 20px;">
-									<option value=0>숙소를 선택해주세요</option>
-									<c:forEach items="${ myRoomPay }" var="myRoomPay">
-										<option value="${ myRoomPay.roNo }">숙소이름 : ${ myRoomPay.roomsTitle }
-											/ 다녀간 날짜 : ${myRoomPay.startDays} ~ ${ myRoomPay.endDays }</option>
-									</c:forEach>
-							</select></td>
-						</tr>
+						<c:choose>
+							<c:when test="${ !empty review }">
+								<input type="hidden" name="reNo" value="${ review.reNo }">
+								<tr>
+									<th>제목</th>
+									<td colspan="3" style="text-align: left;">
+										<input type="text" name="inqTitle" style="width: 400px; margin-left: 20px;" required>
+									</td>
+								</tr>
+								<tr>
+									<th>신고후기 제목</th>
+									<td style="text-align: left; padding-left: 20px;">
+										${ review.reTitle }
+									</td>
+								</tr>
+								<tr>
+									<th>신고후기 내용</th>
+									<td style="text-align: left; padding-left: 20px;">
+										${ review.reContent }
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<th>제목</th>
+									<td colspan="3" style="text-align: left;"><input type="text"
+										name="inqTitle" style="width: 400px; margin-left: 20px;"
+										required></td>
+								</tr>
+								<tr class="roomsDisable disable">
+									<th>신고숙소</th>
+									<td style="text-align: left;"><select class="requiredOption"
+										name="roNo" style="margin-left: 20px;">
+											<option value=0>숙소를 선택해주세요</option>
+											<c:forEach items="${ myRoomPay }" var="myRoomPay">
+												<option value="${ myRoomPay.roNo }">숙소이름 : ${ myRoomPay.roomsTitle }
+													/ 다녀간 날짜 : ${myRoomPay.startDays} ~ ${ myRoomPay.endDays }</option>
+											</c:forEach>
+									</select></td>
+								</tr>
+		
+								<tr class="expDisable disable">
+									<th>신고숙소</th>
+									<td style="text-align: left;">
+										<select class="requiredOption1" name="exNo" style="margin-left: 20px;">
+												<option value=0>체험을 선택해주세요</option>
+												<c:forEach items="${ myExpPay }" var="myExpPay">
+													<option value="${ myExpPay.exNo }">숙소이름 : ${ myExpPay.expTitle }
+														/ 다녀간 날짜 : ${myExpPay.expDate}</option>
+												</c:forEach>
+										</select>
+									</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 
-						<tr class="expDisable disable">
-							<th>신고숙소</th>
-							<td style="text-align: left;"><select
-								class="requiredOption1" name="exNo" style="margin-left: 20px;">
-									<option value=0>체험을 선택해주세요</option>
-									<c:forEach items="${ myExpPay }" var="myExpPay">
-										<option value="${ myExpPay.exNo }">숙소이름 : ${ myExpPay.expTitle }
-											/ 다녀간 날짜 : ${myExpPay.expDate}</option>
-									</c:forEach>
-							</select></td>
-						</tr>
 						<tr style="width: 100px;">
 							<td colspan="4" style="height: 200px;"><textarea
 									name=inqContent style="width: 100%; height: 100%;" required></textarea>

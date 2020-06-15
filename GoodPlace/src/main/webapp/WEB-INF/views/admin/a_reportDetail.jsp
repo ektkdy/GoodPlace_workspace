@@ -70,27 +70,27 @@
 	                                <td width="200px" style="border-top: 0px;">숙소/체험명</td>
 	                                <c:choose>
 		                                <c:when test="${ b.roomsTitle ne null }">
-		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.roomsTitle }</td>
+		                                	<td colspan="2" width="400px" style="background: white; border-top: 0px;"><small>${ b.roomsTitle }</small></td>
 		                                </c:when>
 		                                <c:when test="${ b.expTitle ne null }">
-		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.expTitle }</td>
+		                                	<td colspan="2" width="400px" style="background: white; border-top: 0px;"><small>${ b.expTitle }</small></td>
 		                                </c:when>
 		                                <c:when test="${ b.reTitle ne null }">
-		                                	<td colspan="2" width="300px" style="background: white; border-top: 0px;">${ b.reTitle }</td>
+		                                	<td colspan="2" width="400px" style="background: white; border-top: 0px;"><small>${ b.reTitle }</small></td>
 		                                </c:when>
 	                                </c:choose>
-	                                <td width="200px" style="border-top: 0px;">신고자</td>
-	                                <td width="200px" style="background: white; border-top: 0px;">${ b.email }</td>
-	                                <td width="200px" style="border-top: 0px;">신고당한사람</td>
+	                                <td width="100px" style="border-top: 0px;">신고자</td>
+	                                <td width="200px" style="background: white; border-top: 0px;"><small>${ b.email }</small></td>
+	                                <td width="100px" style="border-top: 0px;">신고당한사람</td>
 	                                <c:choose>
 		                                <c:when test="${ b.emailR ne null }">
-		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailR }</td>
+		                                	<td width="200px" style="background: white; border-top: 0px;"><small>${ b.emailR }</small></td>
 		                                </c:when>
 		                                <c:when test="${ b.emailE ne null }">
-		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailE }</td>
+		                                	<td width="200px" style="background: white; border-top: 0px;"><small>${ b.emailE }</small></td>
 		                                </c:when>
 		                                <c:when test="${ b.emailV ne null }">
-		                                	<td width="200px" style="background: white; border-top: 0px;">${ b.emailV }</td>
+		                                	<td width="200px" style="background: white; border-top: 0px;"><small>${ b.emailV }</small></td>
 		                                </c:when>
 	                                </c:choose>
 	                            </tr>
@@ -104,7 +104,7 @@
 	                            </tr>
 	                            <tr>
 	                            
-	                                <td colspan="5" style="text-align:right;"><button id="contentBtn" name="ino" value="${ b.inNo }" onclick="postFormSubmit(1)">삭제하기</button></td>
+	                                <td colspan="5" style="text-align:right;"><button id="contentBtn" name="ino" value="${ b.inNo }" style="background:gray; border:gray;" onclick="postFormSubmit(1)">삭제하기</button></td>
 	                                <c:choose>
 		                                <c:when test="${ b.emailR ne null }">
 	                                		<td colspan="3" style="text-align:right;"><button id="contentBtn" name="partnerNoR" value="${ b.partnerNoR }" onclick="postFormSubmit(2)">제제하기</button></td>

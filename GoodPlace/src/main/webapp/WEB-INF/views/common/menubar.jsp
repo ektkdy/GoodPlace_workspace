@@ -406,7 +406,7 @@
 						  loginEmail : "${loginUser.email}"},		// 관리자 이메일
 					type:"post",
 					success:function(tutor){				// 관리자 이메일 정보를 찾아 가져옴
-						sock = new SockJS("http://localhost:8888/goodplace/echo/");	// 사용자 세션 연결 (세션ID : 사용자이메일)
+						sock = new SockJS("http://192.168.30.197:8888/goodplace/echo/");	// 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
 						

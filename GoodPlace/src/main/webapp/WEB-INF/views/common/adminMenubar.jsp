@@ -46,8 +46,8 @@
         </span>
         <div id="slide_menu">
             <ul>
-                <li><a href="#">사용자페이지 가기</a></li>
-                <li><a href="#">로그아웃</a></li>
+                <li><a href="${pageContext.servletContext.contextPath">사용자페이지 가기</a></li>
+                <li><a href="logout.me">로그아웃</a></li>
             </ul>
         </div>
     </div>
