@@ -156,15 +156,15 @@
 	            <div class="swiper-button-prev"></div>
 	        </div>
 	
-	        <div style="width:80%; height:120px; margin:0 10%;">
-	            <div style="width:80%;">
+	        <div style="width:80%; margin:0 10%;">
+	            <div style="width:80%; height:120px;">
 	                <br><h1>${ room.roomsTitle }</h1>
-	            </div><br>  
+	            </div><br>
 	            <div class="fullWidth">
-	                <h4>${ room.region }</h4>
+	                <h4>${ room.region }</h4><br><br>
 	            </div>
 	        </div>
-	        <div style="width:80%; margin:0 10%;">
+	        <div style="float:left;width:80%; margin:0 10%;">
 	            <div style="width:20%; margin-right:5%;">
 	                <h1 style="text-align:left;">시설 및<br>서비스</h1>
 	            </div>
@@ -278,9 +278,10 @@
 	                        	</c:forEach>
 	                        </h3>
 	                    </div>
-	                     <div class="fullWidth">
-	                         <p class="reviewContainer">${ review.reContent }</p>
-	                     </div>
+	                    <div class="fullWidth">
+                     		<p class="reviewContainer">${ review.reTitle }</p>
+                    	   <p class="reviewContainer">${ review.reContent }</p>
+	                    </div>
 	                	</div>
 	                	
 						<c:choose>
@@ -311,11 +312,11 @@
 		    <!-- 페이징 바 -->
 		    <div class="pagingBar">
 		        <button>&lt;</button>
-		        <button id="currentPage">n</button>
-		        <button>n</button>
-		        <button>n</button>
-		        <button>n</button>
-		        <button>n</button>            
+		        <button id="currentPage">1</button>
+		        <button>2</button>
+		        <button>3</button>
+		        <button>4</button>
+		        <button>5</button>            
 		        <button>&gt;</button>
 		    </div>
 	
