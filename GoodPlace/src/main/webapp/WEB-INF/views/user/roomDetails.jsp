@@ -17,6 +17,7 @@
     
 	<!-- 결제 API 관련 -->
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62fda0bf46ca2ad372f7f5e69d04a01e&libraries=services"></script>
 	
     <style>
         /* content 시작*/
@@ -222,9 +223,46 @@
 	            <div style="width:75%;" class="marginBottom_60px">
 	                <div class="fullWidth">
 	                    <div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
-	                    <div style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
+	                    <div id="map" style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
 	                </div><br><br>
-	                
+	                <script>
+		                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		                mapOption = {
+		                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		                    level: 3 // 지도의 확대 레벨
+		                };  
+	
+		               // 지도를 생성합니다    
+		               var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+		               // 주소-좌표 변환 객체를 생성합니다
+		               var geocoder = new kakao.maps.services.Geocoder();
+	
+		               // 주소로 좌표를 검색합니다
+		               geocoder.addressSearch('${ room.addBasic }', function(result, status) {
+	
+		                   // 정상적으로 검색이 완료됐으면 
+		                    if (status === kakao.maps.services.Status.OK) {
+	
+		                       var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+		                       // 결과값으로 받은 위치를 마커로 표시합니다
+		                       var marker = new kakao.maps.Marker({
+		                           map: map,
+		                           position: coords
+		                       });
+	
+		                       // 인포윈도우로 장소에 대한 설명을 표시합니다
+		                       var infowindow = new kakao.maps.InfoWindow({
+		                           content: '<div style="width:150px;text-align:center;padding:6px 0;">숙소위치</div>'
+		                       });
+		                       infowindow.open(map, marker);
+	
+		                       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		                       map.setCenter(coords);
+		                   } 
+		               });    
+	                </script>
 	            </div>
 	            <div class="fullWidth"> 
 	                <div style="width:20%; margin-right:5%;">
@@ -284,27 +322,51 @@
                     	   <p class="reviewContainer">${ review.reContent }</p>
 	                    </div>
 	                	</div>
-	                	
-						<c:choose>
-			              	<c:when test="${ loginUser.usNo eq room.userNo }">
-			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-			                    <button class="category postComment" style="padding:6px; width:110px; margin:5px;"><h3>댓글달기</h3></button>
-			                	<button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-			                </div>
-			              	</c:when>
-			              	<c:when test="${ loginUser.usNo eq review.userNo }">
-			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-			                     <button class="category modifyReview" style="padding:6px; width:110px; margin:5px;"><h3>수정</h3></button>
-			                     <button class="category saveReview" style="padding:6px; width:110px; margin:5px;"><h3>저장</h3></button>
-			                </div>
-			              	</c:when>
-			              	<c:otherwise>
-			              		<div style="width:75%; margin-left:25%; text-align:right; padding:3.5px;"  class="marginBottom_40px">
-			                     <button class="category reportReview" style="padding:6px; width:110px; margin:5px; background-color:tomato; color:white;"><h3>후기신고</h3></button>
-			                </div>
-	            			</c:otherwise>
-	            		</c:choose>
-	                </c:forEach>
+
+					<c:choose>
+						<c:when test="${ loginUser.usNo eq room.userNo }">
+							<input type="hidden" name="reNo" value="${ review.reNo }">
+							<div
+								style="width: 75%; margin-left: 25%; text-align: right; padding: 3.5px;"
+								class="marginBottom_40px">
+								<button class="category postComment"
+									style="padding: 6px; width: 110px; margin: 5px;">
+									<h3>댓글달기</h3>
+								</button>
+								<button class="category reportReview"
+									style="padding: 6px; width: 110px; margin: 5px; background-color: tomato; color: white;">
+									<h3>후기신고</h3>
+								</button>
+							</div>
+						</c:when>
+						<c:when test="${ loginUser.usNo eq review.userNo }">
+							<input type="hidden" name="reNo" value="${ review.reNo }">
+							<div
+								style="width: 75%; margin-left: 25%; text-align: right; padding: 3.5px;"
+								class="marginBottom_40px">
+								<button class="category modifyReview"
+									style="padding: 6px; width: 110px; margin: 5px;">
+									<h3>수정</h3>
+								</button>
+								<button class="category saveReview"
+									style="padding: 6px; width: 110px; margin: 5px;">
+									<h3>저장</h3>
+								</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" name="reNo" value="${ review.reNo }">
+							<div
+								style="width: 75%; margin-left: 25%; text-align: right; padding: 3.5px;"
+								class="marginBottom_40px">
+								<button class="category reportReview"
+									style="padding: 6px; width: 110px; margin: 5px; background-color: tomato; color: white;">
+									<h3>후기신고</h3>
+								</button>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 	
 	            </div>
 	            
@@ -544,6 +606,10 @@
         $('.inquirePartner').click(function(){
         	
        	});
+        
+        $(".reportReview").click(function(){
+        	location.href="reviewInq.ro?reNo=" + $(this).parent().siblings().eq(2).val();
+        });
         
     </script>
 

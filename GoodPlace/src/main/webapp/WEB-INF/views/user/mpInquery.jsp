@@ -125,8 +125,23 @@ section {
 										<input type="hidden" name="inNo" value="${ qList.inNo }">
 										
 										<c:choose>
+											<c:when test="${  qList.inqCategory eq 1 }">
+												<td>일반</td>
+											</c:when>
+											<c:when test="${  qList.inqCategory eq 2 }">
+												<td>상품</td>
+											</c:when>
+											<c:when test="${  qList.inqCategory eq 3 }">
+												<td>취소환불</td>
+											</c:when>
+											<c:when test="${  qList.inqCategory eq 4 }">
+												<td>포인트</td>
+											</c:when>
 											<c:when test="${  qList.inqCategory eq 5 }">
-												<td>신고</td>
+												<td>숙소신고</td>
+											</c:when>
+											<c:when test="${  qList.inqCategory eq 6 }">
+												<td>체험신고</td>
 											</c:when>
 										</c:choose>
 											<td>${ qList.inqTitle }</td>
