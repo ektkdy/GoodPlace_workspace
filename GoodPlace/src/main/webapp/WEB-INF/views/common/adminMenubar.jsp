@@ -37,6 +37,16 @@
 </style>
 </head>
 <body>
+
+	<!-- 반응 메세지 출력 -->
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
+
+
     <div id="header">
         <span id="gotomain">
             <a href="adminForm.me"><img src="${ pageContext.servletContext.contextPath }/resources/images/admin/배경없는_굿플로고.png" id="logo" alt="logo" ><p class="title_name">관리자</p></a>
@@ -46,7 +56,7 @@
         </span>
         <div id="slide_menu">
             <ul>
-                <li><a href="${pageContext.servletContext.contextPath">사용자페이지 가기</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}">사용자페이지 가기</a></li>
                 <li><a href="logout.me">로그아웃</a></li>
             </ul>
         </div>
@@ -67,13 +77,6 @@
             <li><a href="aExpWaitList.ex?currentPage=1"><span class="icon12"></span><p>체험관리</p></a></li>
         </ul>
     </div>
-    <script>
-        $(function(){
-            
-            $(".arrow").click(function(){
-                $("#slide_menu").slideToggle(500);
-            });
-        });
-    </script>
+
 </body>
 </html>
