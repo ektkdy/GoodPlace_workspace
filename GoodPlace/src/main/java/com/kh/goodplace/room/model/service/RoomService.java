@@ -74,6 +74,8 @@ public interface RoomService {
 	// 12. 메인 페이지 파워 목록 출력
 	ArrayList<Room> selectRoomList();
 	
+	ArrayList<Room> selectPopList();
+	
 	//------------[예약관리]------------    
 	//9_1. 진행중인 예약목록 조회용 서비스
 	int selectRvRoomListCount(int usNo);

@@ -663,6 +663,33 @@ public class RoomController {
     	return new Gson().toJson(powerList);
     }
 	
+	@ResponseBody
+    @RequestMapping(value="selectPopList.ro", produces="application/json; charset=utf-8")
+    public String selectPopList() {
+    	ArrayList<Room> popAllList = rService.selectPopList();
+    	
+    	System.out.println(popAllList);
+    	
+    	Collections.shuffle(popAllList);
+    	
+    	ArrayList<Room> popList = new ArrayList<>();
+    	
+    	if(popAllList.size() >= 4) {
+    		for(int i=0 ; i<4 ; i++) {
+    			popList.add(popAllList.get(i));
+    		}
+    	} else {
+    		for(int i=0 ; i<popAllList.size() ; i++) {
+    			popList.add(popAllList.get(i));
+    		}
+    	}
+    	
+    	
+    	return new Gson().toJson(popList);
+    }
+	
+	
+	
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------

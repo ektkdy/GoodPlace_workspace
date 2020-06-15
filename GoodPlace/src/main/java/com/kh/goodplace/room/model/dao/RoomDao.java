@@ -222,6 +222,10 @@ public class RoomDao {
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomList");
 	}
 	
+	public ArrayList<Room> selectPopList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("roomMapper.selectPopList");
+	}
+	
 	
 	// --------- 숙소관리 시작 -----------------
 	

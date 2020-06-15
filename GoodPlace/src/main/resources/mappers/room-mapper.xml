@@ -435,6 +435,15 @@
         from rooms 
        where pono is null
 	</select>
+	
+	<select id="selectPopList" resultMap="roomResultSet">
+        SELECT rono, rooms_title, add_basic, change_Name
+        FROM(select RP.rono, rooms_title, add_basic, change_Name , count(*), ROW_NUMBER() OVER (ORDER BY count(*) DESC) AS RECENT_ME
+	        from ROOMSPAY RP
+            left join rooms r on(rp.rono = r.rono)
+	        group by rp.rono, r.rooms_title, r.add_basic, rooms_title, add_basic,change_Name)
+        <![CDATA[where rownum <= 10]]>
+	</select>
 	<!-- 숙소관리 끝-->
 
 	<!-- 숙소조회 시작 -->

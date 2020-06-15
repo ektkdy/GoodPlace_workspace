@@ -52,16 +52,20 @@
     #roomList .power{
         margin: 0 auto;
         text-align: center;
+        height: 240px;
     }
     #roomList .power>li{
         display: inline-block;
         width: 20%;
     	vertical-align: top;
     }
+    #roomList .power>li>a{
+    	text-decoration: none;
+    }
     #roomList .power>li>a>div{
-    	width: 200px;
+    	width: 220px;
     	text-align: left;
-    	margin-left: 20px;
+    	margin-left: 10px;
     }
     
     
@@ -128,7 +132,6 @@
 
             </div>
             <br>
-            <br>
             <!-- 인기등록 숙소-->
             <div><h2>인기숙소</h2></div>
                 <!-- ajax사용해서 실시간 불러오기 -->
@@ -142,35 +145,8 @@
                     <a href="" style="float: right; margin-right: 150px;">인기숙소 더보기 ></a>
                 </div>
                 <hr width="950px" style="margin-top: 0px;">
-            <div class="rooms power">
-                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
-                                <li>
-                    <a href="">
-                        <img src="resources/images/user/goodplaceLogo.jpg" width="200px" height="150px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명
-                    </a>
-                </li>
+            <div class="rooms power" id="popList">
+
             </div>
         </div>
     </div><!-- /content -->
@@ -203,9 +179,9 @@
     		success:function(powerList){				// 관리자 이메일 정보를 찾아 가져옴
 				var value ="";
 				for(var i in powerList){
-					value += "<li>" +
+					value += "<li style='border: 1px soild black'>" +
 			                    "<a href='roomDe.ro?roNo="+ powerList[i].roNo +"'>" +
-			                        "<img src='resources/uploadFiles/" + powerList[i].changeName +"' width='200px' height='150px'><br>" +
+			                        "<img src='resources/uploadFiles/" + powerList[i].changeName +"' width='220px' height='170px'><br>" +
 			                        	
 			                        "<div>" +
 			                        	powerList[i].roomsTitle + "<br>" +
@@ -216,6 +192,32 @@
 				}
 				
 				$("#powerList").html(value);
+    		},error:function(){
+    			console.log("ajax 통신 실패");
+    		}
+    	})
+    	
+    	$.ajax({
+    		// ajax1.do?name=홍길동&age=20
+    		url:"selectPopList.ro",
+    		data:{},		// 관리자 이메일
+    		type:"post",
+    		success:function(popList){				// 관리자 이메일 정보를 찾아 가져옴
+				var value ="";
+				for(var i in popList){
+					value += "<li style='border: 1px soild black'>" +
+			                    "<a href='roomDe.ro?roNo="+ popList[i].roNo +"'>" +
+			                        "<img src='resources/uploadFiles/" + popList[i].changeName +"' width='220px' height='170px'><br>" +
+			                        	
+			                        "<div>" +
+			                        	popList[i].roomsTitle + "<br>" +
+			                        	popList[i].addBasic + 
+			                        "</div>" +	
+			                    "</a>" +
+			                "</li>";
+				}
+				
+				$("#popList").html(value);
     		},error:function(){
     			console.log("ajax 통신 실패");
     		}
