@@ -37,20 +37,11 @@ public class EchoHandler extends TextWebSocketHandler{
     //클라이언트가 연결 되었을 때 실행
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
-        Map<String, Object> user = session.getAttributes();	// session의 데이터를 가져옴
-        System.out.println(user);
-        Member loginUser = (Member)user.get("loginUser");		// loginUser의 회원정보를 가져옴
-    	System.out.println(user.get("class_class_id"));				// 이메일) gmldud695@naver.com
+        Map<String, Object> user = session.getAttributes();
+        Member loginUser = (Member)user.get("loginUser");// loginUser의 회원정보를 가져온다
         
     	String loginUserEmail = loginUser.getEmail() + user.get("class_class_id");
-    	
-    	//if(loginUserEmail.equals("ektkdy@naver.com") ) {	// ektkdy@naver.com // 관리자일 경우
-    	//	loginUserEmail = loginUserEmail + user.get("class_class_id");
-    	//}
-        // 랜덤 세션넘버를
-        System.out.println("세션 id" + session.getId());
-        
+
         // 이메일을 세션의 이름과 매핑시킴
         sessions.put(loginUserEmail, session);// {"gmldud695@naver.com", "idmglanfwa"}	
         logger.info("{} 연결됨", loginUserEmail); 
