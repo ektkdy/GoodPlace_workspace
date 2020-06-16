@@ -101,4 +101,20 @@ public class AccountsDao {
 		return (ArrayList)sqlSession.selectList("accountsMapper.selectIncomeList", usNo);
 	}
 
+	public ArrayList<Accounts> selectRoomIncomeChart(SqlSessionTemplate sqlSession, int usNo) {
+		return (ArrayList)sqlSession.selectList("accountsMapper.selectRoomIncomeChart", usNo);
+	}
+
+	public ArrayList<Accounts> selectExpIncomeChart(SqlSessionTemplate sqlSession, int usNo) {
+		return (ArrayList)sqlSession.selectList("accountsMapper.selectExpIncomeChart", usNo);
+	}
+
+	public int partnerDashboardIncome1(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("accountsMapper.partnerDashboardIncome1", usNo);
+	}
+
+	public int partnerDashboardIncome2(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("accountsMapper.partnerDashboardIncome2", usNo);
+	}
+
 }

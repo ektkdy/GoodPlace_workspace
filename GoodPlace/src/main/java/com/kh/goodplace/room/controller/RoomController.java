@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.kh.goodplace.board.model.service.BoardService;
 import com.kh.goodplace.board.model.vo.Board;
@@ -668,7 +670,7 @@ public class RoomController {
     public String selectPopList() {
     	ArrayList<Room> popAllList = rService.selectPopList();
     	
-    	System.out.println(popAllList);
+    	//System.out.println(popAllList);
     	
     	Collections.shuffle(popAllList);
     	
@@ -851,7 +853,57 @@ public class RoomController {
     	room.setReviewList(rService.getReview(roNo));
     	//System.out.println("reviewList : " + rService.getReview(roNo));
     	
-    	System.out.println(room);
+    	//System.out.println(room);
+    	
+    	
+    	if(room != null) {
+    		
+    		mv.addObject("at", at);
+    		mv.addObject("room", room);
+    		mv.setViewName("user/roomDetails");
+    	}else {
+    		mv.addObject("msg", "숙소상세 조회 실패!!");
+            mv.setViewName("common/errorPage");
+    	}
+    	
+    	return mv;
+    	
+    }
+    
+    // 메인페이지에서 특정 파워숙소 클릭시 해당 숙소 상세페이지로 이동
+    @RequestMapping("powerRoomDe.ro")
+    public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
+    	//System.out.println("roNo : " + roNo);
+    	room  = rService.roomDetail(roNo);
+    	ArrayList<Attachment> at = rService.getDetailImages(roNo);
+    	
+    	// room객체에 숙소태그, 포함사항의 표시형식 보완
+    	room.setRoomsTag("#" + room.getRoomsTag().replace(",", " #"));
+    	room.setMeal(room.getMeal().replace(",", ", "));
+    	
+    	// room객체에 숙소시설, 제공서비스 표시형식 보완
+    	room.setFacility(room.getFacility().replace(",", ", "));
+    	room.setService(room.getService().replace(",", ", "));
+    	
+    	// room객체에 지역 표시 set
+    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
+    	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
+    	String region = room.getAddBasic().substring(0, addLastIndex);
+    	//System.out.println("region : " + region);
+    	room.setRegion(region);
+    	
+    	// room 객체에 파트너정보 set
+    	room.setPaPofile(rService.getPartner(room.getUserNo()).getChangeName());
+    	room.setPartnerIntro(rService.getPartner(room.getUserNo()).getPartnerIntro());
+    	room.setPaName(rService.getPartner(room.getUserNo()).getUserName());
+    	room.setPaAccountName(rService.getPartner(room.getUserNo()).getAccountName());
+    	room.setPaAccountNum(rService.getPartner(room.getUserNo()).getAccountNum());
+    	
+    	// room 객체에 리뷰정보 set
+    	room.setReviewList(rService.getReview(roNo));
+    	//System.out.println("reviewList : " + rService.getReview(roNo));
+    	
+    	//System.out.println(room);
     	
     	
     	if(room != null) {
@@ -1052,8 +1104,13 @@ public class RoomController {
 	// ------------------------------ 파트너 일정관리 시작 ----------------------------------
 		
 		@RequestMapping("calendarView.ca")
-		public String calendarView(Model model) {
+		public String calendarView(Model model, HttpSession session) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int usNo = loginUser.getUsNo();
 			
+			ArrayList<Room> list = rService.roomReservation(usNo);
+			
+			model.addAttribute("list", list);
 			return "partner/partnerCalender";
 		}
 		
@@ -1095,4 +1152,22 @@ public class RoomController {
 						
 			    return jsonString;
 			}
+			
+			//예약 진행
+			@ResponseBody
+			@RequestMapping(value="dashboardRoomCount.rv", produces="application/json; charset=utf-8")
+			public void dashboardRoomCount(int currentPage, HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {      
+				
+				Member loginUser = (Member)session.getAttribute("loginUser");
+				int usNo = loginUser.getUsNo();
+				
+				int listCount = rService.selectRvRoomListCount(usNo);
+			    new Gson().toJson(listCount, response.getWriter());   
+
+			}
+			
+			
+
+			
+			
 }

@@ -61,7 +61,7 @@
 				<a href="http://developers.kakao.com/logout"></a>
                 <br>
                 <b>
-                    <a href="">네이버</a> | <a href="loginEmailForm.me">이메일</a><br><br>
+					<a href="loginEmailForm.me">이메일로 로그인</a><br><br>
                     아직 회원이 아니신가요?
                 </b>
                 <a href="enrollForm.me" style="color: gray;"><b>회원가입</b></a>

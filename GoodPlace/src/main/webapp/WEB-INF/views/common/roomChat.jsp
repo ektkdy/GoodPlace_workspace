@@ -125,7 +125,7 @@
 		                            	<div>
 		                            		<div class="chat_common chat_userId">
 		                            			<img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width='28px' height='28px'>
-		                            			<span>GoodPlace</span>
+		                            			<span>${ loginUser.userName }</span>
 		                            		</div>
 	                            			<div class="chat chat_user">
 	                            				${ m.messageContent }

@@ -2,21 +2,75 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/core/main.css' rel='stylesheet' />
-<link href='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
-<link href='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
-<link href='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/list/main.css' rel='stylesheet' />
-<script src='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/core/main.js'></script>
-<script src='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/interaction/main.js'></script>
-<script src='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/daygrid/main.js'></script>
-<script src='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/timegrid/main.js'></script>
-<script src='${ pageContext.servletContext.contextPath }/resources/fullcalendar/packages/list/main.js'></script>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.css" rel="stylesheet" type="text/css" />
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales/ko.js"></script>
+
+<script>
+	$(document).ready(function() {
+		setCalendar();
+	});
+
+	function setCalendar(){
+
+		var calendarEl = document.getElementById('calendar');
+
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			 plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+		      header: {
+		        left: 'prev,next today',
+		        center: 'title',
+		        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+			},
+			defaultView: 'dayGridMonth',
+			locale: 'ko',
+			navLinks: true, // can click day/week names to navigate views
+			editable: false,
+			allDaySlot: false,
+			eventLimit: true, // allow "more" link when too many events
+			minTime: '11:00:00',
+			maxTime: '24:00:00',
+			contentHeight: 'auto',
+			events : [
+
+				<c:forEach var="r" items="${list}">
+					{
+						title:'${r.roomsTitle}',
+						start:'${r.startDays}',
+						end:'${r.endDays}',
+						color: "#77a1e0"
+					},
+				</c:forEach>
+
+			]
+		});
+		
+		calendar.render();
+		
+	};
+	
+</script>
 <style>
 button:hover{cursor:pointer}
 
@@ -51,7 +105,7 @@ button:hover{cursor:pointer}
                 <br clear="both">
                 <br >
                 <div class="con2">
-                  <div id='calendar'></div>
+					<div id="calendar"></div>
                 </div>
             </div>
         </div>
@@ -66,80 +120,7 @@ button:hover{cursor:pointer}
             });
         });
     </script>
-<!-- 캘린더 -->
-<script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
-      defaultDate: '2020-05-12',
-      navLinks: true, // can click day/week names to navigate views
-      businessHours: true, // display business hours
-      editable: false,
-      events: [
-        {
-          title: 'Business Lunch',
-          start: '2020-05-03T13:00:00',
-          constraint: 'businessHours'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-05-13T11:00:00',
-          constraint: 'availableForMeeting', // defined below
-          color: '#257e4a'
-        },
-        {
-          title: 'Conference',
-          start: '2020-05-18',
-          end: '2020-05-20'
-        },
-        {
-          title: 'Party',
-          start: '2020-05-29T20:00:00'
-        },
-
-        // areas where "Meeting" must be dropped
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-11T10:00:00',
-          end: '2020-05-11T16:00:00',
-          rendering: 'background'
-        },
-        {
-          groupId: 'availableForMeeting',
-          start: '2020-05-13T10:00:00',
-          end: '2020-05-13T16:00:00',
-          rendering: 'background'
-        },
-
-        // red areas where no events can be dropped
-        {
-          start: '2020-05-24',
-          end: '2020-05-28',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
-        },
-        {
-          start: '2020-05-06',
-          end: '2020-05-08',
-          overlap: false,
-          rendering: 'background',
-          color: '#ff9f89'
-        }
-      ]
-    });
-
-    calendar.render();
-  });
-
-</script>
 </body>
 </html>

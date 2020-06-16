@@ -303,6 +303,11 @@ public class RoomServiceImpl implements RoomService{
 		return rDao.selectRoomPayList(sqlSession, m);
 	}
 
+	@Override
+	public ArrayList<Room> roomReservation(int usNo) {
+		return rDao.roomReservation(sqlSession, usNo);
+	}
+
 
 
 

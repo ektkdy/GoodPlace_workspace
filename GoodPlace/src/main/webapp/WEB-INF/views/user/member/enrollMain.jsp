@@ -59,7 +59,7 @@
 				<a href="http://developers.kakao.com/logout"></a>
                 <br>
                 <b>
-                    <a href="">네이버</a> | <a href="enrollEmailForm1.me">이메일</a><br><br>
+                    <a href="enrollEmailForm1.me">이메일로 회원가입</a><br><br>
                    	이미 아이디가 있으신가요?
                 </b>
                 <a href="loginForm.me" style="color: gray;"><b>로그인</b></a>
@@ -75,7 +75,13 @@
 	<jsp:include page="../../common/footer.jsp"/>
 	
 	<script type="text/javascript">
-	
+		
+		$(function(){
+			// 수정해야댐
+			$("#kakao-login-btn").attr("src","resources/images/user/KakaoTalk_out.png");
+			$("#kakao-login-btn").attr("onmouseover","this.src='resources/images/user/KakaoTalk_out.png'");
+			$("#kakao-login-btn").attr("onmouseout","this.src='resources/images/user/KakaoTalk_on.png'");
+		});
 	  // input your appkey
 	  Kakao.init('62fda0bf46ca2ad372f7f5e69d04a01e')
 	  Kakao.Auth.createLoginButton({

@@ -148,14 +148,14 @@ button{cursor: pointer}
                             <tr class="pdBtom">
                                 <th>* 숙소검색태그</th>
                                 <td colspan="2">
-                                    <label><input type="checkbox" name="roomsTag" value="신축건물">신축건물</label>
-                                    <label><input type="checkbox" name="roomsTag" value="교통이 편리한" style="margin-left:104px">교통이 편리한</label> <br>
-                                    <label><input type="checkbox" name="roomsTag" value="관광명소가 가까운">관광명소가 가까운</label>
-                                    <label><input type="checkbox" name="roomsTag" value="무인으로 운영되는" style="margin-left:44.5px">무인으로 운영되는</label><br>
-                                    <label><input type="checkbox" name="roomsTag" value="커플숙소">커플숙소</label>
-                                    <label><input type="checkbox" name="roomsTag" value="비주얼이예쁜" style="margin-left:104px">비주얼이 예쁜</label><br>
-                                    <label><input type="checkbox" name="roomsTag" value="이색숙소">이색숙소</label>
-                                    <label><input type="checkbox" name="roomsTag" value="조식이포함된" style="margin-left:104px">조식이 포함된</label><br>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="신축건물">신축건물</label>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="교통이 편리한" style="margin-left:104px">교통이 편리한</label> <br>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="관광명소가 가까운">관광명소가 가까운</label>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="무인으로 운영되는" style="margin-left:44.5px">무인으로 운영되는</label><br>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="커플숙소">커플숙소</label>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="비주얼이예쁜" style="margin-left:104px">비주얼이 예쁜</label><br>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="이색숙소">이색숙소</label>
+                                    <label><input type="checkbox" class="roomstag" name="roomsTag" value="조식이포함된" style="margin-left:104px">조식이 포함된</label><br>
                                 </td>
                             </tr>
                             <tr class="pdBtom">
@@ -229,7 +229,7 @@ button{cursor: pointer}
                             </tr>
                     </table>
                     <div class="btnArea">
-                        <button class="cancel" type="reset">취소하기</button>
+                        <button class="cancel" onclick="javascript:history.go(-1);">취소하기</button>
                         <button class="enroll" type="submit" disabled>등록하기</button>
                     </div>
                     </form>
@@ -238,9 +238,7 @@ button{cursor: pointer}
         </div>
     </div>
     <!-- 유효성검사 -->
-    <script type="text/javascript">
-    	
-    </script>
+   
     <!-- input 추가 -->
     <script>
 		var maxAppend = 0; 
@@ -412,7 +410,15 @@ button{cursor: pointer}
 	
 		}
 	</script>
-     
+      <script>
+    	$(".roomstag").click(function(){
+    		if($("input[name='roomsTag']:checked").length == 3){
+    			window.alert("태그는 2개까지 선택 가능합니다.");
+    			var test = $(this).prop('checked', false);
+    		};
+    		
+    	});
+    </script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 

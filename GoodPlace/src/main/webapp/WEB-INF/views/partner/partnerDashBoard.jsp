@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerCommon.css" />
 <link rel="stylesheet" type="text/css" href="${ pageContext.servletContext.contextPath }/resources/css/partner/partnerDashBoard.css" />
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"> 
 <style>
 button:hover{cursor:pointer}
 table tr:hover{background:#f1f1f1; cursor:pointer}
@@ -21,7 +23,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
     #noticeList tr:hover{cursor:pointer;}
     
 .dash_img{
-    padding-top:35px
+    padding-top:45px
     }
     .dash_amount{
     font-size:20px;
@@ -72,7 +74,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">새로운 숙소 예약 내역<p>
-	                    		 <p class="dash_amount"><a href="#"><span class="amount">5</span>건</a></p>
+	                    		 <p class="dash_amount"><a href="rvRoomList.rv?currentPage=1"><span class="amount" id="roomCount">5</span>건</a></p>
 	                    	</div>
 	                    </div>
 	                    <div class="imgDiv">
@@ -81,21 +83,22 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">새로운 체험 예약 내역<p>
-	                    		  <p class="dash_amount"><a href="#"><span class="amount">10</span>건</a></p>
+	                    		  <p class="dash_amount"><a href="rvExpList.rv?currentPage=1"><span class="amount" id="expCount">10</span>건</a></p>
 	                    	</div>
 	                    </div>
 	                    <div class="imgDiv" >
 	                    	<div style="float:left; height: 65%;  width:100%">
-	                    		<img src="" width="70px" height="70px" class="dash_img">
+	                    		<img src="${ pageContext.servletContext.contextPath }/resources/images/partner/money.png" width="70px" height="70px" class="dash_img">
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
-	                    		 <p class="dash_amount"><a href="#"><span class="amount">2,500,000</span>원</a></p>
+	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="sumIncome">
+	                    		 2,500,000</span>원</a></p>
 	                    	</div>
 	                    </div>
 	                </div>
 	                <div class="calendar" style="margin-top:20px">
-	
+						<canvas id="myChart" width="350" height="300"></canvas>
 	                </div>
 	                <br clear="both">
 	                <div class="reservDiv">
@@ -172,7 +175,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                        </span>
 	                    </div>
 	                    <div>
-	                        <table class="noticeTb" cellpadding="0" cellspacing="0">
+	                        <table class="noticeTb" cellpadding="0" cellspacing="0" style="margin-bottom:20px">
 	                        <tbody>
 	                        	
 	                        </tbody>
@@ -183,8 +186,175 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
             </div>
         </div>
     </div>
+<script>
+
+	$(function(){
+		$.ajax({
+			url:"incomeChart.me",
+			success:function(result){
+
+				var listRo = result.listRo;
+				var listExp = result.listExp;
+				//console.log(listRo); 
+				//console.log(listExp);
+				
+				var today = new Date();		// 오늘날짜
+				var months = new Array();	// 월을 담을 배열
+				var num = 0;
+				for(var i = 0; i < 6; i++){
+					if((today.getMonth() + 1) - i > 0 && (today.getMonth() + 1) - i <= (today.getMonth() + 1)){
+						months[i] = (today.getMonth() + 1) - i;
+					}else{
+						months[i] = 12 - num;
+						num++;
+					}
+					
+					if(months[i] < 10){				
+						months[i] = "0" + months[i];		
+					}else{
+						months[i] = "" + months[i];
+					}
+				}
+				months.reverse();
+				//console.log(month);			// ["01", "02", "03", "04", "05", "06"]
+				//console.log(month.length);	// 6
+				
+				var roomIncome = [];
+				/*for(var i=0; i<listRo.length; i++){
+					switch(listRo[i].month){
+						case months[0] : roomIncome[0] = listRo[0].income; break;
+						case months[1] : roomIncome[1] = listRo[1].income; break;
+						case months[2] : roomIncome[2] = listRo[2].income; break;
+						case months[3] : roomIncome[3] = listRo[3].income; break;
+						case months[4] : roomIncome[4] = listRo[4].income; break;
+						case months[5] : roomIncome[5] = listRo[5].income; break;
+					}
+				}*/
+				
+				for(var i= 0; i<months.length; i++){
+					for(var j=0; j<listRo.length; j++){
+						if(months[i]==listRo[j].month){
+							roomIncome[i] = listRo[j].income;
+						}
+					}
+				}
+				//console.log(roomIncome);
+				
+				var expIncome = [];
+				//console.log(listExp[0].month);
+				/*console.log(listExp[3].income);
+				
+				for(var i=0; i<listExp.length; i++){
+					switch(listExp[i].month){
+						case months[0] : expIncome[0] = listExp[0].income; break;
+						case months[1] : expIncome[1] = listExp[1].income; break;
+						case months[2] : expIncome[2] = listExp[2].income; break;
+						//case months[3] : expIncome[3] = listExp[3].income; break;
+						//case months[4] : expIncome[4] = listExp[4].income; break;
+						//case months[5] : expIncome[5] = listExp[5].income; break;
+					}
+				}*/
+				
+				for(var i= 0; i<months.length; i++){
+					for(var j=0; j<listExp.length; j++){
+						if(months[i]==listExp[j].month){
+							expIncome[i] = listExp[j].income;
+						}
+					}
+				}
+				//console.log(expIncome);
+			
+			
+				var ctx = document.getElementById('myChart');
+				var myChart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: months,
+						datasets: [{
+							label: '숙소',
+							backgroundColor: 'rgba(153, 102, 255, 0.2)',
+							fill:false,
+							data: roomIncome
+						},{
+							label : '체험',
+							backgroundColor : 'rgba(255, 159, 64, 0.2)', 
+							fill:false,
+							data : expIncome
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						title:{ 
+							diaplay : true,
+							text : '월별 수입내역' 
+						},
+						scales: {						
+							yAxes: [{
+								ticks: {
+									beginAtZero: true
+								}
+							}],
+							xAxes: [{
+								ticks: {
+									macTicksLimit:6,
+									beginAtZero: true
+								}
+							}]
+						},
+					}
+				});
+				
+			}, error:function(){
+				console.log("월별 수입내역 조회용 ajax 실패");
+			}
+		});
+	});
+</script>
+
+<script>
+	$(function(){
+		$.ajax({
+			url:"partnerDashboardIncome.me",
+			success:function(sum){
+				//console.log(sum);
+				var sum = sum;
+				$("#sumIncome").text(sum);
+			}, error:function(){
+				console.log("이번달 총수입 내역 조회용 ajax 실패")
+			}
+		});
+	});
+</script>
+    
  <script>
  	$(function(){
+ 		//숙소 예약 count
+ 		$.ajax({
+ 			url:"dashboardRoomCount.rv",
+ 			data:{currentPage:1},
+ 			type:"post",
+ 			success:function(count){
+ 				var count = count;
+ 				
+ 				$("#roomCount").html(count);
+ 			},error:function(){
+ 	 			console.log("통신실패!!");
+ 	 		}
+ 	 	 });
+ 	 		//체험 예약 count
+ 	 		$.ajax({
+ 	 			url:"dashboardExpCount.rv",
+ 	 			type:"post",
+ 	 			success:function(count){
+ 	 				var count = count;
+ 	 				$("#expCount").html(count);
+ 	 			},error:function(){
+ 	 	 			console.log("통신실패!!");
+ 	 	 		}
+ 	 	 	 });
+ 	 		
+ 		
+ 		
  		//후기
  		$.ajax({
  			url:"reviewListDashboard.bo",
@@ -193,7 +363,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
+ 				//console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -219,7 +389,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -236,7 +406,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			success:function(result){
  				var list = result.list;
  				
- 				console.log(result);
+ 				//console.log(result);
  				
  				var content = "";
  				if(list.length == 0){
@@ -260,7 +430,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -278,7 +448,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
+ 				//console.log(list);
  				
  				var content = "";
  				if(list.length == 0){
@@ -299,7 +469,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 					 	"<td>" + list[i].userName +"</td>" + 
 					 	"<td>" + start.substr(0,10) +"</td>" +
 					 	"<td>" +  list[i].expTitle + "</td>" +
-					 	"<td>예약확정</td>" +
+					 	"<td style='color:#024d9a'>예약대기</td>" +
 					 	"</tr>";
  					}
  				}	 		
@@ -308,7 +478,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  	
@@ -326,7 +496,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  				var pi = result.pi;
  				var list = result.list;
  				
- 				console.log(list);
+ 				//console.log(list);
  				
  				var content = "";
  				if(list.length == 0){
@@ -346,7 +516,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  										 	"<td>" + list[i].userName +"</td>" + 
  										 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
  										 	"<td>" +  list[i].roomsTitle + "</td>" +
- 										 	"<td>예약확정</td>" +
+ 										 	"<td style='color:#024d9a'>예약대기</td>" +
  										"</tr>";
  									  }
  					}	 		
@@ -355,7 +525,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  			
 
  		},error:function(){
- 			console.log("통신실패!!");
+ 			//console.log("통신실패!!");
  		}
  	 });
  		
@@ -367,10 +537,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 
  	});
  </script>
-<script>
-	$(function(){
- 		 	});
-</script>
+
  <script>
      $(function(){
          

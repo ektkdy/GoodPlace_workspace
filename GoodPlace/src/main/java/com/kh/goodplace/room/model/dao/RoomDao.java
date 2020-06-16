@@ -319,5 +319,12 @@ public class RoomDao {
 		return (ArrayList)sqlSession.selectList("roomMapper.selectRoomPayList", m);
 	}
 	
+	
+	// 일정관리 숙소 조회
+	
+	public ArrayList<Room> roomReservation(SqlSessionTemplate sqlSession, int usNo){
+		
+		return  (ArrayList)sqlSession.selectList("roomMapper.roomReservation", usNo);
+	}
 
 }

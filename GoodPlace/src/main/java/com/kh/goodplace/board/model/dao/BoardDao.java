@@ -336,6 +336,10 @@ public Board selectInquiryDt(SqlSessionTemplate sqlSession, int inNo) {
 		return sqlSession.selectOne("boardMapper.selectInquiryDt", inNo);
 		
 	}
+
+public Board selectReviewOne(SqlSessionTemplate sqlSession, int reNo) {
+	return sqlSession.selectOne("boardMapper.selectReviewOne" ,reNo);
+}
 	
 	
 	

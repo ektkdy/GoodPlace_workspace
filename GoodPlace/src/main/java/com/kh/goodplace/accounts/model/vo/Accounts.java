@@ -42,6 +42,8 @@ public class Accounts {
 	private String no;				// 파트너 정산관리에서 사용
 	private int amount;				// 파트너 정산관리에서 사용
 	private Date payDate;			// 파트너 정산관리에서 사용
+	private String month;
+	private String income;
 	
 	
 	/* 체험결제 컬럼들 */

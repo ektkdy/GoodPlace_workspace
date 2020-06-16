@@ -22,9 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
 import com.kh.goodplace.accounts.model.service.AccountsService;
 import com.kh.goodplace.accounts.model.vo.Accounts;
 import com.kh.goodplace.accounts.model.vo.Chart;
@@ -326,33 +328,56 @@ public class AccountsController {
     
     
     
+    //@ResponseBody
+	//@RequestMapping(value = "partnerDashboardIncome.me" , produces="application/json; charset=utf-8")
+    @RequestMapping("partnerDashboardIncome.me")
+    public void partnerDashboardIncome(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+    
+    	Member loginUser  = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
+		
+		int roSum = aService.partnerDashboardIncome1(usNo);
+		int expSum = aService.partnerDashboardIncome2(usNo);
+    
+		int sum = roSum + expSum;
+		
+		Gson gson = new Gson();
+		response.setContentType("application/json; charset=utf-8");
+		
+		gson.toJson(sum, response.getWriter());
+		
+    }
     
     
+    // 406에러 날때 해결방법
+    // @ResponseBody
+    @RequestMapping(value="incomeChart.me")
+    public void selectRoomIncomeChart(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+    	
+    	Member loginUser  = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+		ArrayList<Accounts> listRo = aService.selectRoomIncomeChart(usNo);
+		ArrayList<Accounts> listExp = aService.selectExpIncomeChart(usNo);
+        
+		//System.out.println(listRo);
+		//System.out.println(listExp);
+		
+		Gson gson = new Gson();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    JsonObject jsonObject = new JsonObject();
+		
+	    map.put("listRo", listRo); 
+	    map.put("listExp", listExp);
+	    
+	    //String jsonString = gson.toJson(map);
+	    //return jsonString;
+	    response.setContentType("application/json; charset=utf-8");
+	    gson.toJson(map, response.getWriter());
+	    
+	    
+    }
 
     /* 파트너페이지 정산관리 */
 	@RequestMapping("partnerIncome.ac")

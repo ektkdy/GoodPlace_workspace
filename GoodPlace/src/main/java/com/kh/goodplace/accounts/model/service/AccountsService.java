@@ -51,4 +51,13 @@ public interface AccountsService {
 	// 1_3. 엑셀출력용 수입목록들
 	ArrayList<Accounts> selectIncomeList(int usNo);
 
+	// 파트너 대시보드에서 숙소 수입조회용 서비스
+	ArrayList<Accounts> selectRoomIncomeChart(int usNo);
+
+	ArrayList<Accounts> selectExpIncomeChart(int usNo);
+
+	int partnerDashboardIncome1(int usNo);
+
+	int partnerDashboardIncome2(int usNo);
+
 }
