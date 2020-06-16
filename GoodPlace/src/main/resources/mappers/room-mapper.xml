@@ -601,7 +601,7 @@
 	<!-- roomspay 테이블에 insert -->
 	<insert id="insertRoompay" parameterType="Room">
 		insert into roomspay
-		values(rpno.nextval, #{roNo}, #{userNo}, #{amount}, #{birthday}, sysdate, 0, '11:30', 1, 0, #{people}, #{concept}, #{ request}, #{ tripStartDate }, ${ tripEndDate })
+		values(rpno.nextval, #{roNo}, #{userNo}, #{amount}, #{birthday}, sysdate, 0, '11:30', 1, 0, #{people}, #{concept}, #{ request }, TO_DATE(#{ tripStartDate }, 'YYYY-MM-DD'), TO_DATE(#{ tripEndDate }, 'YYYY-MM-DD'))
 	</insert>
 
 

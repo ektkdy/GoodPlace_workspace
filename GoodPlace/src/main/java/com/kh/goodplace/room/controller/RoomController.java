@@ -926,16 +926,16 @@ public class RoomController {
     	return mv;
     	
     }
-    
+    // 숙소상세 -> 숙소 결제페이지로 이동
     @RequestMapping("insertRoomPay.ro")
-    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addPrice, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
     	
     	
     	Room room = new Room();
     	room.setRoNo(roNo);
     	room.setRoomsTitle(roomsTitle);
     	room.setUserNo(userNo);
-    	room.setAmount(addAmount);
+    	room.setAmount(amount);
     	room.setTripStartDate(tripStartDate);
     	room.setTripEndDate(tripEndDate);
     	room.setPeople(people);
@@ -951,19 +951,21 @@ public class RoomController {
     	return mv;
     }
     
+    // ROOMSPAY 테이블에 INSERT
     @RequestMapping("insertRoomPayToTable.ro")
-    public ModelAndView insertRoomPayToTable( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    public ModelAndView insertRoomPayToTable( int roNo, int usNo, int amount, String tripStartDate, String tripEndDate, int people, String birthday, String concept, String request, ModelAndView mv) {
     	
     	
     	Room room = new Room();
     	room.setRoNo(roNo);
-    	room.setRoomsTitle(roomsTitle);
-    	room.setUserNo(userNo);
-    	room.setAmount(addAmount);
+    	room.setUserNo(usNo);
+    	room.setAmount(amount);
     	room.setTripStartDate(tripStartDate);
     	room.setTripEndDate(tripEndDate);
     	room.setPeople(people);
-    	room.setPrice(price);
+    	room.setBirthday(birthday);
+    	room.setConcept(concept);
+    	room.setRequest(request);
     	
     	System.out.println("roomspay 테이블에 insert : " + room);
     	
