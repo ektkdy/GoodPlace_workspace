@@ -56,4 +56,8 @@ public interface AccountsService {
 
 	ArrayList<Accounts> selectExpIncomeChart(int usNo);
 
+	int partnerDashboardIncome1(int usNo);
+
+	int partnerDashboardIncome2(int usNo);
+
 }

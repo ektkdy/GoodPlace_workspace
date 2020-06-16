@@ -328,17 +328,25 @@ public class AccountsController {
     
     
     
+    //@ResponseBody
+	//@RequestMapping(value = "partnerDashboardIncome.me" , produces="application/json; charset=utf-8")
+    @RequestMapping("partnerDashboardIncome.me")
+    public void partnerDashboardIncome(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
     
+    	Member loginUser  = (Member)session.getAttribute("loginUser");
+		int usNo = loginUser.getUsNo();
+		
+		int roSum = aService.partnerDashboardIncome1(usNo);
+		int expSum = aService.partnerDashboardIncome2(usNo);
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+		int sum = roSum + expSum;
+		
+		Gson gson = new Gson();
+		response.setContentType("application/json; charset=utf-8");
+		
+		gson.toJson(sum, response.getWriter());
+		
+    }
     
     
     // 406에러 날때 해결방법
