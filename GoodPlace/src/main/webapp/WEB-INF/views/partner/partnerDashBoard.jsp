@@ -101,7 +101,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 						<canvas id="myChart" width="350" height="300"></canvas>
 	                </div>
 	                <br clear="both">
-	                <div class="reservDiv">
+	                <div class="reservDiv" style="height:380px">
 	                    <div class="divTitle">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="rvRoomList.rv?currentPage=1"  style="font-size: 18px;">더보기+</a></span></div>
@@ -124,7 +124,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    </div>
 	                </div>
 	                <br clear="both">
-	                <div class="reservDiv">
+	                <div class="reservDiv" style="height:380px">
 	                    <div class="divTitle">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>체험예약목록</p>
@@ -132,7 +132,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                            <a href="rvExpList.rv?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
-	                    <div style="float:left; margin-top:30px">
+	                    <div style="float:left; margin-top:30px;">
 	                        <table id="expReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
 	                            <thead>
 	                                <tr>
