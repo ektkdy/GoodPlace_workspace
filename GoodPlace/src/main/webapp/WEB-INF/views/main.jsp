@@ -111,19 +111,15 @@
             </ul>
         </div>
         <!-- 슬라이더 끝 -->
-        <div style="padding-left:150px;"><a href="eventForm.bo">이벤트 리스트</a></div>
+        <div style="padding-left:150px;"><a href="eventForm.bo"></a></div>
 
         <!-- 파워등록숙소, 인기숙소 -->
         <div id="roomList">
-            <div><h2>파워숙소</h2></div>
+            <div><h2 style="margin-bottom: 0px; ">파워숙소</h2></div>
             <div class="rooms menu">
                 <!-- ajax사용해서 실시간 불러오기 -->
-                <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();">서울</a> | 
-                <a>부산</a> |
-                <a>제주</a> |
-                <a>강릉</a> |
-                <a>여수</a>
-                <a href="" style="float: right; margin-right: 150px;">파워숙소 더보기 ></a>
+                <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();"></a>
+                <a href="" style="float: right; margin-right: 150px;"></a>
             </div>
             <hr width="950px" style="margin-top: 0px;">
             <!-- 파워등록 숙소 -->
@@ -133,16 +129,12 @@
             </div>
             <br>
             <!-- 인기등록 숙소-->
-            <div><h2>인기숙소</h2></div>
+            <div><h2 style="margin-bottom: 0px; ">인기숙소</h2></div>
                 <!-- ajax사용해서 실시간 불러오기 -->
                 <div class="rooms menu">
                     <!-- ajax사용해서 실시간 불러오기 -->
-                    <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();">서울</a> | 
-                    <a>부산</a> |
-                    <a>제주</a> |
-                    <a>강릉</a> |
-                    <a>여수</a>
-                    <a href="" style="float: right; margin-right: 150px;">인기숙소 더보기 ></a>
+                    <a style="color:#63b8ee; cursor: inherit;" onclick="searchView1();"></a>
+                    <a href="" style="float: right; margin-right: 150px;"></a>
                 </div>
                 <hr width="950px" style="margin-top: 0px;">
             <div class="rooms power" id="popList">
