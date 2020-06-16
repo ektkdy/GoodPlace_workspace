@@ -336,10 +336,14 @@ public class AccountsController {
     	Member loginUser  = (Member)session.getAttribute("loginUser");
 		int usNo = loginUser.getUsNo();
 		
+		
 		int roSum = aService.partnerDashboardIncome1(usNo);
 		int expSum = aService.partnerDashboardIncome2(usNo);
     
-		int sum = roSum + expSum;
+		int sum = 0;
+		if(roSum != 0 || expSum != 0) {
+			sum = roSum + expSum;
+		}
 		
 		Gson gson = new Gson();
 		response.setContentType("application/json; charset=utf-8");

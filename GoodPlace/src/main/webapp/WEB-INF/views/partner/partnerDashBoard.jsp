@@ -93,7 +93,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
 	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="sumIncome">
-	                    		 2,500,000</span>원</a></p>
+	                    		 0</span>원</a></p>
 	                    	</div>
 	                    </div>
 	                </div>
