@@ -37,30 +37,21 @@ public class EchoHandler extends TextWebSocketHandler{
     //클라이언트가 연결 되었을 때 실행
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
-        Map<String, Object> user = session.getAttributes();	// session의 데이터를 가져옴
-        System.out.println(user);
-        Member loginUser = (Member)user.get("loginUser");		// loginUser의 회원정보를 가져옴
-    	System.out.println(user.get("class_class_id"));				// 이메일) gmldud695@naver.com
-        
+        Map<String, Object> user = session.getAttributes();
+        Member loginUser = (Member)user.get("loginUser");// loginUser의 회원정보를 가져온다
+        // 이메일 + 세션 classId
     	String loginUserEmail = loginUser.getEmail() + user.get("class_class_id");
-    	
-    	//if(loginUserEmail.equals("ektkdy@naver.com") ) {	// ektkdy@naver.com // 관리자일 경우
-    	//	loginUserEmail = loginUserEmail + user.get("class_class_id");
-    	//}
-        // 랜덤 세션넘버를
-        System.out.println("세션 id" + session.getId());
-        
-        // 이메일을 세션의 이름과 매핑시킴
-        sessions.put(loginUserEmail, session);// {"gmldud695@naver.com", "idmglanfwa"}	
+
+        // loginUserEmail --> 세션 생성
+        sessions.put(loginUserEmail, session);// {"gmldud695@naver.com1", "idmglanfwa"}	
         logger.info("{} 연결됨", loginUserEmail); 
     }
 
     //클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-    	Map<String, Object> user = session.getAttributes();	// session의 데이터를 가져옴
-        Member loginUser = (Member)user.get("loginUser");	// loginUser의 회원정보를 가져옴
+    	Map<String, Object> user = session.getAttributes();
+        Member loginUser = (Member)user.get("loginUser");
         
     	Message messageVO = Message.convertMessage(message.getPayload());
     	
@@ -73,29 +64,7 @@ public class EchoHandler extends TextWebSocketHandler{
 	    roomVO.setUserEmail(messageVO.getMessageSender()); //유저
 	      
 	    ChatRoom croom =null;
-	    // 받사람과 보내는사람이 같지 않을경우 (정상일경우)
-	    /*
-	    if(!messageVO.getMessageSender().equals(messageVO.getMessageReceiver())) {
-	    	System.out.println("보내는사람과 받는사람이 같지 않음");
-	    	
-	    	if(roomVO.getTutorEmail().equals("ektkdy@naver.com")) {
-		    	if(cDao.selectChatRoom(roomVO) == null ) {// 검색한 채팅방이 없는경우 (보내는 사람 아이디와 받는사람 아이디 and조건문 일치 없는경우)
-		    		  System.out.println("b");
-		    		  cDao.createRoom(roomVO);			  // 새로운 채팅방을 만듬 (insert)
-		    		  System.out.println("d");
-		    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom --> 관리자 이름 + 채팅방 번호
-	
-		    	}else {	 // 검색한 채팅방이 있는경우
-		    		  System.out.println("C");
-		    		  croom = cDao.selectChatRoom(roomVO);// 채팅방 정보 croom
-		    	}
-	    	} else {
-	    		croom = cDao.selectpChatRoom(roomVO);
-	    	}
-	    } else {
-	    	croom = cDao.selectChatRoom(roomVO); // 채팅방 정보 가져옴
-	    }
-	    */
+
 	    if(roomVO.getTutorEmail().equals("admin@goodplace.com")) {
 	    	croom = cDao.selectChatRoom(roomVO);
 	    } else {
@@ -121,15 +90,14 @@ public class EchoHandler extends TextWebSocketHandler{
 	    	result = cDao.insertpMessage(messageVO);														// PMESSAGE테이블에 채팅 입력
 	    }
 	    
-	    
-	    // 자신에게 메세지 보냄							
+	    // 자신에게 전송
 	    sessions.get(messageVO.getMessageSender()+croom.getClass_class_id()).sendMessage(new TextMessage(message.getPayload()));
-	    if(sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()) != null) {	// 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
+	    // 상대방이 세션에 들어와있지 않을 경우 보내지 않음(오류방지)
+	    if(sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()) != null) {	
 	    	sessions.get(messageVO.getMessageReceiver()+croom.getClass_class_id()).sendMessage(new TextMessage(message.getPayload()));
 	    }
 	    
 	    // 
-	    
 	    /*
 	    // 세션에 접속해있는 모두에게 메세지 전송
 	    Iterator<String> sessionIds = sessions.keySet().iterator();

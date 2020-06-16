@@ -105,26 +105,42 @@
             margin-bottom: 50px;
         }
 
-        /*파워등록숙소,인기숙소*/
-        #roomList{
-            width:100%;
-            float:left;
-        }
-        #roomList .menu>a{
-            cursor: pointer;
-        }
-        #roomList .rooms{
-            list-style-type: none;
-        }
-        #roomList .power{
-            margin: 0 0 5% 0;
-            text-align: center;
-        }
-        #roomList .power>li{
-            display: inline-block;
-            text-align: left;
-            float:left;
-        }
+        
+	    /*파워등록숙소,인기숙소*/
+    #roomList{
+
+    }
+    #roomList h2{
+        margin-left: 150px;
+    }
+    #roomList .menu{
+        height: 30px;
+        margin-left: 130px;
+    }
+    #roomList .menu>a{
+        cursor: pointer;
+    }
+    #roomList .rooms{
+        list-style-type: none;
+    }
+    #roomList .power{
+        margin: 0 auto;
+        text-align: center;
+        height: 240px;
+    }
+    #roomList .power>li{
+        display: inline-block;
+        width: 20%;
+    	vertical-align: top;
+    }
+    #roomList .power>li>a{
+    	text-decoration: none;
+    }
+    #roomList .power>li>a>div{
+    	width: 220px;
+    	text-align: left;
+    	margin-left: 10px;
+    }
         .halfWidth{
             width:50%;
             float:left;
@@ -269,39 +285,8 @@
         <!-- 인기등록 숙소-->
         <div id="roomList">
             <div style="padding-top:60px;"><h2>HOT 인기숙소</h2></div>
-            <div class="rooms power">
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-               <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px" style="margin:0 53px 0 0;"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
-                        숙소 타이틀<br>
-                        숙소 간단한 설명<br>
-                        <p style="text-align:center; margin:unset;">n개의 이용후기</p>
-                    </a>
-                </li>
+            <div class="rooms power" id="popList">
+                
             </div>
         </div>
 
@@ -317,7 +302,7 @@
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
 			               	<li class="roomDetail" style="margin:0 20px 20px 20px;">
 			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }&tripStartDate=${ tripStartDate }&tripEndDate=${ tripEndDate }&tripPeople=${ tripPeople }">
-			                        <img src="${pageContext.request.contextPath}/resources/images/user/굿플레이스로고02.jpg" width="260px" height="170px"><br>
+			                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ roomList.changeName }" width="260px" height="170px"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
@@ -357,6 +342,31 @@
     
    	<!-- footer -->
 	<jsp:include page="../common/footer.jsp"/>
-	
+	<script>
+		$.ajax({
+			url:"selectPopList.ro",
+			data:{},		
+			type:"post",
+			success:function(popList){				// 관리자 이메일 정보를 찾아 가져옴
+				var value ="";
+				for(var i in popList){
+					value += "<li style='border: 1px soild black'>" +
+			                    "<a href='powerRoomDe.ro?roNo="+ popList[i].roNo +"'>" +
+			                        "<img src='resources/uploadFiles/" + popList[i].changeName +"' width='220px' height='170px'><br>" +
+			                        	
+			                        "<div>" +
+			                        	popList[i].roomsTitle + "<br>" +
+			                        	popList[i].addBasic + 
+			                        "</div>" +	
+			                    "</a>" +
+			                "</li>";
+				}
+				
+				$("#popList").html(value);
+			},error:function(){
+				console.log("ajax 통신 실패");
+			}
+		})
+	</script>
 </body>
 </html>

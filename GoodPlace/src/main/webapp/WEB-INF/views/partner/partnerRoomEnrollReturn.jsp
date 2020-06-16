@@ -71,7 +71,7 @@
                         <table class="reason_tb">
                             <tr class="pdBtom">
                                 <td width="200px" style="text-align:center; font-size:20px;">거절사유</td>
-                                <td><input type="text" name="deny" value="${ r.deny }" readonly></td>
+                                <td><input type="text" name="deny" value="${ r.deny }" style="width:700px;" readonly></td>
                             </tr>
                             <tr>
                                 <td style="text-align:center; font-size:20px;">상세내용</td>

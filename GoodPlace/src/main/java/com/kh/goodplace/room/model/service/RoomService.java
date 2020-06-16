@@ -6,6 +6,7 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
 
@@ -150,7 +151,8 @@ public interface RoomService {
 	//5. 숙소별 리뷰 조회용 서비스 - 진아
 	ArrayList<Board> getReview(int roNo);
 	
-	
+	//6. 숙소 결제완료시 서비스 - 진아
+	int insertRoomPayToTable(Room room);
 	
 	// ---------- 결제 정보 조회 ----------------
 	
@@ -239,8 +241,11 @@ public interface RoomService {
 
 	
 	
+	int selectRoomPaEmail(int roNo);
 	
+	String partnerEmail(int usNo);
 	
+	int insertRoomChat(ChatRoom cr);
 	
 	
 	

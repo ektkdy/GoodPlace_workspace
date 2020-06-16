@@ -29,7 +29,9 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
@@ -43,6 +45,8 @@ public class RoomController {
     @Autowired // DI
     private BoardService bService;
     
+	@Autowired // DI
+	private MemberService mService;
     
     // 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
 	// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
@@ -691,7 +695,13 @@ public class RoomController {
     }
 	
 	
+	@RequestMapping("reviewInq.ro")
+	public String reviewInq(int reNo, Model model) {
+		Board review = bService.selectReviewOne(reNo);
 	
+		model.addAttribute("review", review);
+		return "user/myInqueryEnroll";
+	}
     // ------------- 숙소 관리 끝 --------------------------------------------------
 	
 	// ------------- 사용자 시작 --------------------------------------------------
@@ -708,7 +718,7 @@ public class RoomController {
 		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
    		System.out.println(" roomList 조회 : " + roomList);
-    	System.out.println("roomList 의 크기 : " + roomList.size());
+    	System.out.println("roomList 	의 크기 : " + roomList.size());
     	
     	//roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 세팅 하자
     	ArrayList<Board> reivew = null;
@@ -823,8 +833,8 @@ public class RoomController {
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
     	
     	// room 객체에 검색 조건 set
-    	room.setStartDays(tripStartDate);
-    	room.setEndDays(tripEndDate);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
     	room.setPeople(tripPeople);
     	
     	// room객체에 숙소태그, 포함사항의 표시형식 보완
@@ -855,7 +865,7 @@ public class RoomController {
     	
     	//System.out.println(room);
     	
-    	
+    	System.out.println("room : " + room);
     	if(room != null) {
     		
     		mv.addObject("at", at);
@@ -905,6 +915,7 @@ public class RoomController {
     	
     	//System.out.println(room);
     	
+    	System.out.println(" 숙소 상세 페이지 넘어가기 전 room : " + room);
     	
     	if(room != null) {
     		
@@ -919,7 +930,73 @@ public class RoomController {
     	return mv;
     	
     }
+    // 숙소상세 -> 숙소 결제페이지로 이동
+    @RequestMapping("insertRoomPay.ro")
+    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addPrice, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    	
+    	
+    	Room room = new Room();
+    	room.setRoNo(roNo);
+    	room.setRoomsTitle(roomsTitle);
+    	room.setUserNo(userNo);
+    	room.setAmount(amount);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
+    	room.setPeople(people);
+    	room.setPrice(price);
+    	System.out.println("room 숙소 결제페이지로 넘기기 전 : " + room);
+    	if(room != null) {
+    		mv.addObject("room", room);
+    		mv.setViewName("user/payRooms");
+    	}else {
+    		mv.addObject("msg", "숙소 결제페이지 이동 실패!!");
+    		mv.setViewName("common/errorPage");
+    	}
+    	return mv;
+    }
     
+    // ROOMSPAY 테이블에 INSERT
+    @RequestMapping("insertRoomPayToTable.ro")
+    public ModelAndView insertRoomPayToTable( int roNo, int usNo, int amount, String tripStartDate, String tripEndDate, int people, String birthday, String concept, String request, HttpSession session, ModelAndView mv) {
+    	
+    	
+    	Room room = new Room();
+    	room.setRoNo(roNo);
+    	room.setUserNo(usNo);
+    	room.setAmount(amount);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
+    	room.setPeople(people);
+    	room.setBirthday(birthday);
+    	room.setConcept(concept);
+    	room.setRequest(request);
+    	
+    	System.out.println("roomspay 테이블에 insert : " + room);
+    	
+    	int result = rService.insertRoomPayToTable(room);
+    	
+    	Member loginUser = (Member)session.getAttribute("loginUser");
+    	// 채팅방 생성
+    	ChatRoom chat = new ChatRoom();
+    	
+    	chat.setUserEmail(loginUser.getEmail()); // 내 아이디
+    	
+    	int r = rService.selectRoomPaEmail(room.getRoNo()); // usno
+    	String email = rService.partnerEmail(r); // 유저 검색
+    	chat.setTutorEmail(email);	// 상대방 이메일
+    	chat.setRoNo(room.getRoNo());	// 숙소번호
+    	
+    	int result1 = rService.insertRoomChat(chat);
+    	
+    	if(result > 0) {
+    		mv.addObject("msg", "숙소 예약이 완료되었습니다.");
+    		mv.setViewName("main");
+    	}else {
+    		mv.addObject("msg", "숙소 결제페이지 이동 실패!!");
+    		mv.setViewName("common/errorPage");
+    	}
+    	return mv;
+    }
  	// ------------- 사용자 끝 --------------------------------------------------
 	
 	

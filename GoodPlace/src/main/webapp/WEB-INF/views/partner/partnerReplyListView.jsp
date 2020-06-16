@@ -47,7 +47,7 @@ body{box-sizing:border-box;}
 			<br>
             <!--  답글전  -->
             <section id="content1" style="flaot:left">
-            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1135px">
+            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1330px">
                 <a href="#">
                     <span style="height: 30px;">HOME</span>&gt;
                 </a>
@@ -170,7 +170,7 @@ body{box-sizing:border-box;}
             <!--  //답글전  -->
             <!-- 답글후 -->
             <section id="content2" style="flaot:left">
-            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1125px">
+            <div class="sitemap" style="float:left; position:absolute; top:70px; left:1330px">
                 <a href="#">
                     <span style="height: 30px;">HOME</span>&gt;
                 </a>

@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div style="text-align: left">
-            	<input type="button" value="1:1채팅">
+            	<input type="button" onclick="window.open('roomChatForm.ro?email=${loginUser.email}&roNo='+'${ rp.roNo }', '_blank', 'width=1000px,height=800px,toolbars=no,scrollbars=no')" value="1:1채팅">
             </div>
             
         </div>

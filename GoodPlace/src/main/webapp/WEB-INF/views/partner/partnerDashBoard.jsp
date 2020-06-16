@@ -93,7 +93,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
 	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="sumIncome">
-	                    		 2,500,000</span>원</a></p>
+	                    		 0</span>원</a></p>
 	                    	</div>
 	                    </div>
 	                </div>
@@ -101,7 +101,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 						<canvas id="myChart" width="350" height="300"></canvas>
 	                </div>
 	                <br clear="both">
-	                <div class="reservDiv">
+	                <div class="reservDiv" style="height:380px">
 	                    <div class="divTitle">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/step_icon2.png" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>숙소예약목록</p><span style="float:right; margin-right:10px;"><a href="rvRoomList.rv?currentPage=1"  style="font-size: 18px;">더보기+</a></span></div>
@@ -124,7 +124,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    </div>
 	                </div>
 	                <br clear="both">
-	                <div class="reservDiv">
+	                <div class="reservDiv" style="height:380px">
 	                    <div class="divTitle">
 	                        <img src="${ pageContext.servletContext.contextPath }/resources/images/partner/exp.jpg" style="float:left; padding-left:10px; vertical-align:bottom">
 	                        <p>체험예약목록</p>
@@ -132,7 +132,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                            <a href="rvExpList.rv?currentPage=1" style="font-size: 18px;">더보기+</a>
 	                        </span>
 	                    </div>
-	                    <div style="float:left; margin-top:30px">
+	                    <div style="float:left; margin-top:30px;">
 	                        <table id="expReservationTb"class="reservTb" cellpadding="0" cellspacing="0">
 	                            <thead>
 	                                <tr>

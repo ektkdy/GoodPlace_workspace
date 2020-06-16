@@ -129,4 +129,6 @@ public class Room {
 	private String region;			//지역 표시 ex)서울특별시 강남구
 	ArrayList<Board> reviewList;	// Review테이블
 	private String statusString;	//에러 막으려고 만듬
+	private String tripStartDate;	// 예약시작일
+	private String tripEndDate;	// 예약시작일
 }

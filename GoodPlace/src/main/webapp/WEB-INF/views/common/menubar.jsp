@@ -12,6 +12,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style>
+	a{text-decoration:none}
 	body{
 		margin:0px;
 	}
@@ -81,7 +82,6 @@
 	#navi>li {
 	    position: relative;
 	    float: left;
-	    font-weight: 600;
 	    font-size: 19px;
 	    height: 40px;
 	    text-align: center;
@@ -112,24 +112,21 @@
 	}
 	/*로그인 버튼 */
 	.loginBtn {
-	    box-shadow:inset 0px 1px 0px 0px #bee2f9;
-	    background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
-	    background-color:#63b8ee;
-	    border-radius:6px;
-	    border:1px solid #3866a3;
+	    border-radius:5px;
+	    border:1px solid #fff;
 	    display:inline-block;
 	    cursor:pointer;
-	    color:#14396a;
+	    color:#fff;
 	    font-family:Arial;
 	    font-size:15px;
-	    font-weight:bold;
-	    padding:6px 37px;
+	    padding:6px 35px;
 	    text-decoration:none;
-	    text-shadow:0px 1px 0px #7cacde;
 	}
 	.loginBtn:hover {
-	    background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
-	    background-color:#468ccf;
+	    background:#fff;
+	    color:#6264cf;
+	    font-weight:550;
+	    border:1px solid #6264cf;
 	}
 	.loginBtn:active {
 	    position:relative;
@@ -212,10 +209,18 @@
         z-index: 1111111111;
         background-color: white;
         font-size: 16px;
+        border: 1px solid #5355ce;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px
     }
     .drop-down ul>li{
         padding: 8px 0px;
-        border: rgb(0, 0, 0) 1px solid;
+        color:#333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .round{
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px
     }
     .drop-down ul>li>a{
         text-decoration: none;
@@ -224,10 +229,10 @@
     li:hover > ul{
         display:block;
     }
-    .drop-down ul a:hover{
-        background: rgb(71,71,71);
+    .exp:hover{
+       background: #d3d8f4;
         border:0px;
-        color:#ffffff;
+        color:#fff;
         text-decoration:none;
     }
     .drop-down .drop-down ul {
@@ -275,10 +280,10 @@
 	                	<c:when test="${ empty loginUser }">
 	                		<!-- 로그인 전 -->
 	                		<li style="margin-top: 10px;">
-		                        <a class="list qBtn" href="enrollForm.me" style="font-size: 15px; margin-left: 50px;">회원가입</a>
+		                        <a class="list qBtn" href="enrollForm.me" style="font-size: 15px; margin-left: 20px;">회원가입</a>
 		                    </li>
 		                    <li style="margin-top: 10px;">
-		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 30px;">로그인</a>
+		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 35px;">로그인</a>
 		                    </li>
 	                	</c:when>
 						<c:otherwise>
@@ -299,17 +304,17 @@
 		                        <div id="personalImg" style="margin-left: 10px;">
 
 		                            <li class="drop-down" style="top: 5px;">
-		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px; background-color: darkblue;"></a>
+		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px;"></a>
 		                                <ul>
-		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
-		                                    <li><a href="">my굿플레이스</a></li>
-		                                    <li><a href="ReserveForm.ro">숙소예약내역</a></li>
-		                                    <li><a href="wishList.bo">위시리스트</a></li>
-		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
+		                                    <li class="exp" style="background-color: #6264cf; color:white">${ loginUser.userName }님 환영합니다</li>
+		                                    <li class="exp"><a href="">my굿플레이스</a></li>
+		                                    <li class="exp"><a href="ReserveForm.ro">숙소예약내역</a></li>
+		                                    <li class="exp"><a href="wishList.bo">위시리스트</a></li>
+		                                    <li class="exp"><a href="partnerMain.me">파트너 페이지 가기</a></li>
 		                                    <c:if test="${ loginUser.userKind eq 0 }">
-		                                    	<li><a href="adminForm.me">관리자페이지</a></li>
+		                                    	<li class="exp"><a href="adminForm.me">관리자페이지</a></li>
 		                                    </c:if>
-		                                    <li><a href="logout.me">로그아웃</a></li>
+		                                    <li class="exp" class="round"><a href="logout.me">로그아웃</a></li>
 		                                </ul>
 		                            </li>
 		                        </div>
@@ -339,7 +344,7 @@
         </div>
         <!-- 채팅박스 -->
         <div class="chat_content" id="messageArea" style="box-shadow: lightgray;">
-
+			<div><div class="chat_common"><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/tutorChangeName" width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_admin'>안녕하세요. GoodPlace입니다. 무엇을 도와드릴까요?</div><div class='chat_date chat_adminDate sysdate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'></div></div>
 <!-- 
             <div>
                 <div class="chat_common">
@@ -400,17 +405,19 @@
 	    	$("#sidebox").css("display","block");
 	    	if(sock == null){
 				$.ajax({
-					// ajax1.do?name=홍길동&age=20
 					url:"selectTutor",
-					data:{email:"admin@goodplace.com",
-						  loginEmail : "${loginUser.email}"},		// 관리자 이메일
+					data:{email:"admin@goodplace.com",			// 관리자 이메일
+						  loginEmail : "${loginUser.email}"},	// 내 이메일
 					type:"post",
-					success:function(tutor){				// 관리자 이메일 정보를 찾아 가져옴
-						sock = new SockJS("http://localhost:8888/goodplace/echo/");	// 사용자 세션 연결 (세션ID : 사용자이메일)
+					success:function(tutor){ 
+						sock = new SockJS("http://192.168.30.197:8888/goodplace/echo/");	     // 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
 						
-						$("#tutorChangeName").val(tutor.changeName);	// 관리자 이메일로 프로필 사진을 가져옴
+						var Now = new Date();						 	// Now --> 메세지를 보낼때마다 현재시간으로 초기화 됨
+				  	  	var a = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간 포맷
+						$(".sysdate").text(a);
+						$("#tutorChangeName").val(tutor.changeName);	                 // 관리자 이메일로 프로필 사진을 가져옴
 					},error:function(){
 						console.log("ajax 통신 실패");
 					}
