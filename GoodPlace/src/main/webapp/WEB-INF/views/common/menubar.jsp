@@ -12,6 +12,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style>
+	a{text-decoration:none}
 	body{
 		margin:0px;
 	}
@@ -111,24 +112,21 @@
 	}
 	/*로그인 버튼 */
 	.loginBtn {
-	    box-shadow:inset 0px 1px 0px 0px #bee2f9;
-	    background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
-	    background-color:#63b8ee;
-	    border-radius:6px;
-	    border:1px solid #3866a3;
+	    border-radius:5px;
+	    border:1px solid #fff;
 	    display:inline-block;
 	    cursor:pointer;
-	    color:#14396a;
+	    color:#fff;
 	    font-family:Arial;
 	    font-size:15px;
-	    font-weight:bold;
-	    padding:6px 37px;
+	    padding:6px 35px;
 	    text-decoration:none;
-	    text-shadow:0px 1px 0px #7cacde;
 	}
 	.loginBtn:hover {
-	    background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
-	    background-color:#468ccf;
+	    background:#fff;
+	    color:#6264cf;
+	    font-weight:550;
+	    border:1px solid #6264cf;
 	}
 	.loginBtn:active {
 	    position:relative;
@@ -282,10 +280,10 @@
 	                	<c:when test="${ empty loginUser }">
 	                		<!-- 로그인 전 -->
 	                		<li style="margin-top: 10px;">
-		                        <a class="list qBtn" href="enrollForm.me" style="font-size: 15px; margin-left: 50px;">회원가입</a>
+		                        <a class="list qBtn" href="enrollForm.me" style="font-size: 15px; margin-left: 20px;">회원가입</a>
 		                    </li>
 		                    <li style="margin-top: 10px;">
-		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 30px;">로그인</a>
+		                        <a href="loginForm.me" class="list loginBtn" style="margin-left: 35px;">로그인</a>
 		                    </li>
 	                	</c:when>
 						<c:otherwise>

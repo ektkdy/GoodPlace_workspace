@@ -241,7 +241,11 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Board> getReview(int roNo) {
 		return rDao.getReview(sqlSession, roNo);
 	}
-
+	
+	@Override
+	public int insertRoomPayToTable(Room room) {
+		return rDao.insertRoomPayToTable(sqlSession, room);
+	}
 	// --------- 숙소조회 끝 -------------------------
 	
 	//--------------- 예약관리 시작 -------------------
@@ -307,6 +311,8 @@ public class RoomServiceImpl implements RoomService{
 	public ArrayList<Room> roomReservation(int usNo) {
 		return rDao.roomReservation(sqlSession, usNo);
 	}
+
+
 
 
 

@@ -341,11 +341,17 @@ public class AccountsController {
 		int expSum = aService.partnerDashboardIncome2(usNo);
     
 		int sum = 0;
-		if(roSum != 0 || expSum != 0) {
-			sum = roSum + expSum;
+		
+		if(roSum == 0) {
+			roSum=0;
+		}
+		if(expSum == 0) {
+			expSum=0;
 		}
 		
+		sum = roSum + expSum;
 		Gson gson = new Gson();
+		
 		response.setContentType("application/json; charset=utf-8");
 		
 		gson.toJson(sum, response.getWriter());
