@@ -33,6 +33,7 @@
             background: #fff;
             box-shadow: -1px 0px 10px #e8e8e8;
             border-radius: 30px;
+            text-decoration:none;
             }
         
         .tab_st input {
@@ -42,16 +43,17 @@
         .tab_st button {
             height:45px;
             margin:10px 5px;
-            float: left;
+            float: none;
             width:160px;
             border-radius:25px;
             font-weight: 600;
             text-align:center;
             color:#333;
             background:#fff ;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 500;
             border: none;
+            text-decoration:none;
         }
         .tab_st button:hover {
             cursor: pointer;
@@ -77,10 +79,10 @@
     <div style="height:100%">
         <div class="tab_st" >
         	<!-- class="button_on" style="margin-left: 10px;" -->
-            <button><a href="wishList.bo">위시리스트</a></button>
-            <button><a href="ReserveForm.ro">예약내역</a></button>
-            <button><a href="mpExp.exp">나의체험</a></button>
-            <button><a href="inQuiry.bo">1:1문의</a></button>
+            <button><a href="wishList.bo" style="text-decoration:none">위시리스트</a></button>
+            <button><a href="ReserveForm.ro" style="text-decoration:none">예약내역</a></button>
+            <button><a href="mpExp.exp" style="text-decoration:none">나의체험</a></button>
+            <button><a href="inQuiry.bo" style="text-decoration:none">1:1문의</a></button>
         </div>
      	<br>
      	
