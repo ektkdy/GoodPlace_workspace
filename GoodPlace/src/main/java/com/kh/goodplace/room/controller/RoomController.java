@@ -714,7 +714,7 @@ public class RoomController {
 		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
    		System.out.println(" roomList 조회 : " + roomList);
-    	System.out.println("roomList 의 크기 : " + roomList.size());
+    	System.out.println("roomList 	의 크기 : " + roomList.size());
     	
     	//roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 세팅 하자
     	ArrayList<Board> reivew = null;

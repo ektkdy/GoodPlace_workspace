@@ -371,25 +371,13 @@
 	            </div>
 	            
 	        </div>
-	        
-		    <!-- 페이징 바 -->
-		    <div class="pagingBar">
-		        <button>&lt;</button>
-		        <button id="currentPage">1</button>
-		        <button>2</button>
-		        <button>3</button>
-		        <button>4</button>
-		        <button>5</button>            
-		        <button>&gt;</button>
-		    </div>
-	
 		</div>
 	
 
 	
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;${ room.minPeople }인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div style="height:54px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         <h2 style="font-weight:unset; padding-top:10px;">${ room.startDays } ~ ${ room.endDays }</h2>
@@ -438,7 +426,11 @@
             </div>
 
         </div>
-
+		<c:if test="${ room.reviewList eq null}">
+		   	<div class="fullWidth"  class="marginBottom_10px padding_10px replyStyle2">
+		   		<h2>등록된 후기가 없습니다.</h2>
+		   	</div>		
+		</c:if>
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
             <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
@@ -540,43 +532,7 @@
         $('#payRoom').click(function(){
         	$("#showPayRooms").submit();
         });
-        /*
-        var IMP = window.IMP;
-        IMP.init('imp13454636'); 	
-        
-   		$('#payRoom').click(function(){
-          IMP.request_pay({
-               pg : 'inicis', // version 1.1.0부터 지원.
-               pay_method : 'card',
-               merchant_uid : 'merchant_' + new Date().getTime(),  // 상점 거래 ID
-               name : '주문명:${ room.roomsTitle }',               	// 숙소이름
-               amount : 100,                              		// 가격
-               buyer_email : '${ loginUser.email }',					// 결제자이메일
-               buyer_name : '${ loginUser.userName }',						// 결제자이름
-               buyer_tel : '${ loginUser.phone }',						// 결제자 휴대폰번호
-               buyer_addr : '서울특별시 강남구 삼성동',
-               buyer_postcode : '123-456',
-               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-           }, function(rsp) {
-               if ( rsp.success ) {	// 결제 성공			
-                   var msg = '결제가 완료되었습니다.';
-                   msg += '고유ID : ' + rsp.imp_uid;
-                   msg += '상점 거래ID : ' + rsp.merchant_uid;
-                   msg += '결제 금액 : ' + rsp.paid_amount;
-                   msg += '카드 승인번호 : ' + rsp.apply_num;
-                   
-                   $('#payNo').val(rsp.imp_uid);
-                   $('#reserveNo').val('R-' +  rsp.imp_uid);
-                   
-                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
-                   $("#resultForm").submit();
-               } else {	// 결제 실패
-                   var msg = '결제에 실패하였습니다.';
-                   msg += '에러내용 : ' + rsp.error_msg;
-               }
-               alert(msg);
-           });
-       	}); */
+
         // 후기 내용 저장용 필드
         var reviewContent = "";
         // 댓글달기
