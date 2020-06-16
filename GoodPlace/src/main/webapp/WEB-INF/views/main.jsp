@@ -98,7 +98,7 @@
             <ul class="bxslider"> 
                 <li>
                     <!-- <div style="position:absolute;"><h1>첫 번째 이미지</h1></div> -->
-                    <img src="resources/images/user/eventSlider1.PNG" title="캡션을 지정 할 수 있다."/>
+                    <img src="resources/images/user/eventSlider1.PNG"/>
                 </li>
                 <li>
                     <!-- <div style="position:absolute;"><h1>두 번째 이미지</h1></div> -->
@@ -143,7 +143,6 @@
         </div>
     </div><!-- /content -->
 	
-	<input type="button" onclick="location.href='roomChatForm.ro?email=${loginUser.email}&roNo=1'" value="숙소채팅 테스트">
 	<!-- footer -->
 	<jsp:include page="common/footer.jsp"/>
 	
@@ -164,11 +163,10 @@
     });
     $(function(){
         $.ajax({
-    		// ajax1.do?name=홍길동&age=20
     		url:"selectRoomList.ro",
     		data:{},		// 관리자 이메일
     		type:"post",
-    		success:function(powerList){				// 관리자 이메일 정보를 찾아 가져옴
+    		success:function(powerList){				
 				var value ="";
 				for(var i in powerList){
 					value += "<li style='border: 1px soild black'>" +
@@ -190,9 +188,8 @@
     	})
     	
     	$.ajax({
-    		// ajax1.do?name=홍길동&age=20
     		url:"selectPopList.ro",
-    		data:{},		// 관리자 이메일
+    		data:{},		
     		type:"post",
     		success:function(popList){				// 관리자 이메일 정보를 찾아 가져옴
 				var value ="";

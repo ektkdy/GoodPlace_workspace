@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
-import com.kh.goodplace.common.model.vo.Power;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.dao.RoomDao;
 import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
@@ -314,8 +314,16 @@ public class RoomServiceImpl implements RoomService{
 
 
 
+	public int selectRoomPaEmail(int roNo) {
+		return rDao.selectRoomPaEmail(sqlSession, roNo);
+	}
 
-
-
+	public String partnerEmail(int usNo) {
+		return rDao.partnerEmail(sqlSession, usNo);
+	}
+	
+	public int insertRoomChat(ChatRoom cr) {
+		return rDao.insertRoomChat(sqlSession, cr);
+	}
 	
 }

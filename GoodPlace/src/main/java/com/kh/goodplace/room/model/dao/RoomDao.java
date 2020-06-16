@@ -10,6 +10,7 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
 
@@ -328,6 +329,20 @@ public class RoomDao {
 	public ArrayList<Room> roomReservation(SqlSessionTemplate sqlSession, int usNo){
 		
 		return  (ArrayList)sqlSession.selectList("roomMapper.roomReservation", usNo);
+	}
+	
+	
+	public int selectRoomPaEmail(SqlSessionTemplate sqlSession, int roNo) {
+		return sqlSession.selectOne("roomMapper.selectRoomPaEmail", roNo);
+	}
+	
+	public String partnerEmail(SqlSessionTemplate sqlSession, int usNo) {
+		return sqlSession.selectOne("roomMapper.partnerEmail", usNo);
+	}
+	
+	public int insertRoomChat(SqlSessionTemplate sqlSession, ChatRoom cr) {
+		System.out.println(cr);
+		return sqlSession.insert("roomMapper.insertRoomChat", cr);
 	}
 
 }

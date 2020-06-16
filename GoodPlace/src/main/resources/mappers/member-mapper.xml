@@ -331,9 +331,7 @@
 		WHERE TO_CHAR(PAY_DATE, 'YY/MM') = TO_CHAR(SYSDATE, 'YY/MM') 
 	</select>
 	
-	
-	
-	
+
 	
 	<!-- 관리자 끝 -->
 	
