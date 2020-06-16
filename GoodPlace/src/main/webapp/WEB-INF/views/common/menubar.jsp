@@ -405,17 +405,16 @@
 	    	$("#sidebox").css("display","block");
 	    	if(sock == null){
 				$.ajax({
-					// ajax1.do?name=홍길동&age=20
 					url:"selectTutor",
-					data:{email:"admin@goodplace.com",
-						  loginEmail : "${loginUser.email}"},		// 관리자 이메일
+					data:{email:"admin@goodplace.com",			// 관리자 이메일
+						  loginEmail : "${loginUser.email}"},	// 내 이메일
 					type:"post",
-					success:function(tutor){				// 관리자 이메일 정보를 찾아 가져옴
-						sock = new SockJS("http://localhost:8888/goodplace/echo/");	// 사용자 세션 연결 (세션ID : 사용자이메일)
+					success:function(tutor){ 
+						sock = new SockJS("http://localhost:8888/goodplace/echo/");	     // 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
-						
-						$("#tutorChangeName").val(tutor.changeName);	// 관리자 이메일로 프로필 사진을 가져옴
+
+						$("#tutorChangeName").val(tutor.changeName);	                 // 관리자 이메일로 프로필 사진을 가져옴
 					},error:function(){
 						console.log("ajax 통신 실패");
 					}
