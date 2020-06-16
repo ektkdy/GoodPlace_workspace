@@ -469,7 +469,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 					 	"<td>" + list[i].userName +"</td>" + 
 					 	"<td>" + start.substr(0,10) +"</td>" +
 					 	"<td>" +  list[i].expTitle + "</td>" +
-					 	"<td>예약확정</td>" +
+					 	"<td style='color:#024d9a'>예약대기</td>" +
 					 	"</tr>";
  					}
  				}	 		
@@ -516,7 +516,7 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
  										 	"<td>" + list[i].userName +"</td>" + 
  										 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
  										 	"<td>" +  list[i].roomsTitle + "</td>" +
- 										 	"<td>예약확정</td>" +
+ 										 	"<td style='color:#024d9a'>예약대기</td>" +
  										"</tr>";
  									  }
  					}	 		
