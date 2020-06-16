@@ -829,8 +829,8 @@ public class RoomController {
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
     	
     	// room 객체에 검색 조건 set
-    	room.setStartDays(tripStartDate);
-    	room.setEndDays(tripEndDate);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
     	room.setPeople(tripPeople);
     	
     	// room객체에 숙소태그, 포함사항의 표시형식 보완
@@ -911,6 +911,7 @@ public class RoomController {
     	
     	//System.out.println(room);
     	
+    	System.out.println(" 숙소 상세 페이지 넘어가기 전 room : " + room);
     	
     	if(room != null) {
     		
@@ -924,6 +925,30 @@ public class RoomController {
     	
     	return mv;
     	
+    }
+    
+    @RequestMapping("insertRoomPay.ro")
+    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    	
+    	
+    	Room room = new Room();
+    	room.setRoNo(roNo);
+    	room.setRoomsTitle(roomsTitle);
+    	room.setUserNo(userNo);
+    	room.setAmount(addAmount);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
+    	room.setPeople(people);
+    	room.setPrice(price);
+    	System.out.println("room 숙소 결제페이지로 넘기기 전 : " + room);
+    	if(room != null) {
+    		mv.addObject("room", room);
+    		mv.setViewName("user/payRooms");
+    	}else {
+    		mv.addObject("msg", "숙소 결제페이지 이동 실패!!");
+    		mv.setViewName("common/errorPage");
+    	}
+    	return mv;
     }
     
  	// ------------- 사용자 끝 --------------------------------------------------
