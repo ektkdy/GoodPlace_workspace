@@ -49,15 +49,17 @@
 			editable: false,
 			allDaySlot: false,
 			eventLimit: true, // allow "more" link when too many events
-			minTime: '00:00:00',
+			minTime: '11:00:00',
 			maxTime: '24:00:00',
 			contentHeight: 'auto',
 			events : [
 
 				<c:forEach var="r" items="${list}">
 					{
+						title:'${r.roomsTitle}',
 						start:'${r.startDays}',
-						end:'${r.endDays}'
+						end:'${r.endDays}',
+						color: "#77a1e0"
 					},
 				</c:forEach>
 

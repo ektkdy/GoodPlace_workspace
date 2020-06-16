@@ -670,7 +670,7 @@ public class RoomController {
     public String selectPopList() {
     	ArrayList<Room> popAllList = rService.selectPopList();
     	
-    	System.out.println(popAllList);
+    	//System.out.println(popAllList);
     	
     	Collections.shuffle(popAllList);
     	
@@ -853,7 +853,7 @@ public class RoomController {
     	room.setReviewList(rService.getReview(roNo));
     	//System.out.println("reviewList : " + rService.getReview(roNo));
     	
-    	System.out.println(room);
+    	//System.out.println(room);
     	
     	
     	if(room != null) {
