@@ -231,7 +231,7 @@ $('#ing').click(function(){
 								 	"<td>" + list[i].userName +"</td>" + 
 								 	"<td>" + start.substr(0,10) + " ~ " + end.substr(0,10) + "</td>" +
 								 	"<td>" +  list[i].roomsTitle + "</td>" +
-								 	"<td><button class='confirm_btn' disabled>예약완료</button></td>" +
+								 	"<td><button class='confirm_btn' disabled>확정하기</button></td>" +
 									"</tr>";
 									
 						selectCon += 
