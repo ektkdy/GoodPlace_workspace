@@ -124,9 +124,9 @@
 	}
 	.loginBtn:hover {
 	    background:#fff;
-	    color:#333;
+	    color:#6264cf;
 	    font-weight:550;
-	    border:1px solid 
+	    border:1px solid #6264cf;
 	}
 	.loginBtn:active {
 	    position:relative;
