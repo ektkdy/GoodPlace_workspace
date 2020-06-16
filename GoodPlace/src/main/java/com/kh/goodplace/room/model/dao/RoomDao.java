@@ -247,9 +247,12 @@ public class RoomDao {
 		return sqlSession.selectOne("memberMapper.selectPartner", usNo);
 	}
 
-	
 	public ArrayList<Board> getReview(SqlSessionTemplate sqlSession, int roNo){
 		return (ArrayList)sqlSession.selectList("roomMapper.selectReviewList", roNo);
+	}
+	
+	public int insertRoomPayToTable(SqlSessionTemplate sqlSession, Room room){
+		return sqlSession.update("roomMapper.insertRoompay", room);
 	}
 	
 	// --------- 숙소조회 끝 -----------------

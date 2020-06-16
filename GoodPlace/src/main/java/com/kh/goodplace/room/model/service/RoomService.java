@@ -150,7 +150,8 @@ public interface RoomService {
 	//5. 숙소별 리뷰 조회용 서비스 - 진아
 	ArrayList<Board> getReview(int roNo);
 	
-	
+	//6. 숙소 결제완료시 서비스 - 진아
+	int insertRoomPayToTable(Room room);
 	
 	// ---------- 결제 정보 조회 ----------------
 	

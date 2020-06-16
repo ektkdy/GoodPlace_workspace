@@ -951,6 +951,33 @@ public class RoomController {
     	return mv;
     }
     
+    @RequestMapping("insertRoomPayToTable.ro")
+    public ModelAndView insertRoomPayToTable( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    	
+    	
+    	Room room = new Room();
+    	room.setRoNo(roNo);
+    	room.setRoomsTitle(roomsTitle);
+    	room.setUserNo(userNo);
+    	room.setAmount(addAmount);
+    	room.setTripStartDate(tripStartDate);
+    	room.setTripEndDate(tripEndDate);
+    	room.setPeople(people);
+    	room.setPrice(price);
+    	
+    	System.out.println("roomspay 테이블에 insert : " + room);
+    	
+    	int result = rService.insertRoomPayToTable(room);
+    	
+    	if(result > 0) {
+    		mv.addObject("msg", "숙소 예약이 완료되었습니다.");
+    		mv.setViewName("main");
+    	}else {
+    		mv.addObject("msg", "숙소 결제페이지 이동 실패!!");
+    		mv.setViewName("common/errorPage");
+    	}
+    	return mv;
+    }
  	// ------------- 사용자 끝 --------------------------------------------------
 	
 	

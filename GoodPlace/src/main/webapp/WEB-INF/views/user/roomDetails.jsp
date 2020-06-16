@@ -541,7 +541,7 @@
         
         // 예약하기 -> 결제페이지
         $('#payRoom').click(function(){
-        	$("#showPayRooms").submit;
+        	$("#showPayRooms").submit();
         });
         /*
         var IMP = window.IMP;
