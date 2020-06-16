@@ -81,7 +81,6 @@
 	#navi>li {
 	    position: relative;
 	    float: left;
-	    font-weight: 600;
 	    font-size: 19px;
 	    height: 40px;
 	    text-align: center;
@@ -212,10 +211,18 @@
         z-index: 1111111111;
         background-color: white;
         font-size: 16px;
+        border: 1px solid #5355ce;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px
     }
     .drop-down ul>li{
         padding: 8px 0px;
-        border: rgb(0, 0, 0) 1px solid;
+        color:#333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .round{
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px
     }
     .drop-down ul>li>a{
         text-decoration: none;
@@ -224,10 +231,10 @@
     li:hover > ul{
         display:block;
     }
-    .drop-down ul a:hover{
-        background: rgb(71,71,71);
+    .exp:hover{
+       background: #d3d8f4;
         border:0px;
-        color:#ffffff;
+        color:#fff;
         text-decoration:none;
     }
     .drop-down .drop-down ul {
@@ -299,17 +306,17 @@
 		                        <div id="personalImg" style="margin-left: 10px;">
 
 		                            <li class="drop-down" style="top: 5px;">
-		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px; background-color: darkblue;"></a>
+		                                <a><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${loginUser.changeName}" width="40px" height="40px" style="border-radius: 50px;"></a>
 		                                <ul>
-		                                    <li style="background-color: rgb(43, 41, 150); color:white">${ loginUser.userName }님 환영합니다</li>
-		                                    <li><a href="">my굿플레이스</a></li>
-		                                    <li><a href="ReserveForm.ro">숙소예약내역</a></li>
-		                                    <li><a href="wishList.bo">위시리스트</a></li>
-		                                    <li><a href="partnerMain.me">파트너 페이지 가기</a></li>
+		                                    <li class="exp" style="background-color: #6264cf; color:white">${ loginUser.userName }님 환영합니다</li>
+		                                    <li class="exp"><a href="">my굿플레이스</a></li>
+		                                    <li class="exp"><a href="ReserveForm.ro">숙소예약내역</a></li>
+		                                    <li class="exp"><a href="wishList.bo">위시리스트</a></li>
+		                                    <li class="exp"><a href="partnerMain.me">파트너 페이지 가기</a></li>
 		                                    <c:if test="${ loginUser.userKind eq 0 }">
-		                                    	<li><a href="adminForm.me">관리자페이지</a></li>
+		                                    	<li class="exp"><a href="adminForm.me">관리자페이지</a></li>
 		                                    </c:if>
-		                                    <li><a href="logout.me">로그아웃</a></li>
+		                                    <li class="exp" class="round"><a href="logout.me">로그아웃</a></li>
 		                                </ul>
 		                            </li>
 		                        </div>
