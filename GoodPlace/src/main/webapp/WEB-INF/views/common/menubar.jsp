@@ -410,7 +410,7 @@
 						  loginEmail : "${loginUser.email}"},	// 내 이메일
 					type:"post",
 					success:function(tutor){ 
-						sock = new SockJS("http://localhost:8888/goodplace/echo/");	     // 사용자 세션 연결 (세션ID : 사용자이메일)
+						sock = new SockJS("http://192.168.30.197:8888/goodplace/echo/");	     // 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
 						
