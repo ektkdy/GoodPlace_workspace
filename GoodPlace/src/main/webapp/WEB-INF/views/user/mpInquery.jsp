@@ -108,7 +108,7 @@ section {
 				</div>
 
 				<div>
-					<table class="common_tb" cellpadding="0" cellspacing="0">
+					<table id="subBtn" class="common_tb" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
 								<td width="150px">상담구분</td>
@@ -120,10 +120,8 @@ section {
 						<tbody>
 							<c:forEach items="${ qList }" var="qList">
 								
-									<tr id="subBtn">
-										<form action="inQuiryDt.bo" method="post">
-										<input type="hidden" name="inNo" value="${ qList.inNo }">
-										
+									<tr id="">
+										<td style="display:none">${ qList.inNo }</td>
 										<c:choose>
 											<c:when test="${  qList.inqCategory eq 1 }">
 												<td>일반</td>
@@ -154,7 +152,6 @@ section {
 												<td>답변완료</td>
 											</c:otherwise>
 										</c:choose>
-										</form>
 									</tr>
 								
 							</c:forEach>
@@ -165,21 +162,7 @@ section {
 			</div>
 		</div>
 
-		<!-- 페이징 바 -->
-		<div class="pagingBar">
-			<button>&lt;</button>
-			<button style="background-color: rgb(24, 76, 136); color: white;">n</button>
-			&nbsp;
-			<button>n</button>
-			&nbsp;
-			<button>n</button>
-			&nbsp;
-			<button>n</button>
-			&nbsp;
-			<button>n</button>
-			&nbsp;
-			<button>&gt;</button>
-		</div>
+	
 
 		<!-- /content -->
 		<br clear="both">
@@ -189,9 +172,14 @@ section {
 	<!-- footer -->
 	<jsp:include page="../common/footer.jsp" />
 	<script>
-		$("#subBtn").click(function(){
-			$(this).children().eq(0).submit();
-		})
+		$(function(){
+			 $("#subBtn tbody tr").click(function(){
+                 location.href="inQuiryDt.bo?inNo=" + $(this).children().eq(0).text();
+              });  
+		});
+		//$("#subBtn").click(function(){
+		//	$(this).children().eq(0).submit();
+		//})
 	</script>
 </body>
 </html>
