@@ -153,7 +153,7 @@
 			<c:forEach items="${ expList }" var="exp" varStatus="status">
 	            <div style="width:100%;" class="expContainer">
 	                <div style="width:94%;"  class="expArea">
-	                    <div style="height:216px; width:292px;">
+	                    <div style="height:216px; width:292px;" class="expContainerSubmit">
 	                        <img src="${pageContext.request.contextPath}/resources/images/user/${ exp.changeName }" width="100%;" height="100%;"/>
 	                    </div>
 	                    <div style="height:auto; width:830px; float:left;">
@@ -175,6 +175,7 @@
 	                <form action="showExp.exp" id="showExpDetail">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
 	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+	                	<input type="hidden" name="" value="${ exp.expDateString }"/>
 	                </form>
 	            </div>
           	</c:forEach>
@@ -214,7 +215,7 @@
     
     	// 체험상세 페이지로 이동
     	$(function(){
-    		$(".expContainer").click(function(){
+    		$(".expContainerSubmit").click(function(){
     			$("#showExpDetail").submit();
     		});
     	});

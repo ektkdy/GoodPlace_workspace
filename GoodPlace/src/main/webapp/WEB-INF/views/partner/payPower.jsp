@@ -132,7 +132,7 @@
 	    		    buyer_tel : '010-1234-5678',
 	    		    buyer_addr : '서울특별시 강남구 삼성동',
 	    		    buyer_postcode : '123-456',
-	    		    m_redirect_url : 'http://192.168.30.232:8888/goodplace'
+	    		    m_redirect_url : 'http://localhost:8888/goodplace'
 	    		}, function(rsp) {	// callback
 	    		    if ( rsp.success ) {
 	    		        var msg = '결제가 완료되었습니다.';

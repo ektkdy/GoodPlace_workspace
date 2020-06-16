@@ -92,7 +92,8 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 	                    	</div>
 	                    	<div style="float:left; height: 35%;  width:100%; text-align:center;">
 	                    		<p style="font-size:15px; font-weigh:500">이번달 총 수입<p>
-	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="amount">2,500,000</span>원</a></p>
+	                    		 <p class="dash_amount"><a href="partnerIncome.ac?currentPage=1"><span class="amount" id="sumIncome">
+	                    		 0</span>원</a></p>
 	                    	</div>
 	                    </div>
 	                </div>
@@ -305,6 +306,21 @@ table tr:hover{background:#f1f1f1; cursor:pointer}
 				
 			}, error:function(){
 				console.log("월별 수입내역 조회용 ajax 실패");
+			}
+		});
+	});
+</script>
+
+<script>
+	$(function(){
+		$.ajax({
+			url:"partnerDashboardIncome.me",
+			success:function(sum){
+				//console.log(sum);
+				var sum = sum;
+				$("#sumIncome").text(sum);
+			}, error:function(){
+				console.log("이번달 총수입 내역 조회용 ajax 실패")
 			}
 		});
 	});

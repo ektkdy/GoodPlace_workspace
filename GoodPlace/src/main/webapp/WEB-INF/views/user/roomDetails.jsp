@@ -454,10 +454,14 @@
 
     </div>
     <!-- Roompay 테이블에 넘겨줄 값-->
-	<form action="" id="">
-		<input type="hidden" id="" name=""/>
-		<input type="hidden" id="" name=""/>
-		<input type="hidden" id="" name=""/>
+	<form action="insertRoomPay" id="resultForm">
+		<input type="hidden" id="" name="roNo" value="${ room.roNo }"/>
+		<input type="hidden" id="" name="userNo" value="${ room.userNo }"/>
+		<input type="hidden" id="" name="amount" value="${ room.price }"/>
+		<input type="hidden" id="" name="addAmount" value="${ room.addPrice }"/>
+		<input type="hidden" id="" name="startDays" value="${ room.startDays }"/>
+		<input type="hidden" id="" name="endDays" value="${ room.endDays }"/>
+		<input type="hidden" id="" name="people" value="${ room.people }"/>
 	</form>
     <!-- Initialize Swiper -->
     <script>

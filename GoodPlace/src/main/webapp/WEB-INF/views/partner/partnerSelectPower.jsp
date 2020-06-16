@@ -157,6 +157,7 @@
         $(function(){
             $(".powerKind").change(function(){
                 var option = $(this).val().split(" ");
+                console.log(option);
                 $(this).parent().siblings().eq(6).val(option[0]);
                 $(this).parent().siblings().eq(3).children().val(option[1]);
                 $(this).parent().siblings().eq(4).children().val(option[2]);
