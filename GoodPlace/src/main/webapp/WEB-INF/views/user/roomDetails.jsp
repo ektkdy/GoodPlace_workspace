@@ -300,7 +300,7 @@
 	                    <div class="fullWidth">
 	                        <div class="c_profileArea">
 	                            <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
-	                        </div>
+	                        </div> 
 	                        <div style="width:85%; margin-top:5px;">
 	                            <div style="width:20%;">
 	                                <h4>${ review.userName }</h4>
