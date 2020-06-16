@@ -180,7 +180,7 @@
 				var value ="";
 				for(var i in powerList){
 					value += "<li style='border: 1px soild black'>" +
-			                    "<a href='roomDe.ro?roNo="+ powerList[i].roNo +"'>" +
+			                    "<a href='powerRoomDe.ro?roNo="+ powerList[i].roNo +"'>" +
 			                        "<img src='resources/uploadFiles/" + powerList[i].changeName +"' width='220px' height='170px'><br>" +
 			                        	
 			                        "<div>" +
@@ -206,7 +206,7 @@
 				var value ="";
 				for(var i in popList){
 					value += "<li style='border: 1px soild black'>" +
-			                    "<a href='roomDe.ro?roNo="+ popList[i].roNo +"'>" +
+			                    "<a href='powerRoomDe.ro?roNo="+ popList[i].roNo +"'>" +
 			                        "<img src='resources/uploadFiles/" + popList[i].changeName +"' width='220px' height='170px'><br>" +
 			                        	
 			                        "<div>" +
