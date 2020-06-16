@@ -158,16 +158,7 @@
         
         <hr width="1000px;">
     </div>
-      <!-- 페이징 바 -->
-      <div class="pagingBar">
-        <button>&lt;</button>
-        <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
-        <button>n</button>&nbsp;
-        <button>n</button>&nbsp;
-        <button>n</button>&nbsp;
-        <button>n</button>&nbsp;
-        <button>&gt;</button>
-    </div>
+   
 </div>
    <!-- footer -->
 	<jsp:include page="../common/footer.jsp"/>

@@ -80,9 +80,7 @@
             <button><a href="wishList.bo">위시리스트</a></button>
             <button><a href="ReserveForm.ro">예약내역</a></button>
             <button><a href="mpExp.exp">나의체험</a></button>
-            <button>포인트</button>
             <button><a href="inQuiry.bo">1:1문의</a></button>
-            <button>메세지</button>
         </div>
      	<br>
      	

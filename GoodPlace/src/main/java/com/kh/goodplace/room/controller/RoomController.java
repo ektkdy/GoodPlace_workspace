@@ -855,7 +855,7 @@ public class RoomController {
     	
     	//System.out.println(room);
     	
-    	
+    	System.out.println("room : " + room);
     	if(room != null) {
     		
     		mv.addObject("at", at);

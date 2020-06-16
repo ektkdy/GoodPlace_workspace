@@ -134,14 +134,14 @@
                     <div class="policyBox">
                         <div class="policyText">
                             <input class="subCheck" type="checkbox">
-                            <a href="">
+                            <a href="agreement.bo">
                                 회원 가입 및 운영약관 동의
                                 <img src="resources/images/user/info.JPG" width="15px" style="float: right;">
                             </a>
                         </div>
                         <div class="policyText">
                             <input class="subCheck" type="checkbox">
-                            <a href="">
+                            <a href="agreement.bo">
                                 개인정보 수집 및 이용
                                 <img src="resources/images/user/info.JPG" width="15px" style="float: right;">
                             </a>

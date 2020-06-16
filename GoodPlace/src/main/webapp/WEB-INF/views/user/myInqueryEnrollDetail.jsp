@@ -249,35 +249,27 @@ section {
                             <tr style="width: 100px;">
                                 <td colspan="4" style="height: 200px;">
                                     <div style="text-align: left; padding: 0 20px;">
-                                        작성한 내용ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                       ${ b.inqContent}
                                     </div>
                                 </td>
                             </tr>
 
                             <!-- 답변 -->
-                            <tr>
+                            
+                             <tr>
                                 <td colspan="4" style="border: none; text-align: center; font-size: 16px; color:#1679c5"> 
-                                    답변 내용
+                                    	<strong>답변</strong>
                                 </td>
                             </tr>
                             <tr>
-                                <th>제목</th>
-                                <td style="text-align: left;">
-                                    <span style="margin-left: 20px;">
-                                        답변 제목입니다
-                                    </span>
-                                </td>
-                                <th>
-                                    답변일
-                                </th>
-                                <td>
-                                    2020-05-22
+                                <td style="border-top:auto" colspan="4" style="border: none; text-align: center; font-size: 16px; color:#1679c5"> 
+                                    ${ b.inqReContent }
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="height: 200px;">
                                     <div style="text-align: left; padding: 0 20px;">
-                                        작성한 내용ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                     ${ $.inqReContent }
                                     </div>
                                 </td>
                             </tr>
@@ -286,7 +278,7 @@ section {
                             <tr>
                                 <td colspan="4">
                                     <div>
-                                        <input type="button" class="Btn" value="목록" style="text-align: center; float: none; margin-top: 0px;">
+                                        <input onclick="location.href='Binquery.bo'" type="button" class="Btn" value="목록" style="text-align: center; float: none; margin-top: 0px;">
                                     </div>
                                 </td>
                             </tr>
