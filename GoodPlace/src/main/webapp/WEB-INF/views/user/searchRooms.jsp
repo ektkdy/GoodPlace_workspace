@@ -317,7 +317,7 @@
 		           		<c:forEach items="${ roomList }" var="roomList" varStatus="status">
 			               	<li class="roomDetail" style="margin:0 20px 20px 20px;">
 			                    <a style="display:inline-block; width:260px;" href="roomDe.ro?roNo=${ roomList.roNo }&tripStartDate=${ tripStartDate }&tripEndDate=${ tripEndDate }&tripPeople=${ tripPeople }">
-			                        <img src="${pageContext.request.contextPath}/resources/images/user/${ room.changeName }" width="260px" height="170px"><br>
+			                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ roomList.changeName }" width="260px" height="170px"><br>
 			                        	${ roomList.roomsTitle }<br>
 				                       	#<c:out value="${fn:replace(roomList.roomsTag, ',', ' #')}"/><br>
 			                        <p style="text-align:center; margin:unset;">${ roomList.reviewCount }개의 이용후기</p>
