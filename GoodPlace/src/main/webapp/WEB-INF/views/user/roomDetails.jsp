@@ -148,6 +148,7 @@
 	        <div class="swiper-container" style="width:80%;  height:430px; margin:0 10%; position:relative; z-index:1;">
 	        	
 	            <div class="swiper-wrapper">
+	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ room.changeName }" width="100%" height="100%"></div>
 	            <c:forEach items="${ at }" var="detailImg" varStatus="status">
 	            <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/uploadFiles/${ detailImg.changeName }" width="100%" height="100%"></div>
 	            </c:forEach>
