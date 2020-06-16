@@ -389,7 +389,7 @@
 	
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.userName }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div style="height:54px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         <h2 style="font-weight:unset; padding-top:10px;">${ room.startDays } ~ ${ room.endDays }</h2>
@@ -424,7 +424,7 @@
 		</c:choose>
         <div id="receipt" class="hide" style="width:500px; height:400px; position:relative; z-index:2; left:200px; top:200px; border:2px solid lightgray; background-color:white; float:unset;">
             <div style="float:unset; width:100%; height:200px; border-bottom:2px solid lightgray;">
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;">예약날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20.03.05 (월) &nbsp;~&nbsp; 20.03.07 (화)</h3></div>
+                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;">예약날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ room.tripStartDate }&nbsp;~&nbsp;${ room.tripEndDate }</h3></div>
                 <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : ${ room.price }원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : <c:if test="${ room.people > room.minPeople }" >${ (room.people - room.minPeople) * 10000 }</c:if>원</h3></div>
                 <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;">${ price }원</h2>
                     <div style="height:40px; width:50%; padding:8px; float:unset; position:relative; z-index:3;">
@@ -436,15 +436,10 @@
             <div style="float:unset; width:100%; padding:30px 30px 12px 30px;">
                 <p style="position:absolute;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;해당 내용으로 예약하시겠습니까?</p>
                 <p style="position:absolute; margin-top:40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확인버튼을 누르면 예약이 진행됩니다.</p>
-                    <button style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2" id="payRoom">확인</button>
+                    <button id="payRoom" style="width:80px; height:40px; position:absolute; z-index:4; left:150px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle2">확인</button>
                     <button id="closeReceipt" style="width:80px; height:40px; position:absolute; z-index:4; left:240px; bottom:30px; border-radius:5px; font-weight:bold; font-size:16px;" class="buttonStyle1">취소</button>
             </div>
 
-            
-            <form>
-                <input type="hidden" value="히든으로 필요한 값들 적어서 넘기기">
-                
-            </form>
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
@@ -454,14 +449,16 @@
 
     </div>
     <!-- Roompay 테이블에 넘겨줄 값-->
-	<form action="insertRoomPay" id="resultForm">
-		<input type="hidden" id="" name="roNo" value="${ room.roNo }"/>
-		<input type="hidden" id="" name="userNo" value="${ room.userNo }"/>
-		<input type="hidden" id="" name="amount" value="${ room.price }"/>
-		<input type="hidden" id="" name="addAmount" value="${ room.addPrice }"/>
-		<input type="hidden" id="" name="startDays" value="${ room.startDays }"/>
-		<input type="hidden" id="" name="endDays" value="${ room.endDays }"/>
-		<input type="hidden" id="" name="people" value="${ room.people }"/>
+	<form action="insertRoomPay.ro" method="get" id="showPayRooms">
+		<input type="hidden" name="roNo" value="${ room.roNo }"/>
+		<input type="hidden" name="roomsTitle" value="${ room.roomsTitle }"/>
+		<input type="hidden" name="userNo" value="${ room.userNo }"/>
+		<input type="hidden" name="amount" value="${ room.price }"/>
+		<input type="hidden" name="addAmount" value="${ room.addPrice }"/>
+		<input type="hidden" name="tripStartDate" value="${ room.tripStartDate }"/>
+		<input type="hidden" name="tripEndDate" value="${ room.tripEndDate }"/>
+		<input type="hidden" name="people" value="${ room.people }"/>
+		<input type="hidden" name="price" value="${ room.price }"/>
 	</form>
     <!-- Initialize Swiper -->
     <script>
@@ -543,8 +540,12 @@
         });
         
         // 예약하기 -> 결제페이지
+        $('#payRoom').click(function(){
+        	$("#showPayRooms").submit;
+        });
+        /*
         var IMP = window.IMP;
-        IMP.init('imp13454636'); 
+        IMP.init('imp13454636'); 	
         
    		$('#payRoom').click(function(){
           IMP.request_pay({
@@ -578,7 +579,7 @@
                }
                alert(msg);
            });
-       	});
+       	}); */
         // 후기 내용 저장용 필드
         var reviewContent = "";
         // 댓글달기
