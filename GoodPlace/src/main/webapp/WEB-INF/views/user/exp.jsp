@@ -175,6 +175,7 @@
 	                <form action="showExp.exp" id="showExpDetail">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
 	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+	                	<input type="hidden" name="" value="${ exp.expDateString }"/>
 	                </form>
 	            </div>
           	</c:forEach>
