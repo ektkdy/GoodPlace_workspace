@@ -119,10 +119,21 @@ public class BoardController {
     		result3 = bService.selectReview(b);
     	}
     	
+    	System.out.println(b);
+    	
     	
     	model.addAttribute("b", b);
     	return "user/myInqueryEnrollDetail";
     }
+    
+    @RequestMapping("Binquery.bo") 
+    	public String Binquery() {
+    	
+    	return "redirect:inQuiry.bo";
+    }
+    	
+    	
+    
     
     
     // 사용자 페이지 이벤트리스트 이동
