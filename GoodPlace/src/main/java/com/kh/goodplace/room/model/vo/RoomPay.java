@@ -21,6 +21,7 @@ public class RoomPay {
 	private int roNo;		// 숙소번호
 	private int userNo;		// 회원번호
 	private int amount;		// 결제금액
+	private int addAmount;
 	private String brithDate;	// 예약자 생년월일
 	private Timestamp payDate;	// 결제날짜
 	private int addPoint;	// 적립포인트
