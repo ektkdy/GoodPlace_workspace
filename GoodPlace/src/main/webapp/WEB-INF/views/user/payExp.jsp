@@ -9,6 +9,7 @@
     <title>체험결제</title>
     
     <!-- Swiper JS -->
+    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
     
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
