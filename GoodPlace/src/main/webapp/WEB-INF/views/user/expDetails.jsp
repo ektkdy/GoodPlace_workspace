@@ -159,8 +159,8 @@
                     <div class="swiper-button-prev"></div>
                 </div>
 
-                <div style="width:80%; height:120px; margin:0 10%;">
-                    <div style="width:80%;">
+                <div style="width:80%; height:auto; margin:1% 10%;">
+                    <div style="width:100%;">
                         <br><h1>${ exp.expTitle }</h1>
                     </div><br>
                     <div style="float:left;">
