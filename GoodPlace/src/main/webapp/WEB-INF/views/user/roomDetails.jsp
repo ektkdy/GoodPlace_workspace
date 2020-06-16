@@ -414,10 +414,7 @@
                 </div>
             </div>
         </div>
-        
-        <c:set var="now" value="<%=new java.util.Date() %>"/>
-		<fmt:formatDate value="${now}" pattern="E" var="today" />
-		
+
 		<c:choose>
 			<c:when test="${ room.people > room.minPeople }"><c:set var="price" value="${ room.price + ( (room.people - room.minPeople) * 10000 ) }"></c:set></c:when>
 			<c:otherwise><c:set var="price" value="${ room.price}"></c:set></c:otherwise>
@@ -453,8 +450,8 @@
 		<input type="hidden" name="roNo" value="${ room.roNo }"/>
 		<input type="hidden" name="roomsTitle" value="${ room.roomsTitle }"/>
 		<input type="hidden" name="userNo" value="${ room.userNo }"/>
-		<input type="hidden" name="amount" value="${ room.price }"/>
-		<input type="hidden" name="addAmount" value="${ room.addPrice }"/>
+		<input type="hidden" name="amount" value="${ price }"/>
+		<input type="hidden" name="addPrice" value="${ price - room.price }"/>
 		<input type="hidden" name="tripStartDate" value="${ room.tripStartDate }"/>
 		<input type="hidden" name="tripEndDate" value="${ room.tripEndDate }"/>
 		<input type="hidden" name="people" value="${ room.people }"/>
