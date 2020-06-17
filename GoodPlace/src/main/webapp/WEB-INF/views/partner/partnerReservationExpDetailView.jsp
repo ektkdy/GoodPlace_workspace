@@ -235,7 +235,7 @@
                             <td class="no_border">예약인원:${e.people }</td>
                         </tr>
                         <tr><td class="no_border">이름 : ${e.userName }</td></tr>
-                        <tr><td class="no_border">체험시간 : ${e.expClassNo }</td></tr>
+                        <tr><td class="no_border">체험시간 : ${e.myClassStartTime }</td></tr>
                         <tr>
                         	<c:choose>
                         		<c:when test="${e.statusExp == 1 || e.statusExp == 4}">

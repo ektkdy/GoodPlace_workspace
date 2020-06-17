@@ -188,7 +188,12 @@ public class ExperienceDao {
 			return sqlSession.selectOne("expMapper.reservationExpDetailView", epno);
 		}
 		
-	
+		public Experience reservationExpDetailView2(SqlSessionTemplate sqlSession, int epno) {
+			System.out.println("dao에서 epno : " + epno);
+			Experience e = sqlSession.selectOne("expMapper.reservationExpDetailView2", epno);
+			System.out.println("dao에서 : " + e);
+			return e;
+		}
 	
 		
 		

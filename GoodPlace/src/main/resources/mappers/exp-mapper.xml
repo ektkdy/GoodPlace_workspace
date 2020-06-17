@@ -112,6 +112,72 @@
 		<result column="STATUS" property="statusExp"/>
 	</resultMap>
 	
+	<!-- 체험 + 체험결제 + 회원 -->
+	<resultMap type="Experience" id="ExperiencePayResultSet2">
+		<id column="exno" property="exNo"/>
+		<result column="language" property="language"/>
+		<result column="exp_category" property="expCategory"/>
+		<result column="exp_tag" property="expTag"/>
+		<result column="exp_title" property="expTitle"/>
+		<result column="exp_content" property="expContent"/>
+		<result column="activity" property="activity"/>
+		<result column="max_people" property="maxPeople"/>
+		<result column="exp_date" property="expDate"/>
+		<result column="start_time" property="startTime"/>
+		<result column="end_time" property="endTime"/>
+		<result column="use_time" property="useTime"/>
+		<result column="interval_time" property="intervalTime"/>
+		<result column="supplies" property="supplies"/>
+		<result column="deadline" property="deadline"/>
+		<result column="price" property="price"/>
+		<result column="add_basic" property="addBasic"/>
+		<result column="add_detail" property="addDetail"/>
+		<result column="add_ref" property="addRef"/>
+		<result column="zip_code" property="zipCode"/>
+		<result column="apply_date" property="applyDate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="operate_day" property="operateDay"/>
+		<result column="status" property="status"/>
+		<result column="deny" property="deny"/>
+		<result column="deny_content" property="denyContent"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+
+		<result column="epno" property="epNo"/>
+		<result column="amount" property="amount"/>
+		<result column="pay_date" property="payDate"/>
+		<result column="exp_date" property="expDate"/>
+		<result column="people" property="people"/>
+		
+		<result column="change_name_1" property="atChangeName"/>
+		<result column="EXP_CLASS_NO" property="expClassNo"/>
+		<result column="EXP_CLASS_COUNT" property="expClassCount"/>
+		
+		<!-- 결제 걸럼 -->
+		<result column="EPNO" property="epNo"/>
+		<result column="AMOUNT" property="amount"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="EXP_DATE" property="expDateUser"/>
+		<result column="PEOPLE" property="people"/>
+		<result column="STATUS" property="statusExp"/>
+		
+		<!-- 회원 컬럼 -->
+		<result column="USNO" property="usNo"/>
+		<result column="PANO" property="paNo"/>
+		<result column="EMAIL" property="email"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="POINT" property="point"/>
+		<result column="USER_KIND" property="userKind"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="YELLOW_CARD" property="yellowCard"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
 	
 	
 	<!-- id="ExperienceResultSet" 와 다른점 : exp_date를 vo객체에 String 자료형으로 매핑시킨다. -->
@@ -439,7 +505,14 @@
 		where epno = #{epNo}
 	</select>
 	
-	
+	<select id="reservationExpDetailView2" parameterType="_int" resultMap="ExperiencePayResultSet2">
+		select ex.exno, m.usno, ep.status, epno, exp_title, ep.exp_date, ep.people, user_name, phone,
+        amount, exp_class_no, ex.START_TIME, ex.USE_TIME, ex.INTERVAL_TIME, ex.exp_class_count
+		from experience ex
+		join exppay ep on (ex.exno = ep.exno)
+		join member m on (ep.usno = m.usno)
+		where epno = #{exNo}
+	</select>
 	
 	<!--/////////////////// 예약관리 끝 //////////////////-->
 

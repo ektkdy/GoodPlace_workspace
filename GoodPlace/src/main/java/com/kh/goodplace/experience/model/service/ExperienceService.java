@@ -103,6 +103,10 @@ public interface ExperienceService {
 	
 	//예약 내역 상세페이지
 	Experience reservationExpDetailView(int epno);
+	
+	//예약 내역 상세페이지2
+	Experience reservationExpDetailView2(int epno);
+	
 	//4. 공지사항 검색 총갯수 조회용
 	int expSearchCount(Experience e);
 	

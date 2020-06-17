@@ -35,6 +35,11 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
+	public Experience reservationExpDetailView2(int epno) {
+		return expDao.reservationExpDetailView2(sqlSession, epno);
+	}
+	
+	@Override
 	public int insertExp(Experience e) {
 		return expDao.insertExp(sqlSession, e);
 	}

@@ -653,16 +653,122 @@ public class ExperienceController {
 			}
 			
 			
-			//디테일
+//			//디테일
+//			@RequestMapping("reservationExpDetailView.rv")
+//			public String reservationExpDetailView(int epNo, Model model) {
+//				
+//				Experience e = expService.reservationExpDetailView(epNo);
+//				
+//				model.addAttribute("e", e);
+//				
+//				return "partner/partnerReservationExpDetailView";
+//				
+//			}
+			
+			//디테일2
 			@RequestMapping("reservationExpDetailView.rv")
-			public String reservationExpDetailView(int epNo, Model model) {
+			public ModelAndView reservationExpDetailView(int epNo, ModelAndView mv) {
 				
-				Experience e = expService.reservationExpDetailView(epNo);
+				Experience e = expService.reservationExpDetailView2(201);
+								
+				System.out.println("지점 1 에서 e : " + e);
 				
-				model.addAttribute("e", e);
-				
-				return "partner/partnerReservationExpDetailView";
-				
+				// 내가 예약한 수업교시의 시작시간 myClassStartTime 필드 set
+		  		int startTimeFirstLetterFlag = 0; // 운영시작시간의 첫글자 에 따라 값이 변하는 상태 변수 -> 경우1_첫 글자가 "0" : 0 / 경우2_첫 글자가 "1" 혹은 "2" : 1 
+		  		
+		  		if(!e.getStartTime().substring(0, 1).equals("0")) { // 경우2
+		  			startTimeFirstLetterFlag = 1;
+		  		}else {													// 경우1 
+		  			startTimeFirstLetterFlag = 0;
+		  		}
+		  		
+		  		int startHour = 0;
+		  		if(startTimeFirstLetterFlag == 0) {
+		  			startHour = Integer.parseInt(e.getStartTime().substring(1, 2)); 
+		  		}else {
+		  			startHour = Integer.parseInt(e.getStartTime().substring(0, 2)); 
+		  		}
+		  		
+		  		int startMinute = Integer.parseInt(e.getStartTime().substring(3, 4));
+		  		int intervalMinute = Integer.parseInt(e.getIntervalTime());
+		  		int useTime = Integer.parseInt(e.getUseTime());
+		  		
+		  		double startMinuteDouble = 0.0;
+		  		double intervalMinuteDouble = 0.0;
+		  		
+		  		// 조건들이 파트너딴과 안 맞으면 에러 난다!!!!!!!
+		  		switch(startMinute) {
+		  		case 3: startMinuteDouble = 0.5; break;
+		  		}
+		  		
+		  		switch(intervalMinute) {
+		  		case 30: intervalMinuteDouble = 0.5; break;
+		  		case 60: intervalMinuteDouble = 1.0; break;
+		  		case 120: intervalMinuteDouble = 2.0; break;
+		  		case 180: intervalMinuteDouble = 3.0; break;
+		  		default: break;
+		  		}
+		  		
+		  		double startTimeCal = startHour + startMinuteDouble;
+		  		double nextClass = startTimeCal + useTime + intervalMinuteDouble;
+		  		
+		  		ArrayList<String> expClass = new ArrayList<>();
+		  		
+		  		for(int i=0; i<e.getExpClassCount(); i++) {
+
+		  			if(i == 0) {
+		  				if(startTimeFirstLetterFlag == 0) {
+		  					if((startTimeCal + useTime) < 10.0) {
+		  						if(String.valueOf(startTimeCal).substring(2).equals("0")) {
+		  							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":00 ~ ") + ("0" + (String.valueOf(startTimeCal + useTime)).substring(0,1) + ":00"));
+		  						}else if(String.valueOf(startTimeCal).substring(2).equals("5")) {
+		  							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":30 ~ ") + ("0" + (String.valueOf(startTimeCal + useTime)).substring(0,1) + ":30"));
+		  						}
+		  					}else {
+		  						if(String.valueOf(startTimeCal).substring(2).equals("0")) {
+		  							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":00 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":00"));
+		  						}else if(String.valueOf(startTimeCal).substring(2).equals("5")) {
+		  							expClass.add(("0" + ((String.valueOf(startTimeCal)).substring(0, 1)) + ":30 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":30"));
+		  						}
+		  					}
+		  				}else {
+		  					if(String.valueOf(startTimeCal).substring(3).equals("0")) {
+		  						expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":00 ~ ") + ((String.valueOf(startTimeCal + 1.0)).substring(0,2) + ":00"));
+		  					}else if(String.valueOf(startTimeCal).substring(3).equals("5")) {
+		  						expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":30 ~ ") + ((String.valueOf(startTimeCal + 1.0)).substring(0,2) + ":30"));
+		  					}
+		  				}
+		  				System.out.println(i + "번지까지 왔음, expClass[" + i + "] : " +  expClass.get(i));
+		  			}else if(i >= 1) {
+		  				switch(intervalMinute) {
+		  				case 30: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 0.5) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 0.5 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+		  				case 60: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 1.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 1.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+		  				case 120: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 2.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 2.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+		  				case 180: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 3.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 3.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
+		  				default: break;
+		  				}
+		  				if(String.valueOf(startTimeCal).substring(3).equals("0")) {
+		  					expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":00 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":00"));
+		  				}else if(String.valueOf(startTimeCal).substring(3).equals("5")) {
+		  					expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":30 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":30"));
+		  				}
+		  			}
+		  		}
+
+		  		e.setMyClassStartTime(expClass.get(e.getExpClassNo()).substring(0, 6));
+		      	
+		      	System.out.println("partnerReservationExpDetailView.jsp 로 보내기전 : " + e);
+		      	
+		  		if(e != null) {
+		  			mv.addObject("e", e);
+		  			mv.setViewName("partner/partnerReservationExpDetailView");
+		  		}else {
+		  			mv.addObject("msg", "체험상세 페이지 조회 실패!!");
+		  			mv.setViewName("common/errorPage");
+		  		}
+		  		
+		  		return mv;
+			
 			}
 			
 
