@@ -723,6 +723,8 @@ public class RoomController {
     	//roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 세팅 하자
     	ArrayList<Board> reivew = null;
     	
+    	int roomListSize = roomList.size();
+    	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
         	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
@@ -733,7 +735,7 @@ public class RoomController {
         	mv.addObject("tripStartDate", tripStartDate);
         	mv.addObject("tripEndDate", tripEndDate);
         	mv.addObject("tripPeople", tripPeople);
-        	
+        	mv.addObject("roomListSize", roomListSize);
         	mv.addObject("roomList", roomList);
         	mv.setViewName("user/searchRooms");
         }
@@ -762,6 +764,8 @@ public class RoomController {
 		
 		ArrayList<Room> roomListWithFilter = new ArrayList<>();
 		
+		
+		
 		int count = 0;
 		
 		if(!filterValue.equals("")) {
@@ -780,7 +784,7 @@ public class RoomController {
 			//System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
 			//System.out.println("service split : " + serviceList[0]);
 			roomList2 = (ArrayList)mv.getModel().get("roomList");
-			
+			Attachment at = (Attachment)mv.getModel().get("at");
 			
 			
 			for(Room compareRoom : roomList2) {
@@ -814,6 +818,7 @@ public class RoomController {
 			mv.addObject("filterValue", filterValue);
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
+			mv.addObject("at", at);
 			
 			// 예약시작일자, 예약끝일자, 인원수 set
 			mv.addObject("startDays", tripStartDate);
