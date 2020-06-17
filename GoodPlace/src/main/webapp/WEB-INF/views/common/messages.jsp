@@ -83,7 +83,7 @@
  connect();
 
  function connect() {
-	    sock = new SockJS('http://localhost:8888/goodplace/chat');
+	    sock = new SockJS('http://192.168.30.197:8888/goodplace/echo');
 	    sock.onopen = function() {
 	        console.log('open');
 	    };

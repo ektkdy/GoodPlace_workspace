@@ -154,7 +154,7 @@
 	            <div style="width:100%;" class="expContainer">
 	                <div style="width:94%;"  class="expArea">
 	                    <div style="height:216px; width:292px;" class="expContainerSubmit">
-	                        <img src="${pageContext.request.contextPath}/resources/images/user/${ exp.changeName }" width="100%;" height="100%;"/>
+	                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
 	                    </div>
 	                    <div style="height:auto; width:830px; float:left;">
 	                    <div style="width:50%; height:auto;">

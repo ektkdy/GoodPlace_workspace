@@ -194,7 +194,7 @@
 			var tutorChangeName = $("#tutorChangeName").val();	// 관리자 프로필
 
 			if(data.class_class_id != 2){		// 0: 관리자  (관리자가 보낸 메세지가 아닐때)
-				$("#messageArea").append("<div><div class="+"'chat_common chat_userId'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + '${loginUser.changeName}' +"' width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_user'>"+ data.messageContent + "</div><div class='chat_date chat_userDate'>" + data.messageSendTime + "</div></div>");
+				$("#messageArea").append("<div><div class="+"'chat_common chat_userId'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + '${loginUser.changeName}' +"' width='28px' height='28px'><span>"+ '${loginUser.userName}' +"</span></div><div class='chat chat_user'>"+ data.messageContent + "</div><div class='chat_date chat_userDate'>" + data.messageSendTime + "</div></div>");
 			} else {							// 내가 보낸 메세지 일때
 				$("#messageArea").append("<div><div class="+"'chat_common'"+"><img src='"+"${pageContext.request.contextPath}/resources/uploadFiles/userProfile/" + '${user.changeName}' +"' width='28px' height='28px'><span>"+ '${user.userName }' +"</span></div><div class='chat chat_admin'>"+ data.messageContent + "</div><div class='chat_date chat_adminDate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'>" + data.messageSendTime + "</div></div>");
 			}

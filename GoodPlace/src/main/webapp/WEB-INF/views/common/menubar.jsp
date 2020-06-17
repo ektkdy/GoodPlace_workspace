@@ -344,7 +344,7 @@
         </div>
         <!-- 채팅박스 -->
         <div class="chat_content" id="messageArea" style="box-shadow: lightgray;">
-
+			<div><div class="chat_common"><img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/tutorChangeName" width='28px' height='28px'><span>GoodPlace</span></div><div class='chat chat_admin'>안녕하세요. GoodPlace입니다. 무엇을 도와드릴까요?</div><div class='chat_date chat_adminDate sysdate' style='clear: both; margin: 0px 10px; color:grey; font-size: 10px;'></div></div>
 <!-- 
             <div>
                 <div class="chat_common">
@@ -413,7 +413,10 @@
 						sock = new SockJS("http://localhost:8888/goodplace/echo/");	     // 사용자 세션 연결 (세션ID : 사용자이메일)
 						sock.onmessage = onMessage;
 						sock.onclose = onClose;
-
+						
+						var Now = new Date();						 	// Now --> 메세지를 보낼때마다 현재시간으로 초기화 됨
+				  	  	var a = moment(Now).format('YYYY-MM-DD   h:mm a');	// 현재시간 포맷
+						$(".sysdate").text(a);
 						$("#tutorChangeName").val(tutor.changeName);	                 // 관리자 이메일로 프로필 사진을 가져옴
 					},error:function(){
 						console.log("ajax 통신 실패");

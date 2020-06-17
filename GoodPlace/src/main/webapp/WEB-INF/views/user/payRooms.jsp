@@ -98,7 +98,7 @@
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.tripStartDate } ~ ${ room.tripEndDate }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.people }명</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.price }원</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.price + room.amount }원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.amount }원</p3>
                     </div>
 
                 </div>
@@ -121,15 +121,15 @@
                         </div>
                     </div>
                     <div style="width:50%; height:auto;">
-                        <select name="job" class="pointButton" style="width:327px; height:42px; margin:unset; float:left; border-radius:5px; border:1px solid gray; padding-left:8px; font-size:14px; font-weight:bold;">
-                            <option value="혼자" class="pointButton" selected>혼자 떠나는 여행</option>
-                            <option value="학생" class="pointButton">친구들과 떠나는 여행</option>
-                            <option value="회사원" class="pointButton">연인과 함께 떠나는 로맨틱한 여행</option>
-                            <option value="기타" class="pointButton">허니문</option>
-                            <option value="배우자" class="pointButton" selected>배우자와 단 둘이 떠나는 여행</option>
-                            <option value="학생" class="pointButton">부모님과떠나는 여행</option>
-                            <option value="회사원" class="pointButton">출장 / 학회</option>
-                            <option value="기타" class="pointButton">기타</option>
+                        <select id="conceptVal" name="job" class="pointButton" style="width:327px; height:42px; margin:unset; float:left; border-radius:5px; border:1px solid gray; padding-left:8px; font-size:14px; font-weight:bold;">
+                            <option value="혼자" id="concept1" class="pointButton" selected>혼자 떠나는 여행</option>
+                            <option value="학생" id="concept2" class="pointButton">친구들과 떠나는 여행</option>
+                            <option value="회사원" id="concept3" class="pointButton">연인과 함께 떠나는 로맨틱한 여행</option>
+                            <option value="기타" id="concept4" class="pointButton">허니문</option>
+                            <option value="배우자" id="concept5" class="pointButton" selected>배우자와 단 둘이 떠나는 여행</option>
+                            <option value="학생" id="concept6" class="pointButton">부모님과떠나는 여행</option>
+                            <option value="회사원" id="concept7" class="pointButton">출장 / 학회</option>
+                            <option value="기타" id="concept8" class="pointButton">기타</option>
                         </select>
                     </div>
                     
@@ -216,21 +216,20 @@
                 <hr>
             </div>
 		    <!-- RoomsPay 테이블에 insert	-->
-		   <form action="insertRoomPayToTable.ro" id="resultForm">
+
+            <br style="clear:both;">
+        </div>
+	   	<form action="insertRoomPayToTable.ro" id="resultForm">
 		      <input type="hidden" id="" name="roNo" value="${ room.roNo }"/>
-		      <input type="hidden" id="" name="userNo" value="${ loginUser.userNo }"/>
-		      <input type="hidden" id="" name="amount" value="${ room.price }"/>
-		      <input type="hidden" id="" name="addAmount" value="${ room.addPrice }"/>
+		      <input type="hidden" id="" name="usNo" value="${ loginUser.usNo }"/>
+		      <input type="hidden" id="" name="amount" value="${ room.amount}"/>
 		      <input type="hidden" id="" name="tripStartDate" value="${ room.tripStartDate }"/>
 		      <input type="hidden" id="" name="tripEndDate" value="${ room.tripEndDate }"/>
 		      <input type="hidden" id="" name="people" value="${ room.people }"/>
 		      <input type="hidden" id="birthday" name="birthday"/>
 		      <input type="hidden" id="concept" name="concept"/>
 		      <input type="hidden" id="requestParam" name="request"/>
-		   </form>
-            <br style="clear:both;">
-        </div>
-	
+   		</form>
     <!-- '포인트 사용' 클릭 시 -->
     <script>
         $("#pointButton").click(function(){
@@ -297,12 +296,12 @@
         	var conceptVal = "";
         	for(var i=0; i<8; i++){
         		if($("#concept option:eq(" + i + ")").prop("selected", true)){
-        			conceptVal = $("#concept option:eq(" + i + ")").val();
+        			conceptVal = $("#concept" + i).val();
         		}
         	}
         	
-        	$("#birthday").val(conceptVal);
-        	$("#requestParam").val($("request").val());
+        	$("#concept").val(conceptVal);
+        	$("#requestParam").val($("#request").val());
         	
 	          IMP.request_pay({
 	               pg : 'inicis', // version 1.1.0부터 지원.
@@ -317,11 +316,12 @@
 	               buyer_postcode : '123-456',
 	               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 	           }, function(rsp) {
-	               if ( rsp.success ) {	// 결제 성공			
-	                   var msg = '결제에 실패하였습니다.';
+	               if ( rsp.success ) {	// 결제 성공		
+	            	   var msg = '결제에 실패하였습니다.';
 	                   msg += '에러내용 : ' + rsp.error_msg;
+	                   
 	               } else {	// 결제 실패
-	                   var msg = '결제가 완료되었습니다.';
+	            	   var msg = '결제가 완료되었습니다.';
 	                   msg += '고유ID : ' + rsp.imp_uid;
 	                   msg += '상점 거래ID : ' + rsp.merchant_uid;
 	                   msg += '결제 금액 : ' + rsp.paid_amount;
@@ -332,6 +332,7 @@
 	                   
 	                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
 	                   $("#resultForm").submit();
+	                   
 	               }
 	               alert(msg);
 	          });

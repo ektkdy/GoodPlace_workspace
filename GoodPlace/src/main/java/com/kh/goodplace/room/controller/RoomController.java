@@ -29,7 +29,9 @@ import com.kh.goodplace.board.model.vo.Board;
 import com.kh.goodplace.common.model.vo.Attachment;
 import com.kh.goodplace.common.model.vo.PageInfo;
 import com.kh.goodplace.common.template.Pagination;
+import com.kh.goodplace.member.model.service.MemberService;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.messages.model.vo.ChatRoom;
 import com.kh.goodplace.room.model.service.RoomService;
 import com.kh.goodplace.room.model.vo.Room;
 import com.kh.goodplace.room.model.vo.RoomPay;
@@ -43,6 +45,8 @@ public class RoomController {
     @Autowired // DI
     private BoardService bService;
     
+	@Autowired // DI
+	private MemberService mService;
     
     // 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
 	// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
@@ -714,10 +718,12 @@ public class RoomController {
 		// 검색한 조건에 해당하는 Rooms리스트 조회
     	ArrayList<Room> roomList = rService.searchRoom(room);
    		System.out.println(" roomList 조회 : " + roomList);
-    	System.out.println("roomList 의 크기 : " + roomList.size());
+    	System.out.println("roomList 	의 크기 : " + roomList.size());
     	
     	//roomList(n) 의 후기조회, 후기개수 조회 -> Room vo객체의 reviewCount필드에 세팅 하자
     	ArrayList<Board> reivew = null;
+    	
+    	int roomListSize = roomList.size();
     	
     	for(int i=0; i<roomList.size(); i++) {
     		roomList.get(i).setReviewCount(bService.reviewListCount(roomList.get(i).getRoNo()));
@@ -729,7 +735,7 @@ public class RoomController {
         	mv.addObject("tripStartDate", tripStartDate);
         	mv.addObject("tripEndDate", tripEndDate);
         	mv.addObject("tripPeople", tripPeople);
-        	
+        	mv.addObject("roomListSize", roomListSize);
         	mv.addObject("roomList", roomList);
         	mv.setViewName("user/searchRooms");
         }
@@ -758,6 +764,8 @@ public class RoomController {
 		
 		ArrayList<Room> roomListWithFilter = new ArrayList<>();
 		
+		
+		
 		int count = 0;
 		
 		if(!filterValue.equals("")) {
@@ -776,7 +784,7 @@ public class RoomController {
 			//System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
 			//System.out.println("service split : " + serviceList[0]);
 			roomList2 = (ArrayList)mv.getModel().get("roomList");
-			
+			Attachment at = (Attachment)mv.getModel().get("at");
 			
 			
 			for(Room compareRoom : roomList2) {
@@ -810,6 +818,7 @@ public class RoomController {
 			mv.addObject("filterValue", filterValue);
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
+			mv.addObject("at", at);
 			
 			// 예약시작일자, 예약끝일자, 인원수 set
 			mv.addObject("startDays", tripStartDate);
@@ -926,16 +935,16 @@ public class RoomController {
     	return mv;
     	
     }
-    
+    // 숙소상세 -> 숙소 결제페이지로 이동
     @RequestMapping("insertRoomPay.ro")
-    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addPrice, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
     	
     	
     	Room room = new Room();
     	room.setRoNo(roNo);
     	room.setRoomsTitle(roomsTitle);
     	room.setUserNo(userNo);
-    	room.setAmount(addAmount);
+    	room.setAmount(amount);
     	room.setTripStartDate(tripStartDate);
     	room.setTripEndDate(tripEndDate);
     	room.setPeople(people);
@@ -951,23 +960,38 @@ public class RoomController {
     	return mv;
     }
     
+    // ROOMSPAY 테이블에 INSERT
     @RequestMapping("insertRoomPayToTable.ro")
-    public ModelAndView insertRoomPayToTable( int roNo, String roomsTitle, int userNo, int amount, int addAmount, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {
+    public ModelAndView insertRoomPayToTable( int roNo, int usNo, int amount, String tripStartDate, String tripEndDate, int people, String birthday, String concept, String request, HttpSession session, ModelAndView mv) {
     	
     	
     	Room room = new Room();
     	room.setRoNo(roNo);
-    	room.setRoomsTitle(roomsTitle);
-    	room.setUserNo(userNo);
-    	room.setAmount(addAmount);
+    	room.setUserNo(usNo);
+    	room.setAmount(amount);
     	room.setTripStartDate(tripStartDate);
     	room.setTripEndDate(tripEndDate);
     	room.setPeople(people);
-    	room.setPrice(price);
+    	room.setBirthday(birthday);
+    	room.setConcept(concept);
+    	room.setRequest(request);
     	
     	System.out.println("roomspay 테이블에 insert : " + room);
     	
     	int result = rService.insertRoomPayToTable(room);
+    	
+    	Member loginUser = (Member)session.getAttribute("loginUser");
+    	// 채팅방 생성
+    	ChatRoom chat = new ChatRoom();
+    	
+    	chat.setUserEmail(loginUser.getEmail()); // 내 아이디
+    	
+    	int r = rService.selectRoomPaEmail(room.getRoNo()); // usno
+    	String email = rService.partnerEmail(r); // 유저 검색
+    	chat.setTutorEmail(email);	// 상대방 이메일
+    	chat.setRoNo(room.getRoNo());	// 숙소번호
+    	
+    	int result1 = rService.insertRoomChat(chat);
     	
     	if(result > 0) {
     		mv.addObject("msg", "숙소 예약이 완료되었습니다.");

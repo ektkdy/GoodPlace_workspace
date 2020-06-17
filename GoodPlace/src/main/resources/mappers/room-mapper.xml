@@ -601,9 +601,26 @@
 	<!-- roomspay 테이블에 insert -->
 	<insert id="insertRoompay" parameterType="Room">
 		insert into roomspay
-		values(rpno.nextval, #{roNo}, #{userNo}, #{amount}, #{birthday}, sysdate, 0, '11:30', 1, 0, #{people}, #{concept}, #{ request}, #{ tripStartDate }, ${ tripEndDate })
+		values(rpno.nextval, #{roNo}, #{userNo}, #{amount}, #{birthday}, sysdate, 0, '11:30', 1, 0, #{people}, #{concept}, #{ request }, TO_DATE(#{ tripStartDate }, 'YYYY-MM-DD'), TO_DATE(#{ tripEndDate }, 'YYYY-MM-DD'))
 	</insert>
-
-
+	
+	
+	
+	<select id="selectRoomPaEmail" resultType="_int" parameterType="_int">
+		select usno
+		from rooms
+		where rono = #{roNo}
+	</select>
+	
+	<select id="partnerEmail" resultType="string" parameterType="_int">
+		select email
+		from member
+		where usno = #{usNo}
+	</select>
+	
+	<insert id="insertRoomChat" parameterType="ChatRoom">
+		insert into pchatroom
+		values(chno.nextval, #{userEmail},#{tutorEmail}, classid.nextval, #{roNo})
+	</insert>
 
 </mapper>

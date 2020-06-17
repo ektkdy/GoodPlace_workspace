@@ -160,9 +160,6 @@
         
  
 	    // 메세지
-
-	    
-
 		function sendBtn(){
 			sendMessage();
 			$('#message').text("");

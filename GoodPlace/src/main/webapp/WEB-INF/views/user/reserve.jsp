@@ -125,7 +125,7 @@
 	        			<input type="hidden" name="roomsTitle" value="${ rPayList.roomsTitle }">
 	        			<input type="hidden" name="changeName" value="${ rPayList.changeName }">
 	        		</form>
-		            <div id="detailView" style="border: 1px solid lightgray; margin: 0 30px; height: 200px;">            
+		            <div class="detailView" style="border: 1px solid lightgray; margin: 0 30px; height: 200px;">            
 		                <dvi style="float: left; width: 30%; height: 200px; background-color: gray;">
 		                    <img src="${pageContext.request.contextPath}/resources/uploadFiles/${rPayList.changeName}" width="100%" height="100%" style="padding: 10px; box-sizing: border-box;">
 		                </dvi>
@@ -164,7 +164,7 @@
 	<jsp:include page="../common/footer.jsp"/>
     
     <script>
-    	$("#detailView").click(function(){
+    	$(".detailView").click(function(){
     		$(this).siblings().eq(0).submit();
     	});
     </script>
