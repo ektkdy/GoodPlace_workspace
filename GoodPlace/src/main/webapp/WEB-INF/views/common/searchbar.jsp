@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 <style>
     /*content*/
-
-
     /*메인 검색바(숙소, 체험)*/
     #mainSearch{
         clear: both;

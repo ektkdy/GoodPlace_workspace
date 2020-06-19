@@ -156,7 +156,7 @@
 	                    <div style="height:216px; width:292px;" class="expContainerSubmit">
 	                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
 	                    </div>
-	                    <div style="height:auto; width:830px; float:left;">
+	                    <div style="height:auto; width:830px; float:left;" class="expContainerSubmit">
 	                    <div style="width:50%; height:auto;">
 	                        <h3 class="exp1">${ exp.expCategoryString }</h3>
 	                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>

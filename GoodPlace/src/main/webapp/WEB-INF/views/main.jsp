@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <style>
     /*content*/
-
+    content a{ color:balck;}
     /*이벤트 슬라이더*/
     .bxslider img{
         height: auto;
@@ -80,13 +80,6 @@
     <div id="content" style="margin-bottom: 100px;">
 		
 		<jsp:include page="common/searchbar.jsp"/>
-		
-		<!-- 
-		<form action="mTest.me" method="post">
-			<input type="text" name="userEmail" value="${ loginUser.email }">
-			<input type="submit" value="메세지 테스트">
-		</form>
-		 -->
 		
         <!-- 이벤트 슬라이더 부분 -->
         <!-- 슬라이더 영역 크기 지정 -->
