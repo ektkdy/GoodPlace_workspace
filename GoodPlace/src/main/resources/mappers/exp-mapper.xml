@@ -526,11 +526,11 @@
          ORDER BY EXNO
 	</select>
 	
-	<select id="selectExpCountUser" resultType="_int">
-		SELECT COUNT(*)
-		  FROM EXPERIENCE
-		 GROUP BY EXP_CATEGORY
-		 ORDER BY EXP_CATEGORY
+	<select id="selectExpCountUser" parameterType="_int" resultType="_int">
+        SELECT COUNT
+          FROM (SELECT COUNT(*) AS COUNT
+                  FROM EXPERIENCE
+                 WHERE EXP_CATEGORY = #{expCategory})
 	</select>
 	
 	<select id="selectExpUser" parameterType="_int" resultMap="ExperienceResultSetUser">

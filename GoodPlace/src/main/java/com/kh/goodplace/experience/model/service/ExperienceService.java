@@ -118,7 +118,7 @@ public interface ExperienceService {
 		ArrayList<Experience> selectExpListUser(Experience exp);
 		
 		//2. 체험메인페이지에서 카테고리별 등록된 체험개수 조회용 서비스 - 진아
-		ArrayList<Integer> selectExpCountUser();
+		int selectExpCountUser(int expCategory);
 		
 		//3. 체험상세페이지 조회용 서비스 - 진아
 		Experience selectExpUser(int exNo);

@@ -778,22 +778,9 @@ public class ExperienceController {
   	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
   	@RequestMapping("showExpList.exp")
   	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
-  		System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
-  		System.out.println("지점1");
+  		//System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
+  		//System.out.println("지점1");
   		 
-  		// 카테고리별 체험 등록 개수 set
-  		Experience exp = new Experience();
-  		exp.setExpCountPerCategory(expService.selectExpCountUser());
-  		
-  		// 카테고리명 set
-  		ArrayList<String> expCategoryList = new ArrayList<>();
-  		expCategoryList.add("라이프 및 스타일");
-  		expCategoryList.add("문화와 역사");
-  		expCategoryList.add("미술과 디자인");
-  		expCategoryList.add("스포츠&피트니스");
-  		expCategoryList.add("야외활동");
-  		exp.setExpCategoryList(expCategoryList);
-  		
   		// expCategory 필드 설정
   		int expCategory = 0;
   		if(expCategoryString.equals("라이프 및 스타일")) {
@@ -807,6 +794,27 @@ public class ExperienceController {
   		}else if(expCategoryString.equals("야외활동")){
   			expCategory = 5;
   		}
+  		
+  		
+  		Experience exp = new Experience();
+  		
+  		// 카테고리명 set
+  		ArrayList<String> expCategoryList = new ArrayList<>();
+  		expCategoryList.add("라이프 및 스타일");
+  		expCategoryList.add("문화와 역사");
+  		expCategoryList.add("미술과 디자인");
+  		expCategoryList.add("스포츠&피트니스");
+  		expCategoryList.add("야외활동");
+  		exp.setExpCategoryList(expCategoryList);
+  		
+  		ArrayList<Integer> temp = new ArrayList<>();
+  		
+  		for(int i=1; i<=expCategoryList.size(); i++) {
+  			temp.add(expService.selectExpCountUser(i));
+  		}
+  		
+  		// 카테고리별 체험 등록 개수 set
+  		exp.setExpCountPerCategory(temp);
   		
   		// 넘겨받은 여행조건들 exp객체에 set
   		exp.setExpCategory(expCategory);
@@ -836,6 +844,7 @@ public class ExperienceController {
   		if(expList != null) {
   			mv.addObject("exp", exp);
   			mv.addObject("expList", expList);
+  			mv.addObject("expCategoryList", expCategoryList);
   			mv.setViewName("user/exp");
   		}else {
   			mv.addObject("msg", "체험리스트 조회 실패!!");

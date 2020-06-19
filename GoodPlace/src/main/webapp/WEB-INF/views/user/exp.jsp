@@ -129,7 +129,7 @@
     	<!-- 체험 카테고리, 카테고리별 등록 개수 -->
         <div style="width:100%; height:180px;">
             <div class="categoryPile">
-            	<c:forEach items="${ exp.expCountPerCategory }" var="count" varStatus="status">
+        	 	<c:forEach items="${ exp.expCountPerCategory }" var="count" varStatus="status">
 	                <div class="smallCategory">
 	                	<c:if test="${status.index eq 0}"><h3 class="expCategory">라이프 및 스타일</h3></c:if>
 	                    <c:if test="${status.index eq 1}"><h3 class="expCategory">문화와 역사</h3></c:if>

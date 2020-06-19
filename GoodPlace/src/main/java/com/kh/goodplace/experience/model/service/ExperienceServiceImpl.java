@@ -188,8 +188,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public ArrayList<Integer> selectExpCountUser() {
-		return expDao.selectExpCountUser(sqlSession);
+	public int selectExpCountUser(int expCategory) {
+		return expDao.selectExpCountUser(sqlSession, expCategory);
 	}
 
 	@Override
