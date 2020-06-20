@@ -75,11 +75,14 @@
 	<!-- header -->
 	<jsp:include page="common/menubar.jsp"/>
 	
+	<!-- searchBar -->
+	<jsp:include page="common/searchbar.jsp"/>
+	
 	<!-- content -->
     <br>
     <div id="content" style="margin-bottom: 100px;">
 		
-		<jsp:include page="common/searchbar.jsp"/>
+		
 		
         <!-- 이벤트 슬라이더 부분 -->
         <!-- 슬라이더 영역 크기 지정 -->

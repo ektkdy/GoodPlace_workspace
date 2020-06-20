@@ -146,7 +146,7 @@
         
             <div style="width:100%; height:58px;">
                 <div style="width:50%; height:100%; padding-top:14px;"><h2>모든 체험</h2></div>
-                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a class="sort">가격 높은 순</a></div>
+                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a id="reviewSort" class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a id="cheapSort" class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a id="expensiveSort" class="sort">가격 높은 순</a></div>
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
             
@@ -219,6 +219,34 @@
     			$("#showExpDetail").submit();
     		});
     	});
+    	
+    	// 리뷰 많은 순 정렬
+  		$(function(){
+			$("#reviewSort").click(function(){
+				$.ajax({
+					url:"review	SortExp.exp",
+					data:{},
+					type:"post",
+					success:function(expList){
+						console.log(expList);
+						
+						//var value = "<ul>" + 
+							//			"<li>이름 : " + obj.userName + "</li>" + 
+								//		"<li>나이 : " + obj.age + "</li>" + 
+									//	"<li>아이디 : " + obj.userId + "</li>" +
+									//"</ul>";
+						
+					//	$("#result2").html(value);
+					},
+					error:function(){
+						console.log("ajax 통신실패");
+					}
+				});
+			});
+		});	
+    	// 가격 낮은 순 정렬
+    	
+    	// 가격 높은 순 정렬
     </script>
 	
     <!-- footer -->

@@ -48,6 +48,7 @@ public class RoomController {
 	@Autowired // DI
 	private MemberService mService;
     
+
     // 공유해서 쓸 수 있게끔 따로 정의해 놓은 메소드 
 	// 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -707,8 +708,14 @@ public class RoomController {
 	// ------------- 사용자 시작 --------------------------------------------------
     // 메인페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원) 입력받은 후  숙소검색 페이지로 이동
 	@RequestMapping("searchRo.ro")
-   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, Room room, Board board, ModelAndView mv ) {
-
+   	public ModelAndView searchRoom(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, HttpSession session, Room room, Board board, ModelAndView mv ) {
+		
+  		// searchBar 검색조건 세션에 set
+		session.setAttribute("tripArea", tripArea);
+  		session.setAttribute("tripStartDate", tripStartDate);
+  		session.setAttribute("tripEndDate", tripEndDate);
+		session.setAttribute("tripPeople", tripPeople);
+  		
 		// 넘겨받은 여행조건들 room객체에 set
 		room.setAddBasic(tripArea);
 		room.setStartDays(tripStartDate);
@@ -748,9 +755,15 @@ public class RoomController {
 	
 	// 숙소검색페이지에서 조건 4가지 (위치, 체크인날짜, 체크아웃날짜, 인원)와 필터에 해당하는 숙소리스트 반환
 	@RequestMapping("searchRoWithFilter.ro")
-   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, String filterValue, Room room, Board board, ModelAndView mv ) {
+   	public ModelAndView searchRoWithFilter(String tripArea, String tripStartDate, String tripEndDate, int tripPeople, HttpSession session, String filterValue, Room room, Board board, ModelAndView mv ) {
 
-		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, room, board, mv);
+  		// searchBar 검색조건 세션에 set
+		session.setAttribute("tripArea", tripArea);
+  		session.setAttribute("tripStartDate", tripStartDate);
+  		session.setAttribute("tripEndDate", tripEndDate);
+		session.setAttribute("tripPeople", tripPeople);
+		
+		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, session, room, board, mv);
 		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
 		String serviceFull = "샴푸,화장지,바디워시,비누,짐보관서비스,수건,Free wifi";
 		
@@ -764,9 +777,9 @@ public class RoomController {
 		
 		ArrayList<Room> roomListWithFilter = new ArrayList<>();
 		
-		
-		
 		int count = 0;
+		
+		Attachment at = new Attachment();
 		
 		if(!filterValue.equals("")) {
 			String[] filter = filterValue.split(",");
@@ -784,7 +797,7 @@ public class RoomController {
 			//System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
 			//System.out.println("service split : " + serviceList[0]);
 			roomList2 = (ArrayList)mv.getModel().get("roomList");
-			Attachment at = (Attachment)mv.getModel().get("at");
+			at = (Attachment)mv.getModel().get("at");
 			
 			
 			for(Room compareRoom : roomList2) {
@@ -812,20 +825,20 @@ public class RoomController {
 					count++;
 				}
 			}
-			
+		}
+		
+		if(!roomListWithFilter.isEmpty()){
 			// 필터 조건 자국 남겨주기 위해 set
 			//System.out.println("filterValue : " + filterValue);
 			mv.addObject("filterValue", filterValue);
 			// 필터 조건에 해당하는 숙소만 set // ????????? ModelAndView에 키값 똑같은 걸로 입력하면 중복 오류 안 나요?
 			mv.addObject("roomList", roomListWithFilter);
 			mv.addObject("at", at);
+			mv.addObject("roomListSize", roomListWithFilter.size());
 			
-			// 예약시작일자, 예약끝일자, 인원수 set
-			mv.addObject("startDays", tripStartDate);
-			mv.addObject("endDays", tripEndDate);
-			mv.addObject("tripPeople", tripPeople);
-			
-		}
+        }else{
+            mv.addObject("msg", "필터 조건에 해당하는 숙소가 없습니다.");
+        }
 
 		return mv;
    	}
@@ -935,6 +948,7 @@ public class RoomController {
     	return mv;
     	
     }
+    
     // 숙소상세 -> 숙소 결제페이지로 이동
     @RequestMapping("insertRoomPay.ro")
     public ModelAndView insertRoomPay( int roNo, String roomsTitle, int userNo, int amount, int addPrice, String tripStartDate, String tripEndDate, int people, int price, ModelAndView mv) {

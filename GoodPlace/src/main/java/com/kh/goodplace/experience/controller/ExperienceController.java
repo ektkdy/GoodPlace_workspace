@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -30,6 +31,7 @@ import com.kh.goodplace.experience.model.service.ExperienceService;
 import com.kh.goodplace.experience.model.vo.ExpPay;
 import com.kh.goodplace.experience.model.vo.Experience;
 import com.kh.goodplace.member.model.vo.Member;
+import com.kh.goodplace.room.model.vo.Room;
 
 @Controller
 public class ExperienceController {
@@ -652,19 +654,6 @@ public class ExperienceController {
 			    return jsonString;
 			}
 			
-			
-//			//디테일
-//			@RequestMapping("reservationExpDetailView.rv")
-//			public String reservationExpDetailView(int epNo, Model model) {
-//				
-//				Experience e = expService.reservationExpDetailView(epNo);
-//				
-//				model.addAttribute("e", e);
-//				
-//				return "partner/partnerReservationExpDetailView";
-//				
-//			}
-			
 			//디테일2
 			@RequestMapping("reservationExpDetailView.rv")
 			public ModelAndView reservationExpDetailView(int epNo, ModelAndView mv) {
@@ -777,10 +766,15 @@ public class ExperienceController {
     
   	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
   	@RequestMapping("showExpList.exp")
-  	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, ModelAndView mv) {
+  	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, HttpSession session, ModelAndView mv) {
   		//System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
   		//System.out.println("지점1");
-  		 
+  		
+  		// searchBar 검색조건 세션에 set
+  		session.setAttribute("expCategoryString", expCategoryString);
+  		session.setAttribute("expDateString", expDateString);
+  		session.setAttribute("expTitle", expTitle);
+
   		// expCategory 필드 설정
   		int expCategory = 0;
   		if(expCategoryString.equals("라이프 및 스타일")) {
@@ -1090,6 +1084,30 @@ public class ExperienceController {
   		
   	}
   	
+  	// 리뷰 많은 순 정렬
+	@ResponseBody
+    @RequestMapping(value="reviewSortExp.exp", produces="application/json; charset=utf-8")
+    public String reviewSortExp() {
+    	//ArrayList<Experience> expList = expService.selectExpListUser(exp);
+
+    	/*Collections.shuffle(powerAllList);
+    	
+    	ArrayList<Room> powerList = new ArrayList<>();
+    	
+    	if(powerAllList.size() >= 4) {
+    		for(int i=0 ; i<4 ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	} else {
+    		for(int i=0 ; i<powerAllList.size() ; i++) {
+    			powerList.add(powerAllList.get(i));
+    		}
+    	}
+    	
+    	*/
+    	return ""; //new Gson().toJson();
+    }
+	
   	
   	//------- 체험조회 끝 ---------------------------------------------------
   	
