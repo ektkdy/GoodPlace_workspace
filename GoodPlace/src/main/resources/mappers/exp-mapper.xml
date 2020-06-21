@@ -540,6 +540,12 @@
 		 WHERE EXNO=#{exNo}
 	</select>
 	
+	<select id="selectExppayCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		  FROM EXPPAY
+		 WHERE EXNO=#{exNo}
+	</select>
+	
 	<select id="selectAcceptedPeople" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPPAY

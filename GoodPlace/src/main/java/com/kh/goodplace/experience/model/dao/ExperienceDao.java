@@ -227,7 +227,7 @@ public class ExperienceDao {
 		
 	// --------- 체험관리 시작 -----------------
 	
-		//------------[체험조회 시작]------------
+		//------------[사용자 시작]------------
 		public ArrayList<Experience> selectExpListUser(SqlSessionTemplate sqlSession, Experience exp){
 			System.out.println("selectExpListUser Dao 까지는 온다.");
 			return (ArrayList)sqlSession.selectList("expMapper.selectExpListUser", exp);
@@ -269,7 +269,11 @@ public class ExperienceDao {
 			return (ArrayList)sqlSession.selectList("expMapper.selectEpNoList");
 		}
 		
-		//------------[체험조회 끝]------------
+		public int getExppayCount(SqlSessionTemplate sqlSession, int exNo) {
+			return sqlSession.selectOne("expMapper.selectExppayCount", exNo);
+		}
+		
+		//------------[사용자 끝]------------
 		
 	// 마이페이지
 	public ArrayList<ExpPay> selectExpPayList(SqlSessionTemplate sqlSession, Member m) {

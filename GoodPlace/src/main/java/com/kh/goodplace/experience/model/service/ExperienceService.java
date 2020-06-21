@@ -113,7 +113,7 @@ public interface ExperienceService {
 	//5. 공지사항 검색 조회용
 	ArrayList<Experience> expSearchList(PageInfo pi, Experience e);
 	
-	//------------[체험조회 시작]------------
+	//------------[사용자 시작]------------
 		//1. 메뉴바에서 검색한 조건에 해당하는 체험리스트 조회용 서비스 - 진아
 		ArrayList<Experience> selectExpListUser(Experience exp);
 		
@@ -140,7 +140,10 @@ public interface ExperienceService {
 		
 		//9. INSERT된  체험결제 시퀀스 조회용 서비스 - 진아
 		ArrayList<Integer> getEpNo();
-	//------------[체험조회 끝]------------
+		
+		//10. 해당 체험이 결제된 횟수 조회용 서비스 - 진아
+		int getExppayCount(int exNo);
+	//------------[사용자 끝]------------
 
 	
 	//------------[결제 정보 조회 ]------------

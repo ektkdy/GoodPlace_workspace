@@ -7,13 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>체험메인</title>
-    
-     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/swiperEditJinah.css">
 
-    <!-- Swiper JS -->
-    <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-    
     <style>
         /* content 스타일 시작*/
        	/* 여백 초기화 */
@@ -133,7 +127,7 @@
         <div style="width:100%; height:180px;">
             <div class="categoryPile">
         	 	<c:forEach items="${ exp.expCountPerCategory }" var="count" varStatus="status">
-	                <div class="smallCategory">
+	                <div class="smallCategory" id="category${ status.count }">
 	                	<c:if test="${status.index eq 0}"><h3 class="expCategory">라이프 및 스타일</h3></c:if>
 	                    <c:if test="${status.index eq 1}"><h3 class="expCategory">문화와 역사</h3></c:if>
 	                    <c:if test="${status.index eq 2}"><h3 class="expCategory">미술과 디자인</h3></c:if>
@@ -149,7 +143,7 @@
         
             <div style="width:100%; height:58px;">
                 <div style="width:50%; height:100%; padding-top:14px;"><h2>모든 체험</h2></div>
-                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a onclick="reviewSort();" class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a id="cheapSort" class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a id="expensiveSort" class="sort">가격 높은 순</a></div>
+                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a id="popularSort" class="sort">인기순</a>&nbsp;|&nbsp;<a id="cheapSort" class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a id="expensiveSort" class="sort">가격 높은 순</a></div>
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
             
@@ -223,28 +217,23 @@
     		});
     	});
     	
+    	// 상단의 카테고리 클릭시 해당 카테고리의 모든 체험 조회
+    	
+    	
     	// 리뷰 많은 순 정렬
-		function reviewSort(){
+		$("#popularSort").on("click",function(){     
 			$.ajax({
-				url:"reviewSortExp.exp",
+				url:"popularSortExp.exp",
 				data:{},
 				type:"post",
-				success:function(expList){
-					console.log(expList);
-					
-					//var value = "<ul>" + 
-						//			"<li>이름 : " + obj.userName + "</li>" + 
-							//		"<li>나이 : " + obj.age + "</li>" + 
-								//	"<li>아이디 : " + obj.userId + "</li>" +
-								//"</ul>";
-					
-				//	$("#result2").html(value);
+				success:function(expListAddExppay){
+					alert("reviewSortExp ajax 성공!!" + expListAddExppay);
 				},
 				error:function(){
 					console.log("ajax 통신실패");
 				}
 			});
-		};
+		});
     	// 가격 낮은 순 정렬
     	
     	// 가격 높은 순 정렬

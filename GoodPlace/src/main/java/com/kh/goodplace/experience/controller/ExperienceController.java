@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -38,6 +39,9 @@ public class ExperienceController {
 	
 	@Autowired // DI
 	private ExperienceService expService;
+	
+	@Autowired // DI
+	private HttpSession session;
 	
 	/* 전달받은 파일을 서버에 업로드시킨 후 수정명을 리턴하는 메소드 */
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -838,8 +842,10 @@ public class ExperienceController {
   		if(expList != null) {
   			mv.addObject("exp", exp);
   			mv.addObject("expList", expList);
+  			session.setAttribute("expList", expList);
   			mv.addObject("expCategoryList", expCategoryList);
   			mv.setViewName("user/exp");
+  			this.session = session;
   		}else {
   			mv.addObject("msg", "체험리스트 조회 실패!!");
   			mv.setViewName("common/errorPage");
@@ -1084,28 +1090,36 @@ public class ExperienceController {
   		
   	}
   	
-  	// 리뷰 많은 순 정렬
+  	// 인기순 정렬
 	@ResponseBody
-    @RequestMapping(value="reviewSortExp.exp", produces="application/json; charset=utf-8")
-    public String reviewSortExp() {
-    	//ArrayList<Experience> expList = expService.selectExpListUser(exp);
-
-    	/*Collections.shuffle(powerAllList);
+    @RequestMapping(value="popularSortExp.exp", produces="application/json; charset=utf-8")
+    public String popularSortExp() {
+		
+		ArrayList<Experience> expListAddExppay = (ArrayList)this.session.getAttribute("expList");
+		
+		for(Experience expListTemp : expListAddExppay) {
+			expListTemp.setExppayCount(expService.getExppayCount(expListTemp.getExNo()));
+		}
+		
+    	Collections.sort(expListAddExppay, new Comparator<Experience>() {
+            @Override
+            public int compare(Experience e1, Experience e2) {
+                if (e1.getExppayCount() < e2.getExppayCount()) {
+                    return -1;
+                } else if (e1.getExppayCount() > e2.getExppayCount()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
     	
-    	ArrayList<Room> powerList = new ArrayList<>();
+    	Collections.reverse(expListAddExppay);
     	
-    	if(powerAllList.size() >= 4) {
-    		for(int i=0 ; i<4 ; i++) {
-    			powerList.add(powerAllList.get(i));
-    		}
-    	} else {
-    		for(int i=0 ; i<powerAllList.size() ; i++) {
-    			powerList.add(powerAllList.get(i));
-    		}
+    	for(Experience e : expListAddExppay) {
+    		System.out.println("정렬 반전 후의 e : " + e);
     	}
     	
-    	*/
-    	return ""; //new Gson().toJson();
+    	return new Gson().toJson(expListAddExppay); //new Gson().toJson();
     }
 	
   	

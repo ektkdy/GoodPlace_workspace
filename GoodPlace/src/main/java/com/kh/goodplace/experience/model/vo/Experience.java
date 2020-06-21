@@ -83,6 +83,7 @@ public class Experience {
 	private String detailImg4;  // Attachment 테이블에 담겨있는 체험상세이미지4
 	private String detailImg5;  // Attachment 테이블에 담겨있는 체험상세이미지5
 	private String myClassStartTime; // 내가 예약한 수업교시의 시작시간
+	private int exppayCount;	// 해당 체험이 결제된 횟수
 	
 	/* DB에도 추가한 필드 */
 	private int expClassCount;		// 하루에 진행되는 수업 개수
