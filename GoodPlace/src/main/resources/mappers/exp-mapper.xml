@@ -520,6 +520,7 @@
 	<select id="selectExpListUser" parameterType="Experience" resultMap="ExperienceResultSetUser">
 		SELECT *
 		  FROM EXPERIENCE E
+		  JOIN MEMBER M USING(USNO)
 		 WHERE EXP_CATEGORY=#{expCategory}
            AND ((EXP_TITLE LIKE '%' || #{expTitle} || '%') OR (EXP_TAG LIKE '%' || #{expTitle} || '%'))
          ORDER BY EXNO
@@ -560,7 +561,6 @@
 		 FROM ATTACHMENT
 		WHERE EXNO = #{exNo}
 	</select>
-	
 	<update id="updateExpPay" parameterType="ExpPay">
 		INSERT INTO EXPPAY
 		VALUES (EXNO.NEXTVAL, #{exNo}, #{usNo}, #{amount}, TO_DATE(SYSDATE), TO_DATE(#{expDateString}, 'YYYY-MM-DD'), #{people}, 1, #{expClassNo})
