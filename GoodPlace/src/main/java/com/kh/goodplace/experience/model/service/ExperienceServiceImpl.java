@@ -207,6 +207,12 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public int getExppayCount(int exNo) {
 		return expDao.getExppayCount(sqlSession, exNo);
 	}
+	
+	@Override
+	public ArrayList<Experience> getExpPerCategory(int categoryNo) {
+		return expDao.getExpPerCategory(sqlSession, categoryNo);
+	}
+	
 	@Override
 	public ArrayList<Experience> getAcceptedPeople(int exNo, int expClassNo, String expDateString) {
 		return expDao.getAcceptedPeople(sqlSession, exNo, expClassNo, expDateString);
@@ -243,6 +249,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 	public ArrayList<ExpPay> selectExpPayList(Member m) {
 		return expDao.selectExpPayList(sqlSession, m);
 	}
+
 
 	
 	

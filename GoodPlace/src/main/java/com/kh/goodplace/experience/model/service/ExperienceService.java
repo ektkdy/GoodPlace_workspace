@@ -143,6 +143,9 @@ public interface ExperienceService {
 		
 		//10. 해당 체험이 결제된 횟수 조회용 서비스 - 진아
 		int getExppayCount(int exNo);
+		
+		//11. 카테고리별 체험 조회용 서비스 - 진아
+		ArrayList<Experience> getExpPerCategory(int categoryNo);
 	//------------[사용자 끝]------------
 
 	

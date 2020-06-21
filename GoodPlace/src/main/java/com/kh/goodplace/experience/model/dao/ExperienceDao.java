@@ -273,6 +273,10 @@ public class ExperienceDao {
 			return sqlSession.selectOne("expMapper.selectExppayCount", exNo);
 		}
 		
+		public ArrayList<Experience> getExpPerCategory(SqlSessionTemplate sqlSession, int  categoryNo){
+			return (ArrayList)sqlSession.selectList("expMapper.selectExpPerCategory", categoryNo);
+		}
+		
 		//------------[사용자 끝]------------
 		
 	// 마이페이지

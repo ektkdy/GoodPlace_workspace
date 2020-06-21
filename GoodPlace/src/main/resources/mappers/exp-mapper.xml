@@ -574,6 +574,14 @@
 		 WHERE EPNO = #{epNo}
 	</select>
 	
+	<select id="selectExpPerCategory" parameterType="_int" resultMap="ExperiencePayResultSet">
+		SELECT *
+		  FROM EXPERIENCE E
+          LEFT JOIN MEMBER M USING(USNO)
+          LEFT JOIN PARTNER P USING (PANO)
+		 WHERE EXP_CATEGORY=#{categoryNo}
+	</select>
+	
 	<select id="selectEpNoList" resultType="_int">
 		SELECT EPNO
 		  FROM EXPPAY

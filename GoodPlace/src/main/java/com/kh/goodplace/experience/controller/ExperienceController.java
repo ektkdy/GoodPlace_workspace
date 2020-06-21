@@ -1122,7 +1122,57 @@ public class ExperienceController {
     	return new Gson().toJson(expListAddExppay); //new Gson().toJson();
     }
 	
-  	
+  	// 가격 낮은 순 정렬
+	
+	// 가격 높은 순 정렬
+	
+	// 라이프 및 스타일 카테고리의 모든 체험 조회
+	
+	// 문화와 역사 카테고리의 모든 체험 조회
+
+	// 미술과 디자인 카테고리의 모든 체험 조회
+
+	// 스포츠 및 피트니스 카테고리의 모든 체험 조회
+
+	// 카테고리별 모든 체험 조회
+	@ResponseBody
+    @RequestMapping(value="showCategory.exp", produces="application/json; charset=utf-8")
+    public String showCategory(int categoryNo) {
+		
+		ArrayList<Experience> expList = expService.getExpPerCategory(categoryNo);
+		
+  		// expCategoryString 필드 설정
+		for(Experience exp : expList) {
+	  		int expCategory = exp.getExpCategory();
+	  		if(expCategory == 1) {
+	  			exp.setExpCategoryString("라이프 및 스타일");
+	  		}else if(expCategory == 2){
+	  			exp.setExpCategoryString("문화와 역사");
+	  		}else if(expCategory == 3){
+	  			exp.setExpCategoryString("미술과 디자인");
+	  		}else if(expCategory == 4){
+	  			exp.setExpCategoryString("스포츠&피트니스");
+	  		}else if(expCategory == 5){
+	  			exp.setExpCategoryString("야외활동");
+	  		}
+	  		
+	  		// 파트너 이름 set
+	  		exp.setPaName(exp.getUserName());
+		}
+		
+		
+		
+		
+		System.out.println("카테고리 선택 후 expList" + expList);
+		if(expList.size() > 0) {
+			session.setAttribute("expList", expList);
+			return new Gson().toJson(expList);
+		}else {
+			return "";
+		}
+    	// 리턴 전에 session.setAttribute("expList", expList); 하기!!
+    	
+    }
   	//------- 사용자 끝 ---------------------------------------------------
   	
 			
