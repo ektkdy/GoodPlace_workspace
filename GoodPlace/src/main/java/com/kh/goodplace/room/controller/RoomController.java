@@ -737,7 +737,7 @@ public class RoomController {
         	System.out.println("roomList "+ i + "번지 리뷰 개수" + roomList.get(i).getReviewCount());
     	}
 
-        if(!roomList.isEmpty()){
+        if(roomList.size() > 0){
         	mv.addObject("tripArea", tripArea);
         	mv.addObject("tripStartDate", tripStartDate);
         	mv.addObject("tripEndDate", tripEndDate);
@@ -745,8 +745,7 @@ public class RoomController {
         	mv.addObject("roomListSize", roomListSize);
         	mv.addObject("roomList", roomList);
         	mv.setViewName("user/searchRooms");
-        }
-        else{
+        } else{
             mv.addObject("msg", "숙소검색 실패!!");
             mv.setViewName("common/errorPage");
         }
@@ -827,7 +826,7 @@ public class RoomController {
 			}
 		}
 		
-		if(!roomListWithFilter.isEmpty()){
+		if(roomListWithFilter.size() > 0){
 			// 필터 조건 자국 남겨주기 위해 set
 			//System.out.println("filterValue : " + filterValue);
 			mv.addObject("filterValue", filterValue);
@@ -835,9 +834,9 @@ public class RoomController {
 			mv.addObject("roomList", roomListWithFilter);
 			mv.addObject("at", at);
 			mv.addObject("roomListSize", roomListWithFilter.size());
-			
         }else{
             mv.addObject("msg", "필터 조건에 해당하는 숙소가 없습니다.");
+            mv.setViewName("common/errorPage");
         }
 
 		return mv;

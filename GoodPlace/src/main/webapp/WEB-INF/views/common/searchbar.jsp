@@ -97,7 +97,7 @@
 	       </div>
 	
 	       <!-- 숙소검색 -->
-	       <form action="searchRoWithFilter.ro" id="roomSearchArea" method="get" >
+	       <form action="searchRo.ro" id="roomSearchArea" method="get" >
 	           <div class="search input" style="display: block;">
 	               <li class="liBox">
 	                   <b>위치</b>
@@ -121,15 +121,7 @@
 	           </div>
 	           <input type="hidden" id="filterValue" name="filterValue"/>
 	       </form>
-		<script>
-			$(function(){
-				$("#roomSearchArea #subRoomInfo").click(function(){
-		
-					$("#roomSearchArea").submit();
-					
-				});
-			});
-		</script>
+
 	     	<!-- 체험검색 -->
 	        <form action="showExpList.exp" id="expSearchArea" method="get">
 	            <div class="experience input" style="display: none;">
@@ -156,28 +148,33 @@
 	               </li>
 	            </div>
 	        </form>
-	        <script>
-	        	$(function(){
-	        		$("#expSearchArea #subExpInfo").click(function(){
-	
-	        			$("#expSearchArea").submit();
-	        			
-	        		});
-	        	});
-	        </script>
+
 	    </div>
 	</div><!-- /searchbar -->
 	
 	<script>
-	  	$(function(){
-	  		$("#expSearchArea #subExpInfo").click(function(){
-	
-	  			$("#expSearchArea").submit();
-	  			
-	  		});
-	  	});
-	 </script>
-	<script>
+	// 숙소검색 -> Controller 매핑 기능
+    $(function(){
+		$("#roomSearchArea #subRoomInfo").click(function(){
+			if($("input:checkbox[name=filter]:checked").length > 0){
+				$("#roomSearchArea").attr("action", "searchRoWithFilter.ro"); // 필터 조건 check됬으면 다른 매핑값 부여
+				$("#roomSearchArea").submit();
+			}else{
+				$("#roomSearchArea").submit();
+			}
+		});
+	});
+ 	// 체험검색 -> Controller 매핑 기능
+	$(function(){
+		$("#expSearchArea #subExpInfo").click(function(){
+
+			$("#expSearchArea").submit();
+			
+		});
+	});
+ 	
+ 	
+ 	
     function searchView1(){
         $('#mainSearch form .search').css("display","block");
         $('#mainSearch .chgBtn').children().eq(0).css("color","#63b8ee");

@@ -49,70 +49,70 @@
                         <div>
                             <table>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>다리미</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>다리미</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>주방</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>주방</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>식기류</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>식기류</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>인덕션</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>인덕션</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>옷걸이</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>옷걸이</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>세탁기</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>세탁기</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>침구</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>침구</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>케이블 TV</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>케이블 TV</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>드라이기</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>드라이기</label></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>조리도구(냄비 등)</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>조리도구(냄비 등)</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>냉장고</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>냉장고</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>전자레인지</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>전자레인지</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>에어컨</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>에어컨</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>공용PC</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>공용PC</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>커피포트</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>커피포트</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>아기욕조</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>아기욕조</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>아기침대</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>아기침대</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>여분의 침구</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>여분의 침구</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>온수 및 난방</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>온수 및 난방</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>주차가능</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>주차가능</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>짐보관서비스</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>짐보관서비스</label></td>
                                 </tr>
                                 <tr class="hide">
-                                    <td><input type="checkbox" class="filterCheckBox"/><label>Free wifi</label></td>
+                                    <td><input type="checkbox" name="filter" class="filterCheckBox"/><label>Free wifi</label></td>
                                 </tr>
                             </table>
                             <div style="width:100%" id="openFilter">   
