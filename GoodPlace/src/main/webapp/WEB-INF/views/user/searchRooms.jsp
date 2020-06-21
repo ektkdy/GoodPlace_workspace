@@ -278,7 +278,7 @@
 			},error:function(){
 				console.log("ajax 통신 실패");
 			}
-		})
+		});
 		
 		// searchbar에 검색한 조건 set
 		$(function(){

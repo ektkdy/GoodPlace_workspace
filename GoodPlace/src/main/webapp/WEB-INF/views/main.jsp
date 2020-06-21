@@ -34,7 +34,7 @@
 
     /*파워등록숙소,인기숙소*/
     #roomList{
-
+		margin-top:80px;
     }
     #roomList h2{
         margin-left: 150px;
@@ -208,8 +208,6 @@
     		}
     	})
     })
-    
-    
    
 	</script>
 </body>

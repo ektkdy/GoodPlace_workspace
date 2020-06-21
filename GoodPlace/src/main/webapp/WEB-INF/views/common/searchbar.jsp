@@ -88,7 +88,7 @@
 </head>
 <body>
 
-	    <!-- searchbar -->
+	<!-- searchbar -->
 	<div id="searchbar">
 	    <div id="mainSearch">
 	        <div class="search chgBtn">
@@ -116,7 +116,7 @@
 	                   <input type="number" name="tripPeople" id="tripPeople" placeholder="인원수를 선택해주세요">
 	               </li>
 	               <li style="position:absolute; margin-left:5px;">
-	                   <input id="subRoomInfo" type="button" value="숙소검색" style="width:240px; height:58px; padding:0px;">
+	                   <input id="subRoomInfo" type="button" value="숙소검색" style="border:1px solid gray; width:240px; height:58px; padding:0px;">
 	               </li>
 	           </div>
 	           <input type="hidden" id="filterValue" name="filterValue"/>
@@ -131,7 +131,7 @@
 			});
 		</script>
 	     	<!-- 체험검색 -->
-	        <form action="showExp.exp" id="expSearchArea" method="get">
+	        <form action="showExpList.exp" id="expSearchArea" method="get">
 	            <div class="experience input" style="display: none;">
 	                <li class="liBox1">
 	                    <b>태그</b>
@@ -152,7 +152,7 @@
 	                    <input type="text" name="expTitle" placeholder="키워드를 입력하세요">
 	                </li>
 	                <li style="position:absolute; margin-left:5px;">
-	                   <input id="subExpInfo" type="button" value="체험검색" style="width:240px; height:58px; padding:0px;">
+	                   <input id="subExpInfo" type="button" value="체험검색" style="border:1px solid gray; width:240px; height:58px; padding:0px;">
 	               </li>
 	            </div>
 	        </form>
@@ -167,6 +167,7 @@
 	        </script>
 	    </div>
 	</div><!-- /searchbar -->
+	
 	<script>
 	  	$(function(){
 	  		$("#expSearchArea #subExpInfo").click(function(){
@@ -194,5 +195,6 @@
         $('#mainSearch .chgBtn').children().eq(1).css("cursor","inherit");
     }
 	</script>
+	
 </body>
 </html>

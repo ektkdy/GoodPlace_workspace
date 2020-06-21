@@ -94,6 +94,9 @@
             font-weight: 800;
             color: gray;
         }
+        .sort:hover{
+            color:black;
+        }
         .expArea{
             margin:35px 35px 35px 35px;
             border:2px solid lightgray;
@@ -134,7 +137,7 @@
 	                	<c:if test="${status.index eq 0}"><h3 class="expCategory">라이프 및 스타일</h3></c:if>
 	                    <c:if test="${status.index eq 1}"><h3 class="expCategory">문화와 역사</h3></c:if>
 	                    <c:if test="${status.index eq 2}"><h3 class="expCategory">미술과 디자인</h3></c:if>
-	                    <c:if test="${status.index eq 3}"><h3 class="expCategory">스포츠&피트니스</h3></c:if>
+	                    <c:if test="${status.index eq 3}"><h3 class="expCategory">스포츠&amp;피트니스</h3></c:if>
 	                    <c:if test="${status.index eq 4}"><h3 class="expCategory">야외활동</h3></c:if>
 	                    <p class="expCount expCategory">체험 ${ count }개</p>
 	                </div>
@@ -146,7 +149,7 @@
         
             <div style="width:100%; height:58px;">
                 <div style="width:50%; height:100%; padding-top:14px;"><h2>모든 체험</h2></div>
-                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a id="reviewSort" class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a id="cheapSort" class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a id="expensiveSort" class="sort">가격 높은 순</a></div>
+                <div style="width:50%; height:100%; text-align:right; padding-top:20px;"><a onclick="reviewSort();" class="sort">리뷰 많은 순</a>&nbsp;|&nbsp;<a id="cheapSort" class="sort">가격 낮은 순</a>&nbsp;|&nbsp;<a id="expensiveSort" class="sort">가격 높은 순</a></div>
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
             
@@ -221,29 +224,27 @@
     	});
     	
     	// 리뷰 많은 순 정렬
-  		$(function(){
-			$("#reviewSort").click(function(){
-				$.ajax({
-					url:"review	SortExp.exp",
-					data:{},
-					type:"post",
-					success:function(expList){
-						console.log(expList);
-						
-						//var value = "<ul>" + 
-							//			"<li>이름 : " + obj.userName + "</li>" + 
-								//		"<li>나이 : " + obj.age + "</li>" + 
-									//	"<li>아이디 : " + obj.userId + "</li>" +
-									//"</ul>";
-						
-					//	$("#result2").html(value);
-					},
-					error:function(){
-						console.log("ajax 통신실패");
-					}
-				});
+		function reviewSort(){
+			$.ajax({
+				url:"reviewSortExp.exp",
+				data:{},
+				type:"post",
+				success:function(expList){
+					console.log(expList);
+					
+					//var value = "<ul>" + 
+						//			"<li>이름 : " + obj.userName + "</li>" + 
+							//		"<li>나이 : " + obj.age + "</li>" + 
+								//	"<li>아이디 : " + obj.userId + "</li>" +
+								//"</ul>";
+					
+				//	$("#result2").html(value);
+				},
+				error:function(){
+					console.log("ajax 통신실패");
+				}
 			});
-		});	
+		};
     	// 가격 낮은 순 정렬
     	
     	// 가격 높은 순 정렬

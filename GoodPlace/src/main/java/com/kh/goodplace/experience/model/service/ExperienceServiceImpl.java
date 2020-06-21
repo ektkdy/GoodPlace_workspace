@@ -184,6 +184,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 	@Override
 	public ArrayList<Experience> selectExpListUser(Experience exp) {
+		System.out.println("selectExpListUser ServiceImpl 까지는 온다.");
 		return expDao.selectExpListUser(sqlSession, exp);
 	}
 
