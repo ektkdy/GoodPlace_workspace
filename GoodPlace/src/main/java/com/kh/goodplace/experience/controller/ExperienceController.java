@@ -1017,7 +1017,7 @@ public class ExperienceController {
   	public ModelAndView payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo, ModelAndView mv) {
   		
   		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
-  		
+  			
   		ExpPay expPay = new ExpPay();
   		expPay.setExNo(exNo);
   		expPay.setUsNo(usNo);
@@ -1119,21 +1119,69 @@ public class ExperienceController {
     		System.out.println("정렬 반전 후의 e : " + e);
     	}
     	
-    	return new Gson().toJson(expListAddExppay); //new Gson().toJson();
+    	session.setAttribute("expList", expListAddExppay);
+    	
+    	return new Gson().toJson(expListAddExppay);
     }
 	
   	// 가격 낮은 순 정렬
+	@ResponseBody
+    @RequestMapping(value="cheapSortExp.exp", produces="application/json; charset=utf-8")
+    public String cheapSortExp() {
+		
+		ArrayList<Experience> expListCheapSort = (ArrayList)this.session.getAttribute("expList");
+		
+    	Collections.sort(expListCheapSort, new Comparator<Experience>() {
+            @Override
+            public int compare(Experience e1, Experience e2) {
+                if (e1.getPrice() < e2.getPrice()) {
+                    return -1;
+                } else if (e1.getExppayCount() > e2.getExppayCount()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+    	
+    	for(Experience e : expListCheapSort) {
+    		System.out.println("정렬 후의 e : " + e);
+    	}
+    	
+    	session.setAttribute("expList", expListCheapSort);
+    	
+    	return new Gson().toJson(expListCheapSort);
+    }
 	
 	// 가격 높은 순 정렬
+	@ResponseBody
+    @RequestMapping(value="expensiveSortExp.exp", produces="application/json; charset=utf-8")
+    public String expensiveSortExp() {
+		
+		ArrayList<Experience> expensiveSortExp = (ArrayList)this.session.getAttribute("expList");
+		
+    	Collections.sort(expensiveSortExp, new Comparator<Experience>() {
+            @Override
+            public int compare(Experience e1, Experience e2) {
+                if (e1.getPrice() < e2.getPrice()) {
+                    return -1;
+                } else if (e1.getExppayCount() > e2.getExppayCount()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+    	
+    	Collections.reverse(expensiveSortExp);
+    	
+    	for(Experience e : expensiveSortExp) {
+    		System.out.println("정렬 반전 후의 e : " + e);
+    	}
+    	
+    	session.setAttribute("expList", expensiveSortExp);
+    	
+    	return new Gson().toJson(expensiveSortExp);
+    }
 	
-	// 라이프 및 스타일 카테고리의 모든 체험 조회
-	
-	// 문화와 역사 카테고리의 모든 체험 조회
-
-	// 미술과 디자인 카테고리의 모든 체험 조회
-
-	// 스포츠 및 피트니스 카테고리의 모든 체험 조회
-
 	// 카테고리별 모든 체험 조회
 	@ResponseBody
     @RequestMapping(value="showCategory.exp", produces="application/json; charset=utf-8")
@@ -1165,11 +1213,16 @@ public class ExperienceController {
 		
 		System.out.println("카테고리 선택 후 expList" + expList);
 		if(expList.size() > 0) {
+			
 			session.setAttribute("expList", expList);
 			return new Gson().toJson(expList);
+			
 		}else {
+			
 			return "";
+			
 		}
+		
     	// 리턴 전에 session.setAttribute("expList", expList); 하기!!
     	
     }
