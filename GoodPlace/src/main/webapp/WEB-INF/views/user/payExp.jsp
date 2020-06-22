@@ -8,14 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>체험결제</title>
     
-    <!-- 영수증 움직이는 기능 API -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-
     <!-- 결제 API 관련 -->
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62fda0bf46ca2ad372f7f5e69d04a01e&libraries=services"></script>
 	
     <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+    
+    <!-- 영수증 움직이는 기능 API -->
+    <script type="text/javascript" src="../../../resources/js/jquery-3.4.1.min.js"></script>
+    
     <style>
         /* content 스타일 시작*/
         /* 여백 초기화 */
@@ -182,6 +183,7 @@
 
     <!-- '포인트 사용' 클릭 시 -->
     <script>
+
         $("#pointButton").click(function(){
 
             var myPoint = $('#myPointHidden').val();

@@ -293,7 +293,7 @@
             	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
             	<input type="hidden" name="usNo" value="${ loginUser.usNo }"/>
             	<input type="hidden" name="amount" value="${ exp.price }"/>
-            	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+            	<input type="hidden" name="expDateString" value="${ expDateString }"/>
             	<input type="hidden" name="people"/>
                 <input type="hidden" name="expClassNo"/>
             </form>
