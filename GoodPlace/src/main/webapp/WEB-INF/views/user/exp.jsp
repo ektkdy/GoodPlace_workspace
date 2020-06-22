@@ -102,13 +102,13 @@
             border:2px solid lightgray;
         }
         /* 페이징바 시작 */ 
-            .pagingBar{
+        .pagingBar{
             width:100%;
             margin:60px auto; 
             height:60px; 
-
             text-align:center;
             float:left;
+            margin-left:40%;
         }
         .pagingBar button{
             width:40px;
@@ -117,6 +117,18 @@
             border-radius: 5px;
             background-color: ghostwhite;
             border:1px solid #dcdcdc;
+        }
+        .pagingBar a{
+        	display:block;
+            width:40px;
+            height:30px;
+            color:gray;
+            border-radius: 5px;
+            background-color: ghostwhite;
+            border:1px solid #dcdcdc;
+            float:left;
+            margin:10px;
+            padding-top:10px;
         }
         /* 페이징바 끝 */
         /* content 스타일 끝*/
@@ -153,58 +165,150 @@
             </div><br><br>
             <hr style="border:2px solid lightgray; margin:15px 0 18px 0;">
             <div id="expContainer" style="width:1200px;">
-			<c:forEach items="${ expList }" var="exp" varStatus="status">
-	            <div style="width:100%;" class="expContainer">
-	                <div style="width:94%;"  class="expArea">
-	                    <div style="height:216px; width:292px;" class="expContainerSubmit">
-	                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
-	                    </div>
-	                    <div style="height:auto; width:830px; float:left;" class="expContainerSubmit">
-	                    <div style="width:50%; height:auto;">
-	                        <h3 class="exp1">${ exp.expCategoryString }</h3>
-	                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
-	                        <h3 class="exp1">${ exp.paName }</h3>
-	                        <h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ exp.expTag }</h3>	
-	                        <h3 class="exp1">${ exp.useTime }시간 소요</h3>
-	                        <h3 class="exp1">준비물 : ${ exp.supplies }</h3>
-	                    </div>
-	                    <div style="width:50%;" class="alignRight">
-	                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
-	                        <br><br><br><br><br>
-	                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
-	                    </div>
-	                    </div>
-	                </div>
-	                <form action="showExp.exp" class="showExpDetail">
-	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
-	                	<c:choose>
-	                		<c:when test="${ exp.expDateString ne null} or ${ exp.expDateString ne ''}" >
-	                			<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
-	                		</c:when>
-	                		<c:when test="${ expDateString ne null} or ${ !empty expDateString} or ${ expDateString ne ''}" >
-	                			<input type="hidden" name="expDateString" value="${ expDateString }"/>
-	                		</c:when>
-	                	</c:choose>
-	                </form>
-	            </div>
-          	</c:forEach>
+			
+			<c:choose>
+				<c:when test="${ pi.currentPage eq 1}">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="1" end="5">
+			            <div style="width:100%;" class="expContainer">
+			                <div style="width:94%;"  class="expArea">
+			                    <div style="height:216px; width:292px;" class="expContainerSubmit">
+			                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
+			                    </div>
+			                    <div style="height:auto; width:830px; float:left;" class="expContainerSubmit">
+			                    <div style="width:50%; height:auto;">
+			                        <h3 class="exp1">${ exp.expCategoryString }</h3>
+			                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
+			                        <h3 class="exp1">${ exp.paName }</h3>
+			                        <h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ exp.expTag }</h3>	
+			                        <h3 class="exp1">${ exp.useTime }시간 소요</h3>
+			                        <h3 class="exp1">준비물 : ${ exp.supplies }</h3>
+			                    </div>
+			                    <div style="width:50%;" class="alignRight">
+			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
+			                        <br><br><br><br><br>
+			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                    </div>
+			                    </div>
+			                </div>
+			                <form action="showExp.exp" class="showExpDetail">
+			                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
+			                	<c:choose>
+			                		<c:when test="${ exp.expDateString ne null} or ${ exp.expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+			                		</c:when>
+			                		<c:when test="${ expDateString ne null} or ${ !empty expDateString} or ${ expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ expDateString }"/>
+			                		</c:when>
+			                	</c:choose>
+			                </form>
+			            </div>
+		          	</c:forEach>
+				</c:when>
+				<c:when test="${ pi.currentPage ge 2 }">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit) + 1 }" end="${ pi.currentPage * pi.pageLimit }">
+			            <div style="width:100%;" class="expContainer">
+			                <div style="width:94%;"  class="expArea">
+			                    <div style="height:216px; width:292px;" class="expContainerSubmit">
+			                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
+			                    </div>
+			                    <div style="height:auto; width:830px; float:left;" class="expContainerSubmit">
+			                    <div style="width:50%; height:auto;">
+			                        <h3 class="exp1">${ exp.expCategoryString }</h3>
+			                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
+			                        <h3 class="exp1">${ exp.paName }</h3>
+			                        <h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ exp.expTag }</h3>	
+			                        <h3 class="exp1">${ exp.useTime }시간 소요</h3>
+			                        <h3 class="exp1">준비물 : ${ exp.supplies }</h3>
+			                    </div>
+			                    <div style="width:50%;" class="alignRight">
+			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
+			                        <br><br><br><br><br>
+			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                    </div>
+			                    </div>
+			                </div>
+			                <form action="showExp.exp" class="showExpDetail">
+			                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
+			                	<c:choose>
+			                		<c:when test="${ exp.expDateString ne null} or ${ exp.expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+			                		</c:when>
+			                		<c:when test="${ expDateString ne null} or ${ !empty expDateString} or ${ expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ expDateString }"/>
+			                		</c:when>
+			                	</c:choose>
+			                </form>
+			            </div>
+		          	</c:forEach>
+				</c:when>
+				<c:when test="${ pi.currentPage eq pi.maxPage }">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit) + 1 }" end="${ pi.listCount }">
+			            <div style="width:100%;" class="expContainer">
+			                <div style="width:94%;"  class="expArea">
+			                    <div style="height:216px; width:292px;" class="expContainerSubmit">
+			                        <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ exp.changeName }" width="100%;" height="100%;"/>
+			                    </div>
+			                    <div style="height:auto; width:830px; float:left;" class="expContainerSubmit">
+			                    <div style="width:50%; height:auto;">
+			                        <h3 class="exp1">${ exp.expCategoryString }</h3>
+			                        <h3 class="exp1" style="color:black;">${ exp.expTitle }</h3>
+			                        <h3 class="exp1">${ exp.paName }</h3>
+			                        <h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">${ exp.expTag }</h3>	
+			                        <h3 class="exp1">${ exp.useTime }시간 소요</h3>
+			                        <h3 class="exp1">준비물 : ${ exp.supplies }</h3>
+			                    </div>
+			                    <div style="width:50%;" class="alignRight">
+			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
+			                        <br><br><br><br><br>
+			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                    </div>
+			                    </div>
+			                </div>
+			                <form action="showExp.exp" class="showExpDetail">
+			                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
+			                	<c:choose>
+			                		<c:when test="${ exp.expDateString ne null} or ${ exp.expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+			                		</c:when>
+			                		<c:when test="${ expDateString ne null} or ${ !empty expDateString} or ${ expDateString ne ''}" >
+			                			<input type="hidden" name="expDateString" value="${ expDateString }"/>
+			                		</c:when>
+			                	</c:choose>
+			                </form>
+			            </div>
+		          	</c:forEach>
+				</c:when>
+			</c:choose>
+	            
+          	
           	<c:if test="${ empty expList }">
           		<div class="expContainer"><h2 style="color:gray;">해당 카테고리에 등록된 체험이 없습니다.</h2></div>
           	</c:if>
             </div>
         </div>
-		
-        <!-- 페이징 바 -->
-        <div class="pagingBar">
-            <button>&lt;</button>
-            <button style="background-color:rgb(24, 76, 136); color:white;">n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>n</button>&nbsp;
-            <button>&gt;</button>
-
-        </div>
+        
+        <!-- [이전] -->
+        <div class="pagingBar expContainer">
+		<c:if test="${ pi.currentPage ne 1 }">
+			<a href="showExpList.exp?expCategoryString=${ expCategoryString }&expDateString=${ expDateString }&expTitle=${ expTitle }&currentPage=${ pi.currentPage - 1 }">&lt;</a>
+		</c:if>
+		<!-- [중간버튼들] -->
+		<c:forEach var="p" begin="${ pi.startPage }" end ="${ pi.endPage }">
+			<c:choose>
+				<c:when test="${ p eq pi.currentPage }">
+					<a href="showExpList.exp?expCategoryString=${ expCategoryString }&expDateString=${ expDateString }&expTitle=${ expTitle }&currentPage=${ p }" style="color:red; font-weight:bold;">${ p }</a>
+				</c:when>
+				<c:otherwise>
+					<a href="showExpList.exp?expCategoryString=${ expCategoryString }&expDateString=${ expDateString }&expTitle=${ expTitle }&currentPage=${ p }">${ p }</a>
+				</c:otherwise>
+			</c:choose>    
+       	</c:forEach>
+       	
+       	<!-- [다음] -->
+       	<c:if test="${ pi.currentPage ne pi.maxPage }">
+       		<a href="showExpList.exp?expCategoryString=${ expCategoryString }&expDateString=${ expDateString }&expTitle=${ expTitle }&currentPage=${ pi.currentPage + 1 }">&gt;</a>
+       	</c:if>
+		</div>
         <br style="clear:both;">
     </div>
 
@@ -260,7 +364,7 @@
 					
 					if(expListPerCategory != null){
 						var expList = expListPerCategory;
-						$("#expContainer").children(".expContainer").remove();
+						$(".expContainer").remove();
 						$.each(expList, function (index, exp) { 
 							$("#expContainer").append(	'<div style="width:100%;" class="expContainer">' +
 											                '<div style="width:94%;"  class="expArea">' +
@@ -288,9 +392,9 @@
 											                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
 											                '</form>' +
 									            		'</div>');
-						})
+					});
+						
 					}
-
 				},
 				error:function(){
 					//alert("해당 카테고리에 등록된 체험이 없습니다.");
@@ -298,7 +402,7 @@
 					$("#expContainer").append("<div class='expContainer'><h2 style='color:gray;'>해당 카테고리에 등록된 체험이 없습니다.</h2></div>");
 				}
 			});
-		});
+    	});
     	
     	// 인기순 정렬
 		$("#popularSort").on("click",function(){     
@@ -310,31 +414,31 @@
 					var expList = expListAddExppay;
 					$("#expContainer").children(".expContainer").remove();
 					$.each(expList, function (index, exp) { 
-						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">' +
-										                '<div style="width:94%;"  class="expArea">' +
-										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">' +
-										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/' + exp.changeName + '" width="100%;" height="100%;"/>' +
-										                    '</div>' +
-										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">' +
-										                    '<div style="width:50%; height:auto;">' +
-										                        '<h3 class="exp1">' + exp.expCategoryString + '</h3>' +
-										                        '<h3 class="exp1" style="color:black;">' + exp.expTitle + '</h3>' +
-										                        '<h3 class="exp1">' + exp.paName +'</h3>' +
-										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">' + exp.expTag + '</h3>' +	
-										                        '<h3 class="exp1">' + exp.useTime + '시간 소요</h3>' +
-										                        '<h3 class="exp1">준비물 : ' + exp.supplies + '</h3>' +
-										                    '</div>' +
-										                    '<div style="width:50%;" class="alignRight">' +
-										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />' +
-										                        '<br><br><br><br><br>' +
-										                        '<h3 class="exp3">1인당 ' + exp.price + '원</h3>' +
-										                    '</div>' +
-										                    '</div>' +
-										                '</div>' +
-										                '<form action="showExp.exp" class="showExpDetail">' +
-										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
-										                '</form>' +
+						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
+										                '<div style="width:94%;"  class="expArea">'+
+										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
+										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/'+ exp.changeName + '" width="100%;" height="100%;"/>'+
+										                    '</div>'+
+										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">'+
+										                    '<div style="width:50%; height:auto;">'+
+										                        '<h3 class="exp1">'+ exp.expCategoryString + '</h3>'+
+										                        '<h3 class="exp1" style="color:black;">'+ exp.expTitle + '</h3>'+
+										                        '<h3 class="exp1">'+ exp.paName +'</h3>'+
+										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">'+ exp.expTag + '</h3>'+	
+										                        '<h3 class="exp1">'+ exp.useTime + '시간 소요</h3>'+
+										                        '<h3 class="exp1">준비물 : '+ exp.supplies + '</h3>'+
+										                    '</div>'+
+										                    '<div style="width:50%;" class="alignRight">'+
+										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
+										                        '<br><br><br><br><br>'+
+										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                    '</div>'+
+										                    '</div>'+
+										                '</div>'+
+										                '<form action="showExp.exp" class="showExpDetail">'+
+										                	'<input type="hidden" name="exNo" value="'+ exp.exNo + '"/>'+
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>'+
+										                '</form>'+
 								            		'</div>');
 					})
 
@@ -355,31 +459,31 @@
 					var expList = expListCheapSort;
 					$("#expContainer").children(".expContainer").remove();
 					$.each(expList, function (index, exp) { 
-						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">' +
-										                '<div style="width:94%;"  class="expArea">' +
-										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">' +
-										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/' + exp.changeName + '" width="100%;" height="100%;"/>' +
-										                    '</div>' +
-										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">' +
-										                    '<div style="width:50%; height:auto;">' +
-										                        '<h3 class="exp1">' + exp.expCategoryString + '</h3>' +
-										                        '<h3 class="exp1" style="color:black;">' + exp.expTitle + '</h3>' +
-										                        '<h3 class="exp1">' + exp.paName +'</h3>' +
-										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">' + exp.expTag + '</h3>' +	
-										                        '<h3 class="exp1">' + exp.useTime + '시간 소요</h3>' +
-										                        '<h3 class="exp1">준비물 : ' + exp.supplies + '</h3>' +
-										                    '</div>' +
-										                    '<div style="width:50%;" class="alignRight">' +
-										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />' +
-										                        '<br><br><br><br><br>' +
-										                        '<h3 class="exp3">1인당 ' + exp.price + '원</h3>' +
-										                    '</div>' +
-										                    '</div>' +
-										                '</div>' +
-										                '<form action="showExp.exp" class="showExpDetail">' +
-										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
-										                '</form>' +
+						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
+										                '<div style="width:94%;"  class="expArea">'+
+										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
+										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/'+ exp.changeName + '" width="100%;" height="100%;"/>'+
+										                    '</div>'+
+										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">'+
+										                    '<div style="width:50%; height:auto;">'+
+										                        '<h3 class="exp1">'+ exp.expCategoryString + '</h3>'+
+										                        '<h3 class="exp1" style="color:black;">'+ exp.expTitle + '</h3>'+
+										                        '<h3 class="exp1">'+ exp.paName +'</h3>'+
+										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">'+ exp.expTag + '</h3>'+	
+										                        '<h3 class="exp1">'+ exp.useTime + '시간 소요</h3>'+
+										                        '<h3 class="exp1">준비물 : '+ exp.supplies + '</h3>'+
+										                    '</div>'+
+										                    '<div style="width:50%;" class="alignRight">'+
+										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
+										                        '<br><br><br><br><br>'+
+										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                    '</div>'+
+										                    '</div>'+
+										                '</div>'+
+										                '<form action="showExp.exp" class="showExpDetail">'+
+										                	'<input type="hidden" name="exNo" value="'+ exp.exNo + '"/>'+
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>'+
+										                '</form>'+
 								            		'</div>');
 					})
 
@@ -400,31 +504,31 @@
 					var expList = expListExpensiveSort;
 					$("#expContainer").children(".expContainer").remove();
 					$.each(expList, function (index, exp) { 
-						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">' +
-										                '<div style="width:94%;"  class="expArea">' +
-										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">' +
-										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/' + exp.changeName + '" width="100%;" height="100%;"/>' +
-										                    '</div>' +
-										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">' +
-										                    '<div style="width:50%; height:auto;">' +
-										                        '<h3 class="exp1">' + exp.expCategoryString + '</h3>' +
-										                        '<h3 class="exp1" style="color:black;">' + exp.expTitle + '</h3>' +
-										                        '<h3 class="exp1">' + exp.paName +'</h3>' +
-										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">' + exp.expTag + '</h3>' +	
-										                        '<h3 class="exp1">' + exp.useTime + '시간 소요</h3>' +
-										                        '<h3 class="exp1">준비물 : ' + exp.supplies + '</h3>' +
-										                    '</div>' +
-										                    '<div style="width:50%;" class="alignRight">' +
-										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />' +
-										                        '<br><br><br><br><br>' +
-										                        '<h3 class="exp3">1인당 ' + exp.price + '원</h3>' +
-										                    '</div>' +
-										                    '</div>' +
-										                '</div>' +
-										                '<form action="showExp.exp" class="showExpDetail">' +
-										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
-										                '</form>' +
+						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
+										                '<div style="width:94%;"  class="expArea">'+
+										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
+										                        '<img src="${pageContext.request.contextPath}/resources/uploadFiles/'+ exp.changeName + '" width="100%;" height="100%;"/>'+
+										                    '</div>'+
+										                    '<div style="height:auto; width:830px; float:left;" class="expContainerSubmit">'+
+										                    '<div style="width:50%; height:auto;">'+
+										                        '<h3 class="exp1">'+ exp.expCategoryString + '</h3>'+
+										                        '<h3 class="exp1" style="color:black;">'+ exp.expTitle + '</h3>'+
+										                        '<h3 class="exp1">'+ exp.paName +'</h3>'+
+										                        '<h3 class="exp1" style="margin-top:6px; font-weight:520; color:rosybrown; text-shadow:0.8px 0.8px 1px brown;">'+ exp.expTag + '</h3>'+	
+										                        '<h3 class="exp1">'+ exp.useTime + '시간 소요</h3>'+
+										                        '<h3 class="exp1">준비물 : '+ exp.supplies + '</h3>'+
+										                    '</div>'+
+										                    '<div style="width:50%;" class="alignRight">'+
+										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
+										                        '<br><br><br><br><br>'+
+										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                    '</div>'+
+										                    '</div>'+
+										                '</div>'+
+										                '<form action="showExp.exp" class="showExpDetail">'+
+										                	'<input type="hidden" name="exNo" value="'+ exp.exNo + '"/>'+
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>'+
+										                '</form>'+
 								            		'</div>');
 					})
 

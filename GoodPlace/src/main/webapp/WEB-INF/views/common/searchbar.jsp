@@ -146,6 +146,7 @@
 	                <li style="position:absolute; margin-left:5px;">
 	                   <input id="subExpInfo" type="button" value="체험검색" style="border:1px solid gray; width:240px; height:58px; padding:0px;">
 	               </li>
+	               <input type="hidden" name="currentPage" value="1"/>
 	            </div>
 	        </form>
 

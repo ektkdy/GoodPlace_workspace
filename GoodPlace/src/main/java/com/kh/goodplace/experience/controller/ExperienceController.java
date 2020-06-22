@@ -770,7 +770,7 @@ public class ExperienceController {
     
   	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
   	@RequestMapping("showExpList.exp")
-  	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, HttpSession session, ModelAndView mv) {
+  	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, int currentPage, HttpSession session, ModelAndView mv) {
   		//System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
   		//System.out.println("지점1");
   		
@@ -778,7 +778,8 @@ public class ExperienceController {
   		session.setAttribute("expCategoryString", expCategoryString);
   		session.setAttribute("expDateString", expDateString);
   		session.setAttribute("expTitle", expTitle);
-
+  		session.setAttribute("currentPage", currentPage);
+  		
   		// expCategory 필드 설정
   		int expCategory = 0;
   		if(expCategoryString.equals("라이프 및 스타일")) {
@@ -837,14 +838,18 @@ public class ExperienceController {
   			expList.get(i).setExpDateString(expDateString);
   		}
   		
-
-  		
+  		// 페이징 바 기능
+  		int listCount = expList.size();
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+        
   		if(expList != null) {
   			mv.addObject("exp", exp);
   			mv.addObject("expList", expList);
   			session.setAttribute("expList", expList);
   			mv.addObject("expCategoryList", expCategoryList);
   			mv.setViewName("user/exp");
+  			mv.addObject("pi", pi);
+  	        mv.addObject("listCount", listCount);
   			this.session = session;
   		}else {
   			mv.addObject("msg", "체험리스트 조회 실패!!");
@@ -853,6 +858,7 @@ public class ExperienceController {
   		
   		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
   		System.out.println(" expList : " + expList);
+  		System.out.println("pi : " + pi);
   		System.out.println(" 아무것도 없는 카테고리에서 검색 후 뿌려지는 뷰에서의 session겟  expDateString : " + session.getAttribute("expDateString"));
   		return mv;
   	}
@@ -1095,7 +1101,13 @@ public class ExperienceController {
     @RequestMapping(value="popularSortExp.exp", produces="application/json; charset=utf-8")
     public String popularSortExp() {
 		
+		int currentPage = 1;
+		session.setAttribute("currentPage", currentPage);
+		
 		ArrayList<Experience> expListAddExppay = (ArrayList)this.session.getAttribute("expList");
+		
+		int listCount = expListAddExppay.size();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		for(Experience expListTemp : expListAddExppay) {
 			expListTemp.setExppayCount(expService.getExppayCount(expListTemp.getExNo()));
@@ -1120,6 +1132,10 @@ public class ExperienceController {
     	}
     	
     	session.setAttribute("expList", expListAddExppay);
+    	session.setAttribute("pi", pi);
+    	session.setAttribute("listCount", listCount);
+    	
+    	System.out.println("인기순 정렬 시의 pi : " + pi);
     	
     	return new Gson().toJson(expListAddExppay);
     }
@@ -1189,6 +1205,12 @@ public class ExperienceController {
 		
 		ArrayList<Experience> expList = expService.getExpPerCategory(categoryNo);
 		
+		int currentPage = 1;
+		session.setAttribute("currentPage", currentPage);
+		
+		int listCount = expList.size();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
   		// expCategoryString 필드 설정
 		for(Experience exp : expList) {
 	  		int expCategory = exp.getExpCategory();
@@ -1214,7 +1236,12 @@ public class ExperienceController {
 		System.out.println("카테고리 선택 후 expList" + expList);
 		if(expList.size() > 0) {
 			
+	    	session.setAttribute("pi", pi);
+	    	session.setAttribute("listCount", listCount);
 			session.setAttribute("expList", expList);
+			
+			System.out.println("카테고리별 모든 체험 조회 시의 pi : " + pi);
+			
 			return new Gson().toJson(expList);
 			
 		}else {
