@@ -853,7 +853,7 @@ public class ExperienceController {
   		
   		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
   		System.out.println(" expList : " + expList);
-  		
+  		System.out.println(" 아무것도 없는 카테고리에서 검색 후 뿌려지는 뷰에서의 session겟  expDateString : " + session.getAttribute("expDateString"));
   		return mv;
   	}
   	

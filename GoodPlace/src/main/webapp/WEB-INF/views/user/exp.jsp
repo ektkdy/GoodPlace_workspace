@@ -177,7 +177,14 @@
 	                </div>
 	                <form action="showExp.exp" class="showExpDetail">
 	                	<input type="hidden" name="exNo" value="${ exp.exNo }"/>
-	                	<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+	                	<c:choose>
+	                		<c:when test="${ exp.expDateString ne null} or ${ exp.expDateString ne ''}" >
+	                			<input type="hidden" name="expDateString" value="${ exp.expDateString }"/>
+	                		</c:when>
+	                		<c:when test="${ expDateString ne null} or ${ !empty expDateString} or ${ expDateString ne ''}" >
+	                			<input type="hidden" name="expDateString" value="${ expDateString }"/>
+	                		</c:when>
+	                	</c:choose>
 	                </form>
 	            </div>
           	</c:forEach>
@@ -233,14 +240,11 @@
     	$(".smallCategory").on("click",function(){  
     		
     		// 클릭한 카테고리의 border색 변경
-    		//$(".smallCategory").css("border", "2px solid lightgray");
     		var id = $(this).attr("id");
     		var idNo = id.substr(8, 1);
     		
     		for(var i=1; i<=5; i++){
-
     				$("#category" + i).css("border", "2px solid lightgray");
-
     		}
     		
     		$(this).css("border", "2px solid #FFBB00");
@@ -281,7 +285,7 @@
 											                '</div>' +
 											                '<form action="showExp.exp" class="showExpDetail">' +
 											                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-											                	'<input type="hidden" name="expDateString" value="' + exp.expDateString + '"/>' +
+											                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
 											                '</form>' +
 									            		'</div>');
 						})
@@ -329,7 +333,7 @@
 										                '</div>' +
 										                '<form action="showExp.exp" class="showExpDetail">' +
 										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="' + exp.expDateString + '"/>' +
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
 										                '</form>' +
 								            		'</div>');
 					})
@@ -374,7 +378,7 @@
 										                '</div>' +
 										                '<form action="showExp.exp" class="showExpDetail">' +
 										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="' + exp.expDateString + '"/>' +
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
 										                '</form>' +
 								            		'</div>');
 					})
@@ -419,7 +423,7 @@
 										                '</div>' +
 										                '<form action="showExp.exp" class="showExpDetail">' +
 										                	'<input type="hidden" name="exNo" value="' + exp.exNo + '"/>' +
-										                	'<input type="hidden" name="expDateString" value="' + exp.expDateString + '"/>' +
+										                	'<input type="hidden" name="expDateString" value="${ expDateString }"/>' +
 										                '</form>' +
 								            		'</div>');
 					})

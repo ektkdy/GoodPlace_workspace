@@ -240,7 +240,7 @@
                         </div>
                         
                         <c:forEach items="${ exp.expClass }" var="classInfo" end="${ exp.expClassCount }" varStatus="status">
-                       	<div style="width:100%; height:38px; padding:5px;" class="buttonStyle1 choiceClass">
+                       	<div id="${ stauts.count }" style="width:100%; height:38px; padding:5px;" class="buttonStyle1 choiceClass">
                        		<div style="width:55%; text-align:right;">${ classInfo }</div>
                        		<div class="peopleInfo" style="width:45%; text-align:center;"></div>
                        	</div>
@@ -272,9 +272,9 @@
 
         <div id="receipt" class="hide" style="width:500px; height:400px; position:relative; z-index:2; left:200px; top:200px; border:2px solid lightgray; background-color:white; float:unset;">
             <div style="float:unset; width:100%; height:200px; border-bottom:2px solid lightgray;">
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;"></h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 class="receiptInfo1" style="position:absolute; right:0;"></h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 class="receiptInfo2" style="position: absolute; right:0px; padding:8px;"></h2>
+                <div class="receiptInfo1" style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"></div>
+                <div class="receiptInfo2" style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"></div>
+                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 class="receiptInfo3" style="position: absolute; right:0px; padding:8px;"></h2>
                     <div style="height:40px; width:50%; padding:8px; float:unset; position:relative; z-index:3;">
                         <h2 style="position: absolute;">총 금액</h2>
                     </div>  
@@ -300,7 +300,7 @@
         </div>
 
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
-            <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
+            <a href="showExpList.exp?expCategoryString=${ expCategoryString }&expDateString=${ expDateString }&expTitle=${ expTitle }" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
 
     </div>
@@ -331,7 +331,6 @@
                                     marginTop:'0px'
                                         });
             }                          
-            console.log(position);
         });
     </script>
 
@@ -350,17 +349,21 @@
                 $("#receipt").css({ marginTop:'0px'
                                         });
             }                          
-            console.log(position);
         });
         
        // 영수증 펼치기
         $('#bookItButton').click(function(){
-            if(!$('#recepit').hasClass('hide')){
-                $('#receipt').toggleClass('hide');
-                $('#bookItButton').toggleClass('noFunction'); return;
-            }else{
-                $('#receipt').toggleClass('hide');
-            }
+        	if(${empty loginUser}){
+        		alert("로그인 후 이용해주세요.");
+        	}else{
+	    		
+        		if(!$('#recepit').hasClass('hide')){
+                    $('#receipt').toggleClass('hide');
+                    $('#bookItButton').toggleClass('noFunction'); return;
+                }else{
+                    $('#receipt').toggleClass('hide');
+                }
+        	}
         });
 
         // 영수증 끄기
@@ -384,14 +387,6 @@
                 $('#addWishList').toggleClass('buttonStyle1');
             }
             
-        });
-
-        // 날짜선택
-        $('#getPeriod').mouseenter(function(){
-            $('#calenderArea').toggleClass('hide');
-        });
-        $('#getPeriod' & '#calenderArea').mouseleave(function(){
-            $('#calenderArea').toggleClass('hide');
         });
 
         // 시간선택
@@ -422,7 +417,6 @@
        	$(function(){
        		var paidPeople = ${ exp.acceptedPeople };
        		var max = ${ exp.maxPeople };
-			console.log(paidPeople);
        		for(var i=0; i<"${ exp.expClassCount}"; i++){
        			switch(i){
        			case 0: $("#bookExpMenu").next().children().next().text("(" + (max - paidPeople[i]) + "/" + max + ")"); break;
@@ -448,12 +442,19 @@
         	// 접수 가능한 인원수 없으면 결제 막기
    			if(availablePeople == 0){
    				alert("해당 체험은 접수가 마감되었습니다.");
-   			}{
+   			}else{
    	        	// 인원선택 칸 만듦
    	   			for(var i=1; i<=availablePeople; i++){
    	   				var peopleArea = $('#peopleArea');
-   	   				peopleArea.append("<div style='width:100%; height:38px; padding:5px;' class='buttonStyle1 person'>" + i + "명<input type='hidden' class='adjustPeople' value='" + i + "'/></div>");
+   	   				peopleArea.append("<div id=" + i + " style='width:100%; height:38px; padding:5px;' class='buttonStyle1 person'>" + i + "명<input type='hidden' class='adjustPeople' value='" + i + "'/></div>");
    	   			}
+   	        	
+   	        	for(var i=1; i<=5; i++){
+   					$("#peopleArea #" + i + "").css("background", "white");
+   	    		}
+   	    		
+   	    		$(this).css("background", "#FFBB00");
+   	    		
    	        	// 선택한 수업의 교시 set
    	   			$("input[name=expClassNo]").val($(this).next().next().val());
    	   			alert($(this).next().next().val() + " 교시를 선택하였습니다.");
@@ -463,14 +464,20 @@
         
      	// 선택한 인원수 input hidden 요소에 set
      	$(document).on("click",".person",function(){
-
-        //$(".person").click(function(){
-        	var people = $(this).children(".adjustPeople").val();
+        	var people = $(this).find(".adjustPeople").val();
         	alert(people + "명 접수를 선택 하였습니다.");
         	$("input[name=people]").val(people);
-        	$(".receiptInfo1").text("체험일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ exp.price }원  x " + people +"명");
-        	$(".receiptInfo2").text(people * ${ exp.price } + "원");
-        });
+        	$(".receiptInfo1").html("<div style='width:240px; height:40px; position:absolute;'><h3>체험일</h3></div><div style='width:48%; height:40px; position:absolute; left:50%; text-align:right;'><h3>${ expDateString }</h3></div>");
+        	$(".receiptInfo2").html("<div style='width:240px; height:40px; position:absolute;'></div><div style='width:48%; height:40px; position:absolute; left:50%; text-align:right;'><h3>${ exp.price }원 x " + people + "명</h3></div>");
+        	$(".receiptInfo3").text(people * ${ exp.price } + "원");
+        
+        	for(var i=1; i<=5; i++){
+				$("#timeArea #" + i + "").css("background", "white");
+    		}
+    		
+    		$(this).css("background", "#FFBB00");
+        	
+     	});
         
      	// 예약하기 클릭시 체험결제 페이지로 이동
     	$(function(){

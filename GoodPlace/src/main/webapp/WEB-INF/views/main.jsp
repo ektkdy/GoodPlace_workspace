@@ -37,7 +37,7 @@
 		margin-top:80px;
     }
     #roomList h2{
-        margin-left: 150px;
+        margin-left: 130px;
     }
     #roomList .menu{
         height: 30px;
