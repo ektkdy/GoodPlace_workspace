@@ -168,7 +168,7 @@
 			
 			<c:choose>
 				<c:when test="${ pi.currentPage eq 1}">
-					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="1" end="5">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="0" end="4">
 			            <div style="width:100%;" class="expContainer">
 			                <div style="width:94%;"  class="expArea">
 			                    <div style="height:216px; width:292px;" class="expContainerSubmit">
@@ -205,7 +205,7 @@
 		          	</c:forEach>
 				</c:when>
 				<c:when test="${ pi.currentPage ge 2 }">
-					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit) + 1 }" end="${ pi.currentPage * pi.pageLimit }">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit)}" end="${ (pi.currentPage * pi.pageLimit) - 1 }">
 			            <div style="width:100%;" class="expContainer">
 			                <div style="width:94%;"  class="expArea">
 			                    <div style="height:216px; width:292px;" class="expContainerSubmit">
@@ -242,7 +242,7 @@
 		          	</c:forEach>
 				</c:when>
 				<c:when test="${ pi.currentPage eq pi.maxPage }">
-					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit) + 1 }" end="${ pi.listCount }">
+					<c:forEach items="${ expList }" var="exp" varStatus="status" begin="${ ((pi.currentPage - 1) * pi.pageLimit) }" end="${ pi.listCount - 1 }">
 			            <div style="width:100%;" class="expContainer">
 			                <div style="width:94%;"  class="expArea">
 			                    <div style="height:216px; width:292px;" class="expContainerSubmit">

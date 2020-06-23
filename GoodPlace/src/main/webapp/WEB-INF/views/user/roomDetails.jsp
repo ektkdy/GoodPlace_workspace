@@ -293,7 +293,12 @@
 	                <div style="width:20%; margin-right:5%; position:absolute;">
 	                    <h1 style="text-align:left;">후기</h1>
 	                </div>
-	                
+	                <c:if test="${ empty room.reviewList}">
+					   	<div class="fullWidth" style="text-align:center;">
+					   		<br><br><br><br>
+					   		<h2 style="font-weight:500; color:gray;">등록된 후기가 없습니다.</h2>
+					   	</div>		
+					</c:if>
 	                <c:forEach items="${ room.reviewList }" var="review" varStatus="status">
 	                
 	                	<div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
@@ -427,11 +432,6 @@
             </div>
 
         </div>
-		<c:if test="${ room.reviewList eq null}">
-		   	<div class="fullWidth"  class="marginBottom_10px padding_10px replyStyle2">
-		   		<h2>등록된 후기가 없습니다.</h2>
-		   	</div>		
-		</c:if>
         <div style="text-align:center; margin:60px 0;" class="fullWidth">
             <a href="javascript:history.back();" style="text-decoration:none; display:inline-block; width:130px; height:42px; font-size:20px; font-weight:900; padding-top:12px; border:1px solid rgb(24, 76, 136); color:rgb(24, 76, 136);">더보기</a>
         </div>
@@ -498,12 +498,17 @@
         
        // 영수증 펼치기
         $('#bookItButton').click(function(){
-            if(!$('#recepit').hasClass('hide')){
-                $('#receipt').toggleClass('hide');
-                $('#bookItButton').toggleClass('noFunction'); return;
-            }else{
-                $('#receipt').toggleClass('hide');
-            }
+        	
+        	if(${empty loginUser}){
+        		alert("로그인 후 이용해주세요.");
+        	}else{
+	            if(!$('#recepit').hasClass('hide')){
+	                $('#receipt').toggleClass('hide');
+	                $('#bookItButton').toggleClass('noFunction'); return;
+	            }else{
+	                $('#receipt').toggleClass('hide');
+	            }
+        	}
         });
 
         // 영수증 끄기
