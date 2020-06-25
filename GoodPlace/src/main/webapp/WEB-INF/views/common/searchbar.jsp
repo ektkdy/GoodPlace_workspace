@@ -101,7 +101,7 @@
 	           <div class="search input" style="display: block;">
 	               <li class="liBox">
 	                   <b>위치</b>
-	                   <input type="text" name="tripArea" id="tripArea" placeholder="어디로 여행가세요?"">
+	                   <input type="text" name="tripArea" id="tripArea" placeholder="어디로 여행가세요? ('서울'입력 )">
 	               </li>
 	               <li class="liBox">
 	                   <b>가는날짜</b>
@@ -113,7 +113,7 @@
 	               </li>
 	               <li class="liBox">
 	                   <b>인원수</b>
-	                   <input type="number" name="tripPeople" id="tripPeople" placeholder="인원수를 선택해주세요">
+	                   <input type="number" name="tripPeople" id="tripPeople" placeholder="인원수를 선택해주세요 ('1~6')">
 	               </li>
 	               <li style="position:absolute; margin-left:5px;">
 	                   <input id="subRoomInfo" type="button" value="숙소검색" style="border:1px solid gray; width:240px; height:58px; padding:0px;">
@@ -141,7 +141,7 @@
 	                </li>
 	                <li class="liBox1">
 	                    <b>키워드</b>
-	                    <input type="text" name="expTitle" placeholder="키워드를 입력하세요">
+	                    <input type="text" name="expTitle" placeholder="키워드를 입력하세요 ('체험' 입력)">
 	                </li>
 	                <li style="position:absolute; margin-left:5px;">
 	                   <input id="subExpInfo" type="button" value="체험검색" style="border:1px solid gray; width:240px; height:58px; padding:0px;">
@@ -154,24 +154,52 @@
 	</div><!-- /searchbar -->
 	
 	<script>
-	// 숙소검색 -> Controller 매핑 기능
-    $(function(){
-		$("#roomSearchArea #subRoomInfo").click(function(){
-			if($("input:checkbox[name=filter]:checked").length > 0){
-				$("#roomSearchArea").attr("action", "searchRoWithFilter.ro"); // 필터 조건 check됬으면 다른 매핑값 부여
-				$("#roomSearchArea").submit();
-			}else{
-				$("#roomSearchArea").submit();
-			}
-		});
+	
+	// 숙소검색 기능
+	$("#roomSearchArea #subRoomInfo").click(function(){
+		
+		if($("#tripArea").val() != "서울"){
+			alert("위치 항목에는 '서울'을 입력해주세요");
+			return false;
+		};
+		
+		if( ($("#tripArea").val() == "") || ($("#tripStartDate").val() == "") || ($("#tripEndDate").val() == "") || ($("#tripPeople").val() == "")){
+			alert("검색 조건의 모든 항목을 입력해주세요");
+			return false;
+		};
+		
+		if($("#tripStartDate").val() == $("#tripEndDate").val()){
+			alert("날짜 선택은 1박 이상 가능합니다");
+			return false;
+		};
+		
+		if(($("#tripPeople").val() < 1) || ($("#tripPeople").val() > 6)){
+			alert("인원수는 1~6 사이로 설정해주세요");
+			return false;
+		};	
+		
+		if($("input:checkbox[name=filter]:checked").length > 0){
+			$("#roomSearchArea").attr("action", "searchRoWithFilter.ro"); // 필터 조건 check됬으면 다른 매핑값 부여
+			$("#roomSearchArea").submit();
+		}else{
+			$("#roomSearchArea").submit();
+		};
 	});
- 	// 체험검색 -> Controller 매핑 기능
-	$(function(){
-		$("#expSearchArea #subExpInfo").click(function(){
-
+	
+ 	// 체험검색  기능
+	$("#expSearchArea #subExpInfo").click(function(){
+		
+		if($("input[name=expDateString]").val() == ""){
+			alert("날짜를 입력해주세요");
+			return false;
+		};
+		
+		if($("input[name=expTitle]").val() == ""){
+			alert("키워드로 '체험'을 입력해주세요");
+			return false;
+		};
+		
 			$("#expSearchArea").submit();
-			
-		});
 	});
  	
  	
