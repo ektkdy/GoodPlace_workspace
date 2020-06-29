@@ -771,8 +771,6 @@ public class ExperienceController {
   	// 메인페이지에서 조건 3가지 (태그, 체험날짜, 검색키워드) 입력받은 후  체험메인 페이지로 이동
   	@RequestMapping("showExpList.exp")
   	public ModelAndView showExpList(String expCategoryString, String expDateString, String expTitle, int currentPage, HttpSession session, ModelAndView mv) {
-  		//System.out.println("expCategoryString : " + expCategoryString + ", " + "expDateString : " + expDateString + ", " + "expTitle : " + expTitle);
-  		//System.out.println("지점1");
   		
   		// searchBar 검색조건 세션에 set
   		session.setAttribute("expCategoryString", expCategoryString);
@@ -856,26 +854,17 @@ public class ExperienceController {
   			mv.setViewName("common/errorPage");
   		}	
   		
-  		System.out.println(" expCountPerCategory : " + exp.getExpCountPerCategory().get(0));
-  		System.out.println(" expList : " + expList);
-  		System.out.println("pi : " + pi);
-  		System.out.println(" 아무것도 없는 카테고리에서 검색 후 뿌려지는 뷰에서의 session겟  expDateString : " + session.getAttribute("expDateString"));
   		return mv;
   	}
   	
   	// 체험 상세페이지로 이동
   	@RequestMapping("showExp.exp")
   	public ModelAndView showExp(int exNo, String expDateString, ModelAndView mv) {
-  		System.out.println("지점 2: exNo : " + exNo);
   		
   		Experience exp = expService.selectExpUser(exNo);
   		
-  		
-  		
   		// expList객체 체험태그의 표시형식 보완
   		exp.setExpTag("#" + (exp.getExpTag().replace(",", " #")));
-  		
-  		System.out.println(exp);
   		
   		// 수업교시 계산 후 set
   		int startTimeFirstLetterFlag = 0; // 운영시작시간의 첫글자 에 따라 값이 변하는 상태 변수 -> 경우1_첫 글자가 "0" : 0 / 경우2_첫 글자가 "1" 혹은 "2" : 1 
@@ -959,12 +948,6 @@ public class ExperienceController {
   		}
 
   		exp.setExpClass(expClass);
-  		
-  		System.out.println("startHour : " + startHour + ", startMinute : " + startMinute + ", intervalMinute : " + intervalMinute +", useTime : " + useTime);
-  		System.out.println("startMinuteDouble : " + startMinuteDouble + ", intervalMinuteDouble : " + intervalMinuteDouble);
-  		System.out.println("startTimeCal : " + startTimeCal + ", nextClass : " + nextClass);
-  		System.out.println("스트링으로 변환 -> " + "startTimeCal : " + String.valueOf(startTimeCal) + ", nextClass : " + String.valueOf(nextClass));
-  		System.out.println("expClass : " + expClass);
   	
   		// 접수된 인원 계산후 set
   		ArrayList<Integer> acceptedPeopleList = new ArrayList<>();
@@ -979,8 +962,6 @@ public class ExperienceController {
   		}
   		
   		exp.setAcceptedPeople(acceptedPeopleList);
-  		
-  		System.out.println("acceptedPeople : " + acceptedPeopleList);
   		
       	// exp 객체에 파트너정보 set
       	exp.setPaPofile(expService.getPartner(exp.getUsNo()).getChangeName());
@@ -1005,7 +986,6 @@ public class ExperienceController {
       	// 메뉴바에서 조건 검색한 날자 set
       	exp.setExpDateString(expDateString);
       	
-      	System.out.println("expDetails.jsp 로 보내기전 : " + exp);
   		if(exp != null) {
   			mv.addObject("exp", exp);
   			mv.setViewName("user/expDetails");
@@ -1013,17 +993,13 @@ public class ExperienceController {
   			mv.addObject("msg", "체험상세 페이지 조회 실패!!");
   			mv.setViewName("common/errorPage");
   		}
-  		
   		return mv;
-  		
   	}
   	
   	// 체험 결제페이지로 이동
   	@RequestMapping("payExp.exp")
   	public ModelAndView payExp(int exNo, int usNo, int amount, String expDateString, int people, int expClassNo, ModelAndView mv) {
   		
-  		System.out.println("exNo : " + exNo + ", usNo : " + usNo + ", amount : " + amount + ", expDateString : " + expDateString + ", people : " + people + ", expClassNo : " + expClassNo);		
-  			
   		ExpPay expPay = new ExpPay();
   		expPay.setExNo(exNo);
   		expPay.setUsNo(usNo);
@@ -1034,7 +1010,6 @@ public class ExperienceController {
   		
   		int result = expService.payExp(expPay);
   		
-  		System.out.println("result : " + result);
   		ArrayList<Integer> epNoList = expService.getEpNo();
   		
   		int epNo = epNoList.get(0);
@@ -1068,10 +1043,6 @@ public class ExperienceController {
   		Double myClassStartTime = 0.0;
   		startTime += (useTime * (expClassNo2 - 1) + (intervalTime * (expClassNo2 - 1)));
   		
-  		System.out.println("expPay " + expPay);
-  		System.out.println("exp : " + exp);
-  		System.out.println("startTime : " + startTime);
-  		
   		String startTimeString = String.valueOf(startTime);
   		
   		if(startTimeString.contains(".5")) {
@@ -1080,7 +1051,6 @@ public class ExperienceController {
   			startTimeString = startTimeString + ":00";
   		}
   		
-  		System.out.println("startTimeString : " + startTimeString);
   		exp.setMyClassStartTime(startTimeString);
   		
   		if(result > 0) {
@@ -1127,15 +1097,9 @@ public class ExperienceController {
     	
     	Collections.reverse(expListAddExppay);
     	
-    	for(Experience e : expListAddExppay) {
-    		System.out.println("정렬 반전 후의 e : " + e);
-    	}
-    	
     	session.setAttribute("expList", expListAddExppay);
     	session.setAttribute("pi", pi);
     	session.setAttribute("listCount", listCount);
-    	
-    	System.out.println("인기순 정렬 시의 pi : " + pi);
     	
     	return new Gson().toJson(expListAddExppay);
     }
@@ -1158,11 +1122,7 @@ public class ExperienceController {
                 return 0;
             }
         });
-    	
-    	for(Experience e : expListCheapSort) {
-    		System.out.println("정렬 후의 e : " + e);
-    	}
-    	
+
     	session.setAttribute("expList", expListCheapSort);
     	
     	return new Gson().toJson(expListCheapSort);
@@ -1188,10 +1148,6 @@ public class ExperienceController {
         });
     	
     	Collections.reverse(expensiveSortExp);
-    	
-    	for(Experience e : expensiveSortExp) {
-    		System.out.println("정렬 반전 후의 e : " + e);
-    	}
     	
     	session.setAttribute("expList", expensiveSortExp);
     	
@@ -1230,27 +1186,15 @@ public class ExperienceController {
 	  		exp.setPaName(exp.getUserName());
 		}
 		
-		
-		
-		
-		System.out.println("카테고리 선택 후 expList" + expList);
 		if(expList.size() > 0) {
-			
 	    	session.setAttribute("pi", pi);
 	    	session.setAttribute("listCount", listCount);
 			session.setAttribute("expList", expList);
 			
-			System.out.println("카테고리별 모든 체험 조회 시의 pi : " + pi);
-			
 			return new Gson().toJson(expList);
-			
 		}else {
-			
 			return "";
-			
 		}
-		
-    	// 리턴 전에 session.setAttribute("expList", expList); 하기!!
     	
     }
   	//------- 사용자 끝 ---------------------------------------------------

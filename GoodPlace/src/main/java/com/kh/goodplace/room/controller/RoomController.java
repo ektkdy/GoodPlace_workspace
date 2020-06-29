@@ -762,7 +762,10 @@ public class RoomController {
   		session.setAttribute("tripEndDate", tripEndDate);
 		session.setAttribute("tripPeople", tripPeople);
 		
+		// searchBar 검색조건에 해당하는  숙소 가져오기 (만들어놓은 메소드 이용)
 		mv = searchRoom(tripArea, tripStartDate, tripEndDate, tripPeople, session, room, board, mv);
+		
+		// 필터조건에 맞는 숙소 거르는 기능
 		String facilityFull = "다리미,주방,식기류,인덕션,옷걸이,세탁기,침구,케이블 TV,드라이기,조리도구(냄비 등),냉장고,전자레인지,에어컨,공용PC,커피포트,아기욕조,아기침대,여분의 침구,온수 및 난방,주차가능";
 		String serviceFull = "샴푸,화장지,바디워시,비누,짐보관서비스,수건,Free wifi";
 		
@@ -793,17 +796,12 @@ public class RoomController {
 			
 			String[] facilityList =  facility.split(",");
 			String[] serviceList =  service.split(",");
-			//System.out.println("facility split : " + facilityList[0] + ", " + facilityList[1]);
-			//System.out.println("service split : " + serviceList[0]);
 			roomList2 = (ArrayList)mv.getModel().get("roomList");
 			at = (Attachment)mv.getModel().get("at");
-			
 			
 			for(Room compareRoom : roomList2) {
 				compareFacility = compareRoom.getFacility();
 				compareService = compareRoom.getService();
-				//System.out.println("compareFacility : " + compareFacility);
-				//System.out.println("compareService : " + compareService);
 				compareRoom.setFilterStatus("Y");
 				// 해당 compareRoom이 필터 조건에 만족하는지 for문 돌릴 것
 				for(int i=0; i<facilityList.length; i++) {
@@ -817,8 +815,6 @@ public class RoomController {
 					}
 				}
 				if(!compareRoom.getFilterStatus().equals("N")) {
-					//System.out.println("compareRoom : " + compareRoom);
-					//System.out.println("roomListWithFilter : " + roomListWithFilter);
 					roomListWithFilter.add(compareRoom);
 
 					count++;
@@ -845,7 +841,6 @@ public class RoomController {
 	// 숙소리스트 중에서 특정 숙소 클릭시 해당 숙소 상세페이지로 이동
     @RequestMapping("roomDe.ro")
     public ModelAndView roomDetail(int roNo, String tripStartDate, String tripEndDate, int tripPeople, ModelAndView mv, Room room) {
-    	//System.out.println("roNo : " + roNo);
     	room  = rService.roomDetail(roNo);
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
     	
@@ -863,10 +858,8 @@ public class RoomController {
     	room.setService(room.getService().replace(",", ", "));
     	
     	// room객체에 지역 표시 set
-    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
     	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
     	String region = room.getAddBasic().substring(0, addLastIndex);
-    	//System.out.println("region : " + region);
     	room.setRegion(region);
     	
     	// room 객체에 파트너정보 set
@@ -878,9 +871,6 @@ public class RoomController {
     	
     	// room 객체에 리뷰정보 set
     	room.setReviewList(rService.getReview(roNo));
-    	//System.out.println("reviewList : " + rService.getReview(roNo));
-    	
-    	//System.out.println(room);
     	
     	System.out.println("room : " + room);
     	if(room != null) {
@@ -900,7 +890,6 @@ public class RoomController {
     // 메인페이지에서 특정 파워숙소 클릭시 해당 숙소 상세페이지로 이동
     @RequestMapping("powerRoomDe.ro")
     public ModelAndView roomDetail(int roNo, ModelAndView mv, Room room) {
-    	//System.out.println("roNo : " + roNo);
     	room  = rService.roomDetail(roNo);
     	ArrayList<Attachment> at = rService.getDetailImages(roNo);
     	
@@ -913,10 +902,8 @@ public class RoomController {
     	room.setService(room.getService().replace(",", ", "));
     	
     	// room객체에 지역 표시 set
-    	//System.out.println("공백의 인덱스 : " + room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1)));
     	int addLastIndex = room.getAddBasic().indexOf(" ",(room.getAddBasic().indexOf(" ") + 1));
     	String region = room.getAddBasic().substring(0, addLastIndex);
-    	//System.out.println("region : " + region);
     	room.setRegion(region);
     	
     	// room 객체에 파트너정보 set
@@ -928,9 +915,6 @@ public class RoomController {
     	
     	// room 객체에 리뷰정보 set
     	room.setReviewList(rService.getReview(roNo));
-    	//System.out.println("reviewList : " + rService.getReview(roNo));
-    	
-    	//System.out.println(room);
     	
     	System.out.println(" 숙소 상세 페이지 넘어가기 전 room : " + room);
     	
@@ -962,7 +946,6 @@ public class RoomController {
     	room.setTripEndDate(tripEndDate);
     	room.setPeople(people);
     	room.setPrice(price);
-    	System.out.println("room 숙소 결제페이지로 넘기기 전 : " + room);
     	if(room != null) {
     		mv.addObject("room", room);
     		mv.setViewName("user/payRooms");
@@ -988,8 +971,6 @@ public class RoomController {
     	room.setBirthday(birthday);
     	room.setConcept(concept);
     	room.setRequest(request);
-    	
-    	System.out.println("roomspay 테이블에 insert : " + room);
     	
     	int result = rService.insertRoomPayToTable(room);
     	
