@@ -173,14 +173,14 @@
 	</select>
 
 	<select id="partnerDashboardIncome1" parameterType="_int" resultType="_int">
-		SELECT SUM(EP.AMOUNT) as income
+		SELECT NVL(SUM(EP.AMOUNT),0) as income
 		  FROM EXPPAY EP     
 		  LEFT JOIN EXPERIENCE E ON(EP.EXNO= E.EXNO)
   		 WHERE E.USNO = #{usNo} and TO_CHAR(EP.PAY_DATE, 'MM')=TO_CHAR(sysdate, 'MM')
 	</select>
 
 	<select id="partnerDashboardIncome2" parameterType="_int" resultType="_int">
-		SELECT SUM(RP.AMOUNT) as income
+		SELECT NVL(SUM(RP.AMOUNT),0) as income
 		  FROM ROOMSPAY RP     
 		  LEFT JOIN ROOMS R ON(RP.RONO= R.RONO)
 		 WHERE R.USNO = #{usNo} and TO_CHAR(RP.PAY_DATE, 'MM')=TO_CHAR(sysdate, 'MM')
