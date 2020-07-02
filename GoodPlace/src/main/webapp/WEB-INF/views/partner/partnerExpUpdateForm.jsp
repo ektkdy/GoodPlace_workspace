@@ -81,7 +81,7 @@
 	            	<input type="hidden" name="usNo" value="${ loginUser.usNo }">
 	            	<input type="hidden" name="exNo" value="${ e.exNo }">
 	            	<input type="hidden" name="atList" value="${ list }">
-	            	<input type="hidden" id="count" name="count" value="">
+	            	<input type="hidden" id="count" name="count" value="0">
  	            	
 	                <div colspan="2" style="font-size: 22px; font-weight: bold; color: white; background-color: #34538a; height: 50px; padding-top: 15px; padding-left: 20px;"> 
 	                    1. 기본 정보</div>
@@ -307,10 +307,10 @@
 	                    <tr>
 	                        <th>* 대표 사진</th>
 	                        <td colspan="2">
-	                          	<img id="titleImg" src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
+	                          	<img id="titleImg"  src="${pageContext.request.contextPath}/resources/uploadFiles/${ e.changeName }"
 	                          		 style="border:0.5px solid #dbdbdb; width: 200px; height:150px" >
 	                         	<div id="fileArea">
-									<input type="file" name="thumb" id="thumb" onchange="loadImg(this,1);"required>
+									<input type="file" name="thumb" id="thumb" onchange="loadImg(this);" required>
 								</div>
 	                          <p class="hh">• 텍스트 및 로고가 있을 경우 관리자가 사진을 수정 혹은 삭제할 수 있습니다.</p>
 	                       </td>
@@ -552,20 +552,18 @@
 	
 	});
 	
-	function loadImg(inputFile, num) {
-		if(inputFile.files.length==1){
-      			// 파일을 읽어들일 FileReader 객체생성
-      			var reader = new FileReader();
-
-      			// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
-      			reader.readAsDataURL(inputFile.files[0]);
-      			
-      			//파일 읽기가 완료 되었을때 실행할 메소드
-				// e : 현재 이벤트가 발생한 이벤트객체
-      			reader.onload = function(e){
-				$("#titleImg").attr("src", e.target.result); 
-			};
-		}
+	function loadImg(inputFile) {
+		// 파일을 읽어들일 FileReader 객체생성
+		var reader = new FileReader();
+	
+		// 파일을 읽어주는 메소드 : 파일을 읽어들이는 순간 고유한 url부여
+		reader.readAsDataURL(inputFile.files[0]);
+ 			
+ 		//파일 읽기가 완료 되었을때 실행할 메소드
+		// e : 현재 이벤트가 발생한 이벤트객체
+ 		reader.onload = function(e){
+			$("#titleImg").attr("src", e.target.result); 
+		};
 	}
 </script>
 
@@ -593,13 +591,12 @@
 				if($("#ul").children().is(".addBtn")){
 					
 				}else{
-					$("#ul").append('<button type="button" class="addBtn">+</button>');
+					$("#ul").append('<button type="button" class="addBtn">+</button>'); 
 				}
 			}
+			// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
+			$("#count").val(count);
 		});
-		
-		// 상단에 input hidden으로 count를 받아놓고 form이 submit되면 컨트롤러로 전달한다
-		$("#count").val(count);
 		
 		// 동적으로 만들어진 요소는 on메소드를 이용하여 이벤트 작성
 		//$(".addBtn").click(function(){
