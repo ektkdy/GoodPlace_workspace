@@ -216,8 +216,7 @@ public class ExperienceController {
 			}
 		}
 		
-		// 객체+썸네일 부분
-		// 썸네일 변경시 기존파일 삭제하고 재업로드
+		// 객체+썸네일 부분 : 썸네일 변경시 기존파일 삭제하고 재업로드
 		if(!file.getOriginalFilename().equals("")) {
 			if(e.getChangeName() != null) {
 				deleteFile(e.getChangeName(), request);
@@ -227,6 +226,8 @@ public class ExperienceController {
 			e.setChangeName(changeName);
 			e.setFilePath(request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles\\" + changeName);
 		}
+		
+		//System.out.println(e);
 		int result2 = expService.updateExp(e);
 		
 		
