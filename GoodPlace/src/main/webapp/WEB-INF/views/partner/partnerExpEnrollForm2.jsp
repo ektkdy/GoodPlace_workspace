@@ -45,6 +45,9 @@
     #next{border: 1px solid #34538a; border-radius: 4px; font-size: 15px;}
     #next:hover{color: #34538a; background-color: white; font-weight: bold; border: 1px solid #34538a;}
     #next{color: white; background-color: #34538a;}
+    
+    .add_photo_btn{width:50px; height:35px; background:#184c88; color:#fff; border:none; border-radius:4px;}
+    .delete_photo_btn{width:50px; height:35px; border:none; border-radius:4px;}
 </style>  
 </head>
 <body>
@@ -229,9 +232,9 @@
 	                    <tr>
 	                        <th>* 상세 사진</th>
 	                        <td class="photo_btn" colspan="2">
+	                        	<input type="button" value="추가" onclick="addInput();" class="add_photo_btn">
+								<input type="button" value="삭제" onclick="deleteInput();" class="delete_photo_btn">
 								<div id="parah"></div>
-	                        	<input type="button" value="추가" onclick="addInput();" style="width:50px; height:35px; background:#184c88; color:#fff; border:none; border-radius:4px;" />
-								<input type="button" value="삭제" onclick="deleteInput();" style="width:50px; height:35px; border:none; border-radius:4px;"/>
 								<h5>• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</h5>
 							</td>
 	                    </tr>
@@ -344,17 +347,19 @@ function loadImg(inputFile, num) {
 
 <!-- 상세사진용 input 추가 -->
 <script>
-var maxAppend = 0; 
-  	function addInput(){
-  		if (maxAppend >= 5) return; 
-  		$("#parah").append('<input type="file" name="file"><br>');
-  		maxAppend++;
-  	}
-  	
-  	function deleteInput(){
-  		$("#parah input:last-child").remove();
-  		maxAppend--;
-  	}
+	var maxAppend = 0; 
+	function addInput(){
+		if (maxAppend >= 5) return; 
+		$("#parah").append('<input type="file" name="file">');
+		maxAppend++;
+	}
+	
+	function deleteInput(){
+		$("#parah input:last-child").remove();
+		maxAppend--;
+		if(maxAppend<0){maxAppend=0}
+	}
+
 </script>
 
 <!-- 사용자가 가격을 입력할 때, 자동으로 수익계산(수수료20%제외) -->
