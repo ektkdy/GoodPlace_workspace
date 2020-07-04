@@ -243,12 +243,17 @@
 	                        <th>* 요금 책정</th>
 	                        <td>
 	                            <span>1인 예약시 요금</span>
-	                            <span><input type="number" class="price" name="price" style="text-align:right; padding-right:5px;">원</span>
+	                            <span>
+	                            	<input type="number" class="price" name="price" 
+	                            		   style="text-align:right; padding-right:5px;">원
+	                            </span>
 	                            <br><br>
-	
 	                            <span>파트너 예상수익</span>
-	                            <span><input type="number" class="priceCal" name="priceCal" style="text-align:right; padding-right:5px;" readonly disabled>원</span><br>
-	                            <span></span>
+	                            <span>
+	                            	<input type="number" class="priceCal" name="priceCal" 
+	                            		   style="text-align:right; padding-right:5px;" readonly disabled>원
+	                            </span>
+	                            <br>
 	                        </td>
 	                    </tr>
 	                    <tr>

@@ -332,11 +332,7 @@
 									</c:if>
 								</ul>
 								<div id="photoDiv"></div>
-								
-								
 								<div id="delChangeName"></div>
-								
-								
 								<p class="hh">• 1장 이상의 상세 사진을 등록해주세요. 최대 5장까지 가능합니다.</p>
 							</td>
 	                    </tr>
@@ -357,10 +353,10 @@
 	            <br>
 	            </div>
 	            <div id="btns">
-                <span>
-                    <button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
-		                </span>
-		                <div style="text-align:right; margin-top: -40px;">
+                	<span>
+                    	<button id="gotoList" onclick="javascript:history.go(-1);">목록으로</button>
+		        	</span>
+		            <div style="text-align:right; margin-top: -40px;">
 		                <c:choose>
 		                	<c:when test="${ e.status eq 1}"><!-- 운영중 -->
 		                		<button id="delete" onclick="expSubmit(1);">삭제하기</button>
@@ -382,8 +378,8 @@
 		                	
 		                	</c:otherwise>
 		                </c:choose>
-		                </div>
 		            </div>
+		        </div>
 		        </form>
             <br><br><br>
         </div>

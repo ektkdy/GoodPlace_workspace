@@ -98,7 +98,7 @@
 	                                    		<a href="pNoticeListDetail.bo?noNo=${ b.nextNoNo }">${ b.nextTitle }</a>
                                     		</c:otherwise>
                                     	</c:choose>
-                                    </td>
+                                  	</td>
                                 </tr>
                             </thead>
                         </table>

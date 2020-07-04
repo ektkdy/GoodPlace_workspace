@@ -305,7 +305,8 @@
    		   set language=#{language}, exp_category=#{expCategory}, exp_tag=#{expTag}, exp_title=#{expTitle}, 
       		   activity=#{activity}, max_people=#{maxPeople},start_time=#{startTime}, end_time=#{endTime}, 
       		   use_time=#{useTime}, interval_time=#{intervalTime}, supplies=#{supplies}, deadline=#{deadline}, 
-      		   price=#{price}, add_basic=#{addBasic}, add_detail=#{addDetail}, add_ref=#{addRef}, zip_code=#{zipCode}, exp_content=#{expContent}
+      		   price=#{price}, add_basic=#{addBasic}, add_detail=#{addDetail}, 
+      		   add_ref=#{addRef}, zip_code=#{zipCode}, exp_content=#{expContent}
       		   <if test="changeName != null">
 	      		   ,origin_name=#{originName}, change_name=#{changeName}, file_path=#{filePath} 
       		   </if>
