@@ -224,7 +224,7 @@
 	            <div style="width:75%;" class="marginBottom_60px">
 	                <div class="fullWidth">
 	                    <div style="width:100%; margin-bottom: 28px;"><h2 class="pointColor">${ room.addBasic }&nbsp;&nbsp;${ room.addDetail }</h2></div>
-	                    <div id="map" style="width:100%; height:300px; border:1px solid black;">[내용] 지도 api : 위치 표시</div>
+	                    <div id="map" style="width:100%; height:300px; border:1px solid black;"></div>
 	                </div><br><br>
 	                <script>
 		                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -304,7 +304,7 @@
 	                	<div style="width:75%;"  class="marginBottom_10px padding_10px replyStyle2">
 	                    <div class="fullWidth">
 	                        <div class="c_profileArea">
-	                            <img src="${pageContext.request.contextPath}/resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
+	                            <img src="resources/uploadFiles/userProfile/${ review.usChangeName }" class="c_profile"/>
 	                        </div> 
 	                        <div style="width:85%; margin-top:5px;">
 	                            <div style="width:20%;">
