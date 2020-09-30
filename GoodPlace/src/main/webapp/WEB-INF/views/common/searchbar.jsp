@@ -137,7 +137,7 @@
 	                </li>
 	                <li class="liBox1">
 	                    <b>날짜</b>
-	                    <input type="date" name="expDateString" placeholder="날짜를 입력하세요" >
+	                    <input type="date" id="expDate" name="expDateString" placeholder="날짜를 입력하세요" >
 	                </li>
 	                <li class="liBox1">
 	                    <b>키워드</b>
@@ -154,6 +154,33 @@
 	</div><!-- /searchbar -->
 	
 	<script>
+	
+	// 현재 날짜 이전의 날짜들은 선택 제한하기
+	$(function() {
+		var date = new Date();
+		
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var today = date.getDate();
+		
+		if(month.toString().length != 2){
+			month = "0" + (date.getMonth() + 1);
+		};
+		
+		if(today.toString().length != 2){
+			today = "0" + date.getDate();
+		};
+		
+		var dateString = year + "-" + month + "-" + today;
+		
+		$("#expDate").attr("min", dateString);
+		$("#tripStartDate").attr("min", dateString);
+	});
+ 	
+	//function getTodayType2(){
+		//var date = new Date();
+		//return date.getfullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0"+date.getDate()).slice(-2);
+	//};
 	
 	// 숙소검색 기능
 	$("#roomSearchArea #subRoomInfo").click(function(){
@@ -201,8 +228,6 @@
 		
 			$("#expSearchArea").submit();
 	});
- 	
- 	
  	
     function searchView1(){
         $('#mainSearch form .search').css("display","block");
