@@ -155,7 +155,7 @@
 	
 	<script>
 	
-	// 현재 날짜 이전의 날짜들은 선택 제한하기
+	// 체험검색 : 현재 날짜 이전의 날짜들은 선택 제한하기 & 숙소검색 : 체크인 날짜 오늘부터 선택하도록 날짜 제한하기
 	$(function() {
 		var date = new Date();
 		
@@ -177,10 +177,26 @@
 		$("#tripStartDate").attr("min", dateString);
 	});
  	
-	//function getTodayType2(){
-		//var date = new Date();
-		//return date.getfullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0"+date.getDate()).slice(-2);
-	//};
+	// 숙소검색 : 체크인 날짜 이전의 날짜들은 체크아웃 날짜로 선택 제한하기
+	/* $(function($("#tripEndDate").click()) {
+		var tripStartDate = $("#tripStartDate").val();
+		var tripEndDate = $("#tripEndDate").val();
+		
+		var startYear = tripStartDate.getFullYear();
+		var startMonth = tripStartDate.getMonth() + 1;
+		var startDay = tripStartDate.getDate();
+		
+		if(startMonth.toString().length != 2){
+			startMonth = "0" + (tripStartDate.getMonth() + 1);
+		};
+		
+		if(startDay.toString().length != 2){
+			startDay = "0" + tripStartDate.getDate();
+		};
+		
+		$("#expDate").attr("min", dateString);
+		$("#tripStartDate").attr("min", dateString);
+	}); */
 	
 	// 숙소검색 기능
 	$("#roomSearchArea #subRoomInfo").click(function(){
