@@ -175,10 +175,11 @@
 		
 		$("#expDate").attr("min", dateString);
 		$("#tripStartDate").attr("min", dateString);
+		$("#tripEndDate").attr("min", dateString);
 	});
- 	
+	
 	// 숙소검색 : 체크인 날짜 이전의 날짜들은 체크아웃 날짜로 선택 제한하기
-	/* $(function($("#tripEndDate").click()) {
+	/*$(function($("#tripEndDate").click()) {
 		var tripStartDate = $("#tripStartDate").val();
 		var tripEndDate = $("#tripEndDate").val();
 		
@@ -196,7 +197,7 @@
 		
 		$("#expDate").attr("min", dateString);
 		$("#tripStartDate").attr("min", dateString);
-	}); */
+	});*/
 	
 	// 숙소검색 기능
 	$("#roomSearchArea #subRoomInfo").click(function(){

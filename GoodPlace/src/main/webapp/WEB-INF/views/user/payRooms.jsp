@@ -317,10 +317,6 @@
 	               m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 	           }, function(rsp) {
 	               if ( rsp.success ) {	// 결제 성공		
-	            	   var msg = '결제에 실패하였습니다.';
-	                   msg += '에러내용 : ' + rsp.error_msg;
-	                   
-	               } else {	// 결제 실패
 	            	   var msg = '결제가 완료되었습니다.';
 	                   msg += '고유ID : ' + rsp.imp_uid;
 	                   msg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -332,7 +328,9 @@
 	                   
 	                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
 	                   $("#resultForm").submit();
-	                   
+	               } else {	// 결제 실패
+	            	   var msg = '결제에 실패하였습니다.';
+	                   msg += '에러내용 : ' + rsp.error_msg;
 	               }
 	               alert(msg);
 	          });
