@@ -222,6 +222,12 @@
 			return false;
 		};	
 		
+		if($("#tripStartDate").val() > $("#tripEndDate").val()){
+			alert("오는 날짜를 올바르게 설정해주세요.");
+			$("#tripEndDate").focus();
+			return false;
+		}
+		
 		if($("input:checkbox[name=filter]:checked").length > 0){
 			$("#roomSearchArea").attr("action", "searchRoWithFilter.ro"); // 필터 조건 check됬으면 다른 매핑값 부여
 			$("#roomSearchArea").submit();
