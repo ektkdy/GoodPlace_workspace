@@ -404,6 +404,7 @@
         <br style="clear:both;">
 
     </div>
+    
     <!-- Roompay 테이블에 넘겨줄 값-->
 	<form action="insertRoomPay.ro" method="get" id="showPayRooms">
 		<input type="hidden" name="roNo" value="${ room.roNo }"/>
@@ -416,6 +417,7 @@
 		<input type="hidden" name="people" value="${ room.people }"/>
 		<input type="hidden" name="price" value="${ room.price }"/>
 	</form>
+	
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {
@@ -569,6 +571,7 @@
                 var infowindow = new kakao.maps.InfoWindow({
                     content: '<div style="width:150px;text-align:center;padding:6px 0;">숙소위치</div>'
                 });
+                
                 infowindow.open(map, marker);
 
                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
