@@ -261,6 +261,8 @@
                         
                         // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
                         $("#resultForm").submit();
+                        
+                        window.location.href = "http://222.121.64.22:8080/goodplace";
                     } else {
                         var msg = '결제에 실패하였습니다.';
                         msg += '에러내용 : ' + rsp.error_msg;

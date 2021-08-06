@@ -161,17 +161,17 @@
 		
 		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
-		var today = date.getDate();
+		var tommorow = date.getDate() + 1;
 		
 		if(month.toString().length != 2){
 			month = "0" + (date.getMonth() + 1);
 		};
 		
-		if(today.toString().length != 2){
-			today = "0" + date.getDate();
+		if(tommorow.toString().length != 2){
+			tommorow = "0" + (date.getDate() + 1);
 		};
 		
-		var dateString = year + "-" + month + "-" + today;
+		var dateString = year + "-" + month + "-" + tommorow;
 		
 		$("#expDate").attr("min", dateString);
 		$("#tripStartDate").attr("min", dateString);
@@ -244,7 +244,7 @@
 			return false;
 		};
 		
-		if($("input[name=expTitle]").val() == ""){
+		if($("input[name=expTitle]").val() != "체험"){
 			alert("키워드로 '체험'을 입력해주세요");
 			return false;
 		};
