@@ -149,7 +149,7 @@
                         <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:20px 0 14px 0; padding-left:8px; font-size:16px;" disabled placeholder="홍길동"/>
                         <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="010-0000-8282"/>
                         <input type="text" size="36px;" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" disabled placeholder="happy@gmail.com"/>
-                        <input type="text" id="birth" size="36px;" maxlength="6" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" placeholder="예) 960102"/><br>
+                        <input type="text" id="birth" size="36px;" maxlength="6" style="height:42px; border-radius:5px; border:1px solid gray; margin:14px 0; padding-left:8px; font-size:16px;" placeholder="예) 1996-09-12" value="1996-09-12"/><br>
                         <div style="width:100px; margin-top:14px;">
                             <select name="job" class="pointButton" style="width:60px; height:42px; margin:unset; float:left; border-radius:5px; border:1px solid gray; padding-left:8px; font-size:14px; font-weight:bold;">
                                 <option value="" class="pointButton">9</option>
@@ -226,7 +226,7 @@
 		      <input type="hidden" id="" name="tripStartDate" value="${ room.tripStartDate }"/>
 		      <input type="hidden" id="" name="tripEndDate" value="${ room.tripEndDate }"/>
 		      <input type="hidden" id="" name="people" value="${ room.people }"/>
-		      <input type="hidden" id="birthday" name="birthday"/>
+		      <input type="hidden" id="birthday" name="birthday" value="1996-09-12"/>
 		      <input type="hidden" id="concept" name="concept"/>
 		      <input type="hidden" id="requestParam" name="request"/>
    		</form>
@@ -325,9 +325,11 @@
 	                   
 	                   $('#payNo').val(rsp.imp_uid);
 	                   $('#reserveNo').val('R-' +  rsp.imp_uid);
-	                   
+	                   window.location.href = "http://222.121.64.22:8080/goodplace";
 	                   // 결제가 완료되면 윈도우를 킨 곳에 값을 리턴하고 현재 창을 닫음       
 	                   $("#resultForm").submit();
+	                   
+	                   
 	               } else {	// 결제 실패
 	            	   var msg = '결제에 실패하였습니다.';
 	                   msg += '에러내용 : ' + rsp.error_msg;

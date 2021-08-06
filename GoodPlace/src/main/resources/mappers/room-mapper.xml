@@ -101,7 +101,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="RPNO" property="rpNo"/>
 		<result column="AMOUNT" property="amount"/>
-		<result column="BIRTHDATE" property="birthday"/>
+		<result column="BIRTHDAY" property="birthday"/>
 		<result column="PAY_DATE" property="payDate"/>
 		<result column="ADD_POINT" property="addPoint"/>
 		<result column="PHONE" property="phone"/>
@@ -153,7 +153,7 @@
 		<result column="RONO" property="roNo"/>
 		<result column="USNO" property="userNo"/>
 		<result column="AMOUNT" property="amount"/>
-		<result column="BIRTHDATE" property="brithDate"/>
+		<result column="BIRTHDAY" property="brithDate"/>
 		<result column="PAY_DATE" property="payDate"/>
 		<result column="ADD_POINT" property="addPoint"/>
 		<result column="CHECK_IN" property="checkIn"/>
@@ -510,7 +510,7 @@
 	</select>
 	<!-- 기본 리스트 -->
 	<select id="selectRvRoomList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
-		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, BIRTHDAY, pay_date, rp.check_in, reserve_status, people, 
 			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
 		  from roomspay rp
 		  join rooms r on (r.rono = rp.rono )
@@ -524,7 +524,7 @@
 	
 	<!-- 예약확정 리스트-->
 	<select id="selectRvRoomConfirmList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
-		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, BIRTHDAY, pay_date, rp.check_in, reserve_status, people, 
 			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
 		  from roomspay rp
 		  join rooms r on (r.rono = rp.rono)
@@ -537,7 +537,7 @@
 	</select>
 	<!-- 예약취소 리스트-->
 	<select id="selectRvRoomCancelList" parameterType="_int" resultMap="roomAndRoomspayResultSet">
-		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, birthdate, pay_date, rp.check_in, reserve_status, people, 
+		select rp.rpno, m.user_name ,rp.rono, rp.usno, amount, BIRTHDAY, pay_date, rp.check_in, reserve_status, people, 
 			       concept, request, start_days, end_days, rooms_title, meal, m.change_name
 		  from roomspay rp
 		  join rooms r on (r.rono = rp.rono)
@@ -551,7 +551,7 @@
 
 	<select id="reservationRoomDetailView" parameterType="_int" resultMap="roomAndRoomspayResultSet">
 		select rp.reserve_status, rp.rpno, rooms_title, start_days, end_days, 
-			   user_name, rp.people, birthdate, phone, TRUNC(TO_DATE(END_DAYS))-TO_DATE(START_DAYS) as days, concept, request,
+			   user_name, rp.people, BIRTHDAY, phone, TRUNC(TO_DATE(END_DAYS))-TO_DATE(START_DAYS) as days, concept, request,
 			   amount
 		  from roomspay rp
 		  join member m on (rp.usno = m.usno)
@@ -577,7 +577,7 @@
 	<!-- 마이페이지 -->
 
 	<select id="selectRoomPayList" resultMap="selectRoomPayList" parameterType="Member">
-	  select RPNO, p.RONO, p.USNO, p.AMOUNT, p.BIRTHDATE, p.PAY_DATE, p.ADD_POINT, p.CHECK_IN, p.RESERVE_STATUS, p.USE_POINT, p.PEOPLE, p.CONCEPT, p.REQUEST, p.START_DAYS, p.END_DAYS,  r.ROOMS_TITLE,r.CHANGE_NAME 
+	  select RPNO, p.RONO, p.USNO, p.AMOUNT, p.BIRTHDAY, p.PAY_DATE, p.ADD_POINT, p.CHECK_IN, p.RESERVE_STATUS, p.USE_POINT, p.PEOPLE, p.CONCEPT, p.REQUEST, p.START_DAYS, p.END_DAYS,  r.ROOMS_TITLE,r.CHANGE_NAME 
 		  from roomspay p
           left join rooms r on(p.rono = r.rono)
          where p.usno = #{usNo}

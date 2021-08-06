@@ -937,7 +937,7 @@ public class ExperienceController {
   				case 60: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 1.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 1.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
   				case 120: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 2.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 2.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
   				case 180: if(Double.parseDouble(expClass.get(i-1).substring(11)) == 30.0){ startTimeCal = (0.5 + 3.0) + Double.parseDouble(expClass.get(i-1).substring(8, 10)); }else { startTimeCal = 3.0 + Double.parseDouble(expClass.get(i-1).substring(8, 10)); } break;
-  				default: break;
+  				default: break;	
   				}
   				if(String.valueOf(startTimeCal).substring(3).equals("0")) {
   					expClass.add(((String.valueOf(startTimeCal)).substring(0, 2) + ":00 ~ ") + ((String.valueOf(startTimeCal + useTime)).substring(0,2) + ":00"));

@@ -79,17 +79,17 @@
 	
 	<script type="text/javascript">
 	  // input your appkey
-	  Kakao.init('62fda0bf46ca2ad372f7f5e69d04a01e')
+	  Kakao.init('68f4fd3b188d5ebb8b7eba2636eb2d15')
 	  Kakao.Auth.createLoginButton({
 	    container: '#kakao-login-btn',
 	    success: function(authObj) {
 	      Kakao.API.request({
 	        url: '/v2/user/me',
 	        success: function(res) {
-	          console.log(res.kakao_account['email']);
-	          console.log(res.properties['nickname']);
-	          $("#kakaoEmail").val(res.kakao_account['email']);
-	          $("#kakaoName").val(res.properties['nickname']);
+	          //console.log(res.kakao_account['email']);
+	          //console.log(res.properties['nickname']);
+	          $("#kakaoEmail").val(res.kakao_account.email);
+	          $("#kakaoName").val(res.properties.nickname);
 	          $("#kakaoPwd").val(res.id);
 	          $("#kakaoLogin").submit();
 	        },

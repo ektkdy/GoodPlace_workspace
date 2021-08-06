@@ -467,7 +467,7 @@
        // 영수증 펼치기
         $('#bookItButton').click(function(){
         	
-        	if("${empty loginUser}"){
+        	if(${empty loginUser}){
         		alert("로그인 후 이용해주세요.");
         	}else{
 	            if(!$('#recepit').hasClass('hide')){
