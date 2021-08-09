@@ -179,7 +179,7 @@
 	                    <p>
 	                  		방 ${ room.roomCount }개, 침대 ${ room.bedCount }개, 	화장실 ${ room.restroomCount }개, 샤워실 ${ room.bathCount }개<br>
 	                      	기본인원 ${ room.minPeople }명, 최대인원 ${ room.maxPeople }명<br>
-	                      	1박 금액 : ${ room.price }원<br>
+	                      	1박 금액 : <fmt:formatNumber type="number" value="${ room.price }"/>원<br>
 	                    </p>
 	                </div>
 	                <div class="fullWidth marginBottom_40px">
@@ -349,7 +349,7 @@
 	
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">${ room.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;${ room.minPeople }인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;"><fmt:formatNumber type="number" value="${ room.price }"/>원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;${ room.minPeople }인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div style="height:54px; float:left; width:270px; margin:10px 46px;" class="buttonStyle1 hide">
                         <h2 style="font-weight:unset; padding-top:10px;">${ room.startDays } ~ ${ room.endDays }</h2>
@@ -382,8 +382,8 @@
         <div id="receipt" class="hide" style="width:500px; height:400px; position:relative; z-index:2; left:200px; top:200px; border:2px solid lightgray; background-color:white; float:unset;">
             <div style="float:unset; width:100%; height:200px; border-bottom:2px solid lightgray;">
                 <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position: absolute;">예약날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ room.tripStartDate }&nbsp;~&nbsp;${ room.tripEndDate }</h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : ${ room.price }원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : <c:if test="${ room.people > room.minPeople }" >${ (room.people - room.minPeople) * 10000 }</c:if>원</h3></div>
-                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;">${ price }원</h2>
+                <div style="height:40px; float:unset; position:relative; z-index:3; padding:8px; margin:20px;"><h3 style="position:absolute; right:0;">기본금액 : <fmt:formatNumber type="number" value="${ room.price }"/>원&nbsp;&nbsp;&nbsp;&nbsp;추가금액 : <c:choose><c:when test="${ room.people > room.minPeople }"><fmt:formatNumber type="number" value="${ (room.people - room.minPeople) * 10000 }"/></c:when><c:otherwise>0</c:otherwise></c:choose>원</h3></div>
+                <div style="height:40px; float:unset; position:relative; z-index:3; margin:20px; text-align:center; text-align:right;"><h2 style="position: absolute; right:0px; padding:8px;"><fmt:formatNumber type="number" value="${ price }"/>원</h2>
                     <div style="height:40px; width:50%; padding:8px; float:unset; position:relative; z-index:3;">
                         <h2 style="position: absolute;">총 금액</h2>
                     </div>  

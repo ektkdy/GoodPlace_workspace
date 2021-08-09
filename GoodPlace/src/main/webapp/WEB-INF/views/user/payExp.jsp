@@ -98,8 +98,8 @@
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.expDateString }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.myClassStartTime } (소요시간 : ${ exp.useTime }시간)</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ expPay.people }명</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price }원</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ exp.price * expPay.people }원</p3>
+                        <p3 class="price" style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">원</p3>
+                        <p3 class="totalPrice" style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">원</p3>
                     </div>
 
                 </div>
@@ -150,8 +150,8 @@
                     <h3>포인트 할인</h3>
                 </div>
                 <div style="width:50%;padding:22px 14px; text-align:right;">
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price }원</h3>
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ exp.price * expPay.people }원</h3>
+                    <h3 class="price" style="margin-bottom:10px; font-weight:550; color:dimgray;"></h3>
+                    <h3 class="totalPrice" style="margin-bottom:10px; font-weight:550; color:dimgray;"></h3>
                     <h3 style="color:dimgray; font-weight:550;">0원</h3>
                 </div>
                 <hr>
@@ -159,7 +159,7 @@
                     <h3 style="margin-bottom:10px;">총 결제 금액</h3>
                 </div>
                 <div style="width:50%; height:70px; padding:22px 14px; text-align:right;">
-                    <h3 style="color:dimgray; font-weight:550;">${ exp.price * expPay.people }원</h3>
+                    <h3 class="totalPrice" style="color:dimgray; font-weight:550;"></h3>
                 </div>
                 <hr>
                 <div style="width:100%; padding:22px 14px 0px 14px;">
@@ -181,9 +181,28 @@
         </div>
     </div>
 
-    <!-- '포인트 사용' 클릭 시 -->
+    
     <script>
-
+    	window.onload = function(){
+    		// 로그인 안 된 사용자 거르기
+    		let user = "${loginUser}";
+    		
+    		if(user === ""){
+    			alert("로그인 후 다시 이용해주세요.");
+    			window.location.href = "http://222.121.64.22:8080/goodplace";
+    		}
+    		
+    		// 결제금액 원 단위 화폐처리
+			let price = ${ exp.price };
+			price = price.toLocaleString('ko-KR');
+			let totalPrice = ${ exp.price * expPay.people };
+			totalPrice = totalPrice.toLocaleString('ko-KR');
+			
+			$(".price").text(price + "원");
+			$(".totalPrice").text(totalPrice + "원");
+		};
+		
+		// '포인트 사용' 클릭 시
         $("#pointButton").click(function(){
 
             var myPoint = $('#myPointHidden').val();
@@ -208,7 +227,6 @@
         $(window).scroll(function(){
 	        var position = $(document).scrollTop();
 	
-	        console.log(position);
 	        $("#receipt").css({ width:'310px',
 	                            margin:'314px 0 0 20px;'
 	                                    });
@@ -230,12 +248,22 @@
         // 결제하기 기능
         $('#payIt').click(function(){
         	
+
         	// 동의 여부 확인
         	if($("input:checkbox[name=clause]").is(":checked") == false){
         		alert("동의여부를 체크해주세요.");
         		$("input:checkbox[name=clause]").focus();
         		
         	}else{
+        		// 로그인 안 된 사용자 거르기
+        		let user = "${loginUser}";
+        		console.log("user = " + user);
+        		if(user === ""){
+        			alert("로그인 후 다시 이용해주세요.");
+        			window.location.href = "http://222.121.64.22:8080/goodplace";
+        		}
+        		
+        		
         		IMP.request_pay({
                     pg : 'inicis', // version 1.1.0부터 지원.
                     pay_method : 'card',

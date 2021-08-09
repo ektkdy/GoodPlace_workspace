@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,8 +98,8 @@
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color:dimgray; font-weight:900;">${ room.roomsTitle }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.tripStartDate } ~ ${ room.tripEndDate }</p3>
                         <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.people }명</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.price }원</p3>
-                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;">${ room.amount }원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;"><fmt:formatNumber type="number" value="${ room.price }"/>원</p3>
+                        <p3 style="margin-bottom:12px; font-size:17px; display:block; color: dimgray; font-weight:550;"><fmt:formatNumber type="number" value="${ room.amount }"/>원</p3>
                     </div>
 
                 </div>
@@ -189,8 +190,8 @@
                     <h3>포인트 할인</h3>
                 </div>
                 <div style="width:50%;padding:22px 14px; text-align:right;">
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ room.price }원</h3>
-                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;">${ room.price + room.amount }원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;"><fmt:formatNumber type="number" value="${ room.price }"/>원</h3>
+                    <h3 style="margin-bottom:10px; font-weight:550; color:dimgray;"><fmt:formatNumber type="number" value="${ room.price + room.amount }"/>원</h3>
                     <h3 style="color:dimgray; font-weight:550;">-0원</h3>
                 </div>
                 <hr>
@@ -198,7 +199,7 @@
                     <h3 style="margin-bottom:10px;">총 결제 금액</h3>
                 </div>
                 <div style="width:50%; height:70px; padding:22px 14px; text-align:right;">
-                    <h3 style="color:dimgray; font-weight:550;">${ room.price + room.amount }원</h3>
+                    <h3 style="color:dimgray; font-weight:550;"><fmt:formatNumber type="number" value="${ room.price + room.amount }"/>원</h3>
                 </div>
                 <hr>
                 <div style="width:100%; padding:22px 14px 0px 14px;">

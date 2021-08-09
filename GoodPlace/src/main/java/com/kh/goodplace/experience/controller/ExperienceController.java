@@ -1043,11 +1043,13 @@ public class ExperienceController {
   		Double myClassStartTime = 0.0;
   		startTime += (useTime * (expClassNo2 - 1) + (intervalTime * (expClassNo2 - 1)));
   		
-  		String startTimeString = String.valueOf(startTime);
+  		String startTimeString = "";
   		
   		if(startTimeString.contains(".5")) {
+  			startTimeString = String.valueOf(startTime);
   			startTimeString = startTimeString.substring(0, 2) + ":30";
   		}else {
+  			startTimeString = String.valueOf(Math.round(startTime));
   			startTimeString = startTimeString + ":00";
   		}
   		

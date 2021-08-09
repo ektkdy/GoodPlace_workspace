@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -229,7 +230,7 @@
 
         <div id="bookIt" class="bookItStyle">
             <div class="fullWidth" style="margin-bottom:10px;">
-                <h1 style="float:left; margin:15px 0 15px 46px;">${ exp.price }원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
+                <h1 style="float:left; margin:15px 0 15px 46px;"><fmt:formatNumber type='number' value='${ exp.price }'/>원&nbsp;</h1><h3 style="float:left; margin-top: 25px;"><sub>/&nbsp;1인</sub></h3><br>
                 <div style="text-align:center;" class="fullWidth">
                     <div id="getTime" style="height:54px; float:left; width:270px; margin:10px 46px; padding: 5px 0 0 30px;" class="buttonStyle1">
                         <img src="${pageContext.request.contextPath}/resources/images/user/chooseTime.jpg" alt="시간선택"/>
@@ -468,8 +469,10 @@
         	alert(people + "명 접수를 선택 하였습니다.");
         	$("input[name=people]").val(people);
         	$(".receiptInfo1").html("<div style='width:240px; height:40px; position:absolute;'><h3>체험일</h3></div><div style='width:48%; height:40px; position:absolute; left:50%; text-align:right;'><h3>${ expDateString }</h3></div>");
-        	$(".receiptInfo2").html("<div style='width:240px; height:40px; position:absolute;'></div><div style='width:48%; height:40px; position:absolute; left:50%; text-align:right;'><h3>${ exp.price }원 x " + people + "명</h3></div>");
-        	$(".receiptInfo3").text(people * ${ exp.price } + "원");
+        	$(".receiptInfo2").html("<div style='width:240px; height:40px; position:absolute;'></div><div style='width:48%; height:40px; position:absolute; left:50%; text-align:right;'><h3> <fmt:formatNumber type='number' value='${ exp.price }'/>원 x " + people + "명</h3></div>");
+        	let temp = ${exp.price} * people;
+        	let priceTemp = temp.toLocaleString('ko-KR');
+        	$(".receiptInfo3").text( priceTemp + "원");
         
         	for(var i=1; i<=5; i++){
 				$("#timeArea #" + i + "").css("background", "white");

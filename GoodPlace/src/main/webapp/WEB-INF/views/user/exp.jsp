@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +187,7 @@
 			                    <div style="width:50%;" class="alignRight">
 			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
 			                        <br><br><br><br><br>
-			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                        <h3 class="exp3">1인당 <fmt:formatNumber type='number' value='${ exp.price }'/>원</h3>
 			                    </div>
 			                    </div>
 			                </div>
@@ -223,7 +224,7 @@
 			                    <div style="width:50%;" class="alignRight">
 			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
 			                        <br><br><br><br><br>
-			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                        <h3 class="exp3">1인당<fmt:formatNumber type='number' value='${ exp.price }'/>원</h3>
 			                    </div>
 			                    </div>
 			                </div>
@@ -260,7 +261,7 @@
 			                    <div style="width:50%;" class="alignRight">
 			                        <img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />
 			                        <br><br><br><br><br>
-			                        <h3 class="exp3">1인당 ${ exp.price }원</h3>
+			                        <h3 class="exp3">1인당 <fmt:formatNumber type='number' value='${ exp.price }'/>원</h3>
 			                    </div>
 			                    </div>
 			                </div>
@@ -365,7 +366,8 @@
 					if(expListPerCategory != null){
 						var expList = expListPerCategory;
 						$(".expContainer").remove();
-						$.each(expList, function (index, exp) { 
+						$.each(expList, function (index, exp) {
+							let priceTemp = exp.price.toLocaleString('ko-KR');
 							$("#expContainer").append(	'<div style="width:100%;" class="expContainer">' +
 											                '<div style="width:94%;"  class="expArea">' +
 											                    '<div style="height:216px; width:292px;" class="expContainerSubmit">' +
@@ -383,7 +385,7 @@
 											                    '<div style="width:50%;" height:100%; class="alignRight">' +
 											                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />' +
 											                        '<br><br><br><br><br>' +
-											                        '<h3 class="exp3">1인당 ' + exp.price + '원</h3>' +
+											                        '<h3 class="exp3">1인당 ' + priceTemp + '원</h3>' +
 											                    '</div>' +
 											                    '</div>' +
 											                '</div>' +
@@ -413,7 +415,8 @@
 				success:function(expListAddExppay){
 					var expList = expListAddExppay;
 					$("#expContainer").children(".expContainer").remove();
-					$.each(expList, function (index, exp) { 
+					$.each(expList, function (index, exp) {
+						let priceTemp = exp.price.toLocaleString('ko-KR');
 						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
 										                '<div style="width:94%;"  class="expArea">'+
 										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
@@ -431,7 +434,7 @@
 										                    '<div style="width:50%;" class="alignRight">'+
 										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
 										                        '<br><br><br><br><br>'+
-										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                        '<h3 class="exp3">1인당 '+ priceTemp + '원</h3>'+
 										                    '</div>'+
 										                    '</div>'+
 										                '</div>'+
@@ -449,7 +452,7 @@
 			});
 		});
     	
-    	// 가격 낮은 순 정렬	
+    	// 가격 낮은 순 정렬
 		$("#cheapSort").on("click",function(){     
 			$.ajax({
 				url:"cheapSortExp.exp",
@@ -458,7 +461,8 @@
 				success:function(expListCheapSort){
 					var expList = expListCheapSort;
 					$("#expContainer").children(".expContainer").remove();
-					$.each(expList, function (index, exp) { 
+					$.each(expList, function (index, exp) {
+						let priceTemp = exp.price.toLocaleString('ko-KR');
 						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
 										                '<div style="width:94%;"  class="expArea">'+
 										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
@@ -476,7 +480,7 @@
 										                    '<div style="width:50%;" class="alignRight">'+
 										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
 										                        '<br><br><br><br><br>'+
-										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                        '<h3 class="exp3">1인당 '+ priceTemp + '원</h3>'+
 										                    '</div>'+
 										                    '</div>'+
 										                '</div>'+
@@ -503,7 +507,8 @@
 				success:function(expListExpensiveSort){
 					var expList = expListExpensiveSort;
 					$("#expContainer").children(".expContainer").remove();
-					$.each(expList, function (index, exp) { 
+					$.each(expList, function (index, exp) {
+						let priceTemp = exp.price.toLocaleString('ko-KR');
 						$("#expContainer").append(	'<div style="width:100%;" class="expContainer">'+
 										                '<div style="width:94%;"  class="expArea">'+
 										                    '<div style="height:216px; width:292px;" class="expContainerSubmit">'+
@@ -521,7 +526,7 @@
 										                    '<div style="width:50%;" class="alignRight">'+
 										                        '<img class="likeIt" src="${pageContext.request.contextPath}/resources/images/user/emptyHeart.jpg" class="heartMargin" />'+
 										                        '<br><br><br><br><br>'+
-										                        '<h3 class="exp3">1인당 '+ exp.price + '원</h3>'+
+										                        '<h3 class="exp3">1인당 '+ priceTemp + '원</h3>'+
 										                    '</div>'+
 										                    '</div>'+
 										                '</div>'+
@@ -534,7 +539,7 @@
 
 				},
 				error:function(msg){
-					console.log("ajax 통신실패");	
+					console.log("ajax 통신실패");
 				}
 			});
 		});
